@@ -1,0 +1,629 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopNova - Premium E-Commerce</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Segoe UI',sans-serif;
+    }
+
+    body{
+      background:#f3f4f6;
+      color:#111827;
+    }
+
+    /* HEADER */
+
+    header{
+      background:#081b38;
+      color:white;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:16px 5%;
+      position:sticky;
+      top:0;
+      z-index:1000;
+      box-shadow:0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .logo{
+      font-size:34px;
+      font-weight:bold;
+      color:#2ea7ff;
+      text-decoration:none;
+    }
+
+    .search-box{
+      flex:1;
+      display:flex;
+      justify-content:center;
+      margin:0 30px;
+    }
+
+    .search-box input{
+      width:100%;
+      max-width:420px;
+      padding:12px 20px;
+      border:none;
+      border-radius:30px;
+      outline:none;
+      font-size:15px;
+    }
+
+    nav{
+      display:flex;
+      gap:25px;
+    }
+
+    nav a{
+      color:white;
+      text-decoration:none;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    nav a:hover{
+      color:#2ea7ff;
+    }
+
+    /* HERO */
+
+    .hero{
+      background:
+        linear-gradient(rgba(8,27,56,0.75),
+                        rgba(8,27,56,0.75)),
+        url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1600&q=80');
+
+      background-size:cover;
+      background-position:center;
+
+      color:white;
+      text-align:center;
+      padding:110px 20px;
+    }
+
+    .hero h1{
+      font-size:58px;
+      margin-bottom:18px;
+    }
+
+    .hero p{
+      font-size:22px;
+      margin-bottom:28px;
+    }
+
+    .hero button{
+      background:#ff9800;
+      color:white;
+      border:none;
+      padding:15px 34px;
+      border-radius:30px;
+      font-size:18px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .hero button:hover{
+      background:#ea8600;
+      transform:translateY(-2px);
+    }
+
+    /* PRODUCTS */
+
+    .products{
+      width:92%;
+      max-width:1200px;
+      margin:70px auto;
+    }
+
+    .products h2{
+      text-align:center;
+      font-size:44px;
+      color:#081b38;
+      margin-bottom:40px;
+    }
+
+    .product-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:28px;
+    }
+
+    .product-card{
+      background:white;
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:0 8px 24px rgba(0,0,0,0.08);
+      transition:0.3s;
+    }
+
+    .product-card:hover{
+      transform:translateY(-6px);
+    }
+
+    .product-card img{
+      width:100%;
+      height:230px;
+      object-fit:cover;
+    }
+
+    .product-details{
+      padding:22px;
+    }
+
+    .product-details h3{
+      font-size:24px;
+      margin-bottom:10px;
+    }
+
+    .product-price{
+      font-size:28px;
+      font-weight:bold;
+      color:#059669;
+      margin-bottom:12px;
+    }
+
+    .product-details p{
+      color:#64748b;
+      line-height:1.6;
+      margin-bottom:18px;
+    }
+
+    .button-group{
+      display:flex;
+      gap:12px;
+    }
+
+    .btn{
+      flex:1;
+      padding:12px;
+      border:none;
+      border-radius:10px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .cart-btn{
+      background:#e2e8f0;
+    }
+
+    .cart-btn:hover{
+      background:#cbd5e1;
+    }
+
+    .buy-btn{
+      background:#ff9800;
+      color:white;
+    }
+
+    .buy-btn:hover{
+      background:#ea8600;
+    }
+
+    /* FEATURES */
+
+    .features{
+      width:92%;
+      max-width:1200px;
+      margin:70px auto;
+      display:grid;
+      gap:28px;
+    }
+
+    .feature-card{
+      padding:50px 35px;
+      border-radius:24px;
+      text-align:center;
+      color:white;
+      box-shadow:0 12px 25px rgba(0,0,0,0.15);
+    }
+
+    .shipping{
+      background:linear-gradient(135deg,#2563eb,#06b6d4);
+    }
+
+    .support{
+      background:linear-gradient(135deg,#7c3aed,#ec4899);
+    }
+
+    .feature-icon{
+      font-size:60px;
+      margin-bottom:18px;
+    }
+
+    .feature-card h3{
+      font-size:34px;
+      margin-bottom:12px;
+    }
+
+    .feature-card p{
+      max-width:760px;
+      margin:auto;
+      line-height:1.7;
+      font-size:17px;
+    }
+
+    /* CONTACT BUTTON */
+
+    .contact-section{
+      text-align:center;
+      margin:70px auto;
+    }
+
+    .contact-btn{
+      background:#c45f00;
+      color:white;
+      border:none;
+      padding:16px 38px;
+      border-radius:40px;
+      font-size:18px;
+      font-weight:bold;
+      cursor:pointer;
+      box-shadow:0 8px 18px rgba(196,95,0,0.3);
+      transition:0.3s;
+    }
+
+    .contact-btn:hover{
+      background:#a94f00;
+      transform:translateY(-2px);
+    }
+
+    .social-icons{
+      display:none;
+      margin-top:22px;
+      justify-content:center;
+      gap:18px;
+    }
+
+    .social-icons span{
+      width:60px;
+      height:60px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:26px;
+      color:white;
+      transition:0.3s;
+      box-shadow:0 6px 16px rgba(0,0,0,0.15);
+    }
+
+    .social-icons span:hover{
+      transform:scale(1.08);
+    }
+
+    .wa{ background:#25d366; }
+    .ig{ background:#e1306c; }
+    .yt{ background:#ff0000; }
+    .tw{ background:#111827; }
+
+    /* FOOTER */
+
+    footer{
+      background:#081b38;
+      color:white;
+      text-align:center;
+      padding:28px;
+      margin-top:60px;
+    }
+
+    /* MOBILE */
+
+    @media(max-width:768px){
+
+      header{
+        flex-direction:column;
+        gap:15px;
+      }
+
+      .search-box{
+        width:100%;
+        margin:0;
+      }
+
+      nav{
+        flex-wrap:wrap;
+        justify-content:center;
+      }
+
+      .hero h1{
+        font-size:38px;
+      }
+
+      .hero p{
+        font-size:18px;
+      }
+
+      .products h2{
+        font-size:34px;
+      }
+
+      .button-group{
+        flex-direction:column;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <header>
+
+    <a href="index.html" class="logo">ShopNova</a>
+
+    <div class="search-box">
+
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search products, brands and more..."
+        onkeydown="searchProduct(event)">
+
+    </div>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="cart.html">Cart 🛒</a>
+    </nav>
+
+  </header>
+
+  <section class="hero">
+
+    <h1>Welcome to ShopNova</h1>
+
+    <p>Premium shopping experience for fashion, gadgets and lifestyle products</p>
+
+    <button onclick="window.location.href='products.html'">
+      Explore Products
+    </button>
+
+  </section>
+
+  <section class="products">
+
+    <h2>Featured Products</h2>
+
+    <div class="product-grid">
+
+      <div class="product-card">
+
+        <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800&q=80"
+             alt="Premium Casual Shirt">
+
+        <div class="product-details">
+
+          <h3>Premium Casual Shirt</h3>
+
+          <div class="product-price">₹799</div>
+
+          <p>Soft cotton fabric with a clean premium design perfect for daily wear.</p>
+
+          <div class="button-group">
+
+            <button class="btn cart-btn"
+              onclick="alert('Premium Casual Shirt added to cart!')">
+
+              Add To Cart 🛒
+
+            </button>
+
+            <button class="btn buy-btn"
+              onclick="window.location.href='checkout.html'">
+
+              Buy Now ⚡
+
+            </button>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="product-card">
+
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80"
+             alt="Sports Running Shoes">
+
+        <div class="product-details">
+
+          <h3>Sports Running Shoes</h3>
+
+          <div class="product-price">₹1,499</div>
+
+          <p>Lightweight running shoes with excellent grip, support and comfort for active lifestyles.</p>
+
+          <div class="button-group">
+
+            <button class="btn cart-btn"
+              onclick="alert('Sports Running Shoes added to cart!')">
+
+              Add To Cart 🛒
+
+            </button>
+
+            <button class="btn buy-btn"
+              onclick="window.location.href='checkout.html'">
+
+              Buy Now ⚡
+
+            </button>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="product-card">
+
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80"
+             alt="Smart Watch Pro">
+
+        <div class="product-details">
+
+          <h3>Smart Watch Pro</h3>
+
+          <div class="product-price">₹2,999</div>
+
+          <p>Stylish water-resistant smartwatch with fitness tracking, notifications and long battery life.</p>
+
+          <div class="button-group">
+
+            <button class="btn cart-btn"
+              onclick="alert('Smart Watch Pro added to cart!')">
+
+              Add To Cart 🛒
+
+            </button>
+
+            <button class="btn buy-btn"
+              onclick="window.location.href='checkout.html'">
+
+              Buy Now ⚡
+
+            </button>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="features">
+
+    <div class="feature-card shipping">
+
+      <div class="feature-icon">🚀</div>
+
+      <h3>Fast Shipping</h3>
+
+      <p>Get your favorite products delivered quickly and safely with our premium shipping network.</p>
+
+    </div>
+
+    <div class="feature-card support">
+
+      <div class="feature-icon">🎧</div>
+
+      <h3>24/7 Customer Support</h3>
+
+      <p>Friendly support team available anytime to help you with orders, payments and shopping assistance.</p>
+
+    </div>
+
+  </section>
+
+  <section class="contact-section">
+
+    <button class="contact-btn"
+      onclick="toggleSocials()">
+
+      💬 Connect With Us
+
+    </button>
+
+    <div id="socials" class="social-icons">
+
+      <span class="wa">🟢</span>
+      <span class="ig">📸</span>
+      <span class="yt">▶️</span>
+      <span class="tw">🐦</span>
+
+    </div>
+
+  </section>
+
+  <footer>
+
+    © 2026 <strong>ShopNova</strong> |
+    CEO & Founder: Anuradha
+
+  </footer>
+
+  <script>
+
+    function toggleSocials(){
+
+      const box = document.getElementById('socials');
+
+      if(box.style.display === 'flex'){
+        box.style.display = 'none';
+      }
+
+      else{
+        box.style.display = 'flex';
+      }
+    }
+
+    function searchProduct(event){
+
+      if(event.key === 'Enter'){
+
+        const value = document
+          .getElementById('searchInput')
+          .value
+          .toLowerCase()
+          .trim();
+
+        if(
+          value.includes('shirt') ||
+          value.includes('casual shirt') ||
+          value.includes('premium shirt')
+        ){
+
+          window.location.href = 'products.html';
+        }
+
+        else if(
+          value.includes('shoes') ||
+          value.includes('running shoes') ||
+          value.includes('sports shoes')
+        ){
+
+          window.location.href = 'products.html';
+        }
+
+        else if(
+          value.includes('watch') ||
+          value.includes('smart watch')
+        ){
+
+          window.location.href = 'products.html';
+        }
+
+        else if(
+          value.includes('laptop') ||
+          value.includes('premium laptop')
+        ){
+
+          window.location.href = 'products.html';
+        }
+
+        else{
+
+          alert('❌ Product not available in ShopNova');
+        }
+      }
+    }
+
+  </script>
+
+</body>
+</html>
+

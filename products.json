@@ -1,0 +1,25 @@
+
+[
+  {
+    "id": 1,
+    "name": "Premium Casual Shirt",
+    "price": 799,
+    "description": "Comfortable cotton shirt for everyday wear",
+    "image": "images/shoes.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Sports Running Shoes",
+    "price": 1499,
+    "description": "Lightweight running shoes with premium comfort",
+    "image": "images/shoes.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Smart Watch Pro",
+    "price": 2999,
+    "description": "Water-resistant smartwatch with fitness tracking",
+    "image": "images/watch.webp"
+  }
+]
+

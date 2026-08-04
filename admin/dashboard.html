@@ -1,0 +1,288 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShopNova Admin Dashboard</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      background: #f4f6f9;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 240px;
+      background: #0f172a;
+      color: white;
+      padding: 25px 20px;
+    }
+
+    .sidebar h2 {
+      margin-bottom: 30px;
+    }
+
+    .sidebar a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      margin: 18px 0;
+    }
+
+    .sidebar a:hover {
+      color: #38bdf8;
+    }
+
+    .main {
+      flex: 1;
+      padding: 30px;
+    }
+
+    h1 {
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #64748b;
+      margin-bottom: 25px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 350px 1fr;
+      gap: 25px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .card h3 {
+      margin-bottom: 18px;
+      color: #0f172a;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+
+    textarea {
+      height: 100px;
+      resize: none;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #1d4ed8;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #e2e8f0;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: #475569;
+      font-size: 13px;
+    }
+
+    .delete-btn {
+      background: #ef4444;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .delete-btn:hover {
+      background: #dc2626;
+    }
+
+    @media (max-width: 900px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <h2>ShopNova Pro</h2>
+    <a href="../index.html">🏠 View Storefront</a>
+    <a href="dashboard.html">📦 Admin Dashboard</a>
+  </div>
+
+  <div class="main">
+    <h1>MongoDB Product Control Panel</h1>
+    <p class="subtitle">
+      Backend API connected to <strong>http://localhost:8080</strong>
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>➕ Add Product</h3>
+
+        <input type="text" id="name" placeholder="Product name" />
+        <input type="number" id="price" placeholder="Price" />
+        <input type="text" id="image" placeholder="Image URL" />
+        <textarea id="description" placeholder="Description"></textarea>
+
+        <button class="btn" onclick="addProduct()">Save Product</button>
+      </div>
+
+      <div class="card">
+        <h3>📋 Product Collection</h3>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Description</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="productTable">
+            <tr>
+              <td colspan="4">Loading products...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+<script>
+const API_URL = "http://localhost:8080/api/products";
+
+// Load products
+async function loadProducts() {
+    try {
+        const response = await fetch(API_URL);
+        const products = await response.json();
+
+        const table = document.getElementById("productTable");
+
+        if (!products.length) {
+            table.innerHTML = `
+                <tr>
+                    <td colspan="4">No products found</td>
+                </tr>
+            `;
+            return;
+        }
+
+        table.innerHTML = "";
+
+        products.forEach(product => {
+            table.innerHTML += `
+                <tr>
+                    <td>${product.name}</td>
+                    <td>₹${product.price}</td>
+                    <td>${product.description || "No description"}</td>
+                    <td>
+                        <button onclick="deleteProduct('${product._id}')">Delete</button>
+                    </td>
+                </tr>
+            `;
+        });
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// Add product
+async function addProduct() {
+
+    const product = {
+        name: document.getElementById("name").value,
+        price: Number(document.getElementById("price").value),
+        image: document.getElementById("image").value,
+        description: document.getElementById("description").value,
+        category: "Electronics",
+        stock: 10
+    };
+
+    if (!product.name || !product.price) {
+        alert("Enter product name and price");
+        return;
+    }
+
+    await fetch(API_URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(product)
+    });
+
+    document.getElementById("name").value = "";
+    document.getElementById("price").value = "";
+    document.getElementById("image").value = "";
+    document.getElementById("description").value = "";
+
+    loadProducts();
+}
+
+// Delete product
+async function deleteProduct(id) {
+
+    await fetch(`${API_URL}/${id}`, {
+        method: "DELETE"
+    });
+
+    loadProducts();
+}
+
+// First load
+loadProducts();
+</script>
+
+</body>
+</html>
+   
