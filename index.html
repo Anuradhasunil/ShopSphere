@@ -3,16 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ShopNova - Home</title>
+  <title>ShopNova - Premium E-Commerce Pro</title>
   <style>
+    /* Global Workspace Layout Resets */
     body {
       font-family: Arial, sans-serif;
-      background: #f3f4f6;
+      background: #0d1b2a; /* Restored your dark background theme color */
       margin: 0;
       padding: 0;
       color: #333;
     }
 
+    /* FIXED: STICKY HEADER IMPLEMENTATION */
     header {
       background: #081b38;
       color: white;
@@ -20,6 +22,12 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: fixed;   /* Freezes header floating at top window ceiling */
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;     /* Keeps header layered above all content cards */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
     .logo {
@@ -33,6 +41,7 @@
       border-radius: 20px;
       border: 1px solid #cbd5e1;
       padding-left: 15px;
+      font-size: 0.9rem;
     }
 
     nav a {
@@ -42,15 +51,17 @@
       font-weight: 500;
     }
 
+    /* Fixed spacing offset so header layout won't cover banner text */
     .hero-banner {
       background: linear-gradient(rgba(8, 27, 56, 0.6), rgba(8, 27, 56, 0.6)), url('https://unsplash.com') no-repeat center center/cover;
-      height: 350px;
+      height: 380px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       color: white;
       text-align: center;
+      margin-top: 65px; /* Offset spacing for position: fixed header alignment */
     }
 
     .hero-banner h1 {
@@ -75,14 +86,14 @@
 
     .section-title {
       text-align: center;
-      margin: 40px 0 20px 0;
-      color: #081b38;
-      font-size: 2rem;
+      margin: 40px 0 25px 0;
+      color: white; /* Changed label text to contrast against dark dashboard */
+      font-size: 2.2rem;
     }
 
     .products-container {
       max-width: 1200px;
-      margin: 0 auto 50px auto;
+      margin: 0 auto 60px auto;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 25px;
@@ -93,7 +104,7 @@
       background: white;
       padding: 20px;
       border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
       text-align: center;
       transition: transform 0.2s;
     }
@@ -137,10 +148,56 @@
     .cart-btn:hover {
       background: #112d59;
     }
+
+    /* RESTORED CONTACT COMPONENT STYLES */
+    .contact-float-btn {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #ff9800;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      z-index: 2000;
+    }
+
+    .contact-dropdown-menu {
+      position: fixed;
+      bottom: 95px;
+      right: 25px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      display: none; /* Controlled dynamically via toggleContacts() script */
+      flex-direction: column;
+      padding: 10px;
+      gap: 5px;
+      z-index: 2000;
+    }
+
+    .contact-dropdown-menu a {
+      color: #081b38;
+      text-decoration: none;
+      padding: 8px 15px;
+      font-weight: bold;
+      border-radius: 4px;
+    }
+
+    .contact-dropdown-menu a:hover {
+      background: #f3f4f6;
+    }
   </style>
 </head>
 <body>
 
+  <!-- Sticky Upper Bar -->
   <header>
     <div class="logo">ShopNova</div>
     <div class="search-container">
@@ -153,6 +210,7 @@
     </nav>
   </header>
 
+  <!-- Main Hero Viewport -->
   <div class="hero-banner">
     <h1>Welcome to ShopNova</h1>
     <p>Premium shopping experience for fashion, gadgets and lifestyle products</p>
@@ -162,39 +220,47 @@
   <h2 class="section-title">Featured Products</h2>
 
   <div class="products-container">
-    <!-- 1. Shirt -->
+    <!-- 1. Shirt (Fixed Image Asset Folder Path Mapping) -->
     <div class="product-card">
-      <img src="https://unsplash.com" alt="Premium Casual Shirt">
+      <img src="images/shirt.jpg" alt="Premium Casual Shirt" onerror="this.src='https://unsplash.com'">
       <h3>Premium Casual Shirt</h3>
       <div class="price">₹799</div>
       <button class="cart-btn" onclick="addToCart('Premium Casual Shirt', 799)">Add to Cart 🛒</button>
     </div>
 
-    <!-- 2. Shoes -->
+    <!-- 2. Shoes (Fixed Image Asset Folder Path Mapping) -->
     <div class="product-card">
-      <img src="https://unsplash.com" alt="Sports Running Shoes">
+      <img src="images/shoes.jpg" alt="Sports Running Shoes" onerror="this.src='https://unsplash.com'">
       <h3>Sports Running Shoes</h3>
       <div class="price">₹1,499</div>
       <button class="cart-btn" onclick="addToCart('Sports Running Shoes', 1499)">Add to Cart 🛒</button>
     </div>
 
-    <!-- 3. Smart Watch -->
+    <!-- 3. Smart Watch (Fixed Image Asset Folder Path Mapping) -->
     <div class="product-card">
-      <img src="https://unsplash.com" alt="Smart Watch Pro">
+      <img src="images/watch.jpg" alt="Smart Watch Pro" onerror="this.src='https://unsplash.com'">
       <h3>Smart Watch Pro</h3>
       <div class="price">₹2,999</div>
       <button class="cart-btn" onclick="addToCart('Smart Watch Pro', 2999)">Add to Cart 🛒</button>
     </div>
 
-    <!-- 4. Holy Bible (ADDED HERE FOR HOME) -->
+    <!-- 4. Holy Bible Cover Card -->
     <div class="product-card">
       <img src="https://unsplash.com" alt="Holy Bible">
-      <h3>Holy Bible (Hardcover)</h3>
+      <h3>Holy Bible (Hardcover Edition)</h3>
       <div class="price">₹1,200</div>
       <button class="cart-btn" onclick="addToCart('Holy Bible (Hardcover Edition)', 1200)">Add to Cart 🛒</button>
     </div>
   </div>
 
+  <!-- Restored Contact Trigger Floating Module Elements -->
+  <div class="contact-float-btn" onclick="toggleContacts()">📞</div>
+  <div class="contact-dropdown-menu" id="contactMenu">
+    <a href="mailto:support@shopnova.com">📧 Email Support</a>
+    <a href="tel:+919876543210">💬 WhatsApp Chat</a>
+  </div>
+
+  <!-- Core Script Integrations Link Hook -->
   <script src="script.js"></script>
 </body>
 </html>
