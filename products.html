@@ -4,21 +4,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ShopNova - All Products</title>
+  <title>ShopNova - Products</title>
 
   <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Segoe UI',sans-serif;
+    }
 
     body{
-      font-family:Arial,sans-serif;
       background:#f3f4f6;
-      margin:0;
-      color:#333;
+      color:#111827;
     }
 
     header{
       background:#081b38;
       color:white;
-      padding:15px 40px;
+      padding:16px 5%;
       display:flex;
       justify-content:space-between;
       align-items:center;
@@ -29,36 +33,42 @@
     }
 
     .logo{
-      font-size:1.5rem;
+      font-size:30px;
       font-weight:bold;
+      color:#2ea7ff;
+      text-decoration:none;
+    }
+
+    nav{
+      display:flex;
+      gap:22px;
     }
 
     nav a{
       color:white;
       text-decoration:none;
-      margin-left:20px;
-      font-weight:500;
+      font-weight:bold;
     }
 
-    .catalog-title{
+    .page-title{
       text-align:center;
-      margin:40px 0;
+      padding:50px 20px 20px;
       color:#081b38;
-      font-size:2.2rem;
+      font-size:42px;
     }
 
-    .products-grid{
+    .product-grid{
+      width:92%;
       max-width:1200px;
-      margin:0 auto 60px auto;
+      margin:0 auto 60px;
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-      gap:30px;
-      padding:0 20px;
+      gap:28px;
     }
 
     .product-card{
       background:white;
-      border-radius:16px;
+      border-radius:20px;
       overflow:hidden;
       box-shadow:0 8px 24px rgba(0,0,0,0.08);
       transition:0.3s;
@@ -77,45 +87,69 @@
     }
 
     .product-info{
-      padding:20px;
+      padding:22px;
       flex:1;
       display:flex;
       flex-direction:column;
     }
 
-    .product-card h3{
-      margin:0 0 10px 0;
-      color:#081b38;
-      font-size:1.2rem;
+    .product-info h3{
+      font-size:22px;
+      margin-bottom:10px;
     }
 
     .price{
-      font-size:1.4rem;
+      font-size:28px;
       font-weight:bold;
       color:#059669;
-      margin-bottom:15px;
+      margin-bottom:12px;
     }
 
     .desc{
       color:#64748b;
-      line-height:1.5;
-      flex:1;
+      line-height:1.6;
       margin-bottom:20px;
+      flex:1;
     }
 
-    .cart-btn{
-      background:#081b38;
-      color:white;
-      border:none;
+    .button-group{
+      display:flex;
+      gap:12px;
+    }
+
+    .btn{
+      flex:1;
       padding:12px;
+      border:none;
       border-radius:10px;
-      cursor:pointer;
       font-weight:bold;
+      cursor:pointer;
       transition:0.3s;
     }
 
+    .cart-btn{
+      background:#e2e8f0;
+    }
+
     .cart-btn:hover{
-      background:#112d59;
+      background:#cbd5e1;
+    }
+
+    .buy-btn{
+      background:#ff9800;
+      color:white;
+    }
+
+    .buy-btn:hover{
+      background:#ea8600;
+    }
+
+    footer{
+      background:#081b38;
+      color:white;
+      text-align:center;
+      padding:25px;
+      margin-top:40px;
     }
 
     @media(max-width:768px){
@@ -123,77 +157,70 @@
       header{
         flex-direction:column;
         gap:12px;
-        padding:14px 20px;
       }
 
-      nav{
-        display:flex;
-        gap:18px;
+      .page-title{
+        font-size:32px;
       }
 
-      .catalog-title{
-        font-size:1.8rem;
+      .button-group{
+        flex-direction:column;
       }
     }
-
   </style>
 </head>
 
 <body>
 
   <header>
-
-    <div class="logo">ShopNova</div>
+    <a href="index.html" class="logo">ShopNova</a>
 
     <nav>
       <a href="index.html">Home</a>
       <a href="products.html">Products</a>
       <a href="cart.html">Cart 🛒</a>
     </nav>
-
   </header>
 
-  <h2 class="catalog-title">Our Full Product Catalog</h2>
+  <h1 class="page-title">Explore Premium Products</h1>
 
-  <div class="products-grid">
+  <div class="product-grid">
 
-    <!-- Laptop -->
     <div class="product-card">
-
-      <img
-        src="https://images.unsplash.com/photo-1517336714739-489689fd1ca8?w=800&q=80"
-        alt="Premium Workstation Laptop">
+      <img src="https://images.unsplash.com/photo-1517336714739-489689fd1ca8?w=900&q=80"
+           alt="Premium Workstation Laptop">
 
       <div class="product-info">
-
         <h3>Premium Workstation Laptop</h3>
 
         <div class="price">₹95,000</div>
 
         <div class="desc">
-          High-performance laptop designed for coding, designing,
-          editing and professional productivity.
+          High-performance laptop designed for coding,
+          designing, editing and professional productivity.
         </div>
 
-        <button class="cart-btn"
-          onclick="addToCart('Premium Workstation Laptop',95000)">
+        <div class="button-group">
 
-          Add to Cart 🛒
+          <button class="btn cart-btn"
+            onclick="addToCart('Premium Workstation Laptop',95000)">
+            Add To Cart 🛒
+          </button>
 
-        </button>
+          <button class="btn buy-btn"
+            onclick="window.location.href='payment.html'">
+            Buy Now ⚡
+          </button>
 
+        </div>
       </div>
     </div>
 
-    <!-- Headphones -->
     <div class="product-card">
-
-      <img
-        src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80"
-        alt="Studio Wireless Headphones">
+      <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=900&q=80"
+           alt="Studio Wireless Headphones">
 
       <div class="product-info">
-
         <h3>Studio Wireless Headphones</h3>
 
         <div class="price">₹15,000</div>
@@ -203,25 +230,27 @@
           noise isolation and long battery life.
         </div>
 
-        <button class="cart-btn"
-          onclick="addToCart('Studio Wireless Headphones',15000)">
+        <div class="button-group">
 
-          Add to Cart 🛒
+          <button class="btn cart-btn"
+            onclick="addToCart('Studio Wireless Headphones',15000)">
+            Add To Cart 🛒
+          </button>
 
-        </button>
+          <button class="btn buy-btn"
+            onclick="window.location.href='payment.html'">
+            Buy Now ⚡
+          </button>
 
+        </div>
       </div>
     </div>
 
-    <!-- Holy Bible -->
     <div class="product-card">
-
-      <img
-        src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=800&q=80"
-        alt="Holy Bible">
+      <img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=900&q=80"
+           alt="Holy Bible">
 
       <div class="product-info">
-
         <h3>Holy Bible (Hardcover Edition)</h3>
 
         <div class="price">₹1,200</div>
@@ -231,17 +260,28 @@
           durable binding and a beautiful classic design.
         </div>
 
-        <button class="cart-btn"
-          onclick="addToCart('Holy Bible (Hardcover Edition)',1200)">
+        <div class="button-group">
 
-          Add to Cart 🛒
+          <button class="btn cart-btn"
+            onclick="addToCart('Holy Bible (Hardcover Edition)',1200)">
+            Add To Cart 🛒
+          </button>
 
-        </button>
+          <button class="btn buy-btn"
+            onclick="window.location.href='payment.html'">
+            Buy Now ⚡
+          </button>
 
+        </div>
       </div>
     </div>
 
   </div>
+
+  <footer>
+    © 2026 <strong>ShopNova</strong> |
+    CEO & Founder: Anuradha
+  </footer>
 
   <script src="script.js"></script>
 
