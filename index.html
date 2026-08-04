@@ -36,7 +36,7 @@
     }
 
     .logo{
-      font-size:34px;
+      font-size:32px;
       font-weight:bold;
       color:#2ea7ff;
       text-decoration:none;
@@ -46,12 +46,12 @@
       flex:1;
       display:flex;
       justify-content:center;
-      margin:0 30px;
+      margin:0 25px;
     }
 
     .search-box input{
       width:100%;
-      max-width:420px;
+      max-width:450px;
       padding:12px 20px;
       border:none;
       border-radius:30px;
@@ -61,7 +61,7 @@
 
     nav{
       display:flex;
-      gap:25px;
+      gap:22px;
     }
 
     nav a{
@@ -128,7 +128,7 @@
 
     .products h2{
       text-align:center;
-      font-size:44px;
+      font-size:42px;
       color:#081b38;
       margin-bottom:40px;
     }
@@ -162,7 +162,7 @@
     }
 
     .product-details h3{
-      font-size:24px;
+      font-size:22px;
       margin-bottom:10px;
     }
 
@@ -284,6 +284,7 @@
       margin-top:22px;
       justify-content:center;
       gap:18px;
+      flex-wrap:wrap;
     }
 
     .social-icons span{
@@ -318,13 +319,18 @@
       margin-top:60px;
     }
 
-    /* MOBILE */
+    /* MOBILE RESPONSIVE */
 
-    @media(max-width:768px){
+    @media (max-width: 768px) {
 
       header{
         flex-direction:column;
-        gap:15px;
+        gap:12px;
+        padding:14px;
+      }
+
+      .logo{
+        font-size:28px;
       }
 
       .search-box{
@@ -332,25 +338,73 @@
         margin:0;
       }
 
+      .search-box input{
+        max-width:100%;
+        font-size:14px;
+        padding:11px 16px;
+      }
+
       nav{
-        flex-wrap:wrap;
+        width:100%;
         justify-content:center;
+        flex-wrap:wrap;
+        gap:16px;
+      }
+
+      .hero{
+        padding:80px 18px;
       }
 
       .hero h1{
-        font-size:38px;
+        font-size:34px;
+        line-height:1.2;
       }
 
       .hero p{
-        font-size:18px;
+        font-size:17px;
+      }
+
+      .products{
+        width:94%;
+        margin:50px auto;
       }
 
       .products h2{
-        font-size:34px;
+        font-size:30px;
+      }
+
+      .product-grid{
+        grid-template-columns:1fr;
+        gap:22px;
+      }
+
+      .product-card img{
+        height:210px;
       }
 
       .button-group{
         flex-direction:column;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .feature-card{
+        padding:38px 22px;
+      }
+
+      .feature-card h3{
+        font-size:26px;
+      }
+
+      .feature-card p{
+        font-size:15px;
+      }
+
+      footer{
+        font-size:13px;
+        padding:22px 14px;
       }
     }
 
