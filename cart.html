@@ -1,204 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopNova - Cart & Checkout</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #fcfcfc; padding-top: 85px; padding-bottom: 80px; }
-        header { 
-            background-color: #0f172a; 
-            color: white; 
-            padding: 15px 40px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 5000;
-            height: 60px;
-            box-sizing: border-box;
-        }
-        header h1 { margin: 0; font-size: 24px; font-weight: 700; }
-        nav { display: flex; gap: 20px; }
-        nav a { color: white; text-decoration: none; font-weight: 500; font-size: 15px; }
-        
-        .checkout-layout { max-width: 1000px; margin: 30px auto; padding: 0 20px; display: flex; gap: 30px; flex-wrap: wrap; }
-        .cart-summary { flex: 1.2; min-width: 300px; background: white; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.01); }
-        .payment-section { flex: 1; min-width: 300px; background: white; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        h2 { color: #0f172a; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; margin-top: 0; }
-        
-        /* CLEAN ALIGNMENT FOR PRODUCTS & THE REMOVE OPTION */
-        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #f1f5f9; }
-        .cart-item-info h4 { margin: 0; color: #333; font-weight: 500; }
-        .cart-item-right { display: flex; align-items: center; gap: 15px; }
-        .cart-item-price { font-weight: bold; color: #0f172a; }
-        
-        /* EXPLICIT REMOVE ICON ACTION BUTTON */
-        .remove-btn { background: none; border: none; color: #ef4444; font-size: 16px; cursor: pointer; padding: 0 5px; transition: transform 0.2s; }
-        .remove-btn:hover { transform: scale(1.2); }
-        
-        .total-row { display: flex; justify-content: space-between; font-size: 18px; font-weight: bold; margin-top: 20px; padding-top: 15px; border-top: 2px solid #333; }
-        label { display: block; margin-bottom: 6px; font-weight: bold; font-size: 14px; color: #444; }
-        input[type="text"], input[type="password"] { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        .radio-group { margin-bottom: 25px; display: flex; gap: 20px; }
-        .radio-group label { font-weight: normal; cursor: pointer; display: flex; align-items: center; gap: 5px; }
-        .pay-btn { width: 100%; background-color: #0f172a; color: white; border: none; padding: 12px; font-size: 16px; border-radius: 4px; cursor: pointer; font-weight: bold; }
-        .pay-btn:hover { background-color: #1e293b; }
-        .empty-cart-msg { text-align: center; color: #777; padding: 40px 0; }
-        footer { background-color: #0f172a; color: #94a3b8; text-align: center; padding: 20px; font-size: 13px; margin-top: 40px; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopNova Cart</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f4f6;
+      margin: 0;
+    }
+
+    header {
+      background: #081b38;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart-container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+      border-bottom: 1px solid #e5e7eb;
+      gap: 20px;
+    }
+
+    .qty-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .qty-box button {
+      width: 32px;
+      height: 32px;
+      border: none;
+      border-radius: 6px;
+      background: #e2e8f0;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+
+    .qty-box button:hover {
+      background: #cbd5e1;
+    }
+
+    .remove-btn {
+      background: #ef4444;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: opacity 0.2s;
+    }
+
+    .remove-btn:hover {
+      opacity: 0.9;
+    }
+
+    .checkout-btn {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      background: #ff9800;
+      color: white;
+      text-align: center;
+      padding: 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 25px;
+      transition: background 0.2s;
+    }
+
+    .checkout-btn:hover {
+      background: #e68a00;
+    }
+
+    @media (max-width: 700px) {
+      .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-    <header>
-        <h1>ShopNova</h1>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="products.html">Products</a>
-            <a href="cart.html">Cart 🛒</a>
-        </nav>
-    </header>
+  <header>
+    <h2>ShopNova Cart 🛒</h2>
+    <a href="index.html" style="color: white; text-decoration: none; font-weight: bold;">Home</a>
+  </header>
 
-    <div class="checkout-layout">
-        <!-- Left Window Box Container -->
-        <div class="cart-summary">
-            <h2>Your Order Summary</h2>
-            <div id="cart-items-list"></div>
-            <div class="total-row">
-                <span>Total Amount:</span>
-                <span id="cart-total-price">₹0</span>
+  <div class="cart-container">
+    <div id="cartItems"></div>
+    <h3>Total: <span id="total">₹0</span></h3>
+    <a href="payment.html" class="checkout-btn">
+      Proceed to Payment 💳
+    </a>
+  </div>
+
+  <!-- Global scripts logic access -->
+  <script src="script.js"></script>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem('shopnova_cart')) || [];
+
+    function renderCart() {
+      const container = document.getElementById('cartItems');
+      container.innerHTML = '';
+      let total = 0;
+
+      if (cart.length === 0) {
+        container.innerHTML = '<p style="color: #6b7280; font-size: 1.1rem;">Your shopping cart is currently empty.</p>';
+        document.getElementById('total').innerText = '₹0';
+        return;
+      }
+
+      cart.forEach((item, index) => {
+        total += item.price * item.qty;
+        container.innerHTML += `
+          <div class="cart-item">
+            <div>
+              <h3 style="margin:0 0 5px 0;">${item.name}</h3>
+              <p style="margin:0; color:#4b5563;">₹${item.price} × ${item.qty}</p>
             </div>
-        </div>
+            <div class="qty-box">
+              <button onclick="updateQty(${index}, -1)">-</button>
+              <span style="font-weight: bold; min-width: 20px; text-align: center;">${item.qty}</span>
+              <button onclick="updateQty(${index}, 1)">+</button>
+            </div>
+            <button class="remove-btn" onclick="removeItem(${index})">❌ Remove</button>
+          </div>
+        `;
+      });
 
-        <!-- Right Window Box Container -->
-        <div class="payment-section">
-            <h2>Secure Checkout</h2>
-            <form id="checkout-form" onsubmit="processPayment(event)">
-                <label>Full Name</label>
-                <input type="text" placeholder="Anuradha" required>
+      document.getElementById('total').innerText = '₹' + total;
+    }
 
-                <label>Select Payment Method</label>
-                <div class="radio-group">
-                    <label>
-                        <input type="radio" name="payment" value="card" checked onclick="togglePaymentFields('card')"> Credit/Debit Card
-                    </label>
-                    <label>
-                        <input type="radio" name="payment" value="upi" onclick="togglePaymentFields('upi')"> UPI / NetBanking
-                    </label>
-                </div>
+    function updateQty(index, change) {
+      cart[index].qty += change;
+      if (cart[index].qty < 1) {
+        cart[index].qty = 1;
+      }
+      localStorage.setItem('shopnova_cart', JSON.stringify(cart));
+      renderCart();
+    }
 
-                <div id="card-fields">
-                    <label>Card Number</label>
-                    <input type="text" id="card-num" placeholder="1234 5678 9101 1121" required>
-                    
-                    <div style="display: flex; gap: 10px;">
-                        <div style="flex: 1;">
-                            <label>Expiry</label>
-                            <input type="text" id="card-exp" placeholder="MM/YY" required>
-                        </div>
-                        <div style="flex: 1;">
-                            <label>CVV</label>
-                            <input type="password" id="card-cvv" placeholder="***" required>
-                        </div>
-                    </div>
-                </div>
+    function removeItem(index) {
+      cart.splice(index, 1);
+      localStorage.setItem('shopnova_cart', JSON.stringify(cart));
+      renderCart();
+    }
 
-                <div id="upi-fields" style="display: none;">
-                    <label>Enter UPI ID</label>
-                    <input type="text" id="upi-id" placeholder="anuradha@okaxis">
-                </div>
+    // Render automatically when viewport constructs
+    renderCart();
+  </script>
 
-                <button type="submit" class="pay-btn">Pay & Confirm Order</button>
-            </form>
-        </div>
-    </div>
-
-    <footer>
-        &copy; 2026 <strong>ShopNova</strong> | CEO & Founder: Anuradha
-    </footer>
-
-    <script>
-        // Display items and mount click index configuration directly
-        function displayCart() {
-            const cart = JSON.parse(localStorage.getItem('shopnova_cart')) || [];
-            const listContainer = document.getElementById('cart-items-list');
-            const totalContainer = document.getElementById('cart-total-price');
-            
-            listContainer.innerHTML = '';
-            let total = 0;
-
-            if (cart.length === 0) {
-                listContainer.innerHTML = '<div class="empty-cart-msg">Your shopping cart is empty.</div>';
-                totalContainer.innerText = '₹0';
-                return;
-            }
-
-            // Loop records with trackable item order indexes
-            cart.forEach((item, index) => {
-                const row = document.createElement('div');
-                row.className = 'cart-item';
-                row.innerHTML = `
-                    <div class="cart-item-info">
-                        <h4>${item.name}</h4>
-                    </div>
-                    <div class="cart-item-right">
-                        <div class="cart-item-price">₹${item.price}</div>
-                        <!-- Clicking this button calls the remove function below -->
-                        <button class="remove-btn" onclick="removeFromCart(${index})" title="Remove item">❌</button>
-                    </div>
-                `;
-                listContainer.appendChild(row);
-                total += parseInt(item.price);
-            });
-
-            totalContainer.innerText = '₹' + total;
-        }
-
-        // FUNCTION THAT REMOVES INDIVIDUAL CHOSEN ITEM
-        function removeFromCart(itemIndex) {
-            let cart = JSON.parse(localStorage.getItem('shopnova_cart')) || [];
-            
-            // Remove the exact selected item matching the clicked row index
-            cart.splice(itemIndex, 1);
-            
-            // Overwrite memory and force layout re-render updates instantly
-            localStorage.setItem('shopnova_cart', JSON.stringify(cart));
-            displayCart();
-        }
-
-        function togglePaymentFields(type) {
-            const cardFields = document.getElementById('card-fields');
-            const upiFields = document.getElementById('upi-fields');
-            
-            if (type === 'card') {
-                cardFields.style.display = 'block';
-                upiFields.style.display = 'none';
-                document.getElementById('card-num').required = true;
-                document.getElementById('card-exp').required = true;
-                document.getElementById('card-cvv').required = true;
-                document.getElementById('upi-id').required = false;
-            } else {
-                cardFields.style.display = 'none';
-                upiFields.style.display = 'block';
-                document.getElementById('card-num').required = false;
-                document.getElementById('card-exp').required = false;
-                document.getElementById('card-cvv').required = false;
-                document.getElementById('upi-id').required = true;
-            }
-        }
-
-        function processPayment(event) {
-            event.preventDefault();
-            alert('Payment Received Successfully! Thank you for purchasing from ShopNova.');
-            localStorage.removeItem('shopnova_cart');
-            displayCart();
-        }
-
-        displayCart();
-    </script>
 </body>
 </html>

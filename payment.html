@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopNova Payment</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f4f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .payment-box {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      width: 320px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+
+    img {
+      width: 230px;
+      margin: 20px 0;
+      border-radius: 14px;
+      border: 1px solid #e5e7eb;
+    }
+
+    button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      width: 100%;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="payment-box">
+    <h2>📱 Pay with UPI</h2>
+    
+    <!-- Generates a QR code for your customer to scan -->
+    <img
+      id="qrImage"
+      src="https://qrserver.com"
+      alt="UPI QR">
+
+    <p style="color: #4b5563; font-size: 0.95rem; margin-bottom: 20px;">
+      Scan using Google Pay, PhonePe, Paytm or any UPI app.
+    </p>
+
+    <h3 style="margin-bottom: 20px; color: #081b38;">Amount: <span id="payAmount">₹0</span></h3>
+
+    <button onclick="completePayment()">
+      Payment Completed
+    </button>
+  </div>
+
+  <script src="script.js"></script>
+
+  <script>
+    // Grab cart from local storage to calculate total price
+    let cart = JSON.parse(localStorage.getItem('shopnova_cart')) || [];
+    let total = 0;
+
+    cart.forEach(item => {
+      total += item.price * item.qty;
+    });
+
+    // Display the calculated total balance on screen
+    document.getElementById('payAmount').innerText = '₹' + total;
+
+    // Inject payment amount directly into the scanner data
+    if (total > 0) {
+      document.getElementById('qrImage').src = `https://qrserver.com{total}`;
+    }
+
+    function completePayment() {
+      if (total === 0) {
+        alert("⚠️ Your cart is empty. There's no payment balance to process.");
+        window.location.href = 'index.html';
+        return;
+      }
+
+      // Log order to history
+      saveOrder(total);
+
+      // Wipe shopping cart clean after successful payment
+      localStorage.removeItem('shopnova_cart');
+
+      alert('🎉 Order successfully generated! Thank you for purchasing from ShopNova Pro.');
+      
+      // Send user safely back to home menu page
+      window.location.href = 'index.html';
+    }
+  </script>
+
+</body>
+</html>
