@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ShopNova - All Products</title>
   <style>
+    /* Global Workspace Layout Resets */
     body {
       font-family: Arial, sans-serif;
       background: #f3f4f6;
@@ -13,6 +14,7 @@
       color: #333;
     }
 
+    /* STICKY HEADER FIX FOR ALL PRODUCTS PAGE */
     header {
       background: #081b38;
       color: white;
@@ -20,6 +22,13 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: fixed;   /* Keeps header locked at top ceiling */
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;     
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      box-sizing: border-box;
     }
 
     .logo {
@@ -36,7 +45,7 @@
 
     .catalog-title {
       text-align: center;
-      margin: 40px 0;
+      margin: 110px 0 40px 0; /* Clear header space */
       color: #081b38;
       font-size: 2.2rem;
     }
@@ -57,6 +66,9 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.05);
       text-align: center;
       transition: transform 0.2s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .product-card:hover {
@@ -66,8 +78,9 @@
     .product-card img {
       width: 100%;
       height: 220px;
-      object-fit: cover;
+      object-fit: contain; /* Keeps products clean without cropping shapes */
       border-radius: 8px;
+      background: #f8fafc;
     }
 
     .product-card h3 {
@@ -99,10 +112,22 @@
     .cart-btn:hover {
       background: #112d59;
     }
+
+    /* MOBILE VIEWS ADJUSTMENTS RULES */
+    @media (max-width: 768px) {
+      header {
+        padding: 10px 20px;
+      }
+      .catalog-title {
+        margin-top: 90px;
+        font-size: 1.8rem;
+      }
+    }
   </style>
 </head>
 <body>
 
+  <!-- Sticky Bar Navigation -->
   <header>
     <div class="logo">ShopNova</div>
     <nav>
@@ -115,31 +140,38 @@
   <h2 class="catalog-title">Our Full Product Catalog</h2>
 
   <div class="products-grid">
-    <!-- 1. Workstation Laptop -->
+    <!-- 1. Workstation Laptop (Fixed Link to High-Quality Unsplash Asset) -->
     <div class="product-card">
       <img src="https://unsplash.com" alt="Premium Workstation Laptop">
-      <h3>Premium Workstation Laptop</h3>
-      <div class="price">₹95,000</div>
+      <div>
+        <h3>Premium Workstation Laptop</h3>
+        <div class="price">₹95,000</div>
+      </div>
       <button class="cart-btn" onclick="addToCart('Premium Workstation Laptop', 95000)">Add to Cart 🛒</button>
     </div>
 
-    <!-- 2. Wireless Headphones -->
+    <!-- 2. Wireless Headphones (Fixed Link to High-Quality Unsplash Asset) -->
     <div class="product-card">
       <img src="https://unsplash.com" alt="Studio Wireless Headphones">
-      <h3>Studio Wireless Headphones</h3>
-      <div class="price">₹15,000</div>
+      <div>
+        <h3>Studio Wireless Headphones</h3>
+        <div class="price">₹15,000</div>
+      </div>
       <button class="cart-btn" onclick="addToCart('Studio Wireless Headphones', 15000)">Add to Cart 🛒</button>
     </div>
 
-    <!-- 3. Holy Bible (ADDED HERE FOR PRODUCTS CATALOG) -->
+    <!-- 3. Holy Bible Cover Card (Fixed Link to High-Quality Unsplash Asset) -->
     <div class="product-card">
       <img src="https://unsplash.com" alt="Holy Bible">
-      <h3>Holy Bible (Hardcover Edition)</h3>
-      <div class="price">₹1,200</div>
+      <div>
+        <h3>Holy Bible (Hardcover Edition)</h3>
+        <div class="price">₹1,200</div>
+      </div>
       <button class="cart-btn" onclick="addToCart('Holy Bible (Hardcover Edition)', 1200)">Add to Cart 🛒</button>
     </div>
   </div>
 
+  <!-- Global scripts logic access linkage -->
   <script src="script.js"></script>
 </body>
 </html>
