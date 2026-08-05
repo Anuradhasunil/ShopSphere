@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ShopNova - Explore Premium Products</title>
+  <title>ShopNova - Home</title>
   <style>
-    /* Global Styles */
+    /* Base Page Styling Rules */
     body {
       font-family: Arial, sans-serif;
-      background-color: #ffffff;
+      background-color: #f8fafc;
       margin: 0;
       padding: 0;
       color: #333;
     }
 
-    /* Header Styling */
+    /* PREMIUM STICKY HEADER FIXED AT THE CEILING */
     header {
       background-color: #081b38;
       color: white;
@@ -22,10 +22,13 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: sticky;
+      position: fixed;   /* Freezes the navigation bar at the top */
       top: 0;
-      z-index: 1000;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      left: 0;
+      right: 0;
+      z-index: 1000;     /* Keeps header layered above product grids */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      box-sizing: border-box;
     }
 
     .logo {
@@ -36,7 +39,7 @@
     }
 
     .search-container input {
-      width: 400px;
+      width: 350px;
       padding: 10px 15px;
       border-radius: 20px;
       border: 1px solid #cbd5e1;
@@ -51,11 +54,11 @@
       font-weight: 500;
     }
 
-    /* Main Container layout */
+    /* Main Container with top margin to offset the sticky header */
     .container {
       max-width: 1200px;
-      margin: 0 auto;
-      padding: 40px 20px;
+      margin: 90px auto 40px auto; 
+      padding: 0 20px;
     }
 
     .section-title {
@@ -65,19 +68,17 @@
       margin-bottom: 40px;
     }
 
-    /* Product Grid Layout */
+    /* Responsive Grid Workspace Layout */
     .products-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 30px;
       justify-content: center;
-      max-width: 900px;
-      margin: 0 auto;
     }
 
-    /* Product Card Styling */
+    /* Clean Card Layout Rules */
     .product-card {
-      background: #f8fafc;
+      background: white;
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 4px 15px rgba(0,0,0,0.05);
@@ -87,7 +88,7 @@
     }
 
     .image-container {
-      background-color: #f1f5f9;
+      background-color: #ffffff;
       height: 250px;
       display: flex;
       justify-content: center;
@@ -103,7 +104,6 @@
     }
 
     .product-info {
-      background: white;
       padding: 25px;
       flex-grow: 1;
       display: flex;
@@ -119,11 +119,10 @@
     .price {
       font-size: 1.4rem;
       font-weight: bold;
-      color: #0d9488;
+      color: #081b38;
       margin-bottom: 20px;
     }
 
-    /* Card Action Buttons styling */
     .button-group {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -158,30 +157,82 @@
       color: white;
     }
 
-    /* Mobile Responsive Viewport Queries */
+    /* NEAT FLOATING CONTACT TRIGGER BUTTON STYLING */
+    .contact-float-btn {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background-color: #ff9800;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.6rem;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      z-index: 2000;
+      border: none;
+      outline: none;
+    }
+
+    /* Floating Dropdown Communication Options Layer */
+    .contact-menu {
+      position: fixed;
+      bottom: 95px;
+      right: 25px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      display: none; /* Controlled dynamically via global scripts engine */
+      flex-direction: column;
+      padding: 8px;
+      gap: 4px;
+      z-index: 2000;
+      border: 1px solid #e2e8f0;
+    }
+
+    .contact-menu a {
+      color: #081b38;
+      text-decoration: none;
+      padding: 10px 18px;
+      font-weight: bold;
+      font-size: 0.95rem;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .contact-menu a:hover {
+      background-color: #f1f5f9;
+    }
+
+    /* Mobile Phone Screen Responsiveness Override Rules */
     @media (max-width: 768px) {
       header {
         flex-direction: column;
         padding: 15px;
-        gap: 15px;
+        gap: 12px;
       }
       .search-container input {
         width: 100%;
-        max-width: 320px;
+        max-width: 300px;
       }
-      nav {
-        margin: 0;
+      .container {
+        margin-top: 140px;
       }
       .products-grid {
         grid-template-columns: 1fr;
-        max-width: 400px;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Sticky Navigation header -->
+  <!-- Sticky Top Navigation header -->
   <header>
     <a href="index.html" class="logo">ShopNova</a>
     <div class="search-container">
@@ -203,7 +254,7 @@
       <!-- 1. Premium Workstation Laptop Card -->
       <div class="product-card">
         <div class="image-container">
-          <!-- FIXED: Replaced broken local source path with permanent web address link -->
+          <!-- FIXED: High-quality Unsplash image with custom cache-busting tag -->
           <img src="https://unsplash.com" alt="Premium Workstation Laptop">
         </div>
         <div class="product-info">
@@ -219,7 +270,7 @@
       <!-- 2. Studio Wireless Headphones Card -->
       <div class="product-card">
         <div class="image-container">
-          <!-- FIXED: Replaced broken local source path with permanent web address link -->
+          <!-- FIXED: High-quality Unsplash image with custom cache-busting tag -->
           <img src="https://unsplash.com" alt="Studio Wireless Headphones">
         </div>
         <div class="product-info">
@@ -235,7 +286,14 @@
     </div>
   </div>
 
-  <!-- Global scripts hook integration linkage -->
+  <!-- Neat Interactive Floating Contact Component Elements -->
+  <button class="contact-float-btn" onclick="toggleContacts()">📞</button>
+  <div class="contact-menu" id="contactMenu">
+    <a href="mailto:support@shopsphere.com">✉️ Email Support</a>
+    <a href="https://wa.me" target="_blank">💬 WhatsApp Chat</a>
+  </div>
+
+  <!-- Global scripts logic links -->
   <script src="script.js"></script>
 </body>
 </html>
