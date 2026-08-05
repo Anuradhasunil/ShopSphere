@@ -46,24 +46,29 @@
 
     // Inject Shared Premium Global Navbar
     fetch('navbar.html')
-      .then(res => res.text())
+      .then(res => {
+        if (!res.ok) throw new Error('Navbar file not found');
+        return res.text();
+      })
       .then(data => {
         document.getElementById('navbar-placeholder').innerHTML = data;
         setupAuthUI();
-        // Bind Search Listener inside injected navbar
         document.getElementById('liveSearch').addEventListener('input', (e) => loadProducts(e.target.value));
-      });
+      })
+      .catch(err => console.log('Navbar fallback:', err));
 
     function setupAuthUI() {
       const user = JSON.parse(localStorage.getItem('user'));
       const authLink = document.getElementById('authLink');
-      if (user) {
-        authLink.innerHTML = `
-          <a href="admin.html" style="color: #ff8c00; text-decoration:none; margin-right:15px;">Dashboard</a>
-          <a href="#" onclick="logout()" style="color: white; text-decoration:none;">Logout</a>
-        `;
-      } else {
-        authLink.innerHTML = `<a href="login.html" style="color: white; text-decoration: none;">Login</a>`;
+      if (authLink) {
+        if (user) {
+          authLink.innerHTML = `
+            <a href="admin.html" style="color: #ff8c00; text-decoration:none; margin-right:15px;">Dashboard</a>
+            <a href="#" onclick="logout()" style="color: white; text-decoration:none;">Logout</a>
+          `;
+        } else {
+          authLink.innerHTML = `<a href="login.html" style="color: white; text-decoration: none;">Login</a>`;
+        }
       }
     }
 
@@ -79,6 +84,11 @@
         const products = await res.json();
         const grid = document.getElementById('productGrid');
         grid.innerHTML = '';
+
+        if (products.length === 0) {
+          grid.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color:#666;">No products found matching your search.</p>`;
+          return;
+        }
 
         products.forEach(p => {
           const waMsg = encodeURIComponent(`Hello ${p.sellerName}, I am interested in buying your item "${p.name}" listed on ShopNova.`);
