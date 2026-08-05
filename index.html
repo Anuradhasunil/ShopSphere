@@ -1,304 +1,503 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ShopNova - Home</title>
+
   <style>
-    /* Base Page Styling Rules */
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f8fafc;
-      margin: 0;
-      padding: 0;
-      color: #333;
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Segoe UI',sans-serif;
     }
 
-    /* PREMIUM STICKY HEADER FIXED AT THE CEILING */
-    header {
-      background-color: #081b38;
-      color: white;
-      padding: 15px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: fixed;   
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;     
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      box-sizing: border-box;
+    body{
+      background:#f3f4f6;
+      color:#111827;
     }
 
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: white;
-      text-decoration: none;
+    /* HEADER */
+
+    header{
+      background:#081b38;
+      color:white;
+      padding:16px 5%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      position:sticky;
+      top:0;
+      z-index:1000;
+      box-shadow:0 4px 12px rgba(0,0,0,0.15);
     }
 
-    .search-container input {
-      width: 350px;
-      padding: 10px 15px;
-      border-radius: 20px;
-      border: 1px solid #cbd5e1;
-      font-size: 0.9rem;
-      outline: none;
+    .logo{
+      font-size:32px;
+      font-weight:bold;
+      color:#2ea7ff;
+      text-decoration:none;
     }
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 20px;
-      font-weight: 500;
+    nav{
+      display:flex;
+      gap:24px;
     }
 
-    /* Main Container with top margin to offset the sticky header */
-    .container {
-      max-width: 1200px;
-      margin: 110px auto 40px auto; 
-      padding: 0 20px;
+    nav a{
+      color:white;
+      text-decoration:none;
+      font-weight:bold;
+      transition:0.3s;
     }
 
-    .section-title {
-      text-align: center;
-      font-size: 2.2rem;
-      color: #081b38;
-      margin-bottom: 40px;
+    nav a:hover{
+      color:#2ea7ff;
     }
 
-    /* Responsive Grid Workspace Layout */
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 30px;
-      justify-content: center;
+    /* SEARCH */
+
+    .search-box{
+      flex:1;
+      display:flex;
+      justify-content:center;
+      margin:0 30px;
     }
 
-    /* Clean Card Layout Rules */
-    .product-card {
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-      border: 1px solid #e2e8f0;
-      display: flex;
-      flex-direction: column;
+    .search-box input{
+      width:100%;
+      max-width:420px;
+      padding:14px 20px;
+      border:none;
+      border-radius:30px;
+      font-size:15px;
+      outline:none;
     }
 
-    .image-container {
-      background-color: #ffffff;
-      height: 250px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      box-sizing: border-box;
+    /* HERO */
+
+    .hero{
+      height:420px;
+      background:
+        linear-gradient(rgba(8,27,56,0.65),rgba(8,27,56,0.65)),
+        url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1400&q=80')
+        center/cover no-repeat;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      color:white;
+      padding:20px;
     }
 
-    .product-card img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
+    .hero-content h1{
+      font-size:48px;
+      margin-bottom:18px;
     }
 
-    .product-info {
-      padding: 25px;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
+    .hero-content p{
+      font-size:18px;
+      margin-bottom:28px;
     }
 
-    .product-info h3 {
-      font-size: 1.2rem;
-      margin: 0 0 10px 0;
-      color: #333;
+    .hero-btn{
+      background:#ff9800;
+      color:white;
+      padding:14px 34px;
+      border-radius:30px;
+      text-decoration:none;
+      font-weight:bold;
+      transition:0.3s;
     }
 
-    .price {
-      font-size: 1.4rem;
-      font-weight: bold;
-      color: #081b38;
-      margin-bottom: 20px;
+    .hero-btn:hover{
+      background:#ea8600;
     }
 
-    .button-group {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-      margin-top: auto;
+    /* PRODUCTS */
+
+    .products{
+      width:92%;
+      max-width:1200px;
+      margin:70px auto;
     }
 
-    .btn {
-      padding: 12px;
-      border-radius: 6px;
-      font-size: 0.95rem;
-      font-weight: bold;
-      cursor: pointer;
-      border: none;
-      transition: opacity 0.2s;
-      text-align: center;
-      text-decoration: none;
+    .products h2{
+      text-align:center;
+      font-size:42px;
+      color:#081b38;
+      margin-bottom:45px;
     }
 
-    .btn:hover {
-      opacity: 0.9;
+    .product-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:28px;
     }
 
-    .add-to-cart {
-      background-color: #f1f5f9;
-      color: #333;
-      border: 1px solid #cbd5e1;
+    .product-card{
+      background:white;
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 8px 24px rgba(0,0,0,0.08);
+      transition:0.3s;
+      display:flex;
+      flex-direction:column;
     }
 
-    .buy-now {
-      background-color: #ff9800;
-      color: white;
+    .product-card:hover{
+      transform:translateY(-6px);
     }
 
-    /* NEAT FLOATING CONTACT TRIGGER BUTTON STYLING */
-    .contact-float-btn {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background-color: #ff9800;
-      color: white;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1.6rem;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      z-index: 2000;
-      border: none;
-      outline: none;
+    .product-card img{
+      width:100%;
+      height:230px;
+      object-fit:cover;
     }
 
-    /* Expanded 5-Option Communication Support Dropdown Panel */
-    .contact-menu {
-      position: fixed;
-      bottom: 95px;
-      right: 25px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-      display: none; 
-      flex-direction: column;
-      padding: 10px;
-      gap: 6px;
-      z-index: 2000;
-      border: 1px solid #e2e8f0;
-      min-width: 180px;
+    .product-details{
+      padding:22px;
+      flex:1;
+      display:flex;
+      flex-direction:column;
     }
 
-    .contact-menu a {
-      color: #081b38;
-      text-decoration: none;
-      padding: 10px 14px;
-      font-weight: bold;
-      font-size: 0.9rem;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transition: background-color 0.2s;
+    .product-name{
+      font-size:22px;
+      margin-bottom:10px;
+      color:#081b38;
     }
 
-    .contact-menu a:hover {
-      background-color: #f1f5f9;
+    .product-price{
+      font-size:28px;
+      font-weight:bold;
+      color:#059669;
+      margin-bottom:12px;
     }
 
-    /* Mobile Phone Screen Responsiveness Override Rules */
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        padding: 15px;
-        gap: 12px;
+    .product-details p{
+      color:#64748b;
+      line-height:1.6;
+      margin-bottom:22px;
+      flex:1;
+    }
+
+    .button-group{
+      display:flex;
+      gap:12px;
+    }
+
+    .action-btn{
+      flex:1;
+      padding:12px;
+      border:none;
+      border-radius:10px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .cart-btn{
+      background:#e2e8f0;
+      color:#111827;
+    }
+
+    .cart-btn:hover{
+      background:#cbd5e1;
+    }
+
+    .buy-btn{
+      background:#ff9800;
+      color:white;
+    }
+
+    .buy-btn:hover{
+      background:#ea8600;
+    }
+
+    /* CONTACT BUTTON */
+
+    .contact-btn{
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      width:60px;
+      height:60px;
+      border-radius:50%;
+      background:#ff9800;
+      color:white;
+      border:none;
+      font-size:28px;
+      cursor:pointer;
+      box-shadow:0 6px 18px rgba(0,0,0,0.25);
+    }
+
+    /* FOOTER */
+
+    footer{
+      background:#081b38;
+      color:white;
+      text-align:center;
+      padding:28px;
+      margin-top:60px;
+    }
+
+    /* MOBILE */
+
+    @media(max-width:768px){
+
+      header{
+        flex-direction:column;
+        gap:14px;
+        padding:14px 20px;
       }
-      .search-container input {
-        width: 100%;
-        max-width: 300px;
+
+      .search-box{
+        width:100%;
+        margin:0;
       }
-      .container {
-        margin-top: 160px;
+
+      nav{
+        flex-wrap:wrap;
+        justify-content:center;
       }
-      .products-grid {
-        grid-template-columns: 1fr;
+
+      .hero{
+        height:360px;
+      }
+
+      .hero-content h1{
+        font-size:34px;
+      }
+
+      .products h2{
+        font-size:34px;
+      }
+
+      .button-group{
+        flex-direction:column;
       }
     }
+
   </style>
 </head>
+
 <body>
 
-  <!-- Sticky Top Navigation header -->
   <header>
+
     <a href="index.html" class="logo">ShopNova</a>
-    <div class="search-container">
-      <input type="text" placeholder="Search products, brands and more..." onkeydown="searchProduct(event)">
+
+    <div class="search-box">
+
+      <input type="text"
+             placeholder="Search products, brands and more..."
+             id="searchInput">
+
     </div>
+
     <nav>
       <a href="index.html">Home</a>
       <a href="products.html">Products</a>
-      <a href="payment.html">Cart 🛒</a>
+      <a href="cart.html">Cart 🛒</a>
     </nav>
+
   </header>
 
-  <!-- Main Website Products Showcase Container -->
-  <div class="container">
-    <h2 class="section-title">Explore Premium Products</h2>
+  <section class="hero">
 
-    <div class="products-grid">
-      
-      <!-- 1. Premium Workstation Laptop Card -->
+    <div class="hero-content">
+
+      <h1>Welcome to ShopNova</h1>
+
+      <p>
+        Premium shopping experience for fashion,
+        gadgets, books and lifestyle products
+      </p>
+
+      <a href="products.html" class="hero-btn">
+        Explore Products
+      </a>
+
+    </div>
+
+  </section>
+
+  <section class="products">
+
+    <h2>Featured Products</h2>
+
+    <div class="product-grid">
+
+      <!-- SHIRT -->
       <div class="product-card">
-        <div class="image-container">
-          <!-- FIXED URL PATHWAYS: Bypasses cloud filters to force render the laptop thumbnail directly -->
-          <img src="https://unsplash.com" alt="Premium Workstation Laptop">
-        </div>
-        <div class="product-info">
-          <h3>Premium Workstation Laptop</h3>
-          <div class="price">₹89,999</div>
+
+        <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=900&q=80"
+             alt="Premium Casual Shirt">
+
+        <div class="product-details">
+
+          <h3 class="product-name">Premium Casual Shirt</h3>
+
+          <div class="product-price">₹799</div>
+
+          <p>
+            Soft cotton fabric with a clean premium design
+            perfect for daily wear and stylish comfort.
+          </p>
+
           <div class="button-group">
-            <button class="btn add-to-cart" onclick="addToCart('Premium Workstation Laptop', 89999)">Add To Cart 🛒</button>
-            <a href="payment.html" class="btn buy-now" onclick="addToCart('Premium Workstation Laptop', 89999)">Buy Now ⚡</a>
+
+            <button class="action-btn cart-btn"
+              onclick="addToCart('Premium Casual Shirt',799)">
+
+              Add To Cart 🛒
+
+            </button>
+
+            <button class="action-btn buy-btn"
+              onclick="window.location.href='payment.html'">
+
+              Buy Now ⚡
+
+            </button>
+
           </div>
+
         </div>
       </div>
 
-      <!-- 2. Studio Wireless Headphones Card -->
+      <!-- SHOES -->
       <div class="product-card">
-        <div class="image-container">
-          <!-- FIXED URL PATHWAYS: Bypasses cloud filters to force render the headphone thumbnail directly -->
-          <img src="https://unsplash.com" alt="Studio Wireless Headphones">
-        </div>
-        <div class="product-info">
-          <h3>Studio Wireless Headphones</h3>
-          <div class="price">₹4,999</div>
+
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=900&q=80"
+             alt="Sports Running Shoes">
+
+        <div class="product-details">
+
+          <h3 class="product-name">Sports Running Shoes</h3>
+
+          <div class="product-price">₹1,499</div>
+
+          <p>
+            Lightweight running shoes with excellent grip,
+            support and all-day comfort for active lifestyles.
+          </p>
+
           <div class="button-group">
-            <button class="btn add-to-cart" onclick="addToCart('Studio Wireless Headphones', 4999)">Add To Cart 🛒</button>
-            <a href="payment.html" class="btn buy-now" onclick="addToCart('Studio Wireless Headphones', 4999)">Buy Now ⚡</a>
+
+            <button class="action-btn cart-btn"
+              onclick="addToCart('Sports Running Shoes',1499)">
+
+              Add To Cart 🛒
+
+            </button>
+
+            <button class="action-btn buy-btn"
+              onclick="window.location.href='payment.html'">
+
+              Buy Now ⚡
+
+            </button>
+
           </div>
+
+        </div>
+      </div>
+
+      <!-- WATCH -->
+      <div class="product-card">
+
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=900&q=80"
+             alt="Smart Watch Pro">
+
+        <div class="product-details">
+
+          <h3 class="product-name">Smart Watch Pro</h3>
+
+          <div class="product-price">₹2,999</div>
+
+          <p>
+            Stylish water-resistant smartwatch with fitness
+            tracking, notifications and long battery life.
+          </p>
+
+          <div class="button-group">
+
+            <button class="action-btn cart-btn"
+              onclick="addToCart('Smart Watch Pro',2999)">
+
+              Add To Cart 🛒
+
+            </button>
+
+            <button class="action-btn buy-btn"
+              onclick="window.location.href='payment.html'">
+
+              Buy Now ⚡
+
+            </button>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- HOLY BIBLE -->
+      <div class="product-card">
+
+        <img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=900&q=80"
+             alt="Holy Bible Hardcover Edition">
+
+        <div class="product-details">
+
+          <h3 class="product-name">Holy Bible (Hardcover Edition)</h3>
+
+          <div class="product-price">₹1,200</div>
+
+          <p>
+            Elegant hardcover Holy Bible with premium quality
+            pages, durable binding and a beautiful classic design.
+          </p>
+
+          <div class="button-group">
+
+            <button class="action-btn cart-btn"
+              onclick="addToCart('Holy Bible (Hardcover Edition)',1200)">
+
+              Add To Cart 🛒
+
+            </button>
+
+            <button class="action-btn buy-btn"
+              onclick="window.location.href='payment.html'">
+
+              Buy Now ⚡
+
+            </button>
+
+          </div>
+
         </div>
       </div>
 
     </div>
-  </div>
 
-  <!-- UPDATED FULL CONTACT SUPPORT FLOATING DROPDOWN LIST -->
-  <button class="contact-float-btn" onclick="toggleContacts()">📞</button>
-  <div class="contact-menu" id="contactMenu">
-    <a href="mailto:support@shopsphere.com">✉️ Email Support</a>
-    <a href="https://wa.me" target="_blank">💬 WhatsApp Chat</a>
-    <a href="https://instagram.com" target="_blank">📸 Instagram Profile</a>
-    <a href="https://t.me" target="_blank">✈️ Telegram Support</a>
-    <a href="tel:+919876543210">📞 Call Helpline</a>
-  </div>
+  </section>
 
-  <!-- Global scripts logic links -->
+  <button class="contact-btn">📞</button>
+
+  <footer>
+    © 2026 <strong>ShopNova</strong> |
+    CEO & Founder: Anuradha
+  </footer>
+
   <script src="script.js"></script>
+
 </body>
 </html>
+
