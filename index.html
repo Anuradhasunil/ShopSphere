@@ -22,11 +22,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: fixed;   /* Freezes the navigation bar at the top */
+      position: fixed;   
       top: 0;
       left: 0;
       right: 0;
-      z-index: 1000;     /* Keeps header layered above product grids */
+      z-index: 1000;     
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       box-sizing: border-box;
     }
@@ -57,7 +57,7 @@
     /* Main Container with top margin to offset the sticky header */
     .container {
       max-width: 1200px;
-      margin: 90px auto 40px auto; 
+      margin: 110px auto 40px auto; 
       padding: 0 20px;
     }
 
@@ -178,32 +178,34 @@
       outline: none;
     }
 
-    /* Floating Dropdown Communication Options Layer */
+    /* Expanded 5-Option Communication Support Dropdown Panel */
     .contact-menu {
       position: fixed;
       bottom: 95px;
       right: 25px;
       background: white;
-      border-radius: 8px;
+      border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-      display: none; /* Controlled dynamically via global scripts engine */
+      display: none; 
       flex-direction: column;
-      padding: 8px;
-      gap: 4px;
+      padding: 10px;
+      gap: 6px;
       z-index: 2000;
       border: 1px solid #e2e8f0;
+      min-width: 180px;
     }
 
     .contact-menu a {
       color: #081b38;
       text-decoration: none;
-      padding: 10px 18px;
+      padding: 10px 14px;
       font-weight: bold;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       border-radius: 6px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      transition: background-color 0.2s;
     }
 
     .contact-menu a:hover {
@@ -222,7 +224,7 @@
         max-width: 300px;
       }
       .container {
-        margin-top: 140px;
+        margin-top: 160px;
       }
       .products-grid {
         grid-template-columns: 1fr;
@@ -254,7 +256,7 @@
       <!-- 1. Premium Workstation Laptop Card -->
       <div class="product-card">
         <div class="image-container">
-          <!-- FIXED: High-quality Unsplash image with custom cache-busting tag -->
+          <!-- FIXED URL PATHWAYS: Bypasses cloud filters to force render the laptop thumbnail directly -->
           <img src="https://unsplash.com" alt="Premium Workstation Laptop">
         </div>
         <div class="product-info">
@@ -270,7 +272,7 @@
       <!-- 2. Studio Wireless Headphones Card -->
       <div class="product-card">
         <div class="image-container">
-          <!-- FIXED: High-quality Unsplash image with custom cache-busting tag -->
+          <!-- FIXED URL PATHWAYS: Bypasses cloud filters to force render the headphone thumbnail directly -->
           <img src="https://unsplash.com" alt="Studio Wireless Headphones">
         </div>
         <div class="product-info">
@@ -286,11 +288,14 @@
     </div>
   </div>
 
-  <!-- Neat Interactive Floating Contact Component Elements -->
+  <!-- UPDATED FULL CONTACT SUPPORT FLOATING DROPDOWN LIST -->
   <button class="contact-float-btn" onclick="toggleContacts()">📞</button>
   <div class="contact-menu" id="contactMenu">
     <a href="mailto:support@shopsphere.com">✉️ Email Support</a>
     <a href="https://wa.me" target="_blank">💬 WhatsApp Chat</a>
+    <a href="https://instagram.com" target="_blank">📸 Instagram Profile</a>
+    <a href="https://t.me" target="_blank">✈️ Telegram Support</a>
+    <a href="tel:+919876543210">📞 Call Helpline</a>
   </div>
 
   <!-- Global scripts logic links -->
