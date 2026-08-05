@@ -3,45 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ShopNova - Premium E-Commerce Pro</title>
+  <title>ShopNova - Explore Premium Products</title>
   <style>
-    /* Global Workspace Layout Resets */
+    /* Global Styles */
     body {
       font-family: Arial, sans-serif;
-      background: #0d1b2a; /* Restored your dark background theme color */
+      background-color: #ffffff;
       margin: 0;
       padding: 0;
       color: #333;
     }
 
-    /* FIXED: STICKY HEADER IMPLEMENTATION */
+    /* Header Styling */
     header {
-      background: #081b38;
+      background-color: #081b38;
       color: white;
       padding: 15px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: fixed;   /* Freezes header floating at top window ceiling */
+      position: sticky;
       top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;     /* Keeps header layered above all content cards */
+      z-index: 1000;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
     .logo {
       font-size: 1.5rem;
       font-weight: bold;
+      color: white;
+      text-decoration: none;
     }
 
     .search-container input {
-      width: 300px;
-      padding: 10px;
+      width: 400px;
+      padding: 10px 15px;
       border-radius: 20px;
       border: 1px solid #cbd5e1;
-      padding-left: 15px;
       font-size: 0.9rem;
+      outline: none;
     }
 
     nav a {
@@ -51,155 +51,139 @@
       font-weight: 500;
     }
 
-    /* Fixed spacing offset so header layout won't cover banner text */
-    .hero-banner {
-      background: linear-gradient(rgba(8, 27, 56, 0.6), rgba(8, 27, 56, 0.6)), url('https://unsplash.com') no-repeat center center/cover;
-      height: 380px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      text-align: center;
-      margin-top: 65px; /* Offset spacing for position: fixed header alignment */
-    }
-
-    .hero-banner h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-    }
-
-    .explore-btn {
-      background: #ff9800;
-      color: white;
-      padding: 12px 30px;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: bold;
-      margin-top: 15px;
-      transition: background 0.2s;
-    }
-
-    .explore-btn:hover {
-      background: #e68a00;
+    /* Main Container layout */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
     }
 
     .section-title {
       text-align: center;
-      margin: 40px 0 25px 0;
-      color: white; /* Changed label text to contrast against dark dashboard */
       font-size: 2.2rem;
+      color: #081b38;
+      margin-bottom: 40px;
     }
 
-    .products-container {
-      max-width: 1200px;
-      margin: 0 auto 60px auto;
+    /* Product Grid Layout */
+    .products-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-      padding: 0 20px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      justify-content: center;
+      max-width: 900px;
+      margin: 0 auto;
     }
 
+    /* Product Card Styling */
     .product-card {
-      background: white;
-      padding: 20px;
+      background: #f8fafc;
       border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      text-align: center;
-      transition: transform 0.2s;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      border: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
     }
 
-    .product-card:hover {
-      transform: translateY(-5px);
+    .image-container {
+      background-color: #f1f5f9;
+      height: 250px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
     }
 
     .product-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 8px;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
     }
 
-    .product-card h3 {
-      font-size: 1.1rem;
-      margin: 15px 0 8px 0;
+    .product-info {
+      background: white;
+      padding: 25px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-info h3 {
+      font-size: 1.2rem;
+      margin: 0 0 10px 0;
       color: #333;
     }
 
     .price {
+      font-size: 1.4rem;
       font-weight: bold;
-      color: #081b38;
-      font-size: 1.2rem;
-      margin-bottom: 15px;
+      color: #0d9488;
+      margin-bottom: 20px;
     }
 
-    .cart-btn {
-      background: #081b38;
-      color: white;
-      border: none;
-      padding: 10px 20px;
+    /* Card Action Buttons styling */
+    .button-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: auto;
+    }
+
+    .btn {
+      padding: 12px;
       border-radius: 6px;
-      cursor: pointer;
+      font-size: 0.95rem;
       font-weight: bold;
-      width: 100%;
-      transition: background 0.2s;
-    }
-
-    .cart-btn:hover {
-      background: #112d59;
-    }
-
-    /* RESTORED CONTACT COMPONENT STYLES */
-    .contact-float-btn {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background: #ff9800;
-      color: white;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1.5rem;
       cursor: pointer;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      z-index: 2000;
-    }
-
-    .contact-dropdown-menu {
-      position: fixed;
-      bottom: 95px;
-      right: 25px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      display: none; /* Controlled dynamically via toggleContacts() script */
-      flex-direction: column;
-      padding: 10px;
-      gap: 5px;
-      z-index: 2000;
-    }
-
-    .contact-dropdown-menu a {
-      color: #081b38;
+      border: none;
+      transition: opacity 0.2s;
+      text-align: center;
       text-decoration: none;
-      padding: 8px 15px;
-      font-weight: bold;
-      border-radius: 4px;
     }
 
-    .contact-dropdown-menu a:hover {
-      background: #f3f4f6;
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .add-to-cart {
+      background-color: #f1f5f9;
+      color: #333;
+      border: 1px solid #cbd5e1;
+    }
+
+    .buy-now {
+      background-color: #ff9800;
+      color: white;
+    }
+
+    /* Mobile Responsive Viewport Queries */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 15px;
+        gap: 15px;
+      }
+      .search-container input {
+        width: 100%;
+        max-width: 320px;
+      }
+      nav {
+        margin: 0;
+      }
+      .products-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Sticky Upper Bar -->
+  <!-- Top Sticky Navigation header -->
   <header>
-    <div class="logo">ShopNova</div>
+    <a href="index.html" class="logo">ShopNova</a>
     <div class="search-container">
       <input type="text" placeholder="Search products, brands and more..." onkeydown="searchProduct(event)">
     </div>
@@ -210,57 +194,48 @@
     </nav>
   </header>
 
-  <!-- Main Hero Viewport -->
-  <div class="hero-banner">
-    <h1>Welcome to ShopNova</h1>
-    <p>Premium shopping experience for fashion, gadgets and lifestyle products</p>
-    <a href="products.html" class="explore-btn">Explore Products</a>
-  </div>
+  <!-- Main Website Products Showcase Container -->
+  <div class="container">
+    <h2 class="section-title">Explore Premium Products</h2>
 
-  <h2 class="section-title">Featured Products</h2>
+    <div class="products-grid">
+      
+      <!-- 1. Premium Workstation Laptop Card -->
+      <div class="product-card">
+        <div class="image-container">
+          <!-- FIXED: Replaced broken local source path with permanent web address link -->
+          <img src="https://unsplash.com" alt="Premium Workstation Laptop">
+        </div>
+        <div class="product-info">
+          <h3>Premium Workstation Laptop</h3>
+          <div class="price">₹89,999</div>
+          <div class="button-group">
+            <button class="btn add-to-cart" onclick="addToCart('Premium Workstation Laptop', 89999)">Add To Cart 🛒</button>
+            <a href="payment.html" class="btn buy-now" onclick="addToCart('Premium Workstation Laptop', 89999)">Buy Now ⚡</a>
+          </div>
+        </div>
+      </div>
 
-  <div class="products-container">
-    <!-- 1. Shirt (Fixed Image Asset Folder Path Mapping) -->
-    <div class="product-card">
-      <img src="images/shirt.jpg" alt="Premium Casual Shirt" onerror="this.src='https://unsplash.com'">
-      <h3>Premium Casual Shirt</h3>
-      <div class="price">₹799</div>
-      <button class="cart-btn" onclick="addToCart('Premium Casual Shirt', 799)">Add to Cart 🛒</button>
-    </div>
+      <!-- 2. Studio Wireless Headphones Card -->
+      <div class="product-card">
+        <div class="image-container">
+          <!-- FIXED: Replaced broken local source path with permanent web address link -->
+          <img src="https://unsplash.com" alt="Studio Wireless Headphones">
+        </div>
+        <div class="product-info">
+          <h3>Studio Wireless Headphones</h3>
+          <div class="price">₹4,999</div>
+          <div class="button-group">
+            <button class="btn add-to-cart" onclick="addToCart('Studio Wireless Headphones', 4999)">Add To Cart 🛒</button>
+            <a href="payment.html" class="btn buy-now" onclick="addToCart('Studio Wireless Headphones', 4999)">Buy Now ⚡</a>
+          </div>
+        </div>
+      </div>
 
-    <!-- 2. Shoes (Fixed Image Asset Folder Path Mapping) -->
-    <div class="product-card">
-      <img src="images/shoes.jpg" alt="Sports Running Shoes" onerror="this.src='https://unsplash.com'">
-      <h3>Sports Running Shoes</h3>
-      <div class="price">₹1,499</div>
-      <button class="cart-btn" onclick="addToCart('Sports Running Shoes', 1499)">Add to Cart 🛒</button>
-    </div>
-
-    <!-- 3. Smart Watch (Fixed Image Asset Folder Path Mapping) -->
-    <div class="product-card">
-      <img src="images/watch.jpg" alt="Smart Watch Pro" onerror="this.src='https://unsplash.com'">
-      <h3>Smart Watch Pro</h3>
-      <div class="price">₹2,999</div>
-      <button class="cart-btn" onclick="addToCart('Smart Watch Pro', 2999)">Add to Cart 🛒</button>
-    </div>
-
-    <!-- 4. Holy Bible Cover Card -->
-    <div class="product-card">
-      <img src="https://unsplash.com" alt="Holy Bible">
-      <h3>Holy Bible (Hardcover Edition)</h3>
-      <div class="price">₹1,200</div>
-      <button class="cart-btn" onclick="addToCart('Holy Bible (Hardcover Edition)', 1200)">Add to Cart 🛒</button>
     </div>
   </div>
 
-  <!-- Restored Contact Trigger Floating Module Elements -->
-  <div class="contact-float-btn" onclick="toggleContacts()">📞</div>
-  <div class="contact-dropdown-menu" id="contactMenu">
-    <a href="mailto:support@shopnova.com">📧 Email Support</a>
-    <a href="tel:+919876543210">💬 WhatsApp Chat</a>
-  </div>
-
-  <!-- Core Script Integrations Link Hook -->
+  <!-- Global scripts hook integration linkage -->
   <script src="script.js"></script>
 </body>
 </html>
