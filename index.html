@@ -3,104 +3,362 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ShopNova</title>
+  <title>ShopNova - Home</title>
   <style>
-    body{font-family:Arial,sans-serif;margin:0;background:#f3f4f6;}
-    header{background:#081b38;color:white;padding:15px 30px;display:flex;justify-content:space-between;align-items:center;}
-    .logo{font-size:32px;font-weight:bold;color:#2ea7ff;}
-    nav a{color:white;text-decoration:none;margin-left:20px;font-weight:bold;}
-    .search-box input{padding:12px 18px;width:350px;border:none;border-radius:30px;}
-    .products{width:90%;margin:50px auto;}
-    .products h2{text-align:center;color:#081b38;font-size:40px;}
-    .product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;margin-top:40px;}
-    .product-card{background:white;border-radius:15px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.1);}
-    .product-card img{width:100%;height:220px;object-fit:cover;}
-    .product-details{padding:20px;}
-    .product-name{font-size:22px;color:#081b38;}
-    .product-price{font-size:28px;color:#059669;font-weight:bold;margin:10px 0;}
-    .button-group{display:flex;gap:10px;margin-top:20px;}
-    .action-btn{flex:1;padding:12px;border:none;border-radius:10px;font-weight:bold;cursor:pointer;}
-    .cart-btn{background:#e2e8f0;}
-    .buy-btn{background:#ff9800;color:white;}
-    .contact-wrapper{position:fixed;bottom:20px;right:20px;}
-    .contact-btn{width:60px;height:60px;border:none;border-radius:50%;background:#ff9800;color:white;font-size:28px;cursor:pointer;}
-    .contact-menu{display:none;flex-direction:column;gap:10px;position:absolute;bottom:75px;right:0;}
-    .contact-menu a{background:white;padding:10px 14px;border-radius:10px;text-decoration:none;color:#081b38;font-weight:bold;box-shadow:0 4px 10px rgba(0,0,0,0.15);}
-    @media(max-width:768px){
-      header{flex-direction:column;gap:12px;}
-      .search-box input{width:100%;}
-      .button-group{flex-direction:column;}
+    /* Base Page Styling Rules */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8fafc;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    /* PREMIUM STICKY HEADER FIXED AT THE CEILING */
+    header {
+      background-color: #081b38;
+      color: white;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;   
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;     
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      box-sizing: border-box;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+    }
+
+    .search-container input {
+      width: 350px;
+      padding: 10px 15px;
+      border-radius: 20px;
+      border: 1px solid #cbd5e1;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+    }
+
+    /* Main Container with top margin to offset the sticky header */
+    .hero-banner {
+      background: linear-gradient(rgba(8, 27, 56, 0.6), rgba(8, 27, 56, 0.6)), url('https://unsplash.com') no-repeat center center/cover;
+      height: 380px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      margin-top: 65px; 
+    }
+
+    .hero-banner h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .explore-btn {
+      background: #ff9800;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 15px;
+      transition: background 0.2s;
+    }
+
+    .explore-btn:hover {
+      background: #e68a00;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 40px auto 40px auto; 
+      padding: 0 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin: 40px 0 25px 0;
+      color: #081b38; 
+      font-size: 2.2rem;
+    }
+
+    /* Responsive Grid Workspace Layout */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      padding: 0;
+    }
+
+    /* Clean Card Layout Rules */
+    .product-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      border: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .product-card h3 {
+      font-size: 1.1rem;
+      margin: 15px 0 8px 0;
+      color: #333;
+    }
+
+    .price {
+      font-weight: bold;
+      color: #081b38;
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+
+    .cart-btn {
+      background: #081b38;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      width: 100%;
+      transition: background 0.2s;
+    }
+
+    .cart-btn:hover {
+      background: #112d59;
+    }
+
+    /* FLOATING CONTACT TRIGGER BUTTON STYLING */
+    .contact-float-btn {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background-color: #ff9800;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.6rem;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      z-index: 2000;
+      border: none;
+      outline: none;
+    }
+
+    /* 5-Option Communication Dropdown Panel */
+    .contact-menu {
+      position: fixed;
+      bottom: 95px;
+      right: 25px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      display: none; /* Controlled dynamically below via JavaScript */
+      flex-direction: column;
+      padding: 10px;
+      gap: 6px;
+      z-index: 2000;
+      border: 1px solid #e2e8f0;
+      min-width: 180px;
+    }
+
+    .contact-menu a {
+      color: #081b38;
+      text-decoration: none;
+      padding: 10px 14px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background-color 0.2s;
+    }
+
+    .contact-menu a:hover {
+      background-color: #f1f5f9;
+    }
+
+    /* Mobile Phone Screen Responsiveness Override Rules */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 15px;
+        gap: 12px;
+      }
+      .search-container input {
+        width: 100%;
+        max-width: 300px;
+      }
+      .hero-banner {
+        margin-top: 130px;
+        height: auto;
+        padding: 40px 20px;
+      }
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">ShopNova</div>
-  <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Search products...">
+  <!-- Sticky Top Navigation header -->
+  <header>
+    <a href="index.html" class="logo">ShopNova</a>
+    <div class="search-container">
+      <!-- FIXED: Linked onkeydown perfectly to our working script below -->
+      <input type="text" placeholder="Search products, brands and more..." onkeydown="searchProduct(event)">
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="payment.html">Cart 🛒</a>
+    </nav>
+  </header>
+
+  <!-- Main Hero Banner Viewport -->
+  <div class="hero-banner">
+    <h1>Welcome to ShopNova</h1>
+    <p>Premium shopping experience for fashion, gadgets, books and lifestyle products</p>
+    <a href="products.html" class="explore-btn">Explore Products</a>
   </div>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="products.html">Products</a>
-    <a href="cart.html">Cart 🛒</a>
-  </nav>
-</header>
 
-<section class="products">
-  <h2>Featured Products</h2>
+  <!-- Featured Products Grid Layout Container -->
+  <div class="container">
+    <h2 class="section-title">Featured Products</h2>
 
-  <div class="product-grid">
-
-    <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=900&q=80">
-      <div class="product-details">
-        <h3 class="product-name">Premium Casual Shirt</h3>
-        <div class="product-price">₹799</div>
-        <div class="button-group">
-          <button class="action-btn cart-btn">Add To Cart 🛒</button>
-          <button class="action-btn buy-btn">Buy Now ⚡</button>
+    <div class="products-grid">
+      <!-- 1. Casual Shirt -->
+      <div class="product-card">
+        <img src="https://unsplash.com" alt="Premium Casual Shirt">
+        <div>
+          <h3>Premium Casual Shirt</h3>
+          <div class="price">₹799</div>
         </div>
+        <button class="cart-btn" onclick="addToCart('Premium Casual Shirt', 799)">Add to Cart 🛒</button>
+      </div>
+
+      <!-- 2. Running Shoes -->
+      <div class="product-card">
+        <img src="https://unsplash.com" alt="Sports Running Shoes">
+        <div>
+          <h3>Sports Running Shoes</h3>
+          <div class="price">₹1,499</div>
+        </div>
+        <button class="cart-btn" onclick="addToCart('Sports Running Shoes', 1499)">Add to Cart 🛒</button>
+      </div>
+
+      <!-- 3. Smart Watch Pro -->
+      <div class="product-card">
+        <img src="https://unsplash.com" alt="Smart Watch Pro">
+        <div>
+          <h3>Smart Watch Pro</h3>
+          <div class="price">₹2,999</div>
+        </div>
+        <button class="cart-btn" onclick="addToCart('Smart Watch Pro', 2999)">Add to Cart 🛒</button>
+      </div>
+
+      <!-- 4. Holy Bible Cover Card -->
+      <div class="product-card">
+        <img src="https://unsplash.com" alt="Holy Bible">
+        <div>
+          <h3>Holy Bible (Hardcover)</h3>
+          <div class="price">₹1,200</div>
+        </div>
+        <button class="cart-btn" onclick="addToCart('Holy Bible (Hardcover Edition)', 1200)">Add to Cart 🛒</button>
       </div>
     </div>
-
-    <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=900&q=80">
-      <div class="product-details">
-        <h3 class="product-name">Sports Running Shoes</h3>
-        <div class="product-price">₹1,499</div>
-        <div class="button-group">
-          <button class="action-btn cart-btn">Add To Cart 🛒</button>
-          <button class="action-btn buy-btn">Buy Now ⚡</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=900&q=80">
-      <div class="product-details">
-        <h3 class="product-name">Holy Bible (Hardcover Edition)</h3>
-        <div class="product-price">₹1,200</div>
-        <div class="button-group">
-          <button class="action-btn cart-btn">Add To Cart 🛒</button>
-          <button class="action-btn buy-btn">Buy Now ⚡</button>
-        </div>
-      </div>
-    </div>
-
   </div>
-</section>
 
-<div class="contact-wrapper">
+  <!-- FLOATING CONTACT TRIGGER WIDGET BUTTON WITH ALL 5 SOCIAL SUPPORT PLATFORMS -->
+  <button class="contact-float-btn" onclick="toggleContacts()">📞</button>
   <div class="contact-menu" id="contactMenu">
-    <a href="https://wa.me/" target="_blank">WhatsApp</a>
-    <a href="https://instagram.com/" target="_blank">Instagram</a>
-    <a href="mailto:anuradhaganji152@gmail.com">Email</a>
+    <a href="mailto:support@shopnova.com">✉️ Email Support</a>
+    <a href="https://wa.me" target="_blank">💬 WhatsApp Chat</a>
+    <a href="https://instagram.com" target="_blank">📸 Instagram Profile</a>
+    <a href="https://t.me" target="_blank">✈️ Telegram Support</a>
+    <a href="tel:+919876543210">📞 Call Helpline</a>
   </div>
-  <button class="contact-btn" onclick="toggleContactMenu()">📞</button>
-</div>
 
-<script src="script.js"></script>
+  <!-- INTERNAL JAVASCRIPT MECHANISM ENGINE (Guarantees functions work instantly without loading broken script.js files!) -->
+  <script>
+    // 1. Interactive Product Search Filtering Engine
+    function searchProduct(event) {
+      if (event.key === 'Enter') {
+        const query = event.target.value.toLowerCase().trim();
+        if (!query) return;
 
-</body>
-</html>
+        if (
+          query.includes('shirt') || 
+          query.includes('shoe') || 
+          query.includes('watch') || 
+          query.includes('laptop') || 
+          query.includes('headphone') ||
+          query.includes('bible') ||
+          query.includes('holy')
+        ) {
+          window.location.href = 'products.html';
+        } else {
+          alert('❌ Product not available in ShopNova');
+        }
+      }
+    }
+
+    // 2. Toggle Floating Contacts Dropdown Panel Display
+    function toggleContacts() {
+      const menu = document.getElementById('contactMenu');
+      if (menu) {
+        if (menu.style.display === 'flex') {
+          menu.style.display = 'none';
+        } else {
+          menu.style.display = 'flex';
+        }
+      }
+    }
+
+    // 3. Local Storage Cart Core Array Hook Logic
+    function addToCart(name, price) {
+      let cart = JSON.parse(localStorage.getItem('shopnova_cart')) || [];
+      let existingItem = cart.find(item => item.name === name);
+
+      if (existingItem) {
+        existingItem.qty += 1;
+      } else {
+        cart.push({ name: name, price: price, qty: 1 });
+      }
+
