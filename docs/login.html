@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><title>ShopNova Login</title>
+  <style>
+    body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: #002d62; }
+    .box { background: white; padding: 40px; border-radius: 8px; width: 320px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+    input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+    button { width: 100%; background: #002d62; color: white; padding: 12px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2 style="color:#002d62; text-align:center; margin-top:0;">Account Login</h2>
+    <input type="email" id="email" placeholder="Email Address" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button onclick="handleLogin()">Sign In</button>
+  </div>
+  <script>
+    function handleLogin() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      if(email && password) {
+        // Save dummy authorized credentials simulation profile inside local web state
+        localStorage.setItem('user', JSON.stringify({ email: email, role: 'admin' }));
+        alert('Welcome back to ShopNova!');
+        window.location.href = 'index.html';
+      } else {
+        alert('Please fill out all credentials.');
+      }
+    }
+  </script>
+</body>
+</html>
