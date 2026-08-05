@@ -3,362 +3,156 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ShopNova - Home</title>
+  <title>ShopSphere Marketplace</title>
   <style>
-    /* Base Page Styling Rules */
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f8fafc;
-      margin: 0;
-      padding: 0;
-      color: #333;
-    }
-
-    /* PREMIUM STICKY HEADER FIXED AT THE CEILING */
-    header {
-      background-color: #081b38;
-      color: white;
-      padding: 15px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: fixed;   
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;     
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      box-sizing: border-box;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: white;
-      text-decoration: none;
-    }
-
-    .search-container input {
-      width: 350px;
-      padding: 10px 15px;
-      border-radius: 20px;
-      border: 1px solid #cbd5e1;
-      font-size: 0.9rem;
-      outline: none;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 20px;
-      font-weight: 500;
-    }
-
-    /* Main Container with top margin to offset the sticky header */
-    .hero-banner {
-      background: linear-gradient(rgba(8, 27, 56, 0.6), rgba(8, 27, 56, 0.6)), url('https://unsplash.com') no-repeat center center/cover;
-      height: 380px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      text-align: center;
-      margin-top: 65px; 
-    }
-
-    .hero-banner h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-    }
-
-    .explore-btn {
-      background: #ff9800;
-      color: white;
-      padding: 12px 30px;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: bold;
-      margin-top: 15px;
-      transition: background 0.2s;
-    }
-
-    .explore-btn:hover {
-      background: #e68a00;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 40px auto 40px auto; 
-      padding: 0 20px;
-    }
-
-    .section-title {
-      text-align: center;
-      margin: 40px 0 25px 0;
-      color: #081b38; 
-      font-size: 2.2rem;
-    }
-
-    /* Responsive Grid Workspace Layout */
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-      padding: 0;
-    }
-
-    /* Clean Card Layout Rules */
-    .product-card {
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-      border: 1px solid #e2e8f0;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 20px;
-      text-align: center;
-    }
-
-    .product-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-
-    .product-card h3 {
-      font-size: 1.1rem;
-      margin: 15px 0 8px 0;
-      color: #333;
-    }
-
-    .price {
-      font-weight: bold;
-      color: #081b38;
-      font-size: 1.2rem;
-      margin-bottom: 15px;
-    }
-
-    .cart-btn {
-      background: #081b38;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-      width: 100%;
-      transition: background 0.2s;
-    }
-
-    .cart-btn:hover {
-      background: #112d59;
-    }
-
-    /* FLOATING CONTACT TRIGGER BUTTON STYLING */
-    .contact-float-btn {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background-color: #ff9800;
-      color: white;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1.6rem;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      z-index: 2000;
-      border: none;
-      outline: none;
-    }
-
-    /* 5-Option Communication Dropdown Panel */
-    .contact-menu {
-      position: fixed;
-      bottom: 95px;
-      right: 25px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-      display: none; /* Controlled dynamically below via JavaScript */
-      flex-direction: column;
-      padding: 10px;
-      gap: 6px;
-      z-index: 2000;
-      border: 1px solid #e2e8f0;
-      min-width: 180px;
-    }
-
-    .contact-menu a {
-      color: #081b38;
-      text-decoration: none;
-      padding: 10px 14px;
-      font-weight: bold;
-      font-size: 0.9rem;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transition: background-color 0.2s;
-    }
-
-    .contact-menu a:hover {
-      background-color: #f1f5f9;
-    }
-
-    /* Mobile Phone Screen Responsiveness Override Rules */
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        padding: 15px;
-        gap: 12px;
-      }
-      .search-container input {
-        width: 100%;
-        max-width: 300px;
-      }
-      .hero-banner {
-        margin-top: 130px;
-        height: auto;
-        padding: 40px 20px;
-      }
-      .products-grid {
-        grid-template-columns: 1fr;
-      }
-    }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f4; }
+    header { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background: #333; color: white; border-radius: 5px; }
+    .search-box { padding: 8px; width: 300px; border-radius: 4px; border: 1px solid #ccc; }
+    .admin-btn { background: #007bff; color: white; padding: 10px 15px; border: none; cursor: pointer; border-radius: 4px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
+    .card { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
+    .card img { max-width: 100%; height: 180px; object-fit: cover; border-radius: 5px; }
+    .price { font-size: 18px; color: #28a745; font-weight: bold; margin: 10px 0; }
+    .btn-container { display: flex; gap: 10px; justify-content: center; margin-top: 10px; }
+    .contact-wa { background: #25d366; color: white; padding: 8px 12px; text-decoration: none; border-radius: 4px; font-size: 13px; font-weight: bold; }
+    .contact-mail { background: #dc3545; color: white; padding: 8px 12px; text-decoration: none; border-radius: 4px; font-size: 13px; font-weight: bold; }
+    
+    /* Simple Modal Styling for Seller Posting Form */
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; }
+    .modal-content { background: white; padding: 20px; border-radius: 8px; width: 400px; display: flex; flex-direction: column; gap: 10px; }
+    .modal-content input, .modal-content textarea { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+    .close-btn { background: #6c757d; color: white; padding: 8px; border: none; cursor: pointer; }
   </style>
 </head>
 <body>
 
-  <!-- Sticky Top Navigation header -->
   <header>
-    <a href="index.html" class="logo">ShopNova</a>
-    <div class="search-container">
-      <!-- FIXED: Linked onkeydown perfectly to our working script below -->
-      <input type="text" placeholder="Search products, brands and more..." onkeydown="searchProduct(event)">
-    </div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="products.html">Products</a>
-      <a href="payment.html">Cart 🛒</a>
-    </nav>
+    <h1>ShopSphere</h1>
+    <!-- Live Search Bar Feature -->
+    <input type="text" id="searchBar" class="search-box" placeholder="Search products or categories...">
+    <button class="admin-btn" onclick="toggleModal(true)">+ Sell Product</button>
   </header>
 
-  <!-- Main Hero Banner Viewport -->
-  <div class="hero-banner">
-    <h1>Welcome to ShopNova</h1>
-    <p>Premium shopping experience for fashion, gadgets, books and lifestyle products</p>
-    <a href="products.html" class="explore-btn">Explore Products</a>
-  </div>
+  <!-- Products Showcase Grid Layout -->
+  <div id="productGrid" class="grid"></div>
 
-  <!-- Featured Products Grid Layout Container -->
-  <div class="container">
-    <h2 class="section-title">Featured Products</h2>
-
-    <div class="products-grid">
-      <!-- 1. Casual Shirt -->
-      <div class="product-card">
-        <img src="https://unsplash.com" alt="Premium Casual Shirt">
-        <div>
-          <h3>Premium Casual Shirt</h3>
-          <div class="price">₹799</div>
-        </div>
-        <button class="cart-btn" onclick="addToCart('Premium Casual Shirt', 799)">Add to Cart 🛒</button>
-      </div>
-
-      <!-- 2. Running Shoes -->
-      <div class="product-card">
-        <img src="https://unsplash.com" alt="Sports Running Shoes">
-        <div>
-          <h3>Sports Running Shoes</h3>
-          <div class="price">₹1,499</div>
-        </div>
-        <button class="cart-btn" onclick="addToCart('Sports Running Shoes', 1499)">Add to Cart 🛒</button>
-      </div>
-
-      <!-- 3. Smart Watch Pro -->
-      <div class="product-card">
-        <img src="https://unsplash.com" alt="Smart Watch Pro">
-        <div>
-          <h3>Smart Watch Pro</h3>
-          <div class="price">₹2,999</div>
-        </div>
-        <button class="cart-btn" onclick="addToCart('Smart Watch Pro', 2999)">Add to Cart 🛒</button>
-      </div>
-
-      <!-- 4. Holy Bible Cover Card -->
-      <div class="product-card">
-        <img src="https://unsplash.com" alt="Holy Bible">
-        <div>
-          <h3>Holy Bible (Hardcover)</h3>
-          <div class="price">₹1,200</div>
-        </div>
-        <button class="cart-btn" onclick="addToCart('Holy Bible (Hardcover Edition)', 1200)">Add to Cart 🛒</button>
-      </div>
+  <!-- Seller Multi-Vendor Admin Upload Modal -->
+  <div id="uploadModal" class="modal">
+    <div class="modal-content">
+      <h3>List Your Product For Sale</h3>
+      <input type="text" id="pName" placeholder="Product Name" required>
+      <input type="number" id="pPrice" placeholder="Price (INR)" required>
+      <input type="text" id="pImage" placeholder="Image URL (Unsplash/Imgur link)">
+      <input type="text" id="pCategory" placeholder="Category (e.g. Electronics)">
+      <textarea id="pDesc" placeholder="Brief Description"></textarea>
+      <hr>
+      <h4>Your Contact Info (For Buyers)</h4>
+      <input type="text" id="sName" placeholder="Your Name" required>
+      <input type="email" id="sEmail" placeholder="Your Email Address" required>
+      <input type="text" id="sPhone" placeholder="WhatsApp Number (With Country Code e.g. 919876543210)" required>
+      
+      <button class="admin-btn" onclick="submitProduct()">Submit Product Live</button>
+      <button class="close-btn" onclick="toggleModal(false)">Cancel</button>
     </div>
   </div>
 
-  <!-- FLOATING CONTACT TRIGGER WIDGET BUTTON WITH ALL 5 SOCIAL SUPPORT PLATFORMS -->
-  <button class="contact-float-btn" onclick="toggleContacts()">📞</button>
-  <div class="contact-menu" id="contactMenu">
-    <a href="mailto:support@shopnova.com">✉️ Email Support</a>
-    <a href="https://wa.me" target="_blank">💬 WhatsApp Chat</a>
-    <a href="https://instagram.com" target="_blank">📸 Instagram Profile</a>
-    <a href="https://t.me" target="_blank">✈️ Telegram Support</a>
-    <a href="tel:+919876543210">📞 Call Helpline</a>
-  </div>
-
-  <!-- INTERNAL JAVASCRIPT MECHANISM ENGINE (Guarantees functions work instantly without loading broken script.js files!) -->
   <script>
-    // 1. Interactive Product Search Filtering Engine
-    function searchProduct(event) {
-      if (event.key === 'Enter') {
-        const query = event.target.value.toLowerCase().trim();
-        if (!query) return;
+    // Replace with your active live Vercel URL once deployed (e.g., 'https://vercel.app')
+    const API_BASE_URL = 'http://localhost:5000/api'; 
 
-        if (
-          query.includes('shirt') || 
-          query.includes('shoe') || 
-          query.includes('watch') || 
-          query.includes('laptop') || 
-          query.includes('headphone') ||
-          query.includes('bible') ||
-          query.includes('holy')
-        ) {
-          window.location.href = 'products.html';
-        } else {
-          alert('❌ Product not available in ShopNova');
+    // Open/Close Modal
+    function toggleModal(show) {
+      document.getElementById('uploadModal').style.display = show ? 'flex' : 'none';
+    }
+
+    // Fetch and display active marketplace inventory
+    async function loadProducts(searchQuery = '') {
+      const url = searchQuery 
+        ? `${API_BASE_URL}/search?q=${searchQuery}`
+        : `${API_BASE_URL}/products`;
+
+      try {
+        const response = await fetch(url);
+        const products = await response.json();
+        const grid = document.getElementById('productGrid');
+        grid.innerHTML = '';
+
+        if(products.length === 0) {
+          grid.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color:#666;">No products found matches your criteria.</p>`;
+          return;
         }
+
+        products.forEach(product => {
+          // URLs generated cleanly to map parameters dynamically 
+          const waMessage = encodeURIComponent(`Hi ${product.sellerName}, I am interested in buying your item: "${product.name}" listed on ShopSphere for ₹${product.price}. Is it still available?`);
+          const waLink = `https://wa.me{product.sellerPhone}?text=${waMessage}`;
+          
+          const emailSubject = encodeURIComponent(`Inquiry regarding ${product.name} on ShopSphere`);
+          const emailBody = encodeURIComponent(`Hello ${product.sellerName},\n\nI saw your product "${product.name}" and would like to find out more details.\n\nRegards,\nInterested Buyer`);
+          const mailLink = `mailto:${product.sellerEmail}?subject=${emailSubject}&body=${emailBody}`;
+
+          grid.innerHTML += `
+            <div class="card">
+              <img src="${product.image || 'https://placeholder.com'}" alt="${product.name}">
+              <h3>${product.name}</h3>
+              <p style="color:#666; font-size:14px;">${product.description || 'No description provided.'}</p>
+              <div class="price">₹${product.price}</div>
+              <p style="font-size:12px; color:#888;">Seller: ${product.sellerName}</p>
+              <div class="btn-container">
+                <a href="${waLink}" target="_blank" class="contact-wa">WhatsApp Seller</a>
+                <a href="${mailLink}" class="contact-mail">Email Seller</a>
+              </div>
+            </div>
+          `;
+        });
+      } catch (err) {
+        console.error('Error fetching data:', err);
       }
     }
 
-    // 2. Toggle Floating Contacts Dropdown Panel Display
-    function toggleContacts() {
-      const menu = document.getElementById('contactMenu');
-      if (menu) {
-        if (menu.style.display === 'flex') {
-          menu.style.display = 'none';
-        } else {
-          menu.style.display = 'flex';
+    // Capture user typing actions inside search input box
+    document.getElementById('searchBar').addEventListener('input', (e) => {
+      loadProducts(e.target.value);
+    });
+
+    // Submit new vendor product straight up into the cloud database
+    async function submitProduct() {
+      const productData = {
+        name: document.getElementById('pName').value,
+        price: document.getElementById('pPrice').value,
+        image: document.getElementById('pImage').value,
+        category: document.getElementById('pCategory').value,
+        description: document.getElementById('pDesc').value,
+        sellerName: document.getElementById('sName').value,
+        sellerEmail: document.getElementById('sEmail').value,
+        sellerPhone: document.getElementById('sPhone').value
+      };
+
+      if(!productData.name || !productData.price || !productData.sellerPhone) {
+        alert('Please fill out product name, price and valid mobile details.');
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/products`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(productData)
+        });
+        const result = await response.json();
+        if(result.success) {
+          alert('Success! Your product is live for buyers.');
+          toggleModal(false);
+          loadProducts(); // Refresh listings grid
         }
+      } catch (err) {
+        alert('Error publishing item.');
+        console.error(err);
       }
     }
 
-    // 3. Local Storage Cart Core Array Hook Logic
-    function addToCart(name, price) {
-      let cart = JSON.parse(localStorage.getItem('shopnova_cart')) || [];
-      let existingItem = cart.find(item => item.name === name);
-
-      if (existingItem) {
-        existingItem.qty += 1;
-      } else {
-        cart.push({ name: name, price: price, qty: 1 });
-      }
-
+    // Initial page initialization run
+    loadProducts();
+  </script>
+</body>
+</html>
