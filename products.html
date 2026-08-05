@@ -4,9 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ShopNova - Products</title>
+  <title>ShopNova - All Products</title>
 
   <style>
+
     *{
       margin:0;
       padding:0;
@@ -18,6 +19,8 @@
       background:#f3f4f6;
       color:#111827;
     }
+
+    /* HEADER */
 
     header{
       background:#081b38;
@@ -48,30 +51,42 @@
       color:white;
       text-decoration:none;
       font-weight:bold;
+      transition:0.3s;
     }
+
+    nav a:hover{
+      color:#2ea7ff;
+    }
+
+    /* TITLE */
 
     .page-title{
       text-align:center;
       padding:50px 20px 20px;
       color:#081b38;
       font-size:42px;
+      font-weight:700;
     }
+
+    /* GRID */
 
     .product-grid{
       width:92%;
       max-width:1200px;
-      margin:0 auto 60px;
+      margin:0 auto 70px;
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
       gap:28px;
     }
+
+    /* CARD */
 
     .product-card{
       background:white;
       border-radius:20px;
       overflow:hidden;
       box-shadow:0 8px 24px rgba(0,0,0,0.08);
-      transition:0.3s;
+      transition:0.35s;
       display:flex;
       flex-direction:column;
     }
@@ -96,6 +111,7 @@
     .product-info h3{
       font-size:22px;
       margin-bottom:10px;
+      color:#081b38;
     }
 
     .price{
@@ -112,6 +128,8 @@
       flex:1;
     }
 
+    /* BUTTONS */
+
     .button-group{
       display:flex;
       gap:12px;
@@ -125,10 +143,12 @@
       font-weight:bold;
       cursor:pointer;
       transition:0.3s;
+      font-size:15px;
     }
 
     .cart-btn{
       background:#e2e8f0;
+      color:#111827;
     }
 
     .cart-btn:hover{
@@ -144,19 +164,30 @@
       background:#ea8600;
     }
 
+    /* FOOTER */
+
     footer{
       background:#081b38;
       color:white;
       text-align:center;
       padding:25px;
       margin-top:40px;
+      font-size:14px;
     }
+
+    /* MOBILE */
 
     @media(max-width:768px){
 
       header{
         flex-direction:column;
         gap:12px;
+        padding:14px 20px;
+      }
+
+      nav{
+        flex-wrap:wrap;
+        justify-content:center;
       }
 
       .page-title{
@@ -167,12 +198,14 @@
         flex-direction:column;
       }
     }
+
   </style>
 </head>
 
 <body>
 
   <header>
+
     <a href="index.html" class="logo">ShopNova</a>
 
     <nav>
@@ -180,17 +213,173 @@
       <a href="products.html">Products</a>
       <a href="cart.html">Cart 🛒</a>
     </nav>
+
   </header>
 
   <h1 class="page-title">Explore Premium Products</h1>
 
   <div class="product-grid">
 
+    <!-- 1. CASUAL SHIRT -->
     <div class="product-card">
+
+      <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=900&q=80"
+           alt="Premium Casual Shirt">
+
+      <div class="product-info">
+
+        <h3>Premium Casual Shirt</h3>
+
+        <div class="price">₹799</div>
+
+        <div class="desc">
+          Soft cotton fabric with a clean premium design
+          perfect for daily wear and stylish comfort.
+        </div>
+
+        <div class="button-group">
+
+          <button class="btn cart-btn"
+            onclick="addToCart('Premium Casual Shirt',799)">
+
+            Add To Cart 🛒
+
+          </button>
+
+          <button class="btn buy-btn"
+            onclick="window.location.href='payment.html'">
+
+            Buy Now ⚡
+
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 2. RUNNING SHOES -->
+    <div class="product-card">
+
+      <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=900&q=80"
+           alt="Sports Running Shoes">
+
+      <div class="product-info">
+
+        <h3>Sports Running Shoes</h3>
+
+        <div class="price">₹1,499</div>
+
+        <div class="desc">
+          Lightweight running shoes with excellent grip,
+          support and all-day comfort for active lifestyles.
+        </div>
+
+        <div class="button-group">
+
+          <button class="btn cart-btn"
+            onclick="addToCart('Sports Running Shoes',1499)">
+
+            Add To Cart 🛒
+
+          </button>
+
+          <button class="btn buy-btn"
+            onclick="window.location.href='payment.html'">
+
+            Buy Now ⚡
+
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 3. SMART WATCH -->
+    <div class="product-card">
+
+      <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=900&q=80"
+           alt="Smart Watch Pro">
+
+      <div class="product-info">
+
+        <h3>Smart Watch Pro</h3>
+
+        <div class="price">₹2,999</div>
+
+        <div class="desc">
+          Stylish water-resistant smartwatch with fitness
+          tracking, notifications and long battery life.
+        </div>
+
+        <div class="button-group">
+
+          <button class="btn cart-btn"
+            onclick="addToCart('Smart Watch Pro',2999)">
+
+            Add To Cart 🛒
+
+          </button>
+
+          <button class="btn buy-btn"
+            onclick="window.location.href='payment.html'">
+
+            Buy Now ⚡
+
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 4. HOLY BIBLE -->
+    <div class="product-card">
+
+      <img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=900&q=80"
+           alt="Holy Bible Hardcover Edition">
+
+      <div class="product-info">
+
+        <h3>Holy Bible (Hardcover Edition)</h3>
+
+        <div class="price">₹1,200</div>
+
+        <div class="desc">
+          Elegant hardcover Holy Bible with premium quality
+          pages, durable binding and a beautiful classic design.
+        </div>
+
+        <div class="button-group">
+
+          <button class="btn cart-btn"
+            onclick="addToCart('Holy Bible (Hardcover Edition)',1200)">
+
+            Add To Cart 🛒
+
+          </button>
+
+          <button class="btn buy-btn"
+            onclick="window.location.href='payment.html'">
+
+            Buy Now ⚡
+
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 5. LAPTOP -->
+    <div class="product-card">
+
       <img src="https://images.unsplash.com/photo-1517336714739-489689fd1ca8?w=900&q=80"
            alt="Premium Workstation Laptop">
 
       <div class="product-info">
+
         <h3>Premium Workstation Laptop</h3>
 
         <div class="price">₹95,000</div>
@@ -204,23 +393,31 @@
 
           <button class="btn cart-btn"
             onclick="addToCart('Premium Workstation Laptop',95000)">
+
             Add To Cart 🛒
+
           </button>
 
           <button class="btn buy-btn"
             onclick="window.location.href='payment.html'">
+
             Buy Now ⚡
+
           </button>
 
         </div>
+
       </div>
     </div>
 
+    <!-- 6. HEADPHONES -->
     <div class="product-card">
+
       <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=900&q=80"
            alt="Studio Wireless Headphones">
 
       <div class="product-info">
+
         <h3>Studio Wireless Headphones</h3>
 
         <div class="price">₹15,000</div>
@@ -234,53 +431,30 @@
 
           <button class="btn cart-btn"
             onclick="addToCart('Studio Wireless Headphones',15000)">
+
             Add To Cart 🛒
+
           </button>
 
           <button class="btn buy-btn"
             onclick="window.location.href='payment.html'">
+
             Buy Now ⚡
+
           </button>
 
         </div>
-      </div>
-    </div>
 
-    <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=900&q=80"
-           alt="Holy Bible">
-
-      <div class="product-info">
-        <h3>Holy Bible (Hardcover Edition)</h3>
-
-        <div class="price">₹1,200</div>
-
-        <div class="desc">
-          Elegant hardcover Holy Bible with premium quality pages,
-          durable binding and a beautiful classic design.
-        </div>
-
-        <div class="button-group">
-
-          <button class="btn cart-btn"
-            onclick="addToCart('Holy Bible (Hardcover Edition)',1200)">
-            Add To Cart 🛒
-          </button>
-
-          <button class="btn buy-btn"
-            onclick="window.location.href='payment.html'">
-            Buy Now ⚡
-          </button>
-
-        </div>
       </div>
     </div>
 
   </div>
 
   <footer>
+
     © 2026 <strong>ShopNova</strong> |
     CEO & Founder: Anuradha
+
   </footer>
 
   <script src="script.js"></script>
