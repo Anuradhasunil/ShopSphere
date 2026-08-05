@@ -18,6 +18,7 @@
     body{
       background:#f3f4f6;
       color:#111827;
+      overflow-x:hidden;
     }
 
     /* HEADER */
@@ -112,6 +113,7 @@
       text-decoration:none;
       font-weight:bold;
       transition:0.3s;
+      display:inline-block;
     }
 
     .hero-btn:hover{
@@ -221,19 +223,53 @@
 
     /* CONTACT BUTTON */
 
-    .contact-btn{
+    .contact-wrapper{
       position:fixed;
       bottom:20px;
       right:20px;
-      width:60px;
-      height:60px;
+      z-index:9999;
+    }
+
+    .contact-btn{
+      width:64px;
+      height:64px;
       border-radius:50%;
       background:#ff9800;
       color:white;
       border:none;
-      font-size:28px;
+      font-size:30px;
       cursor:pointer;
-      box-shadow:0 6px 18px rgba(0,0,0,0.25);
+      box-shadow:0 8px 20px rgba(0,0,0,0.25);
+      transition:0.3s;
+    }
+
+    .contact-btn:hover{
+      transform:scale(1.08);
+      background:#ea8600;
+    }
+
+    .contact-menu{
+      display:none;
+      flex-direction:column;
+      gap:10px;
+      margin-bottom:12px;
+      align-items:flex-end;
+    }
+
+    .contact-menu a{
+      background:white;
+      color:#081b38;
+      text-decoration:none;
+      padding:10px 16px;
+      border-radius:12px;
+      font-weight:bold;
+      box-shadow:0 4px 12px rgba(0,0,0,0.12);
+      min-width:140px;
+      text-align:center;
+    }
+
+    .contact-menu a:hover{
+      background:#f1f5f9;
     }
 
     /* FOOTER */
@@ -246,14 +282,19 @@
       margin-top:60px;
     }
 
-    /* MOBILE */
+    /* PERFECT MOBILE RESPONSIVE */
 
-    @media(max-width:768px){
+    @media (max-width: 768px) {
 
       header{
         flex-direction:column;
-        gap:14px;
-        padding:14px 20px;
+        align-items:center;
+        gap:12px;
+        padding:14px 16px;
+      }
+
+      .logo{
+        font-size:28px;
       }
 
       .search-box{
@@ -261,25 +302,112 @@
         margin:0;
       }
 
+      .search-box input{
+        width:100%;
+        max-width:100%;
+        padding:12px 16px;
+        font-size:14px;
+      }
+
       nav{
-        flex-wrap:wrap;
+        width:100%;
+        display:flex;
         justify-content:center;
+        gap:18px;
+        flex-wrap:wrap;
+      }
+
+      nav a{
+        font-size:15px;
       }
 
       .hero{
-        height:360px;
+        height:320px;
+        padding:20px;
       }
 
       .hero-content h1{
-        font-size:34px;
+        font-size:32px;
+        line-height:1.2;
+      }
+
+      .hero-content p{
+        font-size:15px;
+        line-height:1.5;
+      }
+
+      .hero-btn{
+        padding:12px 24px;
+        font-size:14px;
+      }
+
+      .products{
+        width:94%;
+        margin:40px auto;
       }
 
       .products h2{
-        font-size:34px;
+        font-size:30px;
+        margin-bottom:30px;
+      }
+
+      .product-grid{
+        grid-template-columns:1fr;
+        gap:22px;
+      }
+
+      .product-card img{
+        height:210px;
+      }
+
+      .product-details{
+        padding:18px;
+      }
+
+      .product-name{
+        font-size:20px;
+      }
+
+      .product-price{
+        font-size:24px;
+      }
+
+      .product-details p{
+        font-size:14px;
       }
 
       .button-group{
         flex-direction:column;
+        gap:10px;
+      }
+
+      .action-btn{
+        width:100%;
+        padding:13px;
+        font-size:15px;
+      }
+
+      .contact-wrapper{
+        bottom:16px;
+        right:16px;
+      }
+
+      .contact-btn{
+        width:58px;
+        height:58px;
+        font-size:26px;
+      }
+
+      .contact-menu a{
+        min-width:130px;
+        font-size:14px;
+        padding:10px 14px;
+      }
+
+      footer{
+        padding:22px 16px;
+        font-size:13px;
+        line-height:1.6;
       }
     }
 
@@ -293,11 +421,9 @@
     <a href="index.html" class="logo">ShopNova</a>
 
     <div class="search-box">
-
       <input type="text"
              placeholder="Search products, brands and more..."
              id="searchInput">
-
     </div>
 
     <nav>
@@ -489,7 +615,27 @@
 
   </section>
 
-  <button class="contact-btn">📞</button>
+  <!-- CONTACT MENU -->
+
+  <div class="contact-wrapper">
+
+    <div class="contact-menu" id="contactMenu">
+
+      <a href="https://wa.me/" target="_blank">WhatsApp</a>
+
+      <a href="https://instagram.com/" target="_blank">Instagram</a>
+
+      <a href="https://youtube.com/" target="_blank">YouTube</a>
+
+      <a href="mailto:anuradhaganji152@gmail.com">Email</a>
+
+    </div>
+
+    <button class="contact-btn" onclick="toggleContactMenu()">
+      📞
+    </button>
+
+  </div>
 
   <footer>
     © 2026 <strong>ShopNova</strong> |
@@ -497,6 +643,21 @@
   </footer>
 
   <script src="script.js"></script>
+
+  <script>
+
+    function toggleContactMenu() {
+
+      const menu = document.getElementById('contactMenu');
+
+      if (menu.style.display === 'flex') {
+        menu.style.display = 'none';
+      } else {
+        menu.style.display = 'flex';
+      }
+    }
+
+  </script>
 
 </body>
 </html>
