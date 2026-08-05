@@ -7,12 +7,12 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Connect to MongoDB Atlas (Vercel uses process.env.MONGODB_URI)
+// Connects directly to Vercel's securely saved environment key string
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/shopnova')
-  .then(() => console.log('Connected to MongoDB Atlas successfully!'))
-  .catch(err => console.error('MongoDB connection error:', err));
+  .then(() => console.log('Connected to Cloud MongoDB Atlas successfully!'))
+  .catch(err => console.error('MongoDB layout connection error:', err));
 
-// Product Schema incorporating Seller Contact Info
+// Complete Vendor and Shop Product Schema Structure
 const productSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: String,
@@ -22,23 +22,23 @@ const productSchema = new mongoose.Schema({
   stock: Number,
   sellerName: { type: String, required: true },
   sellerEmail: { type: String, required: true },
-  sellerPhone: { type: String, required: true } // format with country code: e.g., 919876543210
+  sellerPhone: { type: String, required: true } 
 });
 
 const Product = mongoose.model('Product', productSchema);
 
-// 1. ADD PRODUCT ROUTE (Used by Sellers / Admin Panel)
+// 1. POST ROUTE: Receive user listed items and submit to Mongo Atlas Cloud Cluster
 app.post('/api/products', async (req, res) => {
   try {
     const newProduct = new Product(req.body);
     await newProduct.save();
-    res.status(201).json({ success: true, message: 'Product added successfully!', product: newProduct });
+    res.status(201).json({ success: true, message: 'Product saved live!', product: newProduct });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }
 });
 
-// 2. GET ALL PRODUCTS ROUTE (Loads the Homepage)
+// 2. GET ROUTE: Load all stored vendor inventories onto the storefront homepage grid
 app.get('/api/products', async (req, res) => {
   try {
     const products = await Product.find({});
@@ -48,7 +48,7 @@ app.get('/api/products', async (req, res) => {
   }
 });
 
-// 3. SEARCH ROUTE (Handles the live Search bar queries)
+// 3. GET Live Search Route filtering elements matching query strings
 app.get('/api/search', async (req, res) => {
   const query = req.query.q;
   if (!query) return res.json([]);
@@ -67,6 +67,5 @@ app.get('/api/search', async (req, res) => {
   }
 });
 
-// Start Server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`ShopNova API operational on port ${PORT}`));
