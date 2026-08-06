@@ -5,60 +5,100 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ShopNova Login</title>
+
   <style>
-    body{
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
       font-family:Arial,sans-serif;
+    }
+
+    body{
       background:#081b38;
+      height:100vh;
       display:flex;
       justify-content:center;
       align-items:center;
-      height:100vh;
+      padding:20px;
     }
 
-    .box{
+    .login-box{
       background:white;
-      padding:40px;
-      border-radius:15px;
-      width:320px;
+      width:100%;
+      max-width:380px;
+      padding:40px 30px;
+      border-radius:18px;
+      box-shadow:0 8px 25px rgba(0,0,0,0.2);
     }
 
-    h2{
+    .login-box h2{
       text-align:center;
       color:#081b38;
+      margin-bottom:30px;
+      font-size:32px;
     }
 
-    input{
+    .login-box input{
       width:100%;
-      padding:12px;
-      margin:10px 0;
-      border:1px solid #ccc;
-      border-radius:8px;
+      padding:14px;
+      margin-bottom:18px;
+      border:1px solid #cbd5e1;
+      border-radius:10px;
+      font-size:15px;
     }
 
-    button{
+    .login-box button{
       width:100%;
-      padding:12px;
+      padding:14px;
       background:#ff9800;
       color:white;
       border:none;
-      border-radius:8px;
+      border-radius:10px;
+      font-size:16px;
       font-weight:bold;
       cursor:pointer;
     }
+
+    .login-box button:hover{
+      background:#e68900;
+    }
+
+    .back{
+      display:block;
+      text-align:center;
+      margin-top:20px;
+      text-decoration:none;
+      color:#081b38;
+      font-weight:bold;
+    }
   </style>
 </head>
+
 <body>
 
-<div class="box">
-  <h2>ShopNova Login</h2>
+  <div class="login-box">
 
-  <input type="email" placeholder="Email">
-  <input type="password" placeholder="Password">
+    <h2>🔐 ShopNova Login</h2>
 
-  <button onclick="alert('Login Successful 🎉')">
-    Login
-  </button>
-</div>
+    <input type="email" placeholder="Enter your email" required>
+
+    <input type="password" placeholder="Enter your password" required>
+
+    <button onclick="login()">Login</button>
+
+    <a href="/" class="back">← Back to Home</a>
+
+  </div>
+
+  <script>
+    function login(){
+
+      alert('🎉 Login Successful! Welcome to ShopNova');
+
+      window.location.href = '/';
+    }
+  </script>
 
 </body>
 </html>

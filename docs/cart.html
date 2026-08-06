@@ -5,50 +5,174 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ShopNova Cart</title>
+
   <style>
     body{
       font-family:Arial,sans-serif;
       background:#f3f4f6;
-      padding:40px;
+      margin:0;
+      padding:20px;
+    }
+
+    header{
+      background:#081b38;
+      color:white;
+      padding:15px 25px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-radius:10px;
+    }
+
+    nav a{
+      color:white;
+      text-decoration:none;
+      margin-left:20px;
+      font-weight:bold;
     }
 
     h1{
       color:#081b38;
+      margin:30px 0;
+      text-align:center;
     }
 
-    .item{
+    .cart-container{
+      max-width:800px;
+      margin:auto;
+    }
+
+    .cart-item{
       background:white;
       padding:20px;
+      border-radius:12px;
       margin-bottom:15px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.1);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .remove-btn{
+      background:#ef4444;
+      color:white;
+      border:none;
+      padding:8px 15px;
+      border-radius:8px;
+      cursor:pointer;
+    }
+
+    .total{
+      background:white;
+      padding:20px;
+      border-radius:12px;
+      margin-top:20px;
+      text-align:right;
+      font-size:22px;
+      font-weight:bold;
+      color:#059669;
+    }
+
+    .checkout-btn{
+      width:100%;
+      margin-top:20px;
+      padding:14px;
+      background:#ff9800;
+      color:white;
+      border:none;
       border-radius:10px;
+      font-size:18px;
+      font-weight:bold;
+      cursor:pointer;
     }
   </style>
 </head>
+
 <body>
 
-<h1>🛒 Your Cart</h1>
+  <header>
+    <h2>ShopNova</h2>
 
-<div id="cartItems"></div>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/products.html">Products</a>
+      <a href="/login.html">Login</a>
+    </nav>
+  </header>
 
-<script>
-  const cart = JSON.parse(localStorage.getItem('shopnova_cart')) || [];
+  <h1>🛒 Your Shopping Cart</h1>
 
-  const container = document.getElementById('cartItems');
+  <div class="cart-container">
 
-  if(cart.length === 0){
-    container.innerHTML = '<p>Your cart is empty.</p>';
-  } else {
+    <div id="cartItems"></div>
 
-    cart.forEach(item => {
-      container.innerHTML += `
-        <div class="item">
-          <h3>${item.name}</h3>
-          <p>₹${item.price}</p>
-        </div>
-      `;
-    });
-  }
-</script>
+    <div class="total" id="totalPrice">
+      Total: ₹0
+    </div>
+
+    <button class="checkout-btn"
+            onclick="alert('Order Placed Successfully 🎉')">
+      Proceed to Checkout
+    </button>
+
+  </div>
+
+  <script>
+
+    let cart = JSON.parse(localStorage.getItem('shopnova_cart')) || [];
+
+    const cartContainer = document.getElementById('cartItems');
+
+    const totalPrice = document.getElementById('totalPrice');
+
+    function renderCart(){
+
+      cartContainer.innerHTML = '';
+
+      let total = 0;
+
+      if(cart.length === 0){
+
+        cartContainer.innerHTML =
+          '<p style="text-align:center;font-size:20px;">Your cart is empty 😢</p>';
+
+      } else {
+
+        cart.forEach((item,index)=>{
+
+          total += item.price;
+
+          cartContainer.innerHTML += `
+            <div class="cart-item">
+              <div>
+                <h3>${item.name}</h3>
+                <p>₹${item.price}</p>
+              </div>
+
+              <button class="remove-btn"
+                      onclick="removeItem(${index})">
+                Remove
+              </button>
+            </div>
+          `;
+        });
+      }
+
+      totalPrice.innerHTML = `Total: ₹${total}`;
+    }
+
+    function removeItem(index){
+
+      cart.splice(index,1);
+
+      localStorage.setItem('shopnova_cart', JSON.stringify(cart));
+
+      renderCart();
+    }
+
+    renderCart();
+
+  </script>
 
 </body>
 </html>
