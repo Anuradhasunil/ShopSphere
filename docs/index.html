@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ShopNova - Home</title>
+  <title>ShopNova - Premium Shopping</title>
 
   <style>
     *{
@@ -19,6 +19,8 @@
       overflow-x:hidden;
     }
 
+    /* ================= HEADER ================= */
+
     header{
       background:#081b38;
       padding:15px 25px;
@@ -27,6 +29,9 @@
       align-items:center;
       flex-wrap:wrap;
       gap:15px;
+      position:sticky;
+      top:0;
+      z-index:1000;
     }
 
     .logo{
@@ -61,40 +66,51 @@
       color:white;
       text-decoration:none;
       font-weight:bold;
+      transition:0.3s;
     }
 
+    nav a:hover{
+      color:#ff9800;
+    }
+
+    /* ================= HERO ================= */
+
     .hero{
-      height:420px;
+      height:430px;
       background:
-        linear-gradient(rgba(8,27,56,0.6),rgba(8,27,56,0.6)),
+        linear-gradient(rgba(8,27,56,0.65),rgba(8,27,56,0.65)),
         url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1400&q=80')
         center/cover no-repeat;
+
       display:flex;
-      align-items:center;
       justify-content:center;
+      align-items:center;
       text-align:center;
       color:white;
       padding:20px;
     }
 
     .hero h1{
-      font-size:50px;
+      font-size:56px;
       margin-bottom:15px;
     }
 
     .hero p{
       font-size:18px;
-      margin-bottom:25px;
+      margin-bottom:30px;
     }
 
-    .hero a{
+    .hero-btn{
       background:#ff9800;
       color:white;
-      padding:14px 30px;
+      padding:14px 32px;
       border-radius:30px;
       text-decoration:none;
       font-weight:bold;
+      display:inline-block;
     }
+
+    /* ================= PRODUCTS ================= */
 
     .products{
       width:92%;
@@ -111,7 +127,7 @@
 
     .product-grid{
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
       gap:25px;
     }
 
@@ -122,6 +138,11 @@
       box-shadow:0 4px 12px rgba(0,0,0,0.1);
       display:flex;
       flex-direction:column;
+      transition:transform 0.3s;
+    }
+
+    .product-card:hover{
+      transform:translateY(-5px);
     }
 
     .product-card img{
@@ -163,6 +184,7 @@
       border-radius:10px;
       font-weight:bold;
       cursor:pointer;
+      transition:0.3s;
     }
 
     .cart-btn{
@@ -173,6 +195,12 @@
       background:#ff9800;
       color:white;
     }
+
+    .buy-btn:hover{
+      background:#e68900;
+    }
+
+    /* ================= CONTACT ================= */
 
     .contact-wrapper{
       position:fixed;
@@ -200,15 +228,18 @@
     }
 
     .contact-btn{
-      width:62px;
-      height:62px;
+      width:64px;
+      height:64px;
       border:none;
       border-radius:50%;
       background:#ff9800;
       color:white;
-      font-size:28px;
+      font-size:30px;
       cursor:pointer;
+      box-shadow:0 4px 12px rgba(0,0,0,0.25);
     }
+
+    /* ================= FOOTER ================= */
 
     footer{
       background:#081b38;
@@ -217,6 +248,8 @@
       padding:25px;
       margin-top:60px;
     }
+
+    /* ================= MOBILE ================= */
 
     @media(max-width:768px){
 
@@ -241,12 +274,22 @@
         font-size:34px;
       }
 
+      .hero p{
+        font-size:15px;
+      }
+
       .products h2{
         font-size:30px;
       }
 
       .button-group{
         flex-direction:column;
+      }
+
+      .contact-btn{
+        width:58px;
+        height:58px;
+        font-size:26px;
       }
     }
   </style>
@@ -259,7 +302,9 @@
     <div class="logo">ShopNova</div>
 
     <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Search products, brands and more..." />
+      <input type="text"
+             id="searchInput"
+             placeholder="Search products, brands and more...">
     </div>
 
     <nav>
@@ -282,7 +327,9 @@
         gadgets, books and lifestyle products
       </p>
 
-      <a href="/products.html">Explore Products</a>
+      <a href="/products.html" class="hero-btn">
+        Explore Products
+      </a>
 
     </div>
 
@@ -296,7 +343,8 @@
 
       <div class="product-card">
 
-        <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=900&q=80" alt="Premium Casual Shirt">
+        <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=900&q=80"
+             alt="Premium Casual Shirt">
 
         <div class="product-details">
 
@@ -323,7 +371,8 @@
 
       <div class="product-card">
 
-        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=900&q=80" alt="Sports Running Shoes">
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=900&q=80"
+             alt="Sports Running Shoes">
 
         <div class="product-details">
 
@@ -350,7 +399,8 @@
 
       <div class="product-card">
 
-        <img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=900&q=80" alt="Holy Bible Hardcover Edition">
+        <img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=900&q=80"
+             alt="Holy Bible Hardcover Edition">
 
         <div class="product-details">
 
@@ -383,10 +433,21 @@
 
     <div class="contact-menu" id="contactMenu">
 
-      <a href="https://wa.me/" target="_blank">WhatsApp</a>
-      <a href="https://instagram.com/" target="_blank">Instagram</a>
-      <a href="https://youtube.com/" target="_blank">YouTube</a>
-      <a href="mailto:anuradhaganji152@gmail.com">Email</a>
+      <a href="https://wa.me/919876543210" target="_blank">
+        WhatsApp
+      </a>
+
+      <a href="https://instagram.com" target="_blank">
+        Instagram
+      </a>
+
+      <a href="https://youtube.com" target="_blank">
+        YouTube
+      </a>
+
+      <a href="mailto:anuradhaganji152@gmail.com">
+        Email
+      </a>
 
     </div>
 
@@ -401,7 +462,62 @@
     © 2026 ShopNova | CEO & Founder: Anuradha
   </footer>
 
-  <script src="/script.js"></script>
+  <script>
+
+    // ================= ADD TO CART =================
+
+    function addToCart(name, price){
+
+      let cart = JSON.parse(localStorage.getItem('shopnova_cart')) || [];
+
+      cart.push({
+        name:name,
+        price:price
+      });
+
+      localStorage.setItem('shopnova_cart', JSON.stringify(cart));
+
+      alert(name + ' added to cart 🛒');
+    }
+
+    // ================= CONTACT BUTTON =================
+
+    function toggleContactMenu(){
+
+      const menu = document.getElementById('contactMenu');
+
+      if(menu.style.display === 'flex'){
+        menu.style.display = 'none';
+      }else{
+        menu.style.display = 'flex';
+      }
+    }
+
+    // ================= SEARCH BAR =================
+
+    const searchInput = document.getElementById('searchInput');
+
+    searchInput.addEventListener('keyup', function(){
+
+      const value = searchInput.value.toLowerCase();
+
+      const products = document.querySelectorAll('.product-card');
+
+      products.forEach(function(card){
+
+        const text = card.innerText.toLowerCase();
+
+        if(text.includes(value)){
+          card.style.display = 'flex';
+        }else{
+          card.style.display = 'none';
+        }
+
+      });
+
+    });
+
+  </script>
 
 </body>
 </html>
