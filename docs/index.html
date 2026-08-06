@@ -16,7 +16,7 @@
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
     .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s; text-align: center; padding-bottom: 20px; display: flex; flex-direction: column; }
     .card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
-    .card img { width: 100%; height: 200px; object-fit: cover; }
+    .card img { width: 100%; height: 200px; object-fit: cover; background-color: #eee; }
     .card h3 { color: #333; margin: 15px 0 5px 0; padding: 0 15px; }
     .price { font-size: 20px; color: #28a745; font-weight: bold; margin: 10px 0; }
     .contact-bar { display: flex; gap: 10px; justify-content: center; padding: 0 15px; margin-top: auto; }
@@ -26,14 +26,12 @@
 </head>
 <body>
 
-  <!-- Dynamic Header Workspace Injection -->
   <div id="navbar-placeholder"></div>
 
-  <!-- Corporate Hero Welcome Showcase Banner -->
   <div class="hero">
     <h1>Welcome to ShopNova</h1>
     <p>Premium shopping experience for fashion, gadgets, books and lifestyle products</p>
-    <button class="hero-btn" onclick="window.location.href='products.html'">Explore Products</button>
+    <button class="hero-btn" onclick="window.location.href='/products.html'">Explore Products</button>
   </div>
 
   <div class="container">
@@ -44,18 +42,13 @@
   <script>
     const API_BASE_URL = 'https://vercel.app';
 
-    // Inject Shared Premium Global Navbar
-    fetch('navbar.html')
-      .then(res => {
-        if (!res.ok) throw new Error('Navbar file not found');
-        return res.text();
-      })
+    fetch('/navbar.html')
+      .then(res => res.text())
       .then(data => {
         document.getElementById('navbar-placeholder').innerHTML = data;
         setupAuthUI();
         document.getElementById('liveSearch').addEventListener('input', (e) => loadProducts(e.target.value));
-      })
-      .catch(err => console.log('Navbar fallback:', err));
+      });
 
     function setupAuthUI() {
       const user = JSON.parse(localStorage.getItem('user'));
@@ -63,11 +56,11 @@
       if (authLink) {
         if (user) {
           authLink.innerHTML = `
-            <a href="admin.html" style="color: #ff8c00; text-decoration:none; margin-right:15px;">Dashboard</a>
+            <a href="/admin/dashboard.html" style="color: #ff8c00; text-decoration:none; margin-right:15px;">Dashboard</a>
             <a href="#" onclick="logout()" style="color: white; text-decoration:none;">Logout</a>
           `;
         } else {
-          authLink.innerHTML = `<a href="login.html" style="color: white; text-decoration: none;">Login</a>`;
+          authLink.innerHTML = `<a href="/admin/login.html" style="color: white; text-decoration: none;">Login</a>`;
         }
       }
     }
@@ -92,15 +85,18 @@
 
         products.forEach(p => {
           const waMsg = encodeURIComponent(`Hello ${p.sellerName}, I am interested in buying your item "${p.name}" listed on ShopNova.`);
+          // If the custom image path string isn't valid, provide a safe premium fallback photo
+          const imgUrl = (p.image && p.image.startsWith('http')) ? p.image : 'https://unsplash.com';
+          
           grid.innerHTML += `
             <div class="card">
-              <img src="${p.image || 'https://placeholder.com'}" alt="${p.name}">
+              <img src="${imgUrl}" alt="${p.name}">
               <h3>${p.name}</h3>
               <p style="color:#666; font-size:14px; padding:0 15px;">${p.description || ''}</p>
               <div class="price">₹${p.price}</div>
               <div class="contact-bar">
-                <a href="https://wa.me{p.sellerPhone}?text=${waMsg}" target="_blank" class="wa-btn">WhatsApp</a>
-                <a href="mailto:${p.sellerEmail}?subject=Inquiry" class="mail-btn">Email</a>
+                <a href="https://wa.me{p.sellerPhone || '919876543210'}?text=${waMsg}" target="_blank" class="wa-btn">WhatsApp</a>
+                <a href="mailto:${p.sellerEmail || 'admin@shopnova.com'}?subject=Inquiry" class="mail-btn">Email</a>
               </div>
             </div>
           `;
