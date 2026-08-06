@@ -11,7 +11,6 @@
       font-family:Arial,sans-serif;
       background:#f3f4f6;
       margin:0;
-      padding:20px;
     }
 
     header{
@@ -21,7 +20,7 @@
       display:flex;
       justify-content:space-between;
       align-items:center;
-      border-radius:10px;
+      flex-wrap:wrap;
     }
 
     nav a{
@@ -32,13 +31,14 @@
     }
 
     h1{
+      text-align:center;
       color:#081b38;
       margin:30px 0;
-      text-align:center;
     }
 
     .cart-container{
-      max-width:800px;
+      width:90%;
+      max-width:900px;
       margin:auto;
     }
 
@@ -47,17 +47,17 @@
       padding:20px;
       border-radius:12px;
       margin-bottom:15px;
-      box-shadow:0 4px 10px rgba(0,0,0,0.1);
       display:flex;
       justify-content:space-between;
       align-items:center;
+      box-shadow:0 4px 10px rgba(0,0,0,0.1);
     }
 
     .remove-btn{
       background:#ef4444;
       color:white;
       border:none;
-      padding:8px 15px;
+      padding:10px 16px;
       border-radius:8px;
       cursor:pointer;
     }
@@ -68,7 +68,7 @@
       border-radius:12px;
       margin-top:20px;
       text-align:right;
-      font-size:22px;
+      font-size:24px;
       font-weight:bold;
       color:#059669;
     }
@@ -76,7 +76,7 @@
     .checkout-btn{
       width:100%;
       margin-top:20px;
-      padding:14px;
+      padding:15px;
       background:#ff9800;
       color:white;
       border:none;
@@ -84,6 +84,18 @@
       font-size:18px;
       font-weight:bold;
       cursor:pointer;
+    }
+
+    .checkout-btn:hover{
+      background:#e68900;
+    }
+
+    @media(max-width:768px){
+      .cart-item{
+        flex-direction:column;
+        gap:15px;
+        align-items:flex-start;
+      }
     }
   </style>
 </head>
@@ -100,7 +112,7 @@
     </nav>
   </header>
 
-  <h1>🛒 Your Shopping Cart</h1>
+  <h1>🛒 Your Cart</h1>
 
   <div class="cart-container">
 
@@ -111,8 +123,8 @@
     </div>
 
     <button class="checkout-btn"
-            onclick="alert('Order Placed Successfully 🎉')">
-      Proceed to Checkout
+            onclick="window.location.href='/payment.html'">
+      Proceed to Payment 💳
     </button>
 
   </div>
@@ -121,28 +133,28 @@
 
     let cart = JSON.parse(localStorage.getItem('shopnova_cart')) || [];
 
-    const cartContainer = document.getElementById('cartItems');
+    const cartItems = document.getElementById('cartItems');
 
     const totalPrice = document.getElementById('totalPrice');
 
     function renderCart(){
 
-      cartContainer.innerHTML = '';
+      cartItems.innerHTML = '';
 
       let total = 0;
 
       if(cart.length === 0){
 
-        cartContainer.innerHTML =
+        cartItems.innerHTML =
           '<p style="text-align:center;font-size:20px;">Your cart is empty 😢</p>';
 
-      } else {
+      }else{
 
         cart.forEach((item,index)=>{
 
           total += item.price;
 
-          cartContainer.innerHTML += `
+          cartItems.innerHTML += `
             <div class="cart-item">
               <div>
                 <h3>${item.name}</h3>

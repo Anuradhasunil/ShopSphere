@@ -1,437 +1,115 @@
+<!-- ================= HEADER ================= -->
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ShopNova - Premium Shopping</title>
+<header>
 
-  <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family:Arial,sans-serif;
-    }
+  <div class="logo">ShopNova</div>
 
-    body{
-      background:#f3f4f6;
-      overflow-x:hidden;
-    }
+  <div class="search-box">
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search products, brands and more..."
+    >
+  </div>
 
-    /* ================= HEADER ================= */
+  <nav>
+    <a href="/">Home</a>
+    <a href="/products.html">Products</a>
+    <a href="/cart.html">Cart 🛒</a>
+    <a href="/login.html">Login</a>
+  </nav>
+
+</header>
+
+<!-- ================= HEADER CSS ================= -->
+
+<style>
+
+  header{
+    background:#081b38;
+    padding:15px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:15px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  .logo{
+    color:#2ea7ff;
+    font-size:34px;
+    font-weight:bold;
+  }
+
+  .search-box{
+    flex:1;
+    display:flex;
+    justify-content:center;
+  }
+
+  .search-box input{
+    width:100%;
+    max-width:520px;
+    padding:12px 20px;
+    border:none;
+    border-radius:30px;
+    outline:none;
+    font-size:15px;
+  }
+
+  nav{
+    display:flex;
+    gap:22px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+
+  nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    transition:0.3s;
+  }
+
+  nav a:hover{
+    color:#ff9800;
+  }
+
+  /* ================= MOBILE RESPONSIVE ================= */
+
+  @media(max-width:768px){
 
     header{
-      background:#081b38;
-      padding:15px 25px;
-      display:flex;
-      justify-content:space-between;
+      flex-direction:column;
       align-items:center;
-      flex-wrap:wrap;
-      gap:15px;
-      position:sticky;
-      top:0;
-      z-index:1000;
+      padding:15px;
     }
 
     .logo{
-      color:#2ea7ff;
-      font-size:34px;
-      font-weight:bold;
+      font-size:28px;
     }
 
     .search-box{
-      flex:1;
-      display:flex;
-      justify-content:center;
+      width:100%;
     }
 
     .search-box input{
-      width:100%;
-      max-width:500px;
-      padding:12px 20px;
-      border:none;
-      border-radius:30px;
-      outline:none;
-      font-size:15px;
+      max-width:100%;
     }
 
     nav{
-      display:flex;
-      gap:20px;
-      flex-wrap:wrap;
+      justify-content:center;
+      width:100%;
+      gap:16px;
     }
 
     nav a{
-      color:white;
-      text-decoration:none;
-      font-weight:bold;
+      font-size:15px;
     }
+  }
 
-    /* ================= HERO ================= */
-
-    .hero{
-      height:450px;
-      background:
-        linear-gradient(rgba(8,27,56,0.6),rgba(8,27,56,0.6)),
-        url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1400&q=80')
-        center/cover no-repeat;
-
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-      color:white;
-      padding:20px;
-    }
-
-    .hero h1{
-      font-size:58px;
-      margin-bottom:15px;
-    }
-
-    .hero p{
-      font-size:20px;
-      margin-bottom:30px;
-    }
-
-    .hero-btn{
-      background:#ff9800;
-      color:white;
-      padding:14px 30px;
-      border-radius:30px;
-      text-decoration:none;
-      font-weight:bold;
-    }
-
-    /* ================= PRODUCTS ================= */
-
-    .products{
-      width:92%;
-      max-width:1200px;
-      margin:60px auto;
-    }
-
-    .products h2{
-      text-align:center;
-      font-size:42px;
-      color:#081b38;
-      margin-bottom:40px;
-    }
-
-    .product-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:25px;
-    }
-
-    .product-card{
-      background:white;
-      border-radius:16px;
-      overflow:hidden;
-      box-shadow:0 4px 12px rgba(0,0,0,0.1);
-      transition:0.3s;
-    }
-
-    .product-card:hover{
-      transform:translateY(-5px);
-    }
-
-    .product-card img{
-      width:100%;
-      height:230px;
-      object-fit:cover;
-    }
-
-    .product-details{
-      padding:20px;
-    }
-
-    .product-name{
-      font-size:22px;
-      color:#081b38;
-      margin-bottom:10px;
-    }
-
-    .product-price{
-      font-size:28px;
-      font-weight:bold;
-      color:#059669;
-      margin-bottom:15px;
-    }
-
-    .button-group{
-      display:flex;
-      gap:10px;
-    }
-
-    .action-btn{
-      flex:1;
-      padding:12px;
-      border:none;
-      border-radius:10px;
-      font-weight:bold;
-      cursor:pointer;
-    }
-
-    .cart-btn{
-      background:#e2e8f0;
-    }
-
-    .buy-btn{
-      background:#ff9800;
-      color:white;
-    }
-
-    /* ================= CONTACT ================= */
-
-    .contact-wrapper{
-      position:fixed;
-      bottom:20px;
-      right:20px;
-      z-index:9999;
-    }
-
-    .contact-menu{
-      display:none;
-      flex-direction:column;
-      gap:10px;
-      margin-bottom:10px;
-      align-items:flex-end;
-    }
-
-    .contact-menu a{
-      background:white;
-      padding:10px 15px;
-      border-radius:12px;
-      text-decoration:none;
-      color:#081b38;
-      font-weight:bold;
-    }
-
-    .contact-btn{
-      width:64px;
-      height:64px;
-      border:none;
-      border-radius:50%;
-      background:#ff9800;
-      color:white;
-      font-size:30px;
-      cursor:pointer;
-    }
-
-    /* ================= FOOTER ================= */
-
-    footer{
-      background:#081b38;
-      color:white;
-      text-align:center;
-      padding:25px;
-      margin-top:60px;
-    }
-
-    /* ================= MOBILE ================= */
-
-    @media(max-width:768px){
-
-      header{
-        flex-direction:column;
-        align-items:center;
-      }
-
-      .search-box{
-        width:100%;
-      }
-
-      nav{
-        justify-content:center;
-      }
-
-      .hero{
-        height:320px;
-      }
-
-      .hero h1{
-        font-size:34px;
-      }
-
-      .hero p{
-        font-size:15px;
-      }
-
-      .products h2{
-        font-size:30px;
-      }
-
-      .button-group{
-        flex-direction:column;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <header>
-
-    <div class="logo">ShopNova</div>
-
-    <div class="search-box">
-      <input type="text"
-             id="searchInput"
-             placeholder="Search products, brands and more...">
-    </div>
-
-    <nav>
-      <a href="/">Home</a>
-      <a href="/products.html">Products</a>
-      <a href="/cart.html">Cart 🛒</a>
-      <a href="/login.html">Login</a>
-    </nav>
-
-  </header>
-
-  <section class="hero">
-
-    <div>
-      <h1>Welcome to ShopNova</h1>
-
-      <p>
-        Premium shopping experience for fashion,
-        gadgets, books and lifestyle products
-      </p>
-
-      <a href="/products.html" class="hero-btn">
-        Explore Products
-      </a>
-    </div>
-
-  </section>
-
-  <section class="products">
-
-    <h2>Featured Products</h2>
-
-    <div class="product-grid">
-
-      <div class="product-card">
-        <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=900&q=80"
-             alt="Premium Casual Shirt">
-
-        <div class="product-details">
-          <h3 class="product-name">Premium Casual Shirt</h3>
-          <div class="product-price">₹799</div>
-
-          <div class="button-group">
-            <button class="action-btn cart-btn">
-              Add To Cart 🛒
-            </button>
-
-            <button class="action-btn buy-btn">
-              Buy Now ⚡
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=900&q=80"
-             alt="Sports Shoes">
-
-        <div class="product-details">
-          <h3 class="product-name">Sports Running Shoes</h3>
-          <div class="product-price">₹1,499</div>
-
-          <div class="button-group">
-            <button class="action-btn cart-btn">
-              Add To Cart 🛒
-            </button>
-
-            <button class="action-btn buy-btn">
-              Buy Now ⚡
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=900&q=80"
-             alt="Holy Bible">
-
-        <div class="product-details">
-          <h3 class="product-name">Holy Bible (Hardcover Edition)</h3>
-          <div class="product-price">₹1,200</div>
-
-          <div class="button-group">
-            <button class="action-btn cart-btn">
-              Add To Cart 🛒
-            </button>
-
-            <button class="action-btn buy-btn">
-              Buy Now ⚡
-            </button>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-  </section>
-
-  <div class="contact-wrapper">
-
-    <div class="contact-menu" id="contactMenu">
-      <a href="https://wa.me/919876543210" target="_blank">WhatsApp</a>
-      <a href="https://instagram.com" target="_blank">Instagram</a>
-      <a href="https://youtube.com" target="_blank">YouTube</a>
-    </div>
-
-    <button class="contact-btn" onclick="toggleContactMenu()">
-      📞
-    </button>
-
-  </div>
-
-  <footer>
-    © 2026 ShopNova | CEO & Founder: Anuradha
-  </footer>
-
-  <script>
-
-    function toggleContactMenu(){
-
-      const menu = document.getElementById('contactMenu');
-
-      if(menu.style.display === 'flex'){
-        menu.style.display = 'none';
-      }else{
-        menu.style.display = 'flex';
-      }
-    }
-
-    const searchInput = document.getElementById('searchInput');
-
-    searchInput.addEventListener('keyup', function(){
-
-      const value = searchInput.value.toLowerCase();
-
-      const products = document.querySelectorAll('.product-card');
-
-      products.forEach(function(card){
-
-        const text = card.innerText.toLowerCase();
-
-        if(text.includes(value)){
-          card.style.display = 'block';
-        }else{
-          card.style.display = 'none';
-        }
-
-      });
-    });
-
-  </script>
-
-</body>
-</html>
-
+</style>

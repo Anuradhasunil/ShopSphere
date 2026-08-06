@@ -1,249 +1,120 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ShopNova - Secure Checkout</title>
+  <title>ShopNova Payment</title>
+
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #0d1b2a;
-      color: #333;
-      margin: 0;
-      padding: 0;
+    body{
+      font-family:Arial,sans-serif;
+      background:#f3f4f6;
+      margin:0;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height:100vh;
+      padding:20px;
     }
 
-    header {
-      background: #081b38;
-      color: white;
-      padding: 15px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .payment-box{
+      background:white;
+      width:100%;
+      max-width:450px;
+      padding:35px;
+      border-radius:18px;
+      text-align:center;
+      box-shadow:0 8px 25px rgba(0,0,0,0.15);
     }
 
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
+    h2{
+      color:#081b38;
+      margin-bottom:20px;
     }
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 20px;
-      font-weight: 500;
+    .qr{
+      width:250px;
+      height:250px;
+      margin:20px auto;
+      display:block;
+      border-radius:12px;
     }
 
-    .checkout-container {
-      max-width: 1100px;
-      margin: 50px auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      padding: 0 20px;
+    .upi{
+      background:#f8fafc;
+      padding:12px;
+      border-radius:10px;
+      margin:15px 0;
+      font-weight:bold;
+      color:#081b38;
     }
 
-    .card {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    button{
+      width:100%;
+      padding:14px;
+      background:#059669;
+      color:white;
+      border:none;
+      border-radius:10px;
+      font-size:17px;
+      font-weight:bold;
+      cursor:pointer;
     }
 
-    h2 {
-      margin-top: 0;
-      color: #081b38;
-      border-bottom: 2px solid #f3f4f6;
-      padding-bottom: 10px;
+    button:hover{
+      background:#047857;
     }
 
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: bold;
-      color: #4b5563;
-    }
-
-    input[type="text"] {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #cbd5e1;
-      border-radius: 6px;
-      box-sizing: border-box;
-      font-size: 1rem;
-    }
-
-    .radio-group {
-      display: flex;
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-
-    .radio-option {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-    }
-
-    .total-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 20px;
-      padding-top: 15px;
-      border-top: 2px solid #081b38;
-      font-size: 1.25rem;
-      font-weight: bold;
-    }
-
-    .pay-btn {
-      width: 100%;
-      background: #081b38;
-      color: white;
-      border: none;
-      padding: 15px;
-      border-radius: 6px;
-      font-size: 1.1rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.2s;
-      margin-top: 10px;
-    }
-
-    .pay-btn:hover {
-      background: #112d59;
-    }
-
-    @media (max-width: 768px) {
-      .checkout-container {
-        grid-template-columns: 1fr;
-      }
+    .back{
+      display:block;
+      margin-top:15px;
+      text-decoration:none;
+      color:#081b38;
+      font-weight:bold;
     }
   </style>
 </head>
+
 <body>
 
-  <header>
-    <div class="logo">ShopNova</div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="products.html">Products</a>
-    </nav>
-  </header>
+  <div class="payment-box">
 
-  <div class="checkout-container">
-    <!-- Left Column: Order Summary -->
-    <div class="card">
-      <h2>Your Order Summary</h2>
-      <div id="checkoutCartItems">
-        <!-- Live checkout cart item listings update automatically here -->
-      </div>
-      <div class="total-row">
-        <span>Total Amount:</span>
-        <span id="checkoutTotalAmount">₹0</span>
-      </div>
+    <h2>💳 UPI Payment</h2>
+
+    <p>Scan the QR code to complete your payment.</p>
+
+    <img class="qr"
+         src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=anuradha@upi&pn=ShopNova&am=999&cu=INR"
+         alt="UPI QR Code">
+
+    <div class="upi">
+      UPI ID: anuradha@upi
     </div>
 
-    <!-- Right Column: Secure Checkout Form -->
-    <div class="card">
-      <h2>Secure Checkout</h2>
-      
-      <div class="form-group">
-        <label>Full Name</label>
-        <input type="text" id="customerName" placeholder="Anuradha" value="Anuradha">
-      </div>
+    <button onclick="completePayment()">
+      Payment Completed ✅
+    </button>
 
-      <div class="form-group">
-        <label>Select Payment Method</label>
-        <div class="radio-group">
-          <label class="radio-option">
-            <input type="radio" name="payMethod" value="card"> Credit/Debit Card
-          </label>
-          <label class="radio-option">
-            <input type="radio" name="payMethod" value="upi" checked> UPI / NetBanking
-          </label>
-        </div>
-      </div>
+    <a href="/cart.html" class="back">
+      ← Back to Cart
+    </a>
 
-      <div class="form-group">
-        <label>Enter UPI ID</label>
-        <input type="text" id="customerUpi" placeholder="anuradha@okaxis" value="anuradha@okaxis">
-      </div>
-
-      <button class="pay-btn" onclick="processCheckoutPayment()">
-        Pay & Confirm Order
-      </button>
-    </div>
   </div>
 
-  <!-- Include your global script file safely -->
-  <script src="script.js"></script>
-
   <script>
-    // Pull active configuration elements straight from local storage structures
-    let cart = JSON.parse(localStorage.getItem('shopnova_cart')) || [];
-    let checkoutTotal = 0;
 
-    function renderCheckoutSummary() {
-      const cartContainer = document.getElementById('checkoutCartItems');
-      const totalDisplay = document.getElementById('checkoutTotalAmount');
-      
-      if (cart.length === 0) {
-        cartContainer.innerHTML = '<p style="color: #6b7280; text-align: center; margin: 40px 0;">Your shopping cart is empty.</p>';
-        totalDisplay.innerText = '₹0';
-        return;
-      }
+    function completePayment(){
 
-      cartContainer.innerHTML = '';
-      checkoutTotal = 0; // Reset tracking accumulation variables cleanly
-      
-      cart.forEach(item => {
-        checkoutTotal += item.price * item.qty;
-        cartContainer.innerHTML += `
-          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px dashed #e5e7eb;">
-            <div>
-              <strong style="color: #081b38; font-size: 1.05rem;">${item.name}</strong>
-              <div style="font-size: 0.85rem; color: #6b7280; margin-top: 4px;">₹${item.price} × ${item.qty}</div>
-            </div>
-            <span style="font-weight: bold; color: #081b38;">₹${item.price * item.qty}</span>
-          </div>
-        `;
-      });
-
-      totalDisplay.innerText = '₹' + checkoutTotal;
-    }
-
-    function processCheckoutPayment() {
-      if (checkoutTotal === 0) {
-        alert("⚠️ Your shopping cart is empty! Add products before checking out.");
-        window.location.href = 'products.html';
-        return;
-      }
-
-      const fullName = document.getElementById('customerName').value || "Customer";
-      const upiId = document.getElementById('customerUpi').value || "anuradha@okaxis";
-
-      alert(`Processing UPI transaction for ₹${checkoutTotal} to account: ${upiId}...\n\n🎉 Success! Thank you, ${fullName}. Your order has been placed successfully!`);
-      
-      // Save order to history arrays safely if function tracks inside script.js
-      if (typeof saveOrder === "function") {
-        saveOrder(checkoutTotal);
-      }
-
-      // Empty out checkout local storage arrays cleanly
       localStorage.removeItem('shopnova_cart');
 
-      // Return your customer safely straight back to home domain entryway maps
-      window.location.href = 'index.html';
+      alert('🎉 Payment Successful! Order Placed Successfully.');
+
+      window.location.href = '/';
     }
 
-    // Initialize display when window constructs completely
-    window.addEventListener('DOMContentLoaded', renderCheckoutSummary);
   </script>
+
 </body>
 </html>
+

@@ -7,39 +7,32 @@
   <title>ShopNova Login</title>
 
   <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family:Arial,sans-serif;
-    }
-
     body{
+      font-family:Arial,sans-serif;
       background:#081b38;
-      height:100vh;
       display:flex;
       justify-content:center;
       align-items:center;
-      padding:20px;
+      height:100vh;
+      margin:0;
     }
 
     .login-box{
       background:white;
-      width:100%;
-      max-width:380px;
+      width:90%;
+      max-width:400px;
       padding:40px 30px;
       border-radius:18px;
       box-shadow:0 8px 25px rgba(0,0,0,0.2);
     }
 
-    .login-box h2{
+    h2{
       text-align:center;
       color:#081b38;
       margin-bottom:30px;
-      font-size:32px;
     }
 
-    .login-box input{
+    input{
       width:100%;
       padding:14px;
       margin-bottom:18px;
@@ -48,7 +41,7 @@
       font-size:15px;
     }
 
-    .login-box button{
+    button{
       width:100%;
       padding:14px;
       background:#ff9800;
@@ -60,7 +53,7 @@
       cursor:pointer;
     }
 
-    .login-box button:hover{
+    button:hover{
       background:#e68900;
     }
 
@@ -81,9 +74,11 @@
 
     <h2>🔐 ShopNova Login</h2>
 
-    <input type="email" placeholder="Enter your email" required>
+    <input type="email"
+           placeholder="Enter your email">
 
-    <input type="password" placeholder="Enter your password" required>
+    <input type="password"
+           placeholder="Enter your password">
 
     <button onclick="login()">Login</button>
 
@@ -94,7 +89,7 @@
   <script>
     function login(){
 
-      alert('🎉 Login Successful! Welcome to ShopNova');
+      alert('🎉 Login Successful!');
 
       window.location.href = '/';
     }
