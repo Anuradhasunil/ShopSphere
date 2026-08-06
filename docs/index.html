@@ -1,62 +1,259 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopNova</title>
+    <title>ShopNova - Home</title>
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
-<header class="navbar">
-    <div class="logo">ShopNova</div>
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="logo">ShopNova</div>
 
-    <div class="search-box">
-        <input type="text" placeholder="Search products, brands and more...">
-    </div>
+        <div class="search-box">
+            <input type="text" placeholder="Search products, brands and more...">
+        </div>
 
-    <nav class="nav-links">
-        <a href="./index.html">Home</a>
-        <a href="./products.html">Products</a>
-        <a href="./cart.html">Cart 🛒</a>
-        <a href="./login.html">Login</a>
-    </nav>
-</header>
+        <nav class="nav-links">
+            <a href="./index.html">Home</a>
+            <a href="./products.html">Products</a>
+            <a href="./cart.html">Cart 🛒</a>
+            <a href="./login.html">Login</a>
+        </nav>
+    </header>
 
-<section class="hero">
-    <h1>Welcome to ShopNova</h1>
-    <p>India's modern shopping destination for fashion, electronics and accessories.</p>
-    <a href="./products.html" class="btn">Explore Products</a>
-</section>
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <h1>Welcome to ShopNova</h1>
+        <p>
+            India's modern shopping destination for fashion,
+            electronics, accessories, and premium lifestyle products.
+        </p>
 
-<section class="home-products">
+        <a href="./products.html" class="btn">
+            Explore Products
+        </a>
+    </section>
 
-    <div class="product-card">
-        <div class="product-image">👕</div>
-        <h3>Casual Shirt</h3>
-        <p>₹799</p>
-        <a href="./products.html" class="btn">Shop Now</a>
-    </div>
+    <!-- FEATURED PRODUCTS -->
+    <section class="home-products">
 
-    <div class="product-card">
-        <div class="product-image">👟</div>
-        <h3>Sports Shoes</h3>
-        <p>₹1499</p>
-        <a href="./products.html" class="btn">Shop Now</a>
-    </div>
+        <div class="product-card">
+            <div class="product-image">👕</div>
+            <h3>Casual Shirt</h3>
+            <p class="price">₹799</p>
+            <a href="./products.html" class="btn">Shop Now</a>
+        </div>
 
-    <div class="product-card">
-        <div class="product-image">⌚</div>
-        <h3>Smart Watch</h3>
-        <p>₹2999</p>
-        <a href="./products.html" class="btn">Shop Now</a>
-    </div>
+        <div class="product-card">
+            <div class="product-image">👟</div>
+            <h3>Sports Shoes</h3>
+            <p class="price">₹1499</p>
+            <a href="./products.html" class="btn">Shop Now</a>
+        </div>
 
-</section>
+        <div class="product-card">
+            <div class="product-image">⌚</div>
+            <h3>Smart Watch</h3>
+            <p class="price">₹2999</p>
+            <a href="./products.html" class="btn">Shop Now</a>
+        </div>
 
-<footer>
-    © 2026 ShopNova | CEO & Founder: Anuradha
-</footer>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        © 2026 ShopNova | CEO & Founder: Anuradha
+    </footer>
 
 </body>
 </html>
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f1f3f6;
+    color: #222;
+}
+
+/* NAVBAR */
+.navbar {
+    background: #001f4d;
+    padding: 15px 30px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #00a2ff;
+}
+
+/* SEARCH */
+.search-box {
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
+}
+
+.search-box input {
+    width: 100%;
+    max-width: 550px;
+
+    padding: 12px 20px;
+
+    border: none;
+    border-radius: 30px;
+    outline: none;
+
+    font-size: 16px;
+}
+
+/* NAV LINKS */
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    color: #00a2ff;
+}
+
+/* HERO SECTION */
+.hero {
+    background: linear-gradient(135deg, #007bff, #00c6ff);
+
+    color: white;
+    text-align: center;
+
+    padding: 100px 20px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    max-width: 700px;
+    margin: 0 auto 25px;
+
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+/* BUTTON */
+.btn {
+    display: inline-block;
+
+    background: #ff9800;
+    color: white;
+
+    padding: 12px 24px;
+
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background: #e68900;
+}
+
+/* PRODUCT SECTION */
+.home-products {
+    max-width: 1100px;
+
+    margin: 40px auto;
+    padding: 20px;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.product-card {
+    background: white;
+
+    border-radius: 15px;
+    padding: 25px;
+
+    text-align: center;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+    transition: transform 0.2s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-image {
+    font-size: 5rem;
+    margin-bottom: 15px;
+}
+
+.price {
+    margin: 12px 0;
+
+    color: #007bff;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+/* FOOTER */
+footer {
+    background: #001f4d;
+    color: white;
+
+    text-align: center;
+
+    padding: 15px;
+    margin-top: 40px;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav-links {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+}
