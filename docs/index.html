@@ -1,109 +1,408 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome to ShopNova | Premium Marketplace</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShopNova - Home</title>
+
   <style>
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background: #f8f9fa; }
-    .hero { background: linear-gradient(rgba(0,45,98,0.7), rgba(0,45,98,0.7)), url('https://unsplash.com'); background-size: cover; background-position: center; color: white; text-align: center; padding: 100px 20px; }
-    .hero h1 { font-size: 42px; margin-bottom: 10px; }
-    .hero p { font-size: 18px; margin-bottom: 30px; opacity: 0.9; }
-    .hero-btn { background: #ff8c00; color: white; padding: 12px 30px; text-decoration: none; border-radius: 25px; font-weight: bold; border: none; cursor: pointer; transition: 0.3s; }
-    .hero-btn:hover { background: #e07b00; }
-    .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-    .section-title { text-align: center; color: #002d62; font-size: 32px; margin-bottom: 30px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
-    .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s; text-align: center; padding-bottom: 20px; display: flex; flex-direction: column; }
-    .card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
-    .card img { width: 100%; height: 200px; object-fit: cover; background-color: #eee; }
-    .card h3 { color: #333; margin: 15px 0 5px 0; padding: 0 15px; }
-    .price { font-size: 20px; color: #28a745; font-weight: bold; margin: 10px 0; }
-    .contact-bar { display: flex; gap: 10px; justify-content: center; padding: 0 15px; margin-top: auto; }
-    .wa-btn { background: #25d366; color: white; padding: 10px 15px; text-decoration: none; border-radius: 6px; font-size: 14px; font-weight: bold; flex: 1; }
-    .mail-btn { background: #dc3545; color: white; padding: 10px 15px; text-decoration: none; border-radius: 6px; font-size: 14px; font-weight: bold; flex: 1; }
-  </style>
-</head>
-<body>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial,sans-serif;
+    }
 
-  <div id="navbar-placeholder"></div>
+    body{
+      background:#f3f4f6;
+      overflow-x:hidden;
+    }
 
-  <div class="hero">
-    <h1>Welcome to ShopNova</h1>
-    <p>Premium shopping experience for fashion, gadgets, books and lifestyle products</p>
-    <button class="hero-btn" onclick="window.location.href='/products.html'">Explore Products</button>
-  </div>
+    header{
+      background:#081b38;
+      padding:15px 25px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:15px;
+    }
 
-  <div class="container">
-    <h2 class="section-title">Featured Products</h2>
-    <div id="productGrid" class="grid"></div>
-  </div>
+    .logo{
+      color:#2ea7ff;
+      font-size:34px;
+      font-weight:bold;
+    }
 
-  <script>
-    const API_BASE_URL = 'https://vercel.app';
+    .search-box{
+      flex:1;
+      display:flex;
+      justify-content:center;
+    }
 
-    fetch('/navbar.html')
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById('navbar-placeholder').innerHTML = data;
-        setupAuthUI();
-        document.getElementById('liveSearch').addEventListener('input', (e) => loadProducts(e.target.value));
-      });
+    .search-box input{
+      width:100%;
+      max-width:500px;
+      padding:12px 20px;
+      border:none;
+      border-radius:30px;
+      outline:none;
+      font-size:15px;
+    }
 
-    function setupAuthUI() {
-      const user = JSON.parse(localStorage.getItem('user'));
-      const authLink = document.getElementById('authLink');
-      if (authLink) {
-        if (user) {
-          authLink.innerHTML = `
-            <a href="/admin/dashboard.html" style="color: #ff8c00; text-decoration:none; margin-right:15px;">Dashboard</a>
-            <a href="#" onclick="logout()" style="color: white; text-decoration:none;">Logout</a>
-          `;
-        } else {
-          authLink.innerHTML = `<a href="/admin/login.html" style="color: white; text-decoration: none;">Login</a>`;
-        }
+    nav{
+      display:flex;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    nav a{
+      color:white;
+      text-decoration:none;
+      font-weight:bold;
+    }
+
+    .hero{
+      height:420px;
+      background:
+        linear-gradient(rgba(8,27,56,0.6),rgba(8,27,56,0.6)),
+        url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1400&q=80')
+        center/cover no-repeat;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      color:white;
+      padding:20px;
+    }
+
+    .hero h1{
+      font-size:50px;
+      margin-bottom:15px;
+    }
+
+    .hero p{
+      font-size:18px;
+      margin-bottom:25px;
+    }
+
+    .hero a{
+      background:#ff9800;
+      color:white;
+      padding:14px 30px;
+      border-radius:30px;
+      text-decoration:none;
+      font-weight:bold;
+    }
+
+    .products{
+      width:92%;
+      max-width:1200px;
+      margin:60px auto;
+    }
+
+    .products h2{
+      text-align:center;
+      font-size:42px;
+      color:#081b38;
+      margin-bottom:40px;
+    }
+
+    .product-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:25px;
+    }
+
+    .product-card{
+      background:white;
+      border-radius:16px;
+      overflow:hidden;
+      box-shadow:0 4px 12px rgba(0,0,0,0.1);
+      display:flex;
+      flex-direction:column;
+    }
+
+    .product-card img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+    }
+
+    .product-details{
+      padding:20px;
+      flex:1;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .product-name{
+      font-size:22px;
+      color:#081b38;
+      margin-bottom:10px;
+    }
+
+    .product-price{
+      font-size:28px;
+      font-weight:bold;
+      color:#059669;
+      margin-bottom:15px;
+    }
+
+    .button-group{
+      display:flex;
+      gap:10px;
+      margin-top:auto;
+    }
+
+    .action-btn{
+      flex:1;
+      padding:12px;
+      border:none;
+      border-radius:10px;
+      font-weight:bold;
+      cursor:pointer;
+    }
+
+    .cart-btn{
+      background:#e2e8f0;
+    }
+
+    .buy-btn{
+      background:#ff9800;
+      color:white;
+    }
+
+    .contact-wrapper{
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      z-index:9999;
+    }
+
+    .contact-menu{
+      display:none;
+      flex-direction:column;
+      gap:10px;
+      margin-bottom:10px;
+      align-items:flex-end;
+    }
+
+    .contact-menu a{
+      background:white;
+      padding:10px 15px;
+      border-radius:12px;
+      text-decoration:none;
+      color:#081b38;
+      font-weight:bold;
+      box-shadow:0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .contact-btn{
+      width:62px;
+      height:62px;
+      border:none;
+      border-radius:50%;
+      background:#ff9800;
+      color:white;
+      font-size:28px;
+      cursor:pointer;
+    }
+
+    footer{
+      background:#081b38;
+      color:white;
+      text-align:center;
+      padding:25px;
+      margin-top:60px;
+    }
+
+    @media(max-width:768px){
+
+      header{
+        flex-direction:column;
+        align-items:center;
+      }
+
+      .search-box{
+        width:100%;
+      }
+
+      nav{
+        justify-content:center;
+      }
+
+      .hero{
+        height:320px;
+      }
+
+      .hero h1{
+        font-size:34px;
+      }
+
+      .products h2{
+        font-size:30px;
+      }
+
+      .button-group{
+        flex-direction:column;
       }
     }
+  </style>
+</head>
 
-    function logout() {
-      localStorage.removeItem('user');
-      window.location.reload();
-    }
+<body>
 
-    async function loadProducts(query = '') {
-      const url = query ? `${API_BASE_URL}/search?q=${query}` : `${API_BASE_URL}/products`;
-      try {
-        const res = await fetch(url);
-        const products = await res.json();
-        const grid = document.getElementById('productGrid');
-        grid.innerHTML = '';
+  <header>
 
-        if (products.length === 0) {
-          grid.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color:#666;">No products found matching your search.</p>`;
-          return;
-        }
+    <div class="logo">ShopNova</div>
 
-        products.forEach(p => {
-          const waMsg = encodeURIComponent(`Hello ${p.sellerName}, I am interested in buying your item "${p.name}" listed on ShopNova.`);
-          // If the custom image path string isn't valid, provide a safe premium fallback photo
-          const imgUrl = (p.image && p.image.startsWith('http')) ? p.image : 'https://unsplash.com';
-          
-          grid.innerHTML += `
-            <div class="card">
-              <img src="${imgUrl}" alt="${p.name}">
-              <h3>${p.name}</h3>
-              <p style="color:#666; font-size:14px; padding:0 15px;">${p.description || ''}</p>
-              <div class="price">₹${p.price}</div>
-              <div class="contact-bar">
-                <a href="https://wa.me{p.sellerPhone || '919876543210'}?text=${waMsg}" target="_blank" class="wa-btn">WhatsApp</a>
-                <a href="mailto:${p.sellerEmail || 'admin@shopnova.com'}?subject=Inquiry" class="mail-btn">Email</a>
-              </div>
-            </div>
-          `;
-        });
-      } catch (err) { console.error(err); }
-    }
-    loadProducts();
-  </script>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search products, brands and more..." />
+    </div>
+
+    <nav>
+      <a href="/">Home</a>
+      <a href="/products.html">Products</a>
+      <a href="/cart.html">Cart 🛒</a>
+      <a href="/login.html">Login</a>
+    </nav>
+
+  </header>
+
+  <section class="hero">
+
+    <div>
+
+      <h1>Welcome to ShopNova</h1>
+
+      <p>
+        Premium shopping experience for fashion,
+        gadgets, books and lifestyle products
+      </p>
+
+      <a href="/products.html">Explore Products</a>
+
+    </div>
+
+  </section>
+
+  <section class="products">
+
+    <h2>Featured Products</h2>
+
+    <div class="product-grid">
+
+      <div class="product-card">
+
+        <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=900&q=80" alt="Premium Casual Shirt">
+
+        <div class="product-details">
+
+          <h3 class="product-name">Premium Casual Shirt</h3>
+
+          <div class="product-price">₹799</div>
+
+          <div class="button-group">
+
+            <button class="action-btn cart-btn"
+                    onclick="addToCart('Premium Casual Shirt',799)">
+              Add To Cart 🛒
+            </button>
+
+            <button class="action-btn buy-btn">
+              Buy Now ⚡
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="product-card">
+
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=900&q=80" alt="Sports Running Shoes">
+
+        <div class="product-details">
+
+          <h3 class="product-name">Sports Running Shoes</h3>
+
+          <div class="product-price">₹1,499</div>
+
+          <div class="button-group">
+
+            <button class="action-btn cart-btn"
+                    onclick="addToCart('Sports Running Shoes',1499)">
+              Add To Cart 🛒
+            </button>
+
+            <button class="action-btn buy-btn">
+              Buy Now ⚡
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="product-card">
+
+        <img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=900&q=80" alt="Holy Bible Hardcover Edition">
+
+        <div class="product-details">
+
+          <h3 class="product-name">Holy Bible (Hardcover Edition)</h3>
+
+          <div class="product-price">₹1,200</div>
+
+          <div class="button-group">
+
+            <button class="action-btn cart-btn"
+                    onclick="addToCart('Holy Bible (Hardcover Edition)',1200)">
+              Add To Cart 🛒
+            </button>
+
+            <button class="action-btn buy-btn">
+              Buy Now ⚡
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <div class="contact-wrapper">
+
+    <div class="contact-menu" id="contactMenu">
+
+      <a href="https://wa.me/" target="_blank">WhatsApp</a>
+      <a href="https://instagram.com/" target="_blank">Instagram</a>
+      <a href="https://youtube.com/" target="_blank">YouTube</a>
+      <a href="mailto:anuradhaganji152@gmail.com">Email</a>
+
+    </div>
+
+    <button class="contact-btn"
+            onclick="toggleContactMenu()">
+      📞
+    </button>
+
+  </div>
+
+  <footer>
+    © 2026 ShopNova | CEO & Founder: Anuradha
+  </footer>
+
+  <script src="/script.js"></script>
+
 </body>
 </html>
+
