@@ -1,95 +1,117 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ShopNova | All Products</title>
+  <title>ShopNova Products</title>
   <style>
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background: #f8f9fa; }
-    .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-    .section-title { color: #002d62; font-size: 32px; margin-bottom: 10px; }
-    .subtitle { color: #666; margin-bottom: 30px; font-size: 16px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
-    .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s; text-align: center; padding-bottom: 20px; display: flex; flex-direction: column; }
-    .card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
-    .card img { width: 100%; height: 200px; object-fit: cover; background-color: #eee; }
-    .card h3 { color: #333; margin: 15px 0 5px 0; padding: 0 15px; }
-    .price { font-size: 20px; color: #28a745; font-weight: bold; margin: 10px 0; }
-    .contact-bar { display: flex; gap: 10px; justify-content: center; padding: 0 15px; margin-top: auto; }
-    .wa-btn { background: #25d366; color: white; padding: 10px 15px; text-decoration: none; border-radius: 6px; font-size: 14px; font-weight: bold; flex: 1; }
-    .mail-btn { background: #dc3545; color: white; padding: 10px 15px; text-decoration: none; border-radius: 6px; font-size: 14px; font-weight: bold; flex: 1; }
+    body{
+      font-family:Arial,sans-serif;
+      margin:0;
+      background:#f3f4f6;
+    }
+
+    header{
+      background:#081b38;
+      color:white;
+      padding:15px 30px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    nav a{
+      color:white;
+      text-decoration:none;
+      margin-left:20px;
+      font-weight:bold;
+    }
+
+    h1{
+      text-align:center;
+      color:#081b38;
+      margin:40px 0;
+    }
+
+    .grid{
+      width:90%;
+      margin:auto;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:25px;
+    }
+
+    .card{
+      background:white;
+      border-radius:15px;
+      overflow:hidden;
+      box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .card img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+    }
+
+    .info{
+      padding:20px;
+    }
+
+    button{
+      width:100%;
+      padding:12px;
+      border:none;
+      border-radius:8px;
+      background:#ff9800;
+      color:white;
+      font-weight:bold;
+      cursor:pointer;
+    }
   </style>
 </head>
 <body>
 
-  <div id="navbar-placeholder"></div>
+<header>
+  <h2>ShopNova</h2>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="cart.html">Cart</a>
+    <a href="login.html">Login</a>
+  </nav>
+</header>
 
-  <div class="container">
-    <h2 class="section-title">Product Catalog</h2>
-    <p class="subtitle">Browse premium products uploaded by verified marketplace vendors.</p>
-    <div id="productGrid" class="grid"></div>
+<h1>All Products</h1>
+
+<div class="grid">
+
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=900&q=80">
+    <div class="info">
+      <h3>Premium Casual Shirt</h3>
+      <p>₹799</p>
+      <button onclick="addToCart('Premium Casual Shirt',799)">
+        Add To Cart
+      </button>
+    </div>
   </div>
 
-  <script>
-    const API_BASE_URL = 'https://vercel.app';
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=900&q=80">
+    <div class="info">
+      <h3>Holy Bible</h3>
+      <p>₹1,200</p>
+      <button onclick="addToCart('Holy Bible',1200)">
+        Add To Cart
+      </button>
+    </div>
+  </div>
 
-    fetch('/navbar.html')
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById('navbar-placeholder').innerHTML = data;
-        setupAuthUI();
-        document.getElementById('liveSearch').addEventListener('input', (e) => loadProducts(e.target.value));
-      });
+</div>
 
-    function setupAuthUI() {
-      const user = JSON.parse(localStorage.getItem('user'));
-      const authLink = document.getElementById('authLink');
-      if (authLink && user) {
-        authLink.innerHTML = `
-          <a href="/admin/dashboard.html" style="color: #ff8c00; text-decoration:none; margin-right:15px;">Dashboard</a>
-          <a href="#" onclick="logout()" style="color: white; text-decoration:none;">Logout</a>
-        `;
-      }
-    }
+<script src="script.js"></script>
 
-    function logout() {
-      localStorage.removeItem('user');
-      window.location.reload();
-    }
-
-    async function loadProducts(query = '') {
-      const url = query ? `${API_BASE_URL}/search?q=${query}` : `${API_BASE_URL}/products`;
-      try {
-        const res = await fetch(url);
-        const products = await res.json();
-        const grid = document.getElementById('productGrid');
-        grid.innerHTML = '';
-
-        if (products.length === 0) {
-          grid.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color:#666;">No products match your search entry.</p>`;
-          return;
-        }
-
-        products.forEach(p => {
-          const waMsg = encodeURIComponent(`Hello ${p.sellerName}, I am interested in buying your item "${p.name}" listed on ShopNova.`);
-          const imgUrl = (p.image && p.image.startsWith('http')) ? p.image : 'https://unsplash.com';
-
-          grid.innerHTML += `
-            <div class="card">
-              <img src="${imgUrl}" alt="${p.name}">
-              <h3>${p.name}</h3>
-              <p style="color:#666; font-size:14px; padding:0 15px;">${p.description || ''}</p>
-              <div class="price">₹${p.price}</div>
-              <div class="contact-bar">
-                <a href="https://wa.me{p.sellerPhone || '919876543210'}?text=${waMsg}" target="_blank" class="wa-btn">WhatsApp</a>
-                <a href="mailto:${p.sellerEmail || 'admin@shopnova.com'}?subject=Inquiry" class="mail-btn">Email</a>
-              </div>
-            </div>
-          `;
-        });
-      } catch (err) { console.error(err); }
-    }
-    loadProducts();
-  </script>
 </body>
 </html>
+
