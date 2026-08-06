@@ -1,115 +1,76 @@
-<!-- ================= HEADER ================= -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopNova - Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-<header>
+<!-- NAVBAR -->
+<header class="navbar">
+    <div class="logo">ShopNova</div>
 
-  <div class="logo">ShopNova</div>
+    <div class="search-box">
+        <input type="text" placeholder="Search products, brands and more...">
+    </div>
 
-  <div class="search-box">
-    <input
-      type="text"
-      id="searchInput"
-      placeholder="Search products, brands and more..."
-    >
-  </div>
-
-  <nav>
-    <a href="/">Home</a>
-    <a href="/products.html">Products</a>
-    <a href="/cart.html">Cart 🛒</a>
-    <a href="/login.html">Login</a>
-  </nav>
-
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="cart.html">Cart 🛒</a>
+        <a href="login.html">Login</a>
+    </nav>
 </header>
 
-<!-- ================= HEADER CSS ================= -->
+<!-- HERO SECTION -->
+<section class="hero">
+    <h1>Welcome to ShopNova</h1>
+    <p>India's modern shopping destination for fashion, electronics and accessories.</p>
+    <a href="products.html" class="btn">Explore Products</a>
+</section>
 
-<style>
+<!-- FEATURED PRODUCTS -->
+<section class="home-products">
 
-  header{
-    background:#081b38;
-    padding:15px 25px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:15px;
-    position:sticky;
-    top:0;
-    z-index:1000;
-    box-shadow:0 4px 12px rgba(0,0,0,0.15);
-  }
+    <div class="product-card">
+        <div class="product-image">👕</div>
+        <h3>Casual Shirt</h3>
+        <p>₹799</p>
+        <a href="products.html" class="btn">Shop Now</a>
+    </div>
 
-  .logo{
-    color:#2ea7ff;
-    font-size:34px;
-    font-weight:bold;
-  }
+    <div class="product-card">
+        <div class="product-image">👟</div>
+        <h3>Sports Shoes</h3>
+        <p>₹1499</p>
+        <a href="products.html" class="btn">Shop Now</a>
+    </div>
 
-  .search-box{
-    flex:1;
-    display:flex;
-    justify-content:center;
-  }
+    <div class="product-card">
+        <div class="product-image">⌚</div>
+        <h3>Smart Watch</h3>
+        <p>₹2999</p>
+        <a href="products.html" class="btn">Shop Now</a>
+    </div>
 
-  .search-box input{
-    width:100%;
-    max-width:520px;
-    padding:12px 20px;
-    border:none;
-    border-radius:30px;
-    outline:none;
-    font-size:15px;
-  }
+</section>
 
-  nav{
-    display:flex;
-    gap:22px;
-    flex-wrap:wrap;
-    align-items:center;
-  }
+<!-- ABOUT SECTION -->
+<section class="about" style="padding:60px 20px; text-align:center; background:white;">
+    <h2 style="font-size:2rem; margin-bottom:20px;">Why Choose ShopNova?</h2>
+    <p style="max-width:800px; margin:auto; font-size:18px; line-height:1.6;">
+        ShopNova is a premium e-commerce platform designed for fast, secure,
+        and stylish online shopping. Enjoy quality products, affordable prices,
+        and a smooth shopping experience on mobile, laptop, or desktop.
+    </p>
+</section>
 
-  nav a{
-    color:white;
-    text-decoration:none;
-    font-weight:bold;
-    transition:0.3s;
-  }
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 ShopNova | CEO & Founder: Anuradha</p>
+</footer>
 
-  nav a:hover{
-    color:#ff9800;
-  }
-
-  /* ================= MOBILE RESPONSIVE ================= */
-
-  @media(max-width:768px){
-
-    header{
-      flex-direction:column;
-      align-items:center;
-      padding:15px;
-    }
-
-    .logo{
-      font-size:28px;
-    }
-
-    .search-box{
-      width:100%;
-    }
-
-    .search-box input{
-      max-width:100%;
-    }
-
-    nav{
-      justify-content:center;
-      width:100%;
-      gap:16px;
-    }
-
-    nav a{
-      font-size:15px;
-    }
-  }
-
-</style>
+</body>
+</html>
