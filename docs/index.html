@@ -1,259 +1,352 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopNova - Home</title>
-    <link rel="stylesheet" href="./style.css">
+    <title>ShopNova - Premium Shopping Experience</title>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <style>
+        /* --- Reset & Base Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            background-color: #0d233a;
+            color: white;
+            padding: 15px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4da3ff;
+            text-decoration: none;
+        }
+        .search-container {
+            flex: 0 1 500px;
+            display: flex;
+            margin: 0 20px;
+        }
+        .search-container input {
+            width: 100%;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+            font-size: 14px;
+        }
+        .search-container button {
+            background-color: #ff9f43;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 4px 4px 0;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.2s;
+        }
+        .search-container button:hover {
+            background-color: #e68a2e;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+            gap: 25px;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover {
+            color: #4da3ff;
+        }
+        .cart-icon {
+            position: relative;
+        }
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -12px;
+            background-color: #ff4d4d;
+            color: white;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 50%;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: linear-gradient(rgba(13, 35, 58, 0.85), rgba(13, 35, 58, 0.85)), 
+                        url('https://unsplash.com') no-repeat center center/cover;
+            height: 450px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            max-width: 600px;
+            opacity: 0.9;
+        }
+        .hero .btn {
+            background-color: #ff9f43;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 25px;
+            font-size: 16px;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 15px rgba(255, 159, 67, 0.4);
+        }
+        .hero .btn:hover {
+            background-color: #e68a2e;
+            transform: translateY(-2px);
+        }
+
+        /* --- Products Section --- */
+        .main-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: #0d233a;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: #ff9f43;
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background-color: #f0f0f0;
+        }
+        .product-info {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .product-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .product-price {
+            font-size: 20px;
+            color: #ff9f43;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .shop-now-btn {
+            margin-top: auto;
+            background-color: #0d233a;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        .shop-now-btn:hover {
+            background-color: #1a4169;
+        }
+
+        /* --- Auth Modal (Login Popup) --- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #888;
+        }
+        .close-modal:hover {
+            color: #333;
+        }
+        .modal h2 {
+            margin-bottom: 20px;
+            color: #0d233a;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            outline: none;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #ff9f43;
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .submit-btn:hover {
+            background-color: #e68a2e;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #0d233a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
+            font-size: 14px;
+            border-top: 3px solid #ff9f43;
+        }
+
+        /* --- Floating Support Button --- */
+        .floating-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #ff9f43;
+            color: white;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            text-decoration: none;
+            transition: transform 0.2s;
+            z-index: 999;
+        }
+        .floating-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+            .search-container {
+                width: 100%;
+                margin: 0;
+                order: 3;
+            }
+            .hero h1 {
+                font-size: 32px;
+            }
+            .hero p {
+                font-size: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <header class="navbar">
-        <div class="logo">ShopNova</div>
-
-        <div class="search-box">
-            <input type="text" placeholder="Search products, brands and more...">
-        </div>
-
-        <nav class="nav-links">
-            <a href="./index.html">Home</a>
-            <a href="./products.html">Products</a>
-            <a href="./cart.html">Cart 🛒</a>
-            <a href="./login.html">Login</a>
-        </nav>
-    </header>
-
-    <!-- HERO SECTION -->
-    <section class="hero">
-        <h1>Welcome to ShopNova</h1>
-        <p>
-            India's modern shopping destination for fashion,
-            electronics, accessories, and premium lifestyle products.
-        </p>
-
-        <a href="./products.html" class="btn">
-            Explore Products
-        </a>
-    </section>
-
-    <!-- FEATURED PRODUCTS -->
-    <section class="home-products">
-
-        <div class="product-card">
-            <div class="product-image">👕</div>
-            <h3>Casual Shirt</h3>
-            <p class="price">₹799</p>
-            <a href="./products.html" class="btn">Shop Now</a>
-        </div>
-
-        <div class="product-card">
-            <div class="product-image">👟</div>
-            <h3>Sports Shoes</h3>
-            <p class="price">₹1499</p>
-            <a href="./products.html" class="btn">Shop Now</a>
-        </div>
-
-        <div class="product-card">
-            <div class="product-image">⌚</div>
-            <h3>Smart Watch</h3>
-            <p class="price">₹2999</p>
-            <a href="./products.html" class="btn">Shop Now</a>
-        </div>
-
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-        © 2026 ShopNova | CEO & Founder: Anuradha
-    </footer>
-
-</body>
-</html>
-
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background: #f1f3f6;
-    color: #222;
-}
-
-/* NAVBAR */
-.navbar {
-    background: #001f4d;
-    padding: 15px 30px;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-.logo {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #00a2ff;
-}
-
-/* SEARCH */
-.search-box {
-    flex: 1;
-
-    display: flex;
-    justify-content: center;
-}
-
-.search-box input {
-    width: 100%;
-    max-width: 550px;
-
-    padding: 12px 20px;
-
-    border: none;
-    border-radius: 30px;
-    outline: none;
-
-    font-size: 16px;
-}
-
-/* NAV LINKS */
-.nav-links {
-    display: flex;
-    gap: 20px;
-}
-
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.nav-links a:hover {
-    color: #00a2ff;
-}
-
-/* HERO SECTION */
-.hero {
-    background: linear-gradient(135deg, #007bff, #00c6ff);
-
-    color: white;
-    text-align: center;
-
-    padding: 100px 20px;
-}
-
-.hero h1 {
-    font-size: 3rem;
-    margin-bottom: 15px;
-}
-
-.hero p {
-    max-width: 700px;
-    margin: 0 auto 25px;
-
-    font-size: 1.2rem;
-    line-height: 1.6;
-}
-
-/* BUTTON */
-.btn {
-    display: inline-block;
-
-    background: #ff9800;
-    color: white;
-
-    padding: 12px 24px;
-
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-
-    transition: background 0.3s ease;
-}
-
-.btn:hover {
-    background: #e68900;
-}
-
-/* PRODUCT SECTION */
-.home-products {
-    max-width: 1100px;
-
-    margin: 40px auto;
-    padding: 20px;
-
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
-}
-
-.product-card {
-    background: white;
-
-    border-radius: 15px;
-    padding: 25px;
-
-    text-align: center;
-
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-
-    transition: transform 0.2s ease;
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
-}
-
-.product-image {
-    font-size: 5rem;
-    margin-bottom: 15px;
-}
-
-.price {
-    margin: 12px 0;
-
-    color: #007bff;
-    font-size: 1.4rem;
-    font-weight: bold;
-}
-
-/* FOOTER */
-footer {
-    background: #001f4d;
-    color: white;
-
-    text-align: center;
-
-    padding: 15px;
-    margin-top: 40px;
-}
-
-/* MOBILE RESPONSIVE */
-@media (max-width: 768px) {
-
-    .navbar {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .nav-links {
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    .hero h1 {
-        font-size: 2rem;
-    }
-
-    .hero p {
-        font-size: 1rem;
-    }
-}
+    <!-- Header / Navbar -->
+    <nav class="navbar">
+        <a href="#" class="logo">ShopNova</a>
+        
+        <!-- Functional Search Bar -->
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search products, brands and more...">
