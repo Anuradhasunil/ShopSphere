@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShopNova - Premium Shopping Experience</title>
-    <!-- FontAwesome for Icons -->
+    <!-- FontAwesome for Navigation and Action Icons -->
     <link rel="stylesheet" href="https://cloudflare.com">
     <style>
-        /* --- Reset & Base Styles --- */
+        /* --- Reset & Layout Styles --- */
         * {
             margin: 0;
             padding: 0;
@@ -19,7 +19,17 @@
             color: #333;
         }
 
-        /* --- Navbar --- */
+        /* --- Global Structural Flex Setup --- */
+        .site-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1 0 auto;
+        }
+
+        /* --- Navbar Styles --- */
         .navbar {
             background-color: #0d233a;
             color: white;
@@ -50,6 +60,7 @@
             border-radius: 4px 0 0 4px;
             outline: none;
             font-size: 14px;
+            color: #333;
         }
         .search-container button {
             background-color: #ff9f43;
@@ -93,11 +104,11 @@
             border-radius: 50%;
         }
 
-        /* --- Hero Section --- */
+        /* --- Hero Dashboard Banner Section --- */
         .hero {
             background: linear-gradient(rgba(13, 35, 58, 0.85), rgba(13, 35, 58, 0.85)), 
                         url('https://unsplash.com') no-repeat center center/cover;
-            height: 450px;
+            height: 400px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -105,6 +116,7 @@
             text-align: center;
             color: white;
             padding: 20px;
+            width: 100%;
         }
         .hero h1 {
             font-size: 48px;
@@ -116,6 +128,7 @@
             margin-bottom: 30px;
             max-width: 600px;
             opacity: 0.9;
+            line-height: 1.5;
         }
         .hero .btn {
             background-color: #ff9f43;
@@ -133,7 +146,7 @@
             transform: translateY(-2px);
         }
 
-        /* --- Products Section --- */
+        /* --- Grid & Catalog Items Layout --- */
         .main-container {
             max-width: 1200px;
             margin: 50px auto;
@@ -212,7 +225,7 @@
             background-color: #1a4169;
         }
 
-        /* --- Auth Modal (Login Popup) --- */
+        /* --- Auth Modal (Login Popup Form) --- */
         .modal {
             display: none;
             position: fixed;
@@ -286,18 +299,18 @@
             background-color: #e68a2e;
         }
 
-        /* --- Footer --- */
+        /* --- Footer Styles --- */
         footer {
             background-color: #0d233a;
             color: white;
             text-align: center;
             padding: 20px;
-            margin-top: 60px;
             font-size: 14px;
             border-top: 3px solid #ff9f43;
+            width: 100%;
         }
 
-        /* --- Floating Support Button --- */
+        /* --- Floating Support Call Button --- */
         .floating-btn {
             position: fixed;
             bottom: 25px;
@@ -320,7 +333,7 @@
             transform: scale(1.1);
         }
 
-        /* --- Responsive Design --- */
+        /* --- Responsive Queries for Handheld Viewports --- */
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
@@ -330,7 +343,6 @@
             .search-container {
                 width: 100%;
                 margin: 0;
-                order: 3;
             }
             .hero h1 {
                 font-size: 32px;
@@ -339,14 +351,3 @@
                 font-size: 15px;
             }
         }
-    </style>
-</head>
-<body>
-
-    <!-- Header / Navbar -->
-    <nav class="navbar">
-        <a href="#" class="logo">ShopNova</a>
-        
-        <!-- Functional Search Bar -->
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search products, brands and more...">
