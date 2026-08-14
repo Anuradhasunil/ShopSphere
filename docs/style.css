@@ -1,1158 +1,431 @@
-/* Base Style Clean Reset */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-body {
-    background-color: #f8f9fa;
-    color: #333;
+body{
+    font-family:"Segoe UI",Arial,sans-serif;
+    background:#f4f7fb;
+    color:#111827;
+    overflow-x:hidden;
+    line-height:1.6;
 }
 
-/* Image containment rules to prevent massive scaling issues */
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
+a{
+    text-decoration:none;
 }
 
-/* Navbar Base Panel Structure Layout */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #0b1a30; 
-    padding: 12px 4%;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+.independence-ticker-wrap{
+    background:linear-gradient(90deg,#ff7a00,#ffffff,#138808);
+    color:#0b1f4d;
+    font-weight:700;
+    overflow:hidden;
+    white-space:nowrap;
+    padding:10px 0;
 }
 
-.nav-left {
-    display: flex;
-    align-items: center;
-    gap: 30px;
+.ticker-content{
+    display:inline-block;
+    padding-left:100%;
+    animation:tickerMove 18s linear infinite;
 }
 
-.logo {
-    color: #ffffff;
-    font-size: 20px;
-    font-weight: bold;
-    letter-spacing: 0.5px;
+@keyframes tickerMove{
+    from{transform:translateX(0);}
+    to{transform:translateX(-100%);}
 }
 
-.search-container {
-    display: flex;
-    align-items: center;
+.sticky-navbar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 28px;
+    background:rgba(11,31,77,0.96);
+    backdrop-filter:blur(10px);
+    box-shadow:0 4px 20px rgba(0,0,0,0.2);
 }
 
-.search-container input {
-    padding: 8px 15px;
-    width: 280px;
-    border: none;
-    border-radius: 4px 0 0 4px;
-    font-size: 14px;
-    outline: none;
+.nav-left{
+    display:flex;
+    align-items:center;
+    gap:18px;
 }
 
-.search-btn {
-    background-color: #f39c12; 
-    border: none;
-    padding: 8px 14px;
-    border-radius: 0 4px 4px 0;
-    cursor: pointer;
-    color: white;
+.logo{
+    font-size:1.6rem;
+    font-weight:800;
+    color:#ffffff;
 }
 
-/* Header Links */
-.nav-right {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+.search-container{
+    display:flex;
+    align-items:center;
+    background:#ffffff;
+    border-radius:999px;
+    overflow:hidden;
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
 }
 
-.nav-link {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: 500;
-    opacity: 0.85;
-    transition: opacity 0.2s;
+.search-container input{
+    border:none;
+    outline:none;
+    padding:10px 16px;
+    min-width:240px;
+    font-size:0.95rem;
 }
 
-.nav-link:hover, .nav-link.active {
-    opacity: 1;
-    color: #f39c12;
+.search-btn{
+    border:none;
+    background:#ff7a00;
+    color:#ffffff;
+    padding:10px 16px;
+    cursor:pointer;
+    font-size:1rem;
+    transition:background .3s ease;
 }
 
-.connect-hub-btn {
-    background-color: #27ae60; 
-    color: #ffffff;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s;
+.search-btn:hover{
+    background:#e66700;
 }
 
-.connect-hub-btn:hover {
-    background-color: #219653;
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:18px;
 }
 
-/* Hero Homepage Section Styling */
-.hero-section {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    background: linear-gradient(135deg, #1e272e 0%, #0b1a30 100%);
-    color: white;
-    padding: 60px 8%;
-    min-height: 500px;
-    gap: 40px;
+.nav-link{
+    color:#ffffff;
+    font-weight:600;
+    transition:color .3s ease;
 }
 
-.hero-content {
-    flex: 1;
-    min-width: 300px;
+.nav-link:hover,.nav-link.active{
+    color:#ffd166;
 }
 
-.hero-badge {
-    background-color: #f39c12;
-    color: #fff;
-    padding: 5px 12px;
-    font-size: 12px;
-    font-weight: bold;
-    border-radius: 4px;
-    letter-spacing: 1px;
+.connect-hub-btn{
+    background:linear-gradient(135deg,#ff7a00,#138808);
+    color:#ffffff;
+    border:none;
+    padding:10px 18px;
+    border-radius:999px;
+    font-weight:700;
+    cursor:pointer;
+    transition:transform .3s ease;
 }
 
-.hero-title {
-    font-size: 48px;
-    font-weight: bold;
-    margin: 20px 0 10px 0;
+.connect-hub-btn:hover{
+    transform:translateY(-2px);
 }
 
-.hero-subtitle {
-    font-size: 16px;
-    color: #bdc3c7;
-    margin-bottom: 30px;
+.patriotic-montage-hero{
+    position:relative;
+    min-height:92vh;
+    display:flex;
+    align-items:center;
+    padding:80px 8%;
+    color:#ffffff;
+    background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),url("images/india-hero.jpg") center/cover no-repeat;
+    overflow:hidden;
 }
 
-.hero-btn {
-    background-color: white;
-    color: #0b1a30;
-    padding: 12px 30px;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 4px;
-    display: inline-block;
-    transition: background 0.2s;
+.patriotic-montage-hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(120deg,rgba(255,122,0,.12),rgba(255,255,255,.03),rgba(19,136,8,.12));
+    animation:heroGlow 6s ease-in-out infinite alternate;
 }
 
-.hero-btn:hover {
-    background-color: #f1f2f6;
+@keyframes heroGlow{
+    from{opacity:.7;}
+    to{opacity:1;}
 }
 
-.hero-image-container {
-    flex: 1;
-    min-width: 300px;
-    max-width: 550px;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+.montage-content-wrapper{
+    max-width:720px;
+    position:relative;
+    z-index:2;
+    animation:fadeUp 1s ease-out both;
 }
 
-.hero-image {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
-/* Product Cards Grid Section Layout */
-.product-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    max-width: 1200px;
-    margin: 50px auto;
-    padding: 0 20px;
-}
-
-.product-card {
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    transition: transform 0.2s;
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
-}
-
-.image-wrapper {
-    width: 100%;
-    height: 250px;
-    background-color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 15px;
-}
-
-.product-image {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-}
-
-.product-info {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    flex-grow: 1;
-}
-
-.product-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: #2c3e50;
-    margin-bottom: 15px;
-    min-height: 44px;
-}
-
-.product-price {
-    font-size: 18px;
-    font-weight: bold;
-    color: #27ae60;
-    margin-bottom: 15px;
-}
-
-.add-to-cart-btn {
-    background-color: #04821a;
-    color: white;
-    border: none;
-    padding: 11px;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.add-to-cart-btn:hover {
-    background-color: #036614;
-}
-/* ==========================================
-   Shopping Cart Layout Specific Styles
-   ========================================== */
-
-.cart-wrapper {
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 0 20px;
-    min-height: 70vh;
-}
-
-.cart-main-title {
-    font-size: 28px;
-    color: #0b1a30;
-    margin-bottom: 30px;
-    font-weight: 700;
-}
-
-/* Master Flexible Two-Column Layout Grid */
-.cart-layout-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 30px;
-    align-items: start;
-}
-
-@media (max-width: 900px) {
-    .cart-layout-grid {
-        grid-template-columns: 1fr;
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
     }
 }
 
-/* Individual Cart Rows Component Container */
-.cart-items-section {
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+.azadi-badge{
+    display:inline-block;
+    background:rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.25);
+    padding:10px 18px;
+    border-radius:999px;
+    margin-bottom:20px;
+    font-weight:700;
+    backdrop-filter:blur(6px);
 }
 
-.cart-item-row {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #f1f2f6;
+.montage-brand-title{
+    font-size:1.2rem;
+    letter-spacing:4px;
+    color:#ffd166;
+    margin-bottom:8px;
 }
 
-.cart-item-row:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
+.montage-main-heading{
+    font-size:clamp(3.5rem,10vw,7rem);
+    line-height:.95;
+    font-weight:900;
+    margin-bottom:16px;
+    text-transform:uppercase;
+    background:linear-gradient(180deg,#ffffff,#dbeafe);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
 }
 
-.cart-item-img-box {
-    width: 80px;
-    height: 80px;
-    border-radius: 8px;
-    overflow: hidden;
-    background-color: #f8f9fa;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #e2e8f0;
+.montage-sub-heading{
+    font-size:1.2rem;
+    font-weight:700;
+    color:#d1fae5;
+    margin-bottom:24px;
 }
 
-.cart-item-img-box img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
+.montage-dedication-box{
+    background:rgba(255,255,255,.12);
+    border-left:4px solid #ff7a00;
+    padding:18px 20px;
+    border-radius:14px;
+    margin-bottom:24px;
+    backdrop-filter:blur(6px);
 }
 
-.cart-item-details {
-    flex-grow: 1;
+.isro-floating{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.25);
+    padding:10px 16px;
+    border-radius:999px;
+    margin-bottom:26px;
+    font-weight:700;
+    backdrop-filter:blur(6px);
+    animation:rocketFloat 3s ease-in-out infinite;
 }
 
-.cart-item-details h3 {
-    font-size: 16px;
-    color: #2c3e50;
-    font-weight: 600;
-    margin-bottom: 6px;
+@keyframes rocketFloat{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+    100%{transform:translateY(0);}
 }
 
-.cart-item-meta {
-    font-size: 13px;
-    color: #7f8c8d;
+.hero-action-buttons{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
 }
 
-.cart-item-pricing {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 10px;
+.patriotic-cta-btn{
+    display:inline-block;
+    background:linear-gradient(135deg,#ff7a00,#138808);
+    color:#ffffff;
+    padding:14px 26px;
+    border-radius:999px;
+    font-weight:800;
+    box-shadow:0 12px 24px rgba(19,136,8,.28);
+    transition:transform .3s ease;
 }
 
-.cart-item-price {
-    font-size: 16px;
-    font-weight: bold;
-    color: #2c3e50;
+.patriotic-cta-btn:hover{
+    transform:translateY(-4px);
 }
 
-.cart-remove-btn {
-    background: none;
-    border: none;
-    color: #e74c3c;
-    font-size: 13px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: opacity 0.2s;
+.we-build-india-section{
+    padding:70px 5%;
 }
 
-.cart-remove-btn:hover {
-    opacity: 0.8;
-    text-decoration: underline;
+.celebration-header{
+    text-align:center;
+    margin-bottom:40px;
 }
 
-/* Summary Box Sidebar Components */
-.cart-summary-sidebar {
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    padding: 25px;
+.main-celebration-title{
+    font-size:2.6rem;
+    color:#0b1f4d;
+    margin-bottom:10px;
 }
 
-.summary-title {
-    font-size: 20px;
-    color: #0b1a30;
-    margin-bottom: 20px;
-    font-weight: 600;
+.celebration-subtitle{
+    color:#475569;
+    font-weight:600;
 }
 
-.summary-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-    font-size: 14px;
-    color: #57606f;
+.heroes-grid-layout{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:22px;
 }
 
-.text-free {
-    color: #27ae60;
-    font-weight: bold;
+.hero-profile-card{
+    position:relative;
+    background:rgba(255,255,255,.95);
+    border:1px solid rgba(255,255,255,.7);
+    padding:28px 22px;
+    border-radius:24px;
+    text-align:center;
+    box-shadow:0 12px 30px rgba(15,23,42,.1);
+    transition:transform .35s ease,box-shadow .35s ease;
+    backdrop-filter:blur(8px);
 }
 
-.summary-divider {
-    border: 0;
-    height: 1px;
-    background-color: #f1f2f6;
-    margin: 15px 0;
+.hero-profile-card:hover{
+    transform:translateY(-10px) scale(1.02);
+    box-shadow:0 22px 42px rgba(15,23,42,.18);
 }
 
-.total-row {
-    font-weight: bold;
-    color: #0b1a30;
-    font-size: 16px;
+.card-number{
+    position:absolute;
+    top:14px;
+    left:16px;
+    font-size:.85rem;
+    font-weight:800;
+    color:#64748b;
 }
 
-.total-price {
-    font-size: 20px;
-    color: #27ae60;
+.hero-card-icon{
+    font-size:2.5rem;
+    margin-bottom:16px;
 }
 
-/* Call to Action Navigation Elements */
-.cart-action-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 25px;
+.shadow-saffron{color:#ff7a00;}
+.shadow-blue{color:#2563eb;}
+.shadow-red{color:#dc2626;}
+.shadow-purple{color:#7c3aed;}
+.shadow-orange{color:#ea580c;}
+.shadow-pink{color:#ec4899;}
+.shadow-maroon{color:#7f1d1d;}
+
+.hero-profile-card h3{
+    margin-bottom:10px;
+    color:#0f172a;
+    font-size:1.1rem;
 }
 
-.btn-checkout {
-    background-color: #04821a;
-    color: white;
-    text-align: center;
-    padding: 14px;
-    border-radius: 6px;
-    font-weight: bold;
-    text-decoration: none;
-    font-size: 15px;
-    transition: background-color 0.2s;
+.hero-profile-card p{
+    color:#475569;
+    font-size:.95rem;
+    line-height:1.6;
 }
 
-.btn-checkout:hover {
-    background-color: #036614;
+.tricolor-values-bar{
+    margin-top:40px;
+    background:linear-gradient(90deg,#ff7a00,#0b1f4d,#138808);
+    border-radius:22px;
+    padding:24px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:18px;
+    color:#ffffff;
 }
 
-.btn-continue {
-    color: #57606f;
-    text-align: center;
-    font-size: 14px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s;
+.value-item{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    font-size:.95rem;
 }
 
-.btn-continue:hover {
-    color: #0b1a30;
-    text-decoration: underline;
+.bullet{
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    display:inline-block;
 }
 
-/* Standardized Sticky Page Footer Layout styling */
-.cart-footer {
-    text-align: center;
-    padding: 25px;
-    background-color: #0b1a30;
-    color: #ffffff;
-    font-size: 13px;
-    letter-spacing: 0.5px;
-    margin-top: 60px;
-    opacity: 0.9;
-}
-/* ==========================================
-   Secure Checkout Page Layout Specific Styles
-   ========================================== */
+.saffron-bg{background:#ff7a00;}
+.white-bg{background:#ffffff;}
+.green-bg{background:#22c55e;}
 
-.checkout-wrapper {
-    max-width: 750px;
-    margin: 40px auto;
-    padding: 0 20px;
-    min-height: 75vh;
+.value-sub{
+    font-size:.85rem;
+    opacity:.9;
 }
 
-.checkout-main-title {
-    font-size: 28px;
-    color: #0b1a30;
-    margin-bottom: 25px;
-    font-weight: 700;
+.cart-footer{
+    background:#0b1f4d;
+    color:#e5e7eb;
+    text-align:center;
+    padding:22px;
+    margin-top:60px;
+    font-size:.95rem;
 }
 
-/* Premium Card Container for Forms */
-.checkout-container-box {
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    padding: 35px;
-}
+@media (max-width:900px){
+    .sticky-navbar{
+        flex-direction:column;
+        gap:14px;
+        padding:16px;
+    }
 
-.form-section-title {
-    font-size: 18px;
-    color: #2c3e50;
-    margin-bottom: 25px;
-    font-weight: 600;
-    border-bottom: 2px solid #f1f2f6;
-    padding-bottom: 10px;
-}
+    .nav-left,.nav-right{
+        width:100%;
+        justify-content:center;
+        flex-wrap:wrap;
+    }
 
-/* Individual Stacked Form Input Groups */
-.input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 20px;
-}
+    .search-container input{
+        min-width:180px;
+    }
 
-.input-group label {
-    font-size: 14px;
-    font-weight: 600;
-    color: #34495e;
-}
+    .patriotic-montage-hero{
+        min-height:80vh;
+        text-align:center;
+        justify-content:center;
+    }
 
-.input-group input, 
-.input-group select {
-    padding: 12px 15px;
-    border: 1px solid #dcdde1;
-    border-radius: 6px;
-    font-size: 14px;
-    color: #2c3e50;
-    outline: none;
-    background-color: #fdfdfd;
-    transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-/* Visual Glow Focus States on Selection fields */
-.input-group input:focus, 
-.input-group select:focus {
-    border-color: #0b1a30;
-    box-shadow: 0 0 5px rgba(11, 26, 48, 0.1);
-    background-color: #ffffff;
-}
-
-/* Dynamic Side-by-Side Flex Layout Row */
-.form-row-two-col {
-    display: flex;
-    gap: 20px;
-}
-
-.form-row-two-col .input-group {
-    flex: 1;
-}
-
-/* Responsive adjustments for mobile phone displays */
-@media (max-width: 600px) {
-    .form-row-two-col {
-        flex-direction: column;
-        gap: 0;
+    .hero-action-buttons{
+        justify-content:center;
     }
 }
 
-/* Premium Pay & Place Order CTA Action Button */
-.btn-place-order {
-    background-color: #04821a;
-    color: white;
-    border: none;
-    width: 100%;
-    text-align: center;
-    padding: 15px;
-    border-radius: 6px;
-    font-weight: bold;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 15px;
-    transition: background-color 0.2s, transform 0.1s;
-}
-
-.btn-place-order:hover {
-    background-color: #036614;
-}
-
-.btn-place-order:active {
-    transform: scale(0.99);
-}
-/* ==========================================================================
-   AUGUST 15TH COMPREHENSIVE LUXURY HOMEPAGE EXPANSION STYLES
-   ========================================================================== */
-
-/* 1. News-Channel Continuous Scrolling Ticker (Remove Breaking News Words) */
-.independence-ticker-wrap {
-    width: 100%;
-    background: linear-gradient(90deg, #FF9933 0%, #ffffff 50%, #138808 100%);
-    overflow: hidden;
-    padding: 10px 0;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    position: relative;
-    z-index: 1100;
-}
-
-.ticker-content {
-    display: inline-block;
-    white-space: nowrap;
-    font-size: 14px;
-    font-weight: 700;
-    color: #0b1a30; /* High contrast dark text styling */
-    animation: marqueeTicker 25s linear infinite;
-    padding-left: 100%;
-}
-
-@keyframes marqueeTicker {
-    0% { transform: translate3d(0, 0, 0); }
-    100% { transform: translate3d(-100%, 0, 0); }
-}
-
-/* 2. Sticky Navbar Configuration Rules */
-.sticky-navbar {
-    position: sticky !important;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-}
-
-/* 3. Majestic Patriotic Hero Section Header Layout */
-.patriotic-hero-section {
-    background: linear-gradient(135deg, rgba(11, 26, 48, 0.9) 0%, rgba(19, 36, 71, 0.7) 100%), url('images/luxury-banner.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    min-height: 480px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 40px 20px;
-}
-
-.patriotic-hero-overlay {
-    max-width: 850px;
-}
-
-.azadi-badge {
-    background-color: #f39c12;
-    color: white;
-    font-size: 12px;
-    font-weight: 700;
-    padding: 6px 16px;
-    border-radius: 50px;
-    letter-spacing: 1.5px;
-    display: inline-block;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-
-.patriotic-hero-title {
-    font-size: 46px;
-    font-weight: 800;
-    color: #ffffff;
-    line-height: 1.3;
-    margin-bottom: 20px;
-    text-shadow: 0 2px 15px rgba(0,0,0,0.4);
-}
-
-/* Elegant micro tricolor title fonts */
-.highlight-saffron { color: #FF9933; }
-.highlight-white { color: #ffffff; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
-.highlight-green { color: #138808; }
-
-.patriotic-hero-subtitle {
-    font-size: 16px;
-    color: #f1f2f6;
-    margin-bottom: 35px;
-    line-height: 1.6;
-}
-
-.patriotic-cta-btn {
-    background-color: #ffffff;
-    color: #0b1a30;
-    text-decoration: none;
-    padding: 14px 35px;
-    border-radius: 6px;
-    font-weight: 700;
-    font-size: 15px;
-    display: inline-block;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    transition: transform 0.2s, background-color 0.2s;
-}
-
-.patriotic-cta-btn:hover {
-    transform: translateY(-2px);
-    background-color: #f8f9fa;
-}
-
-/* 4. We Build India Photo-Grid structural layouts */
-.we-build-india-section {
-    background-color: #f8f9fa;
-    padding: 70px 4% 50px 4%;
-    text-align: center;
-}
-
-.main-celebration-title {
-    font-size: 44px;
-    font-weight: 800;
-    color: #0b1a30;
-    letter-spacing: -0.5px;
-    margin-bottom: 8px;
-}
-
-/* Exact Reference Layout Grid metrics */
-.heroes-grid-layout {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 25px;
-    max-width: 1350px;
-    margin: 45px auto;
-}
-
-/* Clean Portrait Profile Card Shapes */
-.hero-profile-card {
-    background-color: #ffffff;
-    border-radius: 12px;
-    padding: 35px 25px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
-    text-align: center;
-    position: relative;
-    border: 1px solid #eef2f5;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.hero-profile-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-}
-
-.card-number {
-    position: absolute;
-    top: 15px;
-    left: 20px;
-    font-size: 13px;
-    font-weight: 700;
-    color: #b8c2cc;
-    font-family: monospace;
-}
-
-/* Beautiful Icon Circles matching the color themes */
-.hero-card-icon {
-    font-size: 34px;
-    width: 70px;
-    height: 70px;
-    background-color: #f8f9fa;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 20px auto;
-    border: 2px solid transparent;
-}
-
-.shadow-saffron { border-color: #FF9933; color: #FF9933; }
-.shadow-blue { border-color: #130cb7; color: #130cb7; }
-.shadow-red { border-color: #e74c3c; color: #e74c3c; }
-.shadow-purple { border-color: #9b59b6; color: #9b59b6; }
-.shadow-orange { border-color: #e67e22; color: #e67e22; }
-.shadow-pink { border-color: #ff6b81; color: #ff6b81; }
-.shadow-maroon { border-color: #800000; color: #800000; }
-
-.hero-profile-card h3 {
-    font-size: 17px;
-    color: #2c3e50;
-    font-weight: 700;
-    margin-bottom: 12px;
-}
-
-/* Luxury Footnotes bar panels config styling code */
-.tricolor-values-bar {
-    background-color: #0b1a30;
-    padding: 20px 4%;
-    border-radius: 10px;
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 20px;
-    max-width: 1200px;
-    margin: 50px auto 0 auto;
-    box-shadow: 0 5px 15px rgba(11,26,48,0.2);
-}
-
-.value-item {
-    color: #ffffff;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    text-align: left;
-}
-
-.bullet {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    display: inline-block;
-}
-
-.bullet.saffron-bg { background-color: #FF9933; }
-.bullet.white-bg { background-color: #ffffff; }
-.bullet.green-bg { background-color: #138808; }
-
-.value-sub {
-    color: #8fa0b5;
-    font-size: 12px;
-    font-weight: normal;
-}
-/* ==========================================================================
-   MAJESTIC WIDE PATRIOTIC MONTAGE HERO SECTIONS DESIGN RULES
-   ========================================================================== */
-
-/* Full-width composite backdrop container featuring national monuments and heroes artwork */
-.patriotic-montage-hero {
-    background: linear-gradient(to bottom, rgba(11, 26, 48, 0.45) 0%, rgba(11, 26, 48, 0.85) 100%), 
-                url('https://unsplash.com');
-    background-size: cover;
-    background-position: center 30%;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    min-height: 620px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 60px 20px;
-    position: relative;
-    overflow: hidden;
-}
-
-/* Internal text alignment wrapper */
-.montage-content-wrapper {
-    max-width: 900px;
-    z-index: 10;
-}
-
-/* Sleek top badge alignment */
-.patriotic-montage-hero .azadi-badge {
-    background: linear-gradient(90deg, #FF9933 0%, #138808 100%);
-    color: #ffffff;
-    font-size: 11px;
-    font-weight: 700;
-    padding: 6px 18px;
-    border-radius: 50px;
-    letter-spacing: 2px;
-    margin-bottom: 25px;
-    display: inline-block;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
-}
-
-/* Large premium background headers mapping the design look */
-.montage-brand-title {
-    font-size: 26px;
-    font-weight: 700;
-    color: #FF9933;
-    letter-spacing: 6px;
-    text-transform: uppercase;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-    margin-bottom: 2px;
-}
-
-.montage-main-heading {
-    font-size: 96px;
-    font-weight: 900;
-    color: #ffffff;
-    letter-spacing: 4px;
-    line-height: 0.95;
-    margin-bottom: 15px;
-    text-shadow: 0 5px 25px rgba(0, 0, 0, 0.6);
-}
-
-.montage-sub-heading {
-    font-size: 14px;
-    font-weight: 700;
-    color: #2ced87; /* Bright emerald brand metric highlight text */
-    letter-spacing: 5px;
-    margin-bottom: 30px;
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-}
-
-/* Semi-transparent description tray */
-.montage-dedication-box {
-    background-color: rgba(11, 26, 48, 0.65);
-    backdrop-filter: blur(4px);
-    border-left: 4px solid #FF9933;
-    border-right: 4px solid #138808;
-    padding: 15px 30px;
-    max-width: 650px;
-    margin: 0 auto 40px auto;
-    border-radius: 4px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
-
-.montage-dedication-box p {
-    font-size: 15px;
-    color: #ffffff;
-    line-height: 1.6;
-    font-style: italic;
-    opacity: 0.95;
-}
-
-/* Call to action element customization */
-.patriotic-cta-btn {
-    background: linear-gradient(135deg, #FF9933 0%, #f39c12 100%);
-    color: #ffffff !important;
-    text-decoration: none;
-    padding: 15px 40px;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 15px;
-    display: inline-block;
-    box-shadow: 0 6px 20px rgba(243, 156, 18, 0.4);
-    transition: transform 0.2s, box-shadow 0.2s;
-    border: 2px solid transparent;
-}
-
-.patriotic-cta-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(243, 156, 18, 0.6);
-    background: #ffffff;
-    color: #f39c12 !important;
-    border-color: #f39c12;
-}
-
-/* Keeps portrait profile layout sections beautifully padded right underneath */
-.we-build-india-section {
-    padding-top: 60px;
-    background-color: #f8f9fa;
-}
-
-/* Responsive Scaling for massive headers on small mobile displays */
-@media (max-width: 768px) {
-    .montage-main-heading {
-        font-size: 64px;
+@media (max-width:600px){
+    .logo{
+        font-size:1.3rem;
     }
-    .montage-brand-title {
-        font-size: 20px;
-        letter-spacing: 4px;
+
+    .search-container{
+        width:100%;
     }
-}
-/* ==========================================================================
-   MAJESTIC WIDE PATRIOTIC MONTAGE HERO SECTIONS DESIGN RULES
-   ========================================================================== */
 
-/* Full-width composite backdrop container featuring national monuments and heroes artwork */
-.patriotic-montage-hero {
-    background: linear-gradient(to bottom, rgba(11, 26, 48, 0.45) 0%, rgba(11, 26, 48, 0.85) 100%), 
-                url('https://unsplash.com');
-    background-size: cover;
-    background-position: center 30%;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    min-height: 620px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 60px 20px;
-    position: relative;
-    overflow: hidden;
-}
-
-/* Internal text alignment wrapper */
-.montage-content-wrapper {
-    max-width: 900px;
-    z-index: 10;
-}
-
-/* Sleek top badge alignment */
-.patriotic-montage-hero .azadi-badge {
-    background: linear-gradient(90deg, #FF9933 0%, #138808 100%);
-    color: #ffffff;
-    font-size: 11px;
-    font-weight: 700;
-    padding: 6px 18px;
-    border-radius: 50px;
-    letter-spacing: 2px;
-    margin-bottom: 25px;
-    display: inline-block;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
-}
-
-/* Large premium background headers mapping the design look */
-.montage-brand-title {
-    font-size: 26px;
-    font-weight: 700;
-    color: #FF9933;
-    letter-spacing: 6px;
-    text-transform: uppercase;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-    margin-bottom: 2px;
-}
-
-.montage-main-heading {
-    font-size: 96px;
-    font-weight: 900;
-    color: #ffffff;
-    letter-spacing: 4px;
-    line-height: 0.95;
-    margin-bottom: 15px;
-    text-shadow: 0 5px 25px rgba(0, 0, 0, 0.6);
-}
-
-.montage-sub-heading {
-    font-size: 14px;
-    font-weight: 700;
-    color: #2ced87; /* Bright emerald brand metric highlight text */
-    letter-spacing: 5px;
-    margin-bottom: 30px;
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-}
-
-/* Semi-transparent description tray */
-.montage-dedication-box {
-    background-color: rgba(11, 26, 48, 0.65);
-    backdrop-filter: blur(4px);
-    border-left: 4px solid #FF9933;
-    border-right: 4px solid #138808;
-    padding: 15px 30px;
-    max-width: 650px;
-    margin: 0 auto 40px auto;
-    border-radius: 4px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
-
-.montage-dedication-box p {
-    font-size: 15px;
-    color: #ffffff;
-    line-height: 1.6;
-    font-style: italic;
-    opacity: 0.95;
-}
-
-/* Call to action element customization */
-.patriotic-cta-btn {
-    background: linear-gradient(135deg, #FF9933 0%, #f39c12 100%);
-    color: #ffffff !important;
-    text-decoration: none;
-    padding: 15px 40px;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 15px;
-    display: inline-block;
-    box-shadow: 0 6px 20px rgba(243, 156, 18, 0.4);
-    transition: transform 0.2s, box-shadow 0.2s;
-    border: 2px solid transparent;
-}
-
-.patriotic-cta-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(243, 156, 18, 0.6);
-    background: #ffffff;
-    color: #f39c12 !important;
-    border-color: #f39c12;
-}
-
-/* Keeps portrait profile layout sections beautifully padded right underneath */
-.we-build-india-section {
-    padding-top: 60px;
-    background-color: #f8f9fa;
-}
-
-/* Responsive Scaling for massive headers on small mobile displays */
-@media (max-width: 768px) {
-    .montage-main-heading {
-        font-size: 64px;
+    .search-container input{
+        width:100%;
+        min-width:auto;
     }
-    .montage-brand-title {
-        font-size: 20px;
-        letter-spacing: 4px;
+
+    .montage-main-heading{
+        font-size:3.2rem;
     }
-}
-/* ==========================================================================
-   DYNAMIC TRICOLOR PATRIOTIC HERO GRADIENT ANIMATION ENGINE
-   ========================================================================== */
 
-.patriotic-montage-hero {
-    /* Safe fallback linear gradient using Indian National flag colors */
-    background: linear-gradient(-45deg, #FF9933, #ffffff, #138808, #0b1a30);
-    background-size: 400% 400%;
-    /* Smooth continuous waving animation cycle */
-    animation: patrioticWave 15s ease infinite;
-    min-height: 620px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 60px 20px;
-    position: relative;
-    overflow: hidden;
-    border-bottom: 4px solid #0b1a30;
-}
-
-/* Continuous movement tracking matrix loop */
-@keyframes patrioticWave {
-    0% {
-        background-position: 0% 50%;
+    .main-celebration-title{
+        font-size:2rem;
     }
-    50% {
-        background-position: 100% 50%;
+
+    .heroes-grid-layout{
+        grid-template-columns:1fr;
     }
-    100% {
-        background-position: 0% 50%;
+
+    .tricolor-values-bar{
+        grid-template-columns:1fr;
     }
-}
-
-/* Internal text alignment wrapper */
-.montage-content-wrapper {
-    max-width: 900px;
-    z-index: 10;
-}
-
-/* High contrast shadow properties ensuring text pops against white animation backgrounds */
-.montage-brand-title {
-    font-size: 28px;
-    font-weight: 700;
-    color: #FF9933;
-    letter-spacing: 6px;
-    text-transform: uppercase;
-    text-shadow: 2px 2px 4px rgba(11, 26, 48, 0.9);
-    margin-bottom: 5px;
-}
-
-.montage-main-heading {
-    font-size: 96px;
-    font-weight: 900;
-    color: #0b1a30; /* Flipped to corporate navy dark text for extreme readability */
-    letter-spacing: 4px;
-    line-height: 0.95;
-    margin-bottom: 15px;
-    text-shadow: 0 4px 15px rgba(255, 255, 255, 0.6);
-}
-
-.montage-sub-heading {
-    font-size: 15px;
-    font-weight: 700;
-    color: #138808;
-    letter-spacing: 5px;
-    margin-bottom: 35px;
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
-}
-
-/* Semi-transparent description box wrapper */
-.montage-dedication-box {
-    background-color: rgba(11, 26, 48, 0.9); /* Darkened container to protect contrast baseline */
-    border-left: 4px solid #FF9933;
-    border-right: 4px solid #138808;
-    padding: 18px 30px;
-    max-width: 650px;
-    margin: 0 auto 40px auto;
-    border-radius: 6px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-}
-
-.montage-dedication-box p {
-    font-size: 15px;
-    color: #ffffff;
-    line-height: 1.6;
-    font-style: italic;
-    opacity: 1;
 }
