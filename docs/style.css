@@ -251,3 +251,216 @@ img {
 .add-to-cart-btn:hover {
     background-color: #036614;
 }
+/* ==========================================
+   Shopping Cart Layout Specific Styles
+   ========================================== */
+
+.cart-wrapper {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    min-height: 70vh;
+}
+
+.cart-main-title {
+    font-size: 28px;
+    color: #0b1a30;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+/* Master Flexible Two-Column Layout Grid */
+.cart-layout-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .cart-layout-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Individual Cart Rows Component Container */
+.cart-items-section {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.cart-item-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f1f2f6;
+}
+
+.cart-item-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.cart-item-img-box {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e2e8f0;
+}
+
+.cart-item-img-box img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.cart-item-details {
+    flex-grow: 1;
+}
+
+.cart-item-details h3 {
+    font-size: 16px;
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.cart-item-meta {
+    font-size: 13px;
+    color: #7f8c8d;
+}
+
+.cart-item-pricing {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.cart-item-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.cart-remove-btn {
+    background: none;
+    border: none;
+    color: #e74c3c;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+
+.cart-remove-btn:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+/* Summary Box Sidebar Components */
+.cart-summary-sidebar {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    padding: 25px;
+}
+
+.summary-title {
+    font-size: 20px;
+    color: #0b1a30;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #57606f;
+}
+
+.text-free {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.summary-divider {
+    border: 0;
+    height: 1px;
+    background-color: #f1f2f6;
+    margin: 15px 0;
+}
+
+.total-row {
+    font-weight: bold;
+    color: #0b1a30;
+    font-size: 16px;
+}
+
+.total-price {
+    font-size: 20px;
+    color: #27ae60;
+}
+
+/* Call to Action Navigation Elements */
+.cart-action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.btn-checkout {
+    background-color: #04821a;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 15px;
+    transition: background-color 0.2s;
+}
+
+.btn-checkout:hover {
+    background-color: #036614;
+}
+
+.btn-continue {
+    color: #57606f;
+    text-align: center;
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.btn-continue:hover {
+    color: #0b1a30;
+    text-decoration: underline;
+}
+
+/* Standardized Sticky Page Footer Layout styling */
+.cart-footer {
+    text-align: center;
+    padding: 25px;
+    background-color: #0b1a30;
+    color: #ffffff;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    margin-top: 60px;
+    opacity: 0.9;
+}
