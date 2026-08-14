@@ -32,22 +32,9 @@
         <h1 class="cart-main-title">🛒 Your Shopping Cart</h1>
         
         <div class="cart-layout-grid">
-            <!-- Left Side: Interactive Items Container -->
+            <!-- Left Side: Dynamic Interactive Items Container Target Hook -->
             <div class="cart-items-section">
-                <!-- Static Placeholder Item Row -->
-                <div class="cart-item-row">
-                    <div class="cart-item-img-box">
-                        <img src="images/loungewear.jpg" alt="Selected Product" onerror="this.src='https://placeholder.com'">
-                    </div>
-                    <div class="cart-item-details">
-                        <h3>Royal Indigo Jaipur Lounge Set</h3>
-                        <p class="cart-item-meta">Size: M | Color: Royal Indigo</p>
-                    </div>
-                    <div class="cart-item-pricing">
-                        <span class="cart-item-price">₹14,500</span>
-                        <button class="cart-remove-btn" title="Remove Item">🗑️ Remove</button>
-                    </div>
-                </div>
+                <!-- LEAVE THIS BLANK. Javascript will automatically build your items here -->
             </div>
 
             <!-- Right Side: Order Summary Checkout Sidebar -->
@@ -55,7 +42,7 @@
                 <h2 class="summary-title">Order Summary</h2>
                 <div class="summary-row">
                     <span>Subtotal</span>
-                    <span id="cart-subtotal">₹14,500</span>
+                    <span id="cart-subtotal">₹0</span>
                 </div>
                 <div class="summary-row">
                     <span>Shipping Charges</span>
@@ -64,7 +51,7 @@
                 <hr class="summary-divider">
                 <div class="summary-row total-row">
                     <span>Total Amount</span>
-                    <span id="cart-total" class="total-price">₹14,500</span>
+                    <span id="cart-total" class="total-price">₹0</span>
                 </div>
                 
                 <div class="cart-action-buttons">
@@ -80,5 +67,7 @@
         <p>© 2026 ShopNova • Executive Board Directives • CEO & Founder: Anuradha</p>
     </footer>
 
+    <!-- VERY IMPORTANT: Make sure script.js is loaded at the bottom of the body tag -->
+    <script src="script.js"></script>
 </body>
 </html>
