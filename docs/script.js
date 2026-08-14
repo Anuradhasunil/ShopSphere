@@ -180,3 +180,15 @@ function calculateCartTotals(subtotalEl, totalEl) {
     if (subtotalEl) subtotalEl.innerText = `₹${runningSum.toLocaleString('en-IN')}`;
     if (totalEl) totalEl.innerText = `₹${runningSum.toLocaleString('en-IN')}`;
 }
+// Function tracking form submission processes inside your checkout page
+function handlePlaceOrder(event) {
+    event.preventDefault(); // Prevents the page from refreshing layout variables
+    
+    const clientName = document.getElementById("full-name").value;
+    const paymentChoice = document.getElementById("payment-method").value.toUpperCase();
+    
+    alert(`Thank you, ${clientName}! Your order has been placed successfully using payment mode: ${paymentChoice}.`);
+    
+    // Redirects user back home cleanly after confirmation
+    window.location.href = "index.html";
+}

@@ -464,3 +464,113 @@ img {
     margin-top: 60px;
     opacity: 0.9;
 }
+/* ==========================================
+   Secure Checkout Page Layout Specific Styles
+   ========================================== */
+
+.checkout-wrapper {
+    max-width: 750px;
+    margin: 40px auto;
+    padding: 0 20px;
+    min-height: 75vh;
+}
+
+.checkout-main-title {
+    font-size: 28px;
+    color: #0b1a30;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+/* Premium Card Container for Forms */
+.checkout-container-box {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    padding: 35px;
+}
+
+.form-section-title {
+    font-size: 18px;
+    color: #2c3e50;
+    margin-bottom: 25px;
+    font-weight: 600;
+    border-bottom: 2px solid #f1f2f6;
+    padding-bottom: 10px;
+}
+
+/* Individual Stacked Form Input Groups */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #34495e;
+}
+
+.input-group input, 
+.input-group select {
+    padding: 12px 15px;
+    border: 1px solid #dcdde1;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #2c3e50;
+    outline: none;
+    background-color: #fdfdfd;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Visual Glow Focus States on Selection fields */
+.input-group input:focus, 
+.input-group select:focus {
+    border-color: #0b1a30;
+    box-shadow: 0 0 5px rgba(11, 26, 48, 0.1);
+    background-color: #ffffff;
+}
+
+/* Dynamic Side-by-Side Flex Layout Row */
+.form-row-two-col {
+    display: flex;
+    gap: 20px;
+}
+
+.form-row-two-col .input-group {
+    flex: 1;
+}
+
+/* Responsive adjustments for mobile phone displays */
+@media (max-width: 600px) {
+    .form-row-two-col {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+/* Premium Pay & Place Order CTA Action Button */
+.btn-place-order {
+    background-color: #04821a;
+    color: white;
+    border: none;
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-place-order:hover {
+    background-color: #036614;
+}
+
+.btn-place-order:active {
+    transform: scale(0.99);
+}
