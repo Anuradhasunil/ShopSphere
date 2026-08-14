@@ -1067,3 +1067,92 @@ img {
         letter-spacing: 4px;
     }
 }
+/* ==========================================================================
+   DYNAMIC TRICOLOR PATRIOTIC HERO GRADIENT ANIMATION ENGINE
+   ========================================================================== */
+
+.patriotic-montage-hero {
+    /* Safe fallback linear gradient using Indian National flag colors */
+    background: linear-gradient(-45deg, #FF9933, #ffffff, #138808, #0b1a30);
+    background-size: 400% 400%;
+    /* Smooth continuous waving animation cycle */
+    animation: patrioticWave 15s ease infinite;
+    min-height: 620px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 20px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 4px solid #0b1a30;
+}
+
+/* Continuous movement tracking matrix loop */
+@keyframes patrioticWave {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Internal text alignment wrapper */
+.montage-content-wrapper {
+    max-width: 900px;
+    z-index: 10;
+}
+
+/* High contrast shadow properties ensuring text pops against white animation backgrounds */
+.montage-brand-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #FF9933;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(11, 26, 48, 0.9);
+    margin-bottom: 5px;
+}
+
+.montage-main-heading {
+    font-size: 96px;
+    font-weight: 900;
+    color: #0b1a30; /* Flipped to corporate navy dark text for extreme readability */
+    letter-spacing: 4px;
+    line-height: 0.95;
+    margin-bottom: 15px;
+    text-shadow: 0 4px 15px rgba(255, 255, 255, 0.6);
+}
+
+.montage-sub-heading {
+    font-size: 15px;
+    font-weight: 700;
+    color: #138808;
+    letter-spacing: 5px;
+    margin-bottom: 35px;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* Semi-transparent description box wrapper */
+.montage-dedication-box {
+    background-color: rgba(11, 26, 48, 0.9); /* Darkened container to protect contrast baseline */
+    border-left: 4px solid #FF9933;
+    border-right: 4px solid #138808;
+    padding: 18px 30px;
+    max-width: 650px;
+    margin: 0 auto 40px auto;
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.montage-dedication-box p {
+    font-size: 15px;
+    color: #ffffff;
+    line-height: 1.6;
+    font-style: italic;
+    opacity: 1;
+}
