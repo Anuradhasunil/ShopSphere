@@ -803,3 +803,267 @@ img {
     font-size: 12px;
     font-weight: normal;
 }
+/* ==========================================================================
+   MAJESTIC WIDE PATRIOTIC MONTAGE HERO SECTIONS DESIGN RULES
+   ========================================================================== */
+
+/* Full-width composite backdrop container featuring national monuments and heroes artwork */
+.patriotic-montage-hero {
+    background: linear-gradient(to bottom, rgba(11, 26, 48, 0.45) 0%, rgba(11, 26, 48, 0.85) 100%), 
+                url('https://unsplash.com');
+    background-size: cover;
+    background-position: center 30%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 620px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Internal text alignment wrapper */
+.montage-content-wrapper {
+    max-width: 900px;
+    z-index: 10;
+}
+
+/* Sleek top badge alignment */
+.patriotic-montage-hero .azadi-badge {
+    background: linear-gradient(90deg, #FF9933 0%, #138808 100%);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 6px 18px;
+    border-radius: 50px;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+}
+
+/* Large premium background headers mapping the design look */
+.montage-brand-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #FF9933;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    margin-bottom: 2px;
+}
+
+.montage-main-heading {
+    font-size: 96px;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: 4px;
+    line-height: 0.95;
+    margin-bottom: 15px;
+    text-shadow: 0 5px 25px rgba(0, 0, 0, 0.6);
+}
+
+.montage-sub-heading {
+    font-size: 14px;
+    font-weight: 700;
+    color: #2ced87; /* Bright emerald brand metric highlight text */
+    letter-spacing: 5px;
+    margin-bottom: 30px;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Semi-transparent description tray */
+.montage-dedication-box {
+    background-color: rgba(11, 26, 48, 0.65);
+    backdrop-filter: blur(4px);
+    border-left: 4px solid #FF9933;
+    border-right: 4px solid #138808;
+    padding: 15px 30px;
+    max-width: 650px;
+    margin: 0 auto 40px auto;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.montage-dedication-box p {
+    font-size: 15px;
+    color: #ffffff;
+    line-height: 1.6;
+    font-style: italic;
+    opacity: 0.95;
+}
+
+/* Call to action element customization */
+.patriotic-cta-btn {
+    background: linear-gradient(135deg, #FF9933 0%, #f39c12 100%);
+    color: #ffffff !important;
+    text-decoration: none;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 15px;
+    display: inline-block;
+    box-shadow: 0 6px 20px rgba(243, 156, 18, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 2px solid transparent;
+}
+
+.patriotic-cta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(243, 156, 18, 0.6);
+    background: #ffffff;
+    color: #f39c12 !important;
+    border-color: #f39c12;
+}
+
+/* Keeps portrait profile layout sections beautifully padded right underneath */
+.we-build-india-section {
+    padding-top: 60px;
+    background-color: #f8f9fa;
+}
+
+/* Responsive Scaling for massive headers on small mobile displays */
+@media (max-width: 768px) {
+    .montage-main-heading {
+        font-size: 64px;
+    }
+    .montage-brand-title {
+        font-size: 20px;
+        letter-spacing: 4px;
+    }
+}
+/* ==========================================================================
+   MAJESTIC WIDE PATRIOTIC MONTAGE HERO SECTIONS DESIGN RULES
+   ========================================================================== */
+
+/* Full-width composite backdrop container featuring national monuments and heroes artwork */
+.patriotic-montage-hero {
+    background: linear-gradient(to bottom, rgba(11, 26, 48, 0.45) 0%, rgba(11, 26, 48, 0.85) 100%), 
+                url('https://unsplash.com');
+    background-size: cover;
+    background-position: center 30%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 620px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Internal text alignment wrapper */
+.montage-content-wrapper {
+    max-width: 900px;
+    z-index: 10;
+}
+
+/* Sleek top badge alignment */
+.patriotic-montage-hero .azadi-badge {
+    background: linear-gradient(90deg, #FF9933 0%, #138808 100%);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 6px 18px;
+    border-radius: 50px;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+}
+
+/* Large premium background headers mapping the design look */
+.montage-brand-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #FF9933;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    margin-bottom: 2px;
+}
+
+.montage-main-heading {
+    font-size: 96px;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: 4px;
+    line-height: 0.95;
+    margin-bottom: 15px;
+    text-shadow: 0 5px 25px rgba(0, 0, 0, 0.6);
+}
+
+.montage-sub-heading {
+    font-size: 14px;
+    font-weight: 700;
+    color: #2ced87; /* Bright emerald brand metric highlight text */
+    letter-spacing: 5px;
+    margin-bottom: 30px;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Semi-transparent description tray */
+.montage-dedication-box {
+    background-color: rgba(11, 26, 48, 0.65);
+    backdrop-filter: blur(4px);
+    border-left: 4px solid #FF9933;
+    border-right: 4px solid #138808;
+    padding: 15px 30px;
+    max-width: 650px;
+    margin: 0 auto 40px auto;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.montage-dedication-box p {
+    font-size: 15px;
+    color: #ffffff;
+    line-height: 1.6;
+    font-style: italic;
+    opacity: 0.95;
+}
+
+/* Call to action element customization */
+.patriotic-cta-btn {
+    background: linear-gradient(135deg, #FF9933 0%, #f39c12 100%);
+    color: #ffffff !important;
+    text-decoration: none;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 15px;
+    display: inline-block;
+    box-shadow: 0 6px 20px rgba(243, 156, 18, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 2px solid transparent;
+}
+
+.patriotic-cta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(243, 156, 18, 0.6);
+    background: #ffffff;
+    color: #f39c12 !important;
+    border-color: #f39c12;
+}
+
+/* Keeps portrait profile layout sections beautifully padded right underneath */
+.we-build-india-section {
+    padding-top: 60px;
+    background-color: #f8f9fa;
+}
+
+/* Responsive Scaling for massive headers on small mobile displays */
+@media (max-width: 768px) {
+    .montage-main-heading {
+        font-size: 64px;
+    }
+    .montage-brand-title {
+        font-size: 20px;
+        letter-spacing: 4px;
+    }
+}
