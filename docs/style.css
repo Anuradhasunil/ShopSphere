@@ -574,3 +574,232 @@ img {
 .btn-place-order:active {
     transform: scale(0.99);
 }
+/* ==========================================================================
+   AUGUST 15TH COMPREHENSIVE LUXURY HOMEPAGE EXPANSION STYLES
+   ========================================================================== */
+
+/* 1. News-Channel Continuous Scrolling Ticker (Remove Breaking News Words) */
+.independence-ticker-wrap {
+    width: 100%;
+    background: linear-gradient(90deg, #FF9933 0%, #ffffff 50%, #138808 100%);
+    overflow: hidden;
+    padding: 10px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 1100;
+}
+
+.ticker-content {
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: 700;
+    color: #0b1a30; /* High contrast dark text styling */
+    animation: marqueeTicker 25s linear infinite;
+    padding-left: 100%;
+}
+
+@keyframes marqueeTicker {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-100%, 0, 0); }
+}
+
+/* 2. Sticky Navbar Configuration Rules */
+.sticky-navbar {
+    position: sticky !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* 3. Majestic Patriotic Hero Section Header Layout */
+.patriotic-hero-section {
+    background: linear-gradient(135deg, rgba(11, 26, 48, 0.9) 0%, rgba(19, 36, 71, 0.7) 100%), url('images/luxury-banner.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.patriotic-hero-overlay {
+    max-width: 850px;
+}
+
+.azadi-badge {
+    background-color: #f39c12;
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 16px;
+    border-radius: 50px;
+    letter-spacing: 1.5px;
+    display: inline-block;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.patriotic-hero-title {
+    font-size: 46px;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.3;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 15px rgba(0,0,0,0.4);
+}
+
+/* Elegant micro tricolor title fonts */
+.highlight-saffron { color: #FF9933; }
+.highlight-white { color: #ffffff; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+.highlight-green { color: #138808; }
+
+.patriotic-hero-subtitle {
+    font-size: 16px;
+    color: #f1f2f6;
+    margin-bottom: 35px;
+    line-height: 1.6;
+}
+
+.patriotic-cta-btn {
+    background-color: #ffffff;
+    color: #0b1a30;
+    text-decoration: none;
+    padding: 14px 35px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 15px;
+    display: inline-block;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.patriotic-cta-btn:hover {
+    transform: translateY(-2px);
+    background-color: #f8f9fa;
+}
+
+/* 4. We Build India Photo-Grid structural layouts */
+.we-build-india-section {
+    background-color: #f8f9fa;
+    padding: 70px 4% 50px 4%;
+    text-align: center;
+}
+
+.main-celebration-title {
+    font-size: 44px;
+    font-weight: 800;
+    color: #0b1a30;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+}
+
+/* Exact Reference Layout Grid metrics */
+.heroes-grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    max-width: 1350px;
+    margin: 45px auto;
+}
+
+/* Clean Portrait Profile Card Shapes */
+.hero-profile-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 35px 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    text-align: center;
+    position: relative;
+    border: 1px solid #eef2f5;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.hero-profile-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.card-number {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #b8c2cc;
+    font-family: monospace;
+}
+
+/* Beautiful Icon Circles matching the color themes */
+.hero-card-icon {
+    font-size: 34px;
+    width: 70px;
+    height: 70px;
+    background-color: #f8f9fa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px auto;
+    border: 2px solid transparent;
+}
+
+.shadow-saffron { border-color: #FF9933; color: #FF9933; }
+.shadow-blue { border-color: #130cb7; color: #130cb7; }
+.shadow-red { border-color: #e74c3c; color: #e74c3c; }
+.shadow-purple { border-color: #9b59b6; color: #9b59b6; }
+.shadow-orange { border-color: #e67e22; color: #e67e22; }
+.shadow-pink { border-color: #ff6b81; color: #ff6b81; }
+.shadow-maroon { border-color: #800000; color: #800000; }
+
+.hero-profile-card h3 {
+    font-size: 17px;
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+/* Luxury Footnotes bar panels config styling code */
+.tricolor-values-bar {
+    background-color: #0b1a30;
+    padding: 20px 4%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 50px auto 0 auto;
+    box-shadow: 0 5px 15px rgba(11,26,48,0.2);
+}
+
+.value-item {
+    color: #ffffff;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-align: left;
+}
+
+.bullet {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.bullet.saffron-bg { background-color: #FF9933; }
+.bullet.white-bg { background-color: #ffffff; }
+.bullet.green-bg { background-color: #138808; }
+
+.value-sub {
+    color: #8fa0b5;
+    font-size: 12px;
+    font-weight: normal;
+}
