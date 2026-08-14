@@ -100,3 +100,83 @@ function addToCart(productId) {
     console.log(`Product ID: ${productId} selected.`);
     alert(`Item added to cart successfully!`);
 }
+// ==========================================
+// SHOPPING CART FUNCTIONAL LOGIC
+// ==========================================
+
+// Global state holding items currently inside your user shopping cart
+let cartItems = [
+    {
+        id: 3,
+        name: "Royal Indigo Jaipur Lounge Set",
+        price: 14500,
+        image: "images/loungewear.jpg",
+        size: "M",
+        color: "Royal Indigo"
+    }
+];
+
+// Automatically execute calculation checks when the document finishes rendering
+document.addEventListener("DOMContentLoaded", () => {
+    renderCart();
+});
+
+// Primary controller function that builds your row list layouts dynamically
+function renderCart() {
+    const cartContainer = document.querySelector(".cart-items-section");
+    const subtotalElement = document.getElementById("cart-subtotal");
+    const totalElement = document.getElementById("cart-total");
+
+    // Guard safety clause if the active webpage is not cart.html
+    if (!cartContainer) return;
+
+    // Check if the cart array has been completely emptied out
+    if (cartItems.length === 0) {
+        cartContainer.innerHTML = `
+            <div style="text-align: center; padding: 40px; color: #7f8c8d;">
+                <p style="font-size: 18px; margin-bottom: 20px;">Your shopping cart is completely empty!</p>
+                <a href="products.html" style="color: #04821a; font-weight: bold; text-decoration: none;">Go Explore Products →</a>
+            </div>
+        `;
+        if (subtotalElement) subtotalElement.innerText = "₹0";
+        if (totalElement) totalElement.innerText = "₹0";
+        return;
+    }
+
+    // Map existing records to generate interactive rows inside the item box
+    cartContainer.innerHTML = cartItems.map(item => `
+        <div class="cart-item-row" id="item-row-${item.id}">
+            <div class="cart-item-img-box">
+                <img src="${item.image}" alt="${item.name}" onerror="this.src='https://placeholder.com'">
+            </div>
+            <div class="cart-item-details">
+                <h3>${item.name}</h3>
+                <p class="cart-item-meta">Size: ${item.size} | Color: ${item.color}</p>
+            </div>
+            <div class="cart-item-pricing">
+                <span class="cart-item-price">₹${item.price.toLocaleString('en-IN')}</span>
+                <button class="cart-remove-btn" onclick="removeItemFromCart(${item.id})">🗑️ Remove</button>
+            </div>
+        </div>
+    `).join("");
+
+    // Calculate totals automatically 
+    calculateCartTotals(subtotalElement, totalElement);
+}
+
+// Function to handle removing an item when the user clicks 'Remove'
+function removeItemFromCart(itemId) {
+    // Filter out the selected item matching the provided unique ID identifier
+    cartItems = cartItems.filter(item => item.id !== itemId);
+    
+    // Instantly refresh the UI layout grid elements safely
+    renderCart();
+}
+
+// Helper calculation loop script module block
+function calculateCartTotals(subtotalEl, totalEl) {
+    const runningSum = cartItems.reduce((acc, item) => acc + item.price, 0);
+    
+    if (subtotalEl) subtotalEl.innerText = `₹${runningSum.toLocaleString('en-IN')}`;
+    if (totalEl) totalEl.innerText = `₹${runningSum.toLocaleString('en-IN')}`;
+}
