@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopNova - Products</title>
+    <!-- Links directly to style.css in the same folder -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header Navbar Section -->
+    <header class="navbar">
+        <div class="nav-left">
+            <div class="logo">🦅 ShopNova</div>
+            <div class="search-container">
+                <input type="text" placeholder="Search elite collections...">
+                <button class="search-btn">🔍</button>
+            </div>
+        </div>
+        <nav class="nav-right">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="products.html" class="nav-link active">Products</a>
+            <a href="cart.html" class="nav-link">Cart</a>
+            <a href="checkout.html" class="nav-link">Checkout</a>
+            <button class="connect-hub-btn">Connect Hub 🌐</button>
+        </nav>
+    </header>
+
+    <!-- Dynamic Grid Container where Javascript renders your cards -->
+    <main id="product-grid" class="product-container"></main>
+
+    <!-- Correct relative script link inside the same folder -->
+    <script src="script.js"></script>
+</body>
+</html>
