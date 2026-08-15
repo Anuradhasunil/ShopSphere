@@ -3,34 +3,377 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopNova - Products</title>
-    <!-- Links directly to style.css in the same folder -->
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <title>ShopNova - Premium Collections</title>
+    <style>
+        /* =========================================================
+           SHOPNOVA PREMIUM PRODUCTS PAGE
+           ========================================================= */
 
-    <!-- Header Navbar Section -->
-    <header class="navbar">
-        <div class="nav-left">
-            <div class="logo">🦅 ShopNova</div>
-            <div class="search-container">
-                <input type="text" placeholder="Search elite collections...">
-                <button class="search-btn">🔍</button>
-            </div>
-        </div>
-        <nav class="nav-right">
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="products.html" class="nav-link active">Products</a>
-            <a href="cart.html" class="nav-link">Cart</a>
-            <a href="checkout.html" class="nav-link">Checkout</a>
-            <button class="connect-hub-btn">Connect Hub 🌐</button>
-        </nav>
-    </header>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <!-- Dynamic Grid Container where Javascript renders your cards -->
-    <main id="product-grid" class="product-container"></main>
+        html {
+            scroll-behavior: smooth;
+        }
 
-    <!-- Correct relative script link inside the same folder -->
-    <script src="script.js"></script>
-</body>
-</html>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+            overflow-x: hidden;
+        }
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* =========================================================
+           TOP TICKER
+           ========================================================= */
+
+        .shopnova-ticker {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            background: linear-gradient(
+                90deg,
+                #ff7a00,
+                #ffffff,
+                #138808
+            );
+            color: #0b1f4d;
+            font-weight: 800;
+            padding: 9px 0;
+        }
+
+        .shopnova-ticker-track {
+            display: inline-block;
+            padding-left: 100%;
+            animation: tickerMove 24s linear infinite;
+        }
+
+        @keyframes tickerMove {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+        /* =========================================================
+           HEADER
+           ========================================================= */
+
+        .shopnova-header {
+            position: sticky;
+            top: 0;
+            z-index: 9999;
+            background: rgba(8, 24, 59, 0.97);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.18);
+        }
+
+        .shopnova-navbar {
+            width: 100%;
+            min-height: 74px;
+            padding: 12px 4%;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        /* LOGO */
+
+        .shopnova-logo {
+            color: #ffffff;
+            font-size: 25px;
+            font-weight: 900;
+            white-space: nowrap;
+            letter-spacing: -0.5px;
+        }
+
+        .shopnova-logo span {
+            color: #ff9a3c;
+        }
+
+        /* SEARCH */
+
+        .shopnova-search {
+            flex: 1;
+            max-width: 500px;
+            display: flex;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 999px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .shopnova-search input {
+            flex: 1;
+            width: 100%;
+            border: none;
+            outline: none;
+            padding: 13px 18px;
+            font-size: 15px;
+            color: #172033;
+        }
+
+        .shopnova-search button {
+            width: 55px;
+            height: 46px;
+            border: none;
+            background: #ff7a00;
+            color: #ffffff;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        .shopnova-search button:hover {
+            background: #e56600;
+        }
+
+        /* NAVIGATION */
+
+        .shopnova-nav {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .shopnova-nav a {
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 700;
+            white-space: nowrap;
+            transition: 0.3s;
+        }
+
+        .shopnova-nav a:hover,
+        .shopnova-nav a.active {
+            color: #ffd166;
+        }
+
+        .connect-button {
+            border: none;
+            background: linear-gradient(
+                135deg,
+                #ff7a00,
+                #138808
+            );
+            color: #ffffff;
+            padding: 11px 17px;
+            border-radius: 999px;
+            font-weight: 800;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: 0.3s;
+        }
+
+        .connect-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(19, 136, 8, 0.35);
+        }
+
+        /* =========================================================
+           CONTACT POPUP
+           ========================================================= */
+
+        .contact-panel {
+            position: fixed;
+            top: 90px;
+            right: 25px;
+            width: 300px;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 22px;
+            z-index: 10000;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+            display: none;
+        }
+
+        .contact-panel.show {
+            display: block;
+            animation: contactAppear 0.25s ease;
+        }
+
+        @keyframes contactAppear {
+            from {
+                opacity: 0;
+                transform: translateY(-12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .contact-panel h3 {
+            color: #0b1f4d;
+            margin-bottom: 15px;
+        }
+
+        .contact-close {
+            float: right;
+            border: none;
+            background: transparent;
+            font-size: 24px;
+            color: #64748b;
+            cursor: pointer;
+        }
+
+        .contact-panel a {
+            display: block;
+            padding: 12px;
+            margin-top: 9px;
+            border-radius: 12px;
+            background: #f1f5f9;
+            color: #172033;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .contact-panel a:hover {
+            background: #e2e8f0;
+            transform: translateX(4px);
+        }
+
+        /* =========================================================
+           HERO SECTION
+           ========================================================= */
+
+        .products-hero {
+            position: relative;
+            min-height: 480px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 70px 6%;
+            color: #ffffff;
+            overflow: hidden;
+            /* Swapped local link with responsive cloud imagery */
+            background: linear-gradient(rgba(4, 17, 43, 0.75), rgba(4, 17, 43, 0.75)), url("https://unsplash.com") center/cover no-repeat;
+        }
+
+        .products-hero::before {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255, 122, 0, 0.18);
+            top: -140px;
+            left: -80px;
+            animation: heroFloat 8s ease-in-out infinite alternate;
+        }
+
+        .products-hero::after {
+            content: "";
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: rgba(19, 136, 8, 0.18);
+            right: -100px;
+            bottom: -130px;
+            animation: heroFloat 10s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroFloat {
+            from { transform: translateY(0); }
+            to { transform: translateY(28px); }
+        }
+
+        .products-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            animation: heroText 1s ease both;
+        }
+
+        @keyframes heroText {
+            from { opacity: 0; transform: translateY(35px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .products-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .products-hero p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            opacity: 0.9;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* =========================================================
+           PRODUCT CATALOG GRID
+           ========================================================= */
+
+        .catalog-container {
+            max-width: 1280px;
+            margin: 60px auto;
+            padding: 0 4%;
+        }
+
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .product-img-holder {
+            width: 100%;
+            height: 260px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-img-holder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #ff7a00;
+            color: #ffffff;
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 800;
