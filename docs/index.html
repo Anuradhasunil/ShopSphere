@@ -2,9 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ShopNova - Shop Smart, Live Better</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="ShopNova - Premium products for everyday life."
+    >
+
+    <title>ShopNova - Premium Marketplace</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -12,38 +21,50 @@
 <body>
 
 <!-- =========================================================
-     TOP ANNOUNCEMENT
+     TOP INDEPENDENCE DAY TICKER
 ========================================================= -->
-<div class="top-announcement">
-    <div class="announcement-track">
-        <span>✨ Happy Independence Day • Celebrating the spirit of India • Freedom • Unity • Progress ✨</span>
-        <span>✨ Happy Independence Day • Celebrating the spirit of India • Freedom • Unity • Progress ✨</span>
+
+<div class="independence-ticker-wrap">
+    <div class="ticker-content">
+        ✨ Happy Independence Day • Celebrating the spirit of India • Freedom • Unity • Progress • ShopNova ✨
     </div>
 </div>
 
 
 <!-- =========================================================
-     STICKY HEADER
+     HEADER
 ========================================================= -->
+
 <header class="site-header">
 
     <div class="header-inner">
 
-        <!-- LOGO -->
-        <a href="index.html" class="brand">
-            <img
-                src="images/shopnova-logo.png"
-                alt="ShopNova"
-                class="brand-logo"
-            >
+        <!-- SHOPNOVA LOGO -->
+
+        <a href="index.html" class="shopnova-logo">
+
+            <div class="logo-image-wrap">
+                <img
+                    src="images/shopnova-logo.png"
+                    alt="ShopNova logo"
+                    onerror="this.style.display='none';"
+                >
+            </div>
+
+            <span>ShopNova</span>
+
         </a>
 
 
         <!-- SEARCH -->
-        <form class="search-box" id="searchForm">
+
+        <form
+            class="search-container"
+            id="searchForm"
+        >
 
             <input
-                type="search"
+                type="text"
                 id="searchInput"
                 placeholder="Search products..."
                 autocomplete="off"
@@ -51,7 +72,7 @@
 
             <button
                 type="submit"
-                class="search-button"
+                class="search-btn"
                 aria-label="Search"
             >
                 🔍
@@ -61,28 +82,42 @@
 
 
         <!-- NAVIGATION -->
-        <nav class="main-navigation">
 
-            <a href="index.html" class="nav-item active">
+        <nav class="main-nav">
+
+            <a
+                href="index.html"
+                class="nav-link active"
+            >
                 Home
             </a>
 
-            <a href="products.html" class="nav-item">
+            <a
+                href="products.html"
+                class="nav-link"
+            >
                 Products
             </a>
 
-            <a href="cart.html" class="nav-item">
+            <a
+                href="cart.html"
+                class="nav-link"
+            >
                 Cart
             </a>
 
-            <a href="checkout.html" class="nav-item">
+            <a
+                href="checkout.html"
+                class="nav-link"
+            >
                 Checkout
             </a>
 
-            <!-- SINGLE CONTACT BUTTON -->
+            <!-- ONLY ONE CONTACT BUTTON -->
+
             <button
                 type="button"
-                class="contact-button"
+                class="contact-btn"
                 id="contactButton"
             >
                 Contact
@@ -90,30 +125,25 @@
 
         </nav>
 
-        <!-- MOBILE MENU -->
-        <button
-            type="button"
-            class="mobile-menu-button"
-            id="mobileMenuButton"
-            aria-label="Open menu"
-        >
-            ☰
-        </button>
-
     </div>
 
 </header>
 
 
 <!-- =========================================================
-     CONTACT / SOCIAL PANEL
+     CONTACT POPUP
 ========================================================= -->
-<div class="contact-overlay" id="contactOverlay"></div>
 
-<section
+<div
+    class="contact-overlay"
+    id="contactOverlay"
+>
+</div>
+
+
+<div
     class="contact-panel"
     id="contactPanel"
-    aria-hidden="true"
 >
 
     <button
@@ -125,208 +155,191 @@
         ×
     </button>
 
-    <div class="contact-panel-header">
-
-        <div class="contact-panel-icon">
-            💬
-        </div>
-
-        <div>
-            <span class="small-label">SHOPNOVA</span>
-            <h2>Connect With Us</h2>
-        </div>
-
+    <div class="contact-icon">
+        🌐
     </div>
 
-    <p class="contact-panel-text">
-        Stay connected with ShopNova for collections, offers and updates.
+    <h2>
+        Connect with ShopNova
+    </h2>
+
+    <p>
+        Stay connected with our latest collections,
+        offers and updates.
     </p>
 
 
     <div class="social-links">
 
-        <!-- Replace # with your real WhatsApp link -->
         <a
-            href="#"
-            class="social-link whatsapp"
-            onclick="showContactMessage('WhatsApp')"
+            href="contact.html"
+            class="social-link contact-social"
         >
-            <span class="social-icon">💬</span>
+            <span>💬</span>
 
-            <span>
-                <strong>WhatsApp</strong>
-                <small>Chat with us</small>
-            </span>
-
-            <span class="social-arrow">→</span>
+            <div>
+                <strong>Contact Us</strong>
+                <small>Send us a message</small>
+            </div>
         </a>
 
 
-        <!-- Replace # with your real Instagram link -->
         <a
             href="#"
-            class="social-link instagram"
-            onclick="showContactMessage('Instagram')"
+            class="social-link"
+            id="whatsappLink"
         >
-            <span class="social-icon">📷</span>
+            <span>📱</span>
 
-            <span>
+            <div>
+                <strong>WhatsApp</strong>
+                <small>Chat with ShopNova</small>
+            </div>
+        </a>
+
+
+        <a
+            href="#"
+            class="social-link"
+            id="instagramLink"
+        >
+            <span>📷</span>
+
+            <div>
                 <strong>Instagram</strong>
                 <small>Follow ShopNova</small>
-            </span>
-
-            <span class="social-arrow">→</span>
+            </div>
         </a>
 
 
-        <!-- Replace # with your real YouTube link -->
         <a
             href="#"
-            class="social-link youtube"
-            onclick="showContactMessage('YouTube')"
+            class="social-link"
+            id="youtubeLink"
         >
-            <span class="social-icon">▶</span>
+            <span>▶️</span>
 
-            <span>
+            <div>
                 <strong>YouTube</strong>
                 <small>Watch our updates</small>
-            </span>
-
-            <span class="social-arrow">→</span>
-        </a>
-
-
-        <!-- Email -->
-        <a
-            href="mailto:"
-            class="social-link email"
-            onclick="showContactMessage('Email')"
-        >
-            <span class="social-icon">✉</span>
-
-            <span>
-                <strong>Email</strong>
-                <small>Send us a message</small>
-            </span>
-
-            <span class="social-arrow">→</span>
+            </div>
         </a>
 
     </div>
 
-</section>
+</div>
 
 
 <!-- =========================================================
-     HERO
+     HERO SECTION
 ========================================================= -->
+
 <main>
 
 <section class="hero-section">
 
-    <div class="hero-container">
+    <!-- LEFT CONTENT -->
 
-        <!-- LEFT CONTENT -->
-        <div class="hero-content">
+    <div class="hero-content">
 
-            <span class="hero-label">
-                SHOPNOVA
-            </span>
-
-            <h1>
-                One marketplace.
-                <span>Endless possibilities.</span>
-            </h1>
-
-            <p>
-                Discover technology, fashion, lifestyle essentials
-                and premium collections selected for everyday life.
-            </p>
-
-            <div class="hero-buttons">
-
-                <a
-                    href="products.html"
-                    class="primary-button"
-                >
-                    Start Shopping →
-                </a>
-
-                <a
-                    href="#collections"
-                    class="secondary-button"
-                >
-                    Explore Collections
-                </a>
-
-            </div>
+        <div class="hero-badge">
+            ✨ 80th Independence Day Celebration
+        </div>
 
 
-            <!-- HERO STATS -->
-            <div class="hero-stats">
+        <div class="hero-small-title">
+            SHOPNOVA
+        </div>
 
-                <div class="hero-stat">
-                    <strong>01</strong>
-                    <span>Quality</span>
-                </div>
 
-                <div class="hero-stat">
-                    <strong>02</strong>
-                    <span>Choice</span>
-                </div>
+        <h1>
+            One India.<br>
+            One Family.<br>
+            <span>One Future.</span>
+        </h1>
 
-                <div class="hero-stat">
-                    <strong>03</strong>
-                    <span>Value</span>
-                </div>
 
-            </div>
+        <p class="hero-description">
+            Discover premium products for everyday life,
+            created for students, families, professionals
+            and dreamers.
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <a
+                href="products.html"
+                class="primary-btn"
+            >
+                Explore Products →
+            </a>
+
+
+            <a
+                href="cart.html"
+                class="secondary-btn"
+            >
+                View Cart
+            </a>
 
         </div>
 
 
-        <!-- RIGHT VISUAL -->
-        <div class="hero-visual">
+        <!-- SMALL TRUST ITEMS -->
 
-            <div class="hero-glow"></div>
+        <div class="hero-trust">
 
-            <div class="hero-image-card">
-
-                <img
-                    src="images/india-hero.jpg"
-                    alt="ShopNova India collection"
-                >
-
-                <div class="hero-image-overlay">
-
-                    <span>SHOPNOVA</span>
-
-                    <strong>
-                        Made for everyday moments.
-                    </strong>
-
-                    <small>
-                        Technology • Fashion • Lifestyle
-                    </small>
-
+            <div class="trust-item">
+                <span>🚚</span>
+                <div>
+                    <strong>Fast Delivery</strong>
+                    <small>Reliable doorstep delivery</small>
                 </div>
-
             </div>
 
-            <div class="floating-card floating-card-one">
-                ⭐
-                <span>
-                    Premium<br>
-                    Collections
-                </span>
+
+            <div class="trust-item">
+                <span>🔒</span>
+                <div>
+                    <strong>Secure Shopping</strong>
+                    <small>Safe shopping experience</small>
+                </div>
             </div>
 
-            <div class="floating-card floating-card-two">
-                🚚
-                <span>
-                    Fast<br>
-                    Delivery
-                </span>
+
+            <div class="trust-item">
+                <span>⭐</span>
+                <div>
+                    <strong>Premium Collections</strong>
+                    <small>Selected for you</small>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT HERO IMAGE -->
+
+    <div class="hero-image-container">
+
+        <div class="hero-image-glow"></div>
+
+        <img
+            src="images/india-hero.jpg"
+            alt="India celebration and ShopNova"
+            class="hero-image"
+        >
+
+        <div class="image-label">
+
+            <span class="label-dot"></span>
+
+            <div>
+                <strong>Made for India</strong>
+                <small>Celebrating unity and progress</small>
             </div>
 
         </div>
@@ -337,65 +350,62 @@
 
 
 <!-- =========================================================
-     BENEFITS
+     FEATURE STRIP
 ========================================================= -->
-<section class="benefits-section">
 
-    <div class="benefits-container">
+<section class="feature-section">
 
-        <div class="benefit-item">
+    <div class="feature-card">
 
-            <div class="benefit-icon">
-                🚚
-            </div>
-
-            <div>
-                <strong>Fast Delivery</strong>
-                <span>Reliable doorstep delivery</span>
-            </div>
-
+        <div class="feature-icon">
+            🚚
         </div>
 
-
-        <div class="benefit-item">
-
-            <div class="benefit-icon">
-                🔒
-            </div>
-
-            <div>
-                <strong>Secure Shopping</strong>
-                <span>Safe and simple experience</span>
-            </div>
-
+        <div>
+            <h3>Fast Delivery</h3>
+            <p>Reliable doorstep delivery</p>
         </div>
 
+    </div>
 
-        <div class="benefit-item">
 
-            <div class="benefit-icon">
-                ⭐
-            </div>
+    <div class="feature-card">
 
-            <div>
-                <strong>Premium Collections</strong>
-                <span>Products selected for you</span>
-            </div>
-
+        <div class="feature-icon">
+            🔒
         </div>
 
+        <div>
+            <h3>Secure Shopping</h3>
+            <p>Safe and simple experience</p>
+        </div>
 
-        <div class="benefit-item">
+    </div>
 
-            <div class="benefit-icon">
-                💙
-            </div>
 
-            <div>
-                <strong>Customer First</strong>
-                <span>Support when you need it</span>
-            </div>
+    <div class="feature-card">
 
+        <div class="feature-icon">
+            ⭐
+        </div>
+
+        <div>
+            <h3>Premium Collections</h3>
+            <p>Products selected for you</p>
+        </div>
+
+    </div>
+
+
+    <div class="feature-card">
+
+        <div class="feature-icon">
+            💙
+        </div>
+
+        <div>
+            <h3>Customer First</h3>
+            <p>Support whenever you need it</p>
         </div>
 
     </div>
@@ -404,177 +414,79 @@
 
 
 <!-- =========================================================
-     WE BUILD INDIA / PEOPLE SECTION
-     SHOWN ONLY ONCE
+     MARKETPLACE SECTION
 ========================================================= -->
-<section class="people-section">
 
-    <div class="section-heading">
+<section class="marketplace-section">
 
-        <span>THE PEOPLE BEHIND PROGRESS</span>
+    <div class="marketplace-content">
+
+        <div class="section-label">
+            SHOPNOVA COLLECTIONS
+        </div>
 
         <h2>
-            Together, we build a better tomorrow.
+            One marketplace.<br>
+            Endless possibilities.
         </h2>
 
         <p>
-            Celebrating the people, dreams and everyday efforts
-            that make our country stronger.
+            Explore technology, fashion, lifestyle essentials
+            and premium products designed for everyday moments.
         </p>
 
-    </div>
 
+        <div class="marketplace-stats">
 
-    <div class="people-grid">
+            <div class="stat-box">
+                <strong>01</strong>
+                <span>Quality</span>
+            </div>
 
-        <article class="people-card">
-            <div class="people-number">01</div>
-            <div class="people-icon">🪖</div>
-            <h3>Armed Forces</h3>
-            <p>Strength, courage and dedication.</p>
-        </article>
+            <div class="stat-box">
+                <strong>02</strong>
+                <span>Choice</span>
+            </div>
 
+            <div class="stat-box">
+                <strong>03</strong>
+                <span>Value</span>
+            </div>
 
-        <article class="people-card">
-            <div class="people-number">02</div>
-            <div class="people-icon">🌾</div>
-            <h3>Farmers</h3>
-            <p>Growing the food that sustains families.</p>
-        </article>
-
-
-        <article class="people-card">
-            <div class="people-number">03</div>
-            <div class="people-icon">🩺</div>
-            <h3>Doctors</h3>
-            <p>Care, knowledge and compassion.</p>
-        </article>
-
-
-        <article class="people-card">
-            <div class="people-number">04</div>
-            <div class="people-icon">👷</div>
-            <h3>Employees</h3>
-            <p>Everyday work that keeps communities moving.</p>
-        </article>
-
-
-        <article class="people-card">
-            <div class="people-number">05</div>
-            <div class="people-icon">📚</div>
-            <h3>Students</h3>
-            <p>Learning today and shaping tomorrow.</p>
-        </article>
-
-
-        <article class="people-card">
-            <div class="people-number">06</div>
-            <div class="people-icon">🚀</div>
-            <h3>Youngsters</h3>
-            <p>Ideas, energy and innovation.</p>
-        </article>
-
-
-        <article class="people-card">
-            <div class="people-number">07</div>
-            <div class="people-icon">🧸</div>
-            <h3>Kids</h3>
-            <p>Curiosity, dreams and bright possibilities.</p>
-        </article>
-
-
-        <article class="people-card">
-            <div class="people-number">08</div>
-            <div class="people-icon">👨‍👩‍👧‍👦</div>
-            <h3>Families</h3>
-            <p>Love, support and togetherness.</p>
-        </article>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     COLLECTIONS
-========================================================= -->
-<section
-    class="collections-section"
-    id="collections"
->
-
-    <div class="collections-heading">
-
-        <div>
-            <span>SHOPNOVA COLLECTIONS</span>
-
-            <h2>
-                Explore our world.
-            </h2>
-
-            <p>
-                Find something you love today.
-            </p>
         </div>
 
+
         <a
             href="products.html"
-            class="view-all-button"
+            class="marketplace-btn"
         >
-            View Products →
+            Start Shopping →
         </a>
 
     </div>
 
 
-    <div class="collection-grid">
+    <div class="marketplace-visual">
 
-        <a
-            href="products.html"
-            class="collection-card collection-tech"
-        >
-            <div>
-                <span>01</span>
-                <h3>Technology</h3>
-                <p>Smart essentials for modern life.</p>
+        <div class="visual-circle circle-one"></div>
+        <div class="visual-circle circle-two"></div>
+        <div class="visual-circle circle-three"></div>
+
+        <div class="visual-card">
+
+            <div class="visual-logo">
+                🕊️
             </div>
-        </a>
 
+            <h3>
+                ShopNova
+            </h3>
 
-        <a
-            href="products.html"
-            class="collection-card collection-fashion"
-        >
-            <div>
-                <span>02</span>
-                <h3>Fashion</h3>
-                <p>Style made for every moment.</p>
-            </div>
-        </a>
+            <p>
+                Premium shopping for modern life.
+            </p>
 
-
-        <a
-            href="products.html"
-            class="collection-card collection-lifestyle"
-        >
-            <div>
-                <span>03</span>
-                <h3>Lifestyle</h3>
-                <p>Everyday products with premium appeal.</p>
-            </div>
-        </a>
-
-
-        <a
-            href="products.html"
-            class="collection-card collection-luxury"
-        >
-            <div>
-                <span>04</span>
-                <h3>Premium</h3>
-                <p>Selected collections for you.</p>
-            </div>
-        </a>
+        </div>
 
     </div>
 
@@ -582,16 +494,20 @@
 
 
 <!-- =========================================================
-     FINAL CTA
+     FINAL SHOPPING CTA
 ========================================================= -->
+
 <section class="final-cta">
 
     <div>
 
-        <span>SHOPNOVA</span>
+        <span class="section-label light-label">
+            SHOPNOVA
+        </span>
 
         <h2>
-            Find something you love today.
+            Find something<br>
+            you love today.
         </h2>
 
         <p>
@@ -601,9 +517,10 @@
 
     </div>
 
+
     <a
         href="products.html"
-        class="final-cta-button"
+        class="final-cta-btn"
     >
         Browse Products →
     </a>
@@ -616,19 +533,32 @@
 <!-- =========================================================
      FOOTER
 ========================================================= -->
+
 <footer class="site-footer">
 
     <div class="footer-inner">
 
         <div class="footer-brand">
 
-            <img
-                src="images/shopnova-logo.png"
-                alt="ShopNova"
+            <a
+                href="index.html"
+                class="footer-logo"
             >
 
+                <img
+                    src="images/shopnova-logo.png"
+                    alt="ShopNova"
+                    onerror="this.style.display='none';"
+                >
+
+                <span>
+                    ShopNova
+                </span>
+
+            </a>
+
             <p>
-                Shop Smart • Live Better
+                Premium products for everyday life.
             </p>
 
         </div>
@@ -638,10 +568,21 @@
 
             <h3>Shop</h3>
 
-            <a href="index.html">Home</a>
-            <a href="products.html">Products</a>
-            <a href="cart.html">Cart</a>
-            <a href="checkout.html">Checkout</a>
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="products.html">
+                Products
+            </a>
+
+            <a href="cart.html">
+                Cart
+            </a>
+
+            <a href="checkout.html">
+                Checkout
+            </a>
 
         </div>
 
@@ -650,15 +591,16 @@
 
             <h3>Support</h3>
 
-            <button
-                type="button"
-                onclick="openContactPanel()"
-            >
-                Contact
-            </button>
+            <a href="contact.html">
+                Contact Us
+            </a>
 
-            <a href="products.html">
-                Collections
+            <a href="login.html">
+                Login
+            </a>
+
+            <a href="dashboard.html">
+                Dashboard
             </a>
 
         </div>
@@ -670,9 +612,10 @@
 
             <button
                 type="button"
-                onclick="openContactPanel()"
+                class="footer-contact-btn"
+                id="footerContactButton"
             >
-                Social & Contact
+                Connect with us
             </button>
 
         </div>
@@ -682,7 +625,9 @@
 
     <div class="footer-bottom">
 
-        © 2026 ShopNova • Executive Board Directives • CEO & Founder: Anuradha
+        <p>
+            © 2026 ShopNova • Executive Board Directives • CEO & Founder: Anuradha
+        </p>
 
     </div>
 
@@ -690,56 +635,50 @@
 
 
 <!-- =========================================================
-     HOMEPAGE SCRIPT
+     JAVASCRIPT
 ========================================================= -->
+
 <script>
 
 document.addEventListener("DOMContentLoaded", function () {
-
-    const searchForm = document.getElementById("searchForm");
-    const searchInput = document.getElementById("searchInput");
-
-    const contactButton = document.getElementById("contactButton");
-    const contactPanel = document.getElementById("contactPanel");
-    const contactOverlay = document.getElementById("contactOverlay");
-    const contactClose = document.getElementById("contactClose");
-
-    const mobileMenuButton =
-        document.getElementById("mobileMenuButton");
-
-    const navigation =
-        document.querySelector(".main-navigation");
-
 
     /* =====================================================
        SEARCH
     ===================================================== */
 
+    const searchForm =
+        document.getElementById("searchForm");
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+
     if (searchForm && searchInput) {
 
-        searchForm.addEventListener("submit", function (event) {
+        searchForm.addEventListener(
+            "submit",
+            function (event) {
 
-            event.preventDefault();
+                event.preventDefault();
 
-            const query =
-                searchInput.value.trim();
+                const query =
+                    searchInput.value.trim();
 
-            if (!query) {
+                if (query.length === 0) {
 
-                searchInput.focus();
+                    window.location.href =
+                        "products.html";
 
-                return;
+                    return;
+                }
+
+
+                window.location.href =
+                    "products.html?search=" +
+                    encodeURIComponent(query);
+
             }
-
-            /*
-             * Sends the user to the Products page
-             * with the search query.
-             */
-            window.location.href =
-                "products.html?search=" +
-                encodeURIComponent(query);
-
-        });
+        );
 
     }
 
@@ -748,20 +687,31 @@ document.addEventListener("DOMContentLoaded", function () {
        CONTACT PANEL
     ===================================================== */
 
-    function openContact() {
+    const contactButton =
+        document.getElementById("contactButton");
 
-        if (!contactPanel) return;
+    const footerContactButton =
+        document.getElementById("footerContactButton");
 
-        contactPanel.classList.add("open");
+    const contactPanel =
+        document.getElementById("contactPanel");
+
+    const contactOverlay =
+        document.getElementById("contactOverlay");
+
+    const contactClose =
+        document.getElementById("contactClose");
+
+
+    function openContactPanel() {
+
+        if (contactPanel) {
+            contactPanel.classList.add("show");
+        }
 
         if (contactOverlay) {
             contactOverlay.classList.add("show");
         }
-
-        contactPanel.setAttribute(
-            "aria-hidden",
-            "false"
-        );
 
         document.body.classList.add(
             "contact-open"
@@ -769,20 +719,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    function closeContact() {
+    function closeContactPanel() {
 
-        if (!contactPanel) return;
-
-        contactPanel.classList.remove("open");
+        if (contactPanel) {
+            contactPanel.classList.remove("show");
+        }
 
         if (contactOverlay) {
             contactOverlay.classList.remove("show");
         }
-
-        contactPanel.setAttribute(
-            "aria-hidden",
-            "true"
-        );
 
         document.body.classList.remove(
             "contact-open"
@@ -790,14 +735,21 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    window.openContactPanel = openContact;
-
-
     if (contactButton) {
 
         contactButton.addEventListener(
             "click",
-            openContact
+            openContactPanel
+        );
+
+    }
+
+
+    if (footerContactButton) {
+
+        footerContactButton.addEventListener(
+            "click",
+            openContactPanel
         );
 
     }
@@ -807,7 +759,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         contactClose.addEventListener(
             "click",
-            closeContact
+            closeContactPanel
         );
 
     }
@@ -817,7 +769,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         contactOverlay.addEventListener(
             "click",
-            closeContact
+            closeContactPanel
         );
 
     }
@@ -828,7 +780,7 @@ document.addEventListener("DOMContentLoaded", function () {
         function (event) {
 
             if (event.key === "Escape") {
-                closeContact();
+                closeContactPanel();
             }
 
         }
@@ -836,53 +788,79 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       MOBILE MENU
+       SOCIAL LINKS
+       Replace these three values with your real accounts.
     ===================================================== */
 
-    if (
-        mobileMenuButton &&
-        navigation
-    ) {
+    const whatsappLink =
+        document.getElementById("whatsappLink");
 
-        mobileMenuButton.addEventListener(
-            "click",
-            function () {
+    const instagramLink =
+        document.getElementById("instagramLink");
 
-                navigation.classList.toggle(
-                    "mobile-open"
+    const youtubeLink =
+        document.getElementById("youtubeLink");
+
+
+    if (whatsappLink) {
+
+        whatsappLink.href =
+            "https://wa.me/";
+
+        whatsappLink.target =
+            "_blank";
+
+    }
+
+
+    if (instagramLink) {
+
+        instagramLink.href =
+            "#";
+
+    }
+
+
+    if (youtubeLink) {
+
+        youtubeLink.href =
+            "#";
+
+    }
+
+
+    /* =====================================================
+       HEADER SCROLL EFFECT
+    ===================================================== */
+
+    const header =
+        document.querySelector(".site-header");
+
+
+    window.addEventListener(
+        "scroll",
+        function () {
+
+            if (!header) return;
+
+            if (window.scrollY > 20) {
+
+                header.classList.add(
+                    "header-scrolled"
+                );
+
+            } else {
+
+                header.classList.remove(
+                    "header-scrolled"
                 );
 
             }
-        );
 
-    }
+        }
+    );
 
 });
-
-
-/* =========================================================
-   SOCIAL PLACEHOLDER MESSAGE
-========================================================= */
-
-function showContactMessage(platform) {
-
-    /*
-     * The Contact panel works immediately.
-     *
-     * Add your own real social URL later to the
-     * corresponding href in the HTML.
-     */
-
-    if (platform) {
-
-        console.log(
-            platform +
-            " link can be connected from index.html."
-        );
-
-    }
-
-}
 
 </script>
 
