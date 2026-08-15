@@ -429,3 +429,72 @@ a{
         grid-template-columns:1fr;
     }
 }
+/* =========================================
+   CART PAGE FIX
+   Keeps cart images small and responsive
+========================================= */
+
+.cart-page img,
+.cart-container img,
+.cart-item img,
+.cart-product img {
+    width: 120px !important;
+    height: 120px !important;
+    object-fit: contain !important;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Prevent accidental giant images on Cart page */
+body:has(.cart-page) img,
+body:has(.cart-container) img {
+    max-width: 120px !important;
+    max-height: 120px !important;
+}
+
+/* Cart page itself */
+.cart-page,
+.cart-container {
+    width: min(1200px, 94%);
+    margin: 35px auto;
+}
+
+/* Cart items */
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    margin-bottom: 18px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+/* Cart buttons */
+.cart-item button,
+.remove-btn,
+.quantity-btn,
+.checkout-btn {
+    cursor: pointer;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+
+    .cart-page,
+    .cart-container {
+        width: 94%;
+        margin: 20px auto;
+    }
+
+    .cart-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .cart-item img {
+        width: 100px !important;
+        height: 100px !important;
+    }
+}

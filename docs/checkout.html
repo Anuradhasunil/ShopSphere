@@ -3,87 +3,2126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>ShopNova - Secure Checkout</title>
-    <!-- Links directly to style.css in the same directory folder -->
-    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* =====================================================
+           SHOPNOVA CHECKOUT PAGE
+           Complete responsive standalone design
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+            background:
+                linear-gradient(
+                    180deg,
+                    #f8fafc 0%,
+                    #eef4fb 45%,
+                    #ffffff 100%
+                );
+            color: #0f172a;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font-family: inherit;
+        }
+
+        /* =====================================================
+           TOP TICKER
+        ===================================================== */
+
+        .checkout-ticker {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            background: linear-gradient(
+                90deg,
+                #ff7a00,
+                #ffffff,
+                #138808
+            );
+            color: #102a43;
+            font-weight: 800;
+            padding: 9px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+
+        .ticker-track {
+            display: inline-block;
+            padding-left: 100%;
+            animation: tickerMove 24s linear infinite;
+        }
+
+        @keyframes tickerMove {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        .checkout-navbar {
+            position: sticky;
+            top: 0;
+            z-index: 9999;
+
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 13px 28px;
+
+            background: rgba(11, 31, 77, 0.97);
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.18);
+        }
+
+        .checkout-nav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            min-width: 0;
+        }
+
+        .checkout-logo {
+            color: #ffffff;
+            font-size: 1.55rem;
+            font-weight: 900;
+            white-space: nowrap;
+        }
+
+        .checkout-search {
+            display: flex;
+            align-items: center;
+
+            width: min(390px, 38vw);
+
+            background: #ffffff;
+
+            border-radius: 999px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 5px 15px rgba(0,0,0,0.18);
+        }
+
+        .checkout-search input {
+            flex: 1;
+
+            min-width: 0;
+
+            border: none;
+            outline: none;
+
+            padding: 11px 16px;
+
+            font-size: 0.95rem;
+
+            color: #172033;
+        }
+
+        .checkout-search button {
+            width: 55px;
+
+            border: none;
+
+            background: #ff7a00;
+
+            color: #ffffff;
+
+            font-size: 1.15rem;
+
+            padding: 11px;
+
+            cursor: pointer;
+
+            transition: 0.25s ease;
+        }
+
+        .checkout-search button:hover {
+            background: #e96500;
+        }
+
+        .checkout-nav-right {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+
+            gap: 17px;
+
+            flex-wrap: wrap;
+        }
+
+        .checkout-nav-link {
+            color: #ffffff;
+
+            font-size: 0.95rem;
+
+            font-weight: 700;
+
+            transition: 0.25s ease;
+
+            white-space: nowrap;
+        }
+
+        .checkout-nav-link:hover,
+        .checkout-nav-link.active {
+            color: #ffd166;
+        }
+
+        .connect-hub-btn {
+            border: none;
+
+            padding: 11px 18px;
+
+            border-radius: 999px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff7a00,
+                    #138808
+                );
+
+            color: #ffffff;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 5px 14px rgba(0,0,0,0.18);
+
+            transition: 0.25s ease;
+        }
+
+        .connect-hub-btn:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 9px 20px rgba(0,0,0,0.25);
+        }
+
+        /* =====================================================
+           PAGE HEADER
+        ===================================================== */
+
+        .checkout-page-header {
+            text-align: center;
+
+            padding: 45px 20px 25px;
+        }
+
+        .checkout-icon {
+            width: 70px;
+            height: 70px;
+
+            margin: 0 auto 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff7a00,
+                    #138808
+                );
+
+            color: #ffffff;
+
+            font-size: 2rem;
+
+            box-shadow:
+                0 10px 25px rgba(11,31,77,0.18);
+        }
+
+        .checkout-page-header h1 {
+            color: #0b1f4d;
+
+            font-size: clamp(
+                2rem,
+                5vw,
+                3.1rem
+            );
+
+            font-weight: 900;
+
+            margin-bottom: 8px;
+        }
+
+        .checkout-page-header p {
+            color: #64748b;
+
+            font-size: 1rem;
+
+            max-width: 700px;
+
+            margin: auto;
+        }
+
+        /* =====================================================
+           MAIN CHECKOUT AREA
+        ===================================================== */
+
+        .checkout-wrapper {
+            width: min(1200px, 92%);
+
+            margin: 20px auto 70px;
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1.6fr)
+                minmax(300px, 0.8fr);
+
+            gap: 30px;
+
+            align-items: start;
+        }
+
+        /* =====================================================
+           FORM CARD
+        ===================================================== */
+
+        .checkout-card {
+            background: #ffffff;
+
+            border-radius: 22px;
+
+            padding: 30px;
+
+            box-shadow:
+                0 12px 35px rgba(15,23,42,0.09);
+
+            border:
+                1px solid rgba(15,23,42,0.06);
+        }
+
+        .checkout-card-title {
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 25px;
+        }
+
+        .checkout-card-title-icon {
+            width: 44px;
+            height: 44px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background: #eff6ff;
+
+            font-size: 1.35rem;
+        }
+
+        .checkout-card-title h2 {
+            color: #0b1f4d;
+
+            font-size: 1.45rem;
+        }
+
+        .checkout-card-title p {
+            color: #64748b;
+
+            font-size: 0.85rem;
+        }
+
+        /* =====================================================
+           FORM
+        ===================================================== */
+
+        .checkout-form {
+            display: grid;
+
+            gap: 20px;
+        }
+
+        .form-row {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 7px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            color: #1e293b;
+
+            font-size: 0.92rem;
+
+            font-weight: 800;
+        }
+
+        .required {
+            color: #dc2626;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+
+            border:
+                1px solid #cbd5e1;
+
+            border-radius: 11px;
+
+            background: #f8fafc;
+
+            color: #0f172a;
+
+            padding: 13px 14px;
+
+            outline: none;
+
+            font-size: 0.95rem;
+
+            transition:
+                border-color 0.25s ease,
+                box-shadow 0.25s ease,
+                background 0.25s ease;
+        }
+
+        .form-group textarea {
+            min-height: 110px;
+
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            background: #ffffff;
+
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 4px rgba(37,99,235,0.10);
+        }
+
+        /* =====================================================
+           PAYMENT METHODS
+        ===================================================== */
+
+        .payment-section {
+            margin-top: 8px;
+
+            padding-top: 24px;
+
+            border-top:
+                1px solid #e2e8f0;
+        }
+
+        .payment-section h3 {
+            color: #0b1f4d;
+
+            font-size: 1.1rem;
+
+            margin-bottom: 15px;
+        }
+
+        .payment-options {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 12px;
+        }
+
+        .payment-option {
+            position: relative;
+        }
+
+        .payment-option input {
+            position: absolute;
+
+            opacity: 0;
+
+            pointer-events: none;
+        }
+
+        .payment-option label {
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            min-height: 65px;
+
+            padding: 10px;
+
+            text-align: center;
+
+            border:
+                1px solid #cbd5e1;
+
+            border-radius: 12px;
+
+            background: #f8fafc;
+
+            color: #334155;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.25s ease;
+        }
+
+        .payment-option label:hover {
+            border-color: #2563eb;
+
+            transform: translateY(-2px);
+        }
+
+        .payment-option input:checked + label {
+            border-color: #138808;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f0fdf4,
+                    #ffffff
+                );
+
+            color: #166534;
+
+            box-shadow:
+                0 0 0 3px rgba(19,136,8,0.10);
+        }
+
+        /* =====================================================
+           PLACE ORDER
+        ===================================================== */
+
+        .place-order-btn {
+            width: 100%;
+
+            border: none;
+
+            border-radius: 13px;
+
+            padding: 15px 20px;
+
+            margin-top: 7px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff7a00,
+                    #138808
+                );
+
+            color: #ffffff;
+
+            font-size: 1.05rem;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 22px rgba(19,136,8,0.20);
+
+            transition: 0.25s ease;
+        }
+
+        .place-order-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 14px 28px rgba(19,136,8,0.28);
+        }
+
+        /* =====================================================
+           ORDER SUMMARY
+        ===================================================== */
+
+        .summary-card {
+            position: sticky;
+
+            top: 100px;
+
+            background: #ffffff;
+
+            border-radius: 22px;
+
+            padding: 27px;
+
+            box-shadow:
+                0 12px 35px rgba(15,23,42,0.09);
+
+            border:
+                1px solid rgba(15,23,42,0.06);
+        }
+
+        .summary-card h2 {
+            color: #0b1f4d;
+
+            font-size: 1.45rem;
+
+            margin-bottom: 20px;
+        }
+
+        .summary-items {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+
+            max-height: 300px;
+
+            overflow-y: auto;
+
+            margin-bottom: 20px;
+
+            padding-right: 3px;
+        }
+
+        .summary-item {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 12px;
+
+            padding-bottom: 12px;
+
+            border-bottom:
+                1px solid #e2e8f0;
+        }
+
+        .summary-item-name {
+            color: #334155;
+
+            font-weight: 700;
+
+            font-size: 0.9rem;
+        }
+
+        .summary-item-qty {
+            color: #64748b;
+
+            font-size: 0.8rem;
+
+            margin-top: 3px;
+        }
+
+        .summary-item-price {
+            color: #0b1f4d;
+
+            font-weight: 800;
+
+            white-space: nowrap;
+        }
+
+        .summary-empty {
+            padding: 20px;
+
+            text-align: center;
+
+            color: #64748b;
+
+            background: #f8fafc;
+
+            border-radius: 12px;
+        }
+
+        .summary-line {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-top: 13px;
+
+            color: #475569;
+        }
+
+        .summary-line strong {
+            color: #0f172a;
+        }
+
+        .summary-total {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-top: 20px;
+
+            padding-top: 20px;
+
+            border-top:
+                2px solid #e2e8f0;
+        }
+
+        .summary-total span:first-child {
+            color: #0b1f4d;
+
+            font-size: 1.1rem;
+
+            font-weight: 900;
+        }
+
+        .summary-total span:last-child {
+            color: #138808;
+
+            font-size: 1.5rem;
+
+            font-weight: 900;
+        }
+
+        .secure-message {
+            margin-top: 20px;
+
+            padding: 14px;
+
+            border-radius: 12px;
+
+            background: #eff6ff;
+
+            color: #1e40af;
+
+            text-align: center;
+
+            font-size: 0.85rem;
+
+            font-weight: 700;
+        }
+
+        /* =====================================================
+           CONTACT PANEL
+        ===================================================== */
+
+        .contact-panel {
+            position: fixed;
+
+            right: 25px;
+
+            bottom: 25px;
+
+            width: min(330px, calc(100% - 30px));
+
+            padding: 20px;
+
+            background: #ffffff;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 15px 45px rgba(0,0,0,0.20);
+
+            border:
+                1px solid #e2e8f0;
+
+            z-index: 10000;
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transform:
+                translateY(20px);
+
+            transition: 0.25s ease;
+        }
+
+        .contact-panel.show {
+            opacity: 1;
+
+            visibility: visible;
+
+            transform:
+                translateY(0);
+        }
+
+        .contact-panel h3 {
+            color: #0b1f4d;
+
+            margin-bottom: 8px;
+        }
+
+        .contact-panel p {
+            color: #64748b;
+
+            font-size: 0.9rem;
+
+            margin-bottom: 14px;
+        }
+
+        .contact-links {
+            display: grid;
+
+            gap: 9px;
+        }
+
+        .contact-links a {
+            display: block;
+
+            padding: 10px 12px;
+
+            border-radius: 10px;
+
+            background: #f1f5f9;
+
+            color: #0f172a;
+
+            font-weight: 700;
+
+            transition: 0.2s ease;
+        }
+
+        .contact-links a:hover {
+            background: #e2e8f0;
+        }
+
+        .close-contact {
+            position: absolute;
+
+            top: 10px;
+
+            right: 12px;
+
+            border: none;
+
+            background: transparent;
+
+            font-size: 1.2rem;
+
+            cursor: pointer;
+
+            color: #64748b;
+        }
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .checkout-footer {
+            background: #0b1f4d;
+
+            color: #e5e7eb;
+
+            text-align: center;
+
+            padding: 24px 18px;
+
+            font-size: 0.9rem;
+
+            margin-top: 40px;
+        }
+
+        /* =====================================================
+           SUCCESS MESSAGE
+        ===================================================== */
+
+        .success-message {
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 20000;
+
+            background: rgba(15,23,42,0.65);
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+        }
+
+        .success-message.show {
+            display: flex;
+        }
+
+        .success-box {
+            width: min(480px, 100%);
+
+            background: #ffffff;
+
+            border-radius: 24px;
+
+            padding: 35px;
+
+            text-align: center;
+
+            box-shadow:
+                0 25px 70px rgba(0,0,0,0.25);
+
+            animation: successPop 0.35s ease;
+        }
+
+        @keyframes successPop {
+            from {
+                opacity: 0;
+
+                transform:
+                    scale(0.9)
+                    translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    scale(1)
+                    translateY(0);
+            }
+        }
+
+        .success-icon {
+            width: 75px;
+            height: 75px;
+
+            margin: 0 auto 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #dcfce7;
+
+            color: #15803d;
+
+            font-size: 2.3rem;
+        }
+
+        .success-box h2 {
+            color: #0b1f4d;
+
+            margin-bottom: 8px;
+        }
+
+        .success-box p {
+            color: #64748b;
+
+            margin-bottom: 22px;
+        }
+
+        .success-close {
+            border: none;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff7a00,
+                    #138808
+                );
+
+            color: #ffffff;
+
+            border-radius: 999px;
+
+            padding: 12px 25px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+        }
+
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media (max-width: 1000px) {
+
+            .checkout-navbar {
+                flex-direction: column;
+
+                align-items: stretch;
+            }
+
+            .checkout-nav-left {
+                justify-content: center;
+
+                flex-wrap: wrap;
+            }
+
+            .checkout-search {
+                width: min(500px, 100%);
+            }
+
+            .checkout-nav-right {
+                justify-content: center;
+            }
+
+            .checkout-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-card {
+                position: static;
+            }
+        }
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 650px) {
+
+            .checkout-ticker {
+                font-size: 0.8rem;
+            }
+
+            .checkout-navbar {
+                padding: 12px 14px;
+
+                gap: 12px;
+            }
+
+            .checkout-nav-left {
+                flex-direction: column;
+
+                width: 100%;
+
+                gap: 11px;
+            }
+
+            .checkout-logo {
+                font-size: 1.35rem;
+            }
+
+            .checkout-search {
+                width: 100%;
+            }
+
+            .checkout-nav-right {
+                width: 100%;
+
+                gap: 9px;
+            }
+
+            .checkout-nav-link {
+                font-size: 0.82rem;
+            }
+
+            .connect-hub-btn {
+                padding: 9px 13px;
+
+                font-size: 0.82rem;
+            }
+
+            .checkout-page-header {
+                padding:
+                    30px
+                    15px
+                    18px;
+            }
+
+            .checkout-page-header h1 {
+                font-size: 2rem;
+            }
+
+            .checkout-wrapper {
+                width: 94%;
+
+                margin-top: 12px;
+
+                gap: 18px;
+            }
+
+            .checkout-card,
+            .summary-card {
+                padding: 20px;
+
+                border-radius: 17px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+
+                gap: 20px;
+            }
+
+            .payment-options {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-option label {
+                min-height: 52px;
+            }
+
+            .contact-panel {
+                right: 15px;
+
+                bottom: 15px;
+            }
+
+            .success-box {
+                padding: 25px 20px;
+            }
+        }
+
+        /* =====================================================
+           SMALL MOBILE
+        ===================================================== */
+
+        @media (max-width: 400px) {
+
+            .checkout-nav-right {
+                display: grid;
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+                width: 100%;
+            }
+
+            .checkout-nav-link {
+                text-align: center;
+
+                padding: 7px;
+            }
+
+            .connect-hub-btn {
+                width: 100%;
+            }
+
+            .checkout-page-header h1 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-    <!-- Header Navbar Section -->
-    <header class="navbar">
-        <div class="nav-left">
-            <div class="logo">🦅 ShopNova</div>
-            <div class="search-container">
-                <input type="text" placeholder="Search elite collections...">
-                <button class="search-btn">🔍</button>
-            </div>
+    <!-- =====================================================
+         TOP TICKER
+    ===================================================== -->
+
+    <div class="checkout-ticker">
+        <div class="ticker-track">
+            ✨ ShopNova • Secure Shopping • Premium Collections • Fast Delivery • Easy Checkout • ShopNova • Secure Shopping • Premium Collections • Fast Delivery • Easy Checkout ✨
         </div>
-        <nav class="nav-right">
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="products.html" class="nav-link">Products</a>
-            <a href="cart.html" class="nav-link">Cart</a>
-            <a href="checkout.html" class="nav-link active">Checkout</a>
-            <button class="connect-hub-btn">Connect Hub 🌐</button>
+    </div>
+
+
+    <!-- =====================================================
+         NAVBAR
+    ===================================================== -->
+
+    <header class="checkout-navbar">
+
+        <div class="checkout-nav-left">
+
+            <a href="index.html" class="checkout-logo">
+                🦅 ShopNova
+            </a>
+
+            <form
+                class="checkout-search"
+                onsubmit="handleSearch(event)"
+            >
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search elite collections..."
+                    autocomplete="off"
+                >
+
+                <button type="submit">
+                    🔍
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <nav class="checkout-nav-right">
+
+            <a
+                href="index.html"
+                class="checkout-nav-link"
+            >
+                Home
+            </a>
+
+            <a
+                href="products.html"
+                class="checkout-nav-link"
+            >
+                Products
+            </a>
+
+            <a
+                href="cart.html"
+                class="checkout-nav-link"
+            >
+                Cart 🛒
+            </a>
+
+            <a
+                href="checkout.html"
+                class="checkout-nav-link active"
+            >
+                Checkout
+            </a>
+
+            <button
+                type="button"
+                class="connect-hub-btn"
+                id="connectButton"
+            >
+                Connect Hub 🌐
+            </button>
+
         </nav>
+
     </header>
 
-    <!-- Main Secure Checkout Wrapper -->
-    <main class="checkout-wrapper">
-        <h1 class="checkout-main-title">💳 Secure Checkout</h1>
 
-        <div class="checkout-container-box">
-            <h2 class="form-section-title">Shipping & Payment Details</h2>
-            
-            <form id="checkout-form" onsubmit="handlePlaceOrder(event)">
-                
-                <!-- Full Name Input Group -->
-                <div class="input-group">
-                    <label for="full-name">Full Name</label>
-                    <input type="text" id="full-name" placeholder="Enter your full name" required>
-                </div>
+    <!-- =====================================================
+         PAGE HEADER
+    ===================================================== -->
 
-                <!-- Delivery Address Input Group -->
-                <div class="input-group">
-                    <label for="address">Delivery Address</label>
-                    <input type="text" id="address" placeholder="Enter your delivery address" required>
-                </div>
+    <section class="checkout-page-header">
 
-                <!-- Two-Column Row for Contact Fields -->
-                <div class="form-row-two-col">
-                    <div class="input-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" placeholder="Enter your phone number" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" placeholder="Enter your email address" required>
-                    </div>
-                </div>
-
-                <!-- Payment Selection Dropdown Container -->
-                <div class="input-group">
-                    <label for="payment-method">Payment Method</label>
-                    <select id="payment-method" required>
-                        <option value="" disabled selected>Select Payment Method</option>
-                        <option value="upi">UPI (GPay / PhonePe / Paytm)</option>
-                        <option value="card">Credit / Debit Card</option>
-                        <option value="netbanking">Net Banking</option>
-                        <option value="cod">Cash on Delivery (COD)</option>
-                    </select>
-                </div>
-
-                <!-- Form Submit Action Button -->
-                <button type="submit" class="btn-place-order">Pay & Place Order →</button>
-            </form>
+        <div class="checkout-icon">
+            💳
         </div>
+
+        <h1>
+            Secure Checkout
+        </h1>
+
+        <p>
+            Complete your details below to place your ShopNova order safely and easily.
+        </p>
+
+    </section>
+
+
+    <!-- =====================================================
+         CHECKOUT CONTENT
+    ===================================================== -->
+
+    <main class="checkout-wrapper">
+
+
+        <!-- =================================================
+             CUSTOMER DETAILS
+        ================================================= -->
+
+        <section class="checkout-card">
+
+            <div class="checkout-card-title">
+
+                <div class="checkout-card-title-icon">
+                    📦
+                </div>
+
+                <div>
+                    <h2>
+                        Shipping & Payment Details
+                    </h2>
+
+                    <p>
+                        Enter your delivery information
+                    </p>
+                </div>
+
+            </div>
+
+
+            <form
+                class="checkout-form"
+                id="checkoutForm"
+            >
+
+                <!-- NAME + PHONE -->
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="fullName">
+                            Full Name
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="fullName"
+                            name="fullName"
+                            placeholder="Enter your full name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="phone">
+                            Phone Number
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="Enter your phone number"
+                            pattern="[0-9]{10}"
+                            maxlength="10"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                        <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email address"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- ADDRESS -->
+
+                <div class="form-group">
+
+                    <label for="address">
+                        Delivery Address
+                        <span class="required">*</span>
+                    </label>
+
+                    <textarea
+                        id="address"
+                        name="address"
+                        placeholder="Enter your complete delivery address"
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- CITY + PINCODE -->
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="city">
+                            City
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="city"
+                            name="city"
+                            placeholder="Enter your city"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="pincode">
+                            PIN Code
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="pincode"
+                            name="pincode"
+                            placeholder="Enter 6-digit PIN code"
+                            pattern="[0-9]{6}"
+                            maxlength="6"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- PAYMENT -->
+
+                <div class="payment-section">
+
+                    <h3>
+                        Select Payment Method
+                    </h3>
+
+                    <div class="payment-options">
+
+                        <div class="payment-option">
+
+                            <input
+                                type="radio"
+                                id="cod"
+                                name="payment"
+                                value="Cash on Delivery"
+                                required
+                            >
+
+                            <label for="cod">
+                                💵 Cash on Delivery
+                            </label>
+
+                        </div>
+
+
+                        <div class="payment-option">
+
+                            <input
+                                type="radio"
+                                id="upi"
+                                name="payment"
+                                value="UPI"
+                            >
+
+                            <label for="upi">
+                                📱 UPI
+                            </label>
+
+                        </div>
+
+
+                        <div class="payment-option">
+
+                            <input
+                                type="radio"
+                                id="card"
+                                name="payment"
+                                value="Card"
+                            >
+
+                            <label for="card">
+                                💳 Card
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PLACE ORDER -->
+
+                <button
+                    type="submit"
+                    class="place-order-btn"
+                >
+                    Pay & Place Order →
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- =================================================
+             ORDER SUMMARY
+        ================================================= -->
+
+        <aside class="summary-card">
+
+            <h2>
+                Order Summary
+            </h2>
+
+
+            <div
+                class="summary-items"
+                id="summaryItems"
+            >
+                <!-- Cart products inserted by JavaScript -->
+            </div>
+
+
+            <div class="summary-line">
+
+                <span>
+                    Subtotal
+                </span>
+
+                <strong id="subtotal">
+                    ₹0
+                </strong>
+
+            </div>
+
+
+            <div class="summary-line">
+
+                <span>
+                    Delivery
+                </span>
+
+                <strong id="delivery">
+                    FREE
+                </strong>
+
+            </div>
+
+
+            <div class="summary-total">
+
+                <span>
+                    Total
+                </span>
+
+                <span id="total">
+                    ₹0
+                </span>
+
+            </div>
+
+
+            <div class="secure-message">
+                🔒 Your checkout information is handled securely.
+            </div>
+
+        </aside>
+
     </main>
 
-    <!-- Footer Branding Section -->
-    <footer class="cart-footer">
-        <p>© 2026 ShopNova • Executive Board Directives • CEO & Founder: Anuradha</p>
+
+    <!-- =====================================================
+         CONTACT PANEL
+    ===================================================== -->
+
+    <div
+        class="contact-panel"
+        id="contactPanel"
+    >
+
+        <button
+            type="button"
+            class="close-contact"
+            id="closeContact"
+        >
+            ✕
+        </button>
+
+        <h3>
+            Connect with ShopNova
+        </h3>
+
+        <p>
+            Choose a platform to connect with us.
+        </p>
+
+        <div class="contact-links">
+
+            <a
+                href="https://wa.me/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                💬 WhatsApp
+            </a>
+
+            <a
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                📸 Instagram
+            </a>
+
+            <a
+                href="https://www.youtube.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                ▶️ YouTube
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         ORDER SUCCESS POPUP
+    ===================================================== -->
+
+    <div
+        class="success-message"
+        id="successMessage"
+    >
+
+        <div class="success-box">
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h2>
+                Order Placed Successfully!
+            </h2>
+
+            <p>
+                Thank you for shopping with ShopNova.
+                Your order has been received.
+            </p>
+
+            <button
+                type="button"
+                class="success-close"
+                id="successClose"
+            >
+                Continue Shopping
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
+
+    <footer class="checkout-footer">
+
+        <p>
+            © 2026 ShopNova • Executive Board Directives • CEO & Founder: Anuradha
+        </p>
+
     </footer>
 
-    <!-- Hooks up script file interactions -->
-    <script src="script.js"></script>
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ===================================================== -->
+
+    <script>
+
+        /* =====================================================
+           SEARCH
+        ===================================================== */
+
+        function handleSearch(event) {
+
+            event.preventDefault();
+
+            const input =
+                document.getElementById("searchInput");
+
+            const search =
+                input.value.trim();
+
+            if (!search) {
+                input.focus();
+                return;
+            }
+
+            window.location.href =
+                "products.html?search=" +
+                encodeURIComponent(search);
+        }
+
+
+        /* =====================================================
+           CART
+        ===================================================== */
+
+        function getCart() {
+
+            const possibleKeys = [
+                "shopnova_cart",
+                "cart",
+                "cartItems"
+            ];
+
+            for (const key of possibleKeys) {
+
+                try {
+
+                    const stored =
+                        localStorage.getItem(key);
+
+                    if (stored) {
+
+                        const parsed =
+                            JSON.parse(stored);
+
+                        if (Array.isArray(parsed)) {
+                            return parsed;
+                        }
+
+                    }
+
+                } catch (error) {
+
+                    console.log(
+                        "Cart read error:",
+                        error
+                    );
+
+                }
+
+            }
+
+            return [];
+        }
+
+
+        /* =====================================================
+           MONEY
+        ===================================================== */
+
+        function formatPrice(value) {
+
+            const number =
+                Number(value) || 0;
+
+            return "₹" +
+                number.toLocaleString("en-IN");
+        }
+
+
+        /* =====================================================
+           FIND PRODUCT PRICE
+        ===================================================== */
+
+        function getItemPrice(item) {
+
+            return Number(
+                item.price ??
+                item.amount ??
+                item.cost ??
+                0
+            ) || 0;
+        }
+
+
+        /* =====================================================
+           FIND PRODUCT NAME
+        ===================================================== */
+
+        function getItemName(item) {
+
+            return (
+                item.name ||
+                item.title ||
+                item.productName ||
+                "ShopNova Product"
+            );
+        }
+
+
+        /* =====================================================
+           FIND QUANTITY
+        ===================================================== */
+
+        function getItemQuantity(item) {
+
+            return Number(
+                item.quantity ??
+                item.qty ??
+                1
+            ) || 1;
+        }
+
+
+        /* =====================================================
+           DISPLAY ORDER SUMMARY
+        ===================================================== */
+
+        function displayOrderSummary() {
+
+            const cart =
+                getCart();
+
+            const container =
+                document.getElementById(
+                    "summaryItems"
+                );
+
+            const subtotalElement =
+                document.getElementById(
+                    "subtotal"
+                );
+
+            const totalElement =
+                document.getElementById(
+                    "total"
+                );
+
+
+            container.innerHTML = "";
+
+
+            if (!cart.length) {
+
+                container.innerHTML = `
+                    <div class="summary-empty">
+                        🛒 Your cart is empty.
+                        <br><br>
+                        <a
+                            href="products.html"
+                            style="
+                                color:#2563eb;
+                                font-weight:800;
+                            "
+                        >
+                            Continue Shopping →
+                        </a>
+                    </div>
+                `;
+
+                subtotalElement.textContent =
+                    "₹0";
+
+                totalElement.textContent =
+                    "₹0";
+
+                return;
+            }
+
+
+            let subtotal = 0;
+
+
+            cart.forEach(function(item) {
+
+                const price =
+                    getItemPrice(item);
+
+                const quantity =
+                    getItemQuantity(item);
+
+                const name =
+                    getItemName(item);
+
+                const itemTotal =
+                    price * quantity;
+
+                subtotal += itemTotal;
+
+
+                const div =
+                    document.createElement(
+                        "div"
+                    );
+
+                div.className =
+                    "summary-item";
+
+
+                div.innerHTML = `
+
+                    <div>
+
+                        <div class="summary-item-name">
+                            ${escapeHTML(name)}
+                        </div>
+
+                        <div class="summary-item-qty">
+                            Quantity: ${quantity}
+                        </div>
+
+                    </div>
+
+                    <div class="summary-item-price">
+                        ${formatPrice(itemTotal)}
+                    </div>
+
+                `;
+
+
+                container.appendChild(div);
+
+            });
+
+
+            subtotalElement.textContent =
+                formatPrice(subtotal);
+
+            totalElement.textContent =
+                formatPrice(subtotal);
+        }
+
+
+        /* =====================================================
+           HTML ESCAPE
+        ===================================================== */
+
+        function escapeHTML(value) {
+
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+
+        /* =====================================================
+           CONTACT HUB
+        ===================================================== */
+
+        const connectButton =
+            document.getElementById(
+                "connectButton"
+            );
+
+        const contactPanel =
+            document.getElementById(
+                "contactPanel"
+            );
+
+        const closeContact =
+            document.getElementById(
+                "closeContact"
+            );
+
+
+        connectButton.addEventListener(
+            "click",
+            function(event) {
+
+                event.stopPropagation();
+
+                contactPanel.classList.toggle(
+                    "show"
+                );
+
+            }
+        );
+
+
+        closeContact.addEventListener(
+            "click",
+            function() {
+
+                contactPanel.classList.remove(
+                    "show"
+                );
+
+            }
+        );
+
+
+        document.addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    !contactPanel.contains(event.target) &&
+                    !connectButton.contains(event.target)
+                ) {
+
+                    contactPanel.classList.remove(
+                        "show"
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           CHECKOUT FORM
+        ===================================================== */
+
+        const checkoutForm =
+            document.getElementById(
+                "checkoutForm"
+            );
+
+        checkoutForm.addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                const cart =
+                    getCart();
+
+
+                if (!cart.length) {
+
+                    alert(
+                        "Your cart is empty. Please add a product before placing an order."
+                    );
+
+                    window.location.href =
+                        "products.html";
+
+                    return;
+                }
+
+
+                const payment =
+                    document.querySelector(
+                        'input[name="payment"]:checked'
+                    );
+
+
+                if (!payment) {
+
+                    alert(
+                        "Please select a payment method."
+                    );
+
+                    return;
+                }
+
+
+                /*
+                    Demo checkout:
+                    This does not process real payments.
+                */
+
+                document
+                    .getElementById(
+                        "successMessage"
+                    )
+                    .classList.add("show");
+
+
+                /*
+                    Clear cart after successful
+                    demo order.
+                */
+
+                localStorage.removeItem(
+                    "shopnova_cart"
+                );
+
+                localStorage.removeItem(
+                    "cart"
+                );
+
+                localStorage.removeItem(
+                    "cartItems"
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           SUCCESS BUTTON
+        ===================================================== */
+
+        document
+            .getElementById("successClose")
+            .addEventListener(
+                "click",
+                function() {
+
+                    window.location.href =
+                        "products.html";
+
+                }
+            );
+
+
+        /* =====================================================
+           INITIAL LOAD
+        ===================================================== */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function() {
+
+                displayOrderSummary();
+
+            }
+        );
+
+    </script>
+
 </body>
 </html>
