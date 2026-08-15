@@ -4,334 +4,303 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ShopNova - Premium Shopping</title>
+    <title>ShopNova | Shop Smart • Live Better</title>
+
+    <meta
+        name="description"
+        content="ShopNova - premium products, smart shopping and everyday essentials."
+    >
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- =========================================================
-         TOP NAVIGATION
-    ========================================================== -->
-    <header class="shopnova-header">
+<!-- =========================================================
+     HEADER
+========================================================= -->
 
-        <div class="navbar">
+<header class="site-header">
 
-            <!-- SHOPNOVA LOGO -->
-            <a href="index.html" class="brand-logo" aria-label="ShopNova Home">
+    <div class="header-inner">
 
-                <span class="logo-dove-wrap">
+        <!-- LOGO -->
+        <a href="index.html" class="brand-logo">
+            <img
+                src="images/shopnova-logo.png"
+                alt="ShopNova"
+                onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='flex';"
+            >
 
-                    <svg class="logo-dove" viewBox="0 0 100 70" aria-hidden="true">
+            <span id="logoFallback" class="logo-fallback">
+                Shop<span>Nova</span>
+            </span>
+        </a>
 
-                        <!-- Dove body -->
-                        <ellipse
-                            class="dove-body"
-                            cx="53"
-                            cy="36"
-                            rx="24"
-                            ry="15"
-                        />
 
-                        <!-- Dove head -->
-                        <circle
-                            class="dove-head"
-                            cx="73"
-                            cy="23"
-                            r="10"
-                        />
+        <!-- SEARCH -->
+        <form class="search-box" id="searchForm">
 
-                        <!-- Beak -->
-                        <path
-                            class="dove-beak"
-                            d="M82 22 L96 27 L82 29 Z"
-                        />
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Search products..."
+                autocomplete="off"
+            >
 
-                        <!-- Wing -->
-                        <path
-                            class="dove-wing"
-                            d="M52 34
-                               C35 12, 18 17, 14 31
-                               C25 27, 37 39, 52 45
-                               C59 48, 64 42, 52 34 Z"
-                        />
+            <button
+                type="submit"
+                class="search-button"
+                aria-label="Search products"
+            >
+                🔍
+            </button>
 
-                        <!-- Olive branch -->
-                        <path
-                            class="olive-branch"
-                            d="M16 50
-                               C31 48, 42 52, 55 61"
-                        />
+        </form>
 
-                        <!-- Olive leaves -->
-                        <ellipse class="olive-leaf leaf1"
-                                 cx="25" cy="47"
-                                 rx="6" ry="3"
-                                 transform="rotate(-25 25 47)" />
 
-                        <ellipse class="olive-leaf leaf2"
-                                 cx="34" cy="49"
-                                 rx="6" ry="3"
-                                 transform="rotate(25 34 49)" />
+        <!-- NAVIGATION -->
+        <nav class="main-nav">
 
-                        <ellipse class="olive-leaf leaf3"
-                                 cx="43" cy="54"
-                                 rx="6" ry="3"
-                                 transform="rotate(-20 43 54)" />
-
-                        <ellipse class="olive-leaf leaf4"
-                                 cx="51" cy="57"
-                                 rx="6" ry="3"
-                                 transform="rotate(25 51 57)" />
-
-                    </svg>
-
-                </span>
-
-                <span class="brand-name">ShopNova</span>
-
+            <a href="index.html" class="nav-link active">
+                Home
             </a>
 
+            <a href="products.html" class="nav-link">
+                Products
+            </a>
 
-            <!-- SEARCH -->
-            <form class="search-box" id="search-form">
+            <a href="cart.html" class="nav-link">
+                Cart
+            </a>
 
-                <input
-                    type="search"
-                    id="search-input"
-                    placeholder="Search products..."
-                    autocomplete="off"
-                >
-
-                <button
-                    type="submit"
-                    class="search-button"
-                    aria-label="Search"
-                >
-                    🔍
-                </button>
-
-            </form>
-
-
-            <!-- NAVIGATION -->
-            <nav class="main-navigation">
-
-                <a href="index.html" class="nav-item active">
-                    Home
-                </a>
-
-                <a href="products.html" class="nav-item">
-                    Products
-                </a>
-
-                <a href="cart.html" class="nav-item">
-                    Cart
-                </a>
-
-                <a href="checkout.html" class="nav-item">
-                    Checkout
-                </a>
-
-                <button
-                    type="button"
-                    class="contact-button"
-                    id="contact-button"
-                >
-                    Contact
-                </button>
-
-            </nav>
-
-        </div>
-
-    </header>
-
-
-    <!-- =========================================================
-         CONTACT PANEL
-    ========================================================== -->
-    <div class="contact-overlay" id="contact-overlay">
-
-        <div class="contact-panel" id="contact-panel">
+            <a href="checkout.html" class="nav-link">
+                Checkout
+            </a>
 
             <button
                 type="button"
-                class="contact-close"
-                id="contact-close"
-                aria-label="Close"
+                class="contact-button"
+                id="contactButton"
             >
-                ×
+                Contact
             </button>
 
-            <div class="contact-panel-dove">
+        </nav>
 
-                <svg class="contact-dove" viewBox="0 0 100 70">
+    </div>
 
-                    <ellipse
-                        class="dove-body"
-                        cx="53"
-                        cy="36"
-                        rx="24"
-                        ry="15"
-                    />
+</header>
 
-                    <circle
-                        class="dove-head"
-                        cx="73"
-                        cy="23"
-                        r="10"
-                    />
 
-                    <path
-                        class="dove-beak"
-                        d="M82 22 L96 27 L82 29 Z"
-                    />
+<!-- =========================================================
+     CONTACT PANEL
+========================================================= -->
 
-                    <path
-                        class="dove-wing"
-                        d="M52 34
-                           C35 12, 18 17, 14 31
-                           C25 27, 37 39, 52 45
-                           C59 48, 64 42, 52 34 Z"
-                    />
+<div
+    class="contact-overlay"
+    id="contactOverlay"
+>
 
-                    <path
-                        class="olive-branch"
-                        d="M16 50
-                           C31 48, 42 52, 55 61"
-                    />
+    <div class="contact-panel">
 
-                    <ellipse class="olive-leaf leaf1"
-                             cx="25" cy="47"
-                             rx="6" ry="3"
-                             transform="rotate(-25 25 47)" />
+        <button
+            class="contact-close"
+            id="contactClose"
+            aria-label="Close contact panel"
+        >
+            ×
+        </button>
 
-                    <ellipse class="olive-leaf leaf2"
-                             cx="34" cy="49"
-                             rx="6" ry="3"
-                             transform="rotate(25 34 49)" />
+        <div class="contact-icon">
+            💬
+        </div>
 
-                    <ellipse class="olive-leaf leaf3"
-                             cx="43" cy="54"
-                             rx="6" ry="3"
-                             transform="rotate(-20 43 54)" />
+        <p class="contact-label">
+            SHOPNOVA
+        </p>
 
-                    <ellipse class="olive-leaf leaf4"
-                             cx="51" cy="57"
-                             rx="6" ry="3"
-                             transform="rotate(25 51 57)" />
+        <h2>
+            Connect with us
+        </h2>
 
-                </svg>
+        <p class="contact-description">
+            Stay connected with ShopNova for products, support and updates.
+        </p>
 
-            </div>
 
-            <h2>Connect with ShopNova</h2>
+        <div class="social-links">
 
-            <p>
-                Stay connected with our latest collections,
-                offers and updates.
-            </p>
+            <a
+                href="https://wa.me/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-link whatsapp"
+            >
+                <span>💬</span>
+                <div>
+                    <strong>WhatsApp</strong>
+                    <small>Chat with us</small>
+                </div>
+            </a>
 
-            <div class="social-links">
 
-                <a href="contact.html" class="social-link">
-                    <span>💬</span>
-                    <div>
-                        <strong>Contact Us</strong>
-                        <small>Send us a message</small>
-                    </div>
-                </a>
+            <a
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-link instagram"
+            >
+                <span>📷</span>
+                <div>
+                    <strong>Instagram</strong>
+                    <small>Follow ShopNova</small>
+                </div>
+            </a>
 
-                <a href="#" class="social-link">
-                    <span>📱</span>
-                    <div>
-                        <strong>WhatsApp</strong>
-                        <small>Chat with us</small>
-                    </div>
-                </a>
 
-                <a href="#" class="social-link">
-                    <span>📷</span>
-                    <div>
-                        <strong>Instagram</strong>
-                        <small>Follow ShopNova</small>
-                    </div>
-                </a>
+            <a
+                href="https://www.youtube.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-link youtube"
+            >
+                <span>▶</span>
+                <div>
+                    <strong>YouTube</strong>
+                    <small>Watch our updates</small>
+                </div>
+            </a>
 
-                <a href="#" class="social-link">
-                    <span>▶️</span>
-                    <div>
-                        <strong>YouTube</strong>
-                        <small>Watch our updates</small>
-                    </div>
-                </a>
 
-            </div>
+            <a
+                href="mailto:support@shopnova.com"
+                class="social-link email"
+            >
+                <span>✉</span>
+                <div>
+                    <strong>Email</strong>
+                    <small>Send us a message</small>
+                </div>
+            </a>
 
         </div>
 
     </div>
 
-
-    <!-- =========================================================
-         MAIN CONTENT
-    ========================================================== -->
-    <main>
+</div>
 
 
-        <!-- =====================================================
-             HERO SECTION
-        ====================================================== -->
-        <section class="hero-section">
 
-            <div class="hero-content">
+<!-- =========================================================
+     MAIN
+========================================================= -->
 
-                <div class="hero-label">
+<main>
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="hero-section">
+
+        <div class="hero-content">
+
+            <!-- LEFT SIDE -->
+
+            <div class="hero-copy">
+
+                <p class="section-label">
                     SHOPNOVA COLLECTIONS
-                </div>
+                </p>
 
                 <h1>
-                    One marketplace.
-                    <br>
-                    Endless possibilities.
+                    One marketplace.<br>
+                    Endless<br>
+                    possibilities.
                 </h1>
 
-                <p>
+                <p class="hero-description">
                     Explore technology, fashion, lifestyle essentials
                     and premium products designed for everyday moments.
                 </p>
 
 
-                <!-- THREE VALUE BOXES -->
-                <div class="hero-values">
+                <!-- VALUE CARDS -->
 
-                    <div class="value-box">
-                        <span>01</span>
-                        <strong>Quality</strong>
+                <div class="value-cards">
+
+                    <div class="value-card">
+
+                        <span class="value-number">
+                            01
+                        </span>
+
+                        <strong>
+                            Quality
+                        </strong>
+
+                        <span class="value-icon">
+                            ☆
+                        </span>
+
                     </div>
 
-                    <div class="value-box">
-                        <span>02</span>
-                        <strong>Choice</strong>
+
+                    <div class="value-card">
+
+                        <span class="value-number">
+                            02
+                        </span>
+
+                        <strong>
+                            Choice
+                        </strong>
+
+                        <span class="value-icon">
+                            ✓
+                        </span>
+
                     </div>
 
-                    <div class="value-box">
-                        <span>03</span>
-                        <strong>Value</strong>
+
+                    <div class="value-card">
+
+                        <span class="value-number">
+                            03
+                        </span>
+
+                        <strong>
+                            Value
+                        </strong>
+
+                        <span class="value-icon">
+                            ◇
+                        </span>
+
                     </div>
 
                 </div>
 
 
+                <!-- HERO BUTTONS -->
+
                 <div class="hero-buttons">
 
-                    <a href="products.html" class="primary-button">
-                        Start Shopping →
+                    <a
+                        href="products.html"
+                        class="primary-button"
+                    >
+                        Start Shopping
+                        <span>→</span>
                     </a>
 
-                    <a href="cart.html" class="secondary-button">
+
+                    <a
+                        href="cart.html"
+                        class="secondary-button"
+                    >
                         View Cart
                     </a>
 
@@ -340,355 +309,442 @@
             </div>
 
 
-            <!-- HERO LOGO CARD -->
+
+            <!-- RIGHT SIDE -->
+
             <div class="hero-visual">
 
                 <div class="visual-circle circle-one"></div>
+
                 <div class="visual-circle circle-two"></div>
+
                 <div class="visual-circle circle-three"></div>
 
-                <div class="hero-logo-card">
 
-                    <div class="hero-dove-container">
+                <div class="visual-lines"></div>
 
-                        <svg class="hero-dove" viewBox="0 0 100 70">
 
-                            <ellipse
-                                class="dove-body"
-                                cx="53"
-                                cy="36"
-                                rx="24"
-                                ry="15"
-                            />
+                <div class="logo-card">
 
-                            <circle
-                                class="dove-head"
-                                cx="73"
-                                cy="23"
-                                r="10"
-                            />
+                    <div class="floating-dove">
 
-                            <path
-                                class="dove-beak"
-                                d="M82 22 L96 27 L82 29 Z"
-                            />
-
-                            <path
-                                class="dove-wing"
-                                d="M52 34
-                                   C35 12, 18 17, 14 31
-                                   C25 27, 37 39, 52 45
-                                   C59 48, 64 42, 52 34 Z"
-                            />
-
-                            <path
-                                class="olive-branch"
-                                d="M16 50
-                                   C31 48, 42 52, 55 61"
-                            />
-
-                            <ellipse class="olive-leaf leaf1"
-                                     cx="25" cy="47"
-                                     rx="6" ry="3"
-                                     transform="rotate(-25 25 47)" />
-
-                            <ellipse class="olive-leaf leaf2"
-                                     cx="34" cy="49"
-                                     rx="6" ry="3"
-                                     transform="rotate(25 34 49)" />
-
-                            <ellipse class="olive-leaf leaf3"
-                                     cx="43" cy="54"
-                                     rx="6" ry="3"
-                                     transform="rotate(-20 43 54)" />
-
-                            <ellipse class="olive-leaf leaf4"
-                                     cx="51" cy="57"
-                                     rx="6" ry="3"
-                                     transform="rotate(25 51 57)" />
-
-                        </svg>
+                        <img
+                            src="images/shopnova-logo.png"
+                            alt="ShopNova Dove Logo"
+                        >
 
                     </div>
 
-                    <h2>ShopNova</h2>
-
-                    <p>
-                        Premium shopping for modern life.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             QUICK FEATURES
-        ====================================================== -->
-        <section class="features-section">
-
-            <div class="feature-card">
-
-                <div class="feature-icon">🚚</div>
-
-                <div>
-                    <h3>Fast Delivery</h3>
-                    <p>Reliable doorstep delivery</p>
-                </div>
-
-            </div>
-
-
-            <div class="feature-card">
-
-                <div class="feature-icon">🔒</div>
-
-                <div>
-                    <h3>Secure Shopping</h3>
-                    <p>Safe and simple experience</p>
-                </div>
-
-            </div>
-
-
-            <div class="feature-card">
-
-                <div class="feature-icon">⭐</div>
-
-                <div>
-                    <h3>Premium Collections</h3>
-                    <p>Products selected for you</p>
-                </div>
-
-            </div>
-
-
-            <div class="feature-card">
-
-                <div class="feature-icon">💙</div>
-
-                <div>
-                    <h3>Customer First</h3>
-                    <p>Support when you need it</p>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             SIMPLE SHOPPING SECTION
-        ====================================================== -->
-        <section class="shopping-section">
-
-            <div class="section-heading">
-
-                <div>
-
-                    <span>SHOPNOVA</span>
-
                     <h2>
-                        Find something you love today.
+                        ShopNova
                     </h2>
 
                     <p>
-                        Browse our latest collections and discover
-                        something made for you.
+                        Shop Smart • Live Better
                     </p>
 
                 </div>
 
-                <a href="products.html" class="browse-button">
-                    Browse Products →
-                </a>
-
             </div>
 
-        </section>
+        </div>
+
+    </section>
 
 
-    </main>
+
+    <!-- =====================================================
+         BENEFITS
+    ====================================================== -->
+
+    <section class="benefits-section">
+
+        <div class="benefit-item">
+
+            <div class="benefit-icon">
+                🚚
+            </div>
+
+            <div>
+                <h3>
+                    Fast Delivery
+                </h3>
+
+                <p>
+                    Reliable doorstep delivery
+                </p>
+            </div>
+
+        </div>
 
 
-    <!-- =========================================================
-         FOOTER
-    ========================================================== -->
-    <footer class="site-footer">
+        <div class="benefit-divider"></div>
 
-        <div class="footer-brand">
 
-            <a href="index.html" class="footer-logo">
+        <div class="benefit-item">
 
-                <span class="footer-dove">
+            <div class="benefit-icon">
+                🛡
+            </div>
 
-                    <svg viewBox="0 0 100 70">
+            <div>
+                <h3>
+                    Secure Shopping
+                </h3>
 
-                        <ellipse
-                            class="dove-body"
-                            cx="53"
-                            cy="36"
-                            rx="24"
-                            ry="15"
-                        />
+                <p>
+                    Safe and simple experience
+                </p>
+            </div>
 
-                        <circle
-                            class="dove-head"
-                            cx="73"
-                            cy="23"
-                            r="10"
-                        />
+        </div>
 
-                        <path
-                            class="dove-beak"
-                            d="M82 22 L96 27 L82 29 Z"
-                        />
 
-                        <path
-                            class="dove-wing"
-                            d="M52 34
-                               C35 12, 18 17, 14 31
-                               C25 27, 37 39, 52 45
-                               C59 48, 64 42, 52 34 Z"
-                        />
+        <div class="benefit-divider"></div>
 
-                        <path
-                            class="olive-branch"
-                            d="M16 50
-                               C31 48, 42 52, 55 61"
-                        />
 
-                    </svg>
+        <div class="benefit-item">
 
-                </span>
+            <div class="benefit-icon">
+                ✪
+            </div>
 
-                <strong>ShopNova</strong>
+            <div>
+                <h3>
+                    Premium Quality
+                </h3>
 
-            </a>
+                <p>
+                    Products you can trust
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="benefit-divider"></div>
+
+
+        <div class="benefit-item">
+
+            <div class="benefit-icon">
+                ♡
+            </div>
+
+            <div>
+                <h3>
+                    Customer Support
+                </h3>
+
+                <p>
+                    We're here to help
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         DARK CTA SECTION
+    ====================================================== -->
+
+    <section class="dark-cta">
+
+        <div class="cta-content">
+
+            <p class="cta-label">
+                SHOPNOVA
+            </p>
+
+            <h2>
+                Find something you love today.
+            </h2>
 
             <p>
-                Premium products for everyday moments.
+                Browse our latest collections and discover
+                something made for you.
             </p>
 
         </div>
 
 
+        <a
+            href="products.html"
+            class="cta-button"
+        >
+            Browse Products
+            <span>→</span>
+        </a>
+
+    </section>
+
+</main>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="site-footer">
+
+    <div class="footer-inner">
+
+
+        <!-- BRAND -->
+
+        <div class="footer-brand">
+
+            <a href="index.html" class="footer-logo">
+
+                <img
+                    src="images/shopnova-logo.png"
+                    alt="ShopNova"
+                    onerror="this.style.display='none';"
+                >
+
+            </a>
+
+            <p>
+                Your trusted marketplace for quality products,
+                great value and a better shopping experience.
+            </p>
+
+
+            <div class="footer-social">
+
+                <a
+                    href="https://www.instagram.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                >
+                    ◎
+                </a>
+
+                <a
+                    href="https://www.youtube.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="YouTube"
+                >
+                    ▶
+                </a>
+
+                <a
+                    href="https://wa.me/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="WhatsApp"
+                >
+                    ◉
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SHOP -->
+
         <div class="footer-column">
 
-            <h3>Shop</h3>
+            <h3>
+                Shop
+            </h3>
 
-            <a href="products.html">Products</a>
-            <a href="cart.html">Cart</a>
-            <a href="checkout.html">Checkout</a>
+            <a href="products.html">
+                Products
+            </a>
+
+            <a href="cart.html">
+                Cart
+            </a>
+
+            <a href="checkout.html">
+                Checkout
+            </a>
 
         </div>
 
+
+
+        <!-- COMPANY -->
 
         <div class="footer-column">
 
-            <h3>Support</h3>
+            <h3>
+                Company
+            </h3>
 
-            <a href="contact.html">Contact</a>
-            <a href="contact.html">Help Center</a>
+            <a href="index.html">
+                About ShopNova
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+            <a href="vendor.html">
+                Become a Vendor
+            </a>
 
         </div>
 
+
+
+        <!-- SUPPORT -->
 
         <div class="footer-column">
 
-            <h3>Connect</h3>
+            <h3>
+                Support
+            </h3>
 
-            <button
-                type="button"
-                class="footer-contact-button"
-                id="footer-contact-button"
-            >
-                Contact ShopNova
-            </button>
+            <a href="contact.html">
+                Contact Us
+            </a>
+
+            <a href="checkout.html">
+                Order Support
+            </a>
+
+            <a href="products.html">
+                Browse Products
+            </a>
 
         </div>
 
 
-        <div class="footer-bottom">
 
-            © 2026 ShopNova • Executive Board Directives • CEO & Founder: Anuradha
+        <!-- CONTACT -->
+
+        <div class="footer-column">
+
+            <h3>
+                Contact
+            </h3>
+
+            <p>
+                📞 Customer Support
+            </p>
+
+            <p>
+                ✉ support@shopnova.com
+            </p>
+
+            <p>
+                📍 India
+            </p>
 
         </div>
 
-    </footer>
+    </div>
 
 
-    <!-- =========================================================
-         HOME PAGE JAVASCRIPT
-    ========================================================== -->
-    <script>
+    <div class="footer-bottom">
 
-        /* =========================
-           SEARCH
-        ========================== */
+        <p>
+            © 2026 ShopNova • CEO & Founder: Anuradha
+        </p>
 
-        const searchForm = document.getElementById("search-form");
-        const searchInput = document.getElementById("search-input");
+    </div>
 
-        if (searchForm) {
+</footer>
 
-            searchForm.addEventListener("submit", function(event) {
 
-                event.preventDefault();
 
-                const searchValue = searchInput.value.trim();
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
 
-                if (searchValue === "") {
+<script>
 
-                    window.location.href = "products.html";
+document.addEventListener("DOMContentLoaded", function () {
 
-                    return;
-                }
+
+    /* =====================================================
+       SEARCH
+    ====================================================== */
+
+    const searchForm = document.getElementById("searchForm");
+    const searchInput = document.getElementById("searchInput");
+
+    if (searchForm && searchInput) {
+
+        searchForm.addEventListener("submit", function (event) {
+
+            event.preventDefault();
+
+            const query = searchInput.value.trim();
+
+            if (query.length > 0) {
 
                 window.location.href =
                     "products.html?search=" +
-                    encodeURIComponent(searchValue);
+                    encodeURIComponent(query);
 
-            });
+            } else {
 
-        }
-
-
-        /* =========================
-           CONTACT PANEL
-        ========================== */
-
-        const contactButton =
-            document.getElementById("contact-button");
-
-        const footerContactButton =
-            document.getElementById("footer-contact-button");
-
-        const contactOverlay =
-            document.getElementById("contact-overlay");
-
-        const contactClose =
-            document.getElementById("contact-close");
-
-
-        function openContactPanel() {
-
-            if (contactOverlay) {
-
-                contactOverlay.classList.add("show");
-
-                document.body.classList.add("contact-open");
+                window.location.href = "products.html";
 
             }
 
-        }
+        });
+
+    }
 
 
-        function closeContactPanel() {
 
-            if (contactOverlay) {
+    /* =====================================================
+       CONTACT PANEL
+    ====================================================== */
+
+    const contactButton =
+        document.getElementById("contactButton");
+
+    const contactOverlay =
+        document.getElementById("contactOverlay");
+
+    const contactClose =
+        document.getElementById("contactClose");
+
+
+    if (contactButton && contactOverlay) {
+
+        contactButton.addEventListener("click", function () {
+
+            contactOverlay.classList.add("show");
+
+            document.body.classList.add("contact-open");
+
+        });
+
+    }
+
+
+    if (contactClose && contactOverlay) {
+
+        contactClose.addEventListener("click", function () {
+
+            contactOverlay.classList.remove("show");
+
+            document.body.classList.remove("contact-open");
+
+        });
+
+    }
+
+
+    if (contactOverlay) {
+
+        contactOverlay.addEventListener("click", function (event) {
+
+            if (event.target === contactOverlay) {
 
                 contactOverlay.classList.remove("show");
 
@@ -696,71 +752,97 @@
 
             }
 
-        }
+        });
+
+    }
 
 
-        if (contactButton) {
+    document.addEventListener("keydown", function (event) {
 
-            contactButton.addEventListener(
-                "click",
-                openContactPanel
-            );
+        if (event.key === "Escape" && contactOverlay) {
 
-        }
+            contactOverlay.classList.remove("show");
 
-
-        if (footerContactButton) {
-
-            footerContactButton.addEventListener(
-                "click",
-                openContactPanel
-            );
+            document.body.classList.remove("contact-open");
 
         }
 
-
-        if (contactClose) {
-
-            contactClose.addEventListener(
-                "click",
-                closeContactPanel
-            );
-
-        }
+    });
 
 
-        if (contactOverlay) {
 
-            contactOverlay.addEventListener(
-                "click",
-                function(event) {
+    /* =====================================================
+       DOVE HOVER ANIMATION
+    ====================================================== */
 
-                    if (event.target === contactOverlay) {
+    const dove =
+        document.querySelector(".floating-dove");
 
-                        closeContactPanel();
+    if (dove) {
+
+        dove.addEventListener("mouseenter", function () {
+
+            dove.classList.add("dove-fly");
+
+        });
+
+        dove.addEventListener("mouseleave", function () {
+
+            setTimeout(function () {
+
+                dove.classList.remove("dove-fly");
+
+            }, 350);
+
+        });
+
+    }
+
+
+
+    /* =====================================================
+       SCROLL ANIMATION
+    ====================================================== */
+
+    const animatedItems =
+        document.querySelectorAll(
+            ".benefit-item, .dark-cta, .value-card"
+        );
+
+
+    const observer =
+        new IntersectionObserver(
+
+            function (entries) {
+
+                entries.forEach(function (entry) {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add("visible");
 
                     }
 
-                }
-            );
+                });
 
-        }
+            },
 
-
-        document.addEventListener(
-            "keydown",
-            function(event) {
-
-                if (event.key === "Escape") {
-
-                    closeContactPanel();
-
-                }
-
+            {
+                threshold: 0.12
             }
+
         );
 
-    </script>
+
+    animatedItems.forEach(function (item) {
+
+        observer.observe(item);
+
+    });
+
+});
+
+</script>
 
 </body>
 </html>
