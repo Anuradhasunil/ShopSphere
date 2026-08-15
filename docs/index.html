@@ -1,187 +1,890 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopNova - Home of Elite Collections</title>
+
+    <title>ShopNova - Shop Smart, Live Better</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <!-- ===== Independence Day Ticker ===== -->
-    <div class="independence-ticker-wrap">
-        <div class="ticker-content">
-            🇮🇳 ShopNova Wishes Everyone a Very Happy Independence Day • Celebrate the Spirit of Freedom with Pride & Honor • WE BUILD INDIA • ONE NATION • ONE FAMILY • ONE FUTURE 🇮🇳
-        </div>
+<!-- =========================================================
+     TOP ANNOUNCEMENT
+========================================================= -->
+<div class="top-announcement">
+    <div class="announcement-track">
+        <span>✨ Happy Independence Day • Celebrating the spirit of India • Freedom • Unity • Progress ✨</span>
+        <span>✨ Happy Independence Day • Celebrating the spirit of India • Freedom • Unity • Progress ✨</span>
+    </div>
+</div>
+
+
+<!-- =========================================================
+     STICKY HEADER
+========================================================= -->
+<header class="site-header">
+
+    <div class="header-inner">
+
+        <!-- LOGO -->
+        <a href="index.html" class="brand">
+            <img
+                src="images/shopnova-logo.png"
+                alt="ShopNova"
+                class="brand-logo"
+            >
+        </a>
+
+
+        <!-- SEARCH -->
+        <form class="search-box" id="searchForm">
+
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Search products..."
+                autocomplete="off"
+            >
+
+            <button
+                type="submit"
+                class="search-button"
+                aria-label="Search"
+            >
+                🔍
+            </button>
+
+        </form>
+
+
+        <!-- NAVIGATION -->
+        <nav class="main-navigation">
+
+            <a href="index.html" class="nav-item active">
+                Home
+            </a>
+
+            <a href="products.html" class="nav-item">
+                Products
+            </a>
+
+            <a href="cart.html" class="nav-item">
+                Cart
+            </a>
+
+            <a href="checkout.html" class="nav-item">
+                Checkout
+            </a>
+
+            <!-- SINGLE CONTACT BUTTON -->
+            <button
+                type="button"
+                class="contact-button"
+                id="contactButton"
+            >
+                Contact
+            </button>
+
+        </nav>
+
+        <!-- MOBILE MENU -->
+        <button
+            type="button"
+            class="mobile-menu-button"
+            id="mobileMenuButton"
+            aria-label="Open menu"
+        >
+            ☰
+        </button>
+
     </div>
 
-    <!-- ===== Navbar ===== -->
-    <header class="sticky-navbar">
-        <div class="nav-left">
-            <div class="logo">🦅 ShopNova</div>
+</header>
 
-            <form class="search-container" onsubmit="handleSearch(event)">
-                <input type="text" id="search-input" placeholder="Search elite collections...">
-                <button type="submit" class="search-btn">🔍</button>
-            </form>
+
+<!-- =========================================================
+     CONTACT / SOCIAL PANEL
+========================================================= -->
+<div class="contact-overlay" id="contactOverlay"></div>
+
+<section
+    class="contact-panel"
+    id="contactPanel"
+    aria-hidden="true"
+>
+
+    <button
+        type="button"
+        class="contact-close"
+        id="contactClose"
+        aria-label="Close contact panel"
+    >
+        ×
+    </button>
+
+    <div class="contact-panel-header">
+
+        <div class="contact-panel-icon">
+            💬
         </div>
 
-        <nav class="nav-right">
-            <a href="index.html" class="nav-link active">Home</a>
-            <a href="products.html" class="nav-link">Products</a>
-            <a href="cart.html" class="nav-link">Cart</a>
-            <a href="checkout.html" class="nav-link">Checkout</a>
-            <button class="connect-hub-btn">Connect Hub 🌐</button>
-        </nav>
-    </header>
+        <div>
+            <span class="small-label">SHOPNOVA</span>
+            <h2>Connect With Us</h2>
+        </div>
 
-    <!-- ===== Hero Section ===== -->
-    <section class="patriotic-montage-hero">
-        <div class="montage-content-wrapper">
+    </div>
 
-            <span class="azadi-badge">✨ 80th INDEPENDENCE DAY SPECTACULAR ✨</span>
+    <p class="contact-panel-text">
+        Stay connected with ShopNova for collections, offers and updates.
+    </p>
 
-            <div class="montage-brand-title">WE BUILD</div>
 
-            <h1 class="montage-main-heading">INDIA</h1>
+    <div class="social-links">
 
-            <p class="montage-sub-heading">ONE NATION • ONE FAMILY • ONE FUTURE</p>
+        <!-- Replace # with your real WhatsApp link -->
+        <a
+            href="#"
+            class="social-link whatsapp"
+            onclick="showContactMessage('WhatsApp')"
+        >
+            <span class="social-icon">💬</span>
 
-            <div class="montage-dedication-box">
-                <p>
-                    Saluting every hand that works, every heart that cares, and every dream that builds our incredible India.
-                </p>
-            </div>
+            <span>
+                <strong>WhatsApp</strong>
+                <small>Chat with us</small>
+            </span>
 
-            <div class="isro-floating">
-                🚀 ISRO • Space • Science • Innovation
-            </div>
+            <span class="social-arrow">→</span>
+        </a>
 
-            <div class="hero-action-buttons">
-                <a href="products.html" class="patriotic-cta-btn">
-                    Explore Independence Sale →
+
+        <!-- Replace # with your real Instagram link -->
+        <a
+            href="#"
+            class="social-link instagram"
+            onclick="showContactMessage('Instagram')"
+        >
+            <span class="social-icon">📷</span>
+
+            <span>
+                <strong>Instagram</strong>
+                <small>Follow ShopNova</small>
+            </span>
+
+            <span class="social-arrow">→</span>
+        </a>
+
+
+        <!-- Replace # with your real YouTube link -->
+        <a
+            href="#"
+            class="social-link youtube"
+            onclick="showContactMessage('YouTube')"
+        >
+            <span class="social-icon">▶</span>
+
+            <span>
+                <strong>YouTube</strong>
+                <small>Watch our updates</small>
+            </span>
+
+            <span class="social-arrow">→</span>
+        </a>
+
+
+        <!-- Email -->
+        <a
+            href="mailto:"
+            class="social-link email"
+            onclick="showContactMessage('Email')"
+        >
+            <span class="social-icon">✉</span>
+
+            <span>
+                <strong>Email</strong>
+                <small>Send us a message</small>
+            </span>
+
+            <span class="social-arrow">→</span>
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+<main>
+
+<section class="hero-section">
+
+    <div class="hero-container">
+
+        <!-- LEFT CONTENT -->
+        <div class="hero-content">
+
+            <span class="hero-label">
+                SHOPNOVA
+            </span>
+
+            <h1>
+                One marketplace.
+                <span>Endless possibilities.</span>
+            </h1>
+
+            <p>
+                Discover technology, fashion, lifestyle essentials
+                and premium collections selected for everyday life.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a
+                    href="products.html"
+                    class="primary-button"
+                >
+                    Start Shopping →
                 </a>
+
+                <a
+                    href="#collections"
+                    class="secondary-button"
+                >
+                    Explore Collections
+                </a>
+
             </div>
 
-        </div>
-    </section>
 
-    <!-- ===== We Build India Section ===== -->
-    <section class="we-build-india-section">
+            <!-- HERO STATS -->
+            <div class="hero-stats">
 
-        <div class="celebration-header">
-            <h2 class="main-celebration-title">WE BUILD INDIA</h2>
-            <p class="celebration-subtitle">One Nation • One Family • One Future</p>
-        </div>
+                <div class="hero-stat">
+                    <strong>01</strong>
+                    <span>Quality</span>
+                </div>
 
-        <div class="heroes-grid-layout">
+                <div class="hero-stat">
+                    <strong>02</strong>
+                    <span>Choice</span>
+                </div>
 
-            <div class="hero-profile-card">
-                <div class="card-number">01</div>
-                <div class="hero-card-icon shadow-saffron">🪖</div>
-                <h3>Indian Armed Forces</h3>
-                <p>Brave, fearless, and always ready to protect our land and peace.</p>
-            </div>
+                <div class="hero-stat">
+                    <strong>03</strong>
+                    <span>Value</span>
+                </div>
 
-            <div class="hero-profile-card">
-                <div class="card-number">02</div>
-                <div class="hero-card-icon shadow-saffron">🌾</div>
-                <h3>Farmers</h3>
-                <p>They feed the nation and are the true backbone of our country.</p>
-            </div>
-
-            <div class="hero-profile-card">
-                <div class="card-number">03</div>
-                <div class="hero-card-icon shadow-blue">🩺</div>
-                <h3>Doctors</h3>
-                <p>Healers who save lives with care, compassion, and dedication.</p>
-            </div>
-
-            <div class="hero-profile-card">
-                <div class="card-number">04</div>
-                <div class="hero-card-icon shadow-red">👷</div>
-                <h3>Employees</h3>
-                <p>Dedicated workers who help keep our cities clean, safe, and healthy every day.</p>
-            </div>
-
-            <div class="hero-profile-card">
-                <div class="card-number">05</div>
-                <div class="hero-card-icon shadow-purple">📚</div>
-                <h3>Students</h3>
-                <p>The future of India with big dreams and unlimited potential.</p>
-            </div>
-
-            <div class="hero-profile-card">
-                <div class="card-number">06</div>
-                <div class="hero-card-icon shadow-orange">🚀</div>
-                <h3>Youngsters</h3>
-                <p>The energy, passion, and innovation that take India to new heights.</p>
-            </div>
-
-            <div class="hero-profile-card">
-                <div class="card-number">07</div>
-                <div class="hero-card-icon shadow-pink">🧸</div>
-                <h3>Kids</h3>
-                <p>The smiles of today and the hope of a better and brighter tomorrow.</p>
-            </div>
-
-            <div class="hero-profile-card">
-                <div class="card-number">08</div>
-                <div class="hero-card-icon shadow-maroon">🏡</div>
-                <h3>Families</h3>
-                <p>Love, trust, and togetherness—the heart of a strong nation.</p>
             </div>
 
         </div>
 
-        <div class="tricolor-values-bar">
-            <div class="value-item">
-                <span class="bullet saffron-bg"></span>
-                <strong>Unity</strong>
-                <span class="value-sub">We stand united</span>
+
+        <!-- RIGHT VISUAL -->
+        <div class="hero-visual">
+
+            <div class="hero-glow"></div>
+
+            <div class="hero-image-card">
+
+                <img
+                    src="images/india-hero.jpg"
+                    alt="ShopNova India collection"
+                >
+
+                <div class="hero-image-overlay">
+
+                    <span>SHOPNOVA</span>
+
+                    <strong>
+                        Made for everyday moments.
+                    </strong>
+
+                    <small>
+                        Technology • Fashion • Lifestyle
+                    </small>
+
+                </div>
+
             </div>
 
-            <div class="value-item">
-                <span class="bullet saffron-bg"></span>
-                <strong>Integrity</strong>
-                <span class="value-sub">We do what is right</span>
+            <div class="floating-card floating-card-one">
+                ⭐
+                <span>
+                    Premium<br>
+                    Collections
+                </span>
             </div>
 
-            <div class="value-item">
-                <span class="bullet white-bg"></span>
-                <strong>Hard Work</strong>
-                <span class="value-sub">We believe in effort</span>
+            <div class="floating-card floating-card-two">
+                🚚
+                <span>
+                    Fast<br>
+                    Delivery
+                </span>
             </div>
 
-            <div class="value-item">
-                <span class="bullet white-bg"></span>
-                <strong>Progress</strong>
-                <span class="value-sub">We move forward</span>
-            </div>
-
-            <div class="value-item">
-                <span class="bullet green-bg"></span>
-                <strong>Sustainability</strong>
-                <span class="value-sub">We care for nature</span>
-            </div>
-
-            <div class="value-item">
-                <span class="bullet green-bg"></span>
-                <strong>Pride</strong>
-                <span class="value-sub">We are proud Indians</span>
-            </div>
         </div>
 
-    </section>
+    </div>
 
-    <!-- ===== Footer ===== -->
-    <footer class="cart-footer">
-        <p>© 2026 ShopNova • Executive Board Directives • CEO & Founder: Anuradha</p>
-    </footer>
+</section>
 
-    <script src="script.js"></script>
+
+<!-- =========================================================
+     BENEFITS
+========================================================= -->
+<section class="benefits-section">
+
+    <div class="benefits-container">
+
+        <div class="benefit-item">
+
+            <div class="benefit-icon">
+                🚚
+            </div>
+
+            <div>
+                <strong>Fast Delivery</strong>
+                <span>Reliable doorstep delivery</span>
+            </div>
+
+        </div>
+
+
+        <div class="benefit-item">
+
+            <div class="benefit-icon">
+                🔒
+            </div>
+
+            <div>
+                <strong>Secure Shopping</strong>
+                <span>Safe and simple experience</span>
+            </div>
+
+        </div>
+
+
+        <div class="benefit-item">
+
+            <div class="benefit-icon">
+                ⭐
+            </div>
+
+            <div>
+                <strong>Premium Collections</strong>
+                <span>Products selected for you</span>
+            </div>
+
+        </div>
+
+
+        <div class="benefit-item">
+
+            <div class="benefit-icon">
+                💙
+            </div>
+
+            <div>
+                <strong>Customer First</strong>
+                <span>Support when you need it</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     WE BUILD INDIA / PEOPLE SECTION
+     SHOWN ONLY ONCE
+========================================================= -->
+<section class="people-section">
+
+    <div class="section-heading">
+
+        <span>THE PEOPLE BEHIND PROGRESS</span>
+
+        <h2>
+            Together, we build a better tomorrow.
+        </h2>
+
+        <p>
+            Celebrating the people, dreams and everyday efforts
+            that make our country stronger.
+        </p>
+
+    </div>
+
+
+    <div class="people-grid">
+
+        <article class="people-card">
+            <div class="people-number">01</div>
+            <div class="people-icon">🪖</div>
+            <h3>Armed Forces</h3>
+            <p>Strength, courage and dedication.</p>
+        </article>
+
+
+        <article class="people-card">
+            <div class="people-number">02</div>
+            <div class="people-icon">🌾</div>
+            <h3>Farmers</h3>
+            <p>Growing the food that sustains families.</p>
+        </article>
+
+
+        <article class="people-card">
+            <div class="people-number">03</div>
+            <div class="people-icon">🩺</div>
+            <h3>Doctors</h3>
+            <p>Care, knowledge and compassion.</p>
+        </article>
+
+
+        <article class="people-card">
+            <div class="people-number">04</div>
+            <div class="people-icon">👷</div>
+            <h3>Employees</h3>
+            <p>Everyday work that keeps communities moving.</p>
+        </article>
+
+
+        <article class="people-card">
+            <div class="people-number">05</div>
+            <div class="people-icon">📚</div>
+            <h3>Students</h3>
+            <p>Learning today and shaping tomorrow.</p>
+        </article>
+
+
+        <article class="people-card">
+            <div class="people-number">06</div>
+            <div class="people-icon">🚀</div>
+            <h3>Youngsters</h3>
+            <p>Ideas, energy and innovation.</p>
+        </article>
+
+
+        <article class="people-card">
+            <div class="people-number">07</div>
+            <div class="people-icon">🧸</div>
+            <h3>Kids</h3>
+            <p>Curiosity, dreams and bright possibilities.</p>
+        </article>
+
+
+        <article class="people-card">
+            <div class="people-number">08</div>
+            <div class="people-icon">👨‍👩‍👧‍👦</div>
+            <h3>Families</h3>
+            <p>Love, support and togetherness.</p>
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     COLLECTIONS
+========================================================= -->
+<section
+    class="collections-section"
+    id="collections"
+>
+
+    <div class="collections-heading">
+
+        <div>
+            <span>SHOPNOVA COLLECTIONS</span>
+
+            <h2>
+                Explore our world.
+            </h2>
+
+            <p>
+                Find something you love today.
+            </p>
+        </div>
+
+        <a
+            href="products.html"
+            class="view-all-button"
+        >
+            View Products →
+        </a>
+
+    </div>
+
+
+    <div class="collection-grid">
+
+        <a
+            href="products.html"
+            class="collection-card collection-tech"
+        >
+            <div>
+                <span>01</span>
+                <h3>Technology</h3>
+                <p>Smart essentials for modern life.</p>
+            </div>
+        </a>
+
+
+        <a
+            href="products.html"
+            class="collection-card collection-fashion"
+        >
+            <div>
+                <span>02</span>
+                <h3>Fashion</h3>
+                <p>Style made for every moment.</p>
+            </div>
+        </a>
+
+
+        <a
+            href="products.html"
+            class="collection-card collection-lifestyle"
+        >
+            <div>
+                <span>03</span>
+                <h3>Lifestyle</h3>
+                <p>Everyday products with premium appeal.</p>
+            </div>
+        </a>
+
+
+        <a
+            href="products.html"
+            class="collection-card collection-luxury"
+        >
+            <div>
+                <span>04</span>
+                <h3>Premium</h3>
+                <p>Selected collections for you.</p>
+            </div>
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FINAL CTA
+========================================================= -->
+<section class="final-cta">
+
+    <div>
+
+        <span>SHOPNOVA</span>
+
+        <h2>
+            Find something you love today.
+        </h2>
+
+        <p>
+            Browse our latest collections and discover
+            something made for you.
+        </p>
+
+    </div>
+
+    <a
+        href="products.html"
+        class="final-cta-button"
+    >
+        Browse Products →
+    </a>
+
+</section>
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+<footer class="site-footer">
+
+    <div class="footer-inner">
+
+        <div class="footer-brand">
+
+            <img
+                src="images/shopnova-logo.png"
+                alt="ShopNova"
+            >
+
+            <p>
+                Shop Smart • Live Better
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>Shop</h3>
+
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="cart.html">Cart</a>
+            <a href="checkout.html">Checkout</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>Support</h3>
+
+            <button
+                type="button"
+                onclick="openContactPanel()"
+            >
+                Contact
+            </button>
+
+            <a href="products.html">
+                Collections
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>Connect</h3>
+
+            <button
+                type="button"
+                onclick="openContactPanel()"
+            >
+                Social & Contact
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 ShopNova • Executive Board Directives • CEO & Founder: Anuradha
+
+    </div>
+
+</footer>
+
+
+<!-- =========================================================
+     HOMEPAGE SCRIPT
+========================================================= -->
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const searchForm = document.getElementById("searchForm");
+    const searchInput = document.getElementById("searchInput");
+
+    const contactButton = document.getElementById("contactButton");
+    const contactPanel = document.getElementById("contactPanel");
+    const contactOverlay = document.getElementById("contactOverlay");
+    const contactClose = document.getElementById("contactClose");
+
+    const mobileMenuButton =
+        document.getElementById("mobileMenuButton");
+
+    const navigation =
+        document.querySelector(".main-navigation");
+
+
+    /* =====================================================
+       SEARCH
+    ===================================================== */
+
+    if (searchForm && searchInput) {
+
+        searchForm.addEventListener("submit", function (event) {
+
+            event.preventDefault();
+
+            const query =
+                searchInput.value.trim();
+
+            if (!query) {
+
+                searchInput.focus();
+
+                return;
+            }
+
+            /*
+             * Sends the user to the Products page
+             * with the search query.
+             */
+            window.location.href =
+                "products.html?search=" +
+                encodeURIComponent(query);
+
+        });
+
+    }
+
+
+    /* =====================================================
+       CONTACT PANEL
+    ===================================================== */
+
+    function openContact() {
+
+        if (!contactPanel) return;
+
+        contactPanel.classList.add("open");
+
+        if (contactOverlay) {
+            contactOverlay.classList.add("show");
+        }
+
+        contactPanel.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+        document.body.classList.add(
+            "contact-open"
+        );
+    }
+
+
+    function closeContact() {
+
+        if (!contactPanel) return;
+
+        contactPanel.classList.remove("open");
+
+        if (contactOverlay) {
+            contactOverlay.classList.remove("show");
+        }
+
+        contactPanel.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+        document.body.classList.remove(
+            "contact-open"
+        );
+    }
+
+
+    window.openContactPanel = openContact;
+
+
+    if (contactButton) {
+
+        contactButton.addEventListener(
+            "click",
+            openContact
+        );
+
+    }
+
+
+    if (contactClose) {
+
+        contactClose.addEventListener(
+            "click",
+            closeContact
+        );
+
+    }
+
+
+    if (contactOverlay) {
+
+        contactOverlay.addEventListener(
+            "click",
+            closeContact
+        );
+
+    }
+
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Escape") {
+                closeContact();
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       MOBILE MENU
+    ===================================================== */
+
+    if (
+        mobileMenuButton &&
+        navigation
+    ) {
+
+        mobileMenuButton.addEventListener(
+            "click",
+            function () {
+
+                navigation.classList.toggle(
+                    "mobile-open"
+                );
+
+            }
+        );
+
+    }
+
+});
+
+
+/* =========================================================
+   SOCIAL PLACEHOLDER MESSAGE
+========================================================= */
+
+function showContactMessage(platform) {
+
+    /*
+     * The Contact panel works immediately.
+     *
+     * Add your own real social URL later to the
+     * corresponding href in the HTML.
+     */
+
+    if (platform) {
+
+        console.log(
+            platform +
+            " link can be connected from index.html."
+        );
+
+    }
+
+}
+
+</script>
 
 </body>
 </html>
-
