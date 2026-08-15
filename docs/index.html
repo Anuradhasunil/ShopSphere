@@ -8,7 +8,7 @@
 
     <meta
         name="description"
-        content="ShopNova - premium products, smart shopping and everyday essentials."
+        content="ShopNova - premium technology, fashion, lifestyle essentials and everyday products."
     >
 
     <link rel="stylesheet" href="style.css">
@@ -24,17 +24,189 @@
 
     <div class="header-inner">
 
-        <!-- LOGO -->
-        <a href="index.html" class="brand-logo">
-            <img
-                src="images/shopnova-logo.png"
-                alt="ShopNova"
-                onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='flex';"
-            >
+        <!-- SHOPNOVA LOGO -->
+        <a href="index.html" class="brand" aria-label="ShopNova Home">
 
-            <span id="logoFallback" class="logo-fallback">
-                Shop<span>Nova</span>
+            <span class="brand-dove" aria-hidden="true">
+
+                <svg
+                    class="dove-logo"
+                    viewBox="0 0 180 105"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+
+                    <!-- Olive branch -->
+                    <g class="olive-branch">
+
+                        <path
+                            d="M116 43 C139 34 153 26 169 14"
+                            fill="none"
+                            stroke="#27851c"
+                            stroke-width="5"
+                            stroke-linecap="round"
+                        />
+
+                        <ellipse
+                            cx="128"
+                            cy="38"
+                            rx="8"
+                            ry="15"
+                            transform="rotate(-38 128 38)"
+                            fill="#3b9b2b"
+                        />
+
+                        <ellipse
+                            cx="141"
+                            cy="31"
+                            rx="8"
+                            ry="15"
+                            transform="rotate(35 141 31)"
+                            fill="#2d8b25"
+                        />
+
+                        <ellipse
+                            cx="151"
+                            cy="25"
+                            rx="8"
+                            ry="14"
+                            transform="rotate(-35 151 25)"
+                            fill="#55a936"
+                        />
+
+                        <ellipse
+                            cx="161"
+                            cy="18"
+                            rx="7"
+                            ry="13"
+                            transform="rotate(35 161 18)"
+                            fill="#318b26"
+                        />
+
+                    </g>
+
+                    <!-- Dove body -->
+                    <path
+                        class="dove-body"
+                        d="
+                        M35 61
+                        C43 48 58 41 74 43
+                        C89 45 103 51 116 48
+                        C123 47 128 43 131 38
+                        C135 30 131 22 124 20
+                        C115 17 108 22 106 29
+                        C103 36 107 42 114 45
+                        C104 49 94 49 84 45
+                        C70 39 54 38 42 44
+                        C31 50 26 59 35 61Z"
+                        fill="#ffffff"
+                        stroke="#17315f"
+                        stroke-width="3"
+                    />
+
+                    <!-- Dove head -->
+                    <circle
+                        cx="116"
+                        cy="29"
+                        r="13"
+                        fill="#ffffff"
+                        stroke="#17315f"
+                        stroke-width="3"
+                    />
+
+                    <!-- Eye -->
+                    <circle
+                        cx="120"
+                        cy="26"
+                        r="2.8"
+                        fill="#102956"
+                    />
+
+                    <!-- Beak -->
+                    <path
+                        d="M127 31 L141 35 L127 38 Z"
+                        fill="#f08a18"
+                        stroke="#17315f"
+                        stroke-width="2"
+                    />
+
+                    <!-- Main wing -->
+                    <path
+                        class="dove-wing"
+                        d="
+                        M83 48
+                        C63 40 51 24 54 7
+                        C55 3 60 4 63 8
+                        C73 21 84 30 99 36
+                        C105 39 107 44 102 49
+                        C97 53 90 52 83 48Z"
+                        fill="#f8fbff"
+                        stroke="#17315f"
+                        stroke-width="3"
+                    />
+
+                    <!-- Wing detail -->
+                    <path
+                        d="M62 12 C71 28 82 38 96 44"
+                        fill="none"
+                        stroke="#b7c8e5"
+                        stroke-width="2"
+                    />
+
+                    <path
+                        d="M57 22 C69 35 81 43 95 47"
+                        fill="none"
+                        stroke="#c7d6ed"
+                        stroke-width="2"
+                    />
+
+                    <!-- Tail -->
+                    <path
+                        d="
+                        M43 51
+                        C29 43 19 35 10 27
+                        C18 44 27 54 39 60
+                        C29 62 20 64 12 67
+                        C28 72 43 68 52 61Z"
+                        fill="#ffffff"
+                        stroke="#17315f"
+                        stroke-width="3"
+                    />
+
+                    <!-- Olive branch in beak -->
+                    <path
+                        d="M126 34 C133 35 141 38 150 44"
+                        fill="none"
+                        stroke="#27851c"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                    />
+
+                    <ellipse
+                        cx="138"
+                        cy="37"
+                        rx="5"
+                        ry="9"
+                        transform="rotate(-40 138 37)"
+                        fill="#3d9d2e"
+                    />
+
+                    <ellipse
+                        cx="146"
+                        cy="41"
+                        rx="5"
+                        ry="9"
+                        transform="rotate(42 146 41)"
+                        fill="#2d8c27"
+                    />
+
+                </svg>
+
             </span>
+
+            <span class="brand-text">
+                <span class="brand-shop">Shop</span><span class="brand-nova">Nova</span>
+            </span>
+
         </a>
 
 
@@ -46,12 +218,13 @@
                 id="searchInput"
                 placeholder="Search products..."
                 autocomplete="off"
+                aria-label="Search products"
             >
 
             <button
                 type="submit"
-                class="search-button"
-                aria-label="Search products"
+                aria-label="Search"
+                title="Search"
             >
                 🔍
             </button>
@@ -60,33 +233,38 @@
 
 
         <!-- NAVIGATION -->
-        <nav class="main-nav">
+        <nav class="main-nav" aria-label="Main navigation">
 
-            <a href="index.html" class="nav-link active">
+            <a
+                href="index.html"
+                class="active"
+            >
                 Home
             </a>
 
-            <a href="products.html" class="nav-link">
+            <a href="products.html">
                 Products
             </a>
 
-            <a href="cart.html" class="nav-link">
+            <a href="cart.html">
                 Cart
             </a>
 
-            <a href="checkout.html" class="nav-link">
+            <a href="checkout.html">
                 Checkout
             </a>
 
-            <button
-                type="button"
-                class="contact-button"
-                id="contactButton"
-            >
-                Contact
-            </button>
-
         </nav>
+
+
+        <!-- SINGLE CONTACT BUTTON -->
+        <button
+            class="contact-button"
+            id="contactButton"
+            type="button"
+        >
+            Contact
+        </button>
 
     </div>
 
@@ -100,124 +278,137 @@
 <div
     class="contact-overlay"
     id="contactOverlay"
+></div>
+
+<section
+    class="contact-panel"
+    id="contactPanel"
+    aria-hidden="true"
 >
 
-    <div class="contact-panel">
+    <div class="contact-panel-header">
+
+        <div>
+            <span class="contact-small-title">
+                SHOPNOVA
+            </span>
+
+            <h2>
+                Connect with us
+            </h2>
+        </div>
 
         <button
             class="contact-close"
             id="contactClose"
+            type="button"
             aria-label="Close contact panel"
         >
             ×
         </button>
 
-        <div class="contact-icon">
-            💬
-        </div>
-
-        <p class="contact-label">
-            SHOPNOVA
-        </p>
-
-        <h2>
-            Connect with us
-        </h2>
-
-        <p class="contact-description">
-            Stay connected with ShopNova for products, support and updates.
-        </p>
+    </div>
 
 
-        <div class="social-links">
-
-            <a
-                href="https://wa.me/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="social-link whatsapp"
-            >
-                <span>💬</span>
-                <div>
-                    <strong>WhatsApp</strong>
-                    <small>Chat with us</small>
-                </div>
-            </a>
+    <p class="contact-description">
+        Stay connected with ShopNova for products, offers and updates.
+    </p>
 
 
-            <a
-                href="https://www.instagram.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="social-link instagram"
-            >
-                <span>📷</span>
-                <div>
-                    <strong>Instagram</strong>
-                    <small>Follow ShopNova</small>
-                </div>
-            </a>
+    <div class="social-links">
+
+        <a
+            href="https://wa.me/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link whatsapp"
+        >
+            <span class="social-icon">💬</span>
+
+            <span>
+                <strong>WhatsApp</strong>
+                <small>Chat with us</small>
+            </span>
+
+            <span class="social-arrow">→</span>
+        </a>
 
 
-            <a
-                href="https://www.youtube.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="social-link youtube"
-            >
-                <span>▶</span>
-                <div>
-                    <strong>YouTube</strong>
-                    <small>Watch our updates</small>
-                </div>
-            </a>
+        <a
+            href="https://www.instagram.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link instagram"
+        >
+            <span class="social-icon">📷</span>
+
+            <span>
+                <strong>Instagram</strong>
+                <small>Follow ShopNova</small>
+            </span>
+
+            <span class="social-arrow">→</span>
+        </a>
 
 
-            <a
-                href="mailto:support@shopnova.com"
-                class="social-link email"
-            >
-                <span>✉</span>
-                <div>
-                    <strong>Email</strong>
-                    <small>Send us a message</small>
-                </div>
-            </a>
+        <a
+            href="https://www.youtube.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link youtube"
+        >
+            <span class="social-icon">▶</span>
 
-        </div>
+            <span>
+                <strong>YouTube</strong>
+                <small>Watch our updates</small>
+            </span>
+
+            <span class="social-arrow">→</span>
+        </a>
+
+
+        <a
+            href="mailto:shopnova@example.com"
+            class="social-link email"
+        >
+            <span class="social-icon">✉</span>
+
+            <span>
+                <strong>Email</strong>
+                <small>Send us a message</small>
+            </span>
+
+            <span class="social-arrow">→</span>
+        </a>
 
     </div>
 
-</div>
-
+</section>
 
 
 <!-- =========================================================
-     MAIN
+     MAIN CONTENT
 ========================================================= -->
 
 <main>
 
-
-    <!-- =====================================================
-         HERO
-    ====================================================== -->
-
+    <!-- HERO -->
     <section class="hero-section">
 
         <div class="hero-content">
 
-            <!-- LEFT SIDE -->
+            <div class="hero-left">
 
-            <div class="hero-copy">
-
-                <p class="section-label">
+                <span class="eyebrow">
                     SHOPNOVA COLLECTIONS
-                </p>
+                </span>
 
                 <h1>
-                    One marketplace.<br>
-                    Endless<br>
+                    One marketplace.
+                    <br>
+                    Endless
+                    <br>
                     possibilities.
                 </h1>
 
@@ -227,13 +418,12 @@
                 </p>
 
 
-                <!-- VALUE CARDS -->
+                <!-- FEATURES -->
+                <div class="feature-cards">
 
-                <div class="value-cards">
+                    <div class="feature-card">
 
-                    <div class="value-card">
-
-                        <span class="value-number">
+                        <span class="feature-number">
                             01
                         </span>
 
@@ -241,16 +431,16 @@
                             Quality
                         </strong>
 
-                        <span class="value-icon">
+                        <span class="feature-symbol">
                             ☆
                         </span>
 
                     </div>
 
 
-                    <div class="value-card">
+                    <div class="feature-card">
 
-                        <span class="value-number">
+                        <span class="feature-number">
                             02
                         </span>
 
@@ -258,16 +448,16 @@
                             Choice
                         </strong>
 
-                        <span class="value-icon">
+                        <span class="feature-symbol">
                             ✓
                         </span>
 
                     </div>
 
 
-                    <div class="value-card">
+                    <div class="feature-card">
 
-                        <span class="value-number">
+                        <span class="feature-number">
                             03
                         </span>
 
@@ -275,7 +465,7 @@
                             Value
                         </strong>
 
-                        <span class="value-icon">
+                        <span class="feature-symbol">
                             ◇
                         </span>
 
@@ -285,17 +475,14 @@
 
 
                 <!-- HERO BUTTONS -->
-
                 <div class="hero-buttons">
 
                     <a
                         href="products.html"
                         class="primary-button"
                     >
-                        Start Shopping
-                        <span>→</span>
+                        Start Shopping →
                     </a>
-
 
                     <a
                         href="cart.html"
@@ -309,39 +496,197 @@
             </div>
 
 
+            <!-- HERO LOGO CARD -->
+            <div class="hero-right">
 
-            <!-- RIGHT SIDE -->
+                <div class="logo-background">
 
-            <div class="hero-visual">
+                    <div class="glow-circle circle-one"></div>
+                    <div class="glow-circle circle-two"></div>
+                    <div class="glow-circle circle-three"></div>
 
-                <div class="visual-circle circle-one"></div>
-
-                <div class="visual-circle circle-two"></div>
-
-                <div class="visual-circle circle-three"></div>
-
-
-                <div class="visual-lines"></div>
+                    <div class="wave-lines"></div>
 
 
-                <div class="logo-card">
+                    <div class="logo-card">
 
-                    <div class="floating-dove">
+                        <!-- Same dove logo -->
+                        <div class="large-dove">
 
-                        <img
-                            src="images/shopnova-logo.png"
-                            alt="ShopNova Dove Logo"
-                        >
+                            <svg
+                                class="dove-logo hero-dove"
+                                viewBox="0 0 180 105"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+
+                                <g class="olive-branch">
+
+                                    <path
+                                        d="M116 43 C139 34 153 26 169 14"
+                                        fill="none"
+                                        stroke="#27851c"
+                                        stroke-width="5"
+                                        stroke-linecap="round"
+                                    />
+
+                                    <ellipse
+                                        cx="128"
+                                        cy="38"
+                                        rx="8"
+                                        ry="15"
+                                        transform="rotate(-38 128 38)"
+                                        fill="#3b9b2b"
+                                    />
+
+                                    <ellipse
+                                        cx="141"
+                                        cy="31"
+                                        rx="8"
+                                        ry="15"
+                                        transform="rotate(35 141 31)"
+                                        fill="#2d8b25"
+                                    />
+
+                                    <ellipse
+                                        cx="151"
+                                        cy="25"
+                                        rx="8"
+                                        ry="14"
+                                        transform="rotate(-35 151 25)"
+                                        fill="#55a936"
+                                    />
+
+                                </g>
+
+
+                                <path
+                                    d="
+                                    M35 61
+                                    C43 48 58 41 74 43
+                                    C89 45 103 51 116 48
+                                    C123 47 128 43 131 38
+                                    C135 30 131 22 124 20
+                                    C115 17 108 22 106 29
+                                    C103 36 107 42 114 45
+                                    C104 49 94 49 84 45
+                                    C70 39 54 38 42 44
+                                    C31 50 26 59 35 61Z"
+                                    fill="#ffffff"
+                                    stroke="#17315f"
+                                    stroke-width="3"
+                                />
+
+
+                                <circle
+                                    cx="116"
+                                    cy="29"
+                                    r="13"
+                                    fill="#ffffff"
+                                    stroke="#17315f"
+                                    stroke-width="3"
+                                />
+
+
+                                <circle
+                                    cx="120"
+                                    cy="26"
+                                    r="2.8"
+                                    fill="#102956"
+                                />
+
+
+                                <path
+                                    d="M127 31 L141 35 L127 38 Z"
+                                    fill="#f08a18"
+                                    stroke="#17315f"
+                                    stroke-width="2"
+                                />
+
+
+                                <path
+                                    class="dove-wing"
+                                    d="
+                                    M83 48
+                                    C63 40 51 24 54 7
+                                    C55 3 60 4 63 8
+                                    C73 21 84 30 99 36
+                                    C105 39 107 44 102 49
+                                    C97 53 90 52 83 48Z"
+                                    fill="#f8fbff"
+                                    stroke="#17315f"
+                                    stroke-width="3"
+                                />
+
+
+                                <path
+                                    d="M62 12 C71 28 82 38 96 44"
+                                    fill="none"
+                                    stroke="#b7c8e5"
+                                    stroke-width="2"
+                                />
+
+
+                                <path
+                                    d="M57 22 C69 35 81 43 95 47"
+                                    fill="none"
+                                    stroke="#c7d6ed"
+                                    stroke-width="2"
+                                />
+
+
+                                <path
+                                    d="
+                                    M43 51
+                                    C29 43 19 35 10 27
+                                    C18 44 27 54 39 60
+                                    C29 62 20 64 12 67
+                                    C28 72 43 68 52 61Z"
+                                    fill="#ffffff"
+                                    stroke="#17315f"
+                                    stroke-width="3"
+                                />
+
+
+                                <path
+                                    d="M126 34 C133 35 141 38 150 44"
+                                    fill="none"
+                                    stroke="#27851c"
+                                    stroke-width="3"
+                                    stroke-linecap="round"
+                                />
+
+                                <ellipse
+                                    cx="138"
+                                    cy="37"
+                                    rx="5"
+                                    ry="9"
+                                    transform="rotate(-40 138 37)"
+                                    fill="#3d9d2e"
+                                />
+
+                                <ellipse
+                                    cx="146"
+                                    cy="41"
+                                    rx="5"
+                                    ry="9"
+                                    transform="rotate(42 146 41)"
+                                    fill="#2d8c27"
+                                />
+
+                            </svg>
+
+                        </div>
+
+
+                        <h2>
+                            <span class="brand-shop">Shop</span><span class="brand-nova">Nova</span>
+                        </h2>
+
+                        <p>
+                            Shop Smart • Live Better
+                        </p>
 
                     </div>
-
-                    <h2>
-                        ShopNova
-                    </h2>
-
-                    <p>
-                        Shop Smart • Live Better
-                    </p>
 
                 </div>
 
@@ -352,93 +697,80 @@
     </section>
 
 
+    <!-- SERVICE BAR -->
+    <section class="service-section">
 
-    <!-- =====================================================
-         BENEFITS
-    ====================================================== -->
+        <div class="service-item">
 
-    <section class="benefits-section">
-
-        <div class="benefit-item">
-
-            <div class="benefit-icon">
+            <div class="service-icon">
                 🚚
             </div>
 
             <div>
-                <h3>
+                <strong>
                     Fast Delivery
-                </h3>
+                </strong>
 
-                <p>
+                <span>
                     Reliable doorstep delivery
-                </p>
+                </span>
             </div>
 
         </div>
 
 
-        <div class="benefit-divider"></div>
+        <div class="service-item">
 
-
-        <div class="benefit-item">
-
-            <div class="benefit-icon">
-                🛡
+            <div class="service-icon">
+                🛡️
             </div>
 
             <div>
-                <h3>
+                <strong>
                     Secure Shopping
-                </h3>
+                </strong>
 
-                <p>
+                <span>
                     Safe and simple experience
-                </p>
+                </span>
             </div>
 
         </div>
 
 
-        <div class="benefit-divider"></div>
+        <div class="service-item">
 
-
-        <div class="benefit-item">
-
-            <div class="benefit-icon">
-                ✪
+            <div class="service-icon">
+                ⭐
             </div>
 
             <div>
-                <h3>
+                <strong>
                     Premium Quality
-                </h3>
+                </strong>
 
-                <p>
+                <span>
                     Products you can trust
-                </p>
+                </span>
             </div>
 
         </div>
 
 
-        <div class="benefit-divider"></div>
+        <div class="service-item">
 
-
-        <div class="benefit-item">
-
-            <div class="benefit-icon">
-                ♡
+            <div class="service-icon">
+                🎧
             </div>
 
             <div>
-                <h3>
+                <strong>
                     Customer Support
-                </h3>
+                </strong>
 
-                <p>
+                <span>
                     We're here to help
-                </p>
+                </span>
             </div>
 
         </div>
@@ -446,26 +778,21 @@
     </section>
 
 
-
-    <!-- =====================================================
-         DARK CTA SECTION
-    ====================================================== -->
-
-    <section class="dark-cta">
+    <!-- CTA -->
+    <section class="cta-section">
 
         <div class="cta-content">
 
-            <p class="cta-label">
+            <span class="cta-label">
                 SHOPNOVA
-            </p>
+            </span>
 
             <h2>
                 Find something you love today.
             </h2>
 
             <p>
-                Browse our latest collections and discover
-                something made for you.
+                Browse our latest collections and discover something made for you.
             </p>
 
         </div>
@@ -475,14 +802,12 @@
             href="products.html"
             class="cta-button"
         >
-            Browse Products
-            <span>→</span>
+            Browse Products →
         </a>
 
     </section>
 
 </main>
-
 
 
 <!-- =========================================================
@@ -493,63 +818,90 @@
 
     <div class="footer-inner">
 
-
-        <!-- BRAND -->
-
         <div class="footer-brand">
 
-            <a href="index.html" class="footer-logo">
+            <div class="footer-mini-logo">
 
-                <img
-                    src="images/shopnova-logo.png"
-                    alt="ShopNova"
-                    onerror="this.style.display='none';"
+                <svg
+                    viewBox="0 0 180 105"
+                    xmlns="http://www.w3.org/2000/svg"
                 >
 
-            </a>
+                    <path
+                        d="
+                        M35 61
+                        C43 48 58 41 74 43
+                        C89 45 103 51 116 48
+                        C123 47 128 43 131 38
+                        C135 30 131 22 124 20
+                        C115 17 108 22 106 29
+                        C103 36 107 42 114 45
+                        C104 49 94 49 84 45
+                        C70 39 54 38 42 44
+                        C31 50 26 59 35 61Z"
+                        fill="#ffffff"
+                        stroke="#ffffff"
+                        stroke-width="3"
+                    />
 
-            <p>
-                Your trusted marketplace for quality products,
-                great value and a better shopping experience.
-            </p>
+                    <circle
+                        cx="116"
+                        cy="29"
+                        r="13"
+                        fill="#ffffff"
+                    />
+
+                    <path
+                        d="M127 31 L141 35 L127 38 Z"
+                        fill="#ff7a00"
+                    />
+
+                    <path
+                        d="
+                        M83 48
+                        C63 40 51 24 54 7
+                        C55 3 60 4 63 8
+                        C73 21 84 30 99 36
+                        C105 39 107 44 102 49
+                        C97 53 90 52 83 48Z"
+                        fill="#f4f8ff"
+                    />
+
+                    <path
+                        d="M126 34 C133 35 141 38 150 44"
+                        fill="none"
+                        stroke="#4caf32"
+                        stroke-width="4"
+                    />
+
+                    <ellipse
+                        cx="138"
+                        cy="37"
+                        rx="5"
+                        ry="9"
+                        transform="rotate(-40 138 37)"
+                        fill="#4caf32"
+                    />
+
+                </svg>
+
+            </div>
 
 
-            <div class="footer-social">
+            <div>
 
-                <a
-                    href="https://www.instagram.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Instagram"
-                >
-                    ◎
-                </a>
+                <strong>
+                    Shop<span>Nova</span>
+                </strong>
 
-                <a
-                    href="https://www.youtube.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="YouTube"
-                >
-                    ▶
-                </a>
-
-                <a
-                    href="https://wa.me/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="WhatsApp"
-                >
-                    ◉
-                </a>
+                <small>
+                    Shop Smart • Live Better
+                </small>
 
             </div>
 
         </div>
 
-
-
-        <!-- SHOP -->
 
         <div class="footer-column">
 
@@ -572,74 +924,36 @@
         </div>
 
 
-
-        <!-- COMPANY -->
-
-        <div class="footer-column">
-
-            <h3>
-                Company
-            </h3>
-
-            <a href="index.html">
-                About ShopNova
-            </a>
-
-            <a href="contact.html">
-                Contact
-            </a>
-
-            <a href="vendor.html">
-                Become a Vendor
-            </a>
-
-        </div>
-
-
-
-        <!-- SUPPORT -->
-
         <div class="footer-column">
 
             <h3>
                 Support
             </h3>
 
-            <a href="contact.html">
-                Contact Us
-            </a>
-
-            <a href="checkout.html">
-                Order Support
-            </a>
-
-            <a href="products.html">
-                Browse Products
-            </a>
+            <button
+                type="button"
+                class="footer-contact-button"
+                id="footerContactButton"
+            >
+                Contact ShopNova
+            </button>
 
         </div>
 
 
-
-        <!-- CONTACT -->
-
         <div class="footer-column">
 
             <h3>
-                Contact
+                Connect
             </h3>
 
-            <p>
-                📞 Customer Support
-            </p>
-
-            <p>
-                ✉ support@shopnova.com
-            </p>
-
-            <p>
-                📍 India
-            </p>
+            <button
+                type="button"
+                class="footer-contact-button"
+                id="footerContactButton2"
+            >
+                Social Media
+            </button>
 
         </div>
 
@@ -648,14 +962,11 @@
 
     <div class="footer-bottom">
 
-        <p>
-            © 2026 ShopNova • CEO & Founder: Anuradha
-        </p>
+        © 2026 ShopNova • Executive Board Directives • CEO & Founder: Anuradha
 
     </div>
 
 </footer>
-
 
 
 <!-- =========================================================
@@ -666,10 +977,9 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
-
     /* =====================================================
        SEARCH
-    ====================================================== */
+    ===================================================== */
 
     const searchForm = document.getElementById("searchForm");
     const searchInput = document.getElementById("searchInput");
@@ -699,13 +1009,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-
     /* =====================================================
        CONTACT PANEL
-    ====================================================== */
+    ===================================================== */
 
     const contactButton =
         document.getElementById("contactButton");
+
+    const contactPanel =
+        document.getElementById("contactPanel");
 
     const contactOverlay =
         document.getElementById("contactOverlay");
@@ -713,130 +1025,137 @@ document.addEventListener("DOMContentLoaded", function () {
     const contactClose =
         document.getElementById("contactClose");
 
+    const footerContactButton =
+        document.getElementById("footerContactButton");
 
-    if (contactButton && contactOverlay) {
+    const footerContactButton2 =
+        document.getElementById("footerContactButton2");
 
-        contactButton.addEventListener("click", function () {
 
+    function openContact() {
+
+        if (!contactPanel) return;
+
+        contactPanel.classList.add("show");
+
+        if (contactOverlay) {
             contactOverlay.classList.add("show");
+        }
 
-            document.body.classList.add("contact-open");
+        contactPanel.setAttribute(
+            "aria-hidden",
+            "false"
+        );
 
-        });
+        document.body.classList.add(
+            "contact-open"
+        );
 
     }
 
 
-    if (contactClose && contactOverlay) {
+    function closeContact() {
 
-        contactClose.addEventListener("click", function () {
+        if (!contactPanel) return;
 
+        contactPanel.classList.remove("show");
+
+        if (contactOverlay) {
             contactOverlay.classList.remove("show");
+        }
 
-            document.body.classList.remove("contact-open");
+        contactPanel.setAttribute(
+            "aria-hidden",
+            "true"
+        );
 
-        });
+        document.body.classList.remove(
+            "contact-open"
+        );
 
+    }
+
+
+    if (contactButton) {
+        contactButton.addEventListener(
+            "click",
+            openContact
+        );
+    }
+
+
+    if (footerContactButton) {
+        footerContactButton.addEventListener(
+            "click",
+            openContact
+        );
+    }
+
+
+    if (footerContactButton2) {
+        footerContactButton2.addEventListener(
+            "click",
+            openContact
+        );
+    }
+
+
+    if (contactClose) {
+        contactClose.addEventListener(
+            "click",
+            closeContact
+        );
     }
 
 
     if (contactOverlay) {
-
-        contactOverlay.addEventListener("click", function (event) {
-
-            if (event.target === contactOverlay) {
-
-                contactOverlay.classList.remove("show");
-
-                document.body.classList.remove("contact-open");
-
-            }
-
-        });
-
+        contactOverlay.addEventListener(
+            "click",
+            closeContact
+        );
     }
 
 
-    document.addEventListener("keydown", function (event) {
+    document.addEventListener(
+        "keydown",
+        function (event) {
 
-        if (event.key === "Escape" && contactOverlay) {
-
-            contactOverlay.classList.remove("show");
-
-            document.body.classList.remove("contact-open");
+            if (event.key === "Escape") {
+                closeContact();
+            }
 
         }
-
-    });
-
+    );
 
 
     /* =====================================================
-       DOVE HOVER ANIMATION
-    ====================================================== */
+       DOVE HOVER / FLY ANIMATION
+    ===================================================== */
 
-    const dove =
-        document.querySelector(".floating-dove");
-
-    if (dove) {
-
-        dove.addEventListener("mouseenter", function () {
-
-            dove.classList.add("dove-fly");
-
-        });
-
-        dove.addEventListener("mouseleave", function () {
-
-            setTimeout(function () {
-
-                dove.classList.remove("dove-fly");
-
-            }, 350);
-
-        });
-
-    }
+    const doveLogos =
+        document.querySelectorAll(".dove-logo");
 
 
+    doveLogos.forEach(function (dove) {
 
-    /* =====================================================
-       SCROLL ANIMATION
-    ====================================================== */
+        dove.addEventListener(
+            "mouseenter",
+            function () {
 
-    const animatedItems =
-        document.querySelectorAll(
-            ".benefit-item, .dark-cta, .value-card"
-        );
+                dove.classList.add("fly");
 
-
-    const observer =
-        new IntersectionObserver(
-
-            function (entries) {
-
-                entries.forEach(function (entry) {
-
-                    if (entry.isIntersecting) {
-
-                        entry.target.classList.add("visible");
-
-                    }
-
-                });
-
-            },
-
-            {
-                threshold: 0.12
             }
-
         );
 
 
-    animatedItems.forEach(function (item) {
+        dove.addEventListener(
+            "mouseleave",
+            function () {
 
-        observer.observe(item);
+                dove.classList.remove("fly");
+
+            }
+        );
 
     });
 
