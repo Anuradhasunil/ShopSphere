@@ -1,230 +1,1701 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ShopNova | Shop Smart • Live Better</title>
+<title>ShopNova | Shop Smart • Live Better</title>
 
-    <meta
-        name="description"
-        content="ShopNova - premium technology, fashion, lifestyle essentials and everyday products."
-    >
+<meta
+    name="description"
+    content="ShopNova — premium technology, fashion, lifestyle essentials and everyday products."
+>
 
-    <link rel="stylesheet" href="style.css">
+<style>
+
+/* =========================================================
+   SHOPNOVA — COMPLETE HOME PAGE
+   ========================================================= */
+
+:root{
+    --navy:#0b2557;
+    --navy-dark:#071a40;
+    --orange:#ff7200;
+    --orange-light:#ff9a3d;
+    --green:#238b18;
+    --text:#102858;
+    --muted:#687b9d;
+    --bg:#f4f7fb;
+    --white:#ffffff;
+    --border:#dbe3ef;
+    --shadow:0 18px 50px rgba(11,37,87,.10);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background:var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button,
+input{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.site-header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    width:100%;
+
+    background:rgba(255,255,255,.97);
+
+    border-bottom:1px solid #e5eaf2;
+
+    box-shadow:0 5px 25px rgba(11,37,87,.06);
+
+    backdrop-filter:blur(12px);
+}
+
+.header-inner{
+    width:min(1440px,94%);
+    min-height:82px;
+
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:240px minmax(300px,1fr) auto;
+    align-items:center;
+
+    gap:30px;
+}
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    min-width:0;
+}
+
+.logo-box{
+    width:68px;
+    height:68px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
+
+    overflow:visible;
+}
+
+.logo-svg{
+    width:68px;
+    height:68px;
+
+    overflow:visible;
+
+    transition:transform .35s ease;
+}
+
+.brand:hover .logo-svg{
+    transform:translateY(-3px) rotate(-2deg);
+}
+
+.brand-text{
+    font-size:28px;
+    font-weight:900;
+    letter-spacing:-1.5px;
+    white-space:nowrap;
+    color:var(--navy);
+}
+
+.brand-text span{
+    color:var(--orange);
+}
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.search-wrap{
+    width:100%;
+    max-width:650px;
+
+    justify-self:center;
+
+    display:flex;
+    align-items:center;
+
+    height:52px;
+
+    border:1px solid #cfd9e8;
+
+    background:#fff;
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+    box-shadow:0 5px 18px rgba(11,37,87,.04);
+}
+
+.search-wrap:focus-within{
+    border-color:var(--orange);
+
+    box-shadow:
+        0 0 0 4px rgba(255,114,0,.10),
+        0 8px 25px rgba(11,37,87,.07);
+}
+
+.search-input{
+    width:100%;
+    height:100%;
+
+    border:0;
+    outline:0;
+
+    padding:0 18px;
+
+    color:var(--text);
+
+    background:#fff;
+
+    font-size:15px;
+}
+
+.search-input::placeholder{
+    color:#8a9ab3;
+}
+
+.search-btn{
+    width:66px;
+    height:100%;
+
+    border:0;
+
+    background:var(--orange);
+
+    color:#fff;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:24px;
+
+    transition:.25s ease;
+}
+
+.search-btn:hover{
+    background:#e85f00;
+}
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.main-nav{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+
+    gap:28px;
+
+    white-space:nowrap;
+}
+
+.main-nav a{
+    position:relative;
+
+    font-size:14px;
+    font-weight:800;
+
+    color:#14284e;
+
+    padding:30px 0;
+}
+
+.main-nav a::after{
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    right:0;
+    bottom:19px;
+
+    height:2px;
+
+    background:var(--orange);
+
+    transform:scaleX(0);
+
+    transform-origin:center;
+
+    transition:.25s ease;
+}
+
+.main-nav a:hover{
+    color:var(--orange);
+}
+
+.main-nav a:hover::after{
+    transform:scaleX(1);
+}
+
+.main-nav a.active{
+    color:var(--orange);
+}
+
+.main-nav a.active::after{
+    transform:scaleX(1);
+}
+
+/* =========================================================
+   CONTACT BUTTON
+   ========================================================= */
+
+.contact-btn{
+    border:0;
+
+    padding:14px 23px;
+
+    border-radius:30px;
+
+    background:
+        linear-gradient(
+            100deg,
+            var(--orange),
+            #b86d00,
+            var(--green)
+        );
+
+    color:#fff;
+
+    font-weight:900;
+
+    box-shadow:0 10px 24px rgba(35,139,24,.18);
+
+    transition:.3s ease;
+}
+
+.contact-btn:hover{
+    transform:translateY(-2px);
+
+    box-shadow:0 14px 28px rgba(35,139,24,.25);
+}
+
+/* =========================================================
+   CONTACT PANEL
+   ========================================================= */
+
+.contact-overlay{
+    position:fixed;
+    inset:0;
+
+    background:rgba(4,18,43,.38);
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:.25s ease;
+
+    z-index:1999;
+}
+
+.contact-overlay.show{
+    opacity:1;
+    visibility:visible;
+}
+
+.contact-panel{
+    position:fixed;
+
+    top:95px;
+    right:25px;
+
+    width:min(390px,calc(100% - 30px));
+
+    background:#fff;
+
+    border-radius:24px;
+
+    padding:25px;
+
+    box-shadow:0 25px 70px rgba(0,0,0,.20);
+
+    opacity:0;
+    visibility:hidden;
+
+    transform:translateY(-12px) scale(.98);
+
+    transition:.3s ease;
+
+    z-index:2000;
+}
+
+.contact-panel.show{
+    opacity:1;
+    visibility:visible;
+
+    transform:translateY(0) scale(1);
+}
+
+.contact-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    margin-bottom:20px;
+}
+
+.contact-head h3{
+    font-size:22px;
+    color:var(--navy);
+}
+
+.close-contact{
+    width:36px;
+    height:36px;
+
+    border:0;
+    border-radius:50%;
+
+    background:#f0f3f8;
+
+    color:var(--navy);
+
+    font-size:20px;
+}
+
+.contact-sub{
+    color:var(--muted);
+    font-size:14px;
+    line-height:1.6;
+
+    margin-bottom:18px;
+}
+
+.social-list{
+    display:grid;
+    gap:11px;
+}
+
+.social-link{
+    display:flex;
+    align-items:center;
+    gap:13px;
+
+    padding:13px 15px;
+
+    border:1px solid var(--border);
+
+    border-radius:14px;
+
+    background:#fff;
+
+    transition:.25s ease;
+}
+
+.social-link:hover{
+    transform:translateX(4px);
+
+    border-color:#b9c9df;
+
+    background:#f7faff;
+}
+
+.social-icon{
+    width:38px;
+    height:38px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:11px;
+
+    background:#f0f4fa;
+
+    font-size:19px;
+}
+
+.social-text strong{
+    display:block;
+
+    font-size:14px;
+
+    color:var(--navy);
+}
+
+.social-text small{
+    color:var(--muted);
+}
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+main{
+    width:100%;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero-section{
+    width:min(1400px,94%);
+
+    margin:48px auto 0;
+
+    background:#fff;
+
+    border-radius:30px;
+
+    box-shadow:var(--shadow);
+
+    overflow:hidden;
+
+    padding:60px 60px 55px;
+}
+
+.hero-grid{
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,1fr)
+        minmax(430px,560px);
+
+    align-items:center;
+
+    gap:55px;
+}
+
+/* =========================================================
+   HERO TEXT
+   ========================================================= */
+
+.eyebrow{
+    display:inline-block;
+
+    color:var(--orange);
+
+    font-size:13px;
+
+    font-weight:900;
+
+    letter-spacing:4px;
+
+    margin-bottom:24px;
+}
+
+.hero-title{
+    font-size:clamp(48px,5.5vw,78px);
+
+    line-height:.95;
+
+    letter-spacing:-3.5px;
+
+    font-weight:950;
+
+    color:var(--navy);
+
+    max-width:690px;
+
+    margin-bottom:24px;
+}
+
+.hero-description{
+    color:#7183a2;
+
+    font-size:17px;
+
+    line-height:1.8;
+
+    max-width:650px;
+
+    margin-bottom:28px;
+}
+
+/* =========================================================
+   VALUE CARDS
+   ========================================================= */
+
+.value-row{
+    display:flex;
+
+    gap:12px;
+
+    margin-bottom:28px;
+
+    flex-wrap:wrap;
+}
+
+.value-card{
+    width:105px;
+
+    min-height:105px;
+
+    padding:16px;
+
+    border:1px solid var(--border);
+
+    border-radius:14px;
+
+    background:#fff;
+
+    transition:.25s ease;
+}
+
+.value-card:hover{
+    transform:translateY(-4px);
+
+    box-shadow:0 10px 25px rgba(11,37,87,.08);
+}
+
+.value-number{
+    color:var(--orange);
+
+    font-weight:900;
+
+    font-size:17px;
+
+    margin-bottom:9px;
+}
+
+.value-name{
+    font-size:14px;
+
+    font-weight:800;
+
+    color:var(--navy);
+}
+
+/* =========================================================
+   HERO BUTTONS
+   ========================================================= */
+
+.hero-buttons{
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    flex-wrap:wrap;
+}
+
+.primary-btn{
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    min-height:52px;
+
+    padding:0 25px;
+
+    border:0;
+
+    border-radius:14px;
+
+    background:var(--orange);
+
+    color:#fff;
+
+    font-weight:900;
+
+    box-shadow:0 12px 25px rgba(255,114,0,.20);
+
+    transition:.3s ease;
+}
+
+.primary-btn:hover{
+    background:#e96300;
+
+    transform:translateY(-2px);
+}
+
+.secondary-btn{
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    min-height:52px;
+
+    padding:0 25px;
+
+    border:1px solid #d5dfed;
+
+    border-radius:14px;
+
+    background:#fff;
+
+    color:var(--navy);
+
+    font-weight:900;
+
+    transition:.3s ease;
+}
+
+.secondary-btn:hover{
+    border-color:var(--navy);
+
+    transform:translateY(-2px);
+}
+
+/* =========================================================
+   LOGO SHOWCASE
+   ========================================================= */
+
+.logo-showcase{
+    min-height:510px;
+
+    border-radius:28px;
+
+    padding:28px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+        radial-gradient(circle at 18% 70%, rgba(255,255,255,.50), transparent 22%),
+        radial-gradient(circle at 80% 25%, rgba(255,255,255,.45), transparent 22%),
+        linear-gradient(
+            135deg,
+            #ffd98d 0%,
+            #ffb47d 28%,
+            #a7d8f4 57%,
+            #a9e4d0 100%
+        );
+}
+
+/* decorative circles */
+
+.logo-showcase::before,
+.logo-showcase::after{
+    content:"";
+
+    position:absolute;
+
+    border-radius:50%;
+
+    pointer-events:none;
+}
+
+.logo-showcase::before{
+    width:270px;
+    height:270px;
+
+    right:-80px;
+    top:-80px;
+
+    background:rgba(255,255,255,.18);
+}
+
+.logo-showcase::after{
+    width:220px;
+    height:220px;
+
+    left:-80px;
+    bottom:-90px;
+
+    background:rgba(255,255,255,.24);
+}
+
+/* =========================================================
+   LOGO CARD
+   ========================================================= */
+
+.logo-card{
+    width:min(390px,90%);
+
+    min-height:390px;
+
+    background:rgba(255,255,255,.95);
+
+    border-radius:28px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:28px;
+
+    position:relative;
+
+    z-index:2;
+
+    box-shadow:
+        0 25px 55px rgba(11,37,87,.13);
+
+    border:1px solid rgba(255,255,255,.8);
+}
+
+.hero-logo{
+    width:100%;
+
+    max-width:330px;
+
+    height:auto;
+
+    margin-bottom:10px;
+
+    transition:transform .45s ease;
+}
+
+/*
+   Dove hover/flying animation
+*/
+
+.logo-card:hover .hero-logo{
+    animation:doveFly 1.1s ease-in-out;
+}
+
+@keyframes doveFly{
+
+    0%{
+        transform:translate(0,0) rotate(0deg);
+    }
+
+    25%{
+        transform:translate(7px,-10px) rotate(-2deg);
+    }
+
+    50%{
+        transform:translate(15px,-3px) rotate(2deg);
+    }
+
+    75%{
+        transform:translate(7px,-13px) rotate(-2deg);
+    }
+
+    100%{
+        transform:translate(0,0) rotate(0deg);
+    }
+}
+
+.logo-card-title{
+    font-size:27px;
+
+    font-weight:950;
+
+    color:var(--navy);
+
+    margin-top:5px;
+}
+
+.logo-card-text{
+    color:#7485a4;
+
+    font-size:14px;
+
+    margin-top:8px;
+
+    text-align:center;
+
+    line-height:1.6;
+}
+
+/* =========================================================
+   INLINE SHOPNOVA SVG LOGO
+   ========================================================= */
+
+.shopnova-logo-svg{
+    width:100%;
+    height:auto;
+
+    overflow:visible;
+}
+
+/* subtle wing animation */
+
+.dove-wing{
+    transform-origin:65px 72px;
+    transition:transform .35s ease;
+}
+
+.logo-card:hover .dove-wing{
+    animation:wingMove .65s ease-in-out infinite alternate;
+}
+
+@keyframes wingMove{
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(-5deg);
+    }
+}
+
+/* =========================================================
+   SERVICES
+   ========================================================= */
+
+.services{
+    width:min(1400px,94%);
+
+    margin:18px auto 0;
+
+    background:#fff;
+
+    border-radius:24px;
+
+    box-shadow:0 15px 40px rgba(11,37,87,.08);
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    overflow:hidden;
+}
+
+.service{
+    min-height:105px;
+
+    padding:25px 30px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    border-right:1px solid var(--border);
+}
+
+.service:last-child{
+    border-right:0;
+}
+
+.service-icon{
+    width:50px;
+    height:50px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:14px;
+
+    background:#f4f7fb;
+
+    font-size:25px;
+}
+
+.service h3{
+    font-size:14px;
+
+    color:var(--navy);
+
+    margin-bottom:5px;
+}
+
+.service p{
+    font-size:12px;
+
+    color:var(--muted);
+}
+
+/* =========================================================
+   PROMO BANNER
+   ========================================================= */
+
+.promo{
+    width:min(1400px,94%);
+
+    margin:24px auto 55px;
+
+    min-height:185px;
+
+    border-radius:24px;
+
+    padding:40px 50px;
+
+    background:
+        radial-gradient(circle at 88% 15%, rgba(255,255,255,.08), transparent 15%),
+        radial-gradient(circle at 78% 70%, rgba(255,152,61,.10), transparent 22%),
+        linear-gradient(
+            120deg,
+            #061b46,
+            #0d3470,
+            #123e7d
+        );
+
+    color:#fff;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    gap:30px;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.promo::after{
+    content:"";
+
+    position:absolute;
+
+    width:420px;
+    height:420px;
+
+    border:2px solid rgba(255,160,50,.35);
+
+    border-radius:50%;
+
+    right:-210px;
+    top:-140px;
+
+    box-shadow:
+        0 0 0 20px rgba(255,160,50,.05),
+        0 0 0 45px rgba(255,160,50,.04);
+}
+
+.promo-label{
+    color:#ff9b43;
+
+    font-size:12px;
+
+    letter-spacing:4px;
+
+    font-weight:900;
+
+    margin-bottom:10px;
+}
+
+.promo h2{
+    font-size:clamp(28px,3vw,42px);
+
+    margin-bottom:8px;
+}
+
+.promo p{
+    color:#dbe8ff;
+
+    font-size:14px;
+}
+
+.promo-btn{
+    position:relative;
+
+    z-index:2;
+
+    min-width:210px;
+
+    min-height:55px;
+
+    border:0;
+
+    border-radius:14px;
+
+    background:#fff;
+
+    color:var(--navy);
+
+    font-weight:900;
+
+    transition:.3s ease;
+}
+
+.promo-btn:hover{
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 25px rgba(0,0,0,.18);
+}
+
+/* =========================================================
+   SEARCH RESULTS
+   ========================================================= */
+
+.search-message{
+    position:fixed;
+
+    top:92px;
+    left:50%;
+
+    transform:translateX(-50%) translateY(-20px);
+
+    background:var(--navy);
+
+    color:#fff;
+
+    padding:12px 20px;
+
+    border-radius:12px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.18);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.3s ease;
+
+    z-index:3000;
+
+    font-size:14px;
+
+    max-width:90%;
+
+    text-align:center;
+}
+
+.search-message.show{
+    opacity:1;
+
+    visibility:visible;
+
+    transform:translateX(-50%) translateY(0);
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer{
+    background:var(--navy-dark);
+
+    color:#fff;
+
+    padding:48px 5% 28px;
+}
+
+.footer-grid{
+    width:min(1400px,100%);
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr 1fr 1fr;
+
+    gap:45px;
+}
+
+.footer-brand{
+    font-size:25px;
+
+    font-weight:950;
+
+    margin-bottom:10px;
+}
+
+.footer-brand span{
+    color:var(--orange);
+}
+
+.footer p{
+    color:#aebed9;
+
+    font-size:13px;
+
+    line-height:1.7;
+
+    max-width:360px;
+}
+
+.footer h4{
+    margin-bottom:15px;
+
+    font-size:14px;
+}
+
+.footer-links{
+    display:grid;
+
+    gap:9px;
+}
+
+.footer-links a{
+    color:#b8c7df;
+
+    font-size:13px;
+
+    transition:.2s ease;
+}
+
+.footer-links a:hover{
+    color:#fff;
+}
+
+.footer-bottom{
+    width:min(1400px,100%);
+
+    margin:35px auto 0;
+
+    padding-top:22px;
+
+    border-top:1px solid rgba(255,255,255,.12);
+
+    text-align:center;
+
+    color:#aebed9;
+
+    font-size:12px;
+}
+
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
+
+.mobile-menu-btn{
+    display:none;
+
+    width:45px;
+    height:45px;
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    background:#fff;
+
+    color:var(--navy);
+
+    font-size:22px;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media(max-width:1100px){
+
+    .header-inner{
+        grid-template-columns:210px 1fr auto;
+
+        gap:15px;
+    }
+
+    .main-nav{
+        gap:15px;
+    }
+
+    .main-nav a{
+        font-size:13px;
+    }
+
+    .hero-section{
+        padding:45px;
+    }
+
+    .hero-grid{
+        grid-template-columns:1fr 430px;
+
+        gap:35px;
+    }
+
+    .hero-title{
+        font-size:56px;
+    }
+
+    .services{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .service:nth-child(2){
+        border-right:0;
+    }
+
+    .service:nth-child(-n+2){
+        border-bottom:1px solid var(--border);
+    }
+
+    .footer-grid{
+        grid-template-columns:2fr 1fr 1fr;
+    }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width:820px){
+
+    .header-inner{
+        min-height:70px;
+
+        display:flex;
+
+        gap:10px;
+    }
+
+    .logo-box{
+        width:52px;
+        height:52px;
+    }
+
+    .logo-svg{
+        width:52px;
+        height:52px;
+    }
+
+    .brand-text{
+        font-size:21px;
+    }
+
+    .search-wrap{
+        order:2;
+
+        height:44px;
+
+        flex:1;
+    }
+
+    .search-btn{
+        width:54px;
+    }
+
+    .mobile-menu-btn{
+        display:block;
+
+        order:3;
+    }
+
+    .main-nav{
+        position:absolute;
+
+        top:70px;
+        left:10px;
+        right:10px;
+
+        background:#fff;
+
+        border:1px solid var(--border);
+
+        border-radius:16px;
+
+        padding:12px;
+
+        display:none;
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+        gap:0;
+
+        box-shadow:0 20px 50px rgba(11,37,87,.14);
+    }
+
+    .main-nav.open{
+        display:flex;
+    }
+
+    .main-nav a{
+        padding:13px;
+
+        border-radius:10px;
+    }
+
+    .main-nav a::after{
+        display:none;
+    }
+
+    .main-nav a:hover,
+    .main-nav a.active{
+        background:#fff4eb;
+    }
+
+    .contact-btn{
+        width:100%;
+
+        margin-top:5px;
+    }
+
+    .hero-section{
+        width:94%;
+
+        margin-top:25px;
+
+        padding:35px 22px;
+
+        border-radius:23px;
+    }
+
+    .hero-grid{
+        grid-template-columns:1fr;
+
+        gap:35px;
+    }
+
+    .hero-title{
+        font-size:48px;
+
+        letter-spacing:-2.5px;
+    }
+
+    .hero-description{
+        font-size:15px;
+    }
+
+    .logo-showcase{
+        min-height:390px;
+
+        padding:20px;
+    }
+
+    .logo-card{
+        min-height:320px;
+    }
+
+    .services{
+        width:94%;
+
+        grid-template-columns:1fr;
+
+        border-radius:20px;
+    }
+
+    .service{
+        border-right:0 !important;
+
+        border-bottom:1px solid var(--border);
+    }
+
+    .service:last-child{
+        border-bottom:0;
+    }
+
+    .promo{
+        width:94%;
+
+        margin-bottom:35px;
+
+        padding:30px 25px;
+
+        flex-direction:column;
+
+        align-items:flex-start;
+    }
+
+    .promo-btn{
+        width:100%;
+    }
+
+    .footer{
+        padding:40px 6% 25px;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr 1fr;
+
+        gap:30px;
+    }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media(max-width:560px){
+
+    .header-inner{
+        width:94%;
+    }
+
+    .brand-text{
+        display:none;
+    }
+
+    .logo-box{
+        width:48px;
+        height:48px;
+    }
+
+    .logo-svg{
+        width:48px;
+        height:48px;
+    }
+
+    .search-input{
+        font-size:13px;
+
+        padding:0 10px;
+    }
+
+    .search-btn{
+        width:48px;
+
+        font-size:20px;
+    }
+
+    .hero-title{
+        font-size:40px;
+
+        line-height:.98;
+    }
+
+    .eyebrow{
+        font-size:11px;
+
+        letter-spacing:3px;
+    }
+
+    .value-card{
+        flex:1;
+
+        min-width:85px;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+
+        align-items:stretch;
+    }
+
+    .primary-btn,
+    .secondary-btn{
+        width:100%;
+    }
+
+    .logo-showcase{
+        min-height:340px;
+    }
+
+    .logo-card{
+        width:95%;
+
+        min-height:285px;
+
+        padding:18px;
+    }
+
+    .logo-card-title{
+        font-size:23px;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+        scroll-behavior:auto !important;
+        animation:none !important;
+        transition:none !important;
+    }
+}
+
+</style>
 </head>
 
 <body>
 
-<!-- =========================================================
+<!-- =======================================================
      HEADER
-========================================================= -->
+     ======================================================= -->
 
 <header class="site-header">
 
     <div class="header-inner">
 
-        <!-- SHOPNOVA LOGO -->
         <a href="index.html" class="brand" aria-label="ShopNova Home">
 
-            <span class="brand-dove" aria-hidden="true">
+            <div class="logo-box">
 
+                <!-- ShopNova dove logo -->
                 <svg
-                    class="dove-logo"
-                    viewBox="0 0 180 105"
+                    class="logo-svg"
+                    viewBox="0 0 120 120"
                     xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
                 >
 
-                    <!-- Olive branch -->
-                    <g class="olive-branch">
-
-                        <path
-                            d="M116 43 C139 34 153 26 169 14"
-                            fill="none"
-                            stroke="#27851c"
-                            stroke-width="5"
-                            stroke-linecap="round"
-                        />
-
-                        <ellipse
-                            cx="128"
-                            cy="38"
-                            rx="8"
-                            ry="15"
-                            transform="rotate(-38 128 38)"
-                            fill="#3b9b2b"
-                        />
-
-                        <ellipse
-                            cx="141"
-                            cy="31"
-                            rx="8"
-                            ry="15"
-                            transform="rotate(35 141 31)"
-                            fill="#2d8b25"
-                        />
-
-                        <ellipse
-                            cx="151"
-                            cy="25"
-                            rx="8"
-                            ry="14"
-                            transform="rotate(-35 151 25)"
-                            fill="#55a936"
-                        />
-
-                        <ellipse
-                            cx="161"
-                            cy="18"
-                            rx="7"
-                            ry="13"
-                            transform="rotate(35 161 18)"
-                            fill="#318b26"
-                        />
-
-                    </g>
-
-                    <!-- Dove body -->
+                    <!-- golden circle -->
                     <path
-                        class="dove-body"
-                        d="
-                        M35 61
-                        C43 48 58 41 74 43
-                        C89 45 103 51 116 48
-                        C123 47 128 43 131 38
-                        C135 30 131 22 124 20
-                        C115 17 108 22 106 29
-                        C103 36 107 42 114 45
-                        C104 49 94 49 84 45
-                        C70 39 54 38 42 44
-                        C31 50 26 59 35 61Z"
+                        d="M14 82
+                           C35 95 66 97 92 78"
+                        fill="none"
+                        stroke="#ff9a18"
+                        stroke-width="5"
+                        stroke-linecap="round"
+                    />
+
+                    <!-- dove body -->
+                    <ellipse
+                        cx="59"
+                        cy="53"
+                        rx="27"
+                        ry="18"
                         fill="#ffffff"
-                        stroke="#17315f"
-                        stroke-width="3"
+                        stroke="#18366e"
+                        stroke-width="2.5"
                     />
 
-                    <!-- Dove head -->
+                    <!-- dove head -->
                     <circle
-                        cx="116"
-                        cy="29"
-                        r="13"
+                        cx="82"
+                        cy="38"
+                        r="10"
                         fill="#ffffff"
-                        stroke="#17315f"
-                        stroke-width="3"
+                        stroke="#18366e"
+                        stroke-width="2.5"
                     />
 
-                    <!-- Eye -->
-                    <circle
-                        cx="120"
-                        cy="26"
-                        r="2.8"
-                        fill="#102956"
-                    />
-
-                    <!-- Beak -->
+                    <!-- beak -->
                     <path
-                        d="M127 31 L141 35 L127 38 Z"
-                        fill="#f08a18"
-                        stroke="#17315f"
+                        d="M91 38 L105 43 L91 47 Z"
+                        fill="#ff8a00"
+                        stroke="#18366e"
                         stroke-width="2"
                     />
 
-                    <!-- Main wing -->
+                    <!-- eye -->
+                    <circle
+                        cx="84"
+                        cy="36"
+                        r="2.2"
+                        fill="#0b2557"
+                    />
+
+                    <!-- wing -->
                     <path
                         class="dove-wing"
-                        d="
-                        M83 48
-                        C63 40 51 24 54 7
-                        C55 3 60 4 63 8
-                        C73 21 84 30 99 36
-                        C105 39 107 44 102 49
-                        C97 53 90 52 83 48Z"
-                        fill="#f8fbff"
-                        stroke="#17315f"
-                        stroke-width="3"
+                        d="M61 52
+                           C46 28 29 23 20 31
+                           C35 45 40 61 59 66
+                           C67 67 70 59 61 52Z"
+                        fill="#f9fcff"
+                        stroke="#18366e"
+                        stroke-width="2.5"
                     />
 
-                    <!-- Wing detail -->
+                    <!-- olive branch -->
                     <path
-                        d="M62 12 C71 28 82 38 96 44"
+                        d="M91 45
+                           C83 51 75 57 68 67"
                         fill="none"
-                        stroke="#b7c8e5"
-                        stroke-width="2"
-                    />
-
-                    <path
-                        d="M57 22 C69 35 81 43 95 47"
-                        fill="none"
-                        stroke="#c7d6ed"
-                        stroke-width="2"
-                    />
-
-                    <!-- Tail -->
-                    <path
-                        d="
-                        M43 51
-                        C29 43 19 35 10 27
-                        C18 44 27 54 39 60
-                        C29 62 20 64 12 67
-                        C28 72 43 68 52 61Z"
-                        fill="#ffffff"
-                        stroke="#17315f"
-                        stroke-width="3"
-                    />
-
-                    <!-- Olive branch in beak -->
-                    <path
-                        d="M126 34 C133 35 141 38 150 44"
-                        fill="none"
-                        stroke="#27851c"
+                        stroke="#238b18"
                         stroke-width="3"
                         stroke-linecap="round"
                     />
 
                     <ellipse
-                        cx="138"
-                        cy="37"
-                        rx="5"
-                        ry="9"
-                        transform="rotate(-40 138 37)"
-                        fill="#3d9d2e"
+                        cx="83"
+                        cy="50"
+                        rx="8"
+                        ry="3.5"
+                        transform="rotate(-30 83 50)"
+                        fill="#238b18"
                     />
 
                     <ellipse
-                        cx="146"
-                        cy="41"
-                        rx="5"
-                        ry="9"
-                        transform="rotate(42 146 41)"
-                        fill="#2d8c27"
+                        cx="78"
+                        cy="57"
+                        rx="8"
+                        ry="3.5"
+                        transform="rotate(-35 78 57)"
+                        fill="#2e9d22"
+                    />
+
+                    <ellipse
+                        cx="72"
+                        cy="63"
+                        rx="8"
+                        ry="3.5"
+                        transform="rotate(-40 72 63)"
+                        fill="#238b18"
                     />
 
                 </svg>
 
-            </span>
+            </div>
 
-            <span class="brand-text">
-                <span class="brand-shop">Shop</span><span class="brand-nova">Nova</span>
-            </span>
+            <div class="brand-text">
+                Shop<span>Nova</span>
+            </div>
 
         </a>
 
 
-        <!-- SEARCH -->
-        <form class="search-box" id="searchForm">
+        <!-- Search -->
+
+        <form
+            class="search-wrap"
+            id="searchForm"
+        >
 
             <input
                 type="search"
                 id="searchInput"
+                class="search-input"
                 placeholder="Search products..."
                 autocomplete="off"
-                aria-label="Search products"
             >
 
             <button
                 type="submit"
+                class="search-btn"
                 aria-label="Search"
-                title="Search"
             >
                 🔍
             </button>
@@ -232,8 +1703,21 @@
         </form>
 
 
-        <!-- NAVIGATION -->
-        <nav class="main-nav" aria-label="Main navigation">
+        <!-- Mobile menu -->
+
+        <button
+            type="button"
+            class="mobile-menu-btn"
+            id="mobileMenuBtn"
+            aria-label="Open menu"
+        >
+            ☰
+        </button>
+
+
+        <!-- Navigation -->
+
+        <nav class="main-nav" id="mainNav">
 
             <a
                 href="index.html"
@@ -254,163 +1738,190 @@
                 Checkout
             </a>
 
+            <button
+                type="button"
+                class="contact-btn"
+                id="contactButton"
+            >
+                Contact
+            </button>
+
         </nav>
-
-
-        <!-- SINGLE CONTACT BUTTON -->
-        <button
-            class="contact-button"
-            id="contactButton"
-            type="button"
-        >
-            Contact
-        </button>
 
     </div>
 
 </header>
 
 
-<!-- =========================================================
-     CONTACT PANEL
-========================================================= -->
+<!-- =======================================================
+     SEARCH MESSAGE
+     ======================================================= -->
+
+<div
+    class="search-message"
+    id="searchMessage"
+></div>
+
+
+<!-- =======================================================
+     CONTACT OVERLAY
+     ======================================================= -->
 
 <div
     class="contact-overlay"
     id="contactOverlay"
 ></div>
 
-<section
+
+<!-- =======================================================
+     CONTACT PANEL
+     ======================================================= -->
+
+<div
     class="contact-panel"
     id="contactPanel"
-    aria-hidden="true"
 >
 
-    <div class="contact-panel-header">
+    <div class="contact-head">
 
-        <div>
-            <span class="contact-small-title">
-                SHOPNOVA
-            </span>
-
-            <h2>
-                Connect with us
-            </h2>
-        </div>
+        <h3>Connect with ShopNova</h3>
 
         <button
-            class="contact-close"
-            id="contactClose"
             type="button"
-            aria-label="Close contact panel"
+            class="close-contact"
+            id="closeContact"
         >
             ×
         </button>
 
     </div>
 
-
-    <p class="contact-description">
-        Stay connected with ShopNova for products, offers and updates.
+    <p class="contact-sub">
+        Stay connected with ShopNova through our official channels.
     </p>
 
 
-    <div class="social-links">
+    <div class="social-list">
 
         <a
+            class="social-link"
+            href="mailto:shopnova@example.com"
+        >
+
+            <div class="social-icon">
+                ✉️
+            </div>
+
+            <div class="social-text">
+
+                <strong>Email</strong>
+
+                <small>Send us a message</small>
+
+            </div>
+
+        </a>
+
+
+        <a
+            class="social-link"
             href="https://wa.me/"
             target="_blank"
             rel="noopener noreferrer"
-            class="social-link whatsapp"
         >
-            <span class="social-icon">💬</span>
 
-            <span>
+            <div class="social-icon">
+                💬
+            </div>
+
+            <div class="social-text">
+
                 <strong>WhatsApp</strong>
-                <small>Chat with us</small>
-            </span>
 
-            <span class="social-arrow">→</span>
+                <small>Chat with us</small>
+
+            </div>
+
         </a>
 
 
         <a
+            class="social-link"
             href="https://www.instagram.com/"
             target="_blank"
             rel="noopener noreferrer"
-            class="social-link instagram"
         >
-            <span class="social-icon">📷</span>
 
-            <span>
+            <div class="social-icon">
+                📷
+            </div>
+
+            <div class="social-text">
+
                 <strong>Instagram</strong>
-                <small>Follow ShopNova</small>
-            </span>
 
-            <span class="social-arrow">→</span>
+                <small>Follow ShopNova</small>
+
+            </div>
+
         </a>
 
 
         <a
+            class="social-link"
             href="https://www.youtube.com/"
             target="_blank"
             rel="noopener noreferrer"
-            class="social-link youtube"
         >
-            <span class="social-icon">▶</span>
 
-            <span>
+            <div class="social-icon">
+                ▶️
+            </div>
+
+            <div class="social-text">
+
                 <strong>YouTube</strong>
+
                 <small>Watch our updates</small>
-            </span>
 
-            <span class="social-arrow">→</span>
-        </a>
+            </div>
 
-
-        <a
-            href="mailto:shopnova@example.com"
-            class="social-link email"
-        >
-            <span class="social-icon">✉</span>
-
-            <span>
-                <strong>Email</strong>
-                <small>Send us a message</small>
-            </span>
-
-            <span class="social-arrow">→</span>
         </a>
 
     </div>
 
-</section>
+</div>
 
 
-<!-- =========================================================
+<!-- =======================================================
      MAIN CONTENT
-========================================================= -->
+     ======================================================= -->
 
 <main>
 
+
     <!-- HERO -->
+
     <section class="hero-section">
 
-        <div class="hero-content">
+        <div class="hero-grid">
 
-            <div class="hero-left">
 
-                <span class="eyebrow">
+            <!-- LEFT -->
+
+            <div class="hero-content">
+
+                <div class="eyebrow">
                     SHOPNOVA COLLECTIONS
-                </span>
+                </div>
 
-                <h1>
-                    One marketplace.
-                    <br>
-                    Endless
-                    <br>
+
+                <h1 class="hero-title">
+                    One marketplace.<br>
+                    Endless<br>
                     possibilities.
                 </h1>
+
 
                 <p class="hero-description">
                     Explore technology, fashion, lifestyle essentials
@@ -418,75 +1929,65 @@
                 </p>
 
 
-                <!-- FEATURES -->
-                <div class="feature-cards">
+                <!-- Values -->
 
-                    <div class="feature-card">
+                <div class="value-row">
 
-                        <span class="feature-number">
+                    <div class="value-card">
+
+                        <div class="value-number">
                             01
-                        </span>
+                        </div>
 
-                        <strong>
+                        <div class="value-name">
                             Quality
-                        </strong>
-
-                        <span class="feature-symbol">
-                            ☆
-                        </span>
+                        </div>
 
                     </div>
 
 
-                    <div class="feature-card">
+                    <div class="value-card">
 
-                        <span class="feature-number">
+                        <div class="value-number">
                             02
-                        </span>
+                        </div>
 
-                        <strong>
+                        <div class="value-name">
                             Choice
-                        </strong>
-
-                        <span class="feature-symbol">
-                            ✓
-                        </span>
+                        </div>
 
                     </div>
 
 
-                    <div class="feature-card">
+                    <div class="value-card">
 
-                        <span class="feature-number">
+                        <div class="value-number">
                             03
-                        </span>
+                        </div>
 
-                        <strong>
+                        <div class="value-name">
                             Value
-                        </strong>
-
-                        <span class="feature-symbol">
-                            ◇
-                        </span>
+                        </div>
 
                     </div>
 
                 </div>
 
 
-                <!-- HERO BUTTONS -->
+                <!-- Buttons -->
+
                 <div class="hero-buttons">
 
                     <a
                         href="products.html"
-                        class="primary-button"
+                        class="primary-btn"
                     >
                         Start Shopping →
                     </a>
 
                     <a
                         href="cart.html"
-                        class="secondary-button"
+                        class="secondary-btn"
                     >
                         View Cart
                     </a>
@@ -496,196 +1997,220 @@
             </div>
 
 
-            <!-- HERO LOGO CARD -->
-            <div class="hero-right">
+            <!-- RIGHT LOGO SHOWCASE -->
 
-                <div class="logo-background">
+            <div class="logo-showcase">
 
-                    <div class="glow-circle circle-one"></div>
-                    <div class="glow-circle circle-two"></div>
-                    <div class="glow-circle circle-three"></div>
-
-                    <div class="wave-lines"></div>
+                <div class="logo-card">
 
 
-                    <div class="logo-card">
+                    <!-- FULL SHOPNOVA LOGO -->
 
-                        <!-- Same dove logo -->
-                        <div class="large-dove">
+                    <svg
+                        class="shopnova-logo-svg"
+                        viewBox="0 0 700 520"
+                        xmlns="http://www.w3.org/2000/svg"
+                        role="img"
+                        aria-label="ShopNova dove logo with olive branch"
+                    >
 
-                            <svg
-                                class="dove-logo hero-dove"
-                                viewBox="0 0 180 105"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
+                        <!-- golden swoosh -->
 
-                                <g class="olive-branch">
+                        <path
+                            d="M90 340
+                               C170 400 285 410 360 335"
+                            fill="none"
+                            stroke="#f39a16"
+                            stroke-width="12"
+                            stroke-linecap="round"
+                        />
 
-                                    <path
-                                        d="M116 43 C139 34 153 26 169 14"
-                                        fill="none"
-                                        stroke="#27851c"
-                                        stroke-width="5"
-                                        stroke-linecap="round"
-                                    />
+                        <!-- dove body -->
 
-                                    <ellipse
-                                        cx="128"
-                                        cy="38"
-                                        rx="8"
-                                        ry="15"
-                                        transform="rotate(-38 128 38)"
-                                        fill="#3b9b2b"
-                                    />
+                        <ellipse
+                            cx="235"
+                            cy="220"
+                            rx="110"
+                            ry="72"
+                            fill="#ffffff"
+                            stroke="#15376f"
+                            stroke-width="7"
+                        />
 
-                                    <ellipse
-                                        cx="141"
-                                        cy="31"
-                                        rx="8"
-                                        ry="15"
-                                        transform="rotate(35 141 31)"
-                                        fill="#2d8b25"
-                                    />
+                        <!-- dove head -->
 
-                                    <ellipse
-                                        cx="151"
-                                        cy="25"
-                                        rx="8"
-                                        ry="14"
-                                        transform="rotate(-35 151 25)"
-                                        fill="#55a936"
-                                    />
+                        <circle
+                            cx="330"
+                            cy="155"
+                            r="43"
+                            fill="#ffffff"
+                            stroke="#15376f"
+                            stroke-width="7"
+                        />
 
-                                </g>
+                        <!-- dove beak -->
 
+                        <path
+                            d="M365 155 L425 174 L366 192 Z"
+                            fill="#ff8b00"
+                            stroke="#15376f"
+                            stroke-width="6"
+                        />
 
-                                <path
-                                    d="
-                                    M35 61
-                                    C43 48 58 41 74 43
-                                    C89 45 103 51 116 48
-                                    C123 47 128 43 131 38
-                                    C135 30 131 22 124 20
-                                    C115 17 108 22 106 29
-                                    C103 36 107 42 114 45
-                                    C104 49 94 49 84 45
-                                    C70 39 54 38 42 44
-                                    C31 50 26 59 35 61Z"
-                                    fill="#ffffff"
-                                    stroke="#17315f"
-                                    stroke-width="3"
-                                />
+                        <!-- eye -->
 
+                        <circle
+                            cx="341"
+                            cy="147"
+                            r="8"
+                            fill="#0b2557"
+                        />
 
-                                <circle
-                                    cx="116"
-                                    cy="29"
-                                    r="13"
-                                    fill="#ffffff"
-                                    stroke="#17315f"
-                                    stroke-width="3"
-                                />
+                        <!-- wing -->
 
+                        <path
+                            class="dove-wing"
+                            d="M240 215
+                               C185 115 115 90 72 125
+                               C135 170 145 265 226 285
+                               C270 293 282 250 240 215Z"
+                            fill="#f9fcff"
+                            stroke="#15376f"
+                            stroke-width="7"
+                        />
 
-                                <circle
-                                    cx="120"
-                                    cy="26"
-                                    r="2.8"
-                                    fill="#102956"
-                                />
+                        <!-- olive branch -->
 
+                        <path
+                            d="M370 195
+                               C325 218 290 253 265 305"
+                            fill="none"
+                            stroke="#238b18"
+                            stroke-width="10"
+                            stroke-linecap="round"
+                        />
 
-                                <path
-                                    d="M127 31 L141 35 L127 38 Z"
-                                    fill="#f08a18"
-                                    stroke="#17315f"
-                                    stroke-width="2"
-                                />
+                        <!-- leaves -->
 
+                        <ellipse
+                            cx="335"
+                            cy="216"
+                            rx="38"
+                            ry="17"
+                            transform="rotate(-28 335 216)"
+                            fill="#238b18"
+                        />
 
-                                <path
-                                    class="dove-wing"
-                                    d="
-                                    M83 48
-                                    C63 40 51 24 54 7
-                                    C55 3 60 4 63 8
-                                    C73 21 84 30 99 36
-                                    C105 39 107 44 102 49
-                                    C97 53 90 52 83 48Z"
-                                    fill="#f8fbff"
-                                    stroke="#17315f"
-                                    stroke-width="3"
-                                />
+                        <ellipse
+                            cx="314"
+                            cy="242"
+                            rx="38"
+                            ry="17"
+                            transform="rotate(-32 314 242)"
+                            fill="#2e9d22"
+                        />
 
-
-                                <path
-                                    d="M62 12 C71 28 82 38 96 44"
-                                    fill="none"
-                                    stroke="#b7c8e5"
-                                    stroke-width="2"
-                                />
+                        <ellipse
+                            cx="295"
+                            cy="272"
+                            rx="38"
+                            ry="17"
+                            transform="rotate(-38 295 272)"
+                            fill="#238b18"
+                        />
 
 
-                                <path
-                                    d="M57 22 C69 35 81 43 95 47"
-                                    fill="none"
-                                    stroke="#c7d6ed"
-                                    stroke-width="2"
-                                />
+                        <!-- shopping bag -->
+
+                        <path
+                            d="M175 300
+                               L310 300
+                               L292 430
+                               L193 430 Z"
+                            fill="#082b67"
+                            stroke="#15376f"
+                            stroke-width="7"
+                        />
+
+                        <path
+                            d="M210 302
+                               C210 260 274 260 274 302"
+                            fill="none"
+                            stroke="#f3a51b"
+                            stroke-width="8"
+                            stroke-linecap="round"
+                        />
+
+                        <!-- SV -->
+
+                        <text
+                            x="205"
+                            y="382"
+                            font-family="Georgia,serif"
+                            font-size="64"
+                            font-weight="bold"
+                            fill="#f6b331"
+                        >
+                            SV
+                        </text>
 
 
-                                <path
-                                    d="
-                                    M43 51
-                                    C29 43 19 35 10 27
-                                    C18 44 27 54 39 60
-                                    C29 62 20 64 12 67
-                                    C28 72 43 68 52 61Z"
-                                    fill="#ffffff"
-                                    stroke="#17315f"
-                                    stroke-width="3"
-                                />
+                        <!-- ShopNova text -->
+
+                        <text
+                            x="350"
+                            y="345"
+                            font-family="Georgia,serif"
+                            font-size="86"
+                            font-weight="bold"
+                            fill="#0b2557"
+                        >
+                            Shop
+                        </text>
+
+                        <text
+                            x="535"
+                            y="345"
+                            font-family="Georgia,serif"
+                            font-size="86"
+                            font-weight="bold"
+                            fill="#ff7200"
+                        >
+                            Nova
+                        </text>
 
 
-                                <path
-                                    d="M126 34 C133 35 141 38 150 44"
-                                    fill="none"
-                                    stroke="#27851c"
-                                    stroke-width="3"
-                                    stroke-linecap="round"
-                                />
+                        <!-- tagline -->
 
-                                <ellipse
-                                    cx="138"
-                                    cy="37"
-                                    rx="5"
-                                    ry="9"
-                                    transform="rotate(-40 138 37)"
-                                    fill="#3d9d2e"
-                                />
+                        <line
+                            x1="350"
+                            y1="375"
+                            x2="415"
+                            y2="375"
+                            stroke="#ff8a00"
+                            stroke-width="6"
+                        />
 
-                                <ellipse
-                                    cx="146"
-                                    cy="41"
-                                    rx="5"
-                                    ry="9"
-                                    transform="rotate(42 146 41)"
-                                    fill="#2d8c27"
-                                />
-
-                            </svg>
-
-                        </div>
-
-
-                        <h2>
-                            <span class="brand-shop">Shop</span><span class="brand-nova">Nova</span>
-                        </h2>
-
-                        <p>
+                        <text
+                            x="430"
+                            y="382"
+                            font-family="Arial,sans-serif"
+                            font-size="25"
+                            font-weight="bold"
+                            fill="#15376f"
+                        >
                             Shop Smart • Live Better
-                        </p>
+                        </text>
 
+                    </svg>
+
+
+                    <div class="logo-card-title">
+                        ShopNova
+                    </div>
+
+                    <div class="logo-card-text">
+                        Premium shopping for modern life.
                     </div>
 
                 </div>
@@ -697,80 +2222,90 @@
     </section>
 
 
-    <!-- SERVICE BAR -->
-    <section class="service-section">
+    <!-- SERVICES -->
 
-        <div class="service-item">
+    <section class="services">
+
+
+        <div class="service">
 
             <div class="service-icon">
                 🚚
             </div>
 
             <div>
-                <strong>
-                    Fast Delivery
-                </strong>
 
-                <span>
+                <h3>
+                    Fast Delivery
+                </h3>
+
+                <p>
                     Reliable doorstep delivery
-                </span>
+                </p>
+
             </div>
 
         </div>
 
 
-        <div class="service-item">
+        <div class="service">
 
             <div class="service-icon">
                 🛡️
             </div>
 
             <div>
-                <strong>
-                    Secure Shopping
-                </strong>
 
-                <span>
+                <h3>
+                    Secure Shopping
+                </h3>
+
+                <p>
                     Safe and simple experience
-                </span>
+                </p>
+
             </div>
 
         </div>
 
 
-        <div class="service-item">
+        <div class="service">
 
             <div class="service-icon">
                 ⭐
             </div>
 
             <div>
-                <strong>
-                    Premium Quality
-                </strong>
 
-                <span>
+                <h3>
+                    Premium Quality
+                </h3>
+
+                <p>
                     Products you can trust
-                </span>
+                </p>
+
             </div>
 
         </div>
 
 
-        <div class="service-item">
+        <div class="service">
 
             <div class="service-icon">
                 🎧
             </div>
 
             <div>
-                <strong>
-                    Customer Support
-                </strong>
 
-                <span>
+                <h3>
+                    Customer Support
+                </h3>
+
+                <p>
                     We're here to help
-                </span>
+                </p>
+
             </div>
 
         </div>
@@ -778,21 +2313,23 @@
     </section>
 
 
-    <!-- CTA -->
-    <section class="cta-section">
+    <!-- PROMOTIONAL BANNER -->
 
-        <div class="cta-content">
+    <section class="promo">
 
-            <span class="cta-label">
+        <div>
+
+            <div class="promo-label">
                 SHOPNOVA
-            </span>
+            </div>
 
             <h2>
                 Find something you love today.
             </h2>
 
             <p>
-                Browse our latest collections and discover something made for you.
+                Browse our latest collections and discover
+                something made for you.
             </p>
 
         </div>
@@ -800,7 +2337,7 @@
 
         <a
             href="products.html"
-            class="cta-button"
+            class="promo-btn"
         >
             Browse Products →
         </a>
@@ -810,150 +2347,97 @@
 </main>
 
 
-<!-- =========================================================
+<!-- =======================================================
      FOOTER
-========================================================= -->
+     ======================================================= -->
 
-<footer class="site-footer">
+<footer class="footer">
 
-    <div class="footer-inner">
+    <div class="footer-grid">
 
-        <div class="footer-brand">
 
-            <div class="footer-mini-logo">
+        <div>
 
-                <svg
-                    viewBox="0 0 180 105"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-
-                    <path
-                        d="
-                        M35 61
-                        C43 48 58 41 74 43
-                        C89 45 103 51 116 48
-                        C123 47 128 43 131 38
-                        C135 30 131 22 124 20
-                        C115 17 108 22 106 29
-                        C103 36 107 42 114 45
-                        C104 49 94 49 84 45
-                        C70 39 54 38 42 44
-                        C31 50 26 59 35 61Z"
-                        fill="#ffffff"
-                        stroke="#ffffff"
-                        stroke-width="3"
-                    />
-
-                    <circle
-                        cx="116"
-                        cy="29"
-                        r="13"
-                        fill="#ffffff"
-                    />
-
-                    <path
-                        d="M127 31 L141 35 L127 38 Z"
-                        fill="#ff7a00"
-                    />
-
-                    <path
-                        d="
-                        M83 48
-                        C63 40 51 24 54 7
-                        C55 3 60 4 63 8
-                        C73 21 84 30 99 36
-                        C105 39 107 44 102 49
-                        C97 53 90 52 83 48Z"
-                        fill="#f4f8ff"
-                    />
-
-                    <path
-                        d="M126 34 C133 35 141 38 150 44"
-                        fill="none"
-                        stroke="#4caf32"
-                        stroke-width="4"
-                    />
-
-                    <ellipse
-                        cx="138"
-                        cy="37"
-                        rx="5"
-                        ry="9"
-                        transform="rotate(-40 138 37)"
-                        fill="#4caf32"
-                    />
-
-                </svg>
-
+            <div class="footer-brand">
+                Shop<span>Nova</span>
             </div>
 
-
-            <div>
-
-                <strong>
-                    Shop<span>Nova</span>
-                </strong>
-
-                <small>
-                    Shop Smart • Live Better
-                </small>
-
-            </div>
+            <p>
+                Shop Smart • Live Better.
+                Discover premium products,
+                useful essentials and modern collections.
+            </p>
 
         </div>
 
 
-        <div class="footer-column">
+        <div>
 
-            <h3>
+            <h4>
                 Shop
-            </h3>
+            </h4>
 
-            <a href="products.html">
-                Products
-            </a>
+            <div class="footer-links">
 
-            <a href="cart.html">
-                Cart
-            </a>
+                <a href="index.html">
+                    Home
+                </a>
 
-            <a href="checkout.html">
-                Checkout
-            </a>
+                <a href="products.html">
+                    Products
+                </a>
+
+                <a href="cart.html">
+                    Cart
+                </a>
+
+            </div>
 
         </div>
 
 
-        <div class="footer-column">
+        <div>
 
-            <h3>
+            <h4>
                 Support
-            </h3>
+            </h4>
 
-            <button
-                type="button"
-                class="footer-contact-button"
-                id="footerContactButton"
-            >
-                Contact ShopNova
-            </button>
+            <div class="footer-links">
+
+                <a href="checkout.html">
+                    Checkout
+                </a>
+
+                <a href="#" id="footerContact">
+                    Contact
+                </a>
+
+            </div>
 
         </div>
 
 
-        <div class="footer-column">
+        <div>
 
-            <h3>
+            <h4>
                 Connect
-            </h3>
+            </h4>
 
-            <button
-                type="button"
-                class="footer-contact-button"
-                id="footerContactButton2"
-            >
-                Social Media
-            </button>
+            <div class="footer-links">
+
+                <a href="https://www.instagram.com/" target="_blank">
+                    Instagram
+                </a>
+
+                <a href="https://www.youtube.com/" target="_blank">
+                    YouTube
+                </a>
+
+                <a href="https://wa.me/" target="_blank">
+                    WhatsApp
+                </a>
+
+            </div>
 
         </div>
 
@@ -969,197 +2453,252 @@
 </footer>
 
 
-<!-- =========================================================
+<!-- =======================================================
      JAVASCRIPT
-========================================================= -->
+     ======================================================= -->
 
 <script>
 
-document.addEventListener("DOMContentLoaded", function () {
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
 
-    /* =====================================================
-       SEARCH
-    ===================================================== */
+const mobileMenuBtn =
+    document.getElementById("mobileMenuBtn");
 
-    const searchForm = document.getElementById("searchForm");
-    const searchInput = document.getElementById("searchInput");
+const mainNav =
+    document.getElementById("mainNav");
 
-    if (searchForm && searchInput) {
+mobileMenuBtn.addEventListener("click", function(){
 
-        searchForm.addEventListener("submit", function (event) {
+    mainNav.classList.toggle("open");
 
-            event.preventDefault();
-
-            const query = searchInput.value.trim();
-
-            if (query.length > 0) {
-
-                window.location.href =
-                    "products.html?search=" +
-                    encodeURIComponent(query);
-
-            } else {
-
-                window.location.href = "products.html";
-
-            }
-
-        });
-
-    }
+});
 
 
-    /* =====================================================
-       CONTACT PANEL
-    ===================================================== */
+/* =========================================================
+   CLOSE MOBILE MENU AFTER LINK
+   ========================================================= */
 
-    const contactButton =
-        document.getElementById("contactButton");
+document.querySelectorAll(".main-nav a").forEach(function(link){
 
-    const contactPanel =
-        document.getElementById("contactPanel");
+    link.addEventListener("click", function(){
 
-    const contactOverlay =
-        document.getElementById("contactOverlay");
-
-    const contactClose =
-        document.getElementById("contactClose");
-
-    const footerContactButton =
-        document.getElementById("footerContactButton");
-
-    const footerContactButton2 =
-        document.getElementById("footerContactButton2");
-
-
-    function openContact() {
-
-        if (!contactPanel) return;
-
-        contactPanel.classList.add("show");
-
-        if (contactOverlay) {
-            contactOverlay.classList.add("show");
-        }
-
-        contactPanel.setAttribute(
-            "aria-hidden",
-            "false"
-        );
-
-        document.body.classList.add(
-            "contact-open"
-        );
-
-    }
-
-
-    function closeContact() {
-
-        if (!contactPanel) return;
-
-        contactPanel.classList.remove("show");
-
-        if (contactOverlay) {
-            contactOverlay.classList.remove("show");
-        }
-
-        contactPanel.setAttribute(
-            "aria-hidden",
-            "true"
-        );
-
-        document.body.classList.remove(
-            "contact-open"
-        );
-
-    }
-
-
-    if (contactButton) {
-        contactButton.addEventListener(
-            "click",
-            openContact
-        );
-    }
-
-
-    if (footerContactButton) {
-        footerContactButton.addEventListener(
-            "click",
-            openContact
-        );
-    }
-
-
-    if (footerContactButton2) {
-        footerContactButton2.addEventListener(
-            "click",
-            openContact
-        );
-    }
-
-
-    if (contactClose) {
-        contactClose.addEventListener(
-            "click",
-            closeContact
-        );
-    }
-
-
-    if (contactOverlay) {
-        contactOverlay.addEventListener(
-            "click",
-            closeContact
-        );
-    }
-
-
-    document.addEventListener(
-        "keydown",
-        function (event) {
-
-            if (event.key === "Escape") {
-                closeContact();
-            }
-
-        }
-    );
-
-
-    /* =====================================================
-       DOVE HOVER / FLY ANIMATION
-    ===================================================== */
-
-    const doveLogos =
-        document.querySelectorAll(".dove-logo");
-
-
-    doveLogos.forEach(function (dove) {
-
-        dove.addEventListener(
-            "mouseenter",
-            function () {
-
-                dove.classList.add("fly");
-
-            }
-        );
-
-
-        dove.addEventListener(
-            "mouseleave",
-            function () {
-
-                dove.classList.remove("fly");
-
-            }
-        );
+        mainNav.classList.remove("open");
 
     });
 
 });
+
+
+/* =========================================================
+   CONTACT PANEL
+   ========================================================= */
+
+const contactButton =
+    document.getElementById("contactButton");
+
+const contactPanel =
+    document.getElementById("contactPanel");
+
+const contactOverlay =
+    document.getElementById("contactOverlay");
+
+const closeContact =
+    document.getElementById("closeContact");
+
+const footerContact =
+    document.getElementById("footerContact");
+
+
+function openContact(){
+
+    contactPanel.classList.add("show");
+
+    contactOverlay.classList.add("show");
+
+    mainNav.classList.remove("open");
+
+}
+
+
+function closeContactPanel(){
+
+    contactPanel.classList.remove("show");
+
+    contactOverlay.classList.remove("show");
+
+}
+
+
+contactButton.addEventListener(
+    "click",
+    openContact
+);
+
+
+closeContact.addEventListener(
+    "click",
+    closeContactPanel
+);
+
+
+contactOverlay.addEventListener(
+    "click",
+    closeContactPanel
+);
+
+
+footerContact.addEventListener(
+    "click",
+    function(event){
+
+        event.preventDefault();
+
+        openContact();
+
+    }
+);
+
+
+/* =========================================================
+   ESC KEY CLOSE
+   ========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Escape"){
+
+            closeContactPanel();
+
+            mainNav.classList.remove("open");
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+const searchForm =
+    document.getElementById("searchForm");
+
+const searchInput =
+    document.getElementById("searchInput");
+
+const searchMessage =
+    document.getElementById("searchMessage");
+
+
+searchForm.addEventListener(
+    "submit",
+    function(event){
+
+        event.preventDefault();
+
+        const query =
+            searchInput.value.trim();
+
+        if(!query){
+
+            searchMessage.textContent =
+                "Please enter a product to search.";
+
+            searchMessage.classList.add("show");
+
+            setTimeout(function(){
+
+                searchMessage.classList.remove("show");
+
+            },2500);
+
+            return;
+
+        }
+
+
+        /*
+           Send the search term to products.html.
+        */
+
+        window.location.href =
+            "products.html?search=" +
+            encodeURIComponent(query);
+
+    }
+);
+
+
+/* =========================================================
+   SEARCH ENTER SUPPORT
+   ========================================================= */
+
+searchInput.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Enter"){
+
+            event.preventDefault();
+
+            searchForm.dispatchEvent(
+                new Event("submit")
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CLOSE CONTACT WHEN CLICKING SOCIAL LINK
+   ========================================================= */
+
+document.querySelectorAll(".social-link").forEach(function(link){
+
+    link.addEventListener("click", function(){
+
+        setTimeout(function(){
+
+            closeContactPanel();
+
+        },100);
+
+    });
+
+});
+
+
+/* =========================================================
+   SIMPLE LOGO HOVER SUPPORT
+   ========================================================= */
+
+const logoCard =
+    document.querySelector(".logo-card");
+
+logoCard.addEventListener(
+    "mouseenter",
+    function(){
+
+        logoCard.classList.add("logo-hover");
+
+    }
+);
+
+logoCard.addEventListener(
+    "mouseleave",
+    function(){
+
+        logoCard.classList.remove("logo-hover");
+
+    }
+);
 
 </script>
 
