@@ -1,24 +1,41 @@
-<div class="card">
-    <div class="img">
-        <img src="images/bible-wonders.jpg" alt="Bible Wonders Book">
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopnova Ecommerce - Products</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-    <div class="info">
-        <div class="cat">BOOKS</div>
+    <!-- Product Showcase Container Grid -->
+    <div class="products-container">
 
-        <div class="title">
-            Bible Wonders
+        <!-- Card Item: Bible Wonders Book -->
+        <div class="card">
+            <div class="Img">
+                <img src="images/bible-wonders.jpg" alt="Bible Wonders Book">
+            </div>
+            
+            <div class="info">
+                <div class="cat">BOOKS</div>
+                
+                <h3 class="title">Bible Wonders</h3>
+                
+                <div class="price">
+                    <span class="current-price">₹350</span>
+                    <span class="old">₹499</span>
+                </div>
+                
+                <button class="btn" onclick="add('Bible Wonders', 350, 'images/bible-wonders.jpg')">
+                    🛒 Add to Cart
+                </button>
+            </div>
         </div>
 
-        <div class="price">
-            ₹350
-            <span class="old">₹499</span>
-        </div>
+        <!-- Tip: Duplicate the entire <div class="card"> block below this line to add your other inventory items like bag.jpg, earbuds.jpg, suit.jpg, etc. -->
 
-        <button
-            class="btn"
-            onclick="add('Bible Wonders',350,'images/bible-wonders.jpg')">
-            🛒 Add to Cart
-        </button>
     </div>
-</div>
+
+</body>
+</html>
