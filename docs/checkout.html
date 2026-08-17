@@ -1,1602 +1,420 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ShopNova - Secure Checkout</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    <style>
-        /* =========================================================
-           SHOPNOVA CHECKOUT PAGE
-           ========================================================= */
+    <title>ShopNova | Checkout</title>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <link
+        rel="stylesheet"
+        href="style.css">
 
-        body {
-            font-family: "Segoe UI", Arial, sans-serif;
-            background: #f4f7fb;
-            color: #0b1f4d;
-            min-height: 100vh;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        button,
-        input,
-        textarea {
-            font-family: inherit;
-        }
-
-        /* =========================================================
-           HEADER
-           ========================================================= */
-
-        .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-
-            width: 100%;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            gap: 20px;
-
-            padding: 14px 28px;
-
-            background: rgba(11, 31, 77, 0.97);
-
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
-
-            backdrop-filter: blur(10px);
-        }
-
-        .nav-left {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            min-width: 0;
-        }
-
-        .logo {
-            color: white;
-            font-size: 1.55rem;
-            font-weight: 900;
-            white-space: nowrap;
-        }
-
-        .search-container {
-            display: flex;
-            align-items: center;
-
-            background: white;
-
-            border-radius: 999px;
-
-            overflow: hidden;
-
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-        }
-
-        .search-container input {
-            width: 240px;
-
-            border: none;
-            outline: none;
-
-            padding: 11px 16px;
-
-            font-size: 14px;
-        }
-
-        .search-btn {
-            border: none;
-
-            background: #ff7a00;
-
-            color: white;
-
-            padding: 11px 17px;
-
-            cursor: pointer;
-
-            font-size: 16px;
-        }
-
-        .search-btn:hover {
-            background: #e86600;
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            gap: 16px;
-
-            flex-wrap: wrap;
-        }
-
-        .nav-link {
-            color: white;
-            font-weight: 700;
-
-            transition: 0.25s;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: #ffd166;
-        }
-
-        .connect-hub-btn {
-            border: none;
-
-            background: linear-gradient(
-                135deg,
-                #ff7a00,
-                #138808
-            );
-
-            color: white;
-
-            padding: 10px 18px;
-
-            border-radius: 999px;
-
-            font-weight: 800;
-
-            cursor: pointer;
-        }
-
-        /* =========================================================
-           PAGE TITLE
-           ========================================================= */
-
-        .checkout-hero {
-            text-align: center;
-
-            padding: 55px 20px 30px;
-        }
-
-        .checkout-hero h1 {
-            font-size: clamp(2rem, 5vw, 3.2rem);
-
-            font-weight: 900;
-
-            margin-bottom: 10px;
-        }
-
-        .checkout-hero p {
-            color: #64748b;
-
-            font-size: 1rem;
-        }
-
-        /* =========================================================
-           MAIN CHECKOUT
-           ========================================================= */
-
-        .checkout-wrapper {
-            width: min(1200px, 94%);
-
-            margin: 0 auto 60px;
-
-            display: grid;
-
-            grid-template-columns: minmax(0, 1fr) 390px;
-
-            gap: 30px;
-
-            align-items: start;
-        }
-
-        .checkout-card {
-            background: white;
-
-            border-radius: 24px;
-
-            padding: 30px;
-
-            box-shadow:
-                0 15px 40px rgba(15, 23, 42, 0.08);
-        }
-
-        .checkout-card h2 {
-            font-size: 1.45rem;
-
-            margin-bottom: 25px;
-        }
-
-        /* =========================================================
-           FORM
-           ========================================================= */
-
-        .form-grid {
-            display: grid;
-
-            grid-template-columns: 1fr 1fr;
-
-            gap: 18px;
-        }
-
-        .form-group {
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 7px;
-        }
-
-        .form-group.full {
-            grid-column: 1 / -1;
-        }
-
-        .form-group label {
-            font-weight: 700;
-
-            font-size: 14px;
-
-            color: #0b1f4d;
-        }
-
-        .required {
-            color: #dc2626;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-
-            border: 1px solid #cbd5e1;
-
-            border-radius: 12px;
-
-            padding: 13px 14px;
-
-            outline: none;
-
-            font-size: 14px;
-
-            background: #f8fafc;
-
-            transition: 0.25s;
-        }
-
-        .form-group textarea {
-            min-height: 100px;
-
-            resize: vertical;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            border-color: #138808;
-
-            background: white;
-
-            box-shadow: 0 0 0 3px rgba(19, 136, 8, 0.08);
-        }
-
-        /* =========================================================
-           PAYMENT TITLE
-           ========================================================= */
-
-        .payment-heading {
-            margin-top: 30px;
-
-            padding-top: 25px;
-
-            border-top: 1px solid #e2e8f0;
-
-            font-size: 1.2rem;
-
-            font-weight: 900;
-        }
-
-        /* =========================================================
-           PAYMENT OPTIONS
-           ========================================================= */
-
-        .payment-options {
-            display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
-            gap: 12px;
-
-            margin-top: 18px;
-        }
-
-        .payment-option {
-            position: relative;
-
-            border: 1.5px solid #cbd5e1;
-
-            background: #f8fafc;
-
-            border-radius: 15px;
-
-            padding: 20px 12px;
-
-            text-align: center;
-
-            cursor: pointer;
-
-            transition:
-                transform 0.25s,
-                border-color 0.25s,
-                background 0.25s,
-                box-shadow 0.25s;
-        }
-
-        .payment-option:hover {
-            transform: translateY(-2px);
-
-            border-color: #138808;
-
-            background: #ffffff;
-        }
-
-        .payment-option.selected {
-            border-color: #138808;
-
-            background: linear-gradient(
-                180deg,
-                #f0fff4,
-                #ffffff
-            );
-
-            box-shadow:
-                0 6px 18px rgba(19, 136, 8, 0.12);
-        }
-
-        .payment-option input {
-            position: absolute;
-
-            opacity: 0;
-
-            pointer-events: none;
-        }
-
-        .payment-icon {
-            display: block;
-
-            font-size: 25px;
-
-            margin-bottom: 8px;
-        }
-
-        .payment-name {
-            font-weight: 800;
-
-            font-size: 14px;
-        }
-
-        .payment-check {
-            position: absolute;
-
-            top: 8px;
-            right: 10px;
-
-            width: 20px;
-            height: 20px;
-
-            border-radius: 50%;
-
-            background: #138808;
-
-            color: white;
-
-            display: none;
-
-            align-items: center;
-            justify-content: center;
-
-            font-size: 12px;
-        }
-
-        .payment-option.selected .payment-check {
-            display: flex;
-        }
-
-        /* =========================================================
-           PAYMENT PANELS
-           ========================================================= */
-
-        .payment-panel {
-            display: none;
-
-            margin-top: 18px;
-
-            padding: 20px;
-
-            border-radius: 16px;
-
-            background: #f8fafc;
-
-            border: 1px solid #dbe4ee;
-
-            animation: paymentOpen 0.3s ease;
-        }
-
-        .payment-panel.active {
-            display: block;
-        }
-
-        @keyframes paymentOpen {
-            from {
-                opacity: 0;
-
-                transform: translateY(-8px);
-            }
-
-            to {
-                opacity: 1;
-
-                transform: translateY(0);
-            }
-        }
-
-        .payment-panel h3 {
-            margin-bottom: 8px;
-
-            font-size: 1.05rem;
-        }
-
-        .payment-panel p {
-            color: #64748b;
-
-            font-size: 14px;
-
-            line-height: 1.6;
-
-            margin-bottom: 15px;
-        }
-
-        /* =========================================================
-           UPI
-           ========================================================= */
-
-        .upi-box {
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 10px;
-        }
-
-        .upi-box label {
-            font-weight: 700;
-
-            font-size: 14px;
-        }
-
-        .upi-box input {
-            width: 100%;
-
-            border: 1px solid #cbd5e1;
-
-            border-radius: 10px;
-
-            padding: 13px;
-
-            outline: none;
-
-            background: white;
-        }
-
-        .upi-box input:focus {
-            border-color: #138808;
-        }
-
-        .upi-note {
-            margin-top: 12px;
-
-            padding: 12px;
-
-            border-radius: 10px;
-
-            background: #ecfdf5;
-
-            color: #166534;
-
-            font-size: 13px;
-        }
-
-        /* =========================================================
-           CARD PAYMENT
-           ========================================================= */
-
-        .card-payment-grid {
-            display: grid;
-
-            grid-template-columns: 1fr 1fr;
-
-            gap: 12px;
-        }
-
-        .card-payment-grid .full {
-            grid-column: 1 / -1;
-        }
-
-        .card-payment-grid label {
-            display: block;
-
-            font-weight: 700;
-
-            font-size: 13px;
-
-            margin-bottom: 6px;
-        }
-
-        .card-payment-grid input {
-            width: 100%;
-
-            padding: 12px;
-
-            border-radius: 10px;
-
-            border: 1px solid #cbd5e1;
-
-            outline: none;
-
-            background: white;
-        }
-
-        .card-payment-grid input:focus {
-            border-color: #138808;
-        }
-
-        /* =========================================================
-           COD
-           ========================================================= */
-
-        .cod-message {
-            padding: 15px;
-
-            border-radius: 12px;
-
-            background: #fff7ed;
-
-            border-left: 4px solid #ff7a00;
-
-            color: #7c2d12;
-
-            font-size: 14px;
-
-            line-height: 1.6;
-        }
-
-        /* =========================================================
-           PLACE ORDER
-           ========================================================= */
-
-        .place-order-btn {
-            width: 100%;
-
-            border: none;
-
-            margin-top: 25px;
-
-            padding: 16px;
-
-            border-radius: 14px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #ff7a00,
-                    #138808
-                );
-
-            color: white;
-
-            font-size: 16px;
-
-            font-weight: 900;
-
-            cursor: pointer;
-
-            box-shadow:
-                0 10px 25px rgba(19, 136, 8, 0.2);
-
-            transition: 0.25s;
-        }
-
-        .place-order-btn:hover {
-            transform: translateY(-2px);
-
-            box-shadow:
-                0 14px 30px rgba(19, 136, 8, 0.28);
-        }
-
-        /* =========================================================
-           ORDER SUMMARY
-           ========================================================= */
-
-        .summary-card {
-            position: sticky;
-
-            top: 95px;
-        }
-
-        .summary-card h2 {
-            margin-bottom: 20px;
-        }
-
-        .cart-items {
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 14px;
-
-            max-height: 420px;
-
-            overflow-y: auto;
-
-            padding-right: 4px;
-        }
-
-        .summary-item {
-            display: flex;
-
-            align-items: center;
-
-            gap: 12px;
-
-            padding-bottom: 14px;
-
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .summary-item img {
-            width: 65px;
-            height: 65px;
-
-            object-fit: cover;
-
-            border-radius: 10px;
-
-            background: #eef2f7;
-        }
-
-        .summary-item-info {
-            flex: 1;
-        }
-
-        .summary-item-name {
-            font-weight: 800;
-
-            font-size: 14px;
-
-            margin-bottom: 4px;
-        }
-
-        .summary-item-qty {
-            color: #64748b;
-
-            font-size: 13px;
-        }
-
-        .summary-item-price {
-            font-weight: 900;
-
-            white-space: nowrap;
-        }
-
-        .empty-cart {
-            text-align: center;
-
-            padding: 25px 15px;
-
-            background: #f8fafc;
-
-            border-radius: 14px;
-
-            color: #64748b;
-        }
-
-        .continue-shopping {
-            display: inline-block;
-
-            margin-top: 12px;
-
-            color: #2563eb;
-
-            font-weight: 800;
-        }
-
-        .summary-row {
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: center;
-
-            padding: 12px 0;
-
-            color: #64748b;
-        }
-
-        .summary-row strong {
-            color: #0f172a;
-        }
-
-        .summary-divider {
-            border: none;
-
-            border-top: 1px solid #dbe4ee;
-
-            margin: 8px 0;
-        }
-
-        .total-row {
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: center;
-
-            padding-top: 15px;
-
-            font-size: 20px;
-
-            font-weight: 900;
-        }
-
-        .total-price {
-            color: #138808;
-        }
-
-        .secure-box {
-            margin-top: 20px;
-
-            padding: 14px;
-
-            border-radius: 12px;
-
-            text-align: center;
-
-            background: #eff6ff;
-
-            color: #1e40af;
-
-            font-size: 13px;
-
-            font-weight: 700;
-        }
-
-        /* =========================================================
-           SUCCESS MESSAGE
-           ========================================================= */
-
-        .success-message {
-            display: none;
-
-            position: fixed;
-
-            inset: 0;
-
-            z-index: 5000;
-
-            background: rgba(2, 6, 23, 0.65);
-
-            align-items: center;
-
-            justify-content: center;
-
-            padding: 20px;
-        }
-
-        .success-message.show {
-            display: flex;
-        }
-
-        .success-box {
-            width: min(450px, 100%);
-
-            background: white;
-
-            border-radius: 22px;
-
-            padding: 35px;
-
-            text-align: center;
-
-            box-shadow: 0 25px 70px rgba(0,0,0,0.25);
-
-            animation: successPop 0.3s ease;
-        }
-
-        @keyframes successPop {
-            from {
-                opacity: 0;
-
-                transform: scale(0.9);
-            }
-
-            to {
-                opacity: 1;
-
-                transform: scale(1);
-            }
-        }
-
-        .success-icon {
-            font-size: 55px;
-
-            margin-bottom: 12px;
-        }
-
-        .success-box h2 {
-            margin-bottom: 10px;
-        }
-
-        .success-box p {
-            color: #64748b;
-
-            line-height: 1.6;
-
-            margin-bottom: 22px;
-        }
-
-        .success-close {
-            border: none;
-
-            padding: 12px 25px;
-
-            border-radius: 999px;
-
-            background: #0b1f4d;
-
-            color: white;
-
-            font-weight: 800;
-
-            cursor: pointer;
-        }
-
-        /* =========================================================
-           FOOTER
-           ========================================================= */
-
-        footer {
-            background: #0b1f4d;
-
-            color: white;
-
-            text-align: center;
-
-            padding: 24px;
-
-            margin-top: 40px;
-
-            font-size: 14px;
-        }
-
-        /* =========================================================
-           TABLET
-           ========================================================= */
-
-        @media (max-width: 950px) {
-
-            .navbar {
-                flex-direction: column;
-            }
-
-            .nav-left {
-                width: 100%;
-
-                justify-content: center;
-
-                flex-wrap: wrap;
-            }
-
-            .nav-right {
-                width: 100%;
-            }
-
-            .checkout-wrapper {
-                grid-template-columns: 1fr;
-            }
-
-            .summary-card {
-                position: static;
-            }
-        }
-
-        /* =========================================================
-           MOBILE
-           ========================================================= */
-
-        @media (max-width: 650px) {
-
-            .navbar {
-                padding: 12px 14px;
-            }
-
-            .search-container {
-                width: 100%;
-            }
-
-            .search-container input {
-                width: 100%;
-            }
-
-            .nav-right {
-                gap: 10px;
-            }
-
-            .nav-link {
-                font-size: 13px;
-            }
-
-            .connect-hub-btn {
-                padding: 8px 12px;
-
-                font-size: 12px;
-            }
-
-            .checkout-hero {
-                padding: 35px 15px 20px;
-            }
-
-            .checkout-wrapper {
-                width: 94%;
-
-                gap: 20px;
-            }
-
-            .checkout-card {
-                padding: 20px;
-
-                border-radius: 18px;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .form-group.full {
-                grid-column: auto;
-            }
-
-            .payment-options {
-                grid-template-columns: 1fr;
-            }
-
-            .payment-option {
-                display: flex;
-
-                align-items: center;
-
-                text-align: left;
-
-                gap: 12px;
-
-                padding: 15px;
-            }
-
-            .payment-icon {
-                margin-bottom: 0;
-            }
-
-            .payment-check {
-                right: 12px;
-            }
-
-            .card-payment-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .card-payment-grid .full {
-                grid-column: auto;
-            }
-
-            .summary-item img {
-                width: 55px;
-                height: 55px;
-            }
-        }
-    </style>
 </head>
 
 <body>
 
-    <!-- =========================================================
-         NAVIGATION
-         ========================================================= -->
 
-    <header class="navbar">
+<header class="site-header">
 
-        <div class="nav-left">
+    <div class="header-inner">
 
-            <div class="logo">
-                🦅 ShopNova
-            </div>
+        <a href="index.html"
+           class="logo-link">
 
-            <form
-                class="search-container"
-                onsubmit="handleSearch(event)"
-            >
+            <img
+                src="images/shopnova-logo.png"
+                class="shopnova-logo"
+                alt="ShopNova">
 
-                <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="Search elite collections..."
-                >
+        </a>
 
-                <button
-                    type="submit"
-                    class="search-btn"
-                >
-                    🔍
-                </button>
 
-            </form>
+        <div class="search-wrapper">
+
+            <input
+                type="search"
+                id="globalSearch"
+                class="search-input"
+                placeholder="Search products...">
+
+            <button
+                class="search-button"
+                onclick="performSearch()">
+                🔍
+            </button>
 
         </div>
 
-        <nav class="nav-right">
 
-            <a
-                href="index.html"
-                class="nav-link"
-            >
+        <nav class="main-nav">
+
+            <a href="index.html"
+               class="nav-link">
                 Home
             </a>
 
-            <a
-                href="products.html"
-                class="nav-link"
-            >
+            <a href="products.html"
+               class="nav-link">
                 Products
             </a>
 
-            <a
-                href="cart.html"
-                class="nav-link"
-            >
+            <a href="cart.html"
+               class="nav-link cart-nav">
                 Cart
+                <span id="cartCount"
+                      class="cart-count">0</span>
             </a>
 
-            <a
-                href="checkout.html"
-                class="nav-link active"
-            >
+            <a href="checkout.html"
+               class="nav-link active">
                 Checkout
             </a>
 
             <button
-                type="button"
-                class="connect-hub-btn"
-                onclick="openContact()"
-            >
-                Connect Hub 🌐
+                class="contact-button"
+                onclick="openContact()">
+                Contact
             </button>
 
         </nav>
 
-    </header>
+
+        <button
+            class="mobile-menu-button"
+            onclick="toggleMobileMenu()">
+            ☰
+        </button>
+
+    </div>
 
 
-    <!-- =========================================================
-         PAGE TITLE
-         ========================================================= -->
+    <div id="mobileMenu"
+         class="mobile-menu">
 
-    <section class="checkout-hero">
+        <a href="index.html">Home</a>
 
-        <h1>
-            💳 Secure Checkout
-        </h1>
+        <a href="products.html">Products</a>
 
-        <p>
-            Complete your details and choose your preferred payment method.
-        </p>
+        <a href="cart.html">
+            Cart
+            <span id="mobileCartCount">0</span>
+        </a>
+
+        <a href="checkout.html">Checkout</a>
+
+        <button onclick="openContact()">
+            Contact
+        </button>
+
+    </div>
+
+</header>
+
+
+<section class="page-header">
+
+    <h1>Checkout</h1>
+
+    <p>
+        Complete your order details.
+    </p>
+
+</section>
+
+
+<main class="checkout-container">
+
+
+    <section class="checkout-form">
+
+        <h2>
+            Customer Information
+        </h2>
+
+
+        <form onsubmit="submitOrder(event)">
+
+            <div class="form-group">
+
+                <label for="name">
+                    Full Name
+                </label>
+
+                <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    placeholder="Enter your name">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    placeholder="Enter your email">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="phone">
+                    Phone Number
+                </label>
+
+                <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    required
+                    placeholder="Enter your phone number">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="address">
+                    Delivery Address
+                </label>
+
+                <textarea
+                    id="address"
+                    name="address"
+                    required
+                    placeholder="Enter your complete address"></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="city">
+                    City
+                </label>
+
+                <input
+                    id="city"
+                    name="city"
+                    type="text"
+                    required
+                    placeholder="Enter city">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="pincode">
+                    PIN Code
+                </label>
+
+                <input
+                    id="pincode"
+                    name="pincode"
+                    type="text"
+                    required
+                    placeholder="Enter PIN code">
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="primary-button"
+                style="width:100%;">
+
+                Place Order →
+
+            </button>
+
+
+            <div
+                id="successMessage"
+                class="success-message">
+            </div>
+
+        </form>
 
     </section>
 
 
-    <!-- =========================================================
-         CHECKOUT CONTENT
-         ========================================================= -->
+    <aside class="checkout-summary">
 
-    <main class="checkout-wrapper">
+        <h2>
+            Your Order
+        </h2>
 
-        <!-- =====================================================
-             LEFT SIDE
-             ===================================================== -->
 
-        <section class="checkout-card">
+        <div id="checkoutSummary">
 
-            <h2>
-                📦 Shipping & Payment Details
-            </h2>
+        </div>
 
 
-            <!-- CUSTOMER FORM -->
+        <div
+            style="
+                display:flex;
+                justify-content:space-between;
+                margin-top:20px;
+                padding-top:15px;
+                border-top:1px solid #e2e8f0;
+                font-size:20px;
+                font-weight:900;
+                color:#172554;
+            ">
 
-            <form id="checkoutForm">
+            <span>
+                Total
+            </span>
 
-                <div class="form-grid">
+            <span id="checkoutTotal">
+                ₹0
+            </span>
 
-                    <div class="form-group">
+        </div>
 
-                        <label>
-                            Full Name
-                            <span class="required">*</span>
-                        </label>
 
-                        <input
-                            type="text"
-                            id="fullName"
-                            placeholder="Enter your full name"
-                            required
-                        >
+        <a
+            href="cart.html"
+            class="secondary-button"
+            style="
+                width:100%;
+                margin-top:15px;
+            ">
 
-                    </div>
+            ← Back to Cart
 
+        </a>
 
-                    <div class="form-group">
+    </aside>
 
-                        <label>
-                            Phone Number
-                            <span class="required">*</span>
-                        </label>
+</main>
 
-                        <input
-                            type="tel"
-                            id="phone"
-                            placeholder="Enter your phone number"
-                            required
-                        >
 
-                    </div>
+<!-- CONTACT -->
 
+<div id="contactModal"
+     class="contact-modal">
 
-                    <div class="form-group full">
+    <div class="contact-box">
 
-                        <label>
-                            Email Address
-                            <span class="required">*</span>
-                        </label>
+        <button
+            class="close-contact"
+            onclick="closeContact()">
+            ×
+        </button>
 
-                        <input
-                            type="email"
-                            id="email"
-                            placeholder="Enter your email address"
-                            required
-                        >
+        <h2>
+            Contact ShopNova
+        </h2>
 
-                    </div>
+        <p>
+            Choose your preferred way to contact us.
+        </p>
 
 
-                    <div class="form-group full">
+        <div class="contact-options">
 
-                        <label>
-                            Delivery Address
-                            <span class="required">*</span>
-                        </label>
+            <a
+                href="https://wa.me/"
+                target="_blank"
+                class="contact-option">
+                💬 WhatsApp
+            </a>
 
-                        <textarea
-                            id="address"
-                            placeholder="Enter your complete delivery address"
-                            required
-                        ></textarea>
+            <a
+                href="https://www.instagram.com/"
+                target="_blank"
+                class="contact-option">
+                📸 Instagram
+            </a>
 
-                    </div>
+            <a
+                href="https://www.youtube.com/"
+                target="_blank"
+                class="contact-option">
+                ▶ YouTube
+            </a>
 
+            <a
+                href="mailto:contact@shopnova.com"
+                class="contact-option">
+                ✉️ Email
+            </a>
 
-                    <div class="form-group">
+        </div>
 
-                        <label>
-                            City
-                            <span class="required">*</span>
-                        </label>
+    </div>
 
-                        <input
-                            type="text"
-                            id="city"
-                            placeholder="Enter your city"
-                            required
-                        >
+</div>
 
-                    </div>
 
+<footer class="site-footer">
 
-                    <div class="form-group">
+    <div class="footer-container">
 
-                        <label>
-                            PIN Code
-                            <span class="required">*</span>
-                        </label>
+        <div class="footer-brand">
 
-                        <input
-                            type="text"
-                            id="pin"
-                            placeholder="Enter 6-digit PIN code"
-                            maxlength="6"
-                            required
-                        >
+            <img
+                src="images/shopnova-logo.png"
+                class="footer-logo"
+                alt="ShopNova">
 
-                    </div>
-
-                </div>
-
-
-                <!-- PAYMENT -->
-
-                <div class="payment-heading">
-                    Select Payment Method
-                </div>
-
-
-                <div class="payment-options">
-
-                    <!-- COD -->
-
-                    <label
-                        class="payment-option"
-                        id="codOption"
-                        onclick="selectPayment('cod')"
-                    >
-
-                        <input
-                            type="radio"
-                            name="payment"
-                            value="cod"
-                        >
-
-                        <span class="payment-icon">
-                            💵
-                        </span>
-
-                        <span class="payment-name">
-                            Cash on Delivery
-                        </span>
-
-                        <span class="payment-check">
-                            ✓
-                        </span>
-
-                    </label>
-
-
-                    <!-- UPI -->
-
-                    <label
-                        class="payment-option"
-                        id="upiOption"
-                        onclick="selectPayment('upi')"
-                    >
-
-                        <input
-                            type="radio"
-                            name="payment"
-                            value="upi"
-                        >
-
-                        <span class="payment-icon">
-                            📱
-                        </span>
-
-                        <span class="payment-name">
-                            UPI
-                        </span>
-
-                        <span class="payment-check">
-                            ✓
-                        </span>
-
-                    </label>
-
-
-                    <!-- CARD -->
-
-                    <label
-                        class="payment-option"
-                        id="cardOption"
-                        onclick="selectPayment('card')"
-                    >
-
-                        <input
-                            type="radio"
-                            name="payment"
-                            value="card"
-                        >
-
-                        <span class="payment-icon">
-                            💳
-                        </span>
-
-                        <span class="payment-name">
-                            Card
-                        </span>
-
-                        <span class="payment-check">
-                            ✓
-                        </span>
-
-                    </label>
-
-                </div>
-
-
-                <!-- =================================================
-                     COD PANEL
-                     ================================================= -->
-
-                <div
-                    class="payment-panel"
-                    id="codPanel"
-                >
-
-                    <h3>
-                        💵 Cash on Delivery
-                    </h3>
-
-                    <p>
-                        Pay for your order when it arrives at your delivery
-                        address.
-                    </p>
-
-                    <div class="cod-message">
-                        <strong>
-                            Cash on Delivery selected.
-                        </strong>
-                        <br>
-
-                        Please keep the exact or required amount ready when
-                        your order is delivered.
-                    </div>
-
-                </div>
-
-
-                <!-- =================================================
-                     UPI PANEL
-                     ================================================= -->
-
-                <div
-                    class="payment-panel"
-                    id="upiPanel"
-                >
-
-                    <h3>
-                        📱 UPI Payment
-                    </h3>
-
-                    <p>
-                        Enter your UPI ID. After placing the order, you can
-                        complete the payment through your preferred UPI app.
-                    </p>
-
-                    <div class="upi-box">
-
-                        <label for="upiId">
-                            UPI ID
-                        </label>
-
-                        <input
-                            type="text"
-                            id="upiId"
-                            placeholder="example@upi"
-                        >
-
-                    </div>
-
-                    <div class="upi-note">
-                        🔒 Your UPI details are used only for this checkout
-                        demonstration. No real payment is processed by this
-                        page.
-                    </div>
-
-                </div>
-
-
-                <!-- =================================================
-                     CARD PANEL
-                     ================================================= -->
-
-                <div
-                    class="payment-panel"
-                    id="cardPanel"
-                >
-
-                    <h3>
-                        💳 Card Payment
-                    </h3>
-
-                    <p>
-                        Enter your card details below.
-                    </p>
-
-                    <div class="card-payment-grid">
-
-                        <div class="full">
-
-                            <label for="cardNumber">
-                                Card Number
-                            </label>
-
-                            <input
-                                type="text"
-                                id="cardNumber"
-                                placeholder="1234 5678 9012 3456"
-                                maxlength="19"
-                            >
-
-                        </div>
-
-
-                        <div>
-
-                            <label for="expiry">
-                                Expiry Date
-                            </label>
-
-                            <input
-                                type="text"
-                                id="expiry"
-                                placeholder="MM/YY"
-                                maxlength="5"
-                            >
-
-                        </div>
-
-
-                        <div>
-
-                            <label for="cvv">
-                                CVV
-                            </label>
-
-                            <input
-                                type="password"
-                                id="cvv"
-                                placeholder="CVV"
-                                maxlength="4"
-                            >
-
-                        </div>
-
-                    </div>
-
-                    <div class="upi-note">
-                        🔒 Demo checkout only. Do not enter real card
-                        information.
-                    </div>
-
-                </div>
-
-
-                <!-- PLACE ORDER -->
-
-                <button
-                    type="submit"
-                    class="place-order-btn"
-                >
-                    Pay & Place Order →
-                </button>
-
-            </form>
-
-        </section>
-
-
-        <!-- =====================================================
-             RIGHT SIDE ORDER SUMMARY
-             ===================================================== -->
-
-        <aside class="checkout-card summary-card">
-
-            <h2>
-                Order Summary
-            </h2>
-
-
-            <div
-                id="cartItems"
-                class="cart-items"
-            >
-                <!-- JavaScript loads cart -->
-            </div>
-
-
-            <div class="summary-row">
-
-                <span>
-                    Subtotal
-                </span>
-
-                <strong id="subtotal">
-                    ₹0
-                </strong>
-
-            </div>
-
-
-            <div class="summary-row">
-
-                <span>
-                    Delivery
-                </span>
-
-                <strong>
-                    FREE
-                </strong>
-
-            </div>
-
-
-            <hr class="summary-divider">
-
-
-            <div class="total-row">
-
-                <span>
-                    Total
-                </span>
-
-                <span
-                    class="total-price"
-                    id="total"
-                >
-                    ₹0
-                </span>
-
-            </div>
-
-
-            <div class="secure-box">
-                🔒 Your checkout information is handled securely.
-            </div>
-
-        </aside>
-
-    </main>
-
-
-    <!-- =========================================================
-         SUCCESS POPUP
-         ========================================================= -->
-
-    <div
-        class="success-message"
-        id="successMessage"
-    >
-
-        <div class="success-box">
-
-            <div class="success-icon">
-                ✅
-            </div>
-
-            <h2>
-                Order Placed Successfully!
-            </h2>
-
-            <p id="successText">
-                Thank you for shopping with ShopNova.
+            <p>
+                Shop Smart • Live Better
             </p>
 
-            <button
-                class="success-close"
-                onclick="closeSuccess()"
-            >
-                Continue Shopping
+        </div>
+
+
+        <div class="footer-links">
+
+            <h3>
+                Quick Links
+            </h3>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="products.html">
+                Products
+            </a>
+
+            <a href="cart.html">
+                Cart
+            </a>
+
+            <a href="checkout.html">
+                Checkout
+            </a>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <h3>
+                Contact
+            </h3>
+
+            <button onclick="openContact()">
+                Contact ShopNova
             </button>
 
         </div>
@@ -1604,418 +422,16 @@
     </div>
 
 
-    <!-- =========================================================
-         FOOTER
-         ========================================================= -->
+    <div class="footer-bottom">
 
-    <footer>
+        © 2026 ShopNova | Shop Smart • Live Better
 
-        © 2026 ShopNova • Executive Board Directives
-        • CEO & Founder: Anuradha
+    </div>
 
-    </footer>
+</footer>
 
 
-    <!-- =========================================================
-         JAVASCRIPT
-         ========================================================= -->
-
-    <script>
-
-        /* =====================================================
-           CART
-           ===================================================== */
-
-        let cart = [];
-
-        try {
-            cart = JSON.parse(
-                localStorage.getItem("shopnova_cart") || "[]"
-            );
-        } catch (error) {
-            cart = [];
-        }
-
-
-        /* =====================================================
-           LOAD CART
-           ===================================================== */
-
-        function loadCart() {
-
-            const cartItems =
-                document.getElementById("cartItems");
-
-            const subtotalElement =
-                document.getElementById("subtotal");
-
-            const totalElement =
-                document.getElementById("total");
-
-
-            if (!Array.isArray(cart) || cart.length === 0) {
-
-                cartItems.innerHTML = `
-                    <div class="empty-cart">
-
-                        🛒 Your cart is empty.
-
-                        <br>
-
-                        <a
-                            href="products.html"
-                            class="continue-shopping"
-                        >
-                            Continue Shopping →
-                        </a>
-
-                    </div>
-                `;
-
-                subtotalElement.textContent = "₹0";
-
-                totalElement.textContent = "₹0";
-
-                return;
-            }
-
-
-            let subtotal = 0;
-
-
-            cartItems.innerHTML = cart.map(function(item) {
-
-                const quantity =
-                    Number(item.quantity) || 1;
-
-                const price =
-                    Number(item.price) || 0;
-
-                const itemTotal =
-                    price * quantity;
-
-                subtotal += itemTotal;
-
-
-                return `
-
-                    <div class="summary-item">
-
-                        <img
-                            src="${escapeHtml(item.image || "")}"
-                            alt="${escapeHtml(item.name || "Product")}"
-                            onerror="this.style.display='none'"
-                        >
-
-                        <div class="summary-item-info">
-
-                            <div class="summary-item-name">
-                                ${escapeHtml(item.name || "Product")}
-                            </div>
-
-                            <div class="summary-item-qty">
-                                Quantity: ${quantity}
-                            </div>
-
-                        </div>
-
-                        <div class="summary-item-price">
-                            ₹${itemTotal.toLocaleString("en-IN")}
-                        </div>
-
-                    </div>
-
-                `;
-
-            }).join("");
-
-
-            subtotalElement.textContent =
-                "₹" + subtotal.toLocaleString("en-IN");
-
-            totalElement.textContent =
-                "₹" + subtotal.toLocaleString("en-IN");
-        }
-
-
-        /* =====================================================
-           PAYMENT SELECTION
-           ===================================================== */
-
-        function selectPayment(method) {
-
-            const options = [
-                "cod",
-                "upi",
-                "card"
-            ];
-
-
-            options.forEach(function(option) {
-
-                const optionElement =
-                    document.getElementById(
-                        option + "Option"
-                    );
-
-                const panelElement =
-                    document.getElementById(
-                        option + "Panel"
-                    );
-
-                if (option === method) {
-
-                    optionElement.classList.add("selected");
-
-                    panelElement.classList.add("active");
-
-                    const radio =
-                        optionElement.querySelector(
-                            "input[type='radio']"
-                        );
-
-                    if (radio) {
-                        radio.checked = true;
-                    }
-
-                } else {
-
-                    optionElement.classList.remove("selected");
-
-                    panelElement.classList.remove("active");
-
-                    const radio =
-                        optionElement.querySelector(
-                            "input[type='radio']"
-                        );
-
-                    if (radio) {
-                        radio.checked = false;
-                    }
-                }
-
-            });
-
-        }
-
-
-        /* =====================================================
-           CHECKOUT SUBMIT
-           ===================================================== */
-
-        document
-            .getElementById("checkoutForm")
-            .addEventListener("submit", function(event) {
-
-                event.preventDefault();
-
-
-                if (!cart.length) {
-
-                    alert(
-                        "Your cart is empty. Please add a product first."
-                    );
-
-                    return;
-                }
-
-
-                const selectedPayment =
-                    document.querySelector(
-                        "input[name='payment']:checked"
-                    );
-
-
-                if (!selectedPayment) {
-
-                    alert(
-                        "Please select a payment method."
-                    );
-
-                    return;
-                }
-
-
-                const paymentMethod =
-                    selectedPayment.value;
-
-
-                /* UPI validation */
-
-                if (paymentMethod === "upi") {
-
-                    const upiId =
-                        document.getElementById("upiId").value.trim();
-
-                    if (!upiId) {
-
-                        alert(
-                            "Please enter your UPI ID."
-                        );
-
-                        document
-                            .getElementById("upiId")
-                            .focus();
-
-                        return;
-                    }
-                }
-
-
-                /* CARD validation */
-
-                if (paymentMethod === "card") {
-
-                    const cardNumber =
-                        document
-                            .getElementById("cardNumber")
-                            .value
-                            .trim();
-
-                    const expiry =
-                        document
-                            .getElementById("expiry")
-                            .value
-                            .trim();
-
-                    const cvv =
-                        document
-                            .getElementById("cvv")
-                            .value
-                            .trim();
-
-
-                    if (
-                        !cardNumber ||
-                        !expiry ||
-                        !cvv
-                    ) {
-
-                        alert(
-                            "Please complete all card details."
-                        );
-
-                        return;
-                    }
-                }
-
-
-                let paymentName =
-                    "Cash on Delivery";
-
-
-                if (paymentMethod === "upi") {
-                    paymentName = "UPI";
-                }
-
-                if (paymentMethod === "card") {
-                    paymentName = "Card";
-                }
-
-
-                document.getElementById(
-                    "successText"
-                ).textContent =
-                    "Your ShopNova order has been placed using " +
-                    paymentName +
-                    ". Thank you for shopping with us!";
-
-
-                document
-                    .getElementById("successMessage")
-                    .classList.add("show");
-
-
-                /*
-                    Clear cart after successful
-                    demo order.
-                */
-
-                localStorage.removeItem(
-                    "shopnova_cart"
-                );
-
-            });
-
-
-        /* =====================================================
-           CLOSE SUCCESS
-           ===================================================== */
-
-        function closeSuccess() {
-
-            document
-                .getElementById("successMessage")
-                .classList.remove("show");
-
-            window.location.href =
-                "products.html";
-        }
-
-
-        /* =====================================================
-           SEARCH
-           ===================================================== */
-
-        function handleSearch(event) {
-
-            event.preventDefault();
-
-            const search =
-                document
-                    .getElementById("searchInput")
-                    .value
-                    .trim();
-
-            if (!search) {
-
-                return;
-            }
-
-            window.location.href =
-                "products.html?search=" +
-                encodeURIComponent(search);
-        }
-
-
-        /* =====================================================
-           CONTACT BUTTON
-           ===================================================== */
-
-        function openContact() {
-
-            window.location.href =
-                "contact.html";
-        }
-
-
-        /* =====================================================
-           HTML ESCAPE
-           ===================================================== */
-
-        function escapeHtml(value) {
-
-            return String(value)
-
-                .replace(/&/g, "&amp;")
-
-                .replace(/</g, "&lt;")
-
-                .replace(/>/g, "&gt;")
-
-                .replace(/"/g, "&quot;")
-
-                .replace(/'/g, "&#039;");
-        }
-
-
-        /* =====================================================
-           INITIALIZE
-           ===================================================== */
-
-        loadCart();
-
-    </script>
+<script src="script.js"></script>
 
 </body>
 </html>
