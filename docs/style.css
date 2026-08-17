@@ -109,7 +109,7 @@ a {
 }
 
 /* ==========================================
-   HOMEPAGE LAYOUT ELEMENTS
+   HOMEPAGE LAYOUT & DOVE ANIMATION
    ========================================== */
 .hero-section {
     display: flex;
@@ -206,12 +206,28 @@ a {
     max-width: 500px;
 }
 
-/* Fixes Homepage Brand Logo scaling */
 .hero-logo-img {
     max-width: 100%;
     height: auto;
     object-fit: contain;
     display: block;
+}
+
+/* Smooth Fly Up and Down Motion for the Dove Logo */
+.animated-dove {
+    animation: floatMotion 4s ease-in-out infinite;
+}
+
+@keyframes floatMotion {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-15px); /* Gentle flying lift upwards */
+    }
+    100% {
+        transform: translateY(0px);
+    }
 }
 
 /* ==========================================
@@ -244,12 +260,45 @@ a {
     display: flex;
     flex-direction: column;
     box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    position: relative;
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .product-card-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+/* SPECIAL RED DESIGN HIGHLIGHT FOR BIBLE WONDERS BOOK */
+.highlighted-product {
+    border: 2px solid #e63946 !important; /* Standout Crimson Border */
+    box-shadow: 0 6px 20px rgba(230, 57, 70, 0.15);
+}
+
+.promo-badge {
+    position: absolute;
+    top: -12px;
+    left: 15px;
+    background: #e63946;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 4px 12px;
+    border-radius: 20px;
+    box-shadow: 0 2px 6px rgba(230, 57, 70, 0.3);
+    z-index: 10;
+}
+
+.red-text {
+    color: #e63946 !important;
+}
+
+.highlight-btn {
+    background: #e63946 !important;
+}
+
+.highlight-btn:hover {
+    background: #c92a36 !important;
 }
 
 /* Standardized product thumbnail wrappers */
@@ -265,7 +314,6 @@ a {
     padding: 10px;
 }
 
-/* Ensures book cover or item displays cleanly with no vertical clipping */
 .product-card-img {
     max-width: 100% !important;
     max-height: 100% !important;
@@ -334,7 +382,7 @@ a {
     background: #004b93;
 }
 
-/* Responsive breakpoint formatting adjustments */
+/* Responsive configurations */
 @media (max-width: 768px) {
     .hero-section {
         flex-direction: column;
@@ -345,6 +393,6 @@ a {
         justify-content: center;
     }
     .search-bar-container {
-        display: none; /* Hide wide search bar for clean mobile navbars */
+        display: none;
     }
 }
