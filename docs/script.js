@@ -1,158 +1,46 @@
 /* =========================================================
-   SHOPNOVA COMPLETE JAVASCRIPT
+   SHOPNOVA MAIN JAVASCRIPT
 ========================================================= */
+
+"use strict";
 
 
 /* =========================================================
-   PRODUCT DATABASE
+   CART STORAGE
 ========================================================= */
 
-const products = [
-
-    {
-        id: 1,
-        name: "Premium Loungewear",
-        category: "Fashion",
-        price: 1499,
-        image: "images/loungewear.jpg",
-        description: "Comfortable and stylish premium loungewear."
-    },
-
-    {
-        id: 2,
-        name: "Premium Sunglasses",
-        category: "Accessories",
-        price: 1299,
-        image: "images/sunglasses.jpg",
-        description: "Modern sunglasses for everyday style."
-    },
-
-    {
-        id: 3,
-        name: "Men's Premium Shoes",
-        category: "Fashion",
-        price: 1999,
-        image: "images/mens-shoes.jpg",
-        description: "Comfortable footwear with a premium look."
-    },
-
-    {
-        id: 4,
-        name: "Luxury Handbag",
-        category: "Fashion",
-        price: 2499,
-        image: "images/bag.jpg",
-        description: "Elegant handbag designed for modern style."
-    },
-
-    {
-        id: 5,
-        name: "Wireless Earbuds",
-        category: "Electronics",
-        price: 1799,
-        image: "images/earbuds.jpg",
-        description: "Enjoy wireless audio wherever you go."
-    },
-
-    {
-        id: 6,
-        name: "Luxury Collection",
-        category: "Lifestyle",
-        price: 3999,
-        image: "images/luxury-banner.jpg",
-        description: "Premium lifestyle collection."
-    },
-
-    {
-        id: 7,
-        name: "Beauty Makeup Collection",
-        category: "Beauty",
-        price: 999,
-        image: "images/makeup.jpg",
-        description: "Beautiful everyday makeup essentials."
-    },
-
-    {
-        id: 8,
-        name: "Premium Perfume",
-        category: "Lifestyle",
-        price: 1599,
-        image: "images/perfume.jpg",
-        description: "A sophisticated fragrance for every occasion."
-    },
-
-    {
-        id: 9,
-        name: "Premium Suit",
-        category: "Fashion",
-        price: 4999,
-        image: "images/suit.jpg",
-        description: "Elegant premium formal wear."
-    },
-
-    {
-        id: 10,
-        name: "Supercar Key",
-        category: "Lifestyle",
-        price: 5999,
-        image: "images/supercar-key.jpg",
-        description: "Luxury-inspired premium accessory."
-    },
-
-    {
-        id: 11,
-        name: "Smart Watch",
-        category: "Electronics",
-        price: 2999,
-        image: "images/watch.jpg",
-        description: "Smart technology for your everyday lifestyle."
-    }
-
-];
+const CART_KEY = "shopnova_cart";
 
 
-/* =========================================================
-   LOCAL STORAGE
-========================================================= */
+function getCart(){
 
-function getCart() {
+    try{
 
-    try {
+        const cart =
+            JSON.parse(
+                localStorage.getItem(CART_KEY)
+            );
 
-        const savedCart =
-            localStorage.getItem("shopnova_cart");
+        return Array.isArray(cart) ? cart : [];
 
-        if (!savedCart) {
-            return [];
-        }
-
-        const parsed =
-            JSON.parse(savedCart);
-
-        return Array.isArray(parsed)
-            ? parsed
-            : [];
-
-    } catch (error) {
-
-        console.error(
-            "Cart loading error:",
-            error
-        );
+    }catch(error){
 
         return [];
+
     }
+
 }
 
 
-function saveCart(cart) {
+function saveCart(cart){
 
     localStorage.setItem(
-        "shopnova_cart",
+        CART_KEY,
         JSON.stringify(cart)
     );
 
     updateCartCount();
+
 }
 
 
@@ -160,31 +48,29 @@ function saveCart(cart) {
    CART COUNT
 ========================================================= */
 
-function updateCartCount() {
+function updateCartCount(){
 
     const cart = getCart();
 
-    const count = cart.reduce(
-        (total, item) =>
-            total + Number(item.quantity || 1),
-        0
-    );
+    let totalQuantity = 0;
+
+    cart.forEach(item => {
+
+        totalQuantity +=
+            Number(item.quantity) || 0;
+
+    });
 
 
-    const desktopCount =
-        document.getElementById("cartCount");
+    document
+        .querySelectorAll(".cart-count")
+        .forEach(element => {
 
-    const mobileCount =
-        document.getElementById("mobileCartCount");
+            element.textContent =
+                totalQuantity;
 
+        });
 
-    if (desktopCount) {
-        desktopCount.textContent = count;
-    }
-
-    if (mobileCount) {
-        mobileCount.textContent = count;
-    }
 }
 
 
@@ -192,374 +78,234 @@ function updateCartCount() {
    ADD TO CART
 ========================================================= */
 
-function addToCart(productId) {
-
-    const product =
-        products.find(
-            item => item.id === Number(productId)
-        );
-
-
-    if (!product) {
-
-        console.error(
-            "Product not found:",
-            productId
-        );
-
-        return;
-    }
-
+function addToCart(name, price, image){
 
     const cart = getCart();
 
 
-    const existingItem =
+    const existing =
         cart.find(
-            item => item.id === product.id
+            item => item.name === name
         );
 
 
-    if (existingItem) {
+    if(existing){
 
-        existingItem.quantity =
-            Number(existingItem.quantity || 1) + 1;
+        existing.quantity =
+            (Number(existing.quantity) || 0) + 1;
 
-    } else {
+    }else{
 
         cart.push({
 
-            id: product.id,
+            name:name,
 
-            name: product.name,
+            price:Number(price),
 
-            category: product.category,
+            image:image,
 
-            price: product.price,
-
-            image: product.image,
-
-            quantity: 1
+            quantity:1
 
         });
+
     }
 
 
     saveCart(cart);
 
 
-    showNotification(
-        `${product.name} added to cart!`
+    showAddedMessage(name);
+
+}
+
+
+/* =========================================================
+   OLD FUNCTION SUPPORT
+   Keeps existing onclick="add(...)"
+   working if any old page remains.
+========================================================= */
+
+function add(name, price, image){
+
+    addToCart(
+        name,
+        price,
+        image
     );
+
 }
 
 
 /* =========================================================
-   REMOVE FROM CART
+   ADD MESSAGE
 ========================================================= */
 
-function removeFromCart(productId) {
+function showAddedMessage(name){
 
-    let cart = getCart();
-
-
-    cart =
-        cart.filter(
-            item => item.id !== Number(productId)
-        );
+    const message =
+        document.createElement("div");
 
 
-    saveCart(cart);
+    message.textContent =
+        name + " added to cart";
 
 
-    renderCart();
+    message.style.position =
+        "fixed";
+
+    message.style.right =
+        "20px";
+
+    message.style.bottom =
+        "20px";
+
+    message.style.zIndex =
+        "50000";
+
+    message.style.padding =
+        "13px 18px";
+
+    message.style.borderRadius =
+        "9px";
+
+    message.style.background =
+        "#159957";
+
+    message.style.color =
+        "#ffffff";
+
+    message.style.fontSize =
+        "12px";
+
+    message.style.fontWeight =
+        "800";
+
+    message.style.boxShadow =
+        "0 10px 30px rgba(0,0,0,.18)";
+
+
+    document.body.appendChild(message);
+
+
+    setTimeout(() => {
+
+        message.style.opacity =
+            "0";
+
+        message.style.transition =
+            ".3s";
+
+        setTimeout(() => {
+
+            message.remove();
+
+        },300);
+
+    },1500);
+
 }
 
 
 /* =========================================================
-   CHANGE QUANTITY
+   UPDATE QUANTITY
 ========================================================= */
 
-function changeQuantity(productId, change) {
+function changeQuantity(index, amount){
 
     const cart = getCart();
 
 
-    const item =
-        cart.find(
-            item => item.id === Number(productId)
-        );
+    if(!cart[index]){
 
-
-    if (!item) {
         return;
+
     }
 
 
-    item.quantity =
-        Number(item.quantity || 1) + Number(change);
+    cart[index].quantity =
+        (Number(cart[index].quantity) || 1)
+        + amount;
 
 
-    if (item.quantity <= 0) {
+    if(cart[index].quantity <= 0){
 
-        removeFromCart(productId);
+        cart.splice(index,1);
 
-        return;
     }
 
 
     saveCart(cart);
 
-    renderCart();
+
+    renderCartPage();
+
 }
 
 
 /* =========================================================
-   PRICE
+   REMOVE ITEM
 ========================================================= */
 
-function formatPrice(price) {
+function removeFromCart(index){
+
+    const cart = getCart();
+
+
+    if(!cart[index]){
+
+        return;
+
+    }
+
+
+    cart.splice(index,1);
+
+
+    saveCart(cart);
+
+
+    renderCartPage();
+
+}
+
+
+/* =========================================================
+   CART TOTAL
+========================================================= */
+
+function getCartTotal(){
+
+    const cart = getCart();
+
+    return cart.reduce(
+
+        (total,item) => {
+
+            return total +
+                (
+                    Number(item.price) *
+                    Number(item.quantity)
+                );
+
+        },
+
+        0
+
+    );
+
+}
+
+
+/* =========================================================
+   CURRENCY
+========================================================= */
+
+function formatPrice(value){
 
     return "₹" +
-        Number(price).toLocaleString("en-IN");
-}
+        Number(value || 0)
+            .toLocaleString("en-IN");
 
-
-/* =========================================================
-   PRODUCT CARD
-========================================================= */
-
-function createProductCard(product) {
-
-    return `
-
-        <article class="product-card">
-
-            <div class="product-image-wrapper">
-
-                <img
-                    src="${product.image}"
-                    alt="${product.name}"
-                    class="product-image"
-                    loading="lazy"
-                    onerror="this.src='images/luxury-banner.jpg'"
-                >
-
-            </div>
-
-
-            <div class="product-info">
-
-                <div class="product-category">
-                    ${product.category}
-                </div>
-
-                <h3 class="product-name">
-                    ${product.name}
-                </h3>
-
-                <p class="product-description">
-                    ${product.description}
-                </p>
-
-
-                <div class="product-bottom">
-
-                    <span class="product-price">
-                        ${formatPrice(product.price)}
-                    </span>
-
-                    <button
-                        type="button"
-                        class="add-cart-button"
-                        onclick="addToCart(${product.id})">
-                        Add to Cart
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-    `;
-}
-
-
-/* =========================================================
-   HOME PRODUCTS
-========================================================= */
-
-function renderHomeProducts() {
-
-    const grid =
-        document.getElementById(
-            "homeProductGrid"
-        );
-
-
-    if (!grid) {
-        return;
-    }
-
-
-    const featuredProducts =
-        products.slice(0, 8);
-
-
-    grid.innerHTML =
-        featuredProducts
-            .map(createProductCard)
-            .join("");
-}
-
-
-/* =========================================================
-   PRODUCTS PAGE
-========================================================= */
-
-function renderProductsPage() {
-
-    const grid =
-        document.getElementById(
-            "productsGrid"
-        );
-
-
-    if (!grid) {
-        return;
-    }
-
-
-    const searchInput =
-        document.getElementById(
-            "productSearch"
-        );
-
-
-    const categoryFilter =
-        document.getElementById(
-            "categoryFilter"
-        );
-
-
-    function render() {
-
-        const search =
-            searchInput
-                ? searchInput.value
-                    .trim()
-                    .toLowerCase()
-                : "";
-
-
-        const category =
-            categoryFilter
-                ? categoryFilter.value
-                : "all";
-
-
-        const filtered =
-            products.filter(product => {
-
-                const matchesSearch =
-                    product.name
-                        .toLowerCase()
-                        .includes(search) ||
-
-                    product.category
-                        .toLowerCase()
-                        .includes(search) ||
-
-                    product.description
-                        .toLowerCase()
-                        .includes(search);
-
-
-                const matchesCategory =
-                    category === "all" ||
-                    product.category === category;
-
-
-                return (
-                    matchesSearch &&
-                    matchesCategory
-                );
-            });
-
-
-        if (filtered.length === 0) {
-
-            grid.innerHTML = `
-
-                <div class="cart-empty"
-                     style="grid-column:1/-1;">
-
-                    <div class="cart-empty-icon">
-                        🔎
-                    </div>
-
-                    <h2>
-                        No products found
-                    </h2>
-
-                    <p>
-                        Try another search.
-                    </p>
-
-                </div>
-
-            `;
-
-            return;
-        }
-
-
-        grid.innerHTML =
-            filtered
-                .map(createProductCard)
-                .join("");
-    }
-
-
-    if (searchInput) {
-        searchInput.addEventListener(
-            "input",
-            render
-        );
-    }
-
-
-    if (categoryFilter) {
-        categoryFilter.addEventListener(
-            "change",
-            render
-        );
-    }
-
-
-    render();
-
-
-    /* URL SEARCH */
-
-    const urlParams =
-        new URLSearchParams(
-            window.location.search
-        );
-
-
-    const urlSearch =
-        urlParams.get("search");
-
-
-    if (urlSearch && searchInput) {
-
-        searchInput.value =
-            urlSearch;
-
-        render();
-    }
 }
 
 
@@ -567,285 +313,607 @@ function renderProductsPage() {
    CART PAGE
 ========================================================= */
 
-function renderCart() {
+function renderCartPage(){
 
     const container =
         document.getElementById(
-            "cartItems"
+            "cartContent"
         );
 
 
-    const empty =
-        document.getElementById(
-            "cartEmpty"
-        );
+    if(!container){
 
-
-    const layout =
-        document.getElementById(
-            "cartLayout"
-        );
-
-
-    const subtotalElement =
-        document.getElementById(
-            "cartSubtotal"
-        );
-
-
-    const totalElement =
-        document.getElementById(
-            "cartTotal"
-        );
-
-
-    if (!container) {
         return;
+
     }
 
 
     const cart = getCart();
 
 
-    if (cart.length === 0) {
+    if(cart.length === 0){
 
-        if (empty) {
-            empty.style.display = "block";
-        }
+        container.innerHTML = `
 
-        if (layout) {
-            layout.style.display = "none";
-        }
+            <div class="cart-card">
+
+                <div class="empty-cart">
+
+                    <div class="empty-cart-icon">
+                        🛒
+                    </div>
+
+                    <h2>Your Cart is Empty</h2>
+
+                    <p>
+                        Add some products to
+                        get started.
+                    </p>
+
+                    <a href="products.html">
+                        Continue Shopping
+                    </a>
+
+                </div>
+
+            </div>
+
+        `;
 
         return;
+
     }
 
 
-    if (empty) {
-        empty.style.display = "none";
-    }
+    let subtotal = 0;
 
-    if (layout) {
-        layout.style.display = "grid";
-    }
+    cart.forEach(item => {
+
+        subtotal +=
+            Number(item.price) *
+            Number(item.quantity);
+
+    });
 
 
-    container.innerHTML =
-        cart.map(item => `
+    let itemsHtml = "";
+
+
+    cart.forEach((item,index) => {
+
+        const itemTotal =
+            Number(item.price) *
+            Number(item.quantity);
+
+
+        itemsHtml += `
 
             <div class="cart-item">
 
-                <img
-                    src="${item.image}"
-                    alt="${item.name}"
-                    onerror="this.src='images/luxury-banner.jpg'"
-                >
+                <div class="product-info">
 
+                    <img
+                        src="${item.image}"
+                        alt="${escapeHTML(item.name)}"
+                        onerror="this.style.display='none'"
+                    >
 
-                <div>
-
-                    <h3>
-                        ${item.name}
-                    </h3>
-
-                    <p>
-                        ${formatPrice(item.price)}
-                    </p>
-
-
-                    <div style="
-                        display:flex;
-                        align-items:center;
-                        gap:8px;
-                        margin-top:10px;
-                    ">
-
-                        <button
-                            type="button"
-                            onclick="changeQuantity(${item.id}, -1)"
-                            style="
-                                width:30px;
-                                height:30px;
-                                border:1px solid #cbd5e1;
-                                background:white;
-                                border-radius:6px;
-                            ">
-                            −
-                        </button>
+                    <div>
 
                         <strong>
-                            ${item.quantity}
+                            ${escapeHTML(item.name)}
                         </strong>
 
-                        <button
-                            type="button"
-                            onclick="changeQuantity(${item.id}, 1)"
-                            style="
-                                width:30px;
-                                height:30px;
-                                border:1px solid #cbd5e1;
-                                background:white;
-                                border-radius:6px;
-                            ">
-                            +
-                        </button>
+                        <small>
+                            ShopNova Premium Collection
+                        </small>
 
                     </div>
 
                 </div>
 
 
+                <div class="price">
+                    ${formatPrice(item.price)}
+                </div>
+
+
+                <div class="quantity">
+
+                    <button
+                        onclick="changeQuantity(${index},-1)">
+                        −
+                    </button>
+
+                    <span>
+                        ${item.quantity}
+                    </span>
+
+                    <button
+                        onclick="changeQuantity(${index},1)">
+                        +
+                    </button>
+
+                </div>
+
+
+                <div class="price">
+                    ${formatPrice(itemTotal)}
+                </div>
+
+
                 <button
-                    type="button"
-                    class="remove-button"
-                    onclick="removeFromCart(${item.id})">
-                    Remove
+                    class="remove"
+                    onclick="removeFromCart(${index})"
+                    title="Remove">
+
+                    ×
+
                 </button>
 
             </div>
 
-        `)
-        .join("");
+        `;
+
+    });
 
 
-    const subtotal =
-        cart.reduce(
-            (total, item) =>
-                total +
-                Number(item.price) *
-                Number(item.quantity || 1),
-            0
-        );
+    container.innerHTML = `
+
+        <div class="cart-layout">
 
 
-    if (subtotalElement) {
-        subtotalElement.textContent =
-            formatPrice(subtotal);
-    }
+            <div class="cart-card">
+
+                <div class="cart-head">
+
+                    <span>Product</span>
+                    <span>Price</span>
+                    <span>Quantity</span>
+                    <span>Total</span>
+                    <span></span>
+
+                </div>
 
 
-    if (totalElement) {
-        totalElement.textContent =
-            formatPrice(subtotal);
-    }
+                ${itemsHtml}
+
+
+                <a
+                    href="products.html"
+                    class="continue-btn">
+
+                    ← Continue Shopping
+
+                </a>
+
+            </div>
+
+
+            <aside class="summary-card">
+
+                <h2>
+                    Price Details
+                </h2>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Items
+                    </span>
+
+                    <span>
+                        ${cart.reduce(
+                            (a,b) =>
+                            a + Number(b.quantity),
+                            0
+                        )}
+                    </span>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <span>
+                        ${formatPrice(subtotal)}
+                    </span>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Delivery
+                    </span>
+
+                    <strong>
+                        FREE
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row total">
+
+                    <span>
+                        Grand Total
+                    </span>
+
+                    <span>
+                        ${formatPrice(subtotal)}
+                    </span>
+
+                </div>
+
+
+                <a
+                    href="checkout.html"
+                    class="checkout-btn">
+
+                    Proceed to Checkout →
+
+                </a>
+
+            </aside>
+
+        </div>
+
+    `;
+
 }
 
 
 /* =========================================================
-   CHECKOUT
+   CHECKOUT PAGE
 ========================================================= */
 
-function renderCheckout() {
+function renderCheckoutPage(){
 
-    const summary =
+    const container =
         document.getElementById(
-            "checkoutSummary"
+            "checkoutContent"
         );
 
 
-    const totalElement =
-        document.getElementById(
-            "checkoutTotal"
-        );
+    if(!container){
 
-
-    if (!summary) {
         return;
+
     }
 
 
     const cart = getCart();
 
 
-    if (cart.length === 0) {
+    if(cart.length === 0){
 
-        summary.innerHTML = `
+        container.innerHTML = `
 
-            <p style="
-                color:#64748b;
-                line-height:1.6;
-            ">
-                Your cart is empty.
-                Please add products before checkout.
-            </p>
+            <div class="form-card">
 
-            <a
-                href="products.html"
-                class="primary-button"
-                style="
-                    margin-top:18px;
-                    width:100%;
-                ">
-                Browse Products
-            </a>
+                <div class="empty-checkout">
+
+                    <h2>
+                        Your cart is empty
+                    </h2>
+
+                    <p style="
+                        color:#718892;
+                        font-size:13px;
+                        margin-top:7px;
+                    ">
+                        Add products before
+                        proceeding to checkout.
+                    </p>
+
+                    <a href="products.html">
+                        Browse Products
+                    </a>
+
+                </div>
+
+            </div>
 
         `;
 
-        if (totalElement) {
-            totalElement.textContent =
-                "₹0";
-        }
-
         return;
+
     }
 
 
-    let total = 0;
+    const total = getCartTotal();
 
 
-    summary.innerHTML =
-        cart.map(item => {
-
-            const itemTotal =
-                Number(item.price) *
-                Number(item.quantity || 1);
+    let itemsHtml = "";
 
 
-            total += itemTotal;
+    cart.forEach(item => {
+
+        itemsHtml += `
+
+            <div class="order-item">
+
+                <img
+                    src="${item.image}"
+                    alt="${escapeHTML(item.name)}"
+                    onerror="this.style.display='none'"
+                >
+
+                <div class="order-item-info">
+
+                    <strong>
+                        ${escapeHTML(item.name)}
+                    </strong>
+
+                    <small>
+                        Quantity: ${item.quantity}
+                    </small>
+
+                </div>
+
+                <span class="order-price">
+
+                    ${formatPrice(
+                        Number(item.price) *
+                        Number(item.quantity)
+                    )}
+
+                </span>
+
+            </div>
+
+        `;
+
+    });
 
 
-            return `
+    container.innerHTML = `
 
-                <div style="
-                    display:flex;
-                    justify-content:space-between;
-                    gap:15px;
-                    padding:10px 0;
-                    border-bottom:1px solid #e2e8f0;
-                ">
+        <div class="checkout-layout">
 
-                    <span style="
-                        color:#475569;
-                        font-size:14px;
-                    ">
-                        ${item.name}
-                        × ${item.quantity}
+
+            <section class="form-card">
+
+                <h2>
+                    Delivery Information
+                </h2>
+
+
+                <form
+                    id="orderForm"
+                    onsubmit="placeOrder(event)">
+
+
+                    <div class="form-grid">
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                required
+                                placeholder="Enter your name">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Phone Number
+                            </label>
+
+                            <input
+                                type="tel"
+                                required
+                                placeholder="Enter phone number">
+
+                        </div>
+
+
+                        <div class="form-group full">
+
+                            <label>
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                required
+                                placeholder="Enter email address">
+
+                        </div>
+
+
+                        <div class="form-group full">
+
+                            <label>
+                                Delivery Address
+                            </label>
+
+                            <textarea
+                                required
+                                placeholder="House number, street, area..."></textarea>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                City
+                            </label>
+
+                            <input
+                                type="text"
+                                required
+                                placeholder="City">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                PIN Code
+                            </label>
+
+                            <input
+                                type="text"
+                                required
+                                maxlength="6"
+                                placeholder="PIN Code">
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="payment-box">
+
+                        <h2>
+                            Payment Method
+                        </h2>
+
+
+                        <label class="payment-option">
+
+                            <input
+                                type="radio"
+                                name="payment"
+                                value="cod"
+                                checked>
+
+                            Cash on Delivery
+
+                        </label>
+
+
+                        <label class="payment-option">
+
+                            <input
+                                type="radio"
+                                name="payment"
+                                value="upi">
+
+                            UPI / Digital Payment
+
+                        </label>
+
+
+                        <label class="payment-option">
+
+                            <input
+                                type="radio"
+                                name="payment"
+                                value="card">
+
+                            Card Payment
+
+                        </label>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="place-order">
+
+                        Place Order →
+
+                    </button>
+
+
+                </form>
+
+            </section>
+
+
+            <aside class="order-card">
+
+                <h2>
+                    Your Order
+                </h2>
+
+
+                ${itemsHtml}
+
+
+                <div class="summary-row"
+                     style="margin-top:12px;">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <span>
+                        ${formatPrice(total)}
+                    </span>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Delivery
                     </span>
 
                     <strong>
-                        ${formatPrice(itemTotal)}
+                        FREE
                     </strong>
 
                 </div>
 
-            `;
 
-        })
-        .join("");
+                <div class="summary-total">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <span>
+                        ${formatPrice(total)}
+                    </span>
+
+                </div>
 
 
-    if (totalElement) {
-        totalElement.textContent =
-            formatPrice(total);
-    }
+                <a
+                    href="cart.html"
+                    class="back-cart">
+
+                    ← Back to Cart
+
+                </a>
+
+            </aside>
+
+
+        </div>
+
+    `;
+
 }
 
 
 /* =========================================================
-   CHECKOUT SUBMIT
+   PLACE ORDER
 ========================================================= */
 
-function submitOrder(event) {
+function placeOrder(event){
 
     event.preventDefault();
 
@@ -853,18 +921,15 @@ function submitOrder(event) {
     const cart = getCart();
 
 
-    if (cart.length === 0) {
+    if(cart.length === 0){
 
-        showNotification(
+        alert(
             "Your cart is empty."
         );
 
         return;
+
     }
-
-
-    const form =
-        event.target;
 
 
     const success =
@@ -873,84 +938,64 @@ function submitOrder(event) {
         );
 
 
-    if (success) {
+    if(success){
 
-        success.style.display =
-            "block";
+        success.classList.add("show");
 
-        success.innerHTML = `
-
-            ✓ Order request submitted successfully!
-
-            <br><br>
-
-            Thank you for shopping with ShopNova.
-
-        `;
     }
 
 
     localStorage.removeItem(
-        "shopnova_cart"
+        CART_KEY
     );
 
 
     updateCartCount();
 
-    renderCheckout();
-
-
-    form.reset();
-
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
 }
 
 
 /* =========================================================
-   GLOBAL SEARCH
+   SEARCH
 ========================================================= */
 
-function performSearch() {
+function searchProducts(inputId){
 
     const input =
         document.getElementById(
-            "globalSearch"
+            inputId
         );
 
 
-    if (!input) {
+    if(!input){
+
         return;
+
     }
 
 
-    const search =
+    const query =
         input.value.trim();
 
 
-    if (!search) {
+    if(query === ""){
 
         window.location.href =
             "products.html";
 
         return;
+
     }
 
 
     window.location.href =
         "products.html?search=" +
-        encodeURIComponent(search);
+        encodeURIComponent(query);
+
 }
 
 
-/* =========================================================
-   SEARCH ENTER KEY
-========================================================= */
-
-function setupSearch() {
+function performSearch(){
 
     const input =
         document.getElementById(
@@ -958,24 +1003,188 @@ function setupSearch() {
         );
 
 
-    if (!input) {
-        return;
+    if(input){
+
+        const query =
+            input.value.trim();
+
+
+        if(query){
+
+            window.location.href =
+                "products.html?search=" +
+                encodeURIComponent(query);
+
+        }else{
+
+            window.location.href =
+                "products.html";
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   PRODUCT SEARCH + FILTER
+========================================================= */
+
+function filterProducts(category, button){
+
+    document
+        .querySelectorAll(".filter-btn")
+        .forEach(btn => {
+
+            btn.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    if(button){
+
+        button.classList.add(
+            "active"
+        );
+
     }
 
 
-    input.addEventListener(
-        "keydown",
-        function(event) {
+    document
+        .querySelectorAll(".product-card")
+        .forEach(card => {
 
-            if (event.key === "Enter") {
+            if(
+                category === "all" ||
+                card.dataset.category === category
+            ){
 
-                event.preventDefault();
+                card.style.display =
+                    "";
 
-                performSearch();
+            }else{
+
+                card.style.display =
+                    "none";
+
+            }
+
+        });
+
+}
+
+
+function runProductSearch(query){
+
+    const cards =
+        document.querySelectorAll(
+            ".product-card"
+        );
+
+
+    if(!cards.length){
+
+        return;
+
+    }
+
+
+    const cleanQuery =
+        query.toLowerCase().trim();
+
+
+    let found = false;
+
+
+    cards.forEach(card => {
+
+        const name =
+            (
+                card.dataset.name ||
+                ""
+            ).toLowerCase();
+
+
+        const category =
+            (
+                card.dataset.category ||
+                ""
+            ).toLowerCase();
+
+
+        if(
+            cleanQuery === "" ||
+            name.includes(cleanQuery) ||
+            category.includes(cleanQuery)
+        ){
+
+            card.style.display =
+                "";
+
+            found = true;
+
+        }else{
+
+            card.style.display =
+                "none";
+
+        }
+
+    });
+
+
+    let noResults =
+        document.getElementById(
+            "searchNoResults"
+        );
+
+
+    if(!found){
+
+        if(!noResults){
+
+            noResults =
+                document.createElement(
+                    "div"
+                );
+
+            noResults.id =
+                "searchNoResults";
+
+            noResults.className =
+                "no-results";
+
+            noResults.textContent =
+                "No products found.";
+
+            const grid =
+                document.getElementById(
+                    "productGrid"
+                );
+
+            if(grid){
+
+                grid.appendChild(
+                    noResults
+                );
+
             }
 
         }
-    );
+
+    }else{
+
+        if(noResults){
+
+            noResults.remove();
+
+        }
+
+    }
+
 }
 
 
@@ -983,22 +1192,22 @@ function setupSearch() {
    MOBILE MENU
 ========================================================= */
 
-function toggleMobileMenu() {
+function toggleMenu(){
 
     const menu =
         document.getElementById(
-            "mobileMenu"
+            "mobileNav"
         );
 
 
-    if (!menu) {
-        return;
+    if(menu){
+
+        menu.classList.toggle(
+            "show"
+        );
+
     }
 
-
-    menu.classList.toggle(
-        "open"
-    );
 }
 
 
@@ -1006,7 +1215,7 @@ function toggleMobileMenu() {
    CONTACT
 ========================================================= */
 
-function openContact() {
+function openContact(){
 
     const modal =
         document.getElementById(
@@ -1014,17 +1223,18 @@ function openContact() {
         );
 
 
-    if (modal) {
+    if(modal){
 
         modal.classList.add(
             "show"
         );
 
     }
+
 }
 
 
-function closeContact() {
+function closeContact(){
 
     const modal =
         document.getElementById(
@@ -1032,167 +1242,131 @@ function closeContact() {
         );
 
 
-    if (modal) {
+    if(modal){
 
         modal.classList.remove(
             "show"
         );
 
     }
+
 }
 
 
 /* =========================================================
-   CLOSE MODAL OUTSIDE
+   ESCAPE HTML
 ========================================================= */
 
-document.addEventListener(
-    "click",
-    function(event) {
+function escapeHTML(value){
 
-        const modal =
-            document.getElementById(
-                "contactModal"
-            );
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 
-
-        if (
-            modal &&
-            event.target === modal
-        ) {
-
-            closeContact();
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   ESCAPE MODAL
-========================================================= */
-
-document.addEventListener(
-    "keydown",
-    function(event) {
-
-        if (event.key === "Escape") {
-
-            closeContact();
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   NOTIFICATION
-========================================================= */
-
-function showNotification(message) {
-
-    let notification =
-        document.getElementById(
-            "shopnovaNotification"
-        );
-
-
-    if (!notification) {
-
-        notification =
-            document.createElement(
-                "div"
-            );
-
-
-        notification.id =
-            "shopnovaNotification";
-
-
-        notification.style.position =
-            "fixed";
-
-        notification.style.right =
-            "20px";
-
-        notification.style.bottom =
-            "20px";
-
-        notification.style.zIndex =
-            "30000";
-
-        notification.style.background =
-            "#172554";
-
-        notification.style.color =
-            "white";
-
-        notification.style.padding =
-            "15px 20px";
-
-        notification.style.borderRadius =
-            "10px";
-
-        notification.style.fontWeight =
-            "700";
-
-        notification.style.boxShadow =
-            "0 10px 30px rgba(0,0,0,.2)";
-
-
-        document.body.appendChild(
-            notification
-        );
-    }
-
-
-    notification.textContent =
-        message;
-
-
-    notification.style.display =
-        "block";
-
-
-    clearTimeout(
-        window.shopnovaNotificationTimer
-    );
-
-
-    window.shopnovaNotificationTimer =
-        setTimeout(
-            function() {
-
-                notification.style.display =
-                    "none";
-
-            },
-            2500
-        );
 }
 
 
 /* =========================================================
-   INITIALIZE
+   INITIALIZATION
 ========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
-    function() {
+    function(){
 
         updateCartCount();
 
-        renderHomeProducts();
 
-        renderProductsPage();
+        /* Product search */
 
-        renderCart();
+        const productSearch =
+            document.getElementById(
+                "productSearch"
+            );
 
-        renderCheckout();
 
-        setupSearch();
+        if(productSearch){
+
+            productSearch.addEventListener(
+                "input",
+                function(){
+
+                    runProductSearch(
+                        this.value
+                    );
+
+                }
+            );
+
+
+            productSearch.addEventListener(
+                "keypress",
+                function(event){
+
+                    if(
+                        event.key === "Enter"
+                    ){
+
+                        searchProducts(
+                            "productSearch"
+                        );
+
+                    }
+
+                }
+            );
+
+
+            const params =
+                new URLSearchParams(
+                    window.location.search
+                );
+
+
+            const query =
+                params.get("search");
+
+
+            if(query){
+
+                productSearch.value =
+                    query;
+
+                runProductSearch(
+                    query
+                );
+
+            }
+
+        }
+
+
+        /* Close contact modal */
+
+        document.addEventListener(
+            "click",
+            function(event){
+
+                const modal =
+                    document.getElementById(
+                        "contactModal"
+                    );
+
+
+                if(
+                    modal &&
+                    event.target === modal
+                ){
+
+                    closeContact();
+
+                }
+
+            }
+        );
 
     }
 );

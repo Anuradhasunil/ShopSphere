@@ -2,436 +2,704 @@
 <html lang="en">
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+<title>ShopNova | Checkout</title>
 
-    <title>ShopNova | Checkout</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-    <link
-        rel="stylesheet"
-        href="style.css">
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f9f7;
+    color:#12344d;
+}
 
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+button,input,textarea,select{
+    font-family:inherit;
+}
+
+.site-header{
+    position:sticky;
+    top:0;
+    z-index:9999;
+    background:#fff;
+    border-bottom:1px solid #dcebe4;
+    box-shadow:0 4px 20px rgba(15,61,86,.08);
+}
+
+.header-inner{
+    width:min(1250px,94%);
+    min-height:72px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.logo-link{
+    width:155px;
+    height:55px;
+    display:flex;
+    align-items:center;
+    flex-shrink:0;
+    overflow:hidden;
+}
+
+.logo-link img{
+    width:155px;
+    height:55px;
+    display:block;
+    object-fit:contain;
+}
+
+.search-box{
+    flex:1;
+    max-width:500px;
+    height:42px;
+    display:flex;
+    border:1px solid #cfe0d9;
+    border-radius:9px;
+    overflow:hidden;
+}
+
+.search-box input{
+    flex:1;
+    min-width:0;
+    border:none;
+    outline:none;
+    padding:0 13px;
+}
+
+.search-box button{
+    width:48px;
+    border:none;
+    background:#0f5b78;
+    color:#fff;
+    cursor:pointer;
+}
+
+.nav{
+    margin-left:auto;
+    display:flex;
+    align-items:center;
+    gap:4px;
+}
+
+.nav a{
+    padding:10px 11px;
+    border-radius:8px;
+    color:#315467;
+    font-size:13px;
+    font-weight:700;
+}
+
+.nav a:hover,
+.nav a.active{
+    background:#e9f7f0;
+    color:#0b7350;
+}
+
+.cart-count{
+    min-width:19px;
+    height:19px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50px;
+    background:#159957;
+    color:#fff;
+    font-size:10px;
+}
+
+.contact-btn{
+    border:none;
+    padding:10px 15px;
+    border-radius:8px;
+    background:#0f5b78;
+    color:white;
+    font-weight:800;
+    cursor:pointer;
+}
+
+.menu-btn{
+    display:none;
+    width:40px;
+    height:40px;
+    border:none;
+    border-radius:8px;
+    background:#e9f7f0;
+    color:#0f5b78;
+    font-size:20px;
+}
+
+.mobile-nav{
+    display:none;
+    padding:10px 4%;
+    background:#fff;
+}
+
+.mobile-nav.show{
+    display:flex;
+    flex-direction:column;
+}
+
+.mobile-nav a,
+.mobile-nav button{
+    border:none;
+    background:none;
+    padding:12px;
+    text-align:left;
+    color:#12344d;
+    font-weight:700;
+}
+
+.sale-strip{
+    height:34px;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    background:linear-gradient(90deg,#0f5b78,#159957,#0f5b78);
+    color:white;
+}
+
+.sale-track{
+    width:max-content;
+    display:flex;
+    gap:55px;
+    white-space:nowrap;
+    animation:move 25s linear infinite;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+@keyframes move{
+    from{transform:translateX(0)}
+    to{transform:translateX(-50%)}
+}
+
+.page{
+    width:min(1150px,92%);
+    margin:auto;
+    padding:45px 0 70px;
+}
+
+.title{
+    margin-bottom:25px;
+}
+
+.title h1{
+    color:#12344d;
+    font-size:38px;
+}
+
+.title p{
+    color:#718892;
+    font-size:13px;
+    margin-top:7px;
+}
+
+.checkout-layout{
+    display:grid;
+    grid-template-columns:1fr 350px;
+    gap:22px;
+}
+
+.form-card,
+.order-card{
+    background:white;
+    border:1px solid #dfebe6;
+    border-radius:15px;
+    padding:23px;
+    box-shadow:0 7px 20px rgba(15,61,86,.06);
+}
+
+.form-card h2,
+.order-card h2{
+    color:#12344d;
+    font-size:20px;
+    margin-bottom:20px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+.form-group label{
+    color:#315467;
+    font-size:11px;
+    font-weight:800;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+    width:100%;
+    border:1px solid #cfe0d9;
+    border-radius:8px;
+    padding:11px;
+    outline:none;
+    color:#12344d;
+    background:#fff;
+    font-size:12px;
+}
+
+.form-group textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus{
+    border-color:#159957;
+    box-shadow:0 0 0 3px rgba(21,153,87,.08);
+}
+
+.payment-box{
+    margin-top:22px;
+    padding-top:20px;
+    border-top:1px solid #e5eee9;
+}
+
+.payment-option{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    border:1px solid #dfeae5;
+    border-radius:8px;
+    padding:12px;
+    margin-top:8px;
+    font-size:12px;
+    color:#315467;
+}
+
+.order-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 0;
+    border-bottom:1px solid #edf3f0;
+}
+
+.order-item img{
+    width:50px;
+    height:50px;
+    border-radius:7px;
+    object-fit:cover;
+}
+
+.order-item-info{
+    flex:1;
+}
+
+.order-item-info strong{
+    display:block;
+    color:#12344d;
+    font-size:11px;
+}
+
+.order-item-info small{
+    display:block;
+    color:#8798a0;
+    font-size:9px;
+    margin-top:3px;
+}
+
+.order-price{
+    color:#0f5b78;
+    font-size:11px;
+    font-weight:900;
+}
+
+.summary-row{
+    display:flex;
+    justify-content:space-between;
+    padding:8px 0;
+    color:#718892;
+    font-size:12px;
+}
+
+.summary-total{
+    display:flex;
+    justify-content:space-between;
+    border-top:1px solid #dfebe6;
+    margin-top:8px;
+    padding-top:15px;
+    color:#12344d;
+    font-size:18px;
+    font-weight:900;
+}
+
+.place-order{
+    width:100%;
+    border:none;
+    margin-top:18px;
+    padding:13px;
+    border-radius:8px;
+    background:#159957;
+    color:white;
+    font-size:12px;
+    font-weight:900;
+    cursor:pointer;
+}
+
+.place-order:hover{
+    background:#0f5b78;
+}
+
+.back-cart{
+    display:inline-flex;
+    margin-top:15px;
+    color:#0f5b78;
+    font-size:11px;
+    font-weight:800;
+}
+
+.empty-checkout{
+    text-align:center;
+    padding:50px 20px;
+}
+
+.empty-checkout a{
+    display:inline-flex;
+    margin-top:18px;
+    padding:12px 18px;
+    border-radius:8px;
+    background:#0f5b78;
+    color:#fff;
+    font-weight:800;
+}
+
+footer{
+    background:#0f3d56;
+    color:white;
+    padding:30px 20px;
+    text-align:center;
+}
+
+footer p{
+    color:#b9d1d9;
+    font-size:11px;
+    margin-top:6px;
+}
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:20000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:rgba(10,35,48,.7);
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:min(450px,100%);
+    background:white;
+    border-radius:18px;
+    padding:28px;
+    position:relative;
+}
+
+.close-modal{
+    position:absolute;
+    top:12px;
+    right:12px;
+    width:32px;
+    height:32px;
+    border:none;
+    border-radius:50%;
+    background:#e9f7f0;
+    color:#0f5b78;
+    font-size:20px;
+}
+
+.contact-option{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    padding:12px;
+    margin-top:8px;
+    border:1px solid #dfebe6;
+    border-radius:9px;
+}
+
+.contact-option strong,
+.contact-option small{
+    display:block;
+}
+
+.contact-option strong{
+    font-size:12px;
+}
+
+.contact-option small{
+    color:#80939b;
+    font-size:10px;
+    margin-top:2px;
+}
+
+.success-message{
+    position:fixed;
+    inset:0;
+    z-index:30000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    background:rgba(10,35,48,.7);
+    padding:20px;
+}
+
+.success-message.show{
+    display:flex;
+}
+
+.success-box{
+    background:white;
+    width:min(450px,100%);
+    border-radius:18px;
+    padding:35px;
+    text-align:center;
+}
+
+.success-icon{
+    width:65px;
+    height:65px;
+    margin:0 auto 15px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#e9f7f0;
+    color:#159957;
+    font-size:30px;
+}
+
+.success-box h2{
+    color:#12344d;
+    margin-bottom:8px;
+}
+
+.success-box p{
+    color:#718892;
+    font-size:12px;
+}
+
+.success-box a{
+    display:inline-flex;
+    margin-top:20px;
+    padding:11px 18px;
+    border-radius:8px;
+    background:#0f5b78;
+    color:white;
+    font-weight:800;
+    font-size:12px;
+}
+
+@media(max-width:900px){
+    .nav{display:none}
+    .menu-btn{display:block}
+    .checkout-layout{grid-template-columns:1fr}
+}
+
+@media(max-width:650px){
+    .logo-link{
+        width:115px;
+        height:45px;
+    }
+
+    .logo-link img{
+        width:115px;
+        height:45px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+    .title h1{
+        font-size:30px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-
 <header class="site-header">
 
-    <div class="header-inner">
+<div class="header-inner">
 
-        <a href="index.html"
-           class="logo-link">
+<a href="index.html" class="logo-link">
+<img src="images/shopnova-logo.png" alt="ShopNova Logo">
+</a>
 
-            <img
-                src="images/shopnova-logo.png"
-                class="shopnova-logo"
-                alt="ShopNova">
+<div class="search-box">
+<input id="checkoutSearch" type="search" placeholder="Search products...">
+<button onclick="searchProducts('checkoutSearch')">🔍</button>
+</div>
 
-        </a>
+<nav class="nav">
 
+<a href="index.html">Home</a>
+<a href="products.html">Products</a>
+<a href="cart.html">Cart <span class="cart-count">0</span></a>
+<a href="checkout.html" class="active">Checkout</a>
 
-        <div class="search-wrapper">
+<button class="contact-btn" onclick="openContact()">
+Contact
+</button>
 
-            <input
-                type="search"
-                id="globalSearch"
-                class="search-input"
-                placeholder="Search products...">
+</nav>
 
-            <button
-                class="search-button"
-                onclick="performSearch()">
-                🔍
-            </button>
-
-        </div>
-
-
-        <nav class="main-nav">
-
-            <a href="index.html"
-               class="nav-link">
-                Home
-            </a>
-
-            <a href="products.html"
-               class="nav-link">
-                Products
-            </a>
-
-            <a href="cart.html"
-               class="nav-link cart-nav">
-                Cart
-                <span id="cartCount"
-                      class="cart-count">0</span>
-            </a>
-
-            <a href="checkout.html"
-               class="nav-link active">
-                Checkout
-            </a>
-
-            <button
-                class="contact-button"
-                onclick="openContact()">
-                Contact
-            </button>
-
-        </nav>
-
-
-        <button
-            class="mobile-menu-button"
-            onclick="toggleMobileMenu()">
-            ☰
-        </button>
-
-    </div>
-
-
-    <div id="mobileMenu"
-         class="mobile-menu">
-
-        <a href="index.html">Home</a>
-
-        <a href="products.html">Products</a>
-
-        <a href="cart.html">
-            Cart
-            <span id="mobileCartCount">0</span>
-        </a>
-
-        <a href="checkout.html">Checkout</a>
-
-        <button onclick="openContact()">
-            Contact
-        </button>
-
-    </div>
-
-</header>
-
-
-<section class="page-header">
-
-    <h1>Checkout</h1>
-
-    <p>
-        Complete your order details.
-    </p>
-
-</section>
-
-
-<main class="checkout-container">
-
-
-    <section class="checkout-form">
-
-        <h2>
-            Customer Information
-        </h2>
-
-
-        <form onsubmit="submitOrder(event)">
-
-            <div class="form-group">
-
-                <label for="name">
-                    Full Name
-                </label>
-
-                <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    required
-                    placeholder="Enter your name">
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="email">
-                    Email Address
-                </label>
-
-                <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    placeholder="Enter your email">
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="phone">
-                    Phone Number
-                </label>
-
-                <input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    required
-                    placeholder="Enter your phone number">
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="address">
-                    Delivery Address
-                </label>
-
-                <textarea
-                    id="address"
-                    name="address"
-                    required
-                    placeholder="Enter your complete address"></textarea>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="city">
-                    City
-                </label>
-
-                <input
-                    id="city"
-                    name="city"
-                    type="text"
-                    required
-                    placeholder="Enter city">
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="pincode">
-                    PIN Code
-                </label>
-
-                <input
-                    id="pincode"
-                    name="pincode"
-                    type="text"
-                    required
-                    placeholder="Enter PIN code">
-
-            </div>
-
-
-            <button
-                type="submit"
-                class="primary-button"
-                style="width:100%;">
-
-                Place Order →
-
-            </button>
-
-
-            <div
-                id="successMessage"
-                class="success-message">
-            </div>
-
-        </form>
-
-    </section>
-
-
-    <aside class="checkout-summary">
-
-        <h2>
-            Your Order
-        </h2>
-
-
-        <div id="checkoutSummary">
-
-        </div>
-
-
-        <div
-            style="
-                display:flex;
-                justify-content:space-between;
-                margin-top:20px;
-                padding-top:15px;
-                border-top:1px solid #e2e8f0;
-                font-size:20px;
-                font-weight:900;
-                color:#172554;
-            ">
-
-            <span>
-                Total
-            </span>
-
-            <span id="checkoutTotal">
-                ₹0
-            </span>
-
-        </div>
-
-
-        <a
-            href="cart.html"
-            class="secondary-button"
-            style="
-                width:100%;
-                margin-top:15px;
-            ">
-
-            ← Back to Cart
-
-        </a>
-
-    </aside>
-
-</main>
-
-
-<!-- CONTACT -->
-
-<div id="contactModal"
-     class="contact-modal">
-
-    <div class="contact-box">
-
-        <button
-            class="close-contact"
-            onclick="closeContact()">
-            ×
-        </button>
-
-        <h2>
-            Contact ShopNova
-        </h2>
-
-        <p>
-            Choose your preferred way to contact us.
-        </p>
-
-
-        <div class="contact-options">
-
-            <a
-                href="https://wa.me/"
-                target="_blank"
-                class="contact-option">
-                💬 WhatsApp
-            </a>
-
-            <a
-                href="https://www.instagram.com/"
-                target="_blank"
-                class="contact-option">
-                📸 Instagram
-            </a>
-
-            <a
-                href="https://www.youtube.com/"
-                target="_blank"
-                class="contact-option">
-                ▶ YouTube
-            </a>
-
-            <a
-                href="mailto:contact@shopnova.com"
-                class="contact-option">
-                ✉️ Email
-            </a>
-
-        </div>
-
-    </div>
+<button class="menu-btn" onclick="toggleMenu()">☰</button>
 
 </div>
 
+<div id="mobileNav" class="mobile-nav">
+<a href="index.html">Home</a>
+<a href="products.html">Products</a>
+<a href="cart.html">Cart (<span class="cart-count">0</span>)</a>
+<a href="checkout.html">Checkout</a>
+<button onclick="openContact()">Contact</button>
+</div>
 
-<footer class="site-footer">
+</header>
 
-    <div class="footer-container">
+<div class="sale-strip">
+<div class="sale-track">
+<span>✦ SHOPNOVA</span>
+<span>✦ SIMPLE CHECKOUT</span>
+<span>✦ SECURE SHOPPING</span>
+<span>✦ SHOP SMART • LIVE BETTER</span>
+<span>✦ SHOPNOVA</span>
+</div>
+</div>
 
-        <div class="footer-brand">
+<main class="page">
 
-            <img
-                src="images/shopnova-logo.png"
-                class="footer-logo"
-                alt="ShopNova">
+<div class="title">
+<h1>Checkout</h1>
+<p>Complete your details and review your order.</p>
+</div>
 
-            <p>
-                Shop Smart • Live Better
-            </p>
+<div id="checkoutContent"></div>
 
-        </div>
+</main>
 
-
-        <div class="footer-links">
-
-            <h3>
-                Quick Links
-            </h3>
-
-            <a href="index.html">
-                Home
-            </a>
-
-            <a href="products.html">
-                Products
-            </a>
-
-            <a href="cart.html">
-                Cart
-            </a>
-
-            <a href="checkout.html">
-                Checkout
-            </a>
-
-        </div>
-
-
-        <div class="footer-links">
-
-            <h3>
-                Contact
-            </h3>
-
-            <button onclick="openContact()">
-                Contact ShopNova
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <div class="footer-bottom">
-
-        © 2026 ShopNova | Shop Smart • Live Better
-
-    </div>
-
+<footer>
+<strong>ShopNova</strong>
+<p>Shop Smart • Live Better • © 2026 ShopNova</p>
 </footer>
 
+<div id="contactModal" class="modal">
+
+<div class="modal-box">
+
+<button class="close-modal" onclick="closeContact()">×</button>
+
+<h2>Let's Connect</h2>
+
+<p style="color:#718892;font-size:12px;margin-top:6px;">
+Choose your preferred contact method.
+</p>
+
+<a class="contact-option" href="https://wa.me/" target="_blank">
+<span>💬</span>
+<span>
+<strong>WhatsApp</strong>
+<small>Chat with us</small>
+</span>
+</a>
+
+<a class="contact-option" href="https://www.instagram.com/" target="_blank">
+<span>◎</span>
+<span>
+<strong>Instagram</strong>
+<small>Follow ShopNova</small>
+</span>
+</a>
+
+<a class="contact-option" href="https://www.youtube.com/" target="_blank">
+<span>▶</span>
+<span>
+<strong>YouTube</strong>
+<small>Watch ShopNova</small>
+</span>
+</a>
+
+<a class="contact-option" href="mailto:contact@shopnova.com">
+<span>✉</span>
+<span>
+<strong>Email</strong>
+<small>contact@shopnova.com</small>
+</span>
+</a>
+
+</div>
+</div>
+
+<div id="successMessage" class="success-message">
+
+<div class="success-box">
+
+<div class="success-icon">✓</div>
+
+<h2>Order Confirmed</h2>
+
+<p>
+Thank you for shopping with ShopNova.
+Your order has been placed successfully.
+</p>
+
+<a href="products.html">
+Continue Shopping
+</a>
+
+</div>
+
+</div>
 
 <script src="script.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+    renderCheckoutPage();
+});
+</script>
 
 </body>
 </html>
