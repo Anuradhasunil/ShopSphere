@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>ShopNova | Products</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
     <style>
+
         /* =========================================
            PRODUCTS PAGE
         ========================================= */
@@ -16,43 +25,68 @@
         .products-page {
             width: 100%;
             min-height: 100vh;
-            padding: 30px 4%;
+
+            padding: 28px 4% 45px;
+
             background:
                 linear-gradient(
                     180deg,
-                    #f8fcfb,
-                    #eef8f5
+                    #f8fcfb 0%,
+                    #eef8f5 100%
                 );
         }
 
+
+        /* =========================================
+           PAGE TITLE
+        ========================================= */
+
         .products-heading {
             text-align: center;
+
             margin-bottom: 25px;
         }
 
         .products-heading span {
             display: block;
-            color: #087f68;
+
+            color: #078267;
+
             font-size: 12px;
-            font-weight: 800;
+
+            font-weight: 900;
+
             letter-spacing: 2px;
+
             margin-bottom: 7px;
         }
 
         .products-heading h1 {
-            color: #143b58;
+            color: #123c59;
+
             font-size: 34px;
-            margin-bottom: 7px;
+
+            margin: 0 0 7px;
         }
 
         .products-heading p {
-            color: #708895;
+            color: #718792;
+
             font-size: 14px;
+
+            margin: 0;
         }
+
+
+        /* =========================================
+           PRODUCT GRID
+        ========================================= */
 
         .products-grid {
             width: 100%;
+
             max-width: 1250px;
+
             margin: 0 auto;
 
             display: grid;
@@ -63,11 +97,15 @@
             gap: 20px;
         }
 
+
+        /* =========================================
+           PRODUCT CARD
+        ========================================= */
+
         .product-card {
             background: #ffffff;
 
-            border:
-                1px solid #dce9e6;
+            border: 1px solid #dce9e6;
 
             border-radius: 16px;
 
@@ -78,8 +116,8 @@
                 rgba(20, 70, 80, 0.06);
 
             transition:
-                transform .2s ease,
-                box-shadow .2s ease;
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
         }
 
         .product-card:hover {
@@ -90,8 +128,14 @@
                 rgba(20, 70, 80, 0.12);
         }
 
+
+        /* =========================================
+           PRODUCT IMAGE
+        ========================================= */
+
         .product-image {
             width: 100%;
+
             height: 220px;
 
             display: block;
@@ -100,6 +144,31 @@
 
             background: #eef5f3;
         }
+
+
+        /* =========================================
+           BIBLE BOOK IMAGE
+           Keep the complete book visible
+        ========================================= */
+
+        .product-card.book-card
+        .product-image {
+            object-fit: contain;
+
+            padding: 8px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f8f3ea,
+                    #eee3d2
+                );
+        }
+
+
+        /* =========================================
+           PRODUCT INFORMATION
+        ========================================= */
 
         .product-info {
             padding: 17px;
@@ -157,6 +226,11 @@
             font-weight: 700;
         }
 
+
+        /* =========================================
+           ADD TO CART
+        ========================================= */
+
         .add-cart-btn {
             width: 100%;
 
@@ -181,7 +255,7 @@
 
             cursor: pointer;
 
-            transition: .2s ease;
+            transition: 0.2s ease;
         }
 
         .add-cart-btn:hover {
@@ -191,7 +265,14 @@
                     #066b89,
                     #08745f
                 );
+
+            transform: translateY(-1px);
         }
+
+
+        /* =========================================
+           EMPTY
+        ========================================= */
 
         .empty-products {
             text-align: center;
@@ -202,6 +283,118 @@
 
             grid-column: 1 / -1;
         }
+
+
+        /* =========================================
+           CONTACT POPUP
+        ========================================= */
+
+        .contact-popup {
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(10, 35, 50, 0.45);
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            z-index: 9999;
+
+            padding: 20px;
+        }
+
+        .contact-popup.show {
+            display: flex;
+        }
+
+        .contact-box {
+            width: 100%;
+
+            max-width: 390px;
+
+            background: #ffffff;
+
+            border-radius: 18px;
+
+            padding: 28px;
+
+            position: relative;
+
+            box-shadow:
+                0 20px 50px
+                rgba(0,0,0,0.18);
+
+            text-align: center;
+        }
+
+        .contact-box h2 {
+            color: #123c59;
+
+            margin: 0 0 8px;
+        }
+
+        .contact-box p {
+            color: #718792;
+
+            margin-bottom: 20px;
+        }
+
+        .close-contact {
+            position: absolute;
+
+            right: 15px;
+
+            top: 10px;
+
+            width: 34px;
+
+            height: 34px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #eef5f3;
+
+            color: #123c59;
+
+            font-size: 23px;
+
+            cursor: pointer;
+        }
+
+        .contact-links {
+            display: grid;
+
+            gap: 10px;
+        }
+
+        .contact-links a {
+            display: block;
+
+            padding: 12px;
+
+            border-radius: 9px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #087fa1,
+                    #0b8c72
+                );
+
+            color: white;
+
+            text-decoration: none;
+
+            font-weight: 700;
+        }
+
 
         /* =========================================
            RESPONSIVE
@@ -216,6 +409,7 @@
 
         }
 
+
         @media (max-width: 800px) {
 
             .products-grid {
@@ -226,15 +420,17 @@
             }
 
             .product-image {
-                height: 190px;
+                height: 200px;
             }
 
         }
 
+
         @media (max-width: 520px) {
 
             .products-page {
-                padding: 22px 12px;
+                padding:
+                    22px 12px 35px;
             }
 
             .products-heading h1 {
@@ -246,14 +442,18 @@
             }
 
             .product-image {
-                height: 220px;
+                height: 250px;
             }
 
         }
+
     </style>
+
 </head>
 
+
 <body>
+
 
 <!-- =========================================
      HEADER
@@ -263,20 +463,25 @@
 
     <div class="header-inner">
 
-        <!-- LOGO -->
+
+        <!-- SHOPNOVA LOGO -->
+
         <a
             href="index.html"
             class="brand-logo"
+            aria-label="ShopNova Home"
         >
+
             <img
                 src="images/shopnova-logo.png"
                 alt="ShopNova Logo"
-                onerror="this.onerror=null;this.src='images/logo.png';"
             >
+
         </a>
 
 
         <!-- SEARCH -->
+
         <div class="search-box">
 
             <input
@@ -288,7 +493,7 @@
 
             <button
                 type="button"
-                onclick="searchProducts()"
+                id="searchButton"
             >
                 🔍
             </button>
@@ -297,6 +502,7 @@
 
 
         <!-- NAVIGATION -->
+
         <nav class="nav-links">
 
             <a href="index.html">
@@ -322,7 +528,7 @@
             <button
                 type="button"
                 class="contact-btn"
-                onclick="openContact()"
+                id="contactButton"
             >
                 Contact
             </button>
@@ -334,11 +540,13 @@
 </header>
 
 
+
 <!-- =========================================
      PRODUCTS
 ========================================= -->
 
 <main class="products-page">
+
 
     <div class="products-heading">
 
@@ -351,11 +559,12 @@
         </h1>
 
         <p>
-            Discover fashion, beauty, technology and
-            luxury essentials.
+            Discover fashion, beauty, technology,
+            luxury and books.
         </p>
 
     </div>
+
 
 
     <div
@@ -363,7 +572,9 @@
         id="productsGrid"
     ></div>
 
+
 </main>
+
 
 
 <!-- =========================================
@@ -371,8 +582,8 @@
 ========================================= -->
 
 <div
-    id="contactPopup"
     class="contact-popup"
+    id="contactPopup"
 >
 
     <div class="contact-box">
@@ -380,7 +591,7 @@
         <button
             type="button"
             class="close-contact"
-            onclick="closeContact()"
+            id="closeContact"
         >
             ×
         </button>
@@ -430,15 +641,12 @@
 </div>
 
 
-<!-- =========================================
-     JAVASCRIPT
-========================================= -->
 
 <script>
 
 /* =========================================
-   UNIQUE SHOPNOVA PRODUCTS
-========================================= */
+   SHOPNOVA PRODUCT DATABASE
+   ========================================= */
 
 const products = [
 
@@ -498,6 +706,15 @@ const products = [
 
     {
         id: 7,
+        name: "Luxury Collection",
+        category: "Premium",
+        price: 5499,
+        oldPrice: 7999,
+        image: "images/watch.jpg"
+    },
+
+    {
+        id: 8,
         name: "Premium Watch",
         category: "Technology",
         price: 2999,
@@ -506,7 +723,7 @@ const products = [
     },
 
     {
-        id: 8,
+        id: 9,
         name: "Premium Handbag",
         category: "Luxury",
         price: 3499,
@@ -515,7 +732,7 @@ const products = [
     },
 
     {
-        id: 9,
+        id: 10,
         name: "Wireless Earbuds",
         category: "Technology",
         price: 1999,
@@ -524,38 +741,58 @@ const products = [
     },
 
     {
-        id: 10,
+        id: 11,
         name: "Premium Makeup",
         category: "Beauty",
         price: 1499,
         oldPrice: 2299,
         image: "images/makeup.jpg"
+    },
+
+    /* =====================================
+       NEW BOOK PRODUCT
+    ===================================== */
+
+    {
+        id: 12,
+        name: "Bible Wonders",
+        category: "Books",
+        price: 350,
+        oldPrice: 499,
+        image: "images/bible-wonders.png",
+        isBook: true
     }
 
 ];
 
 
+
 /* =========================================
-   RENDER PRODUCTS
-   ONLY ONE TIME
+   DISPLAY PRODUCTS
+   ONLY THIS FUNCTION CREATES CARDS
 ========================================= */
 
-function displayProducts(list) {
+function displayProducts(productList) {
 
     const grid =
         document.getElementById(
             "productsGrid"
         );
 
-    if (!grid) return;
+    if (!grid) {
+        return;
+    }
 
+
+    /* Clear old cards first.
+       This prevents duplicate products. */
 
     grid.innerHTML = "";
 
 
     if (
-        !list ||
-        list.length === 0
+        !Array.isArray(productList) ||
+        productList.length === 0
     ) {
 
         grid.innerHTML = `
@@ -565,11 +802,10 @@ function displayProducts(list) {
         `;
 
         return;
-
     }
 
 
-    list.forEach(function(product) {
+    productList.forEach(function(product) {
 
         const card =
             document.createElement("article");
@@ -577,6 +813,13 @@ function displayProducts(list) {
 
         card.className =
             "product-card";
+
+
+        /* Special class for the Bible book */
+
+        if (product.isBook) {
+            card.classList.add("book-card");
+        }
 
 
         card.innerHTML = `
@@ -623,6 +866,7 @@ function displayProducts(list) {
                 </button>
 
             </div>
+
         `;
 
 
@@ -633,19 +877,25 @@ function displayProducts(list) {
 }
 
 
+
 /* =========================================
    ADD TO CART
 ========================================= */
 
-function addToCart(id) {
+function addToCart(productId) {
 
     const product =
-        products.find(
-            item => item.id === id
-        );
+        products.find(function(item) {
+
+            return Number(item.id) ===
+                   Number(productId);
+
+        });
 
 
-    if (!product) return;
+    if (!product) {
+        return;
+    }
 
 
     let cart = [];
@@ -675,11 +925,12 @@ function addToCart(id) {
 
 
     const existing =
-        cart.find(
-            item =>
-                Number(item.id) ===
-                Number(product.id)
-        );
+        cart.find(function(item) {
+
+            return Number(item.id) ===
+                   Number(product.id);
+
+        });
 
 
     if (existing) {
@@ -727,8 +978,9 @@ function addToCart(id) {
 }
 
 
+
 /* =========================================
-   CART COUNT
+   UPDATE CART COUNT
 ========================================= */
 
 function updateCartCount() {
@@ -752,21 +1004,24 @@ function updateCartCount() {
     }
 
 
+    if (!Array.isArray(cart)) {
+
+        cart = [];
+
+    }
+
+
     let total = 0;
 
 
-    if (Array.isArray(cart)) {
+    cart.forEach(function(item) {
 
-        cart.forEach(function(item) {
+        total +=
+            Number(
+                item.quantity || 1
+            );
 
-            total +=
-                Number(
-                    item.quantity || 1
-                );
-
-        });
-
-    }
+    });
 
 
     const count =
@@ -783,6 +1038,7 @@ function updateCartCount() {
     }
 
 }
+
 
 
 /* =========================================
@@ -804,7 +1060,6 @@ function searchProducts() {
         displayProducts(products);
 
         return;
-
     }
 
 
@@ -833,8 +1088,22 @@ function searchProducts() {
 }
 
 
+
 /* =========================================
-   ENTER SEARCH
+   SEARCH BUTTON
+========================================= */
+
+document
+    .getElementById("searchButton")
+    .addEventListener(
+        "click",
+        searchProducts
+    );
+
+
+
+/* =========================================
+   ENTER KEY SEARCH
 ========================================= */
 
 document
@@ -844,8 +1113,7 @@ document
         function(event) {
 
             if (
-                event.key ===
-                "Enter"
+                event.key === "Enter"
             ) {
 
                 searchProducts();
@@ -856,34 +1124,73 @@ document
     );
 
 
+
 /* =========================================
-   CONTACT
+   CONTACT POPUP
 ========================================= */
 
-function openContact() {
+const contactPopup =
+    document.getElementById(
+        "contactPopup"
+    );
 
-    document
-        .getElementById(
-            "contactPopup"
-        )
-        .classList.add("show");
+const contactButton =
+    document.getElementById(
+        "contactButton"
+    );
 
-}
+const closeContact =
+    document.getElementById(
+        "closeContact"
+    );
 
 
-function closeContact() {
+contactButton.addEventListener(
+    "click",
+    function() {
 
-    document
-        .getElementById(
-            "contactPopup"
-        )
-        .classList.remove("show");
+        contactPopup.classList.add(
+            "show"
+        );
 
-}
+    }
+);
+
+
+closeContact.addEventListener(
+    "click",
+    function() {
+
+        contactPopup.classList.remove(
+            "show"
+        );
+
+    }
+);
+
+
+contactPopup.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target ===
+            contactPopup
+        ) {
+
+            contactPopup.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
 
 
 /* =========================================
-   START PAGE
+   INITIAL PAGE LOAD
 ========================================= */
 
 displayProducts(products);
