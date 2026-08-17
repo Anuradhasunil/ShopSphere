@@ -1,12 +1,7 @@
 /* =====================================================
    SHOPNOVA
-   PROFESSIONAL BLUE + GREEN
-   COMPACT LAYOUT
-===================================================== */
-
-
-/* =====================================================
-   RESET
+   BLUE + GREEN
+   COMPACT PROFESSIONAL DESIGN
 ===================================================== */
 
 * {
@@ -15,16 +10,13 @@
     box-sizing: border-box;
 }
 
-
 html {
     scroll-behavior: smooth;
 }
 
-
 body {
 
     font-family:
-        "Segoe UI",
         Arial,
         Helvetica,
         sans-serif;
@@ -32,20 +24,18 @@ body {
     background:
         linear-gradient(
             180deg,
-            #ffffff 0%,
-            #f1faf7 100%
+            #ffffff,
+            #f2faf8
         );
 
     color: #173b55;
 
     min-height: 100vh;
-
 }
 
 
 /* =====================================================
    HEADER
-   SAME HEADER STYLE FOR ALL PAGES
 ===================================================== */
 
 .main-header {
@@ -54,70 +44,53 @@ body {
 
     top: 0;
 
-    z-index: 1000;
+    z-index: 9999;
 
     width: 100%;
 
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.98
-        );
+    background: #ffffff;
 
     border-bottom:
-        1px solid #dce8e8;
+        1px solid #dce7ea;
 
     box-shadow:
-        0 3px 15px
+        0 3px 14px
         rgba(
-            12,
-            55,
-            70,
+            20,
+            60,
+            75,
             0.08
         );
-
 }
 
 
-/* =====================================================
-   HEADER INNER
-===================================================== */
-
 .header-inner {
 
-    width: 96%;
+    width: 98%;
 
-    max-width: 1380px;
+    max-width: 1400px;
 
     height: 76px;
 
-    margin: 0 auto;
+    margin: auto;
 
     display: flex;
 
     align-items: center;
 
-    gap: 20px;
-
+    gap: 18px;
 }
 
 
 /* =====================================================
-   TOP SHOPNOVA LOGO
-
-   IMPORTANT:
-   THIS IS YOUR EXISTING TOP LOGO.
-
-   DO NOT USE center-dove.png HERE.
+   FULL TOP LOGO
 ===================================================== */
 
 .brand-logo {
 
     width: 285px;
 
-    height: 70px;
+    height: 68px;
 
     flex-shrink: 0;
 
@@ -125,12 +98,9 @@ body {
 
     align-items: center;
 
-    justify-content: flex-start;
-
     overflow: hidden;
 
     text-decoration: none;
-
 }
 
 
@@ -138,14 +108,13 @@ body {
 
     width: 285px;
 
-    height: 70px;
-
-    display: block;
+    height: 68px;
 
     object-fit: contain;
 
     object-position: left center;
 
+    display: block;
 }
 
 
@@ -155,23 +124,22 @@ body {
 
 .search-box {
 
+    height: 46px;
+
     flex: 1;
 
     max-width: 505px;
-
-    height: 46px;
 
     display: flex;
 
     overflow: hidden;
 
-    border:
-        2px solid #d7e5ff;
-
-    border-radius: 13px;
-
     background: white;
 
+    border:
+        2px solid #d7e3ff;
+
+    border-radius: 13px;
 }
 
 
@@ -186,59 +154,40 @@ body {
     outline: none;
 
     padding:
-        0 17px;
-
-    color: #294a61;
+        0 16px;
 
     font-size: 14px;
 
-    background: white;
-
-}
-
-
-.search-box input::placeholder {
-
-    color: #8a9ca8;
-
+    color: #34566c;
 }
 
 
 .search-box button {
 
-    width: 55px;
+    width: 56px;
 
     border: none;
 
-    cursor: pointer;
+    background:
+        #2464e8;
 
     color: white;
 
     font-size: 19px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #2864e8,
-            #176eea
-        );
-
-    transition:
-        background 0.2s ease;
-
+    cursor: pointer;
 }
 
 
 .search-box button:hover {
 
     background:
-        #1554c7;
-
+        #1853c8;
 }
 
 
 /* =====================================================
-   NAVIGATION
+   NAV
 ===================================================== */
 
 .nav-links {
@@ -252,15 +201,14 @@ body {
     gap: 3px;
 
     white-space: nowrap;
-
 }
 
 
 .nav-links a {
 
-    text-decoration: none;
+    color: #263e51;
 
-    color: #243e53;
+    text-decoration: none;
 
     font-size: 14px;
 
@@ -270,11 +218,6 @@ body {
         10px 12px;
 
     border-radius: 9px;
-
-    transition:
-        color 0.2s ease,
-        background 0.2s ease;
-
 }
 
 
@@ -283,26 +226,24 @@ body {
     color: #087e68;
 
     background:
-        #eaf8f4;
-
+        #edf9f5;
 }
 
 
 .nav-links a.active {
 
-    color: #2461d9;
+    color: #2464df;
 
     background:
-        #eef4ff;
-
+        #edf3ff;
 }
 
 
 /* =====================================================
-   CART COUNT
+   CART
 ===================================================== */
 
-.cart-count {
+#cartCount {
 
     display: inline-flex;
 
@@ -314,22 +255,17 @@ body {
 
     height: 20px;
 
-    margin-left: 3px;
+    padding: 0 5px;
 
-    padding:
-        0 5px;
+    margin-left: 3px;
 
     border-radius: 50px;
 
-    background:
-        #ef4444;
+    background: #ef4444;
 
     color: white;
 
     font-size: 10px;
-
-    font-weight: 900;
-
 }
 
 
@@ -341,28 +277,23 @@ body {
 
     border: none;
 
-    color: white;
-
-    background:
-        #182858;
+    border-radius: 9px;
 
     padding:
         11px 18px;
 
-    border-radius: 9px;
+    margin-left: 5px;
+
+    background:
+        #172858;
+
+    color: white;
 
     font-size: 14px;
 
     font-weight: 800;
 
     cursor: pointer;
-
-    margin-left: 4px;
-
-    transition:
-        transform 0.2s ease,
-        background 0.2s ease;
-
 }
 
 
@@ -370,10 +301,6 @@ body {
 
     background:
         #087f6b;
-
-    transform:
-        translateY(-1px);
-
 }
 
 
@@ -383,34 +310,29 @@ body {
 
 .hero {
 
-    padding:
-        0 0 24px;
-
+    width: 100%;
 }
 
 
 .hero-inner {
 
+    position: relative;
+
     width: 100%;
 
     min-height: 470px;
 
-    margin: 0 auto;
-
     padding:
-        30px 58px;
+        34px 58px;
 
     display: grid;
 
     grid-template-columns:
-        1.02fr
-        0.98fr;
+        1fr 0.9fr;
 
     align-items: center;
 
-    gap: 28px;
-
-    position: relative;
+    gap: 20px;
 
     overflow: hidden;
 
@@ -418,18 +340,17 @@ body {
         linear-gradient(
             135deg,
             #ffffff 0%,
-            #f6fbff 50%,
-            #f1faf7 100%
+            #f4faff 52%,
+            #f0faf7 100%
         );
 
     border-bottom:
-        1px solid #dcebe8;
-
+        1px solid #dceae9;
 }
 
 
 /* =====================================================
-   SUBTLE BACKGROUND CIRCLES
+   BACKGROUND CIRCLES
 ===================================================== */
 
 .hero-inner::before {
@@ -438,26 +359,25 @@ body {
 
     position: absolute;
 
-    width: 360px;
+    width: 330px;
 
-    height: 360px;
+    height: 330px;
 
-    left: -95px;
+    left: -65px;
 
-    top: -85px;
+    top: -60px;
 
     border-radius: 50%;
 
     background:
         rgba(
-            49,
-            115,
-            239,
+            48,
+            105,
+            230,
             0.10
         );
 
     pointer-events: none;
-
 }
 
 
@@ -467,31 +387,30 @@ body {
 
     position: absolute;
 
-    width: 300px;
+    width: 270px;
 
-    height: 300px;
+    height: 270px;
 
-    right: -110px;
+    right: -80px;
 
-    bottom: -150px;
+    bottom: -130px;
 
     border-radius: 50%;
 
     background:
         rgba(
-            24,
-            155,
-            112,
+            20,
+            160,
+            120,
             0.08
         );
 
     pointer-events: none;
-
 }
 
 
 /* =====================================================
-   HERO CONTENT
+   LEFT CONTENT
 ===================================================== */
 
 .hero-content {
@@ -501,61 +420,52 @@ body {
     z-index: 2;
 
     max-width: 650px;
-
 }
 
 
 .welcome-badge {
 
-    display: inline-flex;
-
-    align-items: center;
+    display: inline-block;
 
     padding:
-        8px 15px;
+        8px 14px;
 
-    margin-bottom: 18px;
+    margin-bottom: 17px;
 
-    border-radius: 30px;
+    border-radius: 25px;
 
     background:
         #eaf2ff;
 
     color:
-        #1758d1;
+        #1456cf;
 
     font-size: 13px;
 
     font-weight: 800;
-
 }
 
-
-/* =====================================================
-   HERO HEADING
-===================================================== */
 
 .hero-content h1 {
 
     color:
-        #172d62;
+        #182f64;
 
     font-size:
         clamp(
             48px,
-            5.2vw,
-            72px
+            5vw,
+            70px
         );
 
     line-height:
-        0.99;
+        1;
 
     letter-spacing:
         -3px;
 
     margin-bottom:
-        22px;
-
+        20px;
 }
 
 
@@ -565,7 +475,7 @@ body {
         linear-gradient(
             90deg,
             #2864e8,
-            #087e69
+            #087f6b
         );
 
     -webkit-background-clip:
@@ -576,30 +486,21 @@ body {
 
     color:
         transparent;
-
 }
 
 
-/* =====================================================
-   HERO TEXT
-===================================================== */
-
 .hero-content p {
 
-    max-width: 630px;
+    max-width: 620px;
 
     color:
-        #607c8c;
+        #58768a;
 
-    font-size:
-        17px;
+    font-size: 16px;
 
-    line-height:
-        1.7;
+    line-height: 1.65;
 
-    margin-bottom:
-        26px;
-
+    margin-bottom: 25px;
 }
 
 
@@ -611,12 +512,11 @@ body {
 
     display: flex;
 
+    gap: 12px;
+
     align-items: center;
 
-    gap: 13px;
-
     flex-wrap: wrap;
-
 }
 
 
@@ -629,27 +529,20 @@ body {
     justify-content: center;
 
     padding:
-        15px 23px;
+        14px 22px;
 
-    border-radius:
-        10px;
+    border-radius: 10px;
 
     text-decoration: none;
 
     color: white;
 
     background:
-        linear-gradient(
-            135deg,
-            #2864e8,
-            #1e5bd8
-        );
+        #2864e8;
 
-    font-size:
-        14px;
+    font-size: 14px;
 
-    font-weight:
-        800;
+    font-weight: 800;
 
     box-shadow:
         0 8px 18px
@@ -659,28 +552,13 @@ body {
             232,
             0.20
         );
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-
 }
 
 
 .primary-btn:hover {
 
-    transform:
-        translateY(-2px);
-
-    box-shadow:
-        0 12px 22px
-        rgba(
-            40,
-            100,
-            232,
-            0.25
-        );
-
+    background:
+        #1856d0;
 }
 
 
@@ -693,55 +571,37 @@ body {
     justify-content: center;
 
     padding:
-        14px 22px;
+        13px 21px;
 
     border:
-        2px solid #d6e5ff;
+        2px solid #d4e2ff;
 
-    border-radius:
-        10px;
+    border-radius: 10px;
+
+    background: white;
+
+    color:
+        #173b55;
 
     text-decoration: none;
 
-    color:
-        #172d62;
+    font-size: 14px;
 
-    background:
-        white;
-
-    font-size:
-        14px;
-
-    font-weight:
-        800;
-
-}
-
-
-.secondary-btn:hover {
-
-    border-color:
-        #b8d0ff;
-
-    background:
-        #f7faff;
-
+    font-weight: 800;
 }
 
 
 /* =====================================================
-   CENTER DOVE AREA
+   CENTER DOVE
 ===================================================== */
 
 .center-dove-area {
 
     position: relative;
 
-    z-index: 3;
+    z-index: 4;
 
     width: 100%;
-
-    height: 100%;
 
     min-height: 330px;
 
@@ -754,28 +614,18 @@ body {
     padding: 0;
 
     margin: 0;
-
 }
 
 
-/* =====================================================
-   CENTER DOVE IMAGE
-
-   THIS IS THE SECOND IMAGE YOU SHARED.
-===================================================== */
-
 .center-dove-image {
 
-    width:
-        min(
-            390px,
-            82%
-        );
+    width: 330px;
 
-    max-height:
-        340px;
+    max-width: 78%;
 
     height: auto;
+
+    max-height: 330px;
 
     display: block;
 
@@ -783,17 +633,8 @@ body {
 
     cursor: pointer;
 
-    user-select: none;
-
-    -webkit-user-drag: none;
-
-    transform:
-        translateY(0)
-        rotate(0deg);
-
     transition:
-        transform
-        0.55s
+        transform 0.5s
         cubic-bezier(
             0.2,
             0.8,
@@ -801,48 +642,36 @@ body {
             1
         ),
 
-        filter
-        0.55s
-        ease;
-
+        filter 0.5s ease;
 }
 
 
-/* =====================================================
-   DOVE FLIES UP WHEN TOUCHED / HOVERED
-===================================================== */
+/* DOVE FLIES WHEN TOUCHED/HOVERED */
 
 .center-dove-image:hover {
 
     transform:
-        translateY(-22px)
-        rotate(-2deg)
-        scale(1.035);
+        translateY(-20px)
+        scale(1.04);
 
     filter:
         drop-shadow(
-            0 18px 20px
+            0 15px 18px
             rgba(
-                7,
-                115,
+                0,
+                120,
                 100,
                 0.20
             )
         );
-
 }
 
-
-/* =====================================================
-   OPTIONAL TOUCH EFFECT
-===================================================== */
 
 .center-dove-image:active {
 
     transform:
-        translateY(-10px)
-        scale(0.99);
-
+        translateY(-12px)
+        scale(1.02);
 }
 
 
@@ -852,12 +681,12 @@ body {
 
 .service-strip {
 
-    width: 96%;
+    width: 92%;
 
     max-width: 1250px;
 
     margin:
-        0 auto 35px;
+        24px auto 35px;
 
     display:
         grid;
@@ -865,50 +694,43 @@ body {
     grid-template-columns:
         repeat(4, 1fr);
 
-    background:
-        white;
+    background: white;
 
     border:
-        1px solid #dceae7;
+        1px solid #dce9e7;
 
     border-radius:
         15px;
 
-    box-shadow:
-        0 7px 22px
-        rgba(
-            14,
-            69,
-            78,
-            0.06
-        );
-
     overflow:
         hidden;
 
+    box-shadow:
+        0 6px 20px
+        rgba(
+            20,
+            70,
+            80,
+            0.06
+        );
 }
 
 
 .service-item {
 
-    min-height:
-        78px;
+    min-height: 74px;
 
     padding:
-        14px 18px;
+        13px 17px;
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    gap:
-        11px;
+    gap: 10px;
 
     border-right:
-        1px solid #e3eeec;
-
+        1px solid #e1ecea;
 }
 
 
@@ -916,39 +738,29 @@ body {
 
     border-right:
         none;
-
 }
 
 
 .service-icon {
 
-    width:
-        40px;
+    width: 40px;
 
-    height:
-        40px;
+    height: 40px;
 
-    display:
-        flex;
+    flex-shrink: 0;
 
-    align-items:
-        center;
+    display: flex;
 
-    justify-content:
-        center;
+    align-items: center;
 
-    flex-shrink:
-        0;
+    justify-content: center;
 
-    border-radius:
-        10px;
+    border-radius: 10px;
 
     background:
         #e8f7f2;
 
-    font-size:
-        19px;
-
+    font-size: 18px;
 }
 
 
@@ -958,55 +770,49 @@ body {
         #173f57;
 
     font-size:
-        14px;
+        13px;
 
     margin-bottom:
         3px;
-
 }
 
 
 .service-item p {
 
     color:
-        #7a919a;
+        #78909a;
 
     font-size:
         11px;
-
 }
 
 
 /* =====================================================
-   CATEGORIES
+   COLLECTIONS
 ===================================================== */
 
-.categories-section {
+.collections {
 
-    width:
-        96%;
+    width: 92%;
 
-    max-width:
-        1250px;
+    max-width: 1250px;
 
     margin:
         0 auto 38px;
-
 }
 
 
-.section-title {
+.section-heading {
 
     text-align:
         center;
 
     margin-bottom:
         20px;
-
 }
 
 
-.section-title span {
+.section-heading span {
 
     color:
         #087e68;
@@ -1019,11 +825,10 @@ body {
 
     letter-spacing:
         2px;
-
 }
 
 
-.section-title h2 {
+.section-heading h2 {
 
     color:
         #173f57;
@@ -1033,26 +838,20 @@ body {
 
     margin:
         5px 0;
-
 }
 
 
-.section-title p {
+.section-heading p {
 
     color:
-        #718992;
+        #718892;
 
     font-size:
         13px;
-
 }
 
 
-/* =====================================================
-   CATEGORY GRID
-===================================================== */
-
-.category-grid {
+.collection-grid {
 
     display:
         grid;
@@ -1062,14 +861,13 @@ body {
 
     gap:
         15px;
-
 }
 
 
-.category-card {
+.collection-card {
 
     padding:
-        20px 15px;
+        20px 12px;
 
     text-align:
         center;
@@ -1081,45 +879,34 @@ body {
         white;
 
     border:
-        1px solid #dceae7;
+        1px solid #dce9e7;
 
     border-radius:
         14px;
 
-    box-shadow:
-        0 5px 18px
-        rgba(
-            15,
-            70,
-            75,
-            0.05
-        );
-
     transition:
         transform 0.2s ease,
         box-shadow 0.2s ease;
-
 }
 
 
-.category-card:hover {
+.collection-card:hover {
 
     transform:
         translateY(-4px);
 
     box-shadow:
-        0 12px 25px
+        0 10px 24px
         rgba(
-            15,
+            20,
             70,
-            75,
+            80,
             0.10
         );
-
 }
 
 
-.category-icon {
+.collection-icon {
 
     width:
         48px;
@@ -1146,16 +933,15 @@ body {
         linear-gradient(
             135deg,
             #eaf3ff,
-            #e6f7ef
+            #e5f7ef
         );
 
     font-size:
         22px;
-
 }
 
 
-.category-card h3 {
+.collection-card h3 {
 
     color:
         #173f57;
@@ -1165,18 +951,16 @@ body {
 
     margin-bottom:
         3px;
-
 }
 
 
-.category-card p {
+.collection-card p {
 
     color:
-        #81949c;
+        #81939b;
 
     font-size:
         11px;
-
 }
 
 
@@ -1187,7 +971,7 @@ body {
 .final-banner {
 
     width:
-        96%;
+        92%;
 
     max-width:
         1250px;
@@ -1196,7 +980,7 @@ body {
         0 auto 38px;
 
     padding:
-        26px 30px;
+        25px 28px;
 
     display:
         flex;
@@ -1222,14 +1006,13 @@ body {
             #123f5b,
             #087e70
         );
-
 }
 
 
 .final-banner span {
 
     color:
-        #92e4c4;
+        #91e2c1;
 
     font-size:
         10px;
@@ -1239,7 +1022,6 @@ body {
 
     letter-spacing:
         2px;
-
 }
 
 
@@ -1250,25 +1032,22 @@ body {
 
     margin:
         4px 0;
-
 }
 
 
 .final-banner p {
 
     color:
-        #c7dfe1;
+        #c9dfe0;
 
     font-size:
         12px;
-
 }
 
 
 .final-button {
 
-    flex-shrink:
-        0;
+    flex-shrink: 0;
 
     padding:
         12px 19px;
@@ -1276,21 +1055,20 @@ body {
     border-radius:
         9px;
 
-    text-decoration:
-        none;
-
-    color:
-        #12455c;
-
     background:
         white;
+
+    color:
+        #17475a;
+
+    text-decoration:
+        none;
 
     font-size:
         13px;
 
     font-weight:
         800;
-
 }
 
 
@@ -1307,7 +1085,7 @@ body {
         0;
 
     z-index:
-        3000;
+        10000;
 
     display:
         none;
@@ -1328,7 +1106,6 @@ body {
             40,
             0.55
         );
-
 }
 
 
@@ -1336,7 +1113,6 @@ body {
 
     display:
         flex;
-
 }
 
 
@@ -1354,14 +1130,14 @@ body {
     padding:
         28px;
 
-    text-align:
-        center;
-
     background:
         white;
 
     border-radius:
         18px;
+
+    text-align:
+        center;
 
     box-shadow:
         0 25px 60px
@@ -1371,7 +1147,6 @@ body {
             0,
             0.25
         );
-
 }
 
 
@@ -1381,7 +1156,7 @@ body {
         absolute;
 
     top:
-        6px;
+        5px;
 
     right:
         12px;
@@ -1390,7 +1165,7 @@ body {
         none;
 
     background:
-        none;
+        transparent;
 
     color:
         #687e87;
@@ -1400,7 +1175,6 @@ body {
 
     cursor:
         pointer;
-
 }
 
 
@@ -1409,26 +1183,21 @@ body {
     color:
         #173f57;
 
-    font-size:
-        23px;
-
     margin-bottom:
-        5px;
-
+        6px;
 }
 
 
-.contact-box > p {
+.contact-box p {
 
     color:
-        #738992;
+        #718892;
 
     font-size:
         13px;
 
     margin-bottom:
-        17px;
-
+        18px;
 }
 
 
@@ -1439,7 +1208,6 @@ body {
 
     gap:
         9px;
-
 }
 
 
@@ -1451,29 +1219,20 @@ body {
     border-radius:
         9px;
 
-    text-decoration:
-        none;
-
-    color:
-        #18475a;
-
     background:
         #edf8f5;
+
+    color:
+        #17475a;
+
+    text-decoration:
+        none;
 
     font-size:
         13px;
 
     font-weight:
         700;
-
-}
-
-
-.contact-links a:hover {
-
-    background:
-        #dff1eb;
-
 }
 
 
@@ -1484,7 +1243,7 @@ body {
 .footer {
 
     padding:
-        22px 15px;
+        20px 15px;
 
     text-align:
         center;
@@ -1494,14 +1253,13 @@ body {
 
     color:
         white;
-
 }
 
 
-.footer-logo img {
+.footer img {
 
     width:
-        160px;
+        170px;
 
     max-height:
         55px;
@@ -1511,14 +1269,13 @@ body {
 
     margin-bottom:
         5px;
-
 }
 
 
 .footer p {
 
     color:
-        #cadcdf;
+        #d1e0e3;
 
     font-size:
         12px;
@@ -1526,17 +1283,19 @@ body {
 }
 
 
-.footer .copyright {
+.footer small {
+
+    display:
+        block;
 
     margin-top:
-        7px;
+        6px;
 
     color:
-        #91aab1;
+        #91a9b0;
 
     font-size:
         10px;
-
 }
 
 
@@ -1549,43 +1308,38 @@ body {
     .header-inner {
 
         gap:
-            10px;
-
+            9px;
     }
 
 
     .brand-logo {
 
         width:
-            210px;
-
+            220px;
     }
 
 
     .brand-logo img {
 
         width:
-            210px;
-
+            220px;
     }
 
 
     .search-box {
 
         max-width:
-            400px;
-
+            380px;
     }
 
 
     .nav-links a {
 
         padding:
-            9px 7px;
+            8px 7px;
 
         font-size:
             12px;
-
     }
 
 
@@ -1596,28 +1350,21 @@ body {
 
         font-size:
             12px;
-
     }
 
 
     .hero-inner {
 
         padding:
-            30px 38px;
-
-        gap:
-            15px;
-
+            30px 35px;
     }
 
 
     .center-dove-image {
 
         width:
-            330px;
-
+            300px;
     }
-
 }
 
 
@@ -1633,36 +1380,33 @@ body {
             auto;
 
         padding:
-            8px 0;
+            7px 0;
 
         flex-wrap:
             wrap;
 
         justify-content:
             center;
-
     }
 
 
     .brand-logo {
 
         width:
-            230px;
+            220px;
 
         height:
-            60px;
-
+            57px;
     }
 
 
     .brand-logo img {
 
         width:
-            230px;
+            220px;
 
         height:
-            60px;
-
+            57px;
     }
 
 
@@ -1676,7 +1420,6 @@ body {
 
         max-width:
             none;
-
     }
 
 
@@ -1690,38 +1433,22 @@ body {
 
         flex-wrap:
             wrap;
-
-    }
-
-
-    .hero {
-
-        padding:
-            0 0 18px;
-
     }
 
 
     .hero-inner {
 
-        width:
-            100%;
+        grid-template-columns:
+            1fr;
 
         min-height:
             auto;
 
         padding:
-            25px 18px;
-
-        grid-template-columns:
-            1fr;
-
-        gap:
-            0;
+            28px 18px;
 
         text-align:
             center;
-
     }
 
 
@@ -1729,7 +1456,6 @@ body {
 
         max-width:
             100%;
-
     }
 
 
@@ -1740,7 +1466,6 @@ body {
 
         margin-right:
             auto;
-
     }
 
 
@@ -1748,29 +1473,23 @@ body {
 
         justify-content:
             center;
-
     }
 
 
     .center-dove-area {
 
         min-height:
-            250px;
-
-        margin-top:
-            0;
-
+            270px;
     }
 
 
     .center-dove-image {
 
         width:
-            300px;
+            280px;
 
         max-height:
-            250px;
-
+            270px;
     }
 
 
@@ -1778,7 +1497,6 @@ body {
 
         grid-template-columns:
             repeat(2, 1fr);
-
     }
 
 
@@ -1786,7 +1504,6 @@ body {
 
         border-right:
             none;
-
     }
 
 
@@ -1794,16 +1511,14 @@ body {
     .service-item:nth-child(4) {
 
         border-top:
-            1px solid #e3eeec;
-
+            1px solid #e1ecea;
     }
 
 
-    .category-grid {
+    .collection-grid {
 
         grid-template-columns:
             repeat(2, 1fr);
-
     }
 
 
@@ -1814,9 +1529,7 @@ body {
 
         align-items:
             flex-start;
-
     }
-
 }
 
 
@@ -1829,44 +1542,30 @@ body {
     .brand-logo {
 
         width:
-            210px;
+            205px;
 
         height:
-            55px;
-
+            53px;
     }
 
 
     .brand-logo img {
 
         width:
-            210px;
+            205px;
 
         height:
-            55px;
-
-    }
-
-
-    .nav-links {
-
-        width:
-            100%;
-
-        justify-content:
-            center;
-
+            53px;
     }
 
 
     .nav-links a {
 
         padding:
-            7px 6px;
+            7px 5px;
 
         font-size:
             11px;
-
     }
 
 
@@ -1877,7 +1576,6 @@ body {
 
         font-size:
             11px;
-
     }
 
 
@@ -1885,15 +1583,6 @@ body {
 
         padding:
             22px 14px;
-
-    }
-
-
-    .welcome-badge {
-
-        font-size:
-            11px;
-
     }
 
 
@@ -1904,7 +1593,6 @@ body {
 
         letter-spacing:
             -2px;
-
     }
 
 
@@ -1912,41 +1600,23 @@ body {
 
         font-size:
             13px;
-
-        line-height:
-            1.6;
-
-    }
-
-
-    .primary-btn,
-    .secondary-btn {
-
-        padding:
-            11px 15px;
-
-        font-size:
-            12px;
-
     }
 
 
     .center-dove-area {
 
         min-height:
-            205px;
-
+            220px;
     }
 
 
     .center-dove-image {
 
         width:
-            240px;
+            235px;
 
         max-height:
-            205px;
-
+            220px;
     }
 
 
@@ -1954,20 +1624,16 @@ body {
 
         grid-template-columns:
             1fr;
-
     }
 
 
-    .service-item,
-    .service-item:nth-child(2),
-    .service-item:nth-child(3) {
+    .service-item {
 
         border-right:
             none;
 
         border-bottom:
-            1px solid #e3eeec;
-
+            1px solid #e1ecea;
     }
 
 
@@ -1975,47 +1641,19 @@ body {
 
         border-bottom:
             none;
-
     }
 
 
-    .category-grid {
+    .collection-grid {
 
         gap:
             9px;
-
     }
 
 
-    .category-card {
+    .collection-card {
 
         padding:
             15px 8px;
-
     }
-
-
-    .section-title h2 {
-
-        font-size:
-            24px;
-
-    }
-
-
-    .final-banner {
-
-        padding:
-            22px 18px;
-
-    }
-
-
-    .final-banner h2 {
-
-        font-size:
-            21px;
-
-    }
-
 }
