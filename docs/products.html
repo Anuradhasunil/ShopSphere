@@ -26,13 +26,13 @@
         </nav>
     </header>
 
-    <!-- Products Section Grid Window -->
+    <!-- Products Grid Section -->
     <main class="products-page-layout">
         <h2 class="section-title">Explore Our Premium Collection</h2>
         
         <div class="shopnova-product-grid">
             
-            <!-- Card Item 1: Highlighted Bible Wonders Book -->
+            <!-- 1. Highlighted Bible Wonders Book (PRIORITY) -->
             <div class="product-card-item highlighted-product">
                 <span class="promo-badge">BEST SELLER</span>
                 <div class="product-image-wrapper">
@@ -51,7 +51,7 @@
                 </div>
             </div>
 
-            <!-- Card Item 2: Premium Travel Bag -->
+            <!-- 2. Premium Travel Bag -->
             <div class="product-card-item">
                 <div class="product-image-wrapper">
                     <img src="images/bag.jpg" alt="Premium Bag" class="product-card-img">
@@ -69,7 +69,7 @@
                 </div>
             </div>
 
-            <!-- Card Item 3: Wireless Earbuds -->
+            <!-- 3. Wireless Earbuds -->
             <div class="product-card-item">
                 <div class="product-image-wrapper">
                     <img src="images/earbuds.jpg" alt="Wireless Earbuds" class="product-card-img">
@@ -87,7 +87,61 @@
                 </div>
             </div>
 
-            <!-- Card Item 4: Mens Shoes -->
+            <!-- 4. India Hero -->
+            <div class="product-card-item">
+                <div class="product-image-wrapper">
+                    <img src="images/india-hero.jpg" alt="India Hero Edition" class="product-card-img">
+                </div>
+                <div class="product-info-panel">
+                    <div class="product-meta-cat">COLLECTIBLES</div>
+                    <h3 class="product-main-title">India Hero Edition Poster</h3>
+                    <div class="product-price-row">
+                        <span class="product-new-price">₹299</span>
+                        <span class="product-old-price">₹599</span>
+                    </div>
+                    <button class="product-add-btn" onclick="add('India Hero Edition Poster', 299, 'images/india-hero.jpg')">
+                        🛒 Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- 5. Luxury Banner Background (Showcased as Product) -->
+            <div class="product-card-item">
+                <div class="product-image-wrapper">
+                    <img src="images/luxury-banner.jpg" alt="Luxury Backdrop Art" class="product-card-img">
+                </div>
+                <div class="product-info-panel">
+                    <div class="product-meta-cat">ART PRINTS</div>
+                    <h3 class="product-main-title">Luxury Silk Backdrop Art</h3>
+                    <div class="product-price-row">
+                        <span class="product-new-price">₹899</span>
+                        <span class="product-old-price">₹1,499</span>
+                    </div>
+                    <button class="product-add-btn" onclick="add('Luxury Silk Backdrop Art', 899, 'images/luxury-banner.jpg')">
+                        🛒 Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- 6. Cosmetic Makeup Kit -->
+            <div class="product-card-item">
+                <div class="product-image-wrapper">
+                    <img src="images/makeup.jpg" alt="Cosmetic Makeup Kit" class="product-card-img">
+                </div>
+                <div class="product-info-panel">
+                    <div class="product-meta-cat">BEAUTY</div>
+                    <h3 class="product-main-title">Professional Cosmetic Kit</h3>
+                    <div class="product-price-row">
+                        <span class="product-new-price">₹999</span>
+                        <span class="product-old-price">₹1,799</span>
+                    </div>
+                    <button class="product-add-btn" onclick="add('Professional Cosmetic Kit', 999, 'images/makeup.jpg')">
+                        🛒 Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- 7. Men's Casual Shoes -->
             <div class="product-card-item">
                 <div class="product-image-wrapper">
                     <img src="images/mens-shoes.jpg" alt="Mens Shoes" class="product-card-img">
@@ -105,45 +159,47 @@
                 </div>
             </div>
 
-            <!-- Card Item 5: Perfume -->
+            <!-- 8. Luxury Perfume -->
             <div class="product-card-item">
                 <div class="product-image-wrapper">
                     <img src="images/perfume.jpg" alt="Luxury Perfume" class="product-card-img">
                 </div>
                 <div class="product-info-panel">
                     <div class="product-meta-cat">FRAGRANCE</div>
-                    <h3 class="product-main-title">Luxury Perfume</h3>
+                    <h3 class="product-main-title">Luxury Perfume Collection</h3>
                     <div class="product-price-row">
                         <span class="product-new-price">₹2,199</span>
                         <span class="product-old-price">₹3,499</span>
                     </div>
-                    <button class="product-add-btn" onclick="add('Luxury Perfume', 2199, 'images/perfume.jpg')">
+                    <button class="product-add-btn" onclick="add('Luxury Perfume Collection', 2199, 'images/perfume.jpg')">
                         🛒 Add to Cart
                     </button>
                 </div>
             </div>
 
-            <!-- Card Item 6: Sunglasses -->
+            <!-- 9. Tailored Suit -->
+            <div class="product-card-item">
+                <div class="product-image-wrapper">
+                    <img src="images/suit.jpg" alt="Tailored Suit Blazer" class="product-card-img">
+                </div>
+                <div class="product-info-panel">
+                    <div class="product-meta-cat">APPAREL</div>
+                    <h3 class="product-main-title">Premium Business Suit</h3>
+                    <div class="product-price-row">
+                        <span class="product-new-price">₹4,999</span>
+                        <span class="product-old-price">₹7,999</span>
+                    </div>
+                    <button class="product-add-btn" onclick="add('Premium Business Suit', 4999, 'images/suit.jpg')">
+                        🛒 Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- 10. Classic Sunglasses -->
             <div class="product-card-item">
                 <div class="product-image-wrapper">
                     <img src="images/sunglasses.jpg" alt="Classic Sunglasses" class="product-card-img">
                 </div>
                 <div class="product-info-panel">
                     <div class="product-meta-cat">ACCESSORIES</div>
-                    <h3 class="product-main-title">Classic Sunglasses</h3>
-                    <div class="product-price-row">
-                        <span class="product-new-price">₹699</span>
-                        <span class="product-old-price">₹1,199</span>
-                    </div>
-                    <button class="product-add-btn" onclick="add('Classic Sunglasses', 699, 'images/sunglasses.jpg')">
-                        🛒 Add to Cart
-                    </button>
-                </div>
-            </div>
-
-        </div>
-    </main>
-
-    <script src="script.js"></script>
-</body>
-</html>
+                    <h3 class="product-main-title">Classic Aviator Sunglasses</h3>
