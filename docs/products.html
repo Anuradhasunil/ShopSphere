@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -16,455 +17,22 @@
         href="style.css"
     >
 
-    <style>
-
-        /* =========================================
-           PRODUCTS PAGE
-        ========================================= */
-
-        .products-page {
-            width: 100%;
-            min-height: 100vh;
-
-            padding: 28px 4% 45px;
-
-            background:
-                linear-gradient(
-                    180deg,
-                    #f8fcfb 0%,
-                    #eef8f5 100%
-                );
-        }
-
-
-        /* =========================================
-           PAGE TITLE
-        ========================================= */
-
-        .products-heading {
-            text-align: center;
-
-            margin-bottom: 25px;
-        }
-
-        .products-heading span {
-            display: block;
-
-            color: #078267;
-
-            font-size: 12px;
-
-            font-weight: 900;
-
-            letter-spacing: 2px;
-
-            margin-bottom: 7px;
-        }
-
-        .products-heading h1 {
-            color: #123c59;
-
-            font-size: 34px;
-
-            margin: 0 0 7px;
-        }
-
-        .products-heading p {
-            color: #718792;
-
-            font-size: 14px;
-
-            margin: 0;
-        }
-
-
-        /* =========================================
-           PRODUCT GRID
-        ========================================= */
-
-        .products-grid {
-            width: 100%;
-
-            max-width: 1250px;
-
-            margin: 0 auto;
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(4, minmax(0, 1fr));
-
-            gap: 20px;
-        }
-
-
-        /* =========================================
-           PRODUCT CARD
-        ========================================= */
-
-        .product-card {
-            background: #ffffff;
-
-            border: 1px solid #dce9e6;
-
-            border-radius: 16px;
-
-            overflow: hidden;
-
-            box-shadow:
-                0 5px 18px
-                rgba(20, 70, 80, 0.06);
-
-            transition:
-                transform 0.2s ease,
-                box-shadow 0.2s ease;
-        }
-
-        .product-card:hover {
-            transform: translateY(-4px);
-
-            box-shadow:
-                0 12px 28px
-                rgba(20, 70, 80, 0.12);
-        }
-
-
-        /* =========================================
-           PRODUCT IMAGE
-        ========================================= */
-
-        .product-image {
-            width: 100%;
-
-            height: 220px;
-
-            display: block;
-
-            object-fit: cover;
-
-            background: #eef5f3;
-        }
-
-
-        /* =========================================
-           BIBLE BOOK IMAGE
-           Keep the complete book visible
-        ========================================= */
-
-        .product-card.book-card
-        .product-image {
-            object-fit: contain;
-
-            padding: 8px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #f8f3ea,
-                    #eee3d2
-                );
-        }
-
-
-        /* =========================================
-           PRODUCT INFORMATION
-        ========================================= */
-
-        .product-info {
-            padding: 17px;
-        }
-
-        .product-category {
-            color: #00856b;
-
-            font-size: 11px;
-
-            font-weight: 900;
-
-            letter-spacing: 1px;
-
-            text-transform: uppercase;
-
-            margin-bottom: 8px;
-        }
-
-        .product-name {
-            color: #123c59;
-
-            font-size: 18px;
-
-            font-weight: 800;
-
-            margin-bottom: 10px;
-        }
-
-        .product-price-row {
-            display: flex;
-
-            align-items: center;
-
-            gap: 10px;
-
-            margin-bottom: 16px;
-        }
-
-        .product-price {
-            color: #087fa1;
-
-            font-size: 24px;
-
-            font-weight: 900;
-        }
-
-        .old-price {
-            color: #9aaab0;
-
-            font-size: 12px;
-
-            text-decoration: line-through;
-
-            font-weight: 700;
-        }
-
-
-        /* =========================================
-           ADD TO CART
-        ========================================= */
-
-        .add-cart-btn {
-            width: 100%;
-
-            border: none;
-
-            border-radius: 9px;
-
-            padding: 13px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #087fa1,
-                    #0b8c72
-                );
-
-            color: #ffffff;
-
-            font-size: 14px;
-
-            font-weight: 800;
-
-            cursor: pointer;
-
-            transition: 0.2s ease;
-        }
-
-        .add-cart-btn:hover {
-            background:
-                linear-gradient(
-                    90deg,
-                    #066b89,
-                    #08745f
-                );
-
-            transform: translateY(-1px);
-        }
-
-
-        /* =========================================
-           EMPTY
-        ========================================= */
-
-        .empty-products {
-            text-align: center;
-
-            padding: 50px;
-
-            color: #718792;
-
-            grid-column: 1 / -1;
-        }
-
-
-        /* =========================================
-           CONTACT POPUP
-        ========================================= */
-
-        .contact-popup {
-            position: fixed;
-
-            inset: 0;
-
-            background:
-                rgba(10, 35, 50, 0.45);
-
-            display: none;
-
-            align-items: center;
-
-            justify-content: center;
-
-            z-index: 9999;
-
-            padding: 20px;
-        }
-
-        .contact-popup.show {
-            display: flex;
-        }
-
-        .contact-box {
-            width: 100%;
-
-            max-width: 390px;
-
-            background: #ffffff;
-
-            border-radius: 18px;
-
-            padding: 28px;
-
-            position: relative;
-
-            box-shadow:
-                0 20px 50px
-                rgba(0,0,0,0.18);
-
-            text-align: center;
-        }
-
-        .contact-box h2 {
-            color: #123c59;
-
-            margin: 0 0 8px;
-        }
-
-        .contact-box p {
-            color: #718792;
-
-            margin-bottom: 20px;
-        }
-
-        .close-contact {
-            position: absolute;
-
-            right: 15px;
-
-            top: 10px;
-
-            width: 34px;
-
-            height: 34px;
-
-            border: none;
-
-            border-radius: 50%;
-
-            background: #eef5f3;
-
-            color: #123c59;
-
-            font-size: 23px;
-
-            cursor: pointer;
-        }
-
-        .contact-links {
-            display: grid;
-
-            gap: 10px;
-        }
-
-        .contact-links a {
-            display: block;
-
-            padding: 12px;
-
-            border-radius: 9px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #087fa1,
-                    #0b8c72
-                );
-
-            color: white;
-
-            text-decoration: none;
-
-            font-weight: 700;
-        }
-
-
-        /* =========================================
-           RESPONSIVE
-        ========================================= */
-
-        @media (max-width: 1100px) {
-
-            .products-grid {
-                grid-template-columns:
-                    repeat(3, minmax(0, 1fr));
-            }
-
-        }
-
-
-        @media (max-width: 800px) {
-
-            .products-grid {
-                grid-template-columns:
-                    repeat(2, minmax(0, 1fr));
-
-                gap: 14px;
-            }
-
-            .product-image {
-                height: 200px;
-            }
-
-        }
-
-
-        @media (max-width: 520px) {
-
-            .products-page {
-                padding:
-                    22px 12px 35px;
-            }
-
-            .products-heading h1 {
-                font-size: 28px;
-            }
-
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .product-image {
-                height: 250px;
-            }
-
-        }
-
-    </style>
-
 </head>
 
 
 <body>
 
 
-<!-- =========================================
-     HEADER
-========================================= -->
+<!-- =====================================================
+     SHOPNOVA HEADER
+===================================================== -->
 
 <header class="main-header">
 
     <div class="header-inner">
 
 
-        <!-- SHOPNOVA LOGO -->
+        <!-- LOGO -->
 
         <a
             href="index.html"
@@ -505,9 +73,12 @@
 
         <nav class="nav-links">
 
-            <a href="index.html">
+            <a
+                href="index.html"
+            >
                 Home
             </a>
+
 
             <a
                 href="products.html"
@@ -516,14 +87,28 @@
                 Products
             </a>
 
-            <a href="cart.html">
+
+            <a
+                href="cart.html"
+                class="cart-link"
+            >
                 Cart
-                <span id="cartCount">0</span>
+
+                <span
+                    id="cartCount"
+                >
+                    0
+                </span>
+
             </a>
 
-            <a href="checkout.html">
+
+            <a
+                href="checkout.html"
+            >
                 Checkout
             </a>
+
 
             <button
                 type="button"
@@ -541,14 +126,16 @@
 
 
 
-<!-- =========================================
-     PRODUCTS
-========================================= -->
+<!-- =====================================================
+     PRODUCTS PAGE
+===================================================== -->
 
 <main class="products-page">
 
 
-    <div class="products-heading">
+    <!-- PAGE TITLE -->
+
+    <section class="products-heading">
 
         <span>
             SHOPNOVA COLLECTION
@@ -560,26 +147,30 @@
 
         <p>
             Discover fashion, beauty, technology,
-            luxury and books.
+            luxury and lifestyle essentials.
         </p>
 
-    </div>
+    </section>
 
 
 
-    <div
+    <!-- PRODUCT GRID -->
+
+    <section
         class="products-grid"
         id="productsGrid"
-    ></div>
+    >
+
+    </section>
 
 
 </main>
 
 
 
-<!-- =========================================
+<!-- =====================================================
      CONTACT POPUP
-========================================= -->
+===================================================== -->
 
 <div
     class="contact-popup"
@@ -587,6 +178,7 @@
 >
 
     <div class="contact-box">
+
 
         <button
             type="button"
@@ -596,15 +188,19 @@
             ×
         </button>
 
+
         <h2>
             Contact ShopNova
         </h2>
+
 
         <p>
             We're happy to help you.
         </p>
 
+
         <div class="contact-links">
+
 
             <a
                 href="https://wa.me/"
@@ -614,6 +210,7 @@
                 💬 WhatsApp
             </a>
 
+
             <a
                 href="https://instagram.com/"
                 target="_blank"
@@ -621,6 +218,7 @@
             >
                 📸 Instagram
             </a>
+
 
             <a
                 href="https://youtube.com/"
@@ -630,9 +228,13 @@
                 ▶ YouTube
             </a>
 
-            <a href="mailto:support@shopnova.com">
+
+            <a
+                href="mailto:support@shopnova.com"
+            >
                 ✉ Email
             </a>
+
 
         </div>
 
@@ -642,52 +244,89 @@
 
 
 
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
 <script>
 
-/* =========================================
-   SHOPNOVA PRODUCT DATABASE
-   ========================================= */
+
+/* =====================================================
+   SHOPNOVA PRODUCTS
+
+   IMPORTANT:
+   Each product has a UNIQUE ID.
+
+   Bible Wonders is NOT included.
+   Duplicate Watch is NOT included.
+===================================================== */
+
 
 const products = [
 
+
     {
         id: 1,
-        name: "Loungewear",
+        name: "Premium Bag",
         category: "Fashion",
-        price: 1299,
-        oldPrice: 1999,
-        image: "images/loungewear.jpg"
+        price: 1499,
+        oldPrice: 2199,
+        image: "images/bag.jpg"
     },
+
 
     {
         id: 2,
-        name: "Premium Sunglasses",
-        category: "Accessories",
-        price: 1599,
-        oldPrice: 2499,
-        image: "images/sunglasses.jpg"
+        name: "Wireless Earbuds",
+        category: "Technology",
+        price: 1999,
+        oldPrice: 3499,
+        image: "images/earbuds.jpg"
     },
+
 
     {
         id: 3,
+        name: "Luxury Loungewear",
+        category: "Lifestyle",
+        price: 1299,
+        oldPrice: 1899,
+        image: "images/loungewear.jpg"
+    },
+
+
+    {
+        id: 4,
+        name: "Beauty Collection",
+        category: "Beauty",
+        price: 999,
+        oldPrice: 1599,
+        image: "images/makeup.jpg"
+    },
+
+
+    {
+        id: 5,
         name: "Men's Shoes",
-        category: "Fashion",
+        category: "Footwear",
         price: 2499,
         oldPrice: 3999,
         image: "images/mens-shoes.jpg"
     },
 
+
     {
-        id: 4,
+        id: 6,
         name: "Luxury Perfume",
-        category: "Beauty",
+        category: "Fragrance",
         price: 1799,
         oldPrice: 2699,
         image: "images/perfume.jpg"
     },
 
+
     {
-        id: 5,
+        id: 7,
         name: "Formal Suit",
         category: "Fashion",
         price: 4999,
@@ -695,8 +334,19 @@ const products = [
         image: "images/suit.jpg"
     },
 
+
     {
-        id: 6,
+        id: 8,
+        name: "Premium Sunglasses",
+        category: "Accessories",
+        price: 1599,
+        oldPrice: 2499,
+        image: "images/sunglasses.jpg"
+    },
+
+
+    {
+        id: 9,
         name: "Supercar Key",
         category: "Luxury",
         price: 2999,
@@ -704,17 +354,19 @@ const products = [
         image: "images/supercar-key.jpg"
     },
 
+
     {
-        id: 7,
+        id: 10,
         name: "Luxury Collection",
         category: "Premium",
         price: 5499,
         oldPrice: 7999,
-        image: "images/watch.jpg"
+        image: "images/luxury-banner.jpg"
     },
 
+
     {
-        id: 8,
+        id: 11,
         name: "Premium Watch",
         category: "Technology",
         price: 2999,
@@ -722,70 +374,63 @@ const products = [
         image: "images/watch.jpg"
     },
 
-    {
-        id: 9,
-        name: "Premium Handbag",
-        category: "Luxury",
-        price: 3499,
-        oldPrice: 5499,
-        image: "images/bag.jpg"
-    },
 
-    {
-        id: 10,
-        name: "Wireless Earbuds",
-        category: "Technology",
-        price: 1999,
-        oldPrice: 2999,
-        image: "images/earbuds.jpg"
-    },
+    /* =================================================
+       NEW PRODUCT
 
-    {
-        id: 11,
-        name: "Premium Makeup",
-        category: "Beauty",
-        price: 1499,
-        oldPrice: 2299,
-        image: "images/makeup.jpg"
-    },
+       WHEN YOU HAVE YOUR NEW PRODUCT IMAGE:
 
-    /* =====================================
-       NEW BOOK PRODUCT
-    ===================================== */
+       1. Put it inside:
+          docs/images/
+
+       2. Change the image filename below.
+
+       3. Change name/category/price.
+
+       DO NOT add another watch or Bible here.
+    ================================================= */
+
 
     {
         id: 12,
-        name: "Bible Wonders",
-        category: "Books",
-        price: 350,
-        oldPrice: 499,
-        image: "images/bible-wonders.png",
-        isBook: true
+        name: "New Product",
+        category: "New Collection",
+        price: 999,
+        oldPrice: 1499,
+        image: "images/new-product.jpg",
+        newProduct: true
     }
+
 
 ];
 
 
 
-/* =========================================
+/* =====================================================
    DISPLAY PRODUCTS
-   ONLY THIS FUNCTION CREATES CARDS
-========================================= */
+
+   This function clears the grid first.
+   Therefore products cannot duplicate.
+===================================================== */
+
 
 function displayProducts(productList) {
+
 
     const grid =
         document.getElementById(
             "productsGrid"
         );
 
+
     if (!grid) {
+
         return;
+
     }
 
 
-    /* Clear old cards first.
-       This prevents duplicate products. */
+    /* IMPORTANT */
 
     grid.innerHTML = "";
 
@@ -796,105 +441,193 @@ function displayProducts(productList) {
     ) {
 
         grid.innerHTML = `
-            <div class="empty-products">
-                No products found.
+
+            <div class="no-products">
+
+                <div class="no-products-icon">
+                    🔎
+                </div>
+
+                <h2>
+                    No products found
+                </h2>
+
+                <p>
+                    Try another search.
+                </p>
+
             </div>
+
         `;
 
         return;
+
     }
 
 
-    productList.forEach(function(product) {
-
-        const card =
-            document.createElement("article");
+    productList.forEach(
+        function(product) {
 
 
-        card.className =
-            "product-card";
+            const card =
+                document.createElement(
+                    "article"
+                );
 
 
-        /* Special class for the Bible book */
+            card.className =
+                "product-card";
 
-        if (product.isBook) {
-            card.classList.add("book-card");
+
+            if (
+                product.newProduct
+            ) {
+
+                card.classList.add(
+                    "new-product-card"
+                );
+
+            }
+
+
+            card.innerHTML = `
+
+                <div class="product-image-wrap">
+
+
+                    ${
+                        product.newProduct
+
+                        ?
+
+                        `
+                        <div class="new-badge">
+                            NEW
+                        </div>
+                        `
+
+                        :
+
+                        ""
+
+                    }
+
+
+                    <img
+
+                        class="product-image"
+
+                        src="${product.image}"
+
+                        alt="${product.name}"
+
+                        loading="lazy"
+
+                        onerror="
+                            this.onerror=null;
+                            this.src='images/luxury-banner.jpg';
+                        "
+
+                    >
+
+                </div>
+
+
+                <div class="product-info">
+
+
+                    <div class="product-category">
+
+                        ${product.category}
+
+                    </div>
+
+
+                    <h2 class="product-name">
+
+                        ${product.name}
+
+                    </h2>
+
+
+                    <div class="price-row">
+
+
+                        <span class="product-price">
+
+                            ₹${product.price.toLocaleString("en-IN")}
+
+                        </span>
+
+
+                        <span class="old-price">
+
+                            ₹${product.oldPrice.toLocaleString("en-IN")}
+
+                        </span>
+
+
+                    </div>
+
+
+                    <button
+
+                        type="button"
+
+                        class="add-cart-btn"
+
+                        onclick="addToCart(${product.id})"
+
+                    >
+
+                        🛒 Add to Cart
+
+                    </button>
+
+
+                </div>
+
+            `;
+
+
+            grid.appendChild(
+                card
+            );
+
+
         }
-
-
-        card.innerHTML = `
-
-            <img
-                class="product-image"
-                src="${product.image}"
-                alt="${product.name}"
-                loading="lazy"
-                onerror="
-                    this.onerror=null;
-                    this.src='images/luxury-banner.jpg';
-                "
-            >
-
-            <div class="product-info">
-
-                <div class="product-category">
-                    ${product.category}
-                </div>
-
-                <div class="product-name">
-                    ${product.name}
-                </div>
-
-                <div class="product-price-row">
-
-                    <span class="product-price">
-                        ₹${product.price.toLocaleString("en-IN")}
-                    </span>
-
-                    <span class="old-price">
-                        ₹${product.oldPrice.toLocaleString("en-IN")}
-                    </span>
-
-                </div>
-
-                <button
-                    type="button"
-                    class="add-cart-btn"
-                    onclick="addToCart(${product.id})"
-                >
-                    Add to Cart
-                </button>
-
-            </div>
-
-        `;
-
-
-        grid.appendChild(card);
-
-    });
+    );
 
 }
 
 
 
-/* =========================================
+/* =====================================================
    ADD TO CART
-========================================= */
+===================================================== */
 
-function addToCart(productId) {
+
+function addToCart(
+    productId
+) {
+
 
     const product =
-        products.find(function(item) {
+        products.find(
+            function(item) {
 
-            return Number(item.id) ===
-                   Number(productId);
+                return Number(item.id)
+                    ===
+                    Number(productId);
 
-        });
+            }
+        );
 
 
     if (!product) {
+
         return;
+
     }
 
 
@@ -907,17 +640,23 @@ function addToCart(productId) {
             JSON.parse(
                 localStorage.getItem(
                     "shopnova_cart"
-                ) || "[]"
+                )
+                ||
+                "[]"
             );
 
-    } catch (error) {
+    }
+
+    catch(error) {
 
         cart = [];
 
     }
 
 
-    if (!Array.isArray(cart)) {
+    if (
+        !Array.isArray(cart)
+    ) {
 
         cart = [];
 
@@ -925,20 +664,31 @@ function addToCart(productId) {
 
 
     const existing =
-        cart.find(function(item) {
+        cart.find(
+            function(item) {
 
-            return Number(item.id) ===
-                   Number(product.id);
+                return (
+                    Number(item.id)
+                    ===
+                    Number(product.id)
+                );
 
-        });
+            }
+        );
 
 
     if (existing) {
 
         existing.quantity =
-            Number(existing.quantity || 1) + 1;
+            Number(
+                existing.quantity || 1
+            )
+            +
+            1;
 
-    } else {
+    }
+
+    else {
 
         cart.push({
 
@@ -962,8 +712,11 @@ function addToCart(productId) {
 
 
     localStorage.setItem(
+
         "shopnova_cart",
+
         JSON.stringify(cart)
+
     );
 
 
@@ -979,11 +732,13 @@ function addToCart(productId) {
 
 
 
-/* =========================================
-   UPDATE CART COUNT
-========================================= */
+/* =====================================================
+   CART COUNT
+===================================================== */
+
 
 function updateCartCount() {
+
 
     let cart = [];
 
@@ -994,17 +749,23 @@ function updateCartCount() {
             JSON.parse(
                 localStorage.getItem(
                     "shopnova_cart"
-                ) || "[]"
+                )
+                ||
+                "[]"
             );
 
-    } catch (error) {
+    }
+
+    catch(error) {
 
         cart = [];
 
     }
 
 
-    if (!Array.isArray(cart)) {
+    if (
+        !Array.isArray(cart)
+    ) {
 
         cart = [];
 
@@ -1014,14 +775,16 @@ function updateCartCount() {
     let total = 0;
 
 
-    cart.forEach(function(item) {
+    cart.forEach(
+        function(item) {
 
-        total +=
-            Number(
-                item.quantity || 1
-            );
+            total +=
+                Number(
+                    item.quantity || 1
+                );
 
-    });
+        }
+    );
 
 
     const count =
@@ -1041,15 +804,19 @@ function updateCartCount() {
 
 
 
-/* =========================================
+/* =====================================================
    SEARCH
-========================================= */
+===================================================== */
+
 
 function searchProducts() {
 
+
     const input =
         document
-            .getElementById("searchInput")
+            .getElementById(
+                "searchInput"
+            )
             .value
             .trim()
             .toLowerCase();
@@ -1057,44 +824,55 @@ function searchProducts() {
 
     if (!input) {
 
-        displayProducts(products);
+        displayProducts(
+            products
+        );
 
         return;
+
     }
 
 
     const filtered =
-        products.filter(function(product) {
-
-            return (
-
-                product.name
-                    .toLowerCase()
-                    .includes(input)
-
-                ||
-
-                product.category
-                    .toLowerCase()
-                    .includes(input)
-
-            );
-
-        });
+        products.filter(
+            function(product) {
 
 
-    displayProducts(filtered);
+                return (
+
+                    product.name
+                        .toLowerCase()
+                        .includes(input)
+
+                    ||
+
+                    product.category
+                        .toLowerCase()
+                        .includes(input)
+
+                );
+
+            }
+        );
+
+
+    displayProducts(
+        filtered
+    );
 
 }
 
 
 
-/* =========================================
+/* =====================================================
    SEARCH BUTTON
-========================================= */
+===================================================== */
+
 
 document
-    .getElementById("searchButton")
+    .getElementById(
+        "searchButton"
+    )
     .addEventListener(
         "click",
         searchProducts
@@ -1102,18 +880,23 @@ document
 
 
 
-/* =========================================
+/* =====================================================
    ENTER KEY SEARCH
-========================================= */
+===================================================== */
+
 
 document
-    .getElementById("searchInput")
+    .getElementById(
+        "searchInput"
+    )
     .addEventListener(
         "keydown",
         function(event) {
 
+
             if (
-                event.key === "Enter"
+                event.key ===
+                "Enter"
             ) {
 
                 searchProducts();
@@ -1125,19 +908,22 @@ document
 
 
 
-/* =========================================
+/* =====================================================
    CONTACT POPUP
-========================================= */
+===================================================== */
+
 
 const contactPopup =
     document.getElementById(
         "contactPopup"
     );
 
+
 const contactButton =
     document.getElementById(
         "contactButton"
     );
+
 
 const closeContact =
     document.getElementById(
@@ -1173,6 +959,7 @@ contactPopup.addEventListener(
     "click",
     function(event) {
 
+
         if (
             event.target ===
             contactPopup
@@ -1189,15 +976,22 @@ contactPopup.addEventListener(
 
 
 
-/* =========================================
-   INITIAL PAGE LOAD
-========================================= */
+/* =====================================================
+   INITIAL LOAD
+===================================================== */
 
-displayProducts(products);
+
+displayProducts(
+    products
+);
+
 
 updateCartCount();
 
+
 </script>
 
+
 </body>
+
 </html>
