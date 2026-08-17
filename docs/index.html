@@ -20,19 +20,15 @@
     <div class="header-inner">
 
         <!-- SHOPNOVA LOGO -->
-
         <a href="index.html" class="brand-logo">
-
             <img
-                src="images/ShopNova Dove Shopping Logo.png"
+                src="images/shopnova-logo.png"
                 alt="ShopNova Logo"
             >
-
         </a>
 
 
-        <!-- SEARCH -->
-
+        <!-- SEARCH BAR -->
         <div class="search-box">
 
             <input
@@ -54,7 +50,6 @@
 
 
         <!-- NAVIGATION -->
-
         <nav class="nav-links">
 
             <a
@@ -104,7 +99,6 @@
 
 
         <!-- LEFT SIDE -->
-
         <div class="hero-content">
 
             <div class="welcome-badge">
@@ -115,10 +109,7 @@
             <h1>
                 Shop Smart.
                 <br>
-
-                <span>
-                    Live Better.
-                </span>
+                <span>Live Better.</span>
             </h1>
 
 
@@ -153,15 +144,13 @@
 
         <!-- =================================================
              CENTER LOGO
-
-             KEEP THIS EXACTLY.
-             DO NOT CHANGE.
+             SAME SHOPNOVA LOGO
         ================================================== -->
 
         <div class="center-logo-area">
 
             <img
-                src="images/ShopNova Dove Shopping Logo.png"
+                src="images/shopnova-logo.png"
                 alt="ShopNova"
                 class="center-logo"
             >
@@ -187,15 +176,8 @@
         </div>
 
         <div>
-
-            <h3>
-                Fast Delivery
-            </h3>
-
-            <p>
-                Reliable doorstep delivery
-            </p>
-
+            <h3>Fast Delivery</h3>
+            <p>Reliable doorstep delivery</p>
         </div>
 
     </div>
@@ -208,15 +190,8 @@
         </div>
 
         <div>
-
-            <h3>
-                Secure Shopping
-            </h3>
-
-            <p>
-                Safe and simple experience
-            </p>
-
+            <h3>Secure Shopping</h3>
+            <p>Safe and simple experience</p>
         </div>
 
     </div>
@@ -229,15 +204,8 @@
         </div>
 
         <div>
-
-            <h3>
-                Premium Quality
-            </h3>
-
-            <p>
-                Products you can trust
-            </p>
-
+            <h3>Premium Quality</h3>
+            <p>Products you can trust</p>
         </div>
 
     </div>
@@ -250,15 +218,8 @@
         </div>
 
         <div>
-
-            <h3>
-                Customer Support
-            </h3>
-
-            <p>
-                We're here to help
-            </p>
-
+            <h3>Customer Support</h3>
+            <p>We're here to help</p>
         </div>
 
     </div>
@@ -301,9 +262,7 @@
                 👕
             </div>
 
-            <h3>
-                Fashion
-            </h3>
+            <h3>Fashion</h3>
 
             <p>
                 Modern styles
@@ -321,9 +280,7 @@
                 💻
             </div>
 
-            <h3>
-                Technology
-            </h3>
+            <h3>Technology</h3>
 
             <p>
                 Smart essentials
@@ -341,9 +298,7 @@
                 ✨
             </div>
 
-            <h3>
-                Beauty
-            </h3>
+            <h3>Beauty</h3>
 
             <p>
                 Premium collection
@@ -361,9 +316,7 @@
                 ⌚
             </div>
 
-            <h3>
-                Lifestyle
-            </h3>
+            <h3>Lifestyle</h3>
 
             <p>
                 Everyday essentials
@@ -384,9 +337,7 @@
 
     <div>
 
-        <span>
-            SHOPNOVA
-        </span>
+        <span>SHOPNOVA</span>
 
         <h2>
             Find something you love today.
@@ -435,7 +386,6 @@
         <h2>
             Contact ShopNova
         </h2>
-
 
         <p>
             We're happy to help you.
@@ -489,8 +439,8 @@
 <footer class="footer">
 
     <img
-        src="images/ShopNova Dove Shopping Logo.png"
-        alt="ShopNova"
+        src="images/shopnova-logo.png"
+        alt="ShopNova Logo"
     >
 
     <p>
@@ -510,9 +460,9 @@
 
 <script>
 
-/* =========================================
+/* =====================================================
    CART COUNT
-========================================= */
+===================================================== */
 
 function updateCartCount() {
 
@@ -560,17 +510,17 @@ function updateCartCount() {
 }
 
 
-/* =========================================
+/* =====================================================
    SEARCH
-========================================= */
+===================================================== */
 
 function searchProducts() {
 
     const input =
         document
-        .getElementById("searchInput")
-        .value
-        .trim();
+            .getElementById("searchInput")
+            .value
+            .trim();
 
 
     if (input === "") {
@@ -590,12 +540,12 @@ function searchProducts() {
 }
 
 
-/* ENTER KEY SEARCH */
+/* =====================================================
+   ENTER TO SEARCH
+===================================================== */
 
 const searchInput =
-    document.getElementById(
-        "searchInput"
-    );
+    document.getElementById("searchInput");
 
 
 if (searchInput) {
@@ -604,9 +554,7 @@ if (searchInput) {
         "keydown",
         function(event) {
 
-            if (
-                event.key === "Enter"
-            ) {
+            if (event.key === "Enter") {
 
                 searchProducts();
 
@@ -618,9 +566,9 @@ if (searchInput) {
 }
 
 
-/* =========================================
-   CONTACT
-========================================= */
+/* =====================================================
+   CONTACT POPUP
+===================================================== */
 
 function openContact() {
 
@@ -632,9 +580,7 @@ function openContact() {
 
     if (popup) {
 
-        popup.classList.add(
-            "show"
-        );
+        popup.classList.add("show");
 
     }
 
@@ -651,18 +597,16 @@ function closeContact() {
 
     if (popup) {
 
-        popup.classList.remove(
-            "show"
-        );
+        popup.classList.remove("show");
 
     }
 
 }
 
 
-/* =========================================
-   CLOSE CONTACT WHEN CLICKING OUTSIDE
-========================================= */
+/* =====================================================
+   CLICK OUTSIDE CONTACT
+===================================================== */
 
 const contactPopup =
     document.getElementById(
@@ -676,9 +620,7 @@ if (contactPopup) {
         "click",
         function(event) {
 
-            if (
-                event.target === this
-            ) {
+            if (event.target === this) {
 
                 closeContact();
 
@@ -690,9 +632,9 @@ if (contactPopup) {
 }
 
 
-/* =========================================
+/* =====================================================
    START
-========================================= */
+===================================================== */
 
 updateCartCount();
 
