@@ -4,85 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ShopNova | Premium Shopping</title>
+    <title>ShopNova | Shop Smart • Live Better</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
-<header class="header">
+<!-- ================= HEADER ================= -->
+<header class="main-header">
 
     <div class="header-inner">
 
-        <!-- EXISTING TOP LOGO - DO NOT CHANGE -->
-        <a href="index.html" class="logo-area">
-
-            <img
-                src="images/dove.png"
-                alt="ShopNova"
-                class="top-logo"
-            >
-
-            <div class="logo-text">
-                <strong>
-                    <span class="shop">Shop</span><span class="nova">Nova</span>
-                </strong>
-
-                <small>Premium Shopping</small>
-            </div>
-
+        <!-- LOGO -->
+        <a href="index.html" class="brand-logo">
+            <img src="images/shopnova-dove.png"
+                 alt="ShopNova"
+                 onerror="this.style.display='none';">
         </a>
-
 
         <!-- SEARCH -->
         <div class="search-box">
-
             <input
-                type="search"
+                type="text"
                 id="searchInput"
                 placeholder="Search products..."
-                autocomplete="off"
             >
-
-            <button
-                type="button"
-                onclick="performSearch()"
-                aria-label="Search"
-            >
-                🔍
-            </button>
-
+            <button onclick="searchProducts()">🔍</button>
         </div>
 
-
         <!-- NAVIGATION -->
-        <nav class="main-nav">
+        <nav class="nav-links">
 
-            <a href="index.html" class="nav-link active">
-                🏠 <span>Home</span>
+            <a href="index.html" class="active">
+                Home
             </a>
 
-            <a href="products.html" class="nav-link">
-                🛍️ <span>Products</span>
+            <a href="products.html">
+                Products
             </a>
 
-            <a href="cart.html" class="nav-link">
-                🛒 <span>Cart</span>
-                <b id="cartCount" class="cart-count">0</b>
+            <a href="cart.html">
+                Cart
+                <span id="cartCount">0</span>
             </a>
 
-            <a href="checkout.html" class="nav-link">
-                💳 <span>Checkout</span>
+            <a href="checkout.html">
+                Checkout
             </a>
 
-            <a href="#contact" class="contact-button">
+            <button class="contact-btn" onclick="openContact()">
                 Contact
-            </a>
+            </button>
 
         </nav>
 
@@ -91,92 +64,60 @@
 </header>
 
 
-<!-- =====================================================
-     TOP INFORMATION STRIP
-===================================================== -->
-
-<div class="top-strip">
-
-    <span>✦ Premium Products</span>
-    <span>✦ Secure Shopping</span>
-    <span>✦ Fast Delivery</span>
-    <span>✦ Great Offers</span>
-
-</div>
-
-
-<!-- =====================================================
-     HOME HERO
-===================================================== -->
-
+<!-- ================= HERO ================= -->
 <main>
 
 <section class="hero">
 
-    <!-- LEFT SIDE -->
     <div class="hero-content">
 
-        <div class="hero-badge">
-            ✦ WELCOME TO SHOPNOVA
-        </div>
+        <div class="hero-text">
 
-        <h1>
-            Shop Smart.
-            <span>Live Better.</span>
-        </h1>
+            <span class="small-title">
+                SHOPNOVA COLLECTIONS
+            </span>
 
-        <p>
-            Discover premium fashion, technology,
-            accessories and lifestyle products —
-            carefully selected for you.
-        </p>
+            <h1>
+                Shop Smart.<br>
+                <span>Live Better.</span>
+            </h1>
 
+            <p>
+                Discover quality products, modern essentials,
+                fashion and premium lifestyle collections —
+                all in one place.
+            </p>
 
-        <div class="hero-buttons">
+            <div class="hero-buttons">
 
-            <a
-                href="products.html"
-                class="primary-button"
-            >
-                Explore Products →
-            </a>
+                <a href="products.html" class="primary-btn">
+                    Explore Products →
+                </a>
 
-            <a
-                href="#contact"
-                class="secondary-button"
-            >
-                Contact Us
-            </a>
+                <a href="cart.html" class="secondary-btn">
+                    View Cart
+                </a>
+
+            </div>
 
         </div>
 
-    </div>
 
+        <!-- CENTER / LOGO CARD -->
+        <div class="hero-logo-area">
 
-    <!-- =================================================
-         CENTER/RIGHT DOVE ANIMATION
-         
-         THIS IS THE NEW IMAGE ONLY.
-         TOP LOGO IS NOT CHANGED.
-    ================================================= -->
+            <div class="logo-glow"></div>
 
-    <div
-        class="hero-dove-container"
-        id="heroDoveContainer"
-        title="Touch the dove"
-    >
+            <div class="logo-card">
 
-        <div class="dove-glow"></div>
+                <img
+                    src="images/shopnova-dove.png"
+                    alt="ShopNova Dove Logo"
+                    class="hero-logo"
+                >
 
-        <img
-            src="images/shopnova-dove.png"
-            alt="ShopNova Dove"
-            class="hero-dove"
-            id="heroDove"
-        >
+            </div>
 
-        <div class="dove-hint">
-            🕊️ Touch the dove
         </div>
 
     </div>
@@ -184,96 +125,77 @@
 </section>
 
 
-<!-- =====================================================
-     CATEGORIES
-===================================================== -->
+<!-- ================= BENEFITS ================= -->
+<section class="benefits">
 
-<section class="categories-section">
-
-    <div class="section-heading">
-
+    <div class="benefit">
+        <div class="benefit-icon">🚚</div>
         <div>
-            <span>SHOP WITH EASE</span>
-            <h2>Explore Categories</h2>
+            <h3>Fast Delivery</h3>
+            <p>Reliable doorstep delivery</p>
         </div>
-
-        <a
-            href="products.html"
-            class="view-all"
-        >
-            View All →
-        </a>
-
     </div>
 
+    <div class="benefit">
+        <div class="benefit-icon">🛡️</div>
+        <div>
+            <h3>Secure Shopping</h3>
+            <p>Safe and simple experience</p>
+        </div>
+    </div>
+
+    <div class="benefit">
+        <div class="benefit-icon">⭐</div>
+        <div>
+            <h3>Premium Quality</h3>
+            <p>Products you can trust</p>
+        </div>
+    </div>
+
+    <div class="benefit">
+        <div class="benefit-icon">💬</div>
+        <div>
+            <h3>Customer Support</h3>
+            <p>We're here to help</p>
+        </div>
+    </div>
+
+</section>
+
+
+<!-- ================= SIMPLE CATEGORY SECTION ================= -->
+<section class="categories">
+
+    <div class="section-heading">
+        <span>SHOPNOVA</span>
+        <h2>Everything You Need</h2>
+        <p>Quality products for everyday life.</p>
+    </div>
 
     <div class="category-grid">
 
-        <a
-            href="products.html"
-            class="category-card"
-        >
-
-            <div class="category-icon fashion-icon">
-                👕
-            </div>
-
-            <div>
-                <h3>Fashion</h3>
-                <p>Modern styles</p>
-            </div>
-
+        <a href="products.html" class="category-card">
+            <div class="category-icon">👕</div>
+            <h3>Fashion</h3>
+            <p>Modern styles</p>
         </a>
 
-
-        <a
-            href="products.html"
-            class="category-card"
-        >
-
-            <div class="category-icon tech-icon">
-                💻
-            </div>
-
-            <div>
-                <h3>Technology</h3>
-                <p>Smart devices</p>
-            </div>
-
+        <a href="products.html" class="category-card">
+            <div class="category-icon">💻</div>
+            <h3>Technology</h3>
+            <p>Smart essentials</p>
         </a>
 
-
-        <a
-            href="products.html"
-            class="category-card"
-        >
-
-            <div class="category-icon beauty-icon">
-                ✨
-            </div>
-
-            <div>
-                <h3>Beauty</h3>
-                <p>Premium care</p>
-            </div>
-
+        <a href="products.html" class="category-card">
+            <div class="category-icon">✨</div>
+            <h3>Beauty</h3>
+            <p>Premium collection</p>
         </a>
 
-
-        <a
-            href="products.html"
-            class="category-card"
-        >
-
-            <div class="category-icon accessories-icon">
-                👜
-            </div>
-
-            <div>
-                <h3>Accessories</h3>
-                <p>Complete your look</p>
-            </div>
-
+        <a href="products.html" class="category-card">
+            <div class="category-icon">⌚</div>
+            <h3>Lifestyle</h3>
+            <p>Everyday luxury</p>
         </a>
 
     </div>
@@ -281,307 +203,163 @@
 </section>
 
 
-<!-- =====================================================
-     BENEFITS
-===================================================== -->
+<!-- ================= CTA ================= -->
+<section class="cta-section">
 
-<section class="benefits-section">
-
-    <div class="benefit">
-
-        <div class="benefit-icon">
-            🚚
-        </div>
-
-        <div>
-            <h3>Fast Delivery</h3>
-            <p>Quick and reliable delivery</p>
-        </div>
-
-    </div>
-
-
-    <div class="benefit">
-
-        <div class="benefit-icon">
-            🔒
-        </div>
-
-        <div>
-            <h3>Secure Shopping</h3>
-            <p>Safe shopping experience</p>
-        </div>
-
-    </div>
-
-
-    <div class="benefit">
-
-        <div class="benefit-icon">
-            ⭐
-        </div>
-
-        <div>
-            <h3>Premium Quality</h3>
-            <p>Products selected with care</p>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     CONTACT
-===================================================== -->
-
-<section
-    class="contact-section"
-    id="contact"
->
-
-    <div class="contact-content">
-
-        <span>NEED HELP?</span>
+    <div>
+        <span>SHOPNOVA</span>
 
         <h2>
-            We're here for you.
+            Find something you love today.
         </h2>
 
         <p>
-            Have a question about products, orders
-            or shopping? Contact ShopNova anytime.
+            Browse our latest collection and discover
+            something made for you.
         </p>
-
     </div>
 
-
-    <div class="contact-actions">
-
-        <a
-            href="mailto:shopnova@example.com"
-            class="contact-action"
-        >
-            ✉ Email
-        </a>
-
-        <a
-            href="https://wa.me/"
-            class="contact-action"
-        >
-            💬 WhatsApp
-        </a>
-
-        <a
-            href="products.html"
-            class="contact-action filled"
-        >
-            🛍 Shop Now
-        </a>
-
-    </div>
+    <a href="products.html" class="cta-btn">
+        Browse Products →
+    </a>
 
 </section>
 
 </main>
 
 
-<!-- =====================================================
-     FOOTER
-===================================================== -->
+<!-- ================= CONTACT POPUP ================= -->
+<div id="contactPopup" class="contact-popup">
 
-<footer class="footer">
+    <div class="contact-box">
 
-    <div class="footer-inner">
+        <button class="close-contact"
+                onclick="closeContact()">
+            ×
+        </button>
 
-        <div class="footer-brand">
+        <h2>Contact ShopNova</h2>
 
-            <img
-                src="images/dove.png"
-                alt="ShopNova"
-                class="footer-logo"
-            >
+        <p>We're happy to help you.</p>
 
-            <div>
+        <div class="contact-options">
 
-                <strong>
-                    <span class="shop">Shop</span><span class="nova">Nova</span>
-                </strong>
+            <a href="https://wa.me/"
+               target="_blank">
+                💬 WhatsApp
+            </a>
 
-                <p>
-                    Premium shopping made simple.
-                </p>
+            <a href="https://instagram.com/"
+               target="_blank">
+                📸 Instagram
+            </a>
 
-            </div>
+            <a href="https://youtube.com/"
+               target="_blank">
+                ▶ YouTube
+            </a>
 
-        </div>
-
-
-        <div class="footer-links">
-
-            <a href="index.html">Home</a>
-            <a href="products.html">Products</a>
-            <a href="cart.html">Cart</a>
-            <a href="checkout.html">Checkout</a>
+            <a href="mailto:support@shopnova.com">
+                ✉ Email
+            </a>
 
         </div>
-
-
-        <p class="copyright">
-            © 2026 ShopNova. All Rights Reserved.
-        </p>
 
     </div>
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+
+    <img
+        src="images/shopnova-dove.png"
+        alt="ShopNova"
+        class="footer-logo"
+    >
+
+    <p>
+        Shop Smart • Live Better
+    </p>
+
+    <p class="copyright">
+        © 2026 ShopNova. All rights reserved.
+    </p>
 
 </footer>
 
 
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
-
 <script>
 
-/* =====================================================
-   DOVE CLICK / TOUCH ANIMATION
-===================================================== */
+function updateCartCount() {
 
-const heroDove =
-    document.getElementById("heroDove");
+    const cart =
+        JSON.parse(
+            localStorage.getItem("shopnova_cart") || "[]"
+        );
+
+    let count = 0;
+
+    cart.forEach(item => {
+        count += Number(item.quantity || 1);
+    });
+
+    const cartCount =
+        document.getElementById("cartCount");
+
+    if (cartCount) {
+        cartCount.textContent = count;
+    }
+}
 
 
-if (heroDove) {
+function searchProducts() {
 
-    heroDove.addEventListener(
-        "click",
-        function () {
+    const input =
+        document.getElementById("searchInput").value.trim();
 
-            this.classList.remove("dove-flying");
+    if (!input) {
+        window.location.href = "products.html";
+        return;
+    }
 
-            /* Restart animation */
-            void this.offsetWidth;
+    window.location.href =
+        "products.html?search=" +
+        encodeURIComponent(input);
+}
 
-            this.classList.add("dove-flying");
 
-        }
-    );
+function openContact() {
+
+    document
+        .getElementById("contactPopup")
+        .classList.add("show");
 
 }
 
 
-/* =====================================================
-   CART COUNT
-===================================================== */
+function closeContact() {
 
-function updateCartCount() {
+    document
+        .getElementById("contactPopup")
+        .classList.remove("show");
 
-    let cart = [];
-
-    try {
-
-        cart =
-            JSON.parse(
-                localStorage.getItem("shopnova_cart")
-            ) || [];
-
-    } catch (error) {
-
-        cart = [];
-
-    }
+}
 
 
-    const count =
-        document.getElementById("cartCount");
+document
+    .getElementById("searchInput")
+    .addEventListener("keydown", function(event) {
 
-
-    if (!count) {
-        return;
-    }
-
-
-    let total = 0;
-
-
-    cart.forEach(function(item) {
-
-        if (item.quantity) {
-
-            total += Number(item.quantity);
-
-        } else {
-
-            total++;
-
+        if (event.key === "Enter") {
+            searchProducts();
         }
 
     });
 
 
-    count.textContent = total;
-
-}
-
-
 updateCartCount();
-
-
-/* =====================================================
-   SEARCH
-===================================================== */
-
-const searchInput =
-    document.getElementById("searchInput");
-
-
-if (searchInput) {
-
-    searchInput.addEventListener(
-        "keydown",
-        function(event) {
-
-            if (event.key === "Enter") {
-
-                performSearch();
-
-            }
-
-        }
-    );
-
-}
-
-
-function performSearch() {
-
-    const input =
-        document.getElementById("searchInput");
-
-
-    if (!input) {
-        return;
-    }
-
-
-    const search =
-        input.value.trim();
-
-
-    if (!search) {
-
-        window.location.href =
-            "products.html";
-
-        return;
-
-    }
-
-
-    window.location.href =
-        "products.html?search=" +
-        encodeURIComponent(search);
-
-}
 
 </script>
 
