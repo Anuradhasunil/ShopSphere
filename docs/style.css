@@ -1,108 +1,350 @@
-/* Base styles for the product showcase container grid */
-.products-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
+/* ==========================================
+   GLOBAL STYLES & RESET 
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f7f9fc;
+    color: #333333;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* ==========================================
+   GLOBAL NAVBAR COMPONENT 
+   ========================================== */
+.main-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ffffff;
+    padding: 15px 5%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.main-navbar .nav-logo .mini-logo {
+    height: 45px;
+    width: auto;
+    display: block;
+}
+
+.search-bar-container {
+    display: flex;
+    align-items: center;
+    background: #f1f3f6;
+    border: 1px solid #e0e0e0;
+    border-radius: 30px;
+    padding: 5px 15px;
+    width: 35%;
+}
+
+.search-input {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    padding: 6px;
+    font-size: 14px;
+}
+
+.search-btn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: #555555;
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: #0066cc;
+}
+
+.cart-link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.cart-count {
+    background: #ff3333;
+    color: white;
+    font-size: 12px;
+    padding: 2px 7px;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+.btn-contact {
+    background: #0d1b2a;
+    color: #ffffff !important;
+    padding: 8px 18px;
+    border-radius: 6px;
+}
+
+.btn-contact:hover {
+    background: #1b263b;
+}
+
+/* ==========================================
+   HOMEPAGE LAYOUT ELEMENTS
+   ========================================== */
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 8%;
+    min-height: calc(100vh - 80px);
+    gap: 40px;
+}
+
+.hero-left-content {
+    flex: 1;
+    max-width: 550px;
+}
+
+.welcome-badge {
+    display: inline-block;
+    background: #e6f0fa;
+    color: #0066cc;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.hero-main-heading {
+    font-size: 52px;
+    font-weight: 800;
+    line-height: 1.15;
+    color: #0d1b2a;
+    margin-bottom: 20px;
+}
+
+.blue-text {
+    color: #00a896;
+}
+
+.hero-subtext {
+    font-size: 16px;
+    color: #666666;
+    line-height: 1.6;
+    margin-bottom: 35px;
+}
+
+.hero-cta-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-primary {
+    background: #0066cc;
+    color: white;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.2);
+    transition: background 0.2s;
+}
+
+.btn-primary:hover {
+    background: #004b93;
+}
+
+.btn-secondary {
+    background: #ffffff;
+    color: #333333;
+    border: 1px solid #dcdcdc;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.btn-secondary:hover {
+    background: #f1f3f6;
+}
+
+.hero-right-graphic {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.graphic-card-frame {
+    background: #ffffff;
+    border-radius: 24px;
     padding: 40px;
-    max-width: 1200px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Fixes Homepage Brand Logo scaling */
+.hero-logo-img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
+
+/* ==========================================
+   PRODUCTS DISPLAY GRID MODULE
+   ========================================== */
+.products-page-layout {
+    padding: 50px 5%;
+    max-width: 1300px;
     margin: 0 auto;
 }
 
-/* Elegant, uniform product card */
-.card {
+.section-title {
+    font-size: 26px;
+    color: #0d1b2a;
+    margin-bottom: 35px;
+    font-weight: 700;
+}
+
+.shopnova-product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+}
+
+.product-card-item {
     background: #ffffff;
+    border: 1px solid #eef2f5;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 16px;
     display: flex;
     flex-direction: column;
-    padding: 15px;
-    border: 1px solid #eeeeee;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.card:hover {
+.product-card-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
 }
 
-/* Image container ensuring no bottom-cropping */
-.card .Img {
+/* Standardized product thumbnail wrappers */
+.product-image-wrapper {
     width: 100%;
-    height: 280px; /* Fixed height for visual consistency across different images */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #fafafa;
+    height: 260px;
+    background-color: #fafbfc;
     border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     overflow: hidden;
+    padding: 10px;
 }
 
-/* Keeps the 3D book fully visible without cutting off any text/portrait */
-.card .Img img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain; 
+/* Ensures book cover or item displays cleanly with no vertical clipping */
+.product-card-img {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+    display: block;
 }
 
-/* Text details panel */
-.card .info {
-    padding-top: 15px;
+.product-info-panel {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    padding-top: 15px;
 }
 
-.card .cat {
+.product-meta-cat {
     font-size: 11px;
-    text-transform: uppercase;
-    color: #0066cc; /* ShopNova theme blue accent */
-    font-weight: bold;
-    letter-spacing: 1px;
-    margin-bottom: 5px;
+    color: #0066cc;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
 }
 
-.card .title {
-    font-size: 18px;
-    font-weight: 600;
+.product-main-title {
+    font-size: 16px;
     color: #333333;
-    margin: 0 0 10px 0;
+    font-weight: 600;
+    margin-bottom: 10px;
+    line-height: 1.4;
 }
 
-.card .price {
+.product-price-row {
     margin-bottom: 15px;
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.card .current-price {
-    font-size: 20px;
-    font-weight: bold;
+.product-new-price {
+    font-size: 18px;
+    font-weight: 700;
     color: #222222;
 }
 
-.card .old {
-    font-size: 14px;
+.product-old-price {
     text-decoration: line-through;
-    color: #888888;
+    color: #a0a0a0;
+    font-size: 13px;
 }
 
-/* ShopNova themed dynamic action button */
-.card .btn {
-    width: 100%;
+.product-add-btn {
     background: #0066cc;
     color: white;
     border: none;
     padding: 12px;
     border-radius: 6px;
-    font-size: 15px;
-    font-weight: bold;
+    font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s ease;
-    margin-top: auto; /* Pushes button perfectly to the card bottom */
+    width: 100%;
+    transition: background 0.15s;
+    margin-top: auto;
 }
 
-.card .btn:hover {
-    background: #004499;
+.product-add-btn:hover {
+    background: #004b93;
+}
+
+/* Responsive breakpoint formatting adjustments */
+@media (max-width: 768px) {
+    .hero-section {
+        flex-direction: column;
+        padding: 40px 5%;
+        text-align: center;
+    }
+    .hero-cta-buttons {
+        justify-content: center;
+    }
+    .search-bar-container {
+        display: none; /* Hide wide search bar for clean mobile navbars */
+    }
 }

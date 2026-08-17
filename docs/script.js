@@ -1,16 +1,14 @@
-// Dynamic Shopping Cart Storage Engine
+// Synchronized Local Storage Shopping Cart Processor
 function add(name, price, imgUrl) {
-    // 1. Retrieve the existing cart array from browser storage, or initialize an empty array if blank
+    // 1. Fetch active data registry arrays
     let cart = JSON.parse(localStorage.getItem('shopnova_cart')) || [];
 
-    // 2. Scan to see if this specific product metadata already exists in user's cart registry
+    // 2. Validate if target item exists inside current instance
     let existingItem = cart.find(item => item.productName === name);
 
     if (existingItem) {
-        // If it is already there, increment the stack count
         existingItem.quantity += 1;
     } else {
-        // Create an entirely new item dictionary mapping object parameters
         let newItem = {
             productName: name,
             productPrice: Number(price),
@@ -20,27 +18,26 @@ function add(name, price, imgUrl) {
         cart.push(newItem);
     }
 
-    // 3. Save updated collection map adjustments safely back into local device session storage
+    // 3. Stringify payload back to browser memory
     localStorage.setItem('shopnova_cart', JSON.stringify(cart));
 
-    // 4. Fire an elegant non-blocking system alert panel updating checkout counts
-    alert(`🎉 Successfully added "${name}" to your shopping basket!`);
+    // 4. Alert user safely
+    alert(`🎉 Added "${name}" to your cart!`);
     
-    // Optional: Call a function to refresh any total count badges visible in your header navigation bars
+    // 5. Instantly force sync navbar counter indicators
     updateNavCartCount();
 }
 
-// Automatically counts total items in cart to display inside header icons
+// Counts up overall inventory totals across site locations
 function updateNavCartCount() {
     let cart = JSON.parse(localStorage.getItem('shopnova_cart')) || [];
     let totalItems = cart.reduce((total, item) => total + item.quantity, 0);
     
-    // Looks for your navbar span counter elements
-    let cartBadge = document.querySelector('.navbar .cart-count'); 
+    let cartBadge = document.querySelector('.cart-count'); 
     if (cartBadge) {
         cartBadge.innerText = totalItems;
     }
 }
 
-// Initialize count lookups automatically whenever pages load
+// Bind counting lookup actions to clear whenever document registers ready
 document.addEventListener('DOMContentLoaded', updateNavCartCount);

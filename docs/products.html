@@ -3,39 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopnova Ecommerce - Products</title>
+    <title>ShopNova - Our Products</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Product Showcase Container Grid -->
-    <div class="products-container">
-
-        <!-- Card Item: Bible Wonders Book -->
-        <div class="card">
-            <div class="Img">
-                <img src="images/bible-wonders.jpg" alt="Bible Wonders Book">
-            </div>
-            
-            <div class="info">
-                <div class="cat">BOOKS</div>
-                
-                <h3 class="title">Bible Wonders</h3>
-                
-                <div class="price">
-                    <span class="current-price">₹350</span>
-                    <span class="old">₹499</span>
-                </div>
-                
-                <button class="btn" onclick="add('Bible Wonders', 350, 'images/bible-wonders.jpg')">
-                    🛒 Add to Cart
-                </button>
-            </div>
+    <!-- Global Navigation Header -->
+    <header class="main-navbar">
+        <div class="nav-logo">
+            <img src="images/shopnova-logo.png" alt="ShopNova Logo" class="mini-logo">
         </div>
+        <div class="search-bar-container">
+            <input type="text" placeholder="Search products..." class="search-input">
+            <button class="search-btn">🔍</button>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="products.html" class="active">Products</a>
+            <a href="cart.html" class="cart-link">Cart <span class="cart-count">0</span></a>
+            <a href="checkout.html">Checkout</a>
+            <a href="contact.html" class="btn-contact">Contact</a>
+        </nav>
+    </header>
 
-        <!-- Tip: Duplicate the entire <div class="card"> block below this line to add your other inventory items like bag.jpg, earbuds.jpg, suit.jpg, etc. -->
+    <!-- Products Section Grid Window -->
+    <main class="products-page-layout">
+        <h2 class="section-title">Explore Our Premium Collection</h2>
+        
+        <div class="shopnova-product-grid">
+            
+            <!-- Card Item 1: Bible Wonders Book Mockup -->
+            <div class="product-card-item">
+                <div class="product-image-wrapper">
+                    <img src="images/bible-wonders.jpg" alt="Bible Wonders Book" class="product-card-img">
+                </div>
+                <div class="product-info-panel">
+                    <div class="product-meta-cat">BOOKS</div>
+                    <h3 class="product-main-title">Bible Wonders</h3>
+                    <div class="product-price-row">
+                        <span class="product-new-price">₹350</span>
+                        <span class="product-old-price">₹499</span>
+                    </div>
+                    <button class="product-add-btn" onclick="add('Bible Wonders', 350, 'images/bible-wonders.jpg')">
+                        🛒 Add to Cart
+                    </button>
+                </div>
+            </div>
 
-    </div>
+            <!-- Card Item 2: Premium Travel Bag -->
+            <div class="product-card-item">
+                <div class="product-image-wrapper">
+                    <img src="images/bag.jpg" alt="Premium Bag" class="product-card-img">
+                </div>
+                <div class="product-info-panel">
+                    <div class="product-meta-cat">ACCESSORIES</div>
+                    <h3 class="product-main-title">Premium Travel Bag</h3>
+                    <div class="product-price-row">
+                        <span class="product-new-price">₹1,250</span>
+                        <span class="product-old-price">₹1,999</span>
+                    </div>
+                    <button class="product-add-btn" onclick="add('Premium Travel Bag', 1250, 'images/bag.jpg')">
+                        🛒 Add to Cart
+                    </button>
+                </div>
+            </div>
 
+            <!-- Card Item 3: Wireless Earbuds -->
+            <div class="product-card-item">
+                <div class="product-image-wrapper">
+                    <img src="images/earbuds.jpg" alt="Wireless Earbuds" class="product-card-img">
+                </div>
+                <div class="product-info-panel">
+                    <div class="product-meta-cat">ELECTRONICS</div>
+                    <h3 class="product-main-title">Wireless Earbuds</h3>
+                    <div class="product-price-row">
+                        <span class="product-new-price">₹1,499</span>
+                        <span class="product-old-price">₹2,499</span>
+                    </div>
+                    <button class="product-add-btn" onclick="add('Wireless Earbuds', 1499, 'images/earbuds.jpg')">
+                        🛒 Add to Cart
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="script.js"></script>
 </body>
 </html>
