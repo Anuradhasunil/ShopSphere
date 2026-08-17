@@ -1,761 +1,686 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
+    <title>ShopNova | Products</title>
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
 
-<title>ShopNova Products</title>
+    <style>
+        /* =========================================
+           PRODUCTS PAGE
+        ========================================= */
 
-<link rel="stylesheet"
-      href="style.css">
+        .products-page {
+            width: 100%;
+            min-height: 100vh;
+            padding: 30px 4%;
+            background:
+                linear-gradient(
+                    180deg,
+                    #f8fcfb,
+                    #eef8f5
+                );
+        }
 
-<style>
+        .products-heading {
+            text-align: center;
+            margin-bottom: 25px;
+        }
 
-.products-page {
-    width: min(1250px, 94%);
-    margin: auto;
-    padding: 35px 0 60px;
-}
+        .products-heading span {
+            display: block;
+            color: #087f68;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 7px;
+        }
 
-.products-heading {
-    text-align: center;
-    margin-bottom: 30px;
-}
+        .products-heading h1 {
+            color: #143b58;
+            font-size: 34px;
+            margin-bottom: 7px;
+        }
 
-.products-heading span {
-    color: #07875f;
-    font-size: 12px;
-    font-weight: 900;
-    letter-spacing: 2px;
-}
+        .products-heading p {
+            color: #708895;
+            font-size: 14px;
+        }
 
-.products-heading h1 {
-    color: #123c55;
-    font-size: 38px;
-    margin: 7px 0;
-}
+        .products-grid {
+            width: 100%;
+            max-width: 1250px;
+            margin: 0 auto;
 
-.products-heading p {
-    color: #718893;
-}
+            display: grid;
 
-.products-grid {
-    display: grid;
-    grid-template-columns:
-        repeat(4, 1fr);
-    gap: 20px;
-}
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
 
-.product-card {
-    background: white;
-    border: 1px solid #dcebe7;
-    border-radius: 17px;
-    overflow: hidden;
-    box-shadow:
-        0 8px 25px rgba(15,70,75,0.07);
-    transition: 0.25s;
-}
+            gap: 20px;
+        }
 
-.product-card:hover {
-    transform: translateY(-5px);
-    box-shadow:
-        0 15px 35px rgba(15,70,75,0.12);
-}
+        .product-card {
+            background: #ffffff;
 
-.product-image {
-    width: 100%;
-    height: 220px;
-    background: #eef6f5;
-    display: block;
-    object-fit: cover;
-}
+            border:
+                1px solid #dce9e6;
 
-.product-info {
-    padding: 18px;
-}
+            border-radius: 16px;
 
-.product-category {
-    color: #07875f;
-    font-size: 11px;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
+            overflow: hidden;
 
-.product-name {
-    color: #123c55;
-    font-size: 18px;
-    margin: 7px 0;
-}
+            box-shadow:
+                0 5px 18px
+                rgba(20, 70, 80, 0.06);
 
-.product-price {
-    color: #08789a;
-    font-size: 22px;
-    font-weight: 900;
-}
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease;
+        }
 
-.old-price {
-    color: #94a3a8;
-    font-size: 12px;
-    text-decoration: line-through;
-    margin-left: 5px;
-}
+        .product-card:hover {
+            transform: translateY(-4px);
 
-.add-cart {
-    width: 100%;
-    border: none;
-    border-radius: 9px;
-    padding: 11px;
-    margin-top: 12px;
-    background:
-        linear-gradient(
-            135deg,
-            #087ca0,
-            #118b65
-        );
-    color: white;
-    font-weight: 800;
-    cursor: pointer;
-}
+            box-shadow:
+                0 12px 28px
+                rgba(20, 70, 80, 0.12);
+        }
 
-.add-cart:hover {
-    opacity: 0.9;
-}
+        .product-image {
+            width: 100%;
+            height: 220px;
 
-.products-logo {
-    width: 150px;
-    height: 55px;
-    object-fit: contain;
-}
+            display: block;
 
-.products-header {
-    min-height: 74px;
-    padding: 8px 3%;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    background: white;
-    border-bottom: 1px solid #dbe9e6;
-    box-shadow: 0 4px 18px rgba(12,73,72,0.08);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
+            object-fit: cover;
 
-.products-header nav {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-}
+            background: #eef5f3;
+        }
 
-.products-header nav a {
-    text-decoration: none;
-    color: #28485b;
-    font-weight: 700;
-    padding: 9px 12px;
-    border-radius: 8px;
-}
+        .product-info {
+            padding: 17px;
+        }
 
-.products-header nav a:hover,
-.products-header nav a.active {
-    color: #087e68;
-    background: #e8f7f1;
-}
+        .product-category {
+            color: #00856b;
 
-.products-contact {
-    background:
-        linear-gradient(
-            135deg,
-            #08779a,
-            #11895f
-        ) !important;
-    color: white !important;
-}
+            font-size: 11px;
 
-.cart-number {
-    background: #11966c;
-    color: white;
-    border-radius: 20px;
-    padding: 2px 6px;
-    font-size: 11px;
-}
+            font-weight: 900;
 
-.products-footer {
-    background: #0d3348;
-    color: #d5e5e8;
-    text-align: center;
-    padding: 25px;
-}
+            letter-spacing: 1px;
 
-@media(max-width:1000px) {
-    .products-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-}
+            text-transform: uppercase;
 
-@media(max-width:600px) {
+            margin-bottom: 8px;
+        }
 
-    .products-header {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
+        .product-name {
+            color: #123c59;
 
-    .products-header nav {
-        width: 100%;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
+            font-size: 18px;
 
-    .products-grid {
-        grid-template-columns: 1fr;
-    }
+            font-weight: 800;
 
-    .products-heading h1 {
-        font-size: 30px;
-    }
-}
+            margin-bottom: 10px;
+        }
 
-</style>
+        .product-price-row {
+            display: flex;
 
+            align-items: center;
+
+            gap: 10px;
+
+            margin-bottom: 16px;
+        }
+
+        .product-price {
+            color: #087fa1;
+
+            font-size: 24px;
+
+            font-weight: 900;
+        }
+
+        .old-price {
+            color: #9aaab0;
+
+            font-size: 12px;
+
+            text-decoration: line-through;
+
+            font-weight: 700;
+        }
+
+        .add-cart-btn {
+            width: 100%;
+
+            border: none;
+
+            border-radius: 9px;
+
+            padding: 13px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #087fa1,
+                    #0b8c72
+                );
+
+            color: #ffffff;
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition: .2s ease;
+        }
+
+        .add-cart-btn:hover {
+            background:
+                linear-gradient(
+                    90deg,
+                    #066b89,
+                    #08745f
+                );
+        }
+
+        .empty-products {
+            text-align: center;
+
+            padding: 50px;
+
+            color: #718792;
+
+            grid-column: 1 / -1;
+        }
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 1100px) {
+
+            .products-grid {
+                grid-template-columns:
+                    repeat(3, minmax(0, 1fr));
+            }
+
+        }
+
+        @media (max-width: 800px) {
+
+            .products-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+                gap: 14px;
+            }
+
+            .product-image {
+                height: 190px;
+            }
+
+        }
+
+        @media (max-width: 520px) {
+
+            .products-page {
+                padding: 22px 12px;
+            }
+
+            .products-heading h1 {
+                font-size: 28px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-image {
+                height: 220px;
+            }
+
+        }
+    </style>
 </head>
-
 
 <body>
 
+<!-- =========================================
+     HEADER
+========================================= -->
 
-<header class="products-header">
+<header class="main-header">
 
-<a href="index.html">
-<img
-    src="images/shopnova-dove.png"
-    alt="ShopNova"
-    class="products-logo">
-</a>
+    <div class="header-inner">
 
-<nav>
+        <!-- LOGO -->
+        <a
+            href="index.html"
+            class="brand-logo"
+        >
+            <img
+                src="images/shopnova-logo.png"
+                alt="ShopNova Logo"
+                onerror="this.onerror=null;this.src='images/logo.png';"
+            >
+        </a>
 
-<a href="index.html">
-Home
-</a>
 
-<a href="products.html"
-   class="active">
-Products
-</a>
+        <!-- SEARCH -->
+        <div class="search-box">
 
-<a href="cart.html">
-Cart
-<span class="cart-number"
-      id="cartCount">
-0
-</span>
-</a>
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search products..."
+                autocomplete="off"
+            >
 
-<a href="checkout.html">
-Checkout
-</a>
+            <button
+                type="button"
+                onclick="searchProducts()"
+            >
+                🔍
+            </button>
 
-<a href="index.html"
-   class="products-contact">
-Contact
-</a>
+        </div>
 
-</nav>
+
+        <!-- NAVIGATION -->
+        <nav class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a
+                href="products.html"
+                class="active"
+            >
+                Products
+            </a>
+
+            <a href="cart.html">
+                Cart
+                <span id="cartCount">0</span>
+            </a>
+
+            <a href="checkout.html">
+                Checkout
+            </a>
+
+            <button
+                type="button"
+                class="contact-btn"
+                onclick="openContact()"
+            >
+                Contact
+            </button>
+
+        </nav>
+
+    </div>
 
 </header>
 
 
+<!-- =========================================
+     PRODUCTS
+========================================= -->
+
 <main class="products-page">
 
-<div class="products-heading">
+    <div class="products-heading">
 
-<span>SHOPNOVA COLLECTION</span>
+        <span>
+            SHOPNOVA COLLECTION
+        </span>
 
-<h1>Premium Products</h1>
+        <h1>
+            Premium Products
+        </h1>
 
-<p>
-Quality fashion, technology, beauty and lifestyle products.
-</p>
+        <p>
+            Discover fashion, beauty, technology and
+            luxury essentials.
+        </p>
 
-</div>
+    </div>
 
 
-<div class="products-grid">
-
-
-<!-- BAG -->
-
-<div class="product-card">
-
-<img
-src="images/bag.jpg"
-alt="Premium Bag"
-class="product-image">
-
-<div class="product-info">
-
-<div class="product-category">
-Fashion
-</div>
-
-<h2 class="product-name">
-Premium Bag
-</h2>
-
-<div class="product-price">
-₹1,499
-<span class="old-price">
-₹2,199
-</span>
-</div>
-
-<button
-class="add-cart"
-onclick="addToCart(
-'Premium Bag',
-1499,
-'images/bag.jpg'
-)">
-Add to Cart
-</button>
-
-</div>
-</div>
-
-
-<!-- EARBUDS -->
-
-<div class="product-card">
-
-<img
-src="images/earbuds.jpg"
-alt="Wireless Earbuds"
-class="product-image">
-
-<div class="product-info">
-
-<div class="product-category">
-Technology
-</div>
-
-<h2 class="product-name">
-Wireless Earbuds
-</h2>
-
-<div class="product-price">
-₹1,999
-<span class="old-price">
-₹3,499
-</span>
-</div>
-
-<button
-class="add-cart"
-onclick="addToCart(
-'Wireless Earbuds',
-1999,
-'images/earbuds.jpg'
-)">
-Add to Cart
-</button>
-
-</div>
-</div>
-
-
-<!-- LOUNGEWEAR -->
-
-<div class="product-card">
-
-<img
-src="images/loungewear.jpg"
-alt="Luxury Loungewear"
-class="product-image">
-
-<div class="product-info">
-
-<div class="product-category">
-Lifestyle
-</div>
-
-<h2 class="product-name">
-Luxury Loungewear
-</h2>
-
-<div class="product-price">
-₹1,299
-<span class="old-price">
-₹1,899
-</span>
-</div>
-
-<button
-class="add-cart"
-onclick="addToCart(
-'Luxury Loungewear',
-1299,
-'images/loungewear.jpg'
-)">
-Add to Cart
-</button>
-
-</div>
-</div>
-
-
-<!-- MAKEUP -->
-
-<div class="product-card">
-
-<img
-src="images/makeup.jpg"
-alt="Beauty Collection"
-class="product-image">
-
-<div class="product-info">
-
-<div class="product-category">
-Beauty
-</div>
-
-<h2 class="product-name">
-Beauty Collection
-</h2>
-
-<div class="product-price">
-₹999
-<span class="old-price">
-₹1,599
-</span>
-</div>
-
-<button
-class="add-cart"
-onclick="addToCart(
-'Beauty Collection',
-999,
-'images/makeup.jpg'
-)">
-Add to Cart
-</button>
-
-</div>
-</div>
-
-
-<!-- SHOES -->
-
-<div class="product-card">
-
-<img
-src="images/mens-shoes.jpg"
-alt="Men's Shoes"
-class="product-image">
-
-<div class="product-info">
-
-<div class="product-category">
-Fashion
-</div>
-
-<h2 class="product-name">
-Men's Shoes
-</h2>
-
-<div class="product-price">
-₹2,499
-<span class="old-price">
-₹3,999
-</span>
-</div>
-
-<button
-class="add-cart"
-onclick="addToCart(
-'Men Shoes',
-2499,
-'images/mens-shoes.jpg'
-)">
-Add to Cart
-</button>
-
-</div>
-</div>
-
-
-<!-- PERFUME -->
-
-<div class="product-card">
-
-<img
-src="images/perfume.jpg"
-alt="Luxury Perfume"
-class="product-image">
-
-<div class="product-info">
-
-<div class="product-category">
-Beauty
-</div>
-
-<h2 class="product-name">
-Luxury Perfume
-</h2>
-
-<div class="product-price">
-₹1,799
-<span class="old-price">
-₹2,699
-</span>
-</div>
-
-<button
-class="add-cart"
-onclick="addToCart(
-'Luxury Perfume',
-1799,
-'images/perfume.jpg'
-)">
-Add to Cart
-</button>
-
-</div>
-</div>
-
-
-<!-- SUIT -->
-
-<div class="product-card">
-
-<img
-src="images/suit.jpg"
-alt="Formal Suit"
-class="product-image">
-
-<div class="product-info">
-
-<div class="product-category">
-Fashion
-</div>
-
-<h2 class="product-name">
-Formal Suit
-</h2>
-
-<div class="product-price">
-₹4,999
-<span class="old-price">
-₹7,499
-</span>
-</div>
-
-<button
-class="add-cart"
-onclick="addToCart(
-'Formal Suit',
-4999,
-'images/suit.jpg'
-)">
-Add to Cart
-</button>
-
-</div>
-</div>
-
-
-<!-- SUNGLASSES -->
-
-<div class="product-card">
-
-<img
-src="images/sunglasses.jpg"
-alt="Premium Sunglasses"
-class="product-image">
-
-<div class="product-info">
-
-<div class="product-category">
-Accessories
-</div>
-
-<h2 class="product-name">
-Premium Sunglasses
-</h2>
-
-<div class="product-price">
-₹1,599
-<span class="old-price">
-₹2,499
-</span>
-</div>
-
-<button
-class="add-cart"
-onclick="addToCart(
-'Premium Sunglasses',
-1599,
-'images/sunglasses.jpg'
-)">
-Add to Cart
-</button>
-
-</div>
-</div>
-
-
-<!-- SUPERCAR -->
-
-<div class="product-card">
-
-<img
-src="images/supercar-key.jpg"
-alt="Supercar Key"
-class="product-image">
-
-<div class="product-info">
-
-<div class="product-category">
-Luxury
-</div>
-
-<h2 class="product-name">
-Supercar Key
-</h2>
-
-<div class="product-price">
-₹2,999
-<span class="old-price">
-₹4,499
-</span>
-</div>
-
-<button
-class="add-cart"
-onclick="addToCart(
-'Supercar Key',
-2999,
-'images/supercar-key.jpg'
-)">
-Add to Cart
-</button>
-
-</div>
-</div>
-
-
-<!-- LUXURY -->
-
-<div class="product-card">
-
-<img
-src="images/luxury-banner.jpg"
-alt="Luxury Collection"
-class="product-image">
-
-<div class="product-info">
-
-<div class="product-category">
-Premium
-</div>
-
-<h2 class="product-name">
-Luxury Collection
-</h2>
-
-<div class="product-price">
-₹5,499
-<span class="old-price">
-₹7,999
-</span>
-</div>
-
-<button
-class="add-cart"
-onclick="addToCart(
-'Luxury Collection',
-5499,
-'images/luxury-banner.jpg'
-)">
-Add to Cart
-</button>
-
-</div>
-</div>
-
-
-<!-- WATCH FIX -->
-
-<div class="product-card">
-
-<img
-src="images/watch.jpg"
-alt="Premium Watch"
-class="product-image"
-onerror="this.src='images/luxury-banner.jpg';">
-
-<div class="product-info">
-
-<div class="product-category">
-Technology
-</div>
-
-<h2 class="product-name">
-Premium Watch
-</h2>
-
-<div class="product-price">
-₹2,999
-<span class="old-price">
-₹4,999
-</span>
-</div>
-
-<button
-class="add-cart"
-onclick="addToCart(
-'Premium Watch',
-2999,
-'images/watch.jpg'
-)">
-Add to Cart
-</button>
-
-</div>
-</div>
-
-
-</div>
+    <div
+        class="products-grid"
+        id="productsGrid"
+    ></div>
 
 </main>
 
 
-<footer class="products-footer">
+<!-- =========================================
+     CONTACT POPUP
+========================================= -->
 
-© 2026 ShopNova • Shop Smart • Live Better
+<div
+    id="contactPopup"
+    class="contact-popup"
+>
 
-</footer>
+    <div class="contact-box">
 
+        <button
+            type="button"
+            class="close-contact"
+            onclick="closeContact()"
+        >
+            ×
+        </button>
+
+        <h2>
+            Contact ShopNova
+        </h2>
+
+        <p>
+            We're happy to help you.
+        </p>
+
+        <div class="contact-links">
+
+            <a
+                href="https://wa.me/"
+                target="_blank"
+                rel="noopener"
+            >
+                💬 WhatsApp
+            </a>
+
+            <a
+                href="https://instagram.com/"
+                target="_blank"
+                rel="noopener"
+            >
+                📸 Instagram
+            </a>
+
+            <a
+                href="https://youtube.com/"
+                target="_blank"
+                rel="noopener"
+            >
+                ▶ YouTube
+            </a>
+
+            <a href="mailto:support@shopnova.com">
+                ✉ Email
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     JAVASCRIPT
+========================================= -->
 
 <script>
 
-function addToCart(name, price, image) {
+/* =========================================
+   UNIQUE SHOPNOVA PRODUCTS
+========================================= */
 
-    let cart =
-        JSON.parse(
-            localStorage.getItem("shopnova_cart")
-            || "[]"
+const products = [
+
+    {
+        id: 1,
+        name: "Loungewear",
+        category: "Fashion",
+        price: 1299,
+        oldPrice: 1999,
+        image: "images/loungewear.jpg"
+    },
+
+    {
+        id: 2,
+        name: "Premium Sunglasses",
+        category: "Accessories",
+        price: 1599,
+        oldPrice: 2499,
+        image: "images/sunglasses.jpg"
+    },
+
+    {
+        id: 3,
+        name: "Men's Shoes",
+        category: "Fashion",
+        price: 2499,
+        oldPrice: 3999,
+        image: "images/mens-shoes.jpg"
+    },
+
+    {
+        id: 4,
+        name: "Luxury Perfume",
+        category: "Beauty",
+        price: 1799,
+        oldPrice: 2699,
+        image: "images/perfume.jpg"
+    },
+
+    {
+        id: 5,
+        name: "Formal Suit",
+        category: "Fashion",
+        price: 4999,
+        oldPrice: 7499,
+        image: "images/suit.jpg"
+    },
+
+    {
+        id: 6,
+        name: "Supercar Key",
+        category: "Luxury",
+        price: 2999,
+        oldPrice: 4499,
+        image: "images/supercar-key.jpg"
+    },
+
+    {
+        id: 7,
+        name: "Premium Watch",
+        category: "Technology",
+        price: 2999,
+        oldPrice: 4999,
+        image: "images/watch.jpg"
+    },
+
+    {
+        id: 8,
+        name: "Premium Handbag",
+        category: "Luxury",
+        price: 3499,
+        oldPrice: 5499,
+        image: "images/bag.jpg"
+    },
+
+    {
+        id: 9,
+        name: "Wireless Earbuds",
+        category: "Technology",
+        price: 1999,
+        oldPrice: 2999,
+        image: "images/earbuds.jpg"
+    },
+
+    {
+        id: 10,
+        name: "Premium Makeup",
+        category: "Beauty",
+        price: 1499,
+        oldPrice: 2299,
+        image: "images/makeup.jpg"
+    }
+
+];
+
+
+/* =========================================
+   RENDER PRODUCTS
+   ONLY ONE TIME
+========================================= */
+
+function displayProducts(list) {
+
+    const grid =
+        document.getElementById(
+            "productsGrid"
         );
+
+    if (!grid) return;
+
+
+    grid.innerHTML = "";
+
+
+    if (
+        !list ||
+        list.length === 0
+    ) {
+
+        grid.innerHTML = `
+            <div class="empty-products">
+                No products found.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    list.forEach(function(product) {
+
+        const card =
+            document.createElement("article");
+
+
+        card.className =
+            "product-card";
+
+
+        card.innerHTML = `
+
+            <img
+                class="product-image"
+                src="${product.image}"
+                alt="${product.name}"
+                loading="lazy"
+                onerror="
+                    this.onerror=null;
+                    this.src='images/luxury-banner.jpg';
+                "
+            >
+
+            <div class="product-info">
+
+                <div class="product-category">
+                    ${product.category}
+                </div>
+
+                <div class="product-name">
+                    ${product.name}
+                </div>
+
+                <div class="product-price-row">
+
+                    <span class="product-price">
+                        ₹${product.price.toLocaleString("en-IN")}
+                    </span>
+
+                    <span class="old-price">
+                        ₹${product.oldPrice.toLocaleString("en-IN")}
+                    </span>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="add-cart-btn"
+                    onclick="addToCart(${product.id})"
+                >
+                    Add to Cart
+                </button>
+
+            </div>
+        `;
+
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* =========================================
+   ADD TO CART
+========================================= */
+
+function addToCart(id) {
+
+    const product =
+        products.find(
+            item => item.id === id
+        );
+
+
+    if (!product) return;
+
+
+    let cart = [];
+
+
+    try {
+
+        cart =
+            JSON.parse(
+                localStorage.getItem(
+                    "shopnova_cart"
+                ) || "[]"
+            );
+
+    } catch (error) {
+
+        cart = [];
+
+    }
+
+
+    if (!Array.isArray(cart)) {
+
+        cart = [];
+
+    }
+
 
     const existing =
         cart.find(
-            item => item.name === name
+            item =>
+                Number(item.id) ===
+                Number(product.id)
         );
+
 
     if (existing) {
 
@@ -766,11 +691,17 @@ function addToCart(name, price, image) {
 
         cart.push({
 
-            name: name,
+            id: product.id,
 
-            price: price,
+            name: product.name,
 
-            image: image,
+            category: product.category,
+
+            price: product.price,
+
+            oldPrice: product.oldPrice,
+
+            image: product.image,
 
             quantity: 1
 
@@ -778,46 +709,188 @@ function addToCart(name, price, image) {
 
     }
 
+
     localStorage.setItem(
         "shopnova_cart",
         JSON.stringify(cart)
     );
 
+
     updateCartCount();
 
-    alert(name + " added to cart!");
+
+    alert(
+        product.name +
+        " added to cart!"
+    );
 
 }
 
+
+/* =========================================
+   CART COUNT
+========================================= */
 
 function updateCartCount() {
 
-    const cart =
-        JSON.parse(
-            localStorage.getItem("shopnova_cart")
-            || "[]"
-        );
+    let cart = [];
+
+
+    try {
+
+        cart =
+            JSON.parse(
+                localStorage.getItem(
+                    "shopnova_cart"
+                ) || "[]"
+            );
+
+    } catch (error) {
+
+        cart = [];
+
+    }
+
 
     let total = 0;
 
-    cart.forEach(item => {
 
-        total +=
-            Number(item.quantity || 1);
+    if (Array.isArray(cart)) {
 
-    });
+        cart.forEach(function(item) {
 
-    document.getElementById(
-        "cartCount"
-    ).textContent = total;
+            total +=
+                Number(
+                    item.quantity || 1
+                );
+
+        });
+
+    }
+
+
+    const count =
+        document.getElementById(
+            "cartCount"
+        );
+
+
+    if (count) {
+
+        count.textContent =
+            total;
+
+    }
 
 }
 
+
+/* =========================================
+   SEARCH
+========================================= */
+
+function searchProducts() {
+
+    const input =
+        document
+            .getElementById("searchInput")
+            .value
+            .trim()
+            .toLowerCase();
+
+
+    if (!input) {
+
+        displayProducts(products);
+
+        return;
+
+    }
+
+
+    const filtered =
+        products.filter(function(product) {
+
+            return (
+
+                product.name
+                    .toLowerCase()
+                    .includes(input)
+
+                ||
+
+                product.category
+                    .toLowerCase()
+                    .includes(input)
+
+            );
+
+        });
+
+
+    displayProducts(filtered);
+
+}
+
+
+/* =========================================
+   ENTER SEARCH
+========================================= */
+
+document
+    .getElementById("searchInput")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key ===
+                "Enter"
+            ) {
+
+                searchProducts();
+
+            }
+
+        }
+    );
+
+
+/* =========================================
+   CONTACT
+========================================= */
+
+function openContact() {
+
+    document
+        .getElementById(
+            "contactPopup"
+        )
+        .classList.add("show");
+
+}
+
+
+function closeContact() {
+
+    document
+        .getElementById(
+            "contactPopup"
+        )
+        .classList.remove("show");
+
+}
+
+
+/* =========================================
+   START PAGE
+========================================= */
+
+displayProducts(products);
 
 updateCartCount();
 
 </script>
 
 </body>
-
 </html>
