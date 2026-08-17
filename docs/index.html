@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ShopNova | Shop Smart. Live Better.</title>
+    <title>ShopNova | Shop Smart • Live Better</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -12,34 +12,31 @@
 <body>
 
 <!-- ================= HEADER ================= -->
-<header class="site-header">
+<header class="navbar">
 
-    <a href="index.html" class="brand">
+    <a href="index.html" class="logo-link">
         <img
             src="images/shopnova-logo.png"
+            class="site-logo"
             alt="ShopNova Logo"
-            class="top-logo"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
         >
+
+        <span class="logo-fallback">
+            Shop<span>Nova</span>
+        </span>
     </a>
 
     <div class="search-box">
         <input
             type="text"
-            id="searchInput"
+            id="headerSearch"
             placeholder="Search products..."
-            autocomplete="off"
         >
-
-        <button
-            type="button"
-            id="searchBtn"
-            aria-label="Search"
-        >
-            🔍
-        </button>
+        <button onclick="searchProducts()">🔍</button>
     </div>
 
-    <nav class="main-nav">
+    <nav class="nav-links">
 
         <a href="index.html" class="active">
             Home
@@ -50,17 +47,16 @@
         </a>
 
         <a href="cart.html">
-            Cart
-            <span id="cartCount">0</span>
+            Cart <span class="cart-count" id="cartCount">0</span>
         </a>
 
         <a href="checkout.html">
             Checkout
         </a>
 
-        <a href="#contact" class="contact-btn">
+        <button class="contact-btn" onclick="openContact()">
             Contact
-        </a>
+        </button>
 
     </nav>
 
@@ -72,7 +68,7 @@
 
 <section class="home-hero">
 
-    <div class="hero-content">
+    <div class="hero-left">
 
         <div class="welcome-badge">
             ✨ Welcome to ShopNova
@@ -80,6 +76,7 @@
 
         <h1>
             Shop Smart.
+            <br>
             <span>Live Better.</span>
         </h1>
 
@@ -90,17 +87,11 @@
 
         <div class="hero-buttons">
 
-            <a
-                href="products.html"
-                class="primary-btn"
-            >
+            <a href="products.html" class="primary-btn">
                 Start Shopping →
             </a>
 
-            <a
-                href="cart.html"
-                class="secondary-btn"
-            >
+            <a href="cart.html" class="secondary-btn">
                 View Cart 🛒
             </a>
 
@@ -109,56 +100,60 @@
     </div>
 
 
-    <!-- ================= CENTER DOVE ================= -->
-    <div class="hero-image-box">
+    <!-- ================= CENTER LOGO ================= -->
+    <div class="hero-right">
 
-        <img
-            src="images/dove-center.png"
-            alt="ShopNova Dove with Olive Leaves"
-            class="center-dove"
-        >
+        <div class="center-logo-box">
+
+            <img
+                src="images/shopnova-logo.png"
+                alt="ShopNova Logo"
+                class="center-logo"
+                onerror="this.style.display='none'; document.getElementById('centerLogoFallback').style.display='block';"
+            >
+
+            <div id="centerLogoFallback" class="center-logo-fallback">
+                <strong>Shop<span>Nova</span></strong>
+                <small>Shop Smart • Live Better</small>
+            </div>
+
+        </div>
 
     </div>
 
 </section>
 
 
-<!-- ================= BENEFITS ================= -->
-<section class="benefits">
+<!-- ================= FEATURES ================= -->
 
-    <div class="benefit">
-        <div class="benefit-icon">🚚</div>
+<section class="features">
 
+    <div class="feature">
+        <div class="feature-icon">🚚</div>
         <div>
             <strong>Fast Delivery</strong>
             <small>Reliable doorstep delivery</small>
         </div>
     </div>
 
-
-    <div class="benefit">
-        <div class="benefit-icon">🛡️</div>
-
+    <div class="feature">
+        <div class="feature-icon">🛡️</div>
         <div>
             <strong>Secure Shopping</strong>
             <small>Safe and simple experience</small>
         </div>
     </div>
 
-
-    <div class="benefit">
-        <div class="benefit-icon">⭐</div>
-
+    <div class="feature">
+        <div class="feature-icon">⭐</div>
         <div>
             <strong>Premium Quality</strong>
             <small>Products you can trust</small>
         </div>
     </div>
 
-
-    <div class="benefit">
-        <div class="benefit-icon">💬</div>
-
+    <div class="feature">
+        <div class="feature-icon">💬</div>
         <div>
             <strong>Customer Support</strong>
             <small>We're here to help</small>
@@ -168,105 +163,81 @@
 </section>
 
 
-<!-- ================= COLLECTIONS ================= -->
-<section class="collections">
+<!-- ================= SIMPLE INTRO ================= -->
 
-    <div class="section-heading">
-
-        <span>SHOPNOVA COLLECTIONS</span>
-
-        <h2>
-            Everything you need.
-            <br>
-            All in one place.
-        </h2>
-
-        <p>
-            Explore fashion, technology, beauty, lifestyle and
-            premium products selected for you.
-        </p>
-
-    </div>
-
-
-    <div class="collection-grid">
-
-        <a href="products.html" class="collection-card">
-            <span>01</span>
-            <strong>Fashion</strong>
-            <small>Style & essentials</small>
-        </a>
-
-        <a href="products.html" class="collection-card">
-            <span>02</span>
-            <strong>Technology</strong>
-            <small>Smart everyday gear</small>
-        </a>
-
-        <a href="products.html" class="collection-card">
-            <span>03</span>
-            <strong>Beauty</strong>
-            <small>Premium collections</small>
-        </a>
-
-        <a href="products.html" class="collection-card">
-            <span>04</span>
-            <strong>Luxury</strong>
-            <small>Special selections</small>
-        </a>
-
-    </div>
-
-</section>
-
-
-<!-- ================= CONTACT ================= -->
-<section id="contact" class="contact-section">
+<section class="intro-section">
 
     <div>
-        <span class="contact-label">
-            NEED HELP?
+        <span class="section-label">
+            SHOPNOVA COLLECTIONS
         </span>
 
         <h2>
-            We're here for you.
+            Quality products.
+            <br>
+            Better shopping.
         </h2>
 
         <p>
-            Contact ShopNova for product questions, orders and support.
+            Explore fashion, beauty, technology, luxury products
+            and our new Bible Wonders collection.
         </p>
-    </div>
 
-    <a
-        href="mailto:shopnova@example.com"
-        class="primary-btn"
-    >
-        Contact ShopNova →
-    </a>
+        <a href="products.html" class="browse-btn">
+            Browse Products →
+        </a>
+    </div>
 
 </section>
 
 </main>
 
 
-<!-- ================= FOOTER ================= -->
-<footer class="site-footer">
+<!-- ================= CONTACT POPUP ================= -->
 
-    <div class="footer-logo">
+<div id="contactPopup" class="contact-popup">
 
-        <img
-            src="images/shopnova-logo.png"
-            alt="ShopNova"
-        >
+    <div class="contact-box">
+
+        <button class="close-contact" onclick="closeContact()">
+            ×
+        </button>
+
+        <h3>Connect With Us</h3>
+
+        <a href="#" onclick="return false;">
+            📱 WhatsApp
+        </a>
+
+        <a href="#" onclick="return false;">
+            📸 Instagram
+        </a>
+
+        <a href="#" onclick="return false;">
+            ▶️ YouTube
+        </a>
+
+        <a href="mailto:shopnova@example.com">
+            ✉️ Email
+        </a>
 
     </div>
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <strong>ShopNova</strong>
 
     <p>
         Shop Smart • Live Better
     </p>
 
     <p>
-        © 2026 ShopNova • All Rights Reserved
+        © 2026 ShopNova
     </p>
 
 </footer>

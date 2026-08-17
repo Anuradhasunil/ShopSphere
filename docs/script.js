@@ -1,30 +1,23 @@
-/* =========================================================
-   SHOPNOVA - COMPLETE JAVASCRIPT
-   ========================================================= */
-
-"use strict";
+/* =====================================================
+   SHOPNOVA MAIN JAVASCRIPT
+   ===================================================== */
 
 
-/* =========================================================
-   CART STORAGE
-   ========================================================= */
+/* ================= CART STORAGE ================= */
 
 const CART_KEY = "shopnova_cart";
 
+
+/* ================= GET CART ================= */
 
 function getCart() {
 
     try {
 
-        const savedCart =
-            localStorage.getItem(CART_KEY);
-
-        if (!savedCart) {
-            return [];
-        }
-
         const cart =
-            JSON.parse(savedCart);
+            JSON.parse(
+                localStorage.getItem(CART_KEY)
+            );
 
         return Array.isArray(cart)
             ? cart
@@ -32,15 +25,16 @@ function getCart() {
 
     } catch (error) {
 
-        console.error(
-            "ShopNova cart error:",
-            error
-        );
+        console.error("Cart read error:", error);
 
         return [];
+
     }
+
 }
 
+
+/* ================= SAVE CART ================= */
 
 function saveCart(cart) {
 
@@ -52,61 +46,44 @@ function saveCart(cart) {
 }
 
 
-/* =========================================================
-   CART COUNT
-   ========================================================= */
+/* ================= UPDATE CART COUNT ================= */
 
 function updateCartCount() {
 
-    const cartCount =
-        document.getElementById("cartCount");
+    const cart = getCart();
 
-    if (!cartCount) {
-        return;
-    }
+    const total = cart.reduce(
+        (sum, item) =>
+            sum + Number(item.quantity || 1),
+        0
+    );
 
-    const cart =
-        getCart();
+    document
+        .querySelectorAll(".cart-count")
+        .forEach(element => {
 
-    let totalQuantity = 0;
+            element.textContent = total;
 
-    cart.forEach(item => {
+        });
 
-        const quantity =
-            Number(item.quantity) || 0;
-
-        totalQuantity += quantity;
-
-    });
-
-    cartCount.textContent =
-        totalQuantity;
 }
 
 
-/* =========================================================
-   ADD TO CART
-   ========================================================= */
+/* ================= ADD TO CART ================= */
 
-function addToCart(
-    name,
-    price,
-    image
-) {
+function addToCart(name, price, image) {
 
-    const cart =
-        getCart();
+    let cart = getCart();
 
     const existing =
         cart.find(
             item => item.name === name
         );
 
-
     if (existing) {
 
         existing.quantity =
-            (Number(existing.quantity) || 0) + 1;
+            Number(existing.quantity || 1) + 1;
 
     } else {
 
@@ -124,255 +101,181 @@ function addToCart(
 
     }
 
+    saveCart(cart);
+
+    updateCartCount();
+
+    showAddedMessage(name);
+
+}
+
+
+/* ================= SUCCESS MESSAGE ================= */
+
+function showAddedMessage(name) {
+
+    const old =
+        document.querySelector(".cart-message");
+
+    if (old) {
+        old.remove();
+    }
+
+    const message =
+        document.createElement("div");
+
+    message.className = "cart-message";
+
+    message.textContent =
+        name + " added to cart!";
+
+    message.style.position = "fixed";
+    message.style.right = "20px";
+    message.style.bottom = "20px";
+    message.style.zIndex = "9999";
+    message.style.padding = "14px 20px";
+    message.style.background = "#078b79";
+    message.style.color = "#ffffff";
+    message.style.borderRadius = "10px";
+    message.style.fontWeight = "700";
+    message.style.boxShadow =
+        "0 8px 25px rgba(0,0,0,.2)";
+
+    document.body.appendChild(message);
+
+    setTimeout(() => {
+
+        message.remove();
+
+    }, 2200);
+
+}
+
+
+/* ================= REMOVE FROM CART ================= */
+
+function removeFromCart(name) {
+
+    let cart = getCart();
+
+    cart =
+        cart.filter(
+            item => item.name !== name
+        );
 
     saveCart(cart);
 
     updateCartCount();
 
-
-    /*
-       Small confirmation without
-       breaking the page.
-    */
-
-    showToast(
-        `${name} added to cart`
-    );
 }
 
 
-/* =========================================================
-   PRODUCT BUTTONS
-   ========================================================= */
+/* ================= CHANGE QUANTITY ================= */
 
-function setupProductButtons() {
+function changeQuantity(name, amount) {
 
-    const buttons =
-        document.querySelectorAll(
-            ".add-cart-btn"
+    const cart = getCart();
+
+    const item =
+        cart.find(
+            product => product.name === name
         );
 
+    if (!item) {
+        return;
+    }
 
-    buttons.forEach(button => {
+    item.quantity =
+        Number(item.quantity || 1) + amount;
 
-        button.addEventListener(
-            "click",
-            function () {
+    if (item.quantity <= 0) {
 
-                const name =
-                    this.dataset.name;
+        removeFromCart(name);
 
-                const price =
-                    Number(
-                        this.dataset.price
-                    );
+        return;
 
-                const image =
-                    this.dataset.image;
+    }
 
+    saveCart(cart);
 
-                if (!name || !price) {
-
-                    console.error(
-                        "Invalid product:",
-                        this
-                    );
-
-                    return;
-                }
-
-
-                addToCart(
-                    name,
-                    price,
-                    image
-                );
-
-            }
-        );
-
-    });
+    updateCartCount();
 
 }
 
 
-/* =========================================================
-   SEARCH
-   ========================================================= */
+/* ================= SEARCH ================= */
 
-function performSearch() {
+function searchProducts() {
 
     const input =
-        document.getElementById(
-            "searchInput"
-        );
-
+        document.getElementById("headerSearch");
 
     if (!input) {
         return;
     }
 
+    const search =
+        input.value.trim();
 
-    const query =
-        input.value
-            .trim()
-            .toLowerCase();
-
-
-    if (!query) {
+    if (!search) {
 
         window.location.href =
             "products.html";
 
         return;
+
     }
-
-
-    /*
-       Products page receives
-       the search query.
-    */
 
     window.location.href =
         "products.html?search=" +
-        encodeURIComponent(query);
+        encodeURIComponent(search);
+
 }
 
 
-/* =========================================================
-   SEARCH BUTTON
-   ========================================================= */
+/* ================= PRODUCT FILTER ================= */
 
-function setupSearch() {
+function filterProducts() {
 
     const input =
-        document.getElementById(
-            "searchInput"
-        );
-
-    const button =
-        document.getElementById(
-            "searchBtn"
-        );
-
-
-    if (!input || !button) {
-        return;
-    }
-
-
-    button.addEventListener(
-        "click",
-        performSearch
-    );
-
-
-    input.addEventListener(
-        "keydown",
-        function (event) {
-
-            if (event.key === "Enter") {
-
-                event.preventDefault();
-
-                performSearch();
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   PRODUCT SEARCH FILTER
-   ========================================================= */
-
-function filterProductsFromURL() {
+        document.getElementById("productSearch");
 
     const grid =
-        document.getElementById(
-            "productsGrid"
-        );
+        document.getElementById("productsGrid");
 
-
-    if (!grid) {
+    if (!input || !grid) {
         return;
     }
-
-
-    const params =
-        new URLSearchParams(
-            window.location.search
-        );
-
 
     const search =
-        (
-            params.get("search") || ""
-        )
-        .trim()
-        .toLowerCase();
-
-
-    if (!search) {
-        return;
-    }
-
+        input.value
+            .trim()
+            .toLowerCase();
 
     const cards =
         grid.querySelectorAll(
             ".product-card"
         );
 
-
-    let found = 0;
-
+    let visible = 0;
 
     cards.forEach(card => {
 
-        const nameElement =
-            card.querySelector(
-                ".product-name"
-            );
+        const text =
+            card.textContent.toLowerCase();
 
-        const categoryElement =
-            card.querySelector(
-                ".product-category"
-            );
+        if (
+            search === "" ||
+            text.includes(search)
+        ) {
 
+            card.style.display = "";
 
-        const name =
-            nameElement
-                ? nameElement.textContent
-                    .toLowerCase()
-                : "";
-
-
-        const category =
-            categoryElement
-                ? categoryElement.textContent
-                    .toLowerCase()
-                : "";
-
-
-        const matches =
-            name.includes(search) ||
-            category.includes(search);
-
-
-        if (matches) {
-
-            card.style.display =
-                "";
-
-            found++;
+            visible++;
 
         } else {
 
-            card.style.display =
-                "none";
+            card.style.display = "none";
 
         }
 
@@ -380,179 +283,172 @@ function filterProductsFromURL() {
 
 
     let noResults =
-        document.getElementById(
-            "noSearchResults"
+        grid.querySelector(
+            ".no-results"
         );
 
-
-    if (found === 0) {
+    if (visible === 0) {
 
         if (!noResults) {
 
             noResults =
-                document.createElement(
-                    "div"
-                );
+                document.createElement("div");
 
-            noResults.id =
-                "noSearchResults";
+            noResults.className =
+                "no-results";
+
+            noResults.textContent =
+                "No products found.";
 
             noResults.style.gridColumn =
                 "1 / -1";
 
-            noResults.style.padding =
-                "50px 20px";
-
             noResults.style.textAlign =
                 "center";
 
+            noResults.style.padding =
+                "60px";
+
             noResults.style.color =
-                "#60798c";
+                "#607d8b";
 
-            noResults.innerHTML = `
-                <h2 style="color:#16366b;margin-bottom:8px;">
-                    No products found
-                </h2>
-                <p>
-                    Try another product name or category.
-                </p>
-            `;
+            grid.appendChild(noResults);
 
-            grid.appendChild(
-                noResults
-            );
         }
 
-    } else if (noResults) {
+    } else {
 
-        noResults.remove();
+        if (noResults) {
+            noResults.remove();
+        }
 
     }
 
 }
 
 
-/* =========================================================
-   TOAST MESSAGE
-   ========================================================= */
+/* ================= URL SEARCH ================= */
 
-function showToast(message) {
+function applyURLSearch() {
 
-    let toast =
-        document.getElementById(
-            "shopnovaToast"
+    const params =
+        new URLSearchParams(
+            window.location.search
         );
 
+    const search =
+        params.get("search");
 
-    if (!toast) {
+    const input =
+        document.getElementById(
+            "productSearch"
+        );
 
-        toast =
-            document.createElement(
-                "div"
+    if (
+        search &&
+        input
+    ) {
+
+        input.value = search;
+
+        filterProducts();
+
+    }
+
+}
+
+
+/* ================= CONTACT ================= */
+
+function openContact() {
+
+    const popup =
+        document.getElementById(
+            "contactPopup"
+        );
+
+    if (popup) {
+
+        popup.classList.add("show");
+
+    }
+
+}
+
+
+function closeContact() {
+
+    const popup =
+        document.getElementById(
+            "contactPopup"
+        );
+
+    if (popup) {
+
+        popup.classList.remove("show");
+
+    }
+
+}
+
+
+/* ================= CLOSE CONTACT OUTSIDE ================= */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const popup =
+            document.getElementById(
+                "contactPopup"
             );
 
-        toast.id =
-            "shopnovaToast";
+        if (!popup) {
+            return;
+        }
 
+        if (
+            event.target === popup
+        ) {
 
-        toast.style.position =
-            "fixed";
+            closeContact();
 
-        toast.style.right =
-            "20px";
+        }
 
-        toast.style.bottom =
-            "20px";
-
-        toast.style.zIndex =
-            "9999";
-
-        toast.style.background =
-            "linear-gradient(135deg,#16366b,#078568)";
-
-        toast.style.color =
-            "#fff";
-
-        toast.style.padding =
-            "12px 18px";
-
-        toast.style.borderRadius =
-            "10px";
-
-        toast.style.fontSize =
-            "13px";
-
-        toast.style.fontWeight =
-            "700";
-
-        toast.style.boxShadow =
-            "0 8px 25px rgba(0,0,0,.18)";
-
-        toast.style.opacity =
-            "0";
-
-        toast.style.transform =
-            "translateY(10px)";
-
-        toast.style.transition =
-            ".25s";
-
-
-        document.body.appendChild(
-            toast
-        );
     }
+);
 
 
-    toast.textContent =
-        "✓ " + message;
+/* ================= SEARCH ENTER KEY ================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Enter" &&
+            document.activeElement &&
+            document.activeElement.id ===
+                "headerSearch"
+        ) {
+
+            searchProducts();
+
+        }
+
+    }
+);
 
 
-    requestAnimationFrame(() => {
-
-        toast.style.opacity =
-            "1";
-
-        toast.style.transform =
-            "translateY(0)";
-
-    });
-
-
-    clearTimeout(
-        window.shopNovaToastTimer
-    );
-
-
-    window.shopNovaToastTimer =
-        setTimeout(() => {
-
-            toast.style.opacity =
-                "0";
-
-            toast.style.transform =
-                "translateY(10px)";
-
-        }, 2200);
-
-}
-
-
-/* =========================================================
-   INITIALIZE
-   ========================================================= */
+/* ================= PAGE LOAD ================= */
 
 document.addEventListener(
     "DOMContentLoaded",
-    function () {
+    function() {
 
         updateCartCount();
 
-        setupSearch();
-
-        setupProductButtons();
-
-        filterProductsFromURL();
+        applyURLSearch();
 
     }
 );
