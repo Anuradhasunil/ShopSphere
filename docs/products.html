@@ -6,11 +6,6 @@
 
     <title>ShopNova | Products</title>
 
-    <meta
-        name="description"
-        content="ShopNova premium products - Bible Wonders, suits, shoes, bags, watches, electronics, fashion and more."
-    >
-
     <style>
         * {
             margin: 0;
@@ -28,38 +23,37 @@
             color: #172033;
         }
 
-        /* =========================================
+        /* =========================
            HEADER
-        ========================================= */
+        ========================= */
 
         header {
             position: sticky;
             top: 0;
-            z-index: 9999;
+            z-index: 1000;
             background: #071a3d;
             color: white;
-            box-shadow: 0 3px 15px rgba(0, 0, 0, .16);
+            box-shadow: 0 3px 15px rgba(0,0,0,.15);
         }
 
         .header-main {
             width: 100%;
             max-width: 1450px;
             margin: auto;
-            min-height: 70px;
-            padding: 7px 18px;
+            padding: 8px 20px;
 
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 16px;
         }
 
-        /* =========================================
+        /* =========================
            SHOPNOVA LOGO
-           Inline SVG - no missing logo image
-        ========================================= */
+           KEEP YOUR EXISTING LOGO
+        ========================= */
 
         .logo {
-            min-width: 245px;
+            min-width: 230px;
 
             display: flex;
             align-items: center;
@@ -69,13 +63,14 @@
             color: white;
         }
 
-        .logo-mark {
-            width: 53px;
-            height: 53px;
-            min-width: 53px;
+        .logo-art {
+            width: 52px;
+            height: 52px;
+            min-width: 52px;
 
-            background: white;
-            border-radius: 13px;
+            border-radius: 12px;
+
+            background: #ffffff;
 
             display: flex;
             align-items: center;
@@ -83,17 +78,19 @@
 
             overflow: hidden;
 
-            box-shadow:
-                0 4px 12px rgba(0, 0, 0, .22);
+            box-shadow: 0 3px 10px rgba(0,0,0,.2);
         }
 
-        .logo-mark svg {
-            width: 48px;
-            height: 48px;
+        .logo-art img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+
             display: block;
         }
 
-        .logo-text {
+        .logo-content {
             display: flex;
             flex-direction: column;
             line-height: 1;
@@ -102,7 +99,6 @@
         .logo-name {
             font-size: 24px;
             font-weight: 900;
-            letter-spacing: -.6px;
         }
 
         .logo-name .shop {
@@ -110,35 +106,42 @@
         }
 
         .logo-name .nova {
-            color: #66b8ff;
+            color: #63b3ff;
         }
 
         .logo-tagline {
-            margin-top: 5px;
-            color: #cbd5e1;
+            margin-top: 4px;
+
             font-size: 8px;
-            font-weight: 700;
+
+            color: #cbd5e1;
+
             letter-spacing: .8px;
+
+            font-weight: 700;
         }
 
-        /* =========================================
+        /* =========================
            SEARCH
-        ========================================= */
+        ========================= */
 
         .search-box {
             flex: 1;
+
             max-width: 650px;
+
             height: 42px;
 
             display: flex;
 
             background: #ffffff;
+
             border-radius: 8px;
+
             overflow: hidden;
         }
 
         .search-box input {
-            flex: 1;
             width: 100%;
 
             border: none;
@@ -146,24 +149,19 @@
 
             padding: 0 14px;
 
-            color: #172033;
-            background: #ffffff;
-
             font-size: 14px;
-        }
 
-        .search-box input::placeholder {
-            color: #8a94a6;
+            color: #172033;
         }
 
         .search-box button {
             width: 52px;
 
             border: none;
-            outline: none;
 
             background: #1769aa;
-            color: #ffffff;
+
+            color: white;
 
             cursor: pointer;
 
@@ -174,24 +172,28 @@
             background: #0d4f82;
         }
 
-        /* =========================================
+        /* =========================
            HEADER ACTIONS
-        ========================================= */
+        ========================= */
 
         .header-actions {
             display: flex;
+
             align-items: center;
+
             gap: 3px;
         }
 
         .header-actions a {
-            color: #ffffff;
+            color: white;
+
             text-decoration: none;
 
             font-size: 13px;
+
             font-weight: 700;
 
-            padding: 8px 9px;
+            padding: 8px 10px;
 
             border-radius: 7px;
 
@@ -199,19 +201,16 @@
         }
 
         .header-actions a:hover {
-            background: rgba(255, 255, 255, .11);
+            background: rgba(255,255,255,.1);
         }
 
         .cart-link {
             background: #138808 !important;
         }
 
-        .cart-link:hover {
-            background: #0f7107 !important;
-        }
-
         .cart-count {
             display: inline-flex;
+
             align-items: center;
             justify-content: center;
 
@@ -225,24 +224,28 @@
             border-radius: 50%;
 
             background: #ffffff;
+
             color: #138808;
 
             font-size: 10px;
+
             font-weight: 900;
         }
 
-        /* =========================================
+        /* =========================
            NAVIGATION
-        ========================================= */
+        ========================= */
 
         .nav-bar {
             background: #0b2858;
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
 
-            gap: 27px;
+            gap: 28px;
 
             padding: 7px 15px;
         }
@@ -253,67 +256,69 @@
             text-decoration: none;
 
             font-size: 13px;
-            font-weight: 700;
 
-            transition: color .2s ease;
+            font-weight: 700;
         }
 
         .nav-bar a:hover,
         .nav-bar a.active {
-            color: #6cc0ff;
+            color: #63b3ff;
         }
 
-        /* =========================================
+        /* =========================
            HERO
-        ========================================= */
+        ========================= */
 
         .hero {
-            min-height: 175px;
+            min-height: 190px;
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
 
             text-align: center;
 
-            padding: 20px 15px;
+            padding: 25px 15px;
 
             background:
                 linear-gradient(
                     135deg,
                     #071a3d 0%,
-                    #123b70 58%,
+                    #123b70 55%,
                     #176b58 100%
                 );
         }
 
         .hero-content {
             max-width: 850px;
-            padding: 10px 20px;
+
+            padding: 20px 25px;
         }
 
         .hero-badge {
             display: inline-block;
 
-            padding: 5px 13px;
+            padding: 6px 15px;
 
             border-radius: 20px;
 
             background: #ffffff;
+
             color: #071a3d;
 
             font-size: 10px;
+
             font-weight: 900;
 
-            margin-bottom: 7px;
+            margin-bottom: 8px;
         }
 
         .hero h1 {
-            color: #ffffff;
+            color: white;
 
-            font-size: clamp(30px, 5vw, 45px);
-
-            line-height: 1.05;
+            font-size: clamp(32px,5vw,48px);
 
             font-weight: 900;
 
@@ -331,38 +336,39 @@
 
             color: #dce8f7;
 
-            font-size: 13px;
+            font-size: 14px;
 
-            line-height: 1.45;
+            line-height: 1.5;
         }
 
-        /* =========================================
+        /* =========================
            PRODUCTS SECTION
-        ========================================= */
+        ========================= */
 
         .products-section {
             width: 100%;
+
             max-width: 1400px;
 
             margin: auto;
 
-            padding: 22px 18px 32px;
+            padding: 25px 18px 35px;
         }
 
         .section-heading {
             text-align: center;
 
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
 
         .section-heading h2 {
             color: #071a3d;
 
-            font-size: 28px;
+            font-size: 30px;
 
             font-weight: 900;
 
-            margin-bottom: 3px;
+            margin-bottom: 4px;
         }
 
         .section-heading p {
@@ -371,9 +377,9 @@
             font-size: 13px;
         }
 
-        /* =========================================
+        /* =========================
            SEARCH RESULT
-        ========================================= */
+        ========================= */
 
         .search-result {
             display: none;
@@ -382,15 +388,16 @@
 
             color: #071a3d;
 
-            font-size: 13px;
+            font-size: 14px;
+
             font-weight: 800;
 
-            margin-bottom: 13px;
+            margin-bottom: 15px;
         }
 
-        /* =========================================
+        /* =========================
            PRODUCT GRID
-        ========================================= */
+        ========================= */
 
         .products-grid {
             display: grid;
@@ -401,12 +408,12 @@
                     minmax(235px, 1fr)
                 );
 
-            gap: 16px;
+            gap: 18px;
         }
 
-        /* =========================================
+        /* =========================
            PRODUCT CARD
-        ========================================= */
+        ========================= */
 
         .product-card {
             background: #ffffff;
@@ -418,9 +425,10 @@
             border: 1px solid #e1e7ef;
 
             box-shadow:
-                0 4px 15px rgba(7, 26, 61, .07);
+                0 5px 18px rgba(7,26,61,.07);
 
             display: flex;
+
             flex-direction: column;
 
             transition:
@@ -432,19 +440,19 @@
             transform: translateY(-4px);
 
             box-shadow:
-                0 10px 27px rgba(7, 26, 61, .14);
+                0 10px 28px rgba(7,26,61,.13);
         }
 
         .product-card.featured {
             border: 2px solid #1769aa;
         }
 
-        /* =========================================
+        /* =========================
            PRODUCT IMAGE
-        ========================================= */
+        ========================= */
 
         .product-image {
-            height: 215px;
+            height: 220px;
 
             background: #eef2f7;
 
@@ -455,6 +463,7 @@
 
         .product-image img {
             width: 100%;
+
             height: 100%;
 
             display: block;
@@ -468,21 +477,21 @@
             transform: scale(1.04);
         }
 
-        /* =========================================
+        /* =========================
            BADGES
-        ========================================= */
+        ========================= */
 
         .sale-badge {
             position: absolute;
 
-            top: 9px;
-            left: 9px;
+            top: 10px;
+            left: 10px;
 
             z-index: 3;
 
             background: #e65f73;
 
-            color: #ffffff;
+            color: white;
 
             padding: 5px 9px;
 
@@ -496,14 +505,14 @@
         .featured-badge {
             position: absolute;
 
-            top: 9px;
-            right: 9px;
+            top: 10px;
+            right: 10px;
 
             z-index: 3;
 
             background: #1769aa;
 
-            color: #ffffff;
+            color: white;
 
             padding: 5px 9px;
 
@@ -514,14 +523,15 @@
             font-weight: 900;
         }
 
-        /* =========================================
+        /* =========================
            PRODUCT INFO
-        ========================================= */
+        ========================= */
 
         .product-info {
-            padding: 12px;
+            padding: 14px;
 
             display: flex;
+
             flex-direction: column;
 
             flex: 1;
@@ -530,7 +540,7 @@
         .product-category {
             color: #1769aa;
 
-            font-size: 9px;
+            font-size: 10px;
 
             font-weight: 900;
 
@@ -538,31 +548,31 @@
 
             letter-spacing: .7px;
 
-            margin-bottom: 3px;
+            margin-bottom: 4px;
         }
 
         .product-name {
             color: #071a3d;
 
-            font-size: 16px;
+            font-size: 17px;
 
             font-weight: 800;
 
             line-height: 1.25;
 
-            min-height: 40px;
+            min-height: 42px;
         }
 
         .product-description {
             color: #697386;
 
-            font-size: 11.5px;
+            font-size: 12px;
 
             line-height: 1.4;
 
-            margin: 4px 0 8px;
+            margin: 5px 0 10px;
 
-            min-height: 32px;
+            min-height: 34px;
         }
 
         .price-row {
@@ -570,35 +580,35 @@
 
             align-items: center;
 
-            gap: 7px;
+            gap: 8px;
 
-            margin-bottom: 9px;
+            margin-bottom: 11px;
         }
 
         .price {
             color: #071a3d;
 
-            font-size: 20px;
+            font-size: 21px;
 
             font-weight: 900;
         }
 
         .old-price {
-            color: #999999;
+            color: #999;
 
-            font-size: 11px;
+            font-size: 12px;
 
             text-decoration: line-through;
         }
 
-        /* =========================================
-           ADD CART BUTTON
-        ========================================= */
+        /* =========================
+           BUTTON
+        ========================= */
 
         .add-cart-btn {
             width: 100%;
 
-            padding: 9px;
+            padding: 10px;
 
             border: none;
 
@@ -606,9 +616,9 @@
 
             background: #071a3d;
 
-            color: #ffffff;
+            color: white;
 
-            font-size: 12px;
+            font-size: 13px;
 
             font-weight: 800;
 
@@ -616,9 +626,7 @@
 
             margin-top: auto;
 
-            transition:
-                background .25s ease,
-                transform .2s ease;
+            transition: .25s;
         }
 
         .add-cart-btn:hover {
@@ -631,14 +639,9 @@
             background: #138808;
         }
 
-        .add-cart-btn:disabled {
-            cursor: default;
-            opacity: .95;
-        }
-
-        /* =========================================
+        /* =========================
            NO RESULTS
-        ========================================= */
+        ========================= */
 
         .no-results {
             display: none;
@@ -654,30 +657,32 @@
             font-size: 16px;
         }
 
-        /* =========================================
+        /* =========================
            FOOTER
-        ========================================= */
+        ========================= */
 
         footer {
             background: #071a3d;
 
-            color: #ffffff;
+            color: white;
 
             text-align: center;
 
-            padding: 20px 15px;
+            padding: 22px 15px;
         }
 
         footer h3 {
-            font-size: 19px;
+            font-size: 20px;
+
             font-weight: 900;
         }
 
         .footer-line {
-            width: 50px;
+            width: 55px;
+
             height: 2px;
 
-            margin: 7px auto;
+            margin: 8px auto;
 
             background: #72d6a5;
         }
@@ -690,14 +695,15 @@
             line-height: 1.6;
         }
 
-        /* =========================================
-           TABLET
-        ========================================= */
+        /* =========================
+           MOBILE
+        ========================= */
 
-        @media (max-width: 1050px) {
+        @media(max-width:1050px) {
 
             .header-main {
                 flex-wrap: wrap;
+
                 justify-content: center;
             }
 
@@ -709,6 +715,7 @@
                 order: 3;
 
                 width: 100%;
+
                 max-width: 100%;
             }
 
@@ -717,30 +724,16 @@
             }
         }
 
-        /* =========================================
-           MOBILE
-        ========================================= */
-
-        @media (max-width: 700px) {
+        @media(max-width:700px) {
 
             .header-main {
-                padding: 7px 11px;
-                gap: 8px;
+                padding: 8px 12px;
             }
 
             .logo {
                 width: 100%;
+
                 justify-content: center;
-            }
-
-            .logo-mark {
-                width: 48px;
-                height: 48px;
-                min-width: 48px;
-            }
-
-            .logo-name {
-                font-size: 22px;
             }
 
             .header-actions {
@@ -749,17 +742,15 @@
                 display: grid;
 
                 grid-template-columns:
-                    repeat(3, 1fr);
-
-                gap: 3px;
+                    repeat(3,1fr);
             }
 
             .header-actions a {
                 text-align: center;
 
-                font-size: 10px;
+                font-size: 11px;
 
-                padding: 7px 3px;
+                padding: 7px 4px;
             }
 
             .nav-bar {
@@ -770,38 +761,32 @@
                 white-space: nowrap;
 
                 gap: 20px;
-
-                padding: 7px 14px;
-            }
-
-            .nav-bar a {
-                font-size: 12px;
             }
 
             .hero {
-                min-height: 155px;
+                min-height: 170px;
 
-                padding: 17px 10px;
+                padding: 20px 12px;
             }
 
             .hero-content {
-                padding: 8px 12px;
+                padding: 15px;
             }
 
             .hero h1 {
-                font-size: 30px;
+                font-size: 31px;
             }
 
             .hero p {
-                font-size: 11.5px;
+                font-size: 12px;
             }
 
             .products-section {
-                padding: 18px 10px 28px;
+                padding: 20px 12px 30px;
             }
 
             .section-heading {
-                margin-bottom: 13px;
+                margin-bottom: 15px;
             }
 
             .section-heading h2 {
@@ -811,66 +796,46 @@
             .products-grid {
                 grid-template-columns: 1fr 1fr;
 
-                gap: 11px;
+                gap: 12px;
             }
 
             .product-image {
-                height: 175px;
+                height: 185px;
             }
 
             .product-info {
-                padding: 10px;
+                padding: 11px;
             }
 
             .product-name {
-                font-size: 14px;
+                font-size: 15px;
             }
 
             .product-description {
-                font-size: 10.5px;
+                font-size: 11px;
 
-                min-height: 30px;
+                min-height: 31px;
             }
 
             .price {
-                font-size: 17px;
-            }
-
-            .old-price {
-                font-size: 10px;
+                font-size: 18px;
             }
 
             .add-cart-btn {
-                font-size: 10.5px;
+                font-size: 11px;
 
-                padding: 8px 4px;
+                padding: 9px 5px;
             }
         }
 
-        /* =========================================
-           SMALL PHONE
-        ========================================= */
-
-        @media (max-width: 430px) {
+        @media(max-width:430px) {
 
             .products-grid {
                 grid-template-columns: 1fr;
             }
 
             .product-image {
-                height: 225px;
-            }
-
-            .product-name {
-                font-size: 16px;
-            }
-
-            .product-description {
-                font-size: 11px;
-            }
-
-            .add-cart-btn {
-                font-size: 12px;
+                height: 230px;
             }
         }
     </style>
@@ -878,1077 +843,974 @@
 
 <body>
 
-    <!-- =========================================
-         HEADER
-    ========================================= -->
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-    <header>
+<header>
 
-        <div class="header-main">
+    <div class="header-main">
 
-            <!-- SHOPNOVA LOGO -->
-            <a href="index.html" class="logo">
+        <!--
+            IMPORTANT:
+            Keep YOUR EXISTING ShopNova logo filename here.
+            If your old logo is not shopnova-logo.png,
+            change ONLY this filename.
+        -->
 
-                <div class="logo-mark">
+        <a href="index.html" class="logo">
 
-                    <!-- Dove + olive leaf + shopping bag logo -->
-                    <svg
-                        viewBox="0 0 100 100"
-                        xmlns="http://www.w3.org/2000/svg"
-                        aria-label="ShopNova logo"
-                    >
+            <div class="logo-art">
 
-                        <!-- Shopping bag -->
-                        <path
-                            d="M20 35
-                               Q20 29 26 29
-                               H74
-                               Q80 29 80 35
-                               L76 82
-                               Q75 88 69 88
-                               H31
-                               Q25 88 24 82
-                               Z"
-                            fill="#071a3d"
-                        />
+                <img
+                    src="images/shopnova-logo.png"
+                    alt="ShopNova Logo"
+                    onerror="this.style.display='none';"
+                >
 
-                        <!-- Bag handle -->
-                        <path
-                            d="M37 35
-                               C37 18 63 18 63 35"
-                            fill="none"
-                            stroke="#071a3d"
-                            stroke-width="6"
-                            stroke-linecap="round"
-                        />
+            </div>
 
-                        <!-- Dove body -->
-                        <path
-                            d="M28 53
-                               C38 43 49 43 59 49
-                               C65 53 72 53 79 48
-                               C76 59 68 66 57 67
-                               C48 68 41 64 35 60
-                               C31 58 28 56 28 53Z"
-                            fill="#ffffff"
-                        />
+            <div class="logo-content">
 
-                        <!-- Dove wing -->
-                        <path
-                            d="M42 52
-                               C49 46 58 46 64 51
-                               C58 53 53 57 48 61
-                               C45 59 43 56 42 52Z"
-                            fill="#63b3ff"
-                        />
-
-                        <!-- Dove head -->
-                        <circle
-                            cx="70"
-                            cy="47"
-                            r="7"
-                            fill="#ffffff"
-                        />
-
-                        <!-- Eye -->
-                        <circle
-                            cx="72"
-                            cy="45"
-                            r="1.5"
-                            fill="#071a3d"
-                        />
-
-                        <!-- Beak -->
-                        <path
-                            d="M76 48 L86 51 L76 54 Z"
-                            fill="#72d6a5"
-                        />
-
-                        <!-- Olive branch -->
-                        <path
-                            d="M79 52
-                               C86 57 89 62 92 69"
-                            fill="none"
-                            stroke="#3f7d4a"
-                            stroke-width="2.5"
-                            stroke-linecap="round"
-                        />
-
-                        <ellipse
-                            cx="85"
-                            cy="59"
-                            rx="3"
-                            ry="1.5"
-                            transform="rotate(38 85 59)"
-                            fill="#3f7d4a"
-                        />
-
-                        <ellipse
-                            cx="88"
-                            cy="64"
-                            rx="3"
-                            ry="1.5"
-                            transform="rotate(38 88 64)"
-                            fill="#3f7d4a"
-                        />
-
-                    </svg>
-
+                <div class="logo-name">
+                    <span class="shop">Shop</span><span class="nova">Nova</span>
                 </div>
 
-                <div class="logo-text">
-
-                    <div class="logo-name">
-                        <span class="shop">Shop</span><span class="nova">Nova</span>
-                    </div>
-
-                    <div class="logo-tagline">
-                        PREMIUM SHOPPING • BEAUTIFUL CHOICES
-                    </div>
-
+                <div class="logo-tagline">
+                    PREMIUM SHOPPING • BEAUTIFUL CHOICES
                 </div>
 
+            </div>
+
+        </a>
+
+
+        <!-- SEARCH -->
+
+        <div class="search-box">
+
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Search products..."
+                autocomplete="off"
+            >
+
+            <button
+                type="button"
+                id="searchBtn"
+            >
+                🔍
+            </button>
+
+        </div>
+
+
+        <!-- ACTIONS -->
+
+        <div class="header-actions">
+
+            <a href="index.html">
+                🏠 Home
             </a>
 
+            <a
+                href="products.html"
+                class="active"
+            >
+                🛍️ Products
+            </a>
 
-            <!-- SEARCH -->
-            <div class="search-box">
+            <a
+                href="cart.html"
+                class="cart-link"
+            >
+                🛒 Cart
+                <span
+                    class="cart-count"
+                    id="cartCount"
+                >0</span>
+            </a>
 
-                <input
-                    type="search"
-                    id="searchInput"
-                    placeholder="Search products..."
-                    autocomplete="off"
+        </div>
+
+    </div>
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="nav-bar">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a
+            href="products.html"
+            class="active"
+        >
+            Products
+        </a>
+
+        <a href="products.html">
+            Fashion
+        </a>
+
+        <a href="products.html">
+            Shoes
+        </a>
+
+        <a href="products.html">
+            Accessories
+        </a>
+
+        <a href="products.html">
+            Gifts
+        </a>
+
+        <a href="cart.html">
+            Cart
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="hero-badge">
+            SHOPNOVA COLLECTION
+        </div>
+
+        <h1>
+            Discover <span>Beautiful Products</span>
+        </h1>
+
+        <p>
+            Explore premium fashion, footwear, accessories,
+            Bible Wonders and carefully selected products
+            for every occasion.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PRODUCTS
+===================================================== -->
+
+<main class="products-section">
+
+    <div class="section-heading">
+
+        <h2>
+            Our Products
+        </h2>
+
+        <p>
+            Choose your favorite products and add them to your cart.
+        </p>
+
+    </div>
+
+
+    <div
+        id="searchResult"
+        class="search-result"
+    ></div>
+
+
+    <div
+        class="products-grid"
+        id="productsGrid"
+    >
+
+
+        <!-- =================================================
+             BIBLE WONDERS - FIRST
+        ================================================== -->
+
+        <article
+            class="product-card featured"
+            data-name="Bible Wonders"
+            data-category="Books"
+        >
+
+            <div class="product-image">
+
+                <span class="featured-badge">
+                    FEATURED
+                </span>
+
+                <span class="sale-badge">
+                    SPECIAL
+                </span>
+
+                <img
+                    src="images/bible-wonders.jpg"
+                    alt="Bible Wonders"
+                    loading="eager"
                 >
+
+            </div>
+
+            <div class="product-info">
+
+                <div class="product-category">
+                    Books
+                </div>
+
+                <h3 class="product-name">
+                    Bible Wonders
+                </h3>
+
+                <p class="product-description">
+                    A beautiful inspirational Bible Wonders
+                    collection for readers and families.
+                </p>
+
+                <div class="price-row">
+
+                    <span class="price">
+                        ₹499
+                    </span>
+
+                    <span class="old-price">
+                        ₹799
+                    </span>
+
+                </div>
 
                 <button
-                    type="button"
-                    id="searchBtn"
-                    aria-label="Search"
+                    class="add-cart-btn"
+                    onclick="addToCart('Bible Wonders',499,'images/bible-wonders.jpg',this)"
                 >
-                    🔍
+                    🛒 Add to Cart
                 </button>
 
             </div>
 
-
-            <!-- HEADER ACTIONS -->
-            <div class="header-actions">
-
-                <a href="index.html">
-                    🏠 Home
-                </a>
-
-                <a href="products.html" class="active">
-                    🛍️ Products
-                </a>
-
-                <a href="cart.html" class="cart-link">
-                    🛒 Cart
-                    <span class="cart-count" id="cartCount">0</span>
-                </a>
-
-            </div>
-
-        </div>
+        </article>
 
 
-        <!-- NAVIGATION -->
+        <!-- =================================================
+             MEN'S SUIT
+        ================================================== -->
 
-        <nav class="nav-bar">
-
-            <a href="index.html">
-                Home
-            </a>
-
-            <a href="products.html" class="active">
-                Products
-            </a>
-
-            <a href="products.html">
-                Fashion
-            </a>
-
-            <a href="products.html">
-                Shoes
-            </a>
-
-            <a href="products.html">
-                Accessories
-            </a>
-
-            <a href="products.html">
-                Gifts
-            </a>
-
-            <a href="cart.html">
-                Cart
-            </a>
-
-        </nav>
-
-    </header>
-
-
-    <!-- =========================================
-         HERO
-    ========================================= -->
-
-    <section class="hero">
-
-        <div class="hero-content">
-
-            <div class="hero-badge">
-                SHOPNOVA COLLECTION
-            </div>
-
-            <h1>
-                Discover <span>Beautiful Products</span>
-            </h1>
-
-            <p>
-                Explore premium fashion, footwear, accessories,
-                Bible Wonders and carefully selected products
-                for every occasion.
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================================
-         PRODUCTS
-    ========================================= -->
-
-    <main class="products-section">
-
-        <div class="section-heading">
-
-            <h2>
-                Our Products
-            </h2>
-
-            <p>
-                Choose your favorite products and add them to your cart.
-            </p>
-
-        </div>
-
-
-        <!-- SEARCH RESULT -->
-
-        <div
-            id="searchResult"
-            class="search-result"
-        ></div>
-
-
-        <!-- PRODUCT GRID -->
-
-        <div
-            class="products-grid"
-            id="productsGrid"
+        <article
+            class="product-card"
+            data-name="Men's Suit Tuxedo"
+            data-category="Men Fashion"
         >
 
+            <div class="product-image">
 
-            <!-- =====================================
-                 1. BIBLE WONDERS
-                 FIRST PRODUCT
-            ====================================== -->
+                <span class="sale-badge">
+                    SALE
+                </span>
 
-            <article
-                class="product-card featured"
-                data-name="Bible Wonders"
-                data-category="Books"
-            >
+                <img
+                    src="images/suit-tuxedo.jpg"
+                    alt="Men's Suit Tuxedo"
+                    loading="lazy"
+                >
 
-                <div class="product-image">
-
-                    <span class="featured-badge">
-                        FEATURED
-                    </span>
-
-                    <span class="sale-badge">
-                        SPECIAL
-                    </span>
-
-                    <img
-                        src="images/bible-wonders.jpg"
-                        alt="Bible Wonders"
-                        loading="eager"
-                        onerror="this.onerror=null;this.src='images/bible-wonders.png';"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="product-category">
-                        Books
-                    </div>
-
-                    <h3 class="product-name">
-                        Bible Wonders
-                    </h3>
-
-                    <p class="product-description">
-                        A beautiful inspirational Bible
-                        wonders collection for readers and families.
-                    </p>
-
-                    <div class="price-row">
-
-                        <span class="price">
-                            ₹499
-                        </span>
-
-                        <span class="old-price">
-                            ₹799
-                        </span>
-
-                    </div>
-
-                    <button
-                        class="add-cart-btn"
-                        type="button"
-                        onclick="addToCart('Bible Wonders',499,'images/bible-wonders.jpg',this)"
-                    >
-                        🛒 Add to Cart
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- =====================================
-                 2. MEN'S SUIT / TUXEDO
-            ====================================== -->
-
-            <article
-                class="product-card"
-                data-name="Men's Suit Tuxedo"
-                data-category="Men Fashion"
-            >
-
-                <div class="product-image">
-
-                    <span class="sale-badge">
-                        SALE
-                    </span>
-
-                    <img
-                        src="images/suit-tuxedo.jpg"
-                        alt="Men's Suit Tuxedo"
-                        loading="lazy"
-                        onerror="this.onerror=null;this.src='images/suit.jpg';"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="product-category">
-                        Men Fashion
-                    </div>
-
-                    <h3 class="product-name">
-                        Men's Suit Tuxedo
-                    </h3>
-
-                    <p class="product-description">
-                        Elegant premium formal suit and
-                        tuxedo collection for special occasions.
-                    </p>
-
-                    <div class="price-row">
-
-                        <span class="price">
-                            ₹4,999
-                        </span>
-
-                        <span class="old-price">
-                            ₹7,999
-                        </span>
-
-                    </div>
-
-                    <button
-                        class="add-cart-btn"
-                        type="button"
-                        onclick="addToCart(&quot;Men's Suit Tuxedo&quot;,4999,'images/suit-tuxedo.jpg',this)"
-                    >
-                        🛒 Add to Cart
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- =====================================
-                 3. WOMEN'S SHOES
-            ====================================== -->
-
-            <article
-                class="product-card"
-                data-name="Women's Shoes"
-                data-category="Women's Fashion"
-            >
-
-                <div class="product-image">
-
-                    <span class="sale-badge">
-                        SALE
-                    </span>
-
-                    <img
-                        src="images/womens-shoes.jpg"
-                        alt="Women's Shoes"
-                        loading="lazy"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="product-category">
-                        Women's Fashion
-                    </div>
-
-                    <h3 class="product-name">
-                        Women's Shoes
-                    </h3>
-
-                    <p class="product-description">
-                        Stylish and comfortable women's
-                        footwear for everyday and special occasions.
-                    </p>
-
-                    <div class="price-row">
-
-                        <span class="price">
-                            ₹1,899
-                        </span>
-
-                        <span class="old-price">
-                            ₹2,999
-                        </span>
-
-                    </div>
-
-                    <button
-                        class="add-cart-btn"
-                        type="button"
-                        onclick="addToCart(&quot;Women's Shoes&quot;,1899,'images/womens-shoes.jpg',this)"
-                    >
-                        🛒 Add to Cart
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- =====================================
-                 4. MEN'S SHOES
-            ====================================== -->
-
-            <article
-                class="product-card"
-                data-name="Men's Shoes"
-                data-category="Footwear"
-            >
-
-                <div class="product-image">
-
-                    <img
-                        src="images/mens-shoes.jpg"
-                        alt="Men's Shoes"
-                        loading="lazy"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="product-category">
-                        Footwear
-                    </div>
-
-                    <h3 class="product-name">
-                        Men's Shoes
-                    </h3>
-
-                    <p class="product-description">
-                        Premium men's shoes designed for
-                        comfort, style and everyday wear.
-                    </p>
-
-                    <div class="price-row">
-
-                        <span class="price">
-                            ₹1,499
-                        </span>
-
-                        <span class="old-price">
-                            ₹2,499
-                        </span>
-
-                    </div>
-
-                    <button
-                        class="add-cart-btn"
-                        type="button"
-                        onclick="addToCart(&quot;Men's Shoes&quot;,1499,'images/mens-shoes.jpg',this)"
-                    >
-                        🛒 Add to Cart
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- =====================================
-                 5. PREMIUM BAG
-            ====================================== -->
-
-            <article
-                class="product-card"
-                data-name="Premium Bag"
-                data-category="Accessories"
-            >
-
-                <div class="product-image">
-
-                    <img
-                        src="images/bag.jpg"
-                        alt="Premium Bag"
-                        loading="lazy"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="product-category">
-                        Accessories
-                    </div>
-
-                    <h3 class="product-name">
-                        Premium Bag
-                    </h3>
-
-                    <p class="product-description">
-                        Elegant everyday bag with a stylish
-                        premium finish.
-                    </p>
-
-                    <div class="price-row">
-
-                        <span class="price">
-                            ₹1,299
-                        </span>
-
-                        <span class="old-price">
-                            ₹1,999
-                        </span>
-
-                    </div>
-
-                    <button
-                        class="add-cart-btn"
-                        type="button"
-                        onclick="addToCart('Premium Bag',1299,'images/bag.jpg',this)"
-                    >
-                        🛒 Add to Cart
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- =====================================
-                 6. EARBUDS
-            ====================================== -->
-
-            <article
-                class="product-card"
-                data-name="Premium Earbuds"
-                data-category="Electronics"
-            >
-
-                <div class="product-image">
-
-                    <img
-                        src="images/earbuds.jpg"
-                        alt="Premium Earbuds"
-                        loading="lazy"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="product-category">
-                        Electronics
-                    </div>
-
-                    <h3 class="product-name">
-                        Premium Earbuds
-                    </h3>
-
-                    <p class="product-description">
-                        Wireless earbuds with a clean design
-                        and comfortable everyday listening.
-                    </p>
-
-                    <div class="price-row">
-
-                        <span class="price">
-                            ₹1,999
-                        </span>
-
-                        <span class="old-price">
-                            ₹3,499
-                        </span>
-
-                    </div>
-
-                    <button
-                        class="add-cart-btn"
-                        type="button"
-                        onclick="addToCart('Premium Earbuds',1999,'images/earbuds.jpg',this)"
-                    >
-                        🛒 Add to Cart
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- =====================================
-                 7. LOUNGEWEAR
-            ====================================== -->
-
-            <article
-                class="product-card"
-                data-name="Premium Loungewear"
-                data-category="Fashion"
-            >
-
-                <div class="product-image">
-
-                    <img
-                        src="images/loungewear.jpg"
-                        alt="Premium Loungewear"
-                        loading="lazy"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="product-category">
-                        Fashion
-                    </div>
-
-                    <h3 class="product-name">
-                        Premium Loungewear
-                    </h3>
-
-                    <p class="product-description">
-                        Soft and comfortable loungewear
-                        designed for relaxed everyday style.
-                    </p>
-
-                    <div class="price-row">
-
-                        <span class="price">
-                            ₹999
-                        </span>
-
-                        <span class="old-price">
-                            ₹1,599
-                        </span>
-
-                    </div>
-
-                    <button
-                        class="add-cart-btn"
-                        type="button"
-                        onclick="addToCart('Premium Loungewear',999,'images/loungewear.jpg',this)"
-                    >
-                        🛒 Add to Cart
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- =====================================
-                 8. SUNGLASSES
-            ====================================== -->
-
-            <article
-                class="product-card"
-                data-name="Premium Sunglasses"
-                data-category="Accessories"
-            >
-
-                <div class="product-image">
-
-                    <img
-                        src="images/sunglasses.jpg"
-                        alt="Premium Sunglasses"
-                        loading="lazy"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="product-category">
-                        Accessories
-                    </div>
-
-                    <h3 class="product-name">
-                        Premium Sunglasses
-                    </h3>
-
-                    <p class="product-description">
-                        Modern sunglasses with a stylish
-                        premium look.
-                    </p>
-
-                    <div class="price-row">
-
-                        <span class="price">
-                            ₹899
-                        </span>
-
-                        <span class="old-price">
-                            ₹1,499
-                        </span>
-
-                    </div>
-
-                    <button
-                        class="add-cart-btn"
-                        type="button"
-                        onclick="addToCart('Premium Sunglasses',899,'images/sunglasses.jpg',this)"
-                    >
-                        🛒 Add to Cart
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- =====================================
-                 9. MAKEUP
-            ====================================== -->
-
-            <article
-                class="product-card"
-                data-name="Beauty Makeup Collection"
-                data-category="Beauty"
-            >
-
-                <div class="product-image">
-
-                    <span class="sale-badge">
-                        SALE
-                    </span>
-
-                    <img
-                        src="images/makeup.jpg"
-                        alt="Beauty Makeup Collection"
-                        loading="lazy"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="product-category">
-                        Beauty
-                    </div>
-
-                    <h3 class="product-name">
-                        Beauty Makeup Collection
-                    </h3>
-
-                    <p class="product-description">
-                        A beautiful makeup collection
-                        for your everyday beauty routine.
-                    </p>
-
-                    <div class="price-row">
-
-                        <span class="price">
-                            ₹1,299
-                        </span>
-
-                        <span class="old-price">
-                            ₹1,999
-                        </span>
-
-                    </div>
-
-                    <button
-                        class="add-cart-btn"
-                        type="button"
-                        onclick="addToCart('Beauty Makeup Collection',1299,'images/makeup.jpg',this)"
-                    >
-                        🛒 Add to Cart
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- =====================================
-                 10. PERFUME
-            ====================================== -->
-
-            <article
-                class="product-card"
-                data-name="Luxury Perfume"
-                data-category="Beauty"
-            >
-
-                <div class="product-image">
-
-                    <img
-                        src="images/perfume.jpg"
-                        alt="Luxury Perfume"
-                        loading="lazy"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="product-category">
-                        Beauty
-                    </div>
-
-                    <h3 class="product-name">
-                        Luxury Perfume
-                    </h3>
-
-                    <p class="product-description">
-                        A sophisticated fragrance with
-                        a premium elegant presentation.
-                    </p>
-
-                    <div class="price-row">
-
-                        <span class="price">
-                            ₹1,599
-                        </span>
-
-                        <span class="old-price">
-                            ₹2,499
-                        </span>
-
-                    </div>
-
-                    <button
-                        class="add-cart-btn"
-                        type="button"
-                        onclick="addToCart('Luxury Perfume',1599,'images/perfume.jpg',this)"
-                    >
-                        🛒 Add to Cart
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- =====================================
-                 11. PREMIUM WATCH
-            ====================================== -->
-
-            <article
-                class="product-card"
-                data-name="Premium Watch"
-                data-category="Accessories"
-            >
-
-                <div class="product-image">
-
-                    <img
-                        src="images/watch.jpg"
-                        alt="Premium Watch"
-                        loading="lazy"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="product-category">
-                        Accessories
-                    </div>
-
-                    <h3 class="product-name">
-                        Premium Watch
-                    </h3>
-
-                    <p class="product-description">
-                        Stylish premium watch designed
-                        for a modern and elegant look.
-                    </p>
-
-                    <div class="price-row">
-
-                        <span class="price">
-                            ₹2,999
-                        </span>
-
-                        <span class="old-price">
-                            ₹4,499
-                        </span>
-
-                    </div>
-
-                    <button
-                        class="add-cart-btn"
-                        type="button"
-                        onclick="addToCart('Premium Watch',2999,'images/watch.jpg',this)"
-                    >
-                        🛒 Add to Cart
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- =====================================
-                 12. SUPERCAR KEY
-            ====================================== -->
-
-            <article
-                class="product-card"
-                data-name="Luxury Supercar Key"
-                data-category="Luxury"
-            >
-
-                <div class="product-image">
-
-                    <img
-                        src="images/supercar-key.jpg"
-                        alt="Luxury Supercar Key"
-                        loading="lazy"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="product-category">
-                        Luxury
-                    </div>
-
-                    <h3 class="product-name">
-                        Luxury Supercar Key
-                    </h3>
-
-                    <p class="product-description">
-                        Premium luxury-inspired collectible
-                        accessory with an elegant finish.
-                    </p>
-
-                    <div class="price-row">
-
-                        <span class="price">
-                            ₹2,499
-                        </span>
-
-                        <span class="old-price">
-                            ₹3,999
-                        </span>
-
-                    </div>
-
-                    <button
-                        class="add-cart-btn"
-                        type="button"
-                        onclick="addToCart('Luxury Supercar Key',2499,'images/supercar-key.jpg',this)"
-                    >
-                        🛒 Add to Cart
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- =====================================
-                 NO RESULTS
-            ====================================== -->
-
-            <div
-                class="no-results"
-                id="noResults"
-            >
-                <div style="font-size:42px;margin-bottom:10px;">
-                    🔎
-                </div>
-
-                <strong>
-                    No products found
-                </strong>
-
-                <p style="margin-top:6px;">
-                    Try another product name or category.
-                </p>
             </div>
 
+            <div class="product-info">
+
+                <div class="product-category">
+                    Men Fashion
+                </div>
+
+                <h3 class="product-name">
+                    Men's Suit Tuxedo
+                </h3>
+
+                <p class="product-description">
+                    Elegant premium formal suit and tuxedo
+                    collection for special occasions.
+                </p>
+
+                <div class="price-row">
+
+                    <span class="price">
+                        ₹4,999
+                    </span>
+
+                    <span class="old-price">
+                        ₹7,999
+                    </span>
+
+                </div>
+
+                <button
+                    class="add-cart-btn"
+                    onclick="addToCart(&quot;Men's Suit Tuxedo&quot;,4999,'images/suit-tuxedo.jpg',this)"
+                >
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <!-- =================================================
+             WOMEN'S SHOES
+        ================================================== -->
+
+        <article
+            class="product-card"
+            data-name="Women's Shoes"
+            data-category="Women's Fashion"
+        >
+
+            <div class="product-image">
+
+                <span class="sale-badge">
+                    SALE
+                </span>
+
+                <img
+                    src="images/womens-shoes.jpg"
+                    alt="Women's Shoes"
+                    loading="lazy"
+                >
+
+            </div>
+
+            <div class="product-info">
+
+                <div class="product-category">
+                    Women's Fashion
+                </div>
+
+                <h3 class="product-name">
+                    Women's Shoes
+                </h3>
+
+                <p class="product-description">
+                    Stylish and comfortable women's footwear
+                    for everyday and special occasions.
+                </p>
+
+                <div class="price-row">
+
+                    <span class="price">
+                        ₹1,899
+                    </span>
+
+                    <span class="old-price">
+                        ₹2,999
+                    </span>
+
+                </div>
+
+                <button
+                    class="add-cart-btn"
+                    onclick="addToCart(&quot;Women's Shoes&quot;,1899,'images/womens-shoes.jpg',this)"
+                >
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <!-- =================================================
+             MEN'S SHOES
+        ================================================== -->
+
+        <article
+            class="product-card"
+            data-name="Men's Shoes"
+            data-category="Footwear"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="images/mens-shoes.jpg"
+                    alt="Men's Shoes"
+                    loading="lazy"
+                >
+
+            </div>
+
+            <div class="product-info">
+
+                <div class="product-category">
+                    Footwear
+                </div>
+
+                <h3 class="product-name">
+                    Men's Shoes
+                </h3>
+
+                <p class="product-description">
+                    Premium men's shoes designed for comfort,
+                    style and everyday wear.
+                </p>
+
+                <div class="price-row">
+
+                    <span class="price">
+                        ₹1,499
+                    </span>
+
+                    <span class="old-price">
+                        ₹2,499
+                    </span>
+
+                </div>
+
+                <button
+                    class="add-cart-btn"
+                    onclick="addToCart(&quot;Men's Shoes&quot;,1499,'images/mens-shoes.jpg',this)"
+                >
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <!-- =================================================
+             BAG
+        ================================================== -->
+
+        <article
+            class="product-card"
+            data-name="Premium Bag"
+            data-category="Accessories"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="images/bag.jpg"
+                    alt="Premium Bag"
+                    loading="lazy"
+                >
+
+            </div>
+
+            <div class="product-info">
+
+                <div class="product-category">
+                    Accessories
+                </div>
+
+                <h3 class="product-name">
+                    Premium Bag
+                </h3>
+
+                <p class="product-description">
+                    Elegant everyday bag with a stylish
+                    premium finish.
+                </p>
+
+                <div class="price-row">
+
+                    <span class="price">
+                        ₹1,299
+                    </span>
+
+                    <span class="old-price">
+                        ₹1,999
+                    </span>
+
+                </div>
+
+                <button
+                    class="add-cart-btn"
+                    onclick="addToCart('Premium Bag',1299,'images/bag.jpg',this)"
+                >
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <!-- =================================================
+             EARBUDS
+        ================================================== -->
+
+        <article
+            class="product-card"
+            data-name="Premium Earbuds"
+            data-category="Electronics"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="images/earbuds.jpg"
+                    alt="Premium Earbuds"
+                    loading="lazy"
+                >
+
+            </div>
+
+            <div class="product-info">
+
+                <div class="product-category">
+                    Electronics
+                </div>
+
+                <h3 class="product-name">
+                    Premium Earbuds
+                </h3>
+
+                <p class="product-description">
+                    Wireless earbuds with a clean design
+                    and comfortable everyday listening.
+                </p>
+
+                <div class="price-row">
+
+                    <span class="price">
+                        ₹1,999
+                    </span>
+
+                    <span class="old-price">
+                        ₹3,499
+                    </span>
+
+                </div>
+
+                <button
+                    class="add-cart-btn"
+                    onclick="addToCart('Premium Earbuds',1999,'images/earbuds.jpg',this)"
+                >
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <!-- =================================================
+             LOUNGEWEAR
+        ================================================== -->
+
+        <article
+            class="product-card"
+            data-name="Premium Loungewear"
+            data-category="Fashion"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="images/loungewear.jpg"
+                    alt="Premium Loungewear"
+                    loading="lazy"
+                >
+
+            </div>
+
+            <div class="product-info">
+
+                <div class="product-category">
+                    Fashion
+                </div>
+
+                <h3 class="product-name">
+                    Premium Loungewear
+                </h3>
+
+                <p class="product-description">
+                    Soft and comfortable loungewear designed
+                    for relaxed everyday style.
+                </p>
+
+                <div class="price-row">
+
+                    <span class="price">
+                        ₹999
+                    </span>
+
+                    <span class="old-price">
+                        ₹1,599
+                    </span>
+
+                </div>
+
+                <button
+                    class="add-cart-btn"
+                    onclick="addToCart('Premium Loungewear',999,'images/loungewear.jpg',this)"
+                >
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <!-- =================================================
+             SUNGLASSES
+        ================================================== -->
+
+        <article
+            class="product-card"
+            data-name="Premium Sunglasses"
+            data-category="Accessories"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="images/sunglasses.jpg"
+                    alt="Premium Sunglasses"
+                    loading="lazy"
+                >
+
+            </div>
+
+            <div class="product-info">
+
+                <div class="product-category">
+                    Accessories
+                </div>
+
+                <h3 class="product-name">
+                    Premium Sunglasses
+                </h3>
+
+                <p class="product-description">
+                    Modern sunglasses with a stylish
+                    premium look.
+                </p>
+
+                <div class="price-row">
+
+                    <span class="price">
+                        ₹899
+                    </span>
+
+                    <span class="old-price">
+                        ₹1,499
+                    </span>
+
+                </div>
+
+                <button
+                    class="add-cart-btn"
+                    onclick="addToCart('Premium Sunglasses',899,'images/sunglasses.jpg',this)"
+                >
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <!-- =================================================
+             MAKEUP
+        ================================================== -->
+
+        <article
+            class="product-card"
+            data-name="Beauty Makeup Collection"
+            data-category="Beauty"
+        >
+
+            <div class="product-image">
+
+                <span class="sale-badge">
+                    SALE
+                </span>
+
+                <img
+                    src="images/makeup.jpg"
+                    alt="Beauty Makeup Collection"
+                    loading="lazy"
+                >
+
+            </div>
+
+            <div class="product-info">
+
+                <div class="product-category">
+                    Beauty
+                </div>
+
+                <h3 class="product-name">
+                    Beauty Makeup Collection
+                </h3>
+
+                <p class="product-description">
+                    A beautiful makeup collection for
+                    your everyday beauty routine.
+                </p>
+
+                <div class="price-row">
+
+                    <span class="price">
+                        ₹1,299
+                    </span>
+
+                    <span class="old-price">
+                        ₹1,999
+                    </span>
+
+                </div>
+
+                <button
+                    class="add-cart-btn"
+                    onclick="addToCart('Beauty Makeup Collection',1299,'images/makeup.jpg',this)"
+                >
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <!-- =================================================
+             PERFUME
+        ================================================== -->
+
+        <article
+            class="product-card"
+            data-name="Luxury Perfume"
+            data-category="Beauty"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="images/perfume.jpg"
+                    alt="Luxury Perfume"
+                    loading="lazy"
+                >
+
+            </div>
+
+            <div class="product-info">
+
+                <div class="product-category">
+                    Beauty
+                </div>
+
+                <h3 class="product-name">
+                    Luxury Perfume
+                </h3>
+
+                <p class="product-description">
+                    A sophisticated fragrance with a premium
+                    elegant presentation.
+                </p>
+
+                <div class="price-row">
+
+                    <span class="price">
+                        ₹1,599
+                    </span>
+
+                    <span class="old-price">
+                        ₹2,499
+                    </span>
+
+                </div>
+
+                <button
+                    class="add-cart-btn"
+                    onclick="addToCart('Luxury Perfume',1599,'images/perfume.jpg',this)"
+                >
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <!-- =================================================
+             PREMIUM WATCH
+             FIXED IMAGE
+        ================================================== -->
+
+        <article
+            class="product-card"
+            data-name="Premium Watch"
+            data-category="Accessories"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="images/watch.jpg"
+                    alt="Premium Watch"
+                    loading="lazy"
+                    onerror="this.onerror=null;this.src='images/smartwatch.jpg';"
+                >
+
+            </div>
+
+            <div class="product-info">
+
+                <div class="product-category">
+                    Accessories
+                </div>
+
+                <h3 class="product-name">
+                    Premium Watch
+                </h3>
+
+                <p class="product-description">
+                    Stylish premium watch designed for a
+                    modern and elegant look.
+                </p>
+
+                <div class="price-row">
+
+                    <span class="price">
+                        ₹2,999
+                    </span>
+
+                    <span class="old-price">
+                        ₹4,499
+                    </span>
+
+                </div>
+
+                <button
+                    class="add-cart-btn"
+                    onclick="addToCart('Premium Watch',2999,'images/watch.jpg',this)"
+                >
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <!-- =================================================
+             SUPERCAR KEY
+        ================================================== -->
+
+        <article
+            class="product-card"
+            data-name="Luxury Supercar Key"
+            data-category="Luxury"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="images/supercar-key.jpg"
+                    alt="Luxury Supercar Key"
+                    loading="lazy"
+                >
+
+            </div>
+
+            <div class="product-info">
+
+                <div class="product-category">
+                    Luxury
+                </div>
+
+                <h3 class="product-name">
+                    Luxury Supercar Key
+                </h3>
+
+                <p class="product-description">
+                    Premium luxury-inspired collectible
+                    accessory with an elegant finish.
+                </p>
+
+                <div class="price-row">
+
+                    <span class="price">
+                        ₹2,499
+                    </span>
+
+                    <span class="old-price">
+                        ₹3,999
+                    </span>
+
+                </div>
+
+                <button
+                    class="add-cart-btn"
+                    onclick="addToCart('Luxury Supercar Key',2499,'images/supercar-key.jpg',this)"
+                >
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <!-- NO RESULTS -->
+
+        <div
+            class="no-results"
+            id="noResults"
+        >
+            🔎
+            <br>
+            <strong>No products found</strong>
+
+            <p style="margin-top:6px;">
+                Try another product name or category.
+            </p>
         </div>
 
-    </main>
+    </div>
+
+</main>
 
 
-    <!-- =========================================
-         FOOTER
-    ========================================= -->
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
-    <footer>
+<footer>
 
-        <h3>
-            ShopNova
-        </h3>
+    <h3>
+        ShopNova
+    </h3>
 
-        <div class="footer-line"></div>
+    <div class="footer-line"></div>
 
-        <p>
-            Premium shopping • Beautiful choices
-        </p>
+    <p>
+        Premium shopping • Beautiful choices
+    </p>
 
-        <p>
-            © 2026 ShopNova | CEO & Founder: Anuradha
-        </p>
+    <p>
+        © 2026 ShopNova | CEO & Founder: Anuradha
+    </p>
 
-    </footer>
+</footer>
 
 
-    <!-- =========================================
-         YOUR EXISTING JAVASCRIPT
-    ========================================= -->
+<!-- YOUR EXISTING SCRIPT.JS -->
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>
