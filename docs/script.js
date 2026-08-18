@@ -1,15 +1,12 @@
 "use strict";
 
-/* =========================================================
-   SHOPNOVA GLOBAL SCRIPT
-========================================================= */
+
+/* =====================================================
+   SHOPNOVA CART
+===================================================== */
 
 const CART_KEY = "shopnova_cart";
 
-
-/* =========================================================
-   GET CART
-========================================================= */
 
 function getCart() {
 
@@ -41,10 +38,6 @@ function getCart() {
 }
 
 
-/* =========================================================
-   SAVE CART
-========================================================= */
-
 function saveCart(cart) {
 
     try {
@@ -64,14 +57,9 @@ function saveCart(cart) {
 }
 
 
-/* =========================================================
-   CART COUNT
-========================================================= */
-
 function updateCartCount() {
 
-    const cart =
-        getCart();
+    const cart = getCart();
 
     const total =
         cart.reduce(
@@ -98,9 +86,9 @@ function updateCartCount() {
 }
 
 
-/* =========================================================
+/* =====================================================
    ADD TO CART
-========================================================= */
+===================================================== */
 
 function addToCart(
     productName,
@@ -128,17 +116,14 @@ function addToCart(
 
         cart.push({
 
-            name:
-                productName,
+            name: productName,
 
-            price:
-                Number(price) || 0,
+            price: Number(price) || 0,
 
-            image:
-                image || "",
+            image: image || "",
 
-            quantity:
-                1
+            quantity: 1
+
         });
     }
 
@@ -156,10 +141,6 @@ function addToCart(
         button.innerHTML =
             "✓ Added";
 
-        button.classList.add(
-            "added"
-        );
-
         button.disabled =
             true;
 
@@ -169,10 +150,6 @@ function addToCart(
 
                 button.innerHTML =
                     oldText;
-
-                button.classList.remove(
-                    "added"
-                );
 
                 button.disabled =
                     false;
@@ -190,10 +167,6 @@ function addToCart(
 }
 
 
-/* =========================================================
-   COMPATIBILITY
-========================================================= */
-
 function add(
     productName,
     price,
@@ -208,9 +181,9 @@ function add(
 }
 
 
-/* =========================================================
+/* =====================================================
    MESSAGE
-========================================================= */
+===================================================== */
 
 function showMessage(message) {
 
@@ -243,7 +216,7 @@ function showMessage(message) {
             "999999";
 
         box.style.background =
-            "#0b3478";
+            "linear-gradient(135deg,#0a397b,#315bd8)";
 
         box.style.color =
             "#ffffff";
@@ -252,7 +225,7 @@ function showMessage(message) {
             "13px 18px";
 
         box.style.borderRadius =
-            "10px";
+            "11px";
 
         box.style.fontSize =
             "13px";
@@ -261,7 +234,7 @@ function showMessage(message) {
             "700";
 
         box.style.boxShadow =
-            "0 10px 30px rgba(0,0,0,.22)";
+            "0 10px 30px rgba(0,0,0,.25)";
 
         box.style.transition =
             "opacity .3s ease";
@@ -297,277 +270,102 @@ function showMessage(message) {
 }
 
 
-/* =========================================================
-   CONTACT POPUP
-========================================================= */
-
-function setupContactPopup() {
-
-    const button =
-        document.getElementById(
-            "contactBtn"
-        );
-
-    const overlay =
-        document.getElementById(
-            "contactOverlay"
-        );
-
-    const close =
-        document.getElementById(
-            "contactClose"
-        );
-
-
-    if (!button || !overlay) {
-        return;
-    }
-
-
-    button.addEventListener(
-        "click",
-        () => {
-
-            overlay.classList.add(
-                "show"
-            );
-
-            document.body.style.overflow =
-                "hidden";
-        }
-    );
-
-
-    if (close) {
-
-        close.addEventListener(
-            "click",
-            closeContact
-        );
-    }
-
-
-    overlay.addEventListener(
-        "click",
-        event => {
-
-            if (
-                event.target ===
-                overlay
-            ) {
-
-                closeContact();
-            }
-        }
-    );
-
-
-    document.addEventListener(
-        "keydown",
-        event => {
-
-            if (
-                event.key === "Escape"
-            ) {
-
-                closeContact();
-            }
-        }
-    );
-
-
-    function closeContact() {
-
-        overlay.classList.remove(
-            "show"
-        );
-
-        document.body.style.overflow =
-            "";
-    }
-}
-
-
-/* =========================================================
-   PRODUCT DATABASE FOR HOMEPAGE SEARCH
-========================================================= */
+/* =====================================================
+   HOMEPAGE SEARCH PRODUCTS
+===================================================== */
 
 const SHOPNOVA_PRODUCTS = [
 
     {
-        name:
-            "Bible Wonders",
-
-        price:
-            999,
-
-        image:
-            "images/bible-wonders.jpg",
-
-        category:
-            "Books"
+        name: "Bible Wonders",
+        price: 999,
+        image: "images/bible-wonders.jpg",
+        category: "Books"
     },
 
     {
-        name:
-            "Women's Shoes",
-
-        price:
-            1499,
-
-        image:
-            "images/womens-shoes.jpg",
-
-        category:
-            "Women's Fashion"
+        name: "Women's Shoes",
+        price: 1499,
+        image: "images/womens-shoes.jpg",
+        category: "Women's Fashion"
     },
 
     {
-        name:
-            "Men's Suit Tuxedo",
-
-        price:
-            3999,
-
-        image:
-            "images/tuxedo.jpg",
-
-        category:
-            "Men's Fashion"
+        name: "Men's Suit Tuxedo",
+        price: 3999,
+        image: "images/tuxedo.jpg",
+        category: "Men's Fashion"
     },
 
     {
-        name:
-            "Premium Watch",
-
-        price:
-            2999,
-
-        image:
-            "images/watch.jpg",
-
-        category:
-            "Accessories"
+        name: "Premium Watch",
+        price: 2999,
+        image: "images/watch.jpg",
+        category: "Accessories"
     },
 
     {
-        name:
-            "Luxury Perfume",
-
-        price:
-            1999,
-
-        image:
-            "images/perfume.jpg",
-
-        category:
-            "Beauty"
+        name: "Luxury Perfume",
+        price: 1999,
+        image: "images/perfume.jpg",
+        category: "Beauty"
     },
 
     {
-        name:
-            "Men's Shoes",
-
-        price:
-            1799,
-
-        image:
-            "images/mens-shoes.jpg",
-
-        category:
-            "Men's Fashion"
+        name: "Men's Shoes",
+        price: 1799,
+        image: "images/mens-shoes.jpg",
+        category: "Men's Fashion"
     },
 
     {
-        name:
-            "Premium Sunglasses",
-
-        price:
-            1299,
-
-        image:
-            "images/sunglasses.jpg",
-
-        category:
-            "Accessories"
+        name: "Premium Sunglasses",
+        price: 1299,
+        image: "images/sunglasses.jpg",
+        category: "Accessories"
     },
 
     {
-        name:
-            "Luxury Handbag",
-
-        price:
-            2499,
-
-        image:
-            "images/bag.jpg",
-
-        category:
-            "Women's Fashion"
+        name: "Luxury Handbag",
+        price: 2499,
+        image: "images/bag.jpg",
+        category: "Women's Fashion"
     },
 
     {
-        name:
-            "Premium Makeup",
-
-        price:
-            1599,
-
-        image:
-            "images/makeup.jpg",
-
-        category:
-            "Beauty"
+        name: "Premium Makeup",
+        price: 1599,
+        image: "images/makeup.jpg",
+        category: "Beauty"
     },
 
     {
-        name:
-            "Comfort Loungewear",
-
-        price:
-            1199,
-
-        image:
-            "images/loungewear.jpg",
-
-        category:
-            "Fashion"
+        name: "Comfort Loungewear",
+        price: 1199,
+        image: "images/loungewear.jpg",
+        category: "Fashion"
     },
 
     {
-        name:
-            "Premium Earbuds",
-
-        price:
-            2199,
-
-        image:
-            "images/earbuds.jpg",
-
-        category:
-            "Electronics"
+        name: "Premium Earbuds",
+        price: 2199,
+        image: "images/earbuds.jpg",
+        category: "Electronics"
     },
 
     {
-        name:
-            "Supercar Key",
-
-        price:
-            4999,
-
-        image:
-            "images/supercar-key.jpg",
-
-        category:
-            "Luxury"
+        name: "Supercar Key",
+        price: 4999,
+        image: "images/supercar-key.jpg",
+        category: "Luxury"
     }
 
 ];
 
 
-/* =========================================================
+/* =====================================================
    HOMEPAGE SEARCH
-========================================================= */
+===================================================== */
 
 function setupHomeSearch() {
 
@@ -611,7 +409,9 @@ function setupHomeSearch() {
     }
 
 
-    function performSearch() {
+    function performSearch(
+        shouldScroll = true
+    ) {
 
         const query =
             input.value
@@ -627,8 +427,10 @@ function setupHomeSearch() {
             grid.innerHTML =
                 "";
 
-            noResults.style.display =
-                "none";
+            if (noResults) {
+                noResults.style.display =
+                    "none";
+            }
 
             return;
         }
@@ -639,7 +441,6 @@ function setupHomeSearch() {
                 product => {
 
                     return (
-
                         product.name
                             .toLowerCase()
                             .includes(query)
@@ -657,7 +458,6 @@ function setupHomeSearch() {
         results.style.display =
             "block";
 
-
         grid.innerHTML =
             "";
 
@@ -666,15 +466,21 @@ function setupHomeSearch() {
             matches.length === 0
         ) {
 
-            noResults.style.display =
-                "block";
+            if (noResults) {
+
+                noResults.style.display =
+                    "block";
+            }
 
             return;
         }
 
 
-        noResults.style.display =
-            "none";
+        if (noResults) {
+
+            noResults.style.display =
+                "none";
+        }
 
 
         matches.forEach(
@@ -689,41 +495,72 @@ function setupHomeSearch() {
                     "home-product-card";
 
 
-                card.innerHTML = `
+                const image =
+                    document.createElement(
+                        "img"
+                    );
 
-                    <img
-                        src="${product.image}"
-                        alt="${escapeHTML(product.name)}"
-                        class="home-product-image"
-                        loading="lazy"
-                        onerror="this.style.display='none';"
-                    >
+                image.className =
+                    "home-product-image";
 
-                    <div class="home-product-info">
+                image.src =
+                    product.image;
 
-                        <h3>
-                            ${escapeHTML(product.name)}
-                        </h3>
+                image.alt =
+                    product.name;
 
-                        <div class="home-product-price">
-                            ₹${Number(product.price).toLocaleString("en-IN")}
-                        </div>
+                image.loading =
+                    "lazy";
 
-                        <button
-                            type="button"
-                            class="home-add-cart"
-                        >
-                            🛒 Add to Cart
-                        </button>
 
-                    </div>
-                `;
+                const info =
+                    document.createElement(
+                        "div"
+                    );
+
+                info.className =
+                    "home-product-info";
+
+
+                const title =
+                    document.createElement(
+                        "h3"
+                    );
+
+                title.textContent =
+                    product.name;
+
+
+                const price =
+                    document.createElement(
+                        "div"
+                    );
+
+                price.className =
+                    "home-product-price";
+
+                price.textContent =
+                    "₹" +
+                    Number(
+                        product.price
+                    ).toLocaleString(
+                        "en-IN"
+                    );
 
 
                 const cartButton =
-                    card.querySelector(
-                        ".home-add-cart"
+                    document.createElement(
+                        "button"
                     );
+
+                cartButton.type =
+                    "button";
+
+                cartButton.className =
+                    "home-add-cart";
+
+                cartButton.textContent =
+                    "🛒 Add to Cart";
 
 
                 cartButton.addEventListener(
@@ -740,29 +577,42 @@ function setupHomeSearch() {
                 );
 
 
-                grid.appendChild(
-                    card
-                );
+                info.appendChild(title);
+
+                info.appendChild(price);
+
+                info.appendChild(cartButton);
+
+                card.appendChild(image);
+
+                card.appendChild(info);
+
+                grid.appendChild(card);
             }
         );
 
 
-        results.scrollIntoView({
-            behavior:
-                "smooth",
-            block:
-                "start"
-        });
+        if (shouldScroll) {
+
+            setTimeout(
+                () => {
+
+                    results.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+
+                },
+                50
+            );
+        }
     }
 
 
-    if (button) {
-
-        button.addEventListener(
-            "click",
-            performSearch
-        );
-    }
+    button?.addEventListener(
+        "click",
+        () => performSearch(true)
+    );
 
 
     input.addEventListener(
@@ -770,13 +620,12 @@ function setupHomeSearch() {
         event => {
 
             if (
-                event.key ===
-                "Enter"
+                event.key === "Enter"
             ) {
 
                 event.preventDefault();
 
-                performSearch();
+                performSearch(true);
             }
         }
     );
@@ -796,83 +645,145 @@ function setupHomeSearch() {
                 grid.innerHTML =
                     "";
 
-                noResults.style.display =
-                    "none";
+                if (noResults) {
+
+                    noResults.style.display =
+                        "none";
+                }
 
             } else {
 
-                performSearch();
+                performSearch(false);
             }
         }
     );
 
 
-    if (clear) {
+    clear?.addEventListener(
+        "click",
+        () => {
 
-        clear.addEventListener(
-            "click",
-            () => {
+            input.value =
+                "";
 
-                input.value =
-                    "";
+            results.style.display =
+                "none";
 
-                results.style.display =
-                    "none";
+            grid.innerHTML =
+                "";
 
-                grid.innerHTML =
-                    "";
+            if (noResults) {
 
                 noResults.style.display =
                     "none";
-
-                input.focus();
             }
+
+            input.focus();
+        }
+    );
+}
+
+
+/* =====================================================
+   CONTACT POPUP
+===================================================== */
+
+function setupContactPopup() {
+
+    const button =
+        document.getElementById(
+            "contactBtn"
         );
+
+    const overlay =
+        document.getElementById(
+            "contactOverlay"
+        );
+
+    const close =
+        document.getElementById(
+            "contactClose"
+        );
+
+
+    if (!button || !overlay) {
+        return;
     }
-}
 
 
-/* =========================================================
-   HTML ESCAPE
-========================================================= */
+    function openContact() {
 
-function escapeHTML(value) {
-
-    return String(value)
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
+        overlay.classList.add(
+            "show"
         );
+
+        document.body.style.overflow =
+            "hidden";
+    }
+
+
+    function closeContact() {
+
+        overlay.classList.remove(
+            "show"
+        );
+
+        document.body.style.overflow =
+            "";
+    }
+
+
+    button.addEventListener(
+        "click",
+        openContact
+    );
+
+
+    close?.addEventListener(
+        "click",
+        closeContact
+    );
+
+
+    overlay.addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target === overlay
+            ) {
+
+                closeContact();
+            }
+        }
+    );
+
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                closeContact();
+            }
+        }
+    );
 }
 
 
-/* =========================================================
+/* =====================================================
    STORAGE SYNC
-========================================================= */
+===================================================== */
 
 window.addEventListener(
     "storage",
     event => {
 
         if (
-            event.key ===
-            CART_KEY
+            event.key === CART_KEY
         ) {
 
             updateCartCount();
@@ -881,9 +792,9 @@ window.addEventListener(
 );
 
 
-/* =========================================================
+/* =====================================================
    PAGE READY
-========================================================= */
+===================================================== */
 
 document.addEventListener(
     "DOMContentLoaded",
