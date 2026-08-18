@@ -1790,3 +1790,274 @@ body {
             25px 18px;
     }
 }
+/* =========================================
+   SHOPNOVA HERO TEXT ANIMATIONS
+   ONLY FOR WELCOME + MAIN HEADING
+========================================= */
+
+/* Welcome text animation */
+.animated-welcome {
+    display: inline-block;
+    animation:
+        welcomeFloat 3s ease-in-out infinite,
+        welcomeGlow 2s ease-in-out infinite alternate;
+    transform-origin: center;
+}
+
+/* Welcome floating effect */
+@keyframes welcomeFloat {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-6px) scale(1.03);
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Welcome glowing effect */
+@keyframes welcomeGlow {
+    from {
+        box-shadow: 0 5px 15px rgba(37, 99, 235, 0.15);
+    }
+
+    to {
+        box-shadow:
+            0 8px 28px rgba(37, 99, 235, 0.35),
+            0 0 18px rgba(96, 165, 250, 0.25);
+    }
+}
+
+
+/* =========================================
+   3D SHOP SMART LIVE BETTER
+========================================= */
+
+.animated-heading {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+
+    animation:
+        heading3D 4s ease-in-out infinite;
+
+    text-shadow:
+        1px 1px 0 #dbeafe,
+        2px 2px 0 #bfdbfe,
+        3px 3px 0 #93c5fd,
+        4px 4px 12px rgba(30, 64, 175, 0.20);
+}
+
+
+/* 3D movement */
+@keyframes heading3D {
+
+    0% {
+        transform:
+            perspective(1000px)
+            rotateX(0deg)
+            rotateY(0deg)
+            translateZ(0);
+    }
+
+    25% {
+        transform:
+            perspective(1000px)
+            rotateX(2deg)
+            rotateY(-3deg)
+            translateZ(8px);
+    }
+
+    50% {
+        transform:
+            perspective(1000px)
+            rotateX(0deg)
+            rotateY(3deg)
+            translateZ(12px);
+    }
+
+    75% {
+        transform:
+            perspective(1000px)
+            rotateX(-2deg)
+            rotateY(-2deg)
+            translateZ(8px);
+    }
+
+    100% {
+        transform:
+            perspective(1000px)
+            rotateX(0deg)
+            rotateY(0deg)
+            translateZ(0);
+    }
+}
+
+
+/* =========================================
+   BLUE TEXT 3D SHINE
+========================================= */
+
+.animated-heading .blue-text {
+    display: inline-block;
+
+    background:
+        linear-gradient(
+            90deg,
+            #2563eb,
+            #60a5fa,
+            #1d4ed8,
+            #38bdf8,
+            #2563eb
+        );
+
+    background-size: 300% 100%;
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+    animation: blueShine 3s linear infinite;
+
+    text-shadow: none;
+}
+
+
+@keyframes blueShine {
+
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .animated-heading {
+        animation-duration: 4.5s;
+
+        text-shadow:
+            1px 1px 0 #dbeafe,
+            2px 2px 0 #bfdbfe,
+            3px 3px 8px rgba(30, 64, 175, 0.18);
+    }
+
+    .animated-welcome {
+        animation-duration: 3.5s;
+    }
+}
+
+
+/* =========================================
+   REDUCE MOTION ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .animated-welcome,
+    .animated-heading,
+    .animated-heading .blue-text {
+        animation: none;
+    }
+}
+/* =========================================
+   SHOPNOVA LOGO VISIBILITY FIX
+   ONLY BRIGHTENS THE EXISTING LOGO
+   ========================================= */
+
+.nav-logo .mini-logo,
+.hero-logo-img {
+    display: block;
+    filter:
+        brightness(1.18)
+        contrast(1.05)
+        saturate(1.08)
+        drop-shadow(0 0 8px rgba(255, 255, 255, 0.55));
+
+    opacity: 1;
+}
+
+
+/* Light background behind logo
+   DOES NOT change the logo image */
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-logo .mini-logo {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 3px;
+}
+
+
+/* Hero/middle logo visibility */
+
+.graphic-card-frame {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.96),
+            rgba(239, 246, 255, 0.98)
+        );
+
+    border-radius: 24px;
+    box-shadow:
+        0 12px 35px rgba(15, 23, 42, 0.15),
+        0 0 25px rgba(96, 165, 250, 0.18);
+}
+
+
+/* Keep existing logo animation */
+
+.hero-logo-img {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* Mobile logo visibility */
+
+@media (max-width: 700px) {
+
+    .nav-logo .mini-logo {
+        filter:
+            brightness(1.2)
+            contrast(1.05)
+            saturate(1.08)
+            drop-shadow(
+                0 0 7px
+                rgba(255, 255, 255, 0.6)
+            );
+    }
+
+    .hero-logo-img {
+        filter:
+            brightness(1.18)
+            contrast(1.05)
+            saturate(1.08)
+            drop-shadow(
+                0 0 9px
+                rgba(255, 255, 255, 0.55)
+            );
+    }
+}
