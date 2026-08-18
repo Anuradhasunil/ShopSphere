@@ -1,1835 +1,718 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>ShopNova - Products</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: "Segoe UI", Arial, sans-serif;
-            background: #f4f7fb;
-            color: #172033;
-        }
-
-        /* =========================
-           TOP SALE BAR
-        ========================= */
-
-        .announcement {
-            background: linear-gradient(
-                90deg,
-                #ff9933,
-                #ffffff,
-                #138808
-            );
-
-            color: #111827;
-            text-align: center;
-            padding: 9px 15px;
-            font-size: 13px;
-            font-weight: 800;
-            line-height: 1.5;
-        }
-
-        /* =========================
-           HEADER
-        ========================= */
-
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: #071a3d;
-            color: white;
-            box-shadow: 0 5px 25px rgba(0,0,0,.18);
-        }
-
-        .header-main {
-            width: 100%;
-            max-width: 1450px;
-            margin: auto;
-            padding: 12px 24px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        /* =========================
-           SHOPNOVA LOGO
-        ========================= */
-
-        .logo {
-            min-width: 245px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: white;
-        }
-
-        /*
-           IMPORTANT:
-           Your real ShopNova dove/olive-leaf logo
-           should be saved as:
-
-           docs/images/shopnova-logo.png
-        */
-
-        .logo-art {
-            width: 58px;
-            height: 58px;
-            min-width: 58px;
-
-            border-radius: 14px;
-
-            background: #ffffff;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            overflow: hidden;
-
-            box-shadow:
-                0 4px 15px rgba(0,0,0,.25);
-        }
-
-        .logo-art img {
-            width: 100%;
-            height: 100%;
-
-            display: block;
-
-            object-fit: contain;
-        }
-
-        .logo-content {
-            display: flex;
-            flex-direction: column;
-            line-height: 1;
-        }
-
-        .logo-name {
-            font-size: 25px;
-            font-weight: 900;
-        }
-
-        .logo-name .shop {
-            color: white;
-        }
-
-        .logo-name .nova {
-            color: #55a7ff;
-        }
-
-        .logo-tagline {
-            margin-top: 5px;
-            font-size: 8px;
-            color: #cbd5e1;
-            letter-spacing: 1px;
-            font-weight: 700;
-        }
-
-        /* =========================
-           SEARCH
-        ========================= */
-
-        .search-box {
-            flex: 1;
-            max-width: 650px;
-            height: 46px;
-            display: flex;
-            background: white;
-            border-radius: 9px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,.15);
-        }
-
-        .search-box input {
-            width: 100%;
-            border: none;
-            outline: none;
-            padding: 0 17px;
-            font-size: 15px;
-            color: #1f2937;
-        }
-
-        .search-box button {
-            width: 58px;
-            border: none;
-            background: #1877f2;
-            color: white;
-            font-size: 19px;
-            cursor: pointer;
-        }
-
-        .search-box button:hover {
-            background: #0d5dcc;
-        }
-
-        /* =========================
-           HEADER LINKS
-        ========================= */
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .header-actions a {
-            color: white;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 700;
-            padding: 10px;
-            border-radius: 8px;
-            white-space: nowrap;
-        }
-
-        .header-actions a:hover {
-            background: rgba(255,255,255,.12);
-        }
-
-        .cart-link {
-            background: #138808 !important;
-        }
-
-        .cart-count {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 21px;
-            height: 21px;
-            padding: 0 5px;
-            margin-left: 3px;
-            border-radius: 50%;
-            background: #ff9933;
-            color: white;
-            font-size: 11px;
-            font-weight: 900;
-        }
-
-        /* =========================
-           NAV
-        ========================= */
-
-        .nav-bar {
-            background: #0b2858;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 35px;
-            padding: 9px 20px;
-        }
-
-        .nav-bar a {
-            color: #e8eef8;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 700;
-        }
-
-        .nav-bar a:hover,
-        .nav-bar a.active {
-            color: #ffb35c;
-        }
-
-        /* =========================
-           HERO
-        ========================= */
-
-        .hero {
-            min-height: 310px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            text-align: center;
-
-            padding: 50px 20px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(255,153,51,.96),
-                    rgba(255,255,255,.96),
-                    rgba(19,136,8,.94)
-                );
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f5f7fb;
+    color: #172033;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #071a3d;
+    color: white;
+    box-shadow: 0 3px 15px rgba(0,0,0,.15);
+}
+
+.header-main {
+    width: 100%;
+    max-width: 1450px;
+    margin: auto;
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* =========================
+   SHOPNOVA LOGO
+========================= */
+
+.logo {
+    min-width: 230px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    text-decoration: none;
+    color: white;
+}
+
+.logo-art {
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+    border-radius: 12px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,.2);
+}
+
+.logo-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.logo-content {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+
+.logo-name {
+    font-size: 24px;
+    font-weight: 900;
+}
+
+.logo-name .shop {
+    color: #fff;
+}
+
+.logo-name .nova {
+    color: #63b3ff;
+}
+
+.logo-tagline {
+    margin-top: 4px;
+    font-size: 8px;
+    color: #cbd5e1;
+    letter-spacing: .8px;
+    font-weight: 700;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-box {
+    flex: 1;
+    max-width: 650px;
+    height: 42px;
+    display: flex;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.search-box input {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 0 14px;
+    font-size: 14px;
+    color: #172033;
+}
+
+.search-box button {
+    width: 52px;
+    border: none;
+    background: #1769aa;
+    color: white;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+.search-box button:hover {
+    background: #0d4f82;
+}
+
+/* =========================
+   HEADER ACTIONS
+========================= */
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.header-actions a {
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 10px;
+    border-radius: 7px;
+    white-space: nowrap;
+}
+
+.header-actions a:hover {
+    background: rgba(255,255,255,.1);
+}
+
+.cart-link {
+    background: #138808 !important;
+}
+
+.cart-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    margin-left: 3px;
+    border-radius: 50%;
+    background: #fff;
+    color: #138808;
+    font-size: 10px;
+    font-weight: 900;
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.nav-bar {
+    background: #0b2858;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    padding: 7px 15px;
+}
+
+.nav-bar a {
+    color: #e8eef8;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.nav-bar a:hover,
+.nav-bar a.active {
+    color: #63b3ff;
+}
+
+/* =========================
+   PRODUCTS PAGE HERO
+========================= */
+
+.hero {
+    min-height: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    padding: 25px 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #071a3d 0%,
+            #123b70 55%,
+            #176b58 100%
+        );
+}
+
+.hero-content {
+    max-width: 850px;
+    padding: 20px 25px;
+}
+
+.hero-badge {
+    display: inline-block;
+    padding: 6px 15px;
+    border-radius: 20px;
+    background: #ffffff;
+    color: #071a3d;
+    font-size: 10px;
+    font-weight: 900;
+    margin-bottom: 8px;
+}
+
+.hero h1 {
+    color: white;
+    font-size: clamp(32px,5vw,48px);
+    font-weight: 900;
+    margin-bottom: 7px;
+}
+
+.hero h1 span {
+    color: #72d6a5;
+}
+
+.hero p {
+    max-width: 700px;
+    margin: auto;
+    color: #dce8f7;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* =========================
+   PRODUCTS SECTION
+========================= */
+
+.products-section {
+    width: 100%;
+    max-width: 1400px;
+    margin: auto;
+
+    /* SHORT MARGINS */
+    padding: 25px 18px 35px;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.section-heading h2 {
+    color: #071a3d;
+    font-size: 30px;
+    font-weight: 900;
+    margin-bottom: 4px;
+}
+
+.section-heading p {
+    color: #697386;
+    font-size: 13px;
+}
+
+/* =========================
+   SEARCH RESULT
+========================= */
+
+.search-result {
+    display: none;
+    text-align: center;
+    color: #071a3d;
+    font-size: 14px;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+/* =========================
+   PRODUCT GRID
+========================= */
+
+.products-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(235px, 1fr));
+
+    /* SMALL GAP */
+    gap: 18px;
+}
+
+/* =========================
+   PRODUCT CARD
+========================= */
+
+.product-card {
+    background: #fff;
+
+    border-radius: 13px;
+
+    overflow: hidden;
+
+    border: 1px solid #e1e7ef;
+
+    box-shadow:
+        0 5px 18px rgba(7,26,61,.07);
+
+    display: flex;
+    flex-direction: column;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 10px 28px rgba(7,26,61,.13);
+}
+
+.product-card.featured {
+    border: 2px solid #1769aa;
+}
+
+/* =========================
+   PRODUCT IMAGE
+========================= */
+
+.product-image {
+    height: 220px;
+
+    background: #eef2f7;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
 
-        .hero-content {
-            max-width: 900px;
-            padding: 35px 40px;
-            border-radius: 25px;
-
-            background: rgba(255,255,255,.93);
+    object-fit: cover;
 
-            box-shadow:
-                0 20px 50px rgba(0,0,0,.15);
-        }
+    transition: transform .35s ease;
+}
 
-        .hero-badge {
-            display: inline-block;
+.product-card:hover .product-image img {
+    transform: scale(1.04);
+}
 
-            padding: 8px 18px;
+/* =========================
+   BADGES
+========================= */
 
-            border-radius: 30px;
+.sale-badge {
+    position: absolute;
 
-            background: #071a3d;
-            color: white;
+    top: 10px;
+    left: 10px;
 
-            font-size: 12px;
-            font-weight: 900;
+    z-index: 3;
 
-            margin-bottom: 15px;
-        }
+    background: #e65f73;
 
-        .hero h1 {
-            color: #071a3d;
+    color: white;
 
-            font-size: clamp(36px,6vw,58px);
+    padding: 5px 9px;
 
-            font-weight: 900;
+    border-radius: 15px;
 
-            margin-bottom: 12px;
-        }
+    font-size: 9px;
 
-        .hero h1 span {
-            color: #138808;
-        }
+    font-weight: 900;
+}
 
-        .hero p {
-            max-width: 720px;
+.featured-badge {
+    position: absolute;
 
-            margin: auto;
+    top: 10px;
+    right: 10px;
 
-            color: #39455c;
+    z-index: 3;
 
-            font-size: 17px;
+    background: #1769aa;
 
-            line-height: 1.7;
-        }
+    color: white;
 
-        /* =========================
-           PRODUCTS SECTION
-        ========================= */
+    padding: 5px 9px;
 
-        .products-section {
-            width: 100%;
-            max-width: 1400px;
+    border-radius: 15px;
 
-            margin: auto;
+    font-size: 9px;
 
-            padding: 55px 25px 75px;
-        }
+    font-weight: 900;
+}
 
-        .section-heading {
-            text-align: center;
+/* =========================
+   PRODUCT INFO
+========================= */
 
-            margin-bottom: 30px;
-        }
+.product-info {
+    padding: 14px;
 
-        .section-heading h2 {
-            color: #071a3d;
+    display: flex;
+    flex-direction: column;
 
-            font-size: 34px;
+    flex: 1;
+}
 
-            font-weight: 900;
+.product-category {
+    color: #1769aa;
 
-            margin-bottom: 8px;
-        }
+    font-size: 10px;
 
-        .section-heading p {
-            color: #6c7484;
+    font-weight: 900;
 
-            font-size: 15px;
-        }
+    text-transform: uppercase;
 
-        .search-result {
-            display: none;
+    letter-spacing: .7px;
 
-            text-align: center;
+    margin-bottom: 4px;
+}
 
-            color: #071a3d;
+.product-name {
+    color: #071a3d;
 
-            font-size: 15px;
+    font-size: 17px;
 
-            font-weight: 800;
+    font-weight: 800;
 
-            margin-bottom: 25px;
-        }
+    line-height: 1.25;
 
-        /* =========================
-           PRODUCT GRID
-        ========================= */
+    min-height: 42px;
+}
 
-        .products-grid {
-            display: grid;
+.product-description {
+    color: #697386;
 
-            grid-template-columns:
-                repeat(auto-fit,minmax(255px,1fr));
+    font-size: 12px;
 
-            gap: 28px;
-        }
+    line-height: 1.4;
 
-        /* =========================
-           PRODUCT CARD
-        ========================= */
+    margin: 5px 0 10px;
 
-        .product-card {
-            background: white;
+    min-height: 34px;
+}
 
-            border-radius: 20px;
+.price-row {
+    display: flex;
 
-            overflow: hidden;
+    align-items: center;
 
-            border: 1px solid #e3e8f0;
+    gap: 8px;
 
-            box-shadow:
-                0 10px 30px rgba(0,0,0,.07);
+    margin-bottom: 11px;
+}
 
-            display: flex;
+.price {
+    color: #071a3d;
 
-            flex-direction: column;
+    font-size: 21px;
 
-            transition:
-                transform .3s ease,
-                box-shadow .3s ease;
-        }
+    font-weight: 900;
+}
 
-        .product-card:hover {
-            transform: translateY(-8px);
+.old-price {
+    color: #999;
 
-            box-shadow:
-                0 20px 45px rgba(7,26,61,.15);
-        }
+    font-size: 12px;
 
-        .product-card.featured {
-            border: 2px solid #ff9933;
-        }
+    text-decoration: line-through;
+}
 
-        /* =========================
-           PRODUCT IMAGE
-        ========================= */
+/* =========================
+   BUTTON
+========================= */
 
-        .product-image {
-            height: 270px;
+.add-cart-btn {
+    width: 100%;
 
-            background: #eef2f7;
+    padding: 10px;
 
-            position: relative;
+    border: none;
 
-            overflow: hidden;
-        }
+    border-radius: 8px;
 
-        .product-image img {
-            width: 100%;
-            height: 100%;
+    background: #071a3d;
 
-            display: block;
+    color: white;
 
-            object-fit: cover;
+    font-size: 13px;
 
-            transition:
-                transform .45s ease;
-        }
+    font-weight: 800;
 
-        .product-card:hover
-        .product-image img {
-            transform: scale(1.06);
-        }
+    cursor: pointer;
 
-        .sale-badge {
-            position: absolute;
+    margin-top: auto;
 
-            top: 13px;
-            left: 13px;
+    transition: .25s;
+}
 
-            z-index: 3;
+.add-cart-btn:hover {
+    background: #1769aa;
 
-            background: #e63946;
+    transform: translateY(-1px);
+}
 
-            color: white;
+.add-cart-btn.added {
+    background: #138808;
+}
 
-            padding: 7px 11px;
+/* =========================
+   NO RESULTS
+========================= */
 
-            border-radius: 20px;
+.no-results {
+    display: none;
 
-            font-size: 10px;
+    grid-column: 1 / -1;
 
-            font-weight: 900;
-        }
+    text-align: center;
 
-        .featured-badge {
-            position: absolute;
+    padding: 45px 20px;
 
-            top: 13px;
-            right: 13px;
+    color: #667085;
 
-            z-index: 3;
+    font-size: 16px;
+}
 
-            background: #138808;
+/* =========================
+   FOOTER
+========================= */
 
-            color: white;
+footer {
+    background: #071a3d;
+    color: white;
+    text-align: center;
+    padding: 22px 15px;
+}
 
-            padding: 7px 11px;
+footer h3 {
+    font-size: 20px;
+    font-weight: 900;
+}
 
-            border-radius: 20px;
+.footer-line {
+    width: 55px;
+    height: 2px;
+    margin: 8px auto;
+    background: #72d6a5;
+}
 
-            font-size: 10px;
+footer p {
+    color: #cbd5e1;
+    font-size: 11px;
+    line-height: 1.6;
+}
 
-            font-weight: 900;
-        }
+/* =========================
+   MOBILE
+========================= */
 
-        /* =========================
-           PRODUCT INFO
-        ========================= */
+@media(max-width:1050px) {
 
-        .product-info {
-            padding: 20px;
+    .header-main {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 
-            display: flex;
+    .logo {
+        min-width: auto;
+    }
 
-            flex-direction: column;
+    .search-box {
+        order: 3;
+        width: 100%;
+        max-width: 100%;
+    }
 
-            flex: 1;
-        }
+    .header-actions {
+        justify-content: center;
+    }
+}
 
-        .product-category {
-            color: #138808;
+@media(max-width:700px) {
 
-            font-size: 11px;
+    .header-main {
+        padding: 8px 12px;
+    }
 
-            font-weight: 900;
+    .logo {
+        width: 100%;
+        justify-content: center;
+    }
 
-            text-transform: uppercase;
+    .header-actions {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+    }
 
-            letter-spacing: .8px;
+    .header-actions a {
+        text-align: center;
+        font-size: 11px;
+        padding: 7px 4px;
+    }
 
-            margin-bottom: 7px;
-        }
+    .nav-bar {
+        justify-content: flex-start;
+        overflow-x: auto;
+        white-space: nowrap;
+        gap: 20px;
+    }
 
-        .product-name {
-            color: #071a3d;
+    .hero {
+        min-height: 170px;
+        padding: 20px 12px;
+    }
 
-            font-size: 20px;
+    .hero-content {
+        padding: 15px;
+    }
 
-            font-weight: 800;
+    .hero h1 {
+        font-size: 31px;
+    }
 
-            line-height: 1.3;
+    .hero p {
+        font-size: 12px;
+    }
 
-            min-height: 52px;
-        }
+    .products-section {
+        padding: 20px 12px 30px;
+    }
 
-        .product-description {
-            color: #697386;
+    .section-heading {
+        margin-bottom: 15px;
+    }
 
-            font-size: 13px;
+    .section-heading h2 {
+        font-size: 25px;
+    }
 
-            line-height: 1.5;
+    .products-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
 
-            margin: 7px 0 14px;
+    .product-image {
+        height: 185px;
+    }
 
-            min-height: 39px;
-        }
+    .product-info {
+        padding: 11px;
+    }
 
-        .price-row {
-            display: flex;
+    .product-name {
+        font-size: 15px;
+    }
 
-            align-items: center;
+    .product-description {
+        font-size: 11px;
+        min-height: 31px;
+    }
 
-            gap: 10px;
+    .price {
+        font-size: 18px;
+    }
 
-            margin-bottom: 15px;
-        }
+    .add-cart-btn {
+        font-size: 11px;
+        padding: 9px 5px;
+    }
+}
 
-        .price {
-            color: #071a3d;
+@media(max-width:430px) {
 
-            font-size: 25px;
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
 
-            font-weight: 900;
-        }
-
-        .old-price {
-            color: #999;
-
-            font-size: 13px;
-
-            text-decoration: line-through;
-        }
-
-        /* =========================
-           BUTTON
-        ========================= */
-
-        .add-cart-btn {
-            width: 100%;
-
-            padding: 13px;
-
-            border: none;
-
-            border-radius: 10px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #071a3d,
-                    #1655a8
-                );
-
-            color: white;
-
-            font-size: 14px;
-
-            font-weight: 800;
-
-            cursor: pointer;
-
-            margin-top: auto;
-
-            transition: .3s;
-        }
-
-        .add-cart-btn:hover {
-            background:
-                linear-gradient(
-                    135deg,
-                    #138808,
-                    #0b6e05
-                );
-
-            transform: translateY(-2px);
-        }
-
-        .add-cart-btn.added {
-            background: #138808;
-        }
-
-        .add-cart-btn:disabled {
-            cursor: default;
-        }
-
-        /* =========================
-           NO RESULTS
-        ========================= */
-
-        .no-results {
-            display: none;
-
-            grid-column: 1 / -1;
-
-            text-align: center;
-
-            padding: 70px 20px;
-
-            color: #667085;
-
-            font-size: 18px;
-
-            line-height: 2;
-        }
-
-        /* =========================
-           FOOTER
-        ========================= */
-
-        footer {
-            background: #071a3d;
-
-            color: white;
-
-            text-align: center;
-
-            padding: 30px 20px;
-        }
-
-        footer h3 {
-            font-size: 23px;
-
-            font-weight: 900;
-        }
-
-        .footer-line {
-            width: 85px;
-
-            height: 3px;
-
-            margin: 14px auto;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #ff9933,
-                    white,
-                    #138808
-                );
-        }
-
-        footer p {
-            color: #cbd5e1;
-
-            font-size: 13px;
-
-            line-height: 1.8;
-        }
-
-        /* =========================
-           MOBILE
-        ========================= */
-
-        @media(max-width:1050px) {
-
-            .header-main {
-                flex-wrap: wrap;
-
-                justify-content: center;
-            }
-
-            .logo {
-                min-width: auto;
-            }
-
-            .search-box {
-                order: 3;
-
-                width: 100%;
-
-                max-width: 100%;
-            }
-
-            .header-actions {
-                justify-content: center;
-            }
-        }
-
-        @media(max-width:700px) {
-
-            .announcement {
-                font-size: 10px;
-            }
-
-            .header-main {
-                padding: 12px 14px;
-
-                gap: 12px;
-            }
-
-            .logo {
-                width: 100%;
-
-                justify-content: center;
-            }
-
-            .header-actions {
-                width: 100%;
-
-                display: grid;
-
-                grid-template-columns:
-                    repeat(3,1fr);
-
-                gap: 5px;
-            }
-
-            .header-actions a {
-                padding: 9px 4px;
-
-                text-align: center;
-
-                font-size: 11px;
-            }
-
-            .nav-bar {
-                justify-content: flex-start;
-
-                overflow-x: auto;
-
-                white-space: nowrap;
-
-                gap: 22px;
-
-                padding: 10px 15px;
-            }
-
-            .nav-bar a {
-                font-size: 12px;
-            }
-
-            .hero {
-                min-height: 260px;
-
-                padding: 35px 14px;
-            }
-
-            .hero-content {
-                padding: 25px 18px;
-            }
-
-            .hero h1 {
-                font-size: 35px;
-            }
-
-            .hero p {
-                font-size: 14px;
-            }
-
-            .products-section {
-                padding:
-                    40px 15px 55px;
-            }
-
-            .section-heading h2 {
-                font-size: 28px;
-            }
-
-            .products-grid {
-                grid-template-columns: 1fr;
-
-                gap: 20px;
-            }
-
-            .product-image {
-                height: 290px;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-    <!-- =========================
-         TOP BAR
-    ========================= -->
-
-    <div class="announcement">
-        🇮🇳 80th INDEPENDENCE DAY CELEBRATION
-        • FREEDOM SALE 2026
-        • UP TO 80% OFF
-        • VANDE MATARAM 🇮🇳
-    </div>
-
-
-    <!-- =========================
-         HEADER
-    ========================= -->
-
-    <header>
-
-        <div class="header-main">
-
-            <!-- SHOPNOVA LOGO -->
-
-            <a
-                href="index.html"
-                class="logo"
-                aria-label="ShopNova Home"
-            >
-
-                <div class="logo-art">
-
-                    <img
-                        src="images/shopnova-logo.png"
-                        alt="ShopNova Dove Logo"
-                    >
-
-                </div>
-
-
-                <div class="logo-content">
-
-                    <div class="logo-name">
-
-                        <span class="shop">
-                            Shop
-                        </span>
-
-                        <span class="nova">
-                            Nova
-                        </span>
-
-                    </div>
-
-                    <div class="logo-tagline">
-                        SHOP SMART • LIVE BETTER
-                    </div>
-
-                </div>
-
-            </a>
-
-
-            <!-- SEARCH -->
-
-            <div class="search-box">
-
-                <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="Search products..."
-                    autocomplete="off"
-                >
-
-                <button
-                    type="button"
-                    id="searchBtn"
-                >
-                    🔍
-                </button>
-
-            </div>
-
-
-            <!-- HEADER ACTIONS -->
-
-            <div class="header-actions">
-
-                <a href="index.html">
-                    Home
-                </a>
-
-                <a href="products.html">
-                    Products
-                </a>
-
-                <a
-                    href="cart.html"
-                    class="cart-link"
-                >
-                    🛒 Cart
-
-                    <span class="cart-count">
-                        0
-                    </span>
-
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <!-- NAVIGATION -->
-
-        <nav class="nav-bar">
-
-            <a href="index.html">
-                Home
-            </a>
-
-            <a
-                href="products.html"
-                class="active"
-            >
-                Products
-            </a>
-
-            <a href="cart.html">
-                Cart
-            </a>
-
-            <a href="checkout.html">
-                Checkout
-            </a>
-
-        </nav>
-
-    </header>
-
-
-    <!-- =========================
-         HERO
-    ========================= -->
-
-    <section class="hero">
-
-        <div class="hero-content">
-
-            <div class="hero-badge">
-                🇮🇳 FREEDOM SALE 2026 🇮🇳
-            </div>
-
-            <h1>
-                Premium
-                <span>Collections</span>
-            </h1>
-
-            <p>
-                Celebrate India's 80th Independence Day
-                with premium books, fashion, footwear,
-                beauty, lifestyle and luxury products.
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         PRODUCTS
-    ========================= -->
-
-    <main class="products-section">
-
-        <div class="section-heading">
-
-            <h2>
-                Our Premium Products
-            </h2>
-
-            <p>
-                Shop your favourite products at special
-                Freedom Sale prices.
-            </p>
-
-        </div>
-
-
-        <div
-            id="searchResult"
-            class="search-result"
-        ></div>
-
-
-        <div
-            class="products-grid"
-            id="productsGrid"
-        >
-
-
-            <!-- BIBLE WONDERS -->
-
-            <article
-                class="product-card featured"
-                data-name="Bible Wonders"
-                data-category="Books"
-            >
-
-                <div class="product-image">
-
-                    <span class="featured-badge">
-                        ⭐ FEATURED
-                    </span>
-
-                    <span class="sale-badge">
-                        SALE
-                    </span>
-
-                    <img
-                        src="images/bible-wonders.jpg"
-                        alt="Bible Wonders Book"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="product-category">
-                        Books
-                    </div>
-
-                    <h3 class="product-name">
-                        Bible Wonders
-                    </h3>
-
-                    <p class="product-description">
-                        Inspirational Bible wonders
-                        collection for readers and families.
-                    </p>
-
-                    <div class="price-row">
-
-                        <span class="price">
-                            ₹350
-                        </span>
-
-                        <span class="old-price">
-                            ₹499
-                        </span>
-
-                    </div>
-
-                    <button
-                        class="add-cart-btn"
-                        onclick="addToCart(
-                            'Bible Wonders',
-                            350,
-                            'images/bible-wonders.jpg',
-                            this
-                        )"
-                    >
-                        🛒 Add to Cart
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- BAG -->
-
-            <article
-                class="product-card"
-                data-name="Premium Bag"
-                data-category="Fashion"
-            >
-
-                <div class="product-image">
-
-                    <span class="sale-badge">
-                        SALE
-                    </span>
-
-                    <img
-                        src="images/bag.jpg"
-                        alt="Premium Bag"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="product-category">
-                        Fashion
-                    </div>
-
-                    <h3 class="product-name">
-                        Premium Bag
-                    </h3>
-
-                    <p class="product-description">
-                        Stylish premium bag for everyday
-                        use and special occasions.
-                    </p>
-
-                    <div class="price-row">
-
-                        <span class="price">
-                            ₹1,499
-                        </span>
-
-                        <span class="old-price">
-                            ₹2,199
-                        </span>
-
-                    </div>
-
-                    <button
-                        class="add-cart-btn"
-                        onclick="addToCart(
-                            'Premium Bag',
-                            1499,
-                            'images/bag.jpg',
-                            this
-                        )"
-                    >
-                        🛒 Add to Cart
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- EARBUDS -->
-
-            <article
-                class="product-card"
-                data-name="Wireless Earbuds"
-                data-category="Technology"
-            >
-
-                <div class="product-image">
-
-                    <span class="sale-badge">
-                        SALE
-                    </span>
-
-                    <img
-                        src="images/earbuds.jpg"
-                        alt="Wireless Earbuds"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="product-category">
-                        Technology
-                    </div>
-
-                    <h3 class="product-name">
-                        Wireless Earbuds
-                    </h3>
-
-                    <p class="product-description">
-                        Premium wireless earbuds with
-                        modern sound and compact design.
-                    </p>
-
-                    <div class="price-row">
-
-                        <span class="price">
-                            ₹1,999
-                        </span>
-
-                        <span class="old-price">
-                            ₹3,499
-                        </span>
-
-                    </div>
-
-                    <button
-                        class="add-cart-btn"
-                        onclick="addToCart(
-                            'Wireless Earbuds',
-                            1999,
-                            'images/earbuds.jpg',
-                            this
-                        )"
-                    >
-                        🛒 Add to Cart
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- LOUNGEWEAR -->
-
-            <article
-                class="product-card"
-                data-name="Luxury Loungewear"
-                data-category="Lifestyle"
-            >
-
-                <div class="product-image">
-
-                    <img
-                        src="images/loungewear.jpg"
-                        alt="Luxury Loungewear"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="product-category">
-                        Lifestyle
-                    </div>
-
-                    <h3 class="product-name">
-                        Luxury Loungewear
-                    </h3>
-
-                    <p class="product-description">
-                        Comfortable premium loungewear
-                        designed for relaxed days.
-                    </p>
-
-                    <div class="price-row">
-
-                        <span class="price">
-                            ₹1,299
-                        </span>
-
-                        <span class="old-price">
-                            ₹1,899
-                        </span>
-
-                    </div>
-
-                    <button
-                        class="add-cart-btn"
-                        onclick="addToCart(
-                            'Luxury Loungewear',
-                            1299,
-                            'images/loungewear.jpg',
-                            this
-                        )"
-                    >
-                        🛒 Add to Cart
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- MAKEUP -->
-
-            <article
-                class="product-card"
-                data-name="Beauty Collection"
-                data-category="Beauty"
-            >
-
-                <div class="product-image">
-
-                    <span class="sale-badge">
-                        SALE
-                    </span>
-
-                    <img
-                        src="images/makeup.jpg"
-                        alt="Beauty Collection"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="product-category">
-                        Beauty
-                    </div>
-
-                    <h3 class="product-name">
-                        Beauty Collection
-                    </h3>
-
-                    <p class="product-description">
-                        Premium beauty essentials for
-                        everyday elegance.
-                    </p>
-
-                    <div class="price-row">
-
-                        <span class="price">
-                            ₹999
-                        </span>
-
-                        <span class="old-price">
-                            ₹1,599
-                        </span>
-
-                    </div>
-
-                    <button
-                        class="add-cart-btn"
-                        onclick="addToCart(
-                            'Beauty Collection',
-                            999,
-                            'images/makeup.jpg',
-                            this
-                        )"
-                    >
-                        🛒 Add to Cart
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- MEN'S SHOES -->
-
-            <article
-                class="product-card"
-                data-name="Men's Shoes"
-                data-category="Footwear"
-            >
-
-                <div class="product-image">
-
-                    <span class="sale-badge">
-                        SALE
-                    </span>
-
-                    <img
-                        src="images/mens-shoes.jpg"
-                        alt="Men's Shoes"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="product-category">
-                        Footwear
-                    </div>
-
-                    <h3 class="product-name">
-                        Men's Shoes
-                    </h3>
-
-                    <p class="product-description">
-                        Premium men's footwear with
-                        stylish and comfortable design.
-                    </p>
-
-                    <div class="price-row">
-
-                        <span class="price">
-                            ₹2,499
-                        </span>
-
-                        <span class="old-price">
-                            ₹3,999
-                        </span>
-
-                    </div>
-
-                    <button
-                        class="add-cart-btn"
-                        onclick="addToCart(
-                            'Men\'s Shoes',
-                            2499,
-                            'images/mens-shoes.jpg',
-                            this
-                        )"
-                    >
-                        🛒 Add to Cart
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- WOMEN'S SHOES -->
-
-            <article
-                class="product-card"
-                data-name="Women's Shoes"
-                data-category="Footwear"
-            >
-
-                <div class="product-image">
-
-                    <span class="sale-badge">
-                        SALE
-                    </span>
-
-                    <img
-                        src="images/womens-shoes.jpg"
-                        alt="Women's Shoes"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="product-category">
-                        Women's Footwear
-                    </div>
-
-                    <h3 class="product-name">
-                        Women's Shoes
-                    </h3>
-
-                    <p class="product-description">
-                        Elegant women's footwear for
-                        stylish everyday fashion.
-                    </p>
-
-                    <div class="price-row">
-
-                        <span class="price">
-                            ₹2,299
-                        </span>
-
-                        <span class="old-price">
-                            ₹3,499
-                        </span>
-
-                    </div>
-
-                    <button
-                        class="add-cart-btn"
-                        onclick="addToCart(
-                            'Women\'s Shoes',
-                            2299,
-                            'images/womens-shoes.jpg',
-                            this
-                        )"
-                    >
-                        🛒 Add to Cart
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- MEN'S SUIT / TUXEDO -->
-
-            <article
-                class="product-card"
-                data-name="Men's Suit Tuxedo"
-                data-category="Fashion"
-            >
-
-                <div class="product-image">
-
-                    <span class="sale-badge">
-                        SALE
-                    </span>
-
-                    <img
-                        src="images/suit.jpg"
-                        alt="Men's Suit Tuxedo"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="product-category">
-                        Men's Fashion
-                    </div>
-
-                    <h3 class="product-name">
-                        Men's Suit Tuxedo
-                    </h3>
-
-                    <p class="product-description">
-                        Premium formal men's suit and
-                        tuxedo collection.
-                    </p>
-
-                    <div class="price-row">
-
-                        <span class="price">
-                            ₹4,999
-                        </span>
-
-                        <span class="old-price">
-                            ₹7,499
-                        </span>
-
-                    </div>
-
-                    <button
-                        class="add-cart-btn"
-                        onclick="addToCart(
-                            'Men\'s Suit Tuxedo',
-                            4999,
-                            'images/suit.jpg',
-                            this
-                        )"
-                    >
-                        🛒 Add to Cart
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- PERFUME -->
-
-            <article
-                class="product-card"
-                data-name="Luxury Perfume"
-                data-category="Fragrance"
-            >
-
-                <div class="product-image">
-
-                    <span class="sale-badge">
-                        SALE
-                    </span>
-
-                    <img
-                        src="images/perfume.jpg"
-                        alt="Luxury Perfume"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="product-category">
-                        Fragrance
-                    </div>
-
-                    <h3 class="product-name">
-                        Luxury Perfume
-                    </h3>
-
-                    <p class="product-description">
-                        Premium fragrance collection
-                        with a luxurious finish.
-                    </p>
-
-                    <div class="price-row">
-
-                        <span class="price">
-                            ₹1,799
-                        </span>
-
-                        <span class="old-price">
-                            ₹2,699
-                        </span>
-
-                    </div>
-
-                    <button
-                        class="add-cart-btn"
-                        onclick="addToCart(
-                            'Luxury Perfume',
-                            1799,
-                            'images/perfume.jpg',
-                            this
-                        )"
-                    >
-                        🛒 Add to Cart
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- SUNGLASSES -->
-
-            <article
-                class="product-card"
-                data-name="Premium Sunglasses"
-                data-category="Accessories"
-            >
-
-                <div class="product-image">
-
-                    <img
-                        src="images/sunglasses.jpg"
-                        alt="Premium Sunglasses"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="product-category">
-                        Accessories
-                    </div>
-
-                    <h3 class="product-name">
-                        Premium Sunglasses
-                    </h3>
-
-                    <p class="product-description">
-                        Stylish premium sunglasses for
-                        everyday luxury.
-                    </p>
-
-                    <div class="price-row">
-
-                        <span class="price">
-                            ₹1,599
-                        </span>
-
-                        <span class="old-price">
-                            ₹2,499
-                        </span>
-
-                    </div>
-
-                    <button
-                        class="add-cart-btn"
-                        onclick="addToCart(
-                            'Premium Sunglasses',
-                            1599,
-                            'images/sunglasses.jpg',
-                            this
-                        )"
-                    >
-                        🛒 Add to Cart
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- SUPERCAR KEY -->
-
-            <article
-                class="product-card"
-                data-name="Supercar Key"
-                data-category="Luxury"
-            >
-
-                <div class="product-image">
-
-                    <img
-                        src="images/supercar-key.jpg"
-                        alt="Supercar Key"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="product-category">
-                        Luxury
-                    </div>
-
-                    <h3 class="product-name">
-                        Supercar Key
-                    </h3>
-
-                    <p class="product-description">
-                        Premium luxury automotive
-                        accessory collection.
-                    </p>
-
-                    <div class="price-row">
-
-                        <span class="price">
-                            ₹2,999
-                        </span>
-
-                        <span class="old-price">
-                            ₹4,499
-                        </span>
-
-                    </div>
-
-                    <button
-                        class="add-cart-btn"
-                        onclick="addToCart(
-                            'Supercar Key',
-                            2999,
-                            'images/supercar-key.jpg',
-                            this
-                        )"
-                    >
-                        🛒 Add to Cart
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- LUXURY COLLECTION -->
-
-            <article
-                class="product-card"
-                data-name="Luxury Collection"
-                data-category="Premium"
-            >
-
-                <div class="product-image">
-
-                    <span class="sale-badge">
-                        PREMIUM
-                    </span>
-
-                    <img
-                        src="images/luxury-banner.jpg"
-                        alt="Luxury Collection"
-                    >
-
-                </div>
-
-                <div class="product-info">
-
-                    <div class="product-category">
-                        Premium
-                    </div>
-
-                    <h3 class="product-name">
-                        Luxury Collection
-                    </h3>
-
-                    <p class="product-description">
-                        Carefully selected premium
-                        lifestyle collection.
-                    </p>
-
-                    <div class="price-row">
-
-                        <span class="price">
-                            ₹5,499
-                        </span>
-
-                        <span class="old-price">
-                            ₹7,999
-                        </span>
-
-                    </div>
-
-                    <button
-                        class="add-cart-btn"
-                        onclick="addToCart(
-                            'Luxury Collection',
-                            5499,
-                            'images/luxury-banner.jpg',
-                            this
-                        )"
-                    >
-                        🛒 Add to Cart
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- NO RESULTS -->
-
-            <div
-                id="noResults"
-                class="no-results"
-            >
-                😔 No products found.
-                <br>
-                Try another product name.
-            </div>
-
-        </div>
-
-    </main>
-
-
-    <!-- =========================
-         FOOTER
-    ========================= -->
-
-    <footer>
-
-        <h3>
-            ShopNova
-        </h3>
-
-        <div class="footer-line"></div>
-
-        <p>
-            Premium Shopping Experience
-        </p>
-
-        <p>
-            🇮🇳 Freedom Sale 2026 •
-            80th Independence Day Celebration
-        </p>
-
-        <p>
-            © 2026 ShopNova •
-            CEO & Founder: Anuradha
-        </p>
-
-    </footer>
-
-
-    <script src="script.js"></script>
-
-</body>
-</html>
+    .product-image {
+        height: 230px;
+    }
+}
+</style>
