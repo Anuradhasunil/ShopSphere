@@ -8,6 +8,10 @@
 const CART_KEY = "shopnova_cart";
 
 
+/* =====================================================
+   GET CART
+===================================================== */
+
 function getCart() {
 
     try {
@@ -38,6 +42,10 @@ function getCart() {
 }
 
 
+/* =====================================================
+   SAVE CART
+===================================================== */
+
 function saveCart(cart) {
 
     try {
@@ -57,9 +65,14 @@ function saveCart(cart) {
 }
 
 
+/* =====================================================
+   CART COUNT
+===================================================== */
+
 function updateCartCount() {
 
-    const cart = getCart();
+    const cart =
+        getCart();
 
     const total =
         cart.reduce(
@@ -72,6 +85,7 @@ function updateCartCount() {
             0
         );
 
+
     document
         .querySelectorAll(
             ".cart-count, #cartCount, .cart-badge"
@@ -81,6 +95,7 @@ function updateCartCount() {
 
                 counter.textContent =
                     total;
+
             }
         );
 }
@@ -100,6 +115,7 @@ function addToCart(
     const cart =
         getCart();
 
+
     const existing =
         cart.find(
             item =>
@@ -116,13 +132,17 @@ function addToCart(
 
         cart.push({
 
-            name: productName,
+            name:
+                productName,
 
-            price: Number(price) || 0,
+            price:
+                Number(price) || 0,
 
-            image: image || "",
+            image:
+                image || "",
 
-            quantity: 1
+            quantity:
+                1
 
         });
     }
@@ -136,23 +156,24 @@ function addToCart(
     if (button) {
 
         const oldText =
-            button.innerHTML;
+            button.textContent;
 
-        button.innerHTML =
-            "✓ Added";
+        button.textContent =
+            "✓ Added to Cart";
 
-        button.disabled =
-            true;
+
+        button.style.opacity =
+            "0.85";
 
 
         setTimeout(
             () => {
 
-                button.innerHTML =
+                button.textContent =
                     oldText;
 
-                button.disabled =
-                    false;
+                button.style.opacity =
+                    "";
 
             },
             1200
@@ -166,6 +187,10 @@ function addToCart(
     );
 }
 
+
+/* =====================================================
+   COMPATIBILITY
+===================================================== */
 
 function add(
     productName,
@@ -203,6 +228,7 @@ function showMessage(message) {
         box.id =
             "shopnovaMessage";
 
+
         box.style.position =
             "fixed";
 
@@ -215,29 +241,38 @@ function showMessage(message) {
         box.style.zIndex =
             "999999";
 
+
         box.style.background =
             "linear-gradient(135deg,#0a397b,#315bd8)";
+
 
         box.style.color =
             "#ffffff";
 
+
         box.style.padding =
             "13px 18px";
+
 
         box.style.borderRadius =
             "11px";
 
+
         box.style.fontSize =
             "13px";
+
 
         box.style.fontWeight =
             "700";
 
+
         box.style.boxShadow =
             "0 10px 30px rgba(0,0,0,.25)";
 
+
         box.style.transition =
             "opacity .3s ease";
+
 
         document.body.appendChild(
             box
@@ -247,6 +282,7 @@ function showMessage(message) {
 
     box.textContent =
         "✓ " + message;
+
 
     box.style.opacity =
         "1";
@@ -271,8 +307,17 @@ function showMessage(message) {
 
 
 /* =====================================================
-   HOMEPAGE SEARCH PRODUCTS
+   HOMEPAGE PRODUCTS
 ===================================================== */
+
+/*
+    IMPORTANT:
+
+    These image names match your existing
+    docs/images folder.
+
+    Do not change your logo image.
+*/
 
 const SHOPNOVA_PRODUCTS = [
 
@@ -295,13 +340,6 @@ const SHOPNOVA_PRODUCTS = [
         price: 3999,
         image: "images/tuxedo.jpg",
         category: "Men's Fashion"
-    },
-
-    {
-        name: "Premium Watch",
-        price: 2999,
-        image: "images/watch.jpg",
-        category: "Accessories"
     },
 
     {
@@ -374,25 +412,30 @@ function setupHomeSearch() {
             "homeSearchInput"
         );
 
+
     const button =
         document.getElementById(
             "homeSearchBtn"
         );
+
 
     const results =
         document.getElementById(
             "homeSearchResults"
         );
 
+
     const grid =
         document.getElementById(
             "homeProductGrid"
         );
 
+
     const noResults =
         document.getElementById(
             "homeNoResults"
         );
+
 
     const clear =
         document.getElementById(
@@ -405,9 +448,14 @@ function setupHomeSearch() {
         !results ||
         !grid
     ) {
+
         return;
     }
 
+
+    /* =================================================
+       PERFORM SEARCH
+    ================================================= */
 
     function performSearch(
         shouldScroll = true
@@ -419,6 +467,8 @@ function setupHomeSearch() {
                 .toLowerCase();
 
 
+        /* EMPTY SEARCH */
+
         if (!query) {
 
             results.style.display =
@@ -428,6 +478,7 @@ function setupHomeSearch() {
                 "";
 
             if (noResults) {
+
                 noResults.style.display =
                     "none";
             }
@@ -436,11 +487,14 @@ function setupHomeSearch() {
         }
 
 
+        /* FIND PRODUCTS */
+
         const matches =
             SHOPNOVA_PRODUCTS.filter(
                 product => {
 
                     return (
+
                         product.name
                             .toLowerCase()
                             .includes(query)
@@ -450,6 +504,7 @@ function setupHomeSearch() {
                         product.category
                             .toLowerCase()
                             .includes(query)
+
                     );
                 }
             );
@@ -458,9 +513,12 @@ function setupHomeSearch() {
         results.style.display =
             "block";
 
+
         grid.innerHTML =
             "";
 
+
+        /* NO MATCH */
 
         if (
             matches.length === 0
@@ -483,8 +541,15 @@ function setupHomeSearch() {
         }
 
 
+        /* =================================================
+           CREATE PRODUCTS
+        ================================================= */
+
         matches.forEach(
             product => {
+
+
+                /* CARD */
 
                 const card =
                     document.createElement(
@@ -494,6 +559,32 @@ function setupHomeSearch() {
                 card.className =
                     "home-product-card";
 
+
+                /* INNER */
+
+                const inner =
+                    document.createElement(
+                        "div"
+                    );
+
+                inner.className =
+                    "home-product-card-inner";
+
+
+                /* =================================================
+                   FRONT
+                ================================================= */
+
+                const front =
+                    document.createElement(
+                        "div"
+                    );
+
+                front.className =
+                    "home-product-front";
+
+
+                /* IMAGE */
 
                 const image =
                     document.createElement(
@@ -513,6 +604,8 @@ function setupHomeSearch() {
                     "lazy";
 
 
+                /* INFO */
+
                 const info =
                     document.createElement(
                         "div"
@@ -522,6 +615,22 @@ function setupHomeSearch() {
                     "home-product-info";
 
 
+                /* CATEGORY */
+
+                const category =
+                    document.createElement(
+                        "div"
+                    );
+
+                category.className =
+                    "home-product-category";
+
+                category.textContent =
+                    product.category;
+
+
+                /* NAME */
+
                 const title =
                     document.createElement(
                         "h3"
@@ -530,6 +639,8 @@ function setupHomeSearch() {
                 title.textContent =
                     product.name;
 
+
+                /* PRICE */
 
                 const price =
                     document.createElement(
@@ -548,49 +659,250 @@ function setupHomeSearch() {
                     );
 
 
-                const cartButton =
+                /* HINT */
+
+                const hint =
                     document.createElement(
-                        "button"
+                        "div"
                     );
 
-                cartButton.type =
-                    "button";
+                hint.className =
+                    "home-product-hint";
 
-                cartButton.className =
-                    "home-add-cart";
+                hint.textContent =
+                    "↻ Click to inspect product";
 
-                cartButton.textContent =
+
+                info.appendChild(
+                    category
+                );
+
+                info.appendChild(
+                    title
+                );
+
+                info.appendChild(
+                    price
+                );
+
+                info.appendChild(
+                    hint
+                );
+
+
+                front.appendChild(
+                    image
+                );
+
+                front.appendChild(
+                    info
+                );
+
+
+                /* =================================================
+                   BACK
+                ================================================= */
+
+                const back =
+                    document.createElement(
+                        "div"
+                    );
+
+                back.className =
+                    "home-product-back";
+
+
+                /* ICON */
+
+                const backIcon =
+                    document.createElement(
+                        "div"
+                    );
+
+                backIcon.className =
+                    "back-icon";
+
+                backIcon.textContent =
+                    "✦";
+
+
+                /* TITLE */
+
+                const backTitle =
+                    document.createElement(
+                        "h3"
+                    );
+
+                backTitle.textContent =
+                    product.name;
+
+
+                /* CATEGORY */
+
+                const backCategory =
+                    document.createElement(
+                        "div"
+                    );
+
+                backCategory.className =
+                    "back-category";
+
+                backCategory.textContent =
+                    product.category;
+
+
+                /* PRICE */
+
+                const backPrice =
+                    document.createElement(
+                        "div"
+                    );
+
+                backPrice.className =
+                    "back-price";
+
+                backPrice.textContent =
+                    "₹" +
+                    Number(
+                        product.price
+                    ).toLocaleString(
+                        "en-IN"
+                    );
+
+
+                /* DESCRIPTION */
+
+                const backDescription =
+                    document.createElement(
+                        "p"
+                    );
+
+                backDescription.textContent =
+                    "Premium ShopNova selection. Check this product and add it to your shopping cart.";
+
+
+                /* ADD BUTTON */
+
+                const backAction =
+                    document.createElement(
+                        "div"
+                    );
+
+                backAction.className =
+                    "back-action";
+
+                backAction.textContent =
                     "🛒 Add to Cart";
 
 
-                cartButton.addEventListener(
-                    "click",
-                    () => {
+                back.appendChild(
+                    backIcon
+                );
 
-                        addToCart(
-                            product.name,
-                            product.price,
-                            product.image,
-                            cartButton
+                back.appendChild(
+                    backTitle
+                );
+
+                back.appendChild(
+                    backCategory
+                );
+
+                back.appendChild(
+                    backPrice
+                );
+
+                back.appendChild(
+                    backDescription
+                );
+
+                back.appendChild(
+                    backAction
+                );
+
+
+                /* =================================================
+                   BUILD CARD
+                ================================================= */
+
+                inner.appendChild(
+                    front
+                );
+
+                inner.appendChild(
+                    back
+                );
+
+                card.appendChild(
+                    inner
+                );
+
+                grid.appendChild(
+                    card
+                );
+
+
+                /* =================================================
+                   CLICK CARD = ROTATE
+                ================================================= */
+
+                card.addEventListener(
+                    "click",
+                    event => {
+
+                        /*
+                            If Add to Cart was clicked,
+                            do not rotate again.
+                        */
+
+                        if (
+                            event.target.closest(
+                                ".back-action"
+                            )
+                        ) {
+
+                            return;
+                        }
+
+
+                        card.classList.toggle(
+                            "flipped"
                         );
+
                     }
                 );
 
 
-                info.appendChild(title);
+                /* =================================================
+                   ADD TO CART
+                ================================================= */
 
-                info.appendChild(price);
+                backAction.addEventListener(
+                    "click",
+                    event => {
 
-                info.appendChild(cartButton);
+                        event.stopPropagation();
 
-                card.appendChild(image);
 
-                card.appendChild(info);
+                        addToCart(
 
-                grid.appendChild(card);
+                            product.name,
+
+                            product.price,
+
+                            product.image,
+
+                            backAction
+
+                        );
+
+                    }
+                );
+
             }
         );
 
+
+        /* SCROLL */
 
         if (shouldScroll) {
 
@@ -598,8 +910,13 @@ function setupHomeSearch() {
                 () => {
 
                     results.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start"
+
+                        behavior:
+                            "smooth",
+
+                        block:
+                            "start"
+
                     });
 
                 },
@@ -609,11 +926,28 @@ function setupHomeSearch() {
     }
 
 
-    button?.addEventListener(
-        "click",
-        () => performSearch(true)
-    );
+    /* =================================================
+       SEARCH BUTTON
+    ================================================= */
 
+    if (button) {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                performSearch(
+                    true
+                );
+
+            }
+        );
+    }
+
+
+    /* =================================================
+       ENTER
+    ================================================= */
 
     input.addEventListener(
         "keydown",
@@ -625,11 +959,18 @@ function setupHomeSearch() {
 
                 event.preventDefault();
 
-                performSearch(true);
+                performSearch(
+                    true
+                );
             }
+
         }
     );
 
+
+    /* =================================================
+       LIVE SEARCH
+    ================================================= */
 
     input.addEventListener(
         "input",
@@ -653,34 +994,45 @@ function setupHomeSearch() {
 
             } else {
 
-                performSearch(false);
+                performSearch(
+                    false
+                );
             }
+
         }
     );
 
 
-    clear?.addEventListener(
-        "click",
-        () => {
+    /* =================================================
+       CLEAR
+    ================================================= */
 
-            input.value =
-                "";
+    if (clear) {
 
-            results.style.display =
-                "none";
+        clear.addEventListener(
+            "click",
+            () => {
 
-            grid.innerHTML =
-                "";
+                input.value =
+                    "";
 
-            if (noResults) {
-
-                noResults.style.display =
+                results.style.display =
                     "none";
-            }
 
-            input.focus();
-        }
-    );
+                grid.innerHTML =
+                    "";
+
+                if (noResults) {
+
+                    noResults.style.display =
+                        "none";
+                }
+
+                input.focus();
+
+            }
+        );
+    }
 }
 
 
@@ -695,10 +1047,12 @@ function setupContactPopup() {
             "contactBtn"
         );
 
+
     const overlay =
         document.getElementById(
             "contactOverlay"
         );
+
 
     const close =
         document.getElementById(
@@ -706,10 +1060,16 @@ function setupContactPopup() {
         );
 
 
-    if (!button || !overlay) {
+    if (
+        !button ||
+        !overlay
+    ) {
+
         return;
     }
 
+
+    /* OPEN */
 
     function openContact() {
 
@@ -721,6 +1081,8 @@ function setupContactPopup() {
             "hidden";
     }
 
+
+    /* CLOSE */
 
     function closeContact() {
 
@@ -739,11 +1101,16 @@ function setupContactPopup() {
     );
 
 
-    close?.addEventListener(
-        "click",
-        closeContact
-    );
+    if (close) {
 
+        close.addEventListener(
+            "click",
+            closeContact
+        );
+    }
+
+
+    /* CLICK OUTSIDE */
 
     overlay.addEventListener(
         "click",
@@ -755,9 +1122,12 @@ function setupContactPopup() {
 
                 closeContact();
             }
+
         }
     );
 
+
+    /* ESCAPE */
 
     document.addEventListener(
         "keydown",
@@ -769,13 +1139,14 @@ function setupContactPopup() {
 
                 closeContact();
             }
+
         }
     );
 }
 
 
 /* =====================================================
-   STORAGE SYNC
+   CART STORAGE SYNC
 ===================================================== */
 
 window.addEventListener(
@@ -788,6 +1159,7 @@ window.addEventListener(
 
             updateCartCount();
         }
+
     }
 );
 
