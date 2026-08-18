@@ -7,36 +7,151 @@
     <title>ShopNova - Shop Smart. Live Better.</title>
 
     <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* =====================================================
+           TOP HEADER LOGO ONLY
+           DO NOT AFFECT CENTER DOVE LOGO
+        ===================================================== */
+
+        .main-navbar .nav-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .main-navbar .nav-logo a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        /*
+           ONLY TOP LOGO
+           Brighter + clearer + premium glow
+        */
+
+        .main-navbar .nav-logo .mini-logo {
+            width: 68px;
+            height: 68px;
+
+            object-fit: contain;
+            display: block;
+
+            padding: 5px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #ffffff,
+                    #f8fbff
+                );
+
+            border-radius: 16px;
+
+            border: 2px solid rgba(255,255,255,0.85);
+
+            box-shadow:
+                0 5px 15px rgba(0,0,0,0.18),
+                0 0 18px rgba(96,165,250,0.45);
+
+            filter:
+                brightness(1.12)
+                contrast(1.06)
+                saturate(1.12);
+
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease,
+                filter .25s ease;
+        }
+
+        /*
+           Beautiful hover effect
+           ONLY TOP LOGO
+        */
+
+        .main-navbar .nav-logo .mini-logo:hover {
+
+            transform:
+                scale(1.06);
+
+            filter:
+                brightness(1.2)
+                contrast(1.08)
+                saturate(1.18);
+
+            box-shadow:
+                0 7px 22px rgba(0,0,0,0.20),
+                0 0 28px rgba(96,165,250,0.65);
+        }
+
+
+        /* =====================================================
+           MOBILE TOP LOGO
+        ===================================================== */
+
+        @media (max-width: 700px) {
+
+            .main-navbar .nav-logo .mini-logo {
+
+                width: 60px;
+                height: 60px;
+
+                padding: 4px;
+
+                border-radius: 14px;
+
+                box-shadow:
+                    0 4px 12px rgba(0,0,0,0.18),
+                    0 0 15px rgba(96,165,250,0.42);
+            }
+
+        }
+
+    </style>
+
 </head>
 
 <body>
 
-    <!-- =========================================
+
+    <!-- =====================================================
          SHOPNOVA HEADER
-    ========================================== -->
+         ===================================================== -->
 
     <header class="main-navbar">
 
-        <!-- LOGO -->
+        <!-- TOP SHOPNOVA LOGO ONLY -->
+
         <div class="nav-logo">
+
             <a href="index.html">
+
                 <img
                     src="images/shopnova-logo.png"
                     alt="ShopNova Logo"
                     class="mini-logo"
                 >
+
             </a>
+
         </div>
 
 
         <!-- SEARCH BAR -->
+
         <div class="search-bar-container">
 
             <input
                 type="text"
                 id="searchInput"
-                class="search-input"
                 placeholder="Search products..."
+                class="search-input"
                 autocomplete="off"
             >
 
@@ -44,7 +159,7 @@
                 type="button"
                 id="searchBtn"
                 class="search-btn"
-                aria-label="Search"
+                aria-label="Search products"
             >
                 🔍
             </button>
@@ -53,6 +168,7 @@
 
 
         <!-- NAVIGATION -->
+
         <nav class="nav-links">
 
             <a
@@ -78,7 +194,6 @@
                 Checkout
             </a>
 
-            <!-- SINGLE CONTACT BUTTON -->
             <a
                 href="contact.html"
                 class="btn-contact"
@@ -91,23 +206,28 @@
     </header>
 
 
-    <!-- =========================================
-         HERO SECTION
-    ========================================== -->
+
+    <!-- =====================================================
+         HERO / CENTER AREA
+         DO NOT CHANGE THE CENTER DOVE
+    ===================================================== -->
 
     <main class="hero-section">
 
 
-        <!-- LEFT SIDE -->
+        <!-- LEFT CONTENT -->
+
         <div class="hero-left-content">
 
-            <!-- ANIMATED WELCOME -->
+            <!-- WELCOME ANIMATION -->
+
             <span class="welcome-badge animated-welcome">
                 ✨ Welcome to ShopNova
             </span>
 
 
-            <!-- ANIMATED 3D HEADING -->
+            <!-- 3D HEADING -->
+
             <h1 class="hero-main-heading animated-heading">
 
                 Shop Smart.<br>
@@ -120,6 +240,7 @@
 
 
             <!-- DESCRIPTION -->
+
             <p class="hero-subtext">
 
                 Discover premium products, modern style and
@@ -129,7 +250,8 @@
             </p>
 
 
-            <!-- HERO BUTTONS -->
+            <!-- BUTTONS -->
+
             <div class="hero-cta-buttons">
 
                 <a
@@ -138,7 +260,6 @@
                 >
                     Start Shopping →
                 </a>
-
 
                 <a
                     href="cart.html"
@@ -153,18 +274,14 @@
 
 
 
-        <!-- =====================================
-             RIGHT SIDE LOGO
-        ====================================== -->
+        <!-- =================================================
+             CENTER DOVE LOGO
+             COMPLETELY UNCHANGED
+        ================================================== -->
 
         <div class="hero-right-graphic">
 
             <div class="graphic-card-frame">
-
-                <!--
-                    DO NOT CHANGE THIS LOGO.
-                    This is your existing ShopNova logo.
-                -->
 
                 <img
                     src="images/shopnova-logo.png"
@@ -180,16 +297,13 @@
 
 
 
-    <!-- =========================================
-         ANIMATION CSS
-         ONLY FOR THE TWO REQUESTED TEXT AREAS
-    ========================================== -->
+    <!-- =====================================================
+         TEXT ANIMATIONS
+    ===================================================== -->
 
     <style>
 
-        /* =====================================
-           WELCOME TEXT
-        ====================================== */
+        /* Welcome animation */
 
         .animated-welcome {
 
@@ -200,42 +314,31 @@
             animation:
                 welcomeFloat 3s ease-in-out infinite,
                 welcomeGlow 2s ease-in-out infinite alternate;
-
         }
 
-
-        /* Floating animation */
 
         @keyframes welcomeFloat {
 
             0% {
-
                 transform:
                     translateY(0)
                     scale(1);
-
             }
 
             50% {
-
                 transform:
                     translateY(-6px)
                     scale(1.03);
-
             }
 
             100% {
-
                 transform:
                     translateY(0)
                     scale(1);
-
             }
 
         }
 
-
-        /* Glow animation */
 
         @keyframes welcomeGlow {
 
@@ -243,7 +346,7 @@
 
                 box-shadow:
                     0 5px 15px
-                    rgba(37, 99, 235, 0.15);
+                    rgba(37,99,235,.15);
 
             }
 
@@ -251,10 +354,10 @@
 
                 box-shadow:
                     0 8px 28px
-                    rgba(37, 99, 235, 0.35),
+                    rgba(37,99,235,.35),
 
                     0 0 18px
-                    rgba(96, 165, 250, 0.25);
+                    rgba(96,165,250,.25);
 
             }
 
@@ -262,9 +365,9 @@
 
 
 
-        /* =====================================
-           MAIN HEADING 3D
-        ====================================== */
+        /* =================================================
+           3D HEADING
+        ================================================= */
 
         .animated-heading {
 
@@ -284,12 +387,9 @@
                 3px 3px 0 #93c5fd,
 
                 4px 4px 12px
-                rgba(30, 64, 175, 0.20);
-
+                rgba(30,64,175,.20);
         }
 
-
-        /* 3D movement */
 
         @keyframes heading3D {
 
@@ -347,16 +447,15 @@
 
 
 
-        /* =====================================
-           LIVE BETTER BLUE SHINE
-        ====================================== */
+        /* =================================================
+           BLUE SHINE
+        ================================================= */
 
         .animated-heading .blue-text {
 
             display: inline-block;
 
             background:
-
                 linear-gradient(
                     90deg,
                     #2563eb,
@@ -369,7 +468,6 @@
             background-size: 300% 100%;
 
             -webkit-background-clip: text;
-
             background-clip: text;
 
             -webkit-text-fill-color: transparent;
@@ -378,74 +476,42 @@
                 blueShine 3s linear infinite;
 
             text-shadow: none;
-
         }
 
-
-        /* Blue moving shine */
 
         @keyframes blueShine {
 
             0% {
-
-                background-position:
-                    0% 50%;
-
+                background-position: 0% 50%;
             }
 
             50% {
-
-                background-position:
-                    100% 50%;
-
+                background-position: 100% 50%;
             }
 
             100% {
-
-                background-position:
-                    0% 50%;
-
+                background-position: 0% 50%;
             }
 
         }
 
 
+        /* Mobile */
 
-        /* =====================================
-           MOBILE
-        ====================================== */
-
-        @media (max-width: 700px) {
+        @media (max-width:700px) {
 
             .animated-heading {
-
                 animation-duration: 4.5s;
-
-                text-shadow:
-
-                    1px 1px 0 #dbeafe,
-
-                    2px 2px 0 #bfdbfe,
-
-                    3px 3px 8px
-                    rgba(30, 64, 175, 0.18);
-
             }
 
-
             .animated-welcome {
-
                 animation-duration: 3.5s;
-
             }
 
         }
 
 
-
-        /* =====================================
-           ACCESSIBILITY
-        ====================================== */
+        /* Accessibility */
 
         @media (prefers-reduced-motion: reduce) {
 
@@ -463,9 +529,9 @@
 
 
 
-    <!-- =========================================
-         JAVASCRIPT
-    ========================================== -->
+    <!-- =====================================================
+         EXISTING JAVASCRIPT
+    ===================================================== -->
 
     <script src="script.js"></script>
 
