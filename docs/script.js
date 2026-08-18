@@ -1,15 +1,11 @@
 "use strict";
 
-/* =========================================================
-   SHOPNOVA CART
-========================================================= */
-
 const CART_KEY = "shopnova_cart";
 
 
-/* =========================================================
+/* =========================
    GET CART
-========================================================= */
+========================= */
 
 function getCart() {
 
@@ -41,9 +37,9 @@ function getCart() {
 }
 
 
-/* =========================================================
+/* =========================
    SAVE CART
-========================================================= */
+========================= */
 
 function saveCart(cart) {
 
@@ -64,14 +60,13 @@ function saveCart(cart) {
 }
 
 
-/* =========================================================
+/* =========================
    UPDATE CART COUNT
-========================================================= */
+========================= */
 
 function updateCartCount() {
 
-    const cart =
-        getCart();
+    const cart = getCart();
 
     const total =
         cart.reduce(
@@ -92,17 +87,16 @@ function updateCartCount() {
     counters.forEach(
         counter => {
 
-            counter.textContent =
-                total;
+            counter.textContent = total;
 
         }
     );
 }
 
 
-/* =========================================================
+/* =========================
    ADD TO CART
-========================================================= */
+========================= */
 
 function addToCart(
     productName,
@@ -111,8 +105,7 @@ function addToCart(
     button = null
 ) {
 
-    const cart =
-        getCart();
+    const cart = getCart();
 
     const existing =
         cart.find(
@@ -147,8 +140,6 @@ function addToCart(
     updateCartCount();
 
 
-    /* BUTTON FEEDBACK */
-
     if (button) {
 
         const oldText =
@@ -157,9 +148,7 @@ function addToCart(
         button.innerHTML =
             "✓ Added to Cart";
 
-        button.classList.add(
-            "added"
-        );
+        button.classList.add("added");
 
         button.disabled = true;
 
@@ -174,8 +163,7 @@ function addToCart(
                     "added"
                 );
 
-                button.disabled =
-                    false;
+                button.disabled = false;
 
             },
             1200
@@ -190,9 +178,9 @@ function addToCart(
 }
 
 
-/* =========================================================
-   BACKWARD COMPATIBILITY
-========================================================= */
+/* =========================
+   COMPATIBILITY FUNCTION
+========================= */
 
 function add(
     productName,
@@ -208,13 +196,11 @@ function add(
 }
 
 
-/* =========================================================
+/* =========================
    MESSAGE
-========================================================= */
+========================= */
 
-function showMessage(
-    message
-) {
+function showMessage(message) {
 
     let messageBox =
         document.getElementById(
@@ -231,7 +217,6 @@ function showMessage(
 
         messageBox.id =
             "shopnovaMessage";
-
 
         messageBox.style.position =
             "fixed";
@@ -300,13 +285,11 @@ function showMessage(
 }
 
 
-/* =========================================================
-   SEARCH
-========================================================= */
+/* =========================
+   SEARCH PRODUCTS
+========================= */
 
-function searchProducts(
-    query
-) {
+function searchProducts(query) {
 
     const products =
         document.querySelectorAll(
@@ -330,8 +313,7 @@ function searchProducts(
             .toLowerCase();
 
 
-    let found =
-        0;
+    let found = 0;
 
 
     products.forEach(
@@ -379,7 +361,6 @@ function searchProducts(
                 product.style.display =
                     "none";
             }
-
         }
     );
 
@@ -410,17 +391,17 @@ function searchProducts(
 
             result.textContent =
                 found +
-                " product(s) found for \"" +
+                ' product(s) found for "' +
                 query +
-                "\"";
+                '"';
         }
     }
 }
 
 
-/* =========================================================
+/* =========================
    SEARCH SETUP
-========================================================= */
+========================= */
 
 function setupSearch() {
 
@@ -460,17 +441,13 @@ function setupSearch() {
 
                 if (productsPage) {
 
-                    searchProducts(
-                        query
-                    );
+                    searchProducts(query);
 
                 } else {
 
                     window.location.href =
                         "products.html?search=" +
-                        encodeURIComponent(
-                            query
-                        );
+                        encodeURIComponent(query);
                 }
             }
         );
@@ -516,9 +493,9 @@ function setupSearch() {
 }
 
 
-/* =========================================================
+/* =========================
    URL SEARCH
-========================================================= */
+========================= */
 
 function loadURLSearch() {
 
@@ -540,34 +517,27 @@ function loadURLSearch() {
 
 
     const search =
-        params.get(
-            "search"
-        );
+        params.get("search");
 
 
     if (search) {
 
-        input.value =
-            search;
+        input.value = search;
 
-        searchProducts(
-            search
-        );
+        searchProducts(search);
     }
 }
 
 
-/* =========================================================
+/* =========================
    STORAGE SYNC
-========================================================= */
+========================= */
 
 window.addEventListener(
     "storage",
     event => {
 
-        if (
-            event.key === CART_KEY
-        ) {
+        if (event.key === CART_KEY) {
 
             updateCartCount();
         }
@@ -575,9 +545,9 @@ window.addEventListener(
 );
 
 
-/* =========================================================
+/* =========================
    PAGE READY
-========================================================= */
+========================= */
 
 document.addEventListener(
     "DOMContentLoaded",

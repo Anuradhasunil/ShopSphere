@@ -79,29 +79,40 @@
             color: white;
         }
 
+        /*
+           IMPORTANT:
+           Your real ShopNova dove/olive-leaf logo
+           should be saved as:
+
+           docs/images/shopnova-logo.png
+        */
+
         .logo-art {
-            width: 50px;
-            height: 50px;
-            min-width: 50px;
-            border-radius: 50%;
-            background: linear-gradient(
-                135deg,
-                #ff9933 0%,
-                #ffffff 50%,
-                #138808 100%
-            );
+            width: 58px;
+            height: 58px;
+            min-width: 58px;
+
+            border-radius: 14px;
+
+            background: #ffffff;
 
             display: flex;
             align-items: center;
             justify-content: center;
 
+            overflow: hidden;
+
             box-shadow:
-                0 3px 12px rgba(0,0,0,.25);
+                0 4px 15px rgba(0,0,0,.25);
         }
 
-        .logo-dove {
-            font-size: 28px;
-            line-height: 1;
+        .logo-art img {
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: contain;
         }
 
         .logo-content {
@@ -242,9 +253,11 @@
 
         .hero {
             min-height: 310px;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
             text-align: center;
 
             padding: 50px 20px;
@@ -271,19 +284,27 @@
 
         .hero-badge {
             display: inline-block;
+
             padding: 8px 18px;
+
             border-radius: 30px;
+
             background: #071a3d;
             color: white;
+
             font-size: 12px;
             font-weight: 900;
+
             margin-bottom: 15px;
         }
 
         .hero h1 {
             color: #071a3d;
+
             font-size: clamp(36px,6vw,58px);
+
             font-weight: 900;
+
             margin-bottom: 12px;
         }
 
@@ -293,9 +314,13 @@
 
         .hero p {
             max-width: 720px;
+
             margin: auto;
+
             color: #39455c;
+
             font-size: 17px;
+
             line-height: 1.7;
         }
 
@@ -306,33 +331,45 @@
         .products-section {
             width: 100%;
             max-width: 1400px;
+
             margin: auto;
+
             padding: 55px 25px 75px;
         }
 
         .section-heading {
             text-align: center;
+
             margin-bottom: 30px;
         }
 
         .section-heading h2 {
             color: #071a3d;
+
             font-size: 34px;
+
             font-weight: 900;
+
             margin-bottom: 8px;
         }
 
         .section-heading p {
             color: #6c7484;
+
             font-size: 15px;
         }
 
         .search-result {
             display: none;
+
             text-align: center;
+
             color: #071a3d;
+
             font-size: 15px;
+
             font-weight: 800;
+
             margin-bottom: 25px;
         }
 
@@ -342,8 +379,10 @@
 
         .products-grid {
             display: grid;
+
             grid-template-columns:
                 repeat(auto-fit,minmax(255px,1fr));
+
             gap: 28px;
         }
 
@@ -353,14 +392,18 @@
 
         .product-card {
             background: white;
+
             border-radius: 20px;
+
             overflow: hidden;
+
             border: 1px solid #e3e8f0;
 
             box-shadow:
                 0 10px 30px rgba(0,0,0,.07);
 
             display: flex;
+
             flex-direction: column;
 
             transition:
@@ -385,15 +428,20 @@
 
         .product-image {
             height: 270px;
+
             background: #eef2f7;
+
             position: relative;
+
             overflow: hidden;
         }
 
         .product-image img {
             width: 100%;
             height: 100%;
+
             display: block;
+
             object-fit: cover;
 
             transition:
@@ -407,33 +455,43 @@
 
         .sale-badge {
             position: absolute;
+
             top: 13px;
             left: 13px;
+
             z-index: 3;
 
             background: #e63946;
+
             color: white;
 
             padding: 7px 11px;
+
             border-radius: 20px;
 
             font-size: 10px;
+
             font-weight: 900;
         }
 
         .featured-badge {
             position: absolute;
+
             top: 13px;
             right: 13px;
+
             z-index: 3;
 
             background: #138808;
+
             color: white;
 
             padding: 7px 11px;
+
             border-radius: 20px;
 
             font-size: 10px;
+
             font-weight: 900;
         }
 
@@ -443,52 +501,75 @@
 
         .product-info {
             padding: 20px;
+
             display: flex;
+
             flex-direction: column;
+
             flex: 1;
         }
 
         .product-category {
             color: #138808;
+
             font-size: 11px;
+
             font-weight: 900;
+
             text-transform: uppercase;
+
             letter-spacing: .8px;
+
             margin-bottom: 7px;
         }
 
         .product-name {
             color: #071a3d;
+
             font-size: 20px;
+
             font-weight: 800;
+
             line-height: 1.3;
+
             min-height: 52px;
         }
 
         .product-description {
             color: #697386;
+
             font-size: 13px;
+
             line-height: 1.5;
+
             margin: 7px 0 14px;
+
             min-height: 39px;
         }
 
         .price-row {
             display: flex;
+
             align-items: center;
+
             gap: 10px;
+
             margin-bottom: 15px;
         }
 
         .price {
             color: #071a3d;
+
             font-size: 25px;
+
             font-weight: 900;
         }
 
         .old-price {
             color: #999;
+
             font-size: 13px;
+
             text-decoration: line-through;
         }
 
@@ -498,9 +579,11 @@
 
         .add-cart-btn {
             width: 100%;
+
             padding: 13px;
 
             border: none;
+
             border-radius: 10px;
 
             background:
@@ -511,10 +594,13 @@
                 );
 
             color: white;
+
             font-size: 14px;
+
             font-weight: 800;
 
             cursor: pointer;
+
             margin-top: auto;
 
             transition: .3s;
@@ -545,13 +631,17 @@
 
         .no-results {
             display: none;
+
             grid-column: 1 / -1;
 
             text-align: center;
+
             padding: 70px 20px;
 
             color: #667085;
+
             font-size: 18px;
+
             line-height: 2;
         }
 
@@ -561,19 +651,25 @@
 
         footer {
             background: #071a3d;
+
             color: white;
+
             text-align: center;
+
             padding: 30px 20px;
         }
 
         footer h3 {
             font-size: 23px;
+
             font-weight: 900;
         }
 
         .footer-line {
             width: 85px;
+
             height: 3px;
+
             margin: 14px auto;
 
             background:
@@ -587,7 +683,9 @@
 
         footer p {
             color: #cbd5e1;
+
             font-size: 13px;
+
             line-height: 1.8;
         }
 
@@ -599,6 +697,7 @@
 
             .header-main {
                 flex-wrap: wrap;
+
                 justify-content: center;
             }
 
@@ -608,7 +707,9 @@
 
             .search-box {
                 order: 3;
+
                 width: 100%;
+
                 max-width: 100%;
             }
 
@@ -625,33 +726,44 @@
 
             .header-main {
                 padding: 12px 14px;
+
                 gap: 12px;
             }
 
             .logo {
                 width: 100%;
+
                 justify-content: center;
             }
 
             .header-actions {
                 width: 100%;
+
                 display: grid;
+
                 grid-template-columns:
                     repeat(3,1fr);
+
                 gap: 5px;
             }
 
             .header-actions a {
                 padding: 9px 4px;
+
                 text-align: center;
+
                 font-size: 11px;
             }
 
             .nav-bar {
                 justify-content: flex-start;
+
                 overflow-x: auto;
+
                 white-space: nowrap;
+
                 gap: 22px;
+
                 padding: 10px 15px;
             }
 
@@ -661,6 +773,7 @@
 
             .hero {
                 min-height: 260px;
+
                 padding: 35px 14px;
             }
 
@@ -687,6 +800,7 @@
 
             .products-grid {
                 grid-template-columns: 1fr;
+
                 gap: 20px;
             }
 
@@ -699,7 +813,9 @@
 
 <body>
 
-    <!-- TOP BAR -->
+    <!-- =========================
+         TOP BAR
+    ========================= -->
 
     <div class="announcement">
         🇮🇳 80th INDEPENDENCE DAY CELEBRATION
@@ -709,7 +825,9 @@
     </div>
 
 
-    <!-- HEADER -->
+    <!-- =========================
+         HEADER
+    ========================= -->
 
     <header>
 
@@ -724,15 +842,27 @@
             >
 
                 <div class="logo-art">
-                    <div class="logo-dove">
-                        🕊️
-                    </div>
+
+                    <img
+                        src="images/shopnova-logo.png"
+                        alt="ShopNova Dove Logo"
+                    >
+
                 </div>
+
 
                 <div class="logo-content">
 
                     <div class="logo-name">
-                        <span class="shop">Shop</span><span class="nova">Nova</span>
+
+                        <span class="shop">
+                            Shop
+                        </span>
+
+                        <span class="nova">
+                            Nova
+                        </span>
+
                     </div>
 
                     <div class="logo-tagline">
@@ -765,7 +895,7 @@
             </div>
 
 
-            <!-- ACTIONS -->
+            <!-- HEADER ACTIONS -->
 
             <div class="header-actions">
 
@@ -782,7 +912,11 @@
                     class="cart-link"
                 >
                     🛒 Cart
-                    <span class="cart-count">0</span>
+
+                    <span class="cart-count">
+                        0
+                    </span>
+
                 </a>
 
             </div>
@@ -790,7 +924,7 @@
         </div>
 
 
-        <!-- NAV -->
+        <!-- NAVIGATION -->
 
         <nav class="nav-bar">
 
@@ -818,7 +952,9 @@
     </header>
 
 
-    <!-- HERO -->
+    <!-- =========================
+         HERO
+    ========================= -->
 
     <section class="hero">
 
@@ -829,7 +965,8 @@
             </div>
 
             <h1>
-                Premium <span>Collections</span>
+                Premium
+                <span>Collections</span>
             </h1>
 
             <p>
@@ -843,7 +980,9 @@
     </section>
 
 
-    <!-- PRODUCTS -->
+    <!-- =========================
+         PRODUCTS
+    ========================= -->
 
     <main class="products-section">
 
@@ -873,7 +1012,7 @@
         >
 
 
-            <!-- 1. BIBLE WONDERS -->
+            <!-- BIBLE WONDERS -->
 
             <article
                 class="product-card featured"
@@ -942,7 +1081,7 @@
             </article>
 
 
-            <!-- 2. BAG -->
+            <!-- BAG -->
 
             <article
                 class="product-card"
@@ -1007,7 +1146,7 @@
             </article>
 
 
-            <!-- 3. EARBUDS -->
+            <!-- EARBUDS -->
 
             <article
                 class="product-card"
@@ -1072,7 +1211,7 @@
             </article>
 
 
-            <!-- 4. LOUNGEWEAR -->
+            <!-- LOUNGEWEAR -->
 
             <article
                 class="product-card"
@@ -1133,7 +1272,7 @@
             </article>
 
 
-            <!-- 5. MAKEUP -->
+            <!-- MAKEUP -->
 
             <article
                 class="product-card"
@@ -1198,7 +1337,7 @@
             </article>
 
 
-            <!-- 6. MEN'S SHOES -->
+            <!-- MEN'S SHOES -->
 
             <article
                 class="product-card"
@@ -1263,10 +1402,7 @@
             </article>
 
 
-            <!-- 7. WOMEN'S SHOES
-                 EXACT FILENAME:
-                 womens-shoes.jpg
-            -->
+            <!-- WOMEN'S SHOES -->
 
             <article
                 class="product-card"
@@ -1331,10 +1467,7 @@
             </article>
 
 
-            <!-- 8. MEN'S SUIT
-                 EXACT FILENAME:
-                 suit.jpg
-            -->
+            <!-- MEN'S SUIT / TUXEDO -->
 
             <article
                 class="product-card"
@@ -1399,7 +1532,7 @@
             </article>
 
 
-            <!-- 9. PERFUME -->
+            <!-- PERFUME -->
 
             <article
                 class="product-card"
@@ -1464,7 +1597,7 @@
             </article>
 
 
-            <!-- 10. SUNGLASSES -->
+            <!-- SUNGLASSES -->
 
             <article
                 class="product-card"
@@ -1525,7 +1658,7 @@
             </article>
 
 
-            <!-- 11. SUPERCAR KEY -->
+            <!-- SUPERCAR KEY -->
 
             <article
                 class="product-card"
@@ -1586,7 +1719,7 @@
             </article>
 
 
-            <!-- 12. LUXURY COLLECTION -->
+            <!-- LUXURY COLLECTION -->
 
             <article
                 class="product-card"
@@ -1667,7 +1800,9 @@
     </main>
 
 
-    <!-- FOOTER -->
+    <!-- =========================
+         FOOTER
+    ========================= -->
 
     <footer>
 
