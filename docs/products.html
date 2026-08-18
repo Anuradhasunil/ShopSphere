@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +7,6 @@
     <title>ShopNova - Products</title>
 
     <style>
-
         * {
             margin: 0;
             padding: 0;
@@ -25,741 +23,484 @@
             color: #172033;
         }
 
-        /* =========================================
-           ANNOUNCEMENT BAR
-        ========================================= */
+        /* =========================
+           TOP SALE BAR
+        ========================= */
 
         .announcement {
-            background:
-                linear-gradient(
-                    90deg,
-                    #ff9933 0%,
-                    #ffffff 50%,
-                    #138808 100%
-                );
+            background: linear-gradient(
+                90deg,
+                #ff9933,
+                #ffffff,
+                #138808
+            );
 
             color: #111827;
-
             text-align: center;
-
             padding: 9px 15px;
-
-            font-size: 14px;
-
+            font-size: 13px;
             font-weight: 800;
-
             line-height: 1.5;
         }
 
-
-        /* =========================================
+        /* =========================
            HEADER
-        ========================================= */
+        ========================= */
 
         header {
             position: sticky;
-
             top: 0;
-
             z-index: 1000;
-
             background: #071a3d;
-
             color: white;
-
-            box-shadow:
-                0 5px 25px rgba(0, 0, 0, 0.18);
+            box-shadow: 0 5px 25px rgba(0,0,0,.18);
         }
-
 
         .header-main {
             width: 100%;
-
             max-width: 1450px;
-
             margin: auto;
-
-            padding: 13px 25px;
-
+            padding: 12px 24px;
             display: flex;
-
             align-items: center;
-
-            gap: 22px;
+            gap: 20px;
         }
 
-
-        /* =========================================
+        /* =========================
            SHOPNOVA LOGO
-        ========================================= */
+        ========================= */
 
         .logo {
-            min-width: 250px;
-
+            min-width: 245px;
             display: flex;
-
             align-items: center;
-
-            gap: 11px;
-
+            gap: 10px;
             text-decoration: none;
-
             color: white;
         }
 
-
-        /*
-           This is intentionally CSS-drawn instead of
-           requesting logo.png.
-
-           That means there is NO logo.png 404.
-        */
-
         .logo-art {
             width: 50px;
-
             height: 50px;
-
+            min-width: 50px;
             border-radius: 50%;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #ff9933 0%,
-                    #ffffff 50%,
-                    #138808 100%
-                );
+            background: linear-gradient(
+                135deg,
+                #ff9933 0%,
+                #ffffff 50%,
+                #138808 100%
+            );
 
             display: flex;
-
             align-items: center;
-
             justify-content: center;
 
-            position: relative;
-
             box-shadow:
-                0 3px 12px rgba(0, 0, 0, 0.25);
+                0 3px 12px rgba(0,0,0,.25);
         }
-
 
         .logo-dove {
-            font-size: 27px;
-
+            font-size: 28px;
             line-height: 1;
-
-            filter:
-                drop-shadow(
-                    0 2px 2px
-                    rgba(0, 0, 0, 0.25)
-                );
         }
-
 
         .logo-content {
             display: flex;
-
             flex-direction: column;
-
             line-height: 1;
         }
 
-
         .logo-name {
             font-size: 25px;
-
             font-weight: 900;
-
-            letter-spacing: 0.3px;
         }
-
 
         .logo-name .shop {
-            color: #ffffff;
+            color: white;
         }
-
 
         .logo-name .nova {
             color: #55a7ff;
         }
 
-
         .logo-tagline {
             margin-top: 5px;
-
-            font-size: 9px;
-
+            font-size: 8px;
             color: #cbd5e1;
-
             letter-spacing: 1px;
-
-            font-weight: 600;
+            font-weight: 700;
         }
 
-
-        /* =========================================
+        /* =========================
            SEARCH
-        ========================================= */
+        ========================= */
 
         .search-box {
             flex: 1;
-
             max-width: 650px;
-
             height: 46px;
-
             display: flex;
-
             background: white;
-
             border-radius: 9px;
-
             overflow: hidden;
-
-            box-shadow:
-                0 4px 15px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 15px rgba(0,0,0,.15);
         }
-
 
         .search-box input {
             width: 100%;
-
             border: none;
-
             outline: none;
-
             padding: 0 17px;
-
             font-size: 15px;
-
             color: #1f2937;
         }
 
-
         .search-box button {
             width: 58px;
-
             border: none;
-
             background: #1877f2;
-
             color: white;
-
             font-size: 19px;
-
             cursor: pointer;
-
-            transition: 0.3s;
         }
-
 
         .search-box button:hover {
             background: #0d5dcc;
         }
 
-
-        /* =========================================
+        /* =========================
            HEADER LINKS
-        ========================================= */
+        ========================= */
 
         .header-actions {
             display: flex;
-
             align-items: center;
-
-            gap: 7px;
+            gap: 5px;
         }
-
 
         .header-actions a {
             color: white;
-
             text-decoration: none;
-
-            font-size: 14px;
-
+            font-size: 13px;
             font-weight: 700;
-
-            padding: 10px 12px;
-
+            padding: 10px;
             border-radius: 8px;
-
             white-space: nowrap;
-
-            transition: 0.3s;
         }
-
 
         .header-actions a:hover {
-            background:
-                rgba(255, 255, 255, 0.12);
+            background: rgba(255,255,255,.12);
         }
-
 
         .cart-link {
             background: #138808 !important;
         }
 
-
         .cart-count {
             display: inline-flex;
-
             align-items: center;
-
             justify-content: center;
-
-            min-width: 22px;
-
-            height: 22px;
-
+            min-width: 21px;
+            height: 21px;
             padding: 0 5px;
-
             margin-left: 3px;
-
             border-radius: 50%;
-
             background: #ff9933;
-
             color: white;
-
             font-size: 11px;
-
             font-weight: 900;
         }
 
-
-        /* =========================================
-           NAVIGATION
-        ========================================= */
+        /* =========================
+           NAV
+        ========================= */
 
         .nav-bar {
             background: #0b2858;
-
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
-            gap: 34px;
-
-            padding: 10px 20px;
-
-            border-top:
-                1px solid rgba(255, 255, 255, 0.08);
+            gap: 35px;
+            padding: 9px 20px;
         }
-
 
         .nav-bar a {
             color: #e8eef8;
-
             text-decoration: none;
-
             font-size: 14px;
-
             font-weight: 700;
-
-            transition: 0.3s;
         }
-
 
         .nav-bar a:hover,
         .nav-bar a.active {
             color: #ffb35c;
         }
 
-
-        /* =========================================
+        /* =========================
            HERO
-        ========================================= */
+        ========================= */
 
         .hero {
-            min-height: 315px;
-
+            min-height: 310px;
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
             text-align: center;
 
-            padding: 55px 20px;
+            padding: 50px 20px;
 
             background:
                 linear-gradient(
                     135deg,
-                    rgba(255, 153, 51, 0.96),
-                    rgba(255, 255, 255, 0.96),
-                    rgba(19, 136, 8, 0.94)
+                    rgba(255,153,51,.96),
+                    rgba(255,255,255,.96),
+                    rgba(19,136,8,.94)
                 );
         }
 
-
         .hero-content {
             max-width: 900px;
-
             padding: 35px 40px;
-
             border-radius: 25px;
 
-            background:
-                rgba(255, 255, 255, 0.92);
-
-            border:
-                2px solid rgba(7, 26, 61, 0.08);
+            background: rgba(255,255,255,.93);
 
             box-shadow:
-                0 20px 50px
-                rgba(0, 0, 0, 0.15);
+                0 20px 50px rgba(0,0,0,.15);
         }
-
 
         .hero-badge {
             display: inline-block;
-
             padding: 8px 18px;
-
             border-radius: 30px;
-
             background: #071a3d;
-
             color: white;
-
             font-size: 12px;
-
             font-weight: 900;
-
             margin-bottom: 15px;
         }
 
-
         .hero h1 {
             color: #071a3d;
-
-            font-size:
-                clamp(36px, 6vw, 58px);
-
+            font-size: clamp(36px,6vw,58px);
             font-weight: 900;
-
             margin-bottom: 12px;
         }
-
 
         .hero h1 span {
             color: #138808;
         }
 
-
         .hero p {
             max-width: 720px;
-
             margin: auto;
-
             color: #39455c;
-
             font-size: 17px;
-
             line-height: 1.7;
         }
 
-
-        /* =========================================
-           PRODUCTS AREA
-        ========================================= */
+        /* =========================
+           PRODUCTS SECTION
+        ========================= */
 
         .products-section {
             width: 100%;
-
             max-width: 1400px;
-
             margin: auto;
-
             padding: 55px 25px 75px;
         }
 
-
         .section-heading {
             text-align: center;
-
             margin-bottom: 30px;
         }
 
-
         .section-heading h2 {
             color: #071a3d;
-
             font-size: 34px;
-
             font-weight: 900;
-
             margin-bottom: 8px;
         }
 
-
         .section-heading p {
             color: #6c7484;
-
             font-size: 15px;
         }
 
-
-        /* =========================================
-           SEARCH RESULT
-        ========================================= */
-
         .search-result {
             display: none;
-
             text-align: center;
-
             color: #071a3d;
-
-            font-size: 16px;
-
+            font-size: 15px;
             font-weight: 800;
-
             margin-bottom: 25px;
         }
 
-
-        /* =========================================
+        /* =========================
            PRODUCT GRID
-        ========================================= */
+        ========================= */
 
         .products-grid {
             display: grid;
-
             grid-template-columns:
-                repeat(
-                    auto-fit,
-                    minmax(255px, 1fr)
-                );
-
+                repeat(auto-fit,minmax(255px,1fr));
             gap: 28px;
         }
 
-
-        /* =========================================
+        /* =========================
            PRODUCT CARD
-        ========================================= */
+        ========================= */
 
         .product-card {
             background: white;
-
             border-radius: 20px;
-
             overflow: hidden;
-
             border: 1px solid #e3e8f0;
 
             box-shadow:
-                0 10px 30px
-                rgba(0, 0, 0, 0.07);
+                0 10px 30px rgba(0,0,0,.07);
 
             display: flex;
-
             flex-direction: column;
 
             transition:
-                transform 0.3s ease,
-                box-shadow 0.3s ease;
+                transform .3s ease,
+                box-shadow .3s ease;
         }
-
 
         .product-card:hover {
             transform: translateY(-8px);
 
             box-shadow:
-                0 20px 45px
-                rgba(7, 26, 61, 0.15);
+                0 20px 45px rgba(7,26,61,.15);
         }
-
 
         .product-card.featured {
-            border:
-                2px solid #ff9933;
+            border: 2px solid #ff9933;
         }
 
-
-        /* =========================================
+        /* =========================
            PRODUCT IMAGE
-        ========================================= */
+        ========================= */
 
         .product-image {
             height: 270px;
-
             background: #eef2f7;
-
             position: relative;
-
             overflow: hidden;
         }
 
-
         .product-image img {
             width: 100%;
-
             height: 100%;
-
             display: block;
-
             object-fit: cover;
 
             transition:
-                transform 0.45s ease;
+                transform .45s ease;
         }
-
 
         .product-card:hover
         .product-image img {
             transform: scale(1.06);
         }
 
-
         .sale-badge {
             position: absolute;
-
             top: 13px;
-
             left: 13px;
-
             z-index: 3;
 
             background: #e63946;
-
             color: white;
 
             padding: 7px 11px;
-
             border-radius: 20px;
 
             font-size: 10px;
-
             font-weight: 900;
         }
-
 
         .featured-badge {
             position: absolute;
-
             top: 13px;
-
             right: 13px;
-
             z-index: 3;
 
             background: #138808;
-
             color: white;
 
             padding: 7px 11px;
-
             border-radius: 20px;
 
             font-size: 10px;
-
             font-weight: 900;
         }
 
-
-        /* =========================================
-           PRODUCT INFORMATION
-        ========================================= */
+        /* =========================
+           PRODUCT INFO
+        ========================= */
 
         .product-info {
             padding: 20px;
-
             display: flex;
-
             flex-direction: column;
-
             flex: 1;
         }
 
-
         .product-category {
             color: #138808;
-
             font-size: 11px;
-
             font-weight: 900;
-
             text-transform: uppercase;
-
-            letter-spacing: 0.8px;
-
+            letter-spacing: .8px;
             margin-bottom: 7px;
         }
 
-
         .product-name {
             color: #071a3d;
-
             font-size: 20px;
-
             font-weight: 800;
-
             line-height: 1.3;
-
             min-height: 52px;
         }
 
-
         .product-description {
             color: #697386;
-
             font-size: 13px;
-
             line-height: 1.5;
-
-            margin:
-                7px 0 14px;
-
+            margin: 7px 0 14px;
             min-height: 39px;
         }
 
-
         .price-row {
             display: flex;
-
             align-items: center;
-
             gap: 10px;
-
             margin-bottom: 15px;
         }
 
-
         .price {
             color: #071a3d;
-
             font-size: 25px;
-
             font-weight: 900;
         }
 
-
         .old-price {
             color: #999;
-
             font-size: 13px;
-
             text-decoration: line-through;
         }
 
-
-        /* =========================================
-           ADD TO CART BUTTON
-        ========================================= */
+        /* =========================
+           BUTTON
+        ========================= */
 
         .add-cart-btn {
             width: 100%;
-
             padding: 13px;
 
             border: none;
-
             border-radius: 10px;
 
             background:
@@ -770,18 +511,14 @@
                 );
 
             color: white;
-
             font-size: 14px;
-
             font-weight: 800;
 
             cursor: pointer;
-
             margin-top: auto;
 
-            transition: 0.3s;
+            transition: .3s;
         }
-
 
         .add-cart-btn:hover {
             background:
@@ -794,67 +531,49 @@
             transform: translateY(-2px);
         }
 
-
         .add-cart-btn.added {
             background: #138808;
         }
 
-
         .add-cart-btn:disabled {
             cursor: default;
-
-            opacity: 0.9;
         }
 
-
-        /* =========================================
+        /* =========================
            NO RESULTS
-        ========================================= */
+        ========================= */
 
         .no-results {
             display: none;
-
             grid-column: 1 / -1;
 
             text-align: center;
-
             padding: 70px 20px;
 
             color: #667085;
-
             font-size: 18px;
-
             line-height: 2;
         }
 
-
-        /* =========================================
+        /* =========================
            FOOTER
-        ========================================= */
+        ========================= */
 
         footer {
             background: #071a3d;
-
             color: white;
-
             text-align: center;
-
             padding: 30px 20px;
         }
 
-
         footer h3 {
             font-size: 23px;
-
             font-weight: 900;
         }
 
-
         .footer-line {
             width: 85px;
-
             height: 3px;
-
             margin: 14px auto;
 
             background:
@@ -866,193 +585,135 @@
                 );
         }
 
-
         footer p {
             color: #cbd5e1;
-
             font-size: 13px;
-
             line-height: 1.8;
         }
 
-
-        /* =========================================
+        /* =========================
            MOBILE
-        ========================================= */
+        ========================= */
 
-        @media (max-width: 1050px) {
+        @media(max-width:1050px) {
 
             .header-main {
                 flex-wrap: wrap;
-
                 justify-content: center;
             }
-
 
             .logo {
                 min-width: auto;
             }
 
-
             .search-box {
                 order: 3;
-
                 width: 100%;
-
                 max-width: 100%;
             }
-
 
             .header-actions {
                 justify-content: center;
             }
         }
 
-
-        @media (max-width: 700px) {
+        @media(max-width:700px) {
 
             .announcement {
-                font-size: 11px;
-
-                padding: 8px 10px;
+                font-size: 10px;
             }
-
 
             .header-main {
                 padding: 12px 14px;
-
                 gap: 12px;
             }
 
-
             .logo {
                 width: 100%;
-
                 justify-content: center;
             }
 
-
-            .logo-name {
-                font-size: 23px;
-            }
-
-
             .header-actions {
                 width: 100%;
-
                 display: grid;
-
                 grid-template-columns:
-                    repeat(3, 1fr);
-
+                    repeat(3,1fr);
                 gap: 5px;
             }
 
-
             .header-actions a {
                 padding: 9px 4px;
-
                 text-align: center;
-
                 font-size: 11px;
             }
 
-
             .nav-bar {
                 justify-content: flex-start;
-
                 overflow-x: auto;
-
                 white-space: nowrap;
-
                 gap: 22px;
-
                 padding: 10px 15px;
             }
-
 
             .nav-bar a {
                 font-size: 12px;
             }
 
-
             .hero {
                 min-height: 260px;
-
                 padding: 35px 14px;
             }
-
 
             .hero-content {
                 padding: 25px 18px;
             }
 
-
             .hero h1 {
                 font-size: 35px;
             }
 
-
             .hero p {
                 font-size: 14px;
             }
-
 
             .products-section {
                 padding:
                     40px 15px 55px;
             }
 
-
             .section-heading h2 {
                 font-size: 28px;
             }
 
-
             .products-grid {
                 grid-template-columns: 1fr;
-
                 gap: 20px;
             }
-
 
             .product-image {
                 height: 290px;
             }
         }
-
     </style>
 </head>
 
-
 <body>
 
-
-    <!-- =========================================
-         ANNOUNCEMENT
-    ========================================== -->
+    <!-- TOP BAR -->
 
     <div class="announcement">
-
         🇮🇳 80th INDEPENDENCE DAY CELEBRATION
-
         • FREEDOM SALE 2026
-
         • UP TO 80% OFF
-
         • VANDE MATARAM 🇮🇳
-
     </div>
 
 
-    <!-- =========================================
-         HEADER
-    ========================================== -->
+    <!-- HEADER -->
 
     <header>
 
         <div class="header-main">
-
 
             <!-- SHOPNOVA LOGO -->
 
@@ -1063,33 +724,19 @@
             >
 
                 <div class="logo-art">
-
                     <div class="logo-dove">
                         🕊️
                     </div>
-
                 </div>
-
 
                 <div class="logo-content">
 
                     <div class="logo-name">
-
-                        <span class="shop">
-                            Shop
-                        </span>
-
-                        <span class="nova">
-                            Nova
-                        </span>
-
+                        <span class="shop">Shop</span><span class="nova">Nova</span>
                     </div>
 
-
                     <div class="logo-tagline">
-
                         SHOP SMART • LIVE BETTER
-
                     </div>
 
                 </div>
@@ -1104,14 +751,13 @@
                 <input
                     type="text"
                     id="searchInput"
-                    placeholder="Search Bible Wonders, shoes, suit..."
+                    placeholder="Search products..."
                     autocomplete="off"
                 >
 
                 <button
                     type="button"
                     id="searchBtn"
-                    aria-label="Search"
                 >
                     🔍
                 </button>
@@ -1119,7 +765,7 @@
             </div>
 
 
-            <!-- HEADER ACTIONS -->
+            <!-- ACTIONS -->
 
             <div class="header-actions">
 
@@ -1136,13 +782,7 @@
                     class="cart-link"
                 >
                     🛒 Cart
-
-                    <span
-                        class="cart-count"
-                    >
-                        0
-                    </span>
-
+                    <span class="cart-count">0</span>
                 </a>
 
             </div>
@@ -1150,7 +790,7 @@
         </div>
 
 
-        <!-- NAVIGATION -->
+        <!-- NAV -->
 
         <nav class="nav-bar">
 
@@ -1178,35 +818,24 @@
     </header>
 
 
-    <!-- =========================================
-         HERO
-    ========================================== -->
+    <!-- HERO -->
 
     <section class="hero">
 
         <div class="hero-content">
 
             <div class="hero-badge">
-
                 🇮🇳 FREEDOM SALE 2026 🇮🇳
-
             </div>
 
-
             <h1>
-
-                Premium
-                <span>Collections</span>
-
+                Premium <span>Collections</span>
             </h1>
 
-
             <p>
-
                 Celebrate India's 80th Independence Day
                 with premium books, fashion, footwear,
                 beauty, lifestyle and luxury products.
-
             </p>
 
         </div>
@@ -1214,12 +843,9 @@
     </section>
 
 
-    <!-- =========================================
-         PRODUCTS
-    ========================================== -->
+    <!-- PRODUCTS -->
 
     <main class="products-section">
-
 
         <div class="section-heading">
 
@@ -1247,10 +873,7 @@
         >
 
 
-            <!-- =====================================
-                 1. BIBLE WONDERS
-                 FIRST PRODUCT
-            ====================================== -->
+            <!-- 1. BIBLE WONDERS -->
 
             <article
                 class="product-card featured"
@@ -1268,7 +891,6 @@
                         SALE
                     </span>
 
-
                     <img
                         src="images/bible-wonders.jpg"
                         alt="Bible Wonders Book"
@@ -1276,26 +898,20 @@
 
                 </div>
 
-
                 <div class="product-info">
 
                     <div class="product-category">
                         Books
                     </div>
 
-
                     <h3 class="product-name">
                         Bible Wonders
                     </h3>
 
-
                     <p class="product-description">
-
                         Inspirational Bible wonders
                         collection for readers and families.
-
                     </p>
-
 
                     <div class="price-row">
 
@@ -1308,7 +924,6 @@
                         </span>
 
                     </div>
-
 
                     <button
                         class="add-cart-btn"
@@ -1327,9 +942,7 @@
             </article>
 
 
-            <!-- =====================================
-                 2. PREMIUM BAG
-            ====================================== -->
+            <!-- 2. BAG -->
 
             <article
                 class="product-card"
@@ -1350,26 +963,20 @@
 
                 </div>
 
-
                 <div class="product-info">
 
                     <div class="product-category">
                         Fashion
                     </div>
 
-
                     <h3 class="product-name">
                         Premium Bag
                     </h3>
 
-
                     <p class="product-description">
-
                         Stylish premium bag for everyday
                         use and special occasions.
-
                     </p>
-
 
                     <div class="price-row">
 
@@ -1382,7 +989,6 @@
                         </span>
 
                     </div>
-
 
                     <button
                         class="add-cart-btn"
@@ -1401,9 +1007,7 @@
             </article>
 
 
-            <!-- =====================================
-                 3. WIRELESS EARBUDS
-            ====================================== -->
+            <!-- 3. EARBUDS -->
 
             <article
                 class="product-card"
@@ -1424,26 +1028,20 @@
 
                 </div>
 
-
                 <div class="product-info">
 
                     <div class="product-category">
                         Technology
                     </div>
 
-
                     <h3 class="product-name">
                         Wireless Earbuds
                     </h3>
 
-
                     <p class="product-description">
-
                         Premium wireless earbuds with
                         modern sound and compact design.
-
                     </p>
-
 
                     <div class="price-row">
 
@@ -1456,7 +1054,6 @@
                         </span>
 
                     </div>
-
 
                     <button
                         class="add-cart-btn"
@@ -1475,9 +1072,7 @@
             </article>
 
 
-            <!-- =====================================
-                 4. LUXURY LOUNGEWEAR
-            ====================================== -->
+            <!-- 4. LOUNGEWEAR -->
 
             <article
                 class="product-card"
@@ -1494,26 +1089,20 @@
 
                 </div>
 
-
                 <div class="product-info">
 
                     <div class="product-category">
                         Lifestyle
                     </div>
 
-
                     <h3 class="product-name">
                         Luxury Loungewear
                     </h3>
 
-
                     <p class="product-description">
-
                         Comfortable premium loungewear
                         designed for relaxed days.
-
                     </p>
-
 
                     <div class="price-row">
 
@@ -1526,7 +1115,6 @@
                         </span>
 
                     </div>
-
 
                     <button
                         class="add-cart-btn"
@@ -1545,9 +1133,7 @@
             </article>
 
 
-            <!-- =====================================
-                 5. BEAUTY COLLECTION
-            ====================================== -->
+            <!-- 5. MAKEUP -->
 
             <article
                 class="product-card"
@@ -1568,26 +1154,20 @@
 
                 </div>
 
-
                 <div class="product-info">
 
                     <div class="product-category">
                         Beauty
                     </div>
 
-
                     <h3 class="product-name">
                         Beauty Collection
                     </h3>
 
-
                     <p class="product-description">
-
                         Premium beauty essentials for
                         everyday elegance.
-
                     </p>
-
 
                     <div class="price-row">
 
@@ -1600,7 +1180,6 @@
                         </span>
 
                     </div>
-
 
                     <button
                         class="add-cart-btn"
@@ -1619,9 +1198,7 @@
             </article>
 
 
-            <!-- =====================================
-                 6. MEN'S SHOES
-            ====================================== -->
+            <!-- 6. MEN'S SHOES -->
 
             <article
                 class="product-card"
@@ -1642,26 +1219,20 @@
 
                 </div>
 
-
                 <div class="product-info">
 
                     <div class="product-category">
                         Footwear
                     </div>
 
-
                     <h3 class="product-name">
                         Men's Shoes
                     </h3>
 
-
                     <p class="product-description">
-
                         Premium men's footwear with
                         stylish and comfortable design.
-
                     </p>
-
 
                     <div class="price-row">
 
@@ -1674,7 +1245,6 @@
                         </span>
 
                     </div>
-
 
                     <button
                         class="add-cart-btn"
@@ -1693,9 +1263,10 @@
             </article>
 
 
-            <!-- =====================================
-                 7. WOMEN'S SHOES
-            ====================================== -->
+            <!-- 7. WOMEN'S SHOES
+                 EXACT FILENAME:
+                 womens-shoes.jpg
+            -->
 
             <article
                 class="product-card"
@@ -1716,26 +1287,20 @@
 
                 </div>
 
-
                 <div class="product-info">
 
                     <div class="product-category">
                         Women's Footwear
                     </div>
 
-
                     <h3 class="product-name">
                         Women's Shoes
                     </h3>
 
-
                     <p class="product-description">
-
                         Elegant women's footwear for
                         stylish everyday fashion.
-
                     </p>
-
 
                     <div class="price-row">
 
@@ -1748,7 +1313,6 @@
                         </span>
 
                     </div>
-
 
                     <button
                         class="add-cart-btn"
@@ -1767,11 +1331,10 @@
             </article>
 
 
-            <!-- =====================================
-                 8. MEN'S SUIT
-                 IMPORTANT: suit.jpg
-                 NOT suit-tuxedo.jpg
-            ====================================== -->
+            <!-- 8. MEN'S SUIT
+                 EXACT FILENAME:
+                 suit.jpg
+            -->
 
             <article
                 class="product-card"
@@ -1785,7 +1348,6 @@
                         SALE
                     </span>
 
-
                     <img
                         src="images/suit.jpg"
                         alt="Men's Suit Tuxedo"
@@ -1793,26 +1355,20 @@
 
                 </div>
 
-
                 <div class="product-info">
 
                     <div class="product-category">
                         Men's Fashion
                     </div>
 
-
                     <h3 class="product-name">
                         Men's Suit Tuxedo
                     </h3>
 
-
                     <p class="product-description">
-
                         Premium formal men's suit and
                         tuxedo collection.
-
                     </p>
-
 
                     <div class="price-row">
 
@@ -1825,7 +1381,6 @@
                         </span>
 
                     </div>
-
 
                     <button
                         class="add-cart-btn"
@@ -1844,9 +1399,7 @@
             </article>
 
 
-            <!-- =====================================
-                 9. LUXURY PERFUME
-            ====================================== -->
+            <!-- 9. PERFUME -->
 
             <article
                 class="product-card"
@@ -1867,26 +1420,20 @@
 
                 </div>
 
-
                 <div class="product-info">
 
                     <div class="product-category">
                         Fragrance
                     </div>
 
-
                     <h3 class="product-name">
                         Luxury Perfume
                     </h3>
 
-
                     <p class="product-description">
-
                         Premium fragrance collection
                         with a luxurious finish.
-
                     </p>
-
 
                     <div class="price-row">
 
@@ -1899,7 +1446,6 @@
                         </span>
 
                     </div>
-
 
                     <button
                         class="add-cart-btn"
@@ -1918,9 +1464,7 @@
             </article>
 
 
-            <!-- =====================================
-                 10. PREMIUM SUNGLASSES
-            ====================================== -->
+            <!-- 10. SUNGLASSES -->
 
             <article
                 class="product-card"
@@ -1937,26 +1481,20 @@
 
                 </div>
 
-
                 <div class="product-info">
 
                     <div class="product-category">
                         Accessories
                     </div>
 
-
                     <h3 class="product-name">
                         Premium Sunglasses
                     </h3>
 
-
                     <p class="product-description">
-
                         Stylish premium sunglasses for
                         everyday luxury.
-
                     </p>
-
 
                     <div class="price-row">
 
@@ -1969,7 +1507,6 @@
                         </span>
 
                     </div>
-
 
                     <button
                         class="add-cart-btn"
@@ -1988,9 +1525,7 @@
             </article>
 
 
-            <!-- =====================================
-                 11. SUPERCAR KEY
-            ====================================== -->
+            <!-- 11. SUPERCAR KEY -->
 
             <article
                 class="product-card"
@@ -2007,26 +1542,20 @@
 
                 </div>
 
-
                 <div class="product-info">
 
                     <div class="product-category">
                         Luxury
                     </div>
 
-
                     <h3 class="product-name">
                         Supercar Key
                     </h3>
 
-
                     <p class="product-description">
-
                         Premium luxury automotive
                         accessory collection.
-
                     </p>
-
 
                     <div class="price-row">
 
@@ -2039,7 +1568,6 @@
                         </span>
 
                     </div>
-
 
                     <button
                         class="add-cart-btn"
@@ -2058,9 +1586,7 @@
             </article>
 
 
-            <!-- =====================================
-                 12. LUXURY COLLECTION
-            ====================================== -->
+            <!-- 12. LUXURY COLLECTION -->
 
             <article
                 class="product-card"
@@ -2081,26 +1607,20 @@
 
                 </div>
 
-
                 <div class="product-info">
 
                     <div class="product-category">
                         Premium
                     </div>
 
-
                     <h3 class="product-name">
                         Luxury Collection
                     </h3>
 
-
                     <p class="product-description">
-
                         Carefully selected premium
                         lifestyle collection.
-
                     </p>
-
 
                     <div class="price-row">
 
@@ -2113,7 +1633,6 @@
                         </span>
 
                     </div>
-
 
                     <button
                         class="add-cart-btn"
@@ -2132,21 +1651,15 @@
             </article>
 
 
-            <!-- =====================================
-                 NO RESULTS
-            ====================================== -->
+            <!-- NO RESULTS -->
 
             <div
                 id="noResults"
                 class="no-results"
             >
-
                 😔 No products found.
-
                 <br>
-
                 Try another product name.
-
             </div>
 
         </div>
@@ -2154,9 +1667,7 @@
     </main>
 
 
-    <!-- =========================================
-         FOOTER
-    ========================================== -->
+    <!-- FOOTER -->
 
     <footer>
 
@@ -2164,20 +1675,16 @@
             ShopNova
         </h3>
 
-
         <div class="footer-line"></div>
-
 
         <p>
             Premium Shopping Experience
         </p>
 
-
         <p>
             🇮🇳 Freedom Sale 2026 •
             80th Independence Day Celebration
         </p>
-
 
         <p>
             © 2026 ShopNova •
@@ -2187,12 +1694,7 @@
     </footer>
 
 
-    <!-- =========================================
-         JAVASCRIPT
-    ========================================== -->
-
     <script src="script.js"></script>
 
 </body>
-
 </html>

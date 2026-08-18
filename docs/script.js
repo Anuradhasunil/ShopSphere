@@ -1,21 +1,15 @@
 "use strict";
 
-
 /* =========================================================
-   SHOPNOVA JAVASCRIPT
-   ========================================================= */
-
-
-/* =========================================================
-   CART STORAGE
-   ========================================================= */
+   SHOPNOVA CART
+========================================================= */
 
 const CART_KEY = "shopnova_cart";
 
 
 /* =========================================================
    GET CART
-   ========================================================= */
+========================================================= */
 
 function getCart() {
 
@@ -31,16 +25,14 @@ function getCart() {
         const cart =
             JSON.parse(saved);
 
-        if (!Array.isArray(cart)) {
-            return [];
-        }
-
-        return cart;
+        return Array.isArray(cart)
+            ? cart
+            : [];
 
     } catch (error) {
 
         console.error(
-            "ShopNova cart error:",
+            "Cart loading error:",
             error
         );
 
@@ -51,7 +43,7 @@ function getCart() {
 
 /* =========================================================
    SAVE CART
-   ========================================================= */
+========================================================= */
 
 function saveCart(cart) {
 
@@ -65,7 +57,7 @@ function saveCart(cart) {
     } catch (error) {
 
         console.error(
-            "ShopNova could not save cart:",
+            "Cart saving error:",
             error
         );
     }
@@ -73,18 +65,17 @@ function saveCart(cart) {
 
 
 /* =========================================================
-   CART COUNT
-   ========================================================= */
+   UPDATE CART COUNT
+========================================================= */
 
 function updateCartCount() {
 
     const cart =
         getCart();
 
-
     const total =
         cart.reduce(
-            function (sum, item) {
+            (sum, item) => {
 
                 return sum +
                     (Number(item.quantity) || 0);
@@ -93,17 +84,15 @@ function updateCartCount() {
             0
         );
 
-
-    const elements =
+    const counters =
         document.querySelectorAll(
             ".cart-count, #cartCount, .cart-badge"
         );
 
+    counters.forEach(
+        counter => {
 
-    elements.forEach(
-        function (element) {
-
-            element.textContent =
+            counter.textContent =
                 total;
 
         }
@@ -113,27 +102,22 @@ function updateCartCount() {
 
 /* =========================================================
    ADD TO CART
-   ========================================================= */
+========================================================= */
 
 function addToCart(
     productName,
     price,
     image,
-    button
+    button = null
 ) {
 
-    let cart =
+    const cart =
         getCart();
-
 
     const existing =
         cart.find(
-            function (item) {
-
-                return item.name ===
-                    productName;
-
-            }
+            item =>
+                item.name === productName
         );
 
 
@@ -160,43 +144,38 @@ function addToCart(
 
     saveCart(cart);
 
-
     updateCartCount();
 
 
-    /* =========================================
-       BUTTON FEEDBACK
-    ========================================== */
+    /* BUTTON FEEDBACK */
 
     if (button) {
 
-        const original =
+        const oldText =
             button.innerHTML;
-
 
         button.innerHTML =
             "✓ Added to Cart";
-
 
         button.classList.add(
             "added"
         );
 
-
         button.disabled = true;
 
 
         setTimeout(
-            function () {
+            () => {
 
                 button.innerHTML =
-                    original;
+                    oldText;
 
                 button.classList.remove(
                     "added"
                 );
 
-                button.disabled = false;
+                button.disabled =
+                    false;
 
             },
             1200
@@ -204,7 +183,7 @@ function addToCart(
     }
 
 
-    showCartMessage(
+    showMessage(
         productName +
         " added to cart!"
     );
@@ -212,10 +191,8 @@ function addToCart(
 
 
 /* =========================================================
-   OLD add() FUNCTION
-   ---------------------------------------------------------
-   Keeps older ShopNova buttons working.
-   ========================================================= */
+   BACKWARD COMPATIBILITY
+========================================================= */
 
 function add(
     productName,
@@ -226,110 +203,95 @@ function add(
     addToCart(
         productName,
         price,
-        image,
-        null
+        image
     );
 }
 
 
 /* =========================================================
-   CART NOTIFICATION
-   ========================================================= */
+   MESSAGE
+========================================================= */
 
-function showCartMessage(
+function showMessage(
     message
 ) {
 
-    let box =
+    let messageBox =
         document.getElementById(
             "shopnovaMessage"
         );
 
 
-    if (!box) {
+    if (!messageBox) {
 
-        box =
+        messageBox =
             document.createElement(
                 "div"
             );
 
-
-        box.id =
+        messageBox.id =
             "shopnovaMessage";
 
 
-        box.style.position =
+        messageBox.style.position =
             "fixed";
 
+        messageBox.style.right =
+            "20px";
 
-        box.style.bottom =
-            "25px";
+        messageBox.style.bottom =
+            "20px";
 
-
-        box.style.right =
-            "25px";
-
-
-        box.style.zIndex =
+        messageBox.style.zIndex =
             "999999";
 
-
-        box.style.background =
+        messageBox.style.background =
             "#071a3d";
 
-
-        box.style.color =
+        messageBox.style.color =
             "#ffffff";
 
-
-        box.style.padding =
+        messageBox.style.padding =
             "14px 20px";
 
-
-        box.style.borderRadius =
+        messageBox.style.borderRadius =
             "12px";
 
-
-        box.style.fontWeight =
-            "700";
-
-
-        box.style.fontSize =
+        messageBox.style.fontSize =
             "14px";
 
+        messageBox.style.fontWeight =
+            "700";
 
-        box.style.boxShadow =
+        messageBox.style.boxShadow =
             "0 10px 30px rgba(0,0,0,.25)";
 
-
-        box.style.transition =
+        messageBox.style.transition =
             "opacity .3s ease";
 
-
         document.body.appendChild(
-            box
+            messageBox
         );
     }
 
 
-    box.textContent =
+    messageBox.textContent =
         "✓ " + message;
 
-
-    box.style.opacity =
+    messageBox.style.opacity =
         "1";
 
 
     clearTimeout(
-        window.shopnovaMessageTimer
+        window.shopnovaTimer
     );
 
 
-    window.shopnovaMessageTimer =
+    window.shopnovaTimer =
         setTimeout(
-            function () {
+            () => {
 
-                box.style.opacity =
+                messageBox.style.opacity =
                     "0";
 
             },
@@ -339,8 +301,8 @@ function showCartMessage(
 
 
 /* =========================================================
-   SEARCH PRODUCTS
-   ========================================================= */
+   SEARCH
+========================================================= */
 
 function searchProducts(
     query
@@ -351,12 +313,10 @@ function searchProducts(
             ".product-card"
         );
 
-
     const noResults =
         document.getElementById(
             "noResults"
         );
-
 
     const result =
         document.getElementById(
@@ -364,75 +324,55 @@ function searchProducts(
         );
 
 
-    if (!products.length) {
-        return;
-    }
-
-
-    const clean =
+    const search =
         String(query || "")
             .trim()
             .toLowerCase();
 
 
-    let visible =
+    let found =
         0;
 
 
     products.forEach(
-        function (product) {
+        product => {
 
             const name =
                 (
                     product.dataset.name ||
-                    product
-                        .querySelector(
-                            ".product-name"
-                        )
-                        ?.textContent ||
                     ""
-                )
-                .toLowerCase();
+                ).toLowerCase();
 
 
             const category =
                 (
                     product.dataset.category ||
-                    product
-                        .querySelector(
-                            ".product-category"
-                        )
-                        ?.textContent ||
                     ""
-                )
-                .toLowerCase();
+                ).toLowerCase();
 
 
             const description =
                 (
-                    product
-                        .querySelector(
-                            ".product-description"
-                        )
-                        ?.textContent ||
+                    product.querySelector(
+                        ".product-description"
+                    )?.textContent ||
                     ""
-                )
-                .toLowerCase();
+                ).toLowerCase();
 
 
-            const match =
-                clean === "" ||
-                name.includes(clean) ||
-                category.includes(clean) ||
-                description.includes(clean);
+            const matches =
+                search === "" ||
+                name.includes(search) ||
+                category.includes(search) ||
+                description.includes(search);
 
 
-            if (match) {
+            if (matches) {
 
                 product.style.display =
                     "flex";
 
-                visible++;
+                found++;
 
             } else {
 
@@ -444,26 +384,18 @@ function searchProducts(
     );
 
 
-    /* =========================================
-       NO RESULTS
-    ========================================== */
-
     if (noResults) {
 
         noResults.style.display =
-            visible === 0
+            found === 0
                 ? "block"
                 : "none";
     }
 
 
-    /* =========================================
-       RESULT TEXT
-    ========================================== */
-
     if (result) {
 
-        if (clean === "") {
+        if (search === "") {
 
             result.style.display =
                 "none";
@@ -477,7 +409,7 @@ function searchProducts(
                 "block";
 
             result.textContent =
-                visible +
+                found +
                 " product(s) found for \"" +
                 query +
                 "\"";
@@ -488,7 +420,7 @@ function searchProducts(
 
 /* =========================================================
    SEARCH SETUP
-   ========================================================= */
+========================================================= */
 
 function setupSearch() {
 
@@ -496,7 +428,6 @@ function setupSearch() {
         document.getElementById(
             "searchInput"
         );
-
 
     const button =
         document.getElementById(
@@ -509,15 +440,11 @@ function setupSearch() {
     }
 
 
-    /* =========================================
-       SEARCH BUTTON
-    ========================================== */
-
     if (button) {
 
         button.addEventListener(
             "click",
-            function () {
+            () => {
 
                 const query =
                     input.value.trim();
@@ -539,60 +466,36 @@ function setupSearch() {
 
                 } else {
 
-                    if (query) {
-
-                        window.location.href =
-                            "products.html?search=" +
-                            encodeURIComponent(
-                                query
-                            );
-
-                    } else {
-
-                        window.location.href =
-                            "products.html";
-                    }
+                    window.location.href =
+                        "products.html?search=" +
+                        encodeURIComponent(
+                            query
+                        );
                 }
-
             }
         );
     }
 
 
-    /* =========================================
-       ENTER KEY
-    ========================================== */
-
     input.addEventListener(
         "keydown",
-        function (event) {
+        event => {
 
-            if (
-                event.key ===
-                "Enter"
-            ) {
+            if (event.key === "Enter") {
 
                 event.preventDefault();
 
-
                 if (button) {
-
                     button.click();
-
                 }
-
             }
         }
     );
 
 
-    /* =========================================
-       LIVE SEARCH
-    ========================================== */
-
     input.addEventListener(
         "input",
-        function () {
+        () => {
 
             const productsPage =
                 window.location.pathname
@@ -608,17 +511,16 @@ function setupSearch() {
                     input.value
                 );
             }
-
         }
     );
 }
 
 
 /* =========================================================
-   LOAD SEARCH FROM URL
-   ========================================================= */
+   URL SEARCH
+========================================================= */
 
-function loadSearchFromURL() {
+function loadURLSearch() {
 
     const input =
         document.getElementById(
@@ -637,110 +539,55 @@ function loadSearchFromURL() {
         );
 
 
-    const query =
+    const search =
         params.get(
             "search"
         );
 
 
-    if (query) {
+    if (search) {
 
         input.value =
-            query;
+            search;
 
         searchProducts(
-            query
+            search
         );
     }
 }
 
 
 /* =========================================================
-   MOBILE MENU SUPPORT
-   ========================================================= */
-
-function setupMobileMenu() {
-
-    const menuButton =
-        document.getElementById(
-            "menuBtn"
-        ) ||
-        document.getElementById(
-            "menu-btn"
-        ) ||
-        document.querySelector(
-            ".menu-btn"
-        );
-
-
-    const menu =
-        document.getElementById(
-            "nav-menu"
-        ) ||
-        document.getElementById(
-            "navbar"
-        ) ||
-        document.querySelector(
-            ".nav-menu"
-        );
-
-
-    if (!menuButton || !menu) {
-        return;
-    }
-
-
-    menuButton.addEventListener(
-        "click",
-        function () {
-
-            menu.classList.toggle(
-                "active"
-            );
-
-            menu.classList.toggle(
-                "show"
-            );
-        }
-    );
-}
-
-
-/* =========================================================
-   CART SYNC BETWEEN TABS
-   ========================================================= */
+   STORAGE SYNC
+========================================================= */
 
 window.addEventListener(
     "storage",
-    function (event) {
+    event => {
 
         if (
-            event.key ===
-            CART_KEY
+            event.key === CART_KEY
         ) {
 
             updateCartCount();
         }
-
     }
 );
 
 
 /* =========================================================
-   PAGE LOAD
-   ========================================================= */
+   PAGE READY
+========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
-    function () {
+    () => {
 
         updateCartCount();
 
         setupSearch();
 
-        loadSearchFromURL();
-
-        setupMobileMenu();
+        loadURLSearch();
 
     }
 );
