@@ -3,202 +3,589 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopNova - Our Products</title>
+
+    <title>ShopNova - Products</title>
+
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fa;
+            color: #111827;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .shop-header {
+            position: sticky;
+            top: 0;
+            z-index: 9999;
+            width: 100%;
+            height: 62px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 5%;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            min-width: 190px;
+        }
+
+        .logo-area img {
+            width: 145px;
+            height: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* =========================
+           SEARCH
+        ========================= */
+
+        .header-search {
+            flex: 1;
+            max-width: 425px;
+            margin: 0 30px;
+            position: relative;
+        }
+
+        .header-search input {
+            width: 100%;
+            height: 44px;
+            border-radius: 24px;
+            border: 1px solid #d1d5db;
+            background: #f3f4f6;
+            padding: 0 48px 0 22px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .header-search input:focus {
+            border-color: #0b6fd3;
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(11, 111, 211, 0.10);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        /* =========================
+           NAVIGATION
+        ========================= */
+
+        .main-nav {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            white-space: nowrap;
+        }
+
+        .main-nav a {
+            color: #4b5563;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .main-nav a:hover {
+            color: #0868c9;
+        }
+
+        .main-nav a.active {
+            color: #0868c9;
+            font-weight: 700;
+        }
+
+        .cart-link {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .cart-count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            min-width: 20px;
+            height: 20px;
+            padding: 0 5px;
+
+            border-radius: 50%;
+            background: #ff3b30;
+            color: white;
+
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .contact-button {
+            background: #142333;
+            color: white !important;
+
+            padding: 10px 18px;
+            border-radius: 6px;
+
+            font-weight: 700 !important;
+        }
+
+        .contact-button:hover {
+            background: #0868c9;
+        }
+
+        /* =========================
+           PAGE
+        ========================= */
+
+        .products-page {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 35px 20px 60px;
+        }
+
+        .products-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .products-title h1 {
+            margin: 0;
+            font-size: 32px;
+            color: #111827;
+        }
+
+        .products-title p {
+            margin: 8px 0 0;
+            color: #6b7280;
+            font-size: 15px;
+        }
+
+        /* =========================
+           PRODUCT GRID
+        ========================= */
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 30px;
+            width: 100%;
+        }
+
+        /* =========================
+           PRODUCT CARD
+        ========================= */
+
+        .product-card {
+            background: #ffffff;
+            border: 1px solid #e7ebef;
+            border-radius: 12px;
+            overflow: hidden;
+
+            min-width: 0;
+
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+
+            display: flex;
+            flex-direction: column;
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.10);
+        }
+
+        .product-image-box {
+            width: calc(100% - 32px);
+            height: 260px;
+
+            margin: 16px;
+
+            background: #f8fafc;
+            border-radius: 8px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+        }
+
+        .product-image-box img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+            display: block;
+        }
+
+        .product-info {
+            padding: 0 16px 16px;
+            flex: 1;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-category {
+            color: #0868c9;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            letter-spacing: 0.2px;
+        }
+
+        .product-name {
+            font-size: 16px;
+            line-height: 1.4;
+            color: #111827;
+
+            min-height: 45px;
+            margin-bottom: 7px;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin-bottom: 16px;
+        }
+
+        .current-price {
+            font-size: 18px;
+            font-weight: 800;
+            color: #111827;
+        }
+
+        .old-price {
+            color: #9ca3af;
+            font-size: 13px;
+            text-decoration: line-through;
+        }
+
+        .add-cart-button {
+            width: 100%;
+            height: 42px;
+
+            border: 0;
+            border-radius: 6px;
+
+            background: #0872d1;
+            color: #ffffff;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            margin-top: auto;
+
+            transition: background 0.2s ease;
+        }
+
+        .add-cart-button:hover {
+            background: #005bb5;
+        }
+
+        .add-cart-button:active {
+            transform: scale(0.98);
+        }
+
+        /* =========================
+           NO RESULTS
+        ========================= */
+
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 50px 20px;
+            color: #6b7280;
+            font-size: 18px;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .products-footer {
+            margin-top: 45px;
+            padding: 25px 15px;
+            text-align: center;
+
+            border-top: 1px solid #e5e7eb;
+
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 1000px) {
+
+            .shop-header {
+                padding: 0 20px;
+            }
+
+            .logo-area {
+                min-width: 155px;
+            }
+
+            .logo-area img {
+                width: 130px;
+            }
+
+            .header-search {
+                margin: 0 15px;
+                max-width: 350px;
+            }
+
+            .main-nav {
+                gap: 15px;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 22px;
+            }
+
+            .product-image-box {
+                height: 230px;
+            }
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 760px) {
+
+            .shop-header {
+                height: auto;
+                min-height: 70px;
+
+                flex-wrap: wrap;
+                justify-content: center;
+
+                padding: 10px 12px;
+                gap: 8px;
+            }
+
+            .logo-area {
+                width: 100%;
+                min-width: 0;
+                justify-content: center;
+            }
+
+            .logo-area img {
+                width: 135px;
+            }
+
+            .header-search {
+                order: 2;
+                width: 100%;
+                max-width: none;
+                margin: 0;
+            }
+
+            .main-nav {
+                order: 3;
+
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+
+                gap: 12px;
+            }
+
+            .main-nav a {
+                font-size: 13px;
+            }
+
+            .contact-button {
+                padding: 8px 13px !important;
+            }
+
+            .products-page {
+                padding: 25px 12px 45px;
+            }
+
+            .products-title h1 {
+                font-size: 26px;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 15px;
+            }
+
+            .product-image-box {
+                width: calc(100% - 20px);
+                height: 190px;
+                margin: 10px;
+            }
+
+            .product-info {
+                padding: 0 10px 10px;
+            }
+
+            .product-name {
+                font-size: 14px;
+                min-height: 42px;
+            }
+
+            .current-price {
+                font-size: 16px;
+            }
+
+            .old-price {
+                font-size: 11px;
+            }
+
+            .add-cart-button {
+                height: 40px;
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 430px) {
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-image-box {
+                height: 250px;
+            }
+
+            .product-name {
+                font-size: 16px;
+            }
+
+            .add-cart-button {
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-    <!-- Global Navigation Header -->
-    <header class="main-navbar">
-        <div class="nav-logo">
-            <img src="images/shopnova-logo.png" alt="ShopNova Logo" class="mini-logo">
-        </div>
-        <div class="search-bar-container">
-            <input type="text" placeholder="Search products..." class="search-input">
-            <button class="search-btn">🔍</button>
-        </div>
-        <nav class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="products.html" class="active">Products</a>
-            <a href="cart.html" class="cart-link">Cart <span class="cart-count">0</span></a>
-            <a href="checkout.html">Checkout</a>
-            <a href="contact.html" class="btn-contact">Contact</a>
-        </nav>
-    </header>
+<header class="shop-header">
 
-    <!-- Products Grid Section Window -->
-    <main class="products-page-layout">
-        <h2 class="section-title">Explore Our Premium Collection</h2>
-        
-        <div class="shopnova-product-grid">
-            
-            <!-- 1. Highlighted Bible Wonders Book -->
-            <div class="product-card-item highlighted-product">
-                <span class="promo-badge">BEST SELLER</span>
-                <div class="product-image-wrapper">
-                    <img src="images/bible-wonders.jpg" alt="Bible Wonders Book" class="product-card-img">
-                </div>
-                <div class="product-info-panel">
-                    <div class="product-meta-cat red-text">BOOKS</div>
-                    <h3 class="product-main-title">Bible Wonders</h3>
-                    <div class="product-price-row">
-                        <span class="product-new-price">₹350</span>
-                        <span class="product-old-price">₹499</span>
-                    </div>
-                    <button class="product-add-btn highlight-btn" onclick="add('Bible Wonders', 350, 'images/bible-wonders.jpg')">
-                        🛒 Add to Cart
-                    </button>
-                </div>
-            </div>
+    <div class="logo-area">
+        <a href="index.html">
+            <img
+                src="images/logo.png"
+                alt="ShopNova Logo"
+                onerror="this.style.display='none';"
+            >
+        </a>
+    </div>
 
-            <!-- 2. Premium Travel Bag -->
-            <div class="product-card-item">
-                <div class="product-image-wrapper">
-                    <img src="images/bag.jpg" alt="Premium Bag" class="product-card-img">
-                </div>
-                <div class="product-info-panel">
-                    <div class="product-meta-cat">ACCESSORIES</div>
-                    <h3 class="product-main-title">Premium Travel Bag</h3>
-                    <div class="product-price-row">
-                        <span class="product-new-price">₹1,250</span>
-                        <span class="product-old-price">₹1,999</span>
-                    </div>
-                    <button class="product-add-btn" onclick="add('Premium Travel Bag', 1250, 'images/bag.jpg')">
-                        🛒 Add to Cart
-                    </button>
-                </div>
-            </div>
+    <div class="header-search">
+        <input
+            type="text"
+            id="productSearch"
+            placeholder="Search products..."
+            autocomplete="off"
+        >
 
-            <!-- 3. Wireless Earbuds -->
-            <div class="product-card-item">
-                <div class="product-image-wrapper">
-                    <img src="images/earbuds.jpg" alt="Wireless Earbuds" class="product-card-img">
-                </div>
-                <div class="product-info-panel">
-                    <div class="product-meta-cat">ELECTRONICS</div>
-                    <h3 class="product-main-title">Wireless Earbuds</h3>
-                    <div class="product-price-row">
-                        <span class="product-new-price">₹1,499</span>
-                        <span class="product-old-price">₹2,499</span>
-                    </div>
-                    <button class="product-add-btn" onclick="add('Wireless Earbuds', 1499, 'images/earbuds.jpg')">
-                        🛒 Add to Cart
-                    </button>
-                </div>
-            </div>
+        <span class="search-icon">🔍</span>
+    </div>
 
-            <!-- 4. Women's Loungewear Night Dress -->
-            <div class="product-card-item">
-                <div class="product-image-wrapper">
-                    <img src="images/loungewear.jpg" alt="Women's Night Dress" class="product-card-img">
-                </div>
-                <div class="product-info-panel">
-                    <div class="product-meta-cat">APPAREL</div>
-                    <h3 class="product-main-title">Women's Premium Loungewear</h3>
-                    <div class="product-price-row">
-                        <span class="product-new-price">₹1,199</span>
-                        <span class="product-old-price">₹1,899</span>
-                    </div>
-                    <button class="product-add-btn" onclick="add('Women\'s Premium Loungewear', 1199, 'images/loungewear.jpg')">
-                        🛒 Add to Cart
-                    </button>
-                </div>
-            </div>
+    <nav class="main-nav">
 
-            <!-- 5. Pink Luxury Gown Night Dress -->
-            <div class="product-card-item">
-                <div class="product-image-wrapper">
-                    <img src="images/luxury-banner.jpg" alt="Luxury Evening Gown" class="product-card-img">
-                </div>
-                <div class="product-info-panel">
-                    <div class="product-meta-cat">APPAREL</div>
-                    <h3 class="product-main-title">Luxury Evening Gown</h3>
-                    <div class="product-price-row">
-                        <span class="product-new-price">₹4,999</span>
-                        <span class="product-old-price">₹7,999</span>
-                    </div>
-                    <button class="product-add-btn" onclick="add('Luxury Evening Gown', 4999, 'images/luxury-banner.jpg')">
-                        🛒 Add to Cart
-                    </button>
-                </div>
-            </div>
+        <a href="index.html">Home</a>
 
-            <!-- 6. Cosmetic Makeup Kit -->
-            <div class="product-card-item">
-                <div class="product-image-wrapper">
-                    <img src="images/makeup.jpg" alt="Cosmetic Makeup Kit" class="product-card-img">
-                </div>
-                <div class="product-info-panel">
-                    <div class="product-meta-cat">BEAUTY</div>
-                    <h3 class="product-main-title">Professional Cosmetic Kit</h3>
-                    <div class="product-price-row">
-                        <span class="product-new-price">₹999</span>
-                        <span class="product-old-price">₹1,799</span>
-                    </div>
-                    <button class="product-add-btn" onclick="add('Professional Cosmetic Kit', 999, 'images/makeup.jpg')">
-                        🛒 Add to Cart
-                    </button>
-                </div>
-            </div>
+        <a href="products.html" class="active">
+            Products
+        </a>
 
-            <!-- 7. Men's Casual Shoes -->
-            <div class="product-card-item">
-                <div class="product-image-wrapper">
-                    <img src="images/mens-shoes.jpg" alt="Men's Casual Shoes" class="product-card-img">
-                </div>
-                <div class="product-info-panel">
-                    <div class="product-meta-cat">FOOTWEAR</div>
-                    <h3 class="product-main-title">Men's Casual Shoes</h3>
-                    <div class="product-price-row">
-                        <span class="product-new-price">₹1,899</span>
-                        <span class="product-old-price">₹2,999</span>
-                    </div>
-                    <button class="product-add-btn" onclick="add('Men\'s Casual Shoes', 1899, 'images/mens-shoes.jpg')">
-                        🛒 Add to Cart
-                    </button>
-                </div>
-            </div>
+        <a href="cart.html" class="cart-link">
+            Cart
+            <span class="cart-count" id="cartCount">0</span>
+        </a>
 
-            <!-- 8. Luxury Perfume Collection -->
-            <div class="product-card-item">
-                <div class="product-image-wrapper">
-                    <img src="images/perfume.jpg" alt="Luxury Perfume" class="product-card-img">
-                </div>
-                <div class="product-info-panel">
-                    <div class="product-meta-cat">FRAGRANCE</div>
-                    <h3 class="product-main-title">Luxury Perfume Collection</h3>
-                    <div class="product-price-row">
-                        <span class="product-new-price">₹2,199</span>
-                        <span class="product-old-price">₹3,499</span>
-                    </div>
-                    <button class="product-add-btn" onclick="add('Luxury Perfume Collection', 2199, 'images/perfume.jpg')">
-                        🛒 Add to Cart
-                    </button>
-                </div>
-            </div>
+        <a href="checkout.html">
+            Checkout
+        </a>
 
-            <!-- 9. Men's Corporate Business Suit -->
-            <div class="product-card-item">
-                <div class="product-image-wrapper">
-                    <img src="images/suit.jpg" alt="Men's Corporate Business Suit" class="product-card-img">
-                </div>
-                <div class="product-info-panel">
-                    <div class="product-meta-cat">APPAREL</div>
-                    <h3 class="product-main-title">Men's Corporate Business Suit</h3>
-                    <div class="product-price-row">
-                        <span class="product-new-price">₹3,499</span>
-                        <span class="product-old-price">₹5,499</span>
-                    </div>
-                    <button class="product-add-btn" onclick="add('Men\'s Corporate Business Suit', 3499, 'images/suit.jpg')">
-                        🛒 Add to Cart
-                    </button>
-                </div>
-            </div>
+        <a href="contact.html" class="contact-button">
+            Contact
+        </a>
 
-            <!-- 10. Classic Aviator Sunglasses -->
-            <div class="product-card-item">
-                <div class="product-image-wrapper">
-                    <img src="images/sunglasses.jpg" alt="Classic Aviator Sunglasses" class="product-card-img">
-                </div>
-                <div class="product-info-panel">
-                    <div class="product-meta-cat">ACCESSORIES</div>
+    </nav>
+
+</header>
+
+
+<main class="products-page">
+
+    <div class="products-title">
+
+        <h1>Our Products</h1>
+
+        <p>
+            Discover premium products at amazing prices
+        </p>
+
+    </div>
+
+
+    <section
+        class="product-grid"
+        id="productGrid"
+    >
+        <!-- Products are inserted by script.js -->
+    </section>
+
+
+    <footer class="products-footer">
+
+        © 2026 ShopNova | CEO & Founder: Anuradha
+
+    </footer>
+
+</main>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
