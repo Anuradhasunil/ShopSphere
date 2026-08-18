@@ -1,653 +1,1901 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>ShopNova | Cart</title>
-
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#f4f9f7;
-    color:#12344d;
-}
-
-a{
-    text-decoration:none;
-    color:inherit;
-}
-
-button{
-    font-family:inherit;
-    cursor:pointer;
-}
-
-.site-header{
-    position:sticky;
-    top:0;
-    z-index:9999;
-    background:#fff;
-    border-bottom:1px solid #dcebe4;
-    box-shadow:0 4px 20px rgba(15,61,86,.08);
-}
-
-.header-inner{
-    width:min(1250px,94%);
-    min-height:72px;
-    margin:auto;
-    display:flex;
-    align-items:center;
-    gap:18px;
-}
-
-.logo-link{
-    width:155px;
-    height:55px;
-    display:flex;
-    align-items:center;
-    flex-shrink:0;
-    overflow:hidden;
-}
-
-.logo-link img{
-    width:155px;
-    height:55px;
-    object-fit:contain;
-    display:block;
-}
-
-.search-box{
-    flex:1;
-    max-width:500px;
-    height:42px;
-    display:flex;
-    border:1px solid #cfe0d9;
-    border-radius:9px;
-    overflow:hidden;
-}
-
-.search-box input{
-    flex:1;
-    border:none;
-    outline:none;
-    padding:0 13px;
-}
-
-.search-box button{
-    width:48px;
-    border:none;
-    background:#0f5b78;
-    color:#fff;
-}
-
-.nav{
-    margin-left:auto;
-    display:flex;
-    align-items:center;
-    gap:4px;
-}
-
-.nav a{
-    padding:10px 11px;
-    border-radius:8px;
-    color:#315467;
-    font-size:13px;
-    font-weight:700;
-}
-
-.nav a:hover,
-.nav a.active{
-    background:#e9f7f0;
-    color:#0b7350;
-}
-
-.cart-count{
-    min-width:19px;
-    height:19px;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:50px;
-    background:#159957;
-    color:#fff;
-    font-size:10px;
-}
-
-.contact-btn{
-    border:none;
-    padding:10px 15px;
-    border-radius:8px;
-    background:#0f5b78;
-    color:#fff;
-    font-weight:800;
-}
-
-.menu-btn{
-    display:none;
-    width:40px;
-    height:40px;
-    border:none;
-    border-radius:8px;
-    background:#e9f7f0;
-    color:#0f5b78;
-    font-size:20px;
-}
-
-.mobile-nav{
-    display:none;
-    padding:10px 4%;
-    background:white;
-}
-
-.mobile-nav.show{
-    display:flex;
-    flex-direction:column;
-}
-
-.mobile-nav a,
-.mobile-nav button{
-    border:none;
-    background:none;
-    text-align:left;
-    padding:12px;
-    font-weight:700;
-    color:#12344d;
-}
-
-.sale-strip{
-    height:34px;
-    display:flex;
-    align-items:center;
-    overflow:hidden;
-    background:linear-gradient(90deg,#0f5b78,#159957,#0f5b78);
-    color:#fff;
-}
-
-.sale-track{
-    display:flex;
-    width:max-content;
-    gap:55px;
-    animation:move 25s linear infinite;
-    white-space:nowrap;
-    font-size:10px;
-    font-weight:800;
-    letter-spacing:1px;
-}
-
-@keyframes move{
-    from{transform:translateX(0)}
-    to{transform:translateX(-50%)}
-}
-
-.page{
-    width:min(1150px,92%);
-    margin:auto;
-    padding:45px 0 70px;
-}
-
-.page-title{
-    margin-bottom:25px;
-}
-
-.page-title h1{
-    font-size:38px;
-    color:#12344d;
-}
-
-.page-title p{
-    color:#718892;
-    margin-top:7px;
-    font-size:13px;
-}
-
-.cart-layout{
-    display:grid;
-    grid-template-columns:1fr 320px;
-    gap:22px;
-}
-
-.cart-card,
-.summary-card{
-    background:white;
-    border:1px solid #dfebe6;
-    border-radius:15px;
-    box-shadow:0 7px 20px rgba(15,61,86,.06);
-}
-
-.cart-card{
-    padding:20px;
-}
-
-.cart-head{
-    display:grid;
-    grid-template-columns:2fr 1fr 1fr 1fr 45px;
-    gap:12px;
-    padding:0 0 12px;
-    border-bottom:1px solid #e5eee9;
-    color:#718892;
-    font-size:11px;
-    font-weight:800;
-}
-
-.cart-item{
-    display:grid;
-    grid-template-columns:2fr 1fr 1fr 1fr 45px;
-    gap:12px;
-    align-items:center;
-    padding:16px 0;
-    border-bottom:1px solid #edf3f0;
-}
-
-.product-info{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.product-info img{
-    width:65px;
-    height:65px;
-    border-radius:9px;
-    object-fit:cover;
-    background:#eef5f2;
-}
-
-.product-info strong{
-    display:block;
-    color:#12344d;
-    font-size:13px;
-}
-
-.product-info small{
-    display:block;
-    color:#8798a0;
-    margin-top:4px;
-    font-size:10px;
-}
-
-.price{
-    font-weight:800;
-    color:#0f5b78;
-    font-size:13px;
-}
-
-.quantity{
-    display:flex;
-    align-items:center;
-    gap:6px;
-}
-
-.quantity button{
-    width:28px;
-    height:28px;
-    border:1px solid #cfe0d9;
-    border-radius:6px;
-    background:white;
-    color:#0f5b78;
-    font-weight:900;
-}
-
-.quantity span{
-    min-width:22px;
-    text-align:center;
-    font-size:12px;
-}
-
-.remove{
-    width:30px;
-    height:30px;
-    border:none;
-    border-radius:7px;
-    background:#fff0f0;
-    color:#dc2626;
-    font-size:18px;
-}
-
-.summary-card{
-    padding:22px;
-    height:max-content;
-}
-
-.summary-card h2{
-    color:#12344d;
-    font-size:20px;
-    margin-bottom:20px;
-}
-
-.summary-row{
-    display:flex;
-    justify-content:space-between;
-    padding:9px 0;
-    color:#647b84;
-    font-size:12px;
-}
-
-.summary-row.total{
-    border-top:1px solid #dfebe6;
-    margin-top:8px;
-    padding-top:15px;
-    color:#12344d;
-    font-size:17px;
-    font-weight:900;
-}
-
-.checkout-btn,
-.continue-btn{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    min-height:44px;
-    border-radius:8px;
-    font-size:12px;
-    font-weight:900;
-}
-
-.checkout-btn{
-    margin-top:16px;
-    background:#159957;
-    color:white;
-}
-
-.checkout-btn:hover{
-    background:#0f5b78;
-}
-
-.continue-btn{
-    width:max-content;
-    margin-top:20px;
-    padding:0 18px;
-    border:1px solid #cfe0d9;
-    color:#0f5b78;
-}
-
-.empty-cart{
-    text-align:center;
-    padding:70px 20px;
-}
-
-.empty-cart-icon{
-    width:70px;
-    height:70px;
-    margin:0 auto 18px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:50%;
-    background:#e9f7f0;
-    font-size:28px;
-}
-
-.empty-cart h2{
-    color:#12344d;
-    margin-bottom:8px;
-}
-
-.empty-cart p{
-    color:#718892;
-    font-size:13px;
-    margin-bottom:20px;
-}
-
-.empty-cart a{
-    display:inline-flex;
-    padding:12px 18px;
-    border-radius:8px;
-    background:#0f5b78;
-    color:#fff;
-    font-weight:800;
-    font-size:12px;
-}
-
-footer{
-    background:#0f3d56;
-    color:white;
-    padding:30px 20px;
-    text-align:center;
-}
-
-footer p{
-    color:#b9d1d9;
-    font-size:11px;
-    margin-top:6px;
-}
-
-.modal{
-    position:fixed;
-    inset:0;
-    z-index:20000;
-    display:none;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-    background:rgba(10,35,48,.7);
-}
-
-.modal.show{
-    display:flex;
-}
-
-.modal-box{
-    width:min(450px,100%);
-    background:white;
-    border-radius:18px;
-    padding:28px;
-    position:relative;
-}
-
-.close-modal{
-    position:absolute;
-    right:12px;
-    top:12px;
-    width:32px;
-    height:32px;
-    border:none;
-    border-radius:50%;
-    background:#e9f7f0;
-    color:#0f5b78;
-    font-size:20px;
-}
-
-.contact-option{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:12px;
-    margin-top:8px;
-    border:1px solid #dfebe6;
-    border-radius:9px;
-}
-
-.contact-option strong,
-.contact-option small{
-    display:block;
-}
-
-.contact-option strong{
-    font-size:12px;
-}
-
-.contact-option small{
-    color:#80939b;
-    font-size:10px;
-    margin-top:2px;
-}
-
-@media(max-width:900px){
-    .nav{display:none}
-    .menu-btn{display:block}
-    .cart-layout{grid-template-columns:1fr}
-}
-
-@media(max-width:650px){
-    .logo-link{
-        width:115px;
-        height:45px;
-    }
-
-    .logo-link img{
-        width:115px;
-        height:45px;
-    }
-
-    .cart-head{
-        display:none;
-    }
-
-    .cart-item{
-        grid-template-columns:1fr auto;
-        gap:10px;
-    }
-
-    .cart-item > .price,
-    .cart-item > .quantity{
-        grid-column:auto;
-    }
-
-    .cart-item > .remove{
-        grid-column:2;
-        grid-row:1;
-    }
-
-    .page-title h1{
-        font-size:30px;
-    }
-}
-</style>
+    <title>ShopNova | Your Cart</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background:
+                linear-gradient(135deg, #f8f7ff 0%, #f4f8ff 55%, #fff5fa 100%);
+            color: #172033;
+            min-height: 100vh;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #071a3d,
+                    #172b68,
+                    #43256f
+                );
+
+            color: white;
+
+            box-shadow:
+                0 5px 22px rgba(17, 24, 74, .18);
+        }
+
+        .header-main {
+            width: 100%;
+            max-width: 1450px;
+
+            margin: auto;
+
+            padding: 8px 20px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 16px;
+        }
+
+        /* =========================
+           LOGO
+        ========================= */
+
+        .logo {
+            min-width: 230px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 9px;
+
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo-art {
+            width: 52px;
+            height: 52px;
+
+            min-width: 52px;
+
+            border-radius: 12px;
+
+            background: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 4px 12px rgba(0,0,0,.2);
+        }
+
+        .logo-art img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+
+            display: block;
+        }
+
+        .logo-content {
+            display: flex;
+            flex-direction: column;
+
+            line-height: 1;
+        }
+
+        .logo-name {
+            font-size: 24px;
+            font-weight: 900;
+        }
+
+        .logo-name .shop {
+            color: white;
+        }
+
+        .logo-name .nova {
+            color: #8fb9ff;
+        }
+
+        .logo-tagline {
+            margin-top: 4px;
+
+            font-size: 8px;
+
+            color: #d7ddf0;
+
+            letter-spacing: .8px;
+
+            font-weight: 700;
+        }
+
+        /* =========================
+           SEARCH
+        ========================= */
+
+        .search-box {
+            flex: 1;
+
+            max-width: 650px;
+
+            height: 42px;
+
+            display: flex;
+
+            background: white;
+
+            border-radius: 9px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 4px 15px rgba(0,0,0,.1);
+        }
+
+        .search-box input {
+            width: 100%;
+
+            border: none;
+            outline: none;
+
+            padding: 0 14px;
+
+            font-size: 14px;
+
+            color: #172033;
+        }
+
+        .search-box button {
+            width: 52px;
+
+            border: none;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #3b82f6,
+                    #7c3aed
+                );
+
+            color: white;
+
+            cursor: pointer;
+
+            font-size: 17px;
+        }
+
+        /* =========================
+           HEADER ACTIONS
+        ========================= */
+
+        .header-actions {
+            display: flex;
+
+            align-items: center;
+
+            gap: 3px;
+        }
+
+        .header-actions a {
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            padding: 8px 10px;
+
+            border-radius: 7px;
+
+            white-space: nowrap;
+        }
+
+        .header-actions a:hover {
+            background: rgba(255,255,255,.1);
+        }
+
+        .cart-link {
+            background:
+                linear-gradient(
+                    135deg,
+                    #ec4899,
+                    #8b5cf6
+                ) !important;
+        }
+
+        .cart-count {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            min-width: 20px;
+            height: 20px;
+
+            padding: 0 5px;
+
+            margin-left: 3px;
+
+            border-radius: 50%;
+
+            background: white;
+
+            color: #7c3aed;
+
+            font-size: 10px;
+
+            font-weight: 900;
+        }
+
+        /* =========================
+           NAVIGATION
+        ========================= */
+
+        .nav-bar {
+            background: #0b2858;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 28px;
+
+            padding: 7px 15px;
+        }
+
+        .nav-bar a {
+            color: #e8eef8;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+        .nav-bar a:hover,
+        .nav-bar a.active {
+            color: #f5a3d0;
+        }
+
+        /* =========================
+           CART HERO
+        ========================= */
+
+        .cart-hero {
+            background:
+                linear-gradient(
+                    135deg,
+                    #071a3d 0%,
+                    #253b82 55%,
+                    #7c3aed 100%
+                );
+
+            color: white;
+
+            text-align: center;
+
+            padding: 34px 15px;
+        }
+
+        .cart-hero .small-title {
+            display: inline-block;
+
+            padding: 6px 14px;
+
+            border-radius: 30px;
+
+            background: rgba(255,255,255,.15);
+
+            border: 1px solid rgba(255,255,255,.25);
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            margin-bottom: 8px;
+        }
+
+        .cart-hero h1 {
+            font-size: clamp(30px, 5vw, 44px);
+
+            font-weight: 900;
+
+            margin-bottom: 6px;
+        }
+
+        .cart-hero p {
+            color: #e0e7ff;
+
+            font-size: 13px;
+        }
+
+        /* =========================
+           MAIN CART
+        ========================= */
+
+        .cart-wrapper {
+            width: 100%;
+
+            max-width: 1250px;
+
+            margin: 0 auto;
+
+            padding: 28px 18px 45px;
+        }
+
+        .cart-layout {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1fr)
+                350px;
+
+            gap: 22px;
+
+            align-items: start;
+        }
+
+        /* =========================
+           CART CARD
+        ========================= */
+
+        .cart-card {
+            background: white;
+
+            border-radius: 18px;
+
+            border: 1px solid #e5e7f2;
+
+            box-shadow:
+                0 8px 30px rgba(34, 42, 88, .08);
+
+            overflow: hidden;
+        }
+
+        .cart-card-header {
+            padding: 18px 20px;
+
+            border-bottom: 1px solid #edf0f7;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+        }
+
+        .cart-card-header h2 {
+            color: #101b45;
+
+            font-size: 21px;
+
+            font-weight: 900;
+        }
+
+        .items-label {
+            color: #7c3aed;
+
+            background: #f1eaff;
+
+            padding: 6px 11px;
+
+            border-radius: 20px;
+
+            font-size: 11px;
+
+            font-weight: 800;
+        }
+
+        /* =========================
+           CART ITEM
+        ========================= */
+
+        .cart-item {
+            display: grid;
+
+            grid-template-columns:
+                90px
+                minmax(150px, 1fr)
+                100px
+                125px
+                40px;
+
+            align-items: center;
+
+            gap: 15px;
+
+            padding: 18px 20px;
+
+            border-bottom: 1px solid #edf0f7;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-image {
+            width: 90px;
+            height: 90px;
+
+            border-radius: 13px;
+
+            background: #f3f5fa;
+
+            overflow: hidden;
+
+            border: 1px solid #e8ebf4;
+        }
+
+        .cart-item-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+        }
+
+        .cart-item-info h3 {
+            color: #101b45;
+
+            font-size: 16px;
+
+            font-weight: 850;
+
+            margin-bottom: 5px;
+        }
+
+        .cart-item-info p {
+            color: #7a8295;
+
+            font-size: 11px;
+        }
+
+        .cart-item-price {
+            color: #172554;
+
+            font-size: 15px;
+
+            font-weight: 900;
+        }
+
+        /* =========================
+           QUANTITY
+        ========================= */
+
+        .quantity-control {
+            display: inline-flex;
+
+            align-items: center;
+
+            border: 1px solid #dfe4ef;
+
+            border-radius: 9px;
+
+            overflow: hidden;
+
+            background: #fafbff;
+        }
+
+        .quantity-control button {
+            width: 32px;
+            height: 34px;
+
+            border: none;
+
+            background: white;
+
+            color: #49358b;
+
+            font-size: 17px;
+
+            font-weight: 900;
+
+            cursor: pointer;
+        }
+
+        .quantity-control button:hover {
+            background: #f3eefe;
+        }
+
+        .quantity-control span {
+            min-width: 32px;
+
+            text-align: center;
+
+            color: #172033;
+
+            font-size: 13px;
+
+            font-weight: 900;
+        }
+
+        /* =========================
+           ITEM TOTAL
+        ========================= */
+
+        .item-total {
+            color: #111c4e;
+
+            font-size: 16px;
+
+            font-weight: 900;
+
+            text-align: right;
+        }
+
+        /* =========================
+           REMOVE BUTTON
+        ========================= */
+
+        .remove-btn {
+            width: 34px;
+            height: 34px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #fff0f5;
+
+            color: #e11d48;
+
+            font-size: 22px;
+
+            line-height: 1;
+
+            cursor: pointer;
+
+            transition: .2s;
+        }
+
+        .remove-btn:hover {
+            background: #ffe0ea;
+
+            color: #be123c;
+
+            transform: scale(1.08);
+        }
+
+        /* =========================
+           CART BOTTOM
+        ========================= */
+
+        .cart-bottom {
+            padding: 18px 20px;
+
+            border-top: 1px solid #edf0f7;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+        }
+
+        .continue-btn {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-decoration: none;
+
+            padding: 11px 17px;
+
+            border-radius: 10px;
+
+            color: #34405f;
+
+            background: #f4f6fb;
+
+            font-size: 12px;
+
+            font-weight: 800;
+        }
+
+        .continue-btn:hover {
+            background: #e9edfa;
+        }
+
+        .clear-btn {
+            border: none;
+
+            background: transparent;
+
+            color: #d61f45;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+        }
+
+        .clear-btn:hover {
+            text-decoration: underline;
+        }
+
+        /* =========================
+           SUMMARY
+        ========================= */
+
+        .summary-card {
+            background: white;
+
+            border-radius: 18px;
+
+            border: 1px solid #e5e7f2;
+
+            box-shadow:
+                0 8px 30px rgba(34, 42, 88, .09);
+
+            padding: 22px;
+
+            position: sticky;
+
+            top: 105px;
+        }
+
+        .summary-card h2 {
+            color: #101b45;
+
+            font-size: 20px;
+
+            font-weight: 900;
+
+            margin-bottom: 17px;
+        }
+
+        .summary-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 12px;
+
+            font-size: 13px;
+        }
+
+        .summary-row span:first-child {
+            color: #697386;
+        }
+
+        .summary-row span:last-child {
+            color: #172554;
+
+            font-weight: 800;
+        }
+
+        .free {
+            color: #16a34a !important;
+        }
+
+        .discount {
+            color: #db2777 !important;
+        }
+
+        .summary-divider {
+            height: 1px;
+
+            background: #e9ecf4;
+
+            margin: 16px 0;
+        }
+
+        .grand-total {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 18px;
+        }
+
+        .grand-total span:first-child {
+            color: #101b45;
+
+            font-size: 15px;
+
+            font-weight: 900;
+        }
+
+        .grand-total span:last-child {
+            color: #6d28d9;
+
+            font-size: 24px;
+
+            font-weight: 950;
+        }
+
+        .checkout-btn {
+            width: 100%;
+
+            border: none;
+
+            border-radius: 11px;
+
+            padding: 13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed,
+                    #db2777
+                );
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 8px 20px rgba(91, 72, 205, .25);
+
+            transition: .25s;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 12px 25px rgba(91, 72, 205, .3);
+        }
+
+        .secure-note {
+            text-align: center;
+
+            color: #7a8295;
+
+            font-size: 10px;
+
+            margin-top: 13px;
+        }
+
+        /* =========================
+           EMPTY CART
+        ========================= */
+
+        .empty-cart {
+            display: none;
+
+            text-align: center;
+
+            padding: 55px 20px;
+        }
+
+        .empty-icon {
+            width: 78px;
+            height: 78px;
+
+            margin: 0 auto 15px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e9efff,
+                    #fbe7f3
+                );
+
+            font-size: 35px;
+        }
+
+        .empty-cart h2 {
+            color: #101b45;
+
+            font-size: 25px;
+
+            margin-bottom: 7px;
+        }
+
+        .empty-cart p {
+            color: #7a8295;
+
+            font-size: 13px;
+
+            margin-bottom: 20px;
+        }
+
+        .shop-btn {
+            display: inline-flex;
+
+            text-decoration: none;
+
+            padding: 11px 20px;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed
+                );
+
+            color: white;
+
+            font-size: 12px;
+
+            font-weight: 900;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #071a3d;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 22px 15px;
+
+            margin-top: 15px;
+        }
+
+        footer h3 {
+            font-size: 20px;
+
+            font-weight: 900;
+        }
+
+        footer p {
+            color: #cbd5e1;
+
+            font-size: 11px;
+
+            margin-top: 6px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media(max-width:1050px) {
+
+            .header-main {
+                flex-wrap: wrap;
+
+                justify-content: center;
+            }
+
+            .search-box {
+                order: 3;
+
+                width: 100%;
+
+                max-width: 100%;
+            }
+        }
+
+        @media(max-width:900px) {
+
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-card {
+                position: static;
+            }
+        }
+
+        @media(max-width:700px) {
+
+            .header-main {
+                padding: 8px 12px;
+            }
+
+            .logo {
+                width: 100%;
+
+                justify-content: center;
+            }
+
+            .header-actions {
+                width: 100%;
+
+                display: grid;
+
+                grid-template-columns:
+                    repeat(3, 1fr);
+            }
+
+            .header-actions a {
+                text-align: center;
+
+                font-size: 11px;
+
+                padding: 7px 4px;
+            }
+
+            .nav-bar {
+                justify-content: flex-start;
+
+                overflow-x: auto;
+
+                white-space: nowrap;
+
+                gap: 20px;
+            }
+
+            .cart-hero {
+                padding: 27px 12px;
+            }
+
+            .cart-wrapper {
+                padding: 18px 10px 30px;
+            }
+
+            .cart-item {
+                grid-template-columns:
+                    70px
+                    1fr
+                    35px;
+
+                gap: 11px;
+
+                padding: 14px;
+            }
+
+            .cart-item-image {
+                width: 70px;
+                height: 70px;
+            }
+
+            .cart-item-price {
+                grid-column: 2;
+            }
+
+            .quantity-control {
+                grid-column: 2;
+            }
+
+            .item-total {
+                grid-column: 2;
+
+                text-align: left;
+            }
+
+            .remove-btn {
+                grid-column: 3;
+
+                grid-row: 1;
+            }
+
+            .cart-bottom {
+                flex-direction: column;
+
+                align-items: stretch;
+            }
+
+            .continue-btn {
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<header class="site-header">
+<header>
 
-<div class="header-inner">
+    <div class="header-main">
 
-<a href="index.html" class="logo-link">
-<img src="images/shopnova-logo.png" alt="ShopNova Logo">
-</a>
+        <a href="index.html" class="logo">
 
-<div class="search-box">
-<input id="cartSearch" type="search" placeholder="Search products...">
-<button onclick="searchProducts('cartSearch')">🔍</button>
-</div>
+            <div class="logo-art">
+                <img
+                    src="images/shopnova-logo.png"
+                    alt="ShopNova Logo"
+                >
+            </div>
 
-<nav class="nav">
+            <div class="logo-content">
 
-<a href="index.html">Home</a>
-<a href="products.html">Products</a>
+                <div class="logo-name">
+                    <span class="shop">Shop</span><span class="nova">Nova</span>
+                </div>
 
-<a href="cart.html" class="active">
-Cart <span class="cart-count">0</span>
-</a>
+                <div class="logo-tagline">
+                    PREMIUM SHOPPING • BEAUTIFUL CHOICES
+                </div>
 
-<a href="checkout.html">Checkout</a>
+            </div>
 
-<button class="contact-btn" onclick="openContact()">
-Contact
-</button>
+        </a>
 
-</nav>
+        <div class="search-box">
 
-<button class="menu-btn" onclick="toggleMenu()">☰</button>
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Search products..."
+            >
 
-</div>
+            <button
+                type="button"
+                id="searchBtn"
+            >
+                🔍
+            </button>
 
-<div id="mobileNav" class="mobile-nav">
-<a href="index.html">Home</a>
-<a href="products.html">Products</a>
-<a href="cart.html">Cart (<span class="cart-count">0</span>)</a>
-<a href="checkout.html">Checkout</a>
-<button onclick="openContact()">Contact</button>
-</div>
+        </div>
+
+        <div class="header-actions">
+
+            <a href="index.html">
+                🏠 Home
+            </a>
+
+            <a href="products.html">
+                🛍️ Products
+            </a>
+
+            <a href="cart.html" class="cart-link">
+                🛒 Cart
+                <span id="cartCount" class="cart-count">0</span>
+            </a>
+
+        </div>
+
+    </div>
+
+    <nav class="nav-bar">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="products.html">
+            Products
+        </a>
+
+        <a href="cart.html" class="active">
+            Cart
+        </a>
+
+        <a href="products.html">
+            Fashion
+        </a>
+
+        <a href="products.html">
+            Shoes
+        </a>
+
+        <a href="products.html">
+            Accessories
+        </a>
+
+    </nav>
 
 </header>
 
-<div class="sale-strip">
-<div class="sale-track">
-<span>✦ SHOPNOVA</span>
-<span>✦ SHOP SMART • LIVE BETTER</span>
-<span>✦ EASY SHOPPING</span>
-<span>✦ QUALITY PRODUCTS</span>
-<span>✦ SHOPNOVA</span>
-</div>
-</div>
 
-<main class="page">
+<section class="cart-hero">
 
-<div class="page-title">
-<h1>Your Shopping Cart</h1>
-<p>Review your selected products before checkout.</p>
-</div>
+    <div class="small-title">
+        SHOPNOVA SHOPPING BAG
+    </div>
 
-<div id="cartContent"></div>
+    <h1>
+        Your Shopping Cart
+    </h1>
+
+    <p>
+        Review your products before moving to secure checkout.
+    </p>
+
+</section>
+
+
+<main class="cart-wrapper">
+
+    <div id="cartContent" class="cart-layout">
+
+        <section class="cart-card">
+
+            <div class="cart-card-header">
+
+                <h2>
+                    Cart Items
+                </h2>
+
+                <span
+                    id="itemsLabel"
+                    class="items-label"
+                >
+                    0 Items
+                </span>
+
+            </div>
+
+            <div id="cartItems"></div>
+
+            <div class="cart-bottom">
+
+                <a
+                    href="products.html"
+                    class="continue-btn"
+                >
+                    ← Continue Shopping
+                </a>
+
+                <button
+                    type="button"
+                    class="clear-btn"
+                    onclick="clearCart()"
+                >
+                    Clear Cart
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <aside class="summary-card">
+
+            <h2>
+                Price Details
+            </h2>
+
+            <div class="summary-row">
+
+                <span>
+                    Items
+                </span>
+
+                <span id="summaryItems">
+                    0
+                </span>
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>
+                    Subtotal
+                </span>
+
+                <span id="subtotal">
+                    ₹0
+                </span>
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>
+                    Delivery
+                </span>
+
+                <span class="free">
+                    FREE
+                </span>
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>
+                    Discount
+                </span>
+
+                <span
+                    class="discount"
+                    id="discount"
+                >
+                    -₹0
+                </span>
+
+            </div>
+
+            <div class="summary-divider"></div>
+
+            <div class="grand-total">
+
+                <span>
+                    Grand Total
+                </span>
+
+                <span id="grandTotal">
+                    ₹0
+                </span>
+
+            </div>
+
+            <button
+                type="button"
+                class="checkout-btn"
+                id="checkoutBtn"
+                onclick="proceedToCheckout()"
+            >
+                🔒 Proceed to Checkout →
+            </button>
+
+            <div class="secure-note">
+                🛡️ 100% Secure Checkout
+            </div>
+
+        </aside>
+
+    </div>
+
+
+    <section
+        id="emptyCart"
+        class="cart-card empty-cart"
+    >
+
+        <div class="empty-icon">
+            🛒
+        </div>
+
+        <h2>
+            Your Cart is Empty
+        </h2>
+
+        <p>
+            Add some beautiful products from ShopNova
+            and they will appear here.
+        </p>
+
+        <a
+            href="products.html"
+            class="shop-btn"
+        >
+            Continue Shopping →
+        </a>
+
+    </section>
 
 </main>
 
+
 <footer>
-<strong>ShopNova</strong>
-<p>Shop Smart • Live Better • © 2026 ShopNova</p>
+
+    <h3>
+        ShopNova
+    </h3>
+
+    <p>
+        Premium shopping • Beautiful choices
+    </p>
+
+    <p>
+        © 2026 ShopNova | CEO & Founder: Anuradha
+    </p>
+
 </footer>
 
-<div id="contactModal" class="modal">
-
-<div class="modal-box">
-
-<button class="close-modal" onclick="closeContact()">×</button>
-
-<h2>Let's Connect</h2>
-
-<p style="color:#718892;margin:7px 0 18px;font-size:12px;">
-Choose your preferred contact method.
-</p>
-
-<a class="contact-option" href="https://wa.me/" target="_blank">
-<span>💬</span>
-<span>
-<strong>WhatsApp</strong>
-<small>Chat with us</small>
-</span>
-</a>
-
-<a class="contact-option" href="https://www.instagram.com/" target="_blank">
-<span>◎</span>
-<span>
-<strong>Instagram</strong>
-<small>Follow ShopNova</small>
-</span>
-</a>
-
-<a class="contact-option" href="https://www.youtube.com/" target="_blank">
-<span>▶</span>
-<span>
-<strong>YouTube</strong>
-<small>Watch ShopNova</small>
-</span>
-</a>
-
-<a class="contact-option" href="mailto:contact@shopnova.com">
-<span>✉</span>
-<span>
-<strong>Email</strong>
-<small>contact@shopnova.com</small>
-</span>
-</a>
-
-</div>
-</div>
-
-<script src="script.js"></script>
 
 <script>
-document.addEventListener("DOMContentLoaded", function(){
-    renderCartPage();
-});
+
+"use strict";
+
+const CART_KEY = "shopnova_cart";
+
+
+function getCart() {
+
+    try {
+
+        const cart =
+            JSON.parse(
+                localStorage.getItem(CART_KEY) || "[]"
+            );
+
+        return Array.isArray(cart)
+            ? cart
+            : [];
+
+    } catch (error) {
+
+        console.error(error);
+
+        return [];
+    }
+}
+
+
+function saveCart(cart) {
+
+    localStorage.setItem(
+        CART_KEY,
+        JSON.stringify(cart)
+    );
+}
+
+
+/* =========================
+   FORMAT MONEY
+========================= */
+
+function money(value) {
+
+    return "₹" +
+        Number(value || 0).toLocaleString("en-IN");
+}
+
+
+/* =========================
+   UPDATE HEADER COUNT
+========================= */
+
+function updateHeaderCount(cart) {
+
+    const totalItems =
+        cart.reduce(
+            (sum, item) =>
+                sum + (Number(item.quantity) || 0),
+            0
+        );
+
+    const count =
+        document.getElementById("cartCount");
+
+    if (count) {
+        count.textContent = totalItems;
+    }
+}
+
+
+/* =========================
+   RENDER CART
+========================= */
+
+function renderCart() {
+
+    const cart = getCart();
+
+    const cartItems =
+        document.getElementById("cartItems");
+
+    const cartContent =
+        document.getElementById("cartContent");
+
+    const emptyCart =
+        document.getElementById("emptyCart");
+
+    updateHeaderCount(cart);
+
+
+    if (!cart.length) {
+
+        cartContent.style.display = "none";
+
+        emptyCart.style.display = "block";
+
+        return;
+    }
+
+
+    cartContent.style.display = "grid";
+
+    emptyCart.style.display = "none";
+
+
+    cartItems.innerHTML = "";
+
+
+    let subtotal = 0;
+
+    let totalQuantity = 0;
+
+
+    cart.forEach(
+        (item, index) => {
+
+            const quantity =
+                Math.max(
+                    1,
+                    Number(item.quantity) || 1
+                );
+
+            const price =
+                Number(item.price) || 0;
+
+            const total =
+                price * quantity;
+
+            subtotal += total;
+
+            totalQuantity += quantity;
+
+
+            const row =
+                document.createElement("div");
+
+            row.className = "cart-item";
+
+
+            row.innerHTML = `
+
+                <div class="cart-item-image">
+
+                    <img
+                        src="${item.image || "images/luxury-banner.jpg"}"
+                        alt="${escapeHTML(item.name)}"
+                        onerror="this.onerror=null;this.src='images/luxury-banner.jpg';"
+                    >
+
+                </div>
+
+
+                <div class="cart-item-info">
+
+                    <h3>
+                        ${escapeHTML(item.name)}
+                    </h3>
+
+                    <p>
+                        ShopNova Premium Collection
+                    </p>
+
+                </div>
+
+
+                <div class="cart-item-price">
+                    ${money(price)}
+                </div>
+
+
+                <div class="quantity-control">
+
+                    <button
+                        type="button"
+                        onclick="changeQuantity(${index}, -1)"
+                        aria-label="Decrease quantity"
+                    >
+                        −
+                    </button>
+
+                    <span>
+                        ${quantity}
+                    </span>
+
+                    <button
+                        type="button"
+                        onclick="changeQuantity(${index}, 1)"
+                        aria-label="Increase quantity"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+
+                <div class="item-total">
+                    ${money(total)}
+                </div>
+
+
+                <button
+                    type="button"
+                    class="remove-btn"
+                    onclick="removeItem(${index})"
+                    title="Remove this product"
+                    aria-label="Remove ${escapeHTML(item.name)}"
+                >
+                    ×
+                </button>
+
+            `;
+
+
+            cartItems.appendChild(row);
+
+        }
+    );
+
+
+    /*
+       Simple store discount.
+       Keeps checkout professional without
+       changing the actual product prices.
+    */
+
+    const discount =
+        subtotal >= 5000
+            ? 500
+            : subtotal >= 2500
+                ? 250
+                : 0;
+
+
+    const grandTotal =
+        Math.max(
+            0,
+            subtotal - discount
+        );
+
+
+    document.getElementById("itemsLabel")
+        .textContent =
+            totalQuantity +
+            (totalQuantity === 1 ? " Item" : " Items");
+
+
+    document.getElementById("summaryItems")
+        .textContent =
+            totalQuantity;
+
+
+    document.getElementById("subtotal")
+        .textContent =
+            money(subtotal);
+
+
+    document.getElementById("discount")
+        .textContent =
+            "-" + money(discount);
+
+
+    document.getElementById("grandTotal")
+        .textContent =
+            money(grandTotal);
+
+}
+
+
+/* =========================
+   CHANGE QUANTITY
+========================= */
+
+function changeQuantity(index, amount) {
+
+    const cart = getCart();
+
+    if (!cart[index]) {
+        return;
+    }
+
+
+    const current =
+        Number(cart[index].quantity) || 1;
+
+
+    const next =
+        current + amount;
+
+
+    if (next <= 0) {
+
+        removeItem(index);
+
+        return;
+    }
+
+
+    cart[index].quantity = next;
+
+    saveCart(cart);
+
+    renderCart();
+}
+
+
+/* =========================
+   REMOVE ONE PRODUCT
+========================= */
+
+function removeItem(index) {
+
+    const cart = getCart();
+
+    if (!cart[index]) {
+        return;
+    }
+
+
+    const productName =
+        cart[index].name;
+
+
+    cart.splice(index, 1);
+
+    saveCart(cart);
+
+    renderCart();
+
+    showMessage(
+        productName +
+        " removed from your cart."
+    );
+}
+
+
+/* =========================
+   CLEAR CART
+========================= */
+
+function clearCart() {
+
+    const cart = getCart();
+
+    if (!cart.length) {
+        return;
+    }
+
+
+    if (
+        !confirm(
+            "Remove all products from your cart?"
+        )
+    ) {
+        return;
+    }
+
+
+    localStorage.removeItem(CART_KEY);
+
+    renderCart();
+
+    showMessage(
+        "Your cart has been cleared."
+    );
+}
+
+
+/* =========================
+   PROCEED CHECKOUT
+========================= */
+
+function proceedToCheckout() {
+
+    const cart = getCart();
+
+    if (!cart.length) {
+
+        showMessage(
+            "Your cart is empty."
+        );
+
+        return;
+    }
+
+
+    window.location.href =
+        "checkout.html";
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function setupSearch() {
+
+    const input =
+        document.getElementById(
+            "searchInput"
+        );
+
+    const button =
+        document.getElementById(
+            "searchBtn"
+        );
+
+
+    function search() {
+
+        const query =
+            input.value.trim();
+
+
+        if (!query) {
+            return;
+        }
+
+
+        window.location.href =
+            "products.html?search=" +
+            encodeURIComponent(query);
+    }
+
+
+    button.addEventListener(
+        "click",
+        search
+    );
+
+
+    input.addEventListener(
+        "keydown",
+        event => {
+
+            if (event.key === "Enter") {
+
+                event.preventDefault();
+
+                search();
+            }
+        }
+    );
+}
+
+
+/* =========================
+   SAFE TEXT
+========================= */
+
+function escapeHTML(text) {
+
+    return String(text || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+function showMessage(message) {
+
+    let box =
+        document.getElementById(
+            "shopnovaMessage"
+        );
+
+
+    if (!box) {
+
+        box =
+            document.createElement("div");
+
+        box.id =
+            "shopnovaMessage";
+
+        box.style.position =
+            "fixed";
+
+        box.style.right =
+            "20px";
+
+        box.style.bottom =
+            "20px";
+
+        box.style.zIndex =
+            "999999";
+
+        box.style.background =
+            "linear-gradient(135deg,#2563eb,#7c3aed,#db2777)";
+
+        box.style.color =
+            "#fff";
+
+        box.style.padding =
+            "13px 18px";
+
+        box.style.borderRadius =
+            "12px";
+
+        box.style.fontSize =
+            "13px";
+
+        box.style.fontWeight =
+            "800";
+
+        box.style.boxShadow =
+            "0 10px 30px rgba(0,0,0,.25)";
+
+        document.body.appendChild(box);
+    }
+
+
+    box.textContent =
+        "✓ " + message;
+
+    box.style.opacity = "1";
+
+
+    clearTimeout(
+        window.shopnovaMessageTimer
+    );
+
+
+    window.shopnovaMessageTimer =
+        setTimeout(
+            () => {
+
+                box.style.opacity =
+                    "0";
+
+            },
+            1800
+        );
+}
+
+
+/* =========================
+   STORAGE SYNC
+========================= */
+
+window.addEventListener(
+    "storage",
+    event => {
+
+        if (event.key === CART_KEY) {
+
+            renderCart();
+        }
+    }
+);
+
+
+/* =========================
+   READY
+========================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        renderCart();
+
+        setupSearch();
+
+    }
+);
+
 </script>
 
 </body>
