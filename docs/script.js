@@ -1180,3 +1180,1109 @@ document.addEventListener(
 
     }
 );
+/* =========================
+   CONTACT BUTTON
+   Handles WhatsApp, Instagram & YouTube
+   ========================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+    const contactBtn = document.getElementById("contactBtn");
+
+    if (!contactBtn) return;
+
+    contactBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        const contactMenu = document.getElementById("contactMenu");
+
+        if (contactMenu) {
+            contactMenu.classList.toggle("show");
+        }
+    });
+
+    // Close contact menu when clicking outside
+    document.addEventListener("click", function (event) {
+        const contactMenu = document.getElementById("contactMenu");
+
+        if (!contactMenu) return;
+
+        if (
+            !contactMenu.contains(event.target) &&
+            event.target !== contactBtn
+        ) {
+            contactMenu.classList.remove("show");
+        }
+    });
+});
+/* =========================================================
+   SHOPNOVA VENDOR PANEL
+   ADD THIS SECTION AT THE END OF script.js
+   ========================================================= */
+
+
+/* =========================================================
+   VENDOR PRODUCT STORAGE
+   ========================================================= */
+
+const VENDOR_PRODUCTS_KEY =
+    "shopnova_vendor_products";
+
+
+function getVendorProducts() {
+
+    try {
+
+        const saved =
+            localStorage.getItem(
+                VENDOR_PRODUCTS_KEY
+            );
+
+        if (!saved) {
+            return [];
+        }
+
+        const products =
+            JSON.parse(saved);
+
+        return Array.isArray(products)
+            ? products
+            : [];
+
+    } catch (error) {
+
+        console.error(
+            "Vendor product loading error:",
+            error
+        );
+
+        return [];
+    }
+}
+
+
+function saveVendorProducts(products) {
+
+    try {
+
+        localStorage.setItem(
+            VENDOR_PRODUCTS_KEY,
+            JSON.stringify(products)
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Vendor product saving error:",
+            error
+        );
+
+        showMessage(
+            "Unable to save product."
+        );
+    }
+}
+
+
+/* =========================================================
+   PRODUCT IMAGE PREVIEW
+   ========================================================= */
+
+function setupVendorImagePreview() {
+
+    const imageInput =
+        document.getElementById(
+            "productImage"
+        );
+
+    const preview =
+        document.getElementById(
+            "imagePreview"
+        );
+
+    if (!imageInput || !preview) {
+        return;
+    }
+
+
+    imageInput.addEventListener(
+        "change",
+        function () {
+
+            const file =
+                this.files[0];
+
+
+            if (!file) {
+
+                preview.innerHTML = `
+                    <span>
+                        Product image preview
+                    </span>
+                `;
+
+                return;
+            }
+
+
+            /* Check image */
+
+            if (!file.type.startsWith("image/")) {
+
+                showMessage(
+                    "Please select a valid image."
+                );
+
+                this.value = "";
+
+                preview.innerHTML = `
+                    <span>
+                        Product image preview
+                    </span>
+                `;
+
+                return;
+            }
+
+
+            /* Maximum 5 MB */
+
+            const maxSize =
+                5 * 1024 * 1024;
+
+
+            if (file.size > maxSize) {
+
+                showMessage(
+                    "Image must be smaller than 5 MB."
+                );
+
+                this.value = "";
+
+                preview.innerHTML = `
+                    <span>
+                        Product image preview
+                    </span>
+                `;
+
+                return;
+            }
+
+
+            /* Preview */
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function (event) {
+
+                    preview.innerHTML = `
+
+                        <img
+                            src="${event.target.result}"
+                            alt="Product Preview">
+
+                    `;
+
+                };
+
+
+            reader.readAsDataURL(file);
+
+        }
+    );
+}
+
+
+/* =========================================================
+   GPS LOCATION
+   ========================================================= */
+
+function setupVendorGPS() {
+
+    const button =
+        document.getElementById(
+            "getLocation"
+        );
+
+    const locationInput =
+        document.getElementById(
+            "location"
+        );
+
+    const latitudeInput =
+        document.getElementById(
+            "latitude"
+        );
+
+    const longitudeInput =
+        document.getElementById(
+            "longitude"
+        );
+
+
+    if (!button) {
+        return;
+    }
+
+
+    button.addEventListener(
+        "click",
+        function () {
+
+
+            /* Browser support */
+
+            if (!navigator.geolocation) {
+
+                showMessage(
+                    "GPS is not supported by your browser."
+                );
+
+                return;
+            }
+
+
+            button.disabled = true;
+
+            button.textContent =
+                "📍 Getting Location...";
+
+
+            navigator.geolocation.getCurrentPosition(
+
+                function (position) {
+
+
+                    const latitude =
+                        position.coords.latitude;
+
+
+                    const longitude =
+                        position.coords.longitude;
+
+
+                    /* Save coordinates */
+
+                    if (latitudeInput) {
+
+                        latitudeInput.value =
+                            latitude.toFixed(6);
+
+                    }
+
+
+                    if (longitudeInput) {
+
+                        longitudeInput.value =
+                            longitude.toFixed(6);
+
+                    }
+
+
+                    /* Show location */
+
+                    if (locationInput) {
+
+                        locationInput.value =
+                            "GPS: " +
+                            latitude.toFixed(6) +
+                            ", " +
+                            longitude.toFixed(6);
+
+                    }
+
+
+                    button.disabled = false;
+
+                    button.textContent =
+                        "✓ Location Added";
+
+
+                    showMessage(
+                        "Location added successfully."
+                    );
+
+                },
+
+
+                function (error) {
+
+
+                    button.disabled = false;
+
+                    button.textContent =
+                        "📍 Use My Location";
+
+
+                    let message =
+                        "Unable to get your location.";
+
+
+                    if (
+                        error.code ===
+                        error.PERMISSION_DENIED
+                    ) {
+
+                        message =
+                            "Location permission was denied.";
+
+                    } else if (
+                        error.code ===
+                        error.POSITION_UNAVAILABLE
+                    ) {
+
+                        message =
+                            "Location information is unavailable.";
+
+                    } else if (
+                        error.code ===
+                        error.TIMEOUT
+                    ) {
+
+                        message =
+                            "Location request timed out.";
+
+                    }
+
+
+                    showMessage(message);
+
+                },
+
+
+                {
+                    enableHighAccuracy: true,
+                    timeout: 10000,
+                    maximumAge: 0
+                }
+
+            );
+
+        }
+    );
+}
+
+
+/* =========================================================
+   VENDOR FORM
+   ========================================================= */
+
+function setupVendorForm() {
+
+    const form =
+        document.getElementById(
+            "vendorForm"
+        );
+
+
+    if (!form) {
+        return;
+    }
+
+
+    form.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+
+            const formData =
+                new FormData(form);
+
+
+            /* =================================================
+               VENDOR INFORMATION
+               ================================================= */
+
+            const business =
+                formData.get("business");
+
+
+            const owner =
+                formData.get("owner");
+
+
+            const email =
+                formData.get("email");
+
+
+            const phone =
+                formData.get("phone");
+
+
+            /* =================================================
+               PRODUCT INFORMATION
+               ================================================= */
+
+            const productName =
+                formData.get("productName");
+
+
+            const price =
+                formData.get("price");
+
+
+            const mrp =
+                formData.get("mrp");
+
+
+            const category =
+                formData.get("category");
+
+
+            const brand =
+                formData.get("brand");
+
+
+            const stock =
+                formData.get("stock");
+
+
+            const description =
+                formData.get("description");
+
+
+            /* =================================================
+               LOCATION
+               ================================================= */
+
+            const location =
+                formData.get("location");
+
+
+            const latitude =
+                formData.get("latitude");
+
+
+            const longitude =
+                formData.get("longitude");
+
+
+            /* =================================================
+               IMAGE
+               ================================================= */
+
+            const imageFile =
+                formData.get(
+                    "productImage"
+                );
+
+
+            /* =================================================
+               REQUIRED VALIDATION
+               ================================================= */
+
+            if (
+                !business ||
+                !owner ||
+                !email ||
+                !phone ||
+                !productName ||
+                !price ||
+                !category ||
+                !stock ||
+                !description ||
+                !location
+            ) {
+
+                showMessage(
+                    "Please fill in all required fields."
+                );
+
+                return;
+            }
+
+
+            /* =================================================
+               PRICE VALIDATION
+               ================================================= */
+
+            const sellingPrice =
+                Number(price);
+
+
+            const originalPrice =
+                Number(mrp);
+
+
+            if (
+                isNaN(sellingPrice) ||
+                sellingPrice <= 0
+            ) {
+
+                showMessage(
+                    "Please enter a valid product price."
+                );
+
+                return;
+            }
+
+
+            if (
+                mrp &&
+                (
+                    isNaN(originalPrice) ||
+                    originalPrice < sellingPrice
+                )
+            ) {
+
+                showMessage(
+                    "MRP cannot be lower than selling price."
+                );
+
+                return;
+            }
+
+
+            /* =================================================
+               STOCK VALIDATION
+               ================================================= */
+
+            if (
+                isNaN(Number(stock)) ||
+                Number(stock) < 0
+            ) {
+
+                showMessage(
+                    "Please enter a valid stock quantity."
+                );
+
+                return;
+            }
+
+
+            /* =================================================
+               IMAGE VALIDATION
+               ================================================= */
+
+            if (
+                !imageFile ||
+                !imageFile.name
+            ) {
+
+                showMessage(
+                    "Please select a product image."
+                );
+
+                return;
+            }
+
+
+            if (
+                !imageFile.type.startsWith(
+                    "image/"
+                )
+            ) {
+
+                showMessage(
+                    "Please select a valid product image."
+                );
+
+                return;
+            }
+
+
+            /* =================================================
+               READ IMAGE
+               ================================================= */
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function () {
+
+
+                    /* =================================================
+                       CREATE PRODUCT OBJECT
+                       ================================================= */
+
+                    const product = {
+
+                        id:
+                            Date.now(),
+
+                        vendor: {
+
+                            business:
+                                business,
+
+                            owner:
+                                owner,
+
+                            email:
+                                email,
+
+                            phone:
+                                phone
+
+                        },
+
+
+                        product: {
+
+                            name:
+                                productName,
+
+                            image:
+                                reader.result,
+
+                            price:
+                                sellingPrice,
+
+                            mrp:
+                                mrp
+                                    ? originalPrice
+                                    : null,
+
+                            category:
+                                category,
+
+                            brand:
+                                brand || "",
+
+                            stock:
+                                Number(stock),
+
+                            description:
+                                description
+
+                        },
+
+
+                        location: {
+
+                            address:
+                                location,
+
+                            latitude:
+                                latitude || "",
+
+                            longitude:
+                                longitude || ""
+
+                        },
+
+
+                        createdAt:
+                            new Date().toISOString()
+
+                    };
+
+
+                    /* =================================================
+                       GET EXISTING PRODUCTS
+                       ================================================= */
+
+                    const products =
+                        getVendorProducts();
+
+
+                    /* =================================================
+                       ADD NEW PRODUCT
+                       ================================================= */
+
+                    products.push(product);
+
+
+                    /* =================================================
+                       SAVE
+                       ================================================= */
+
+                    saveVendorProducts(
+                        products
+                    );
+
+
+                    /* =================================================
+                       SUCCESS
+                       ================================================= */
+
+                    showMessage(
+                        "Product added successfully!"
+                    );
+
+
+                    /* =================================================
+                       RESET FORM
+                       ================================================= */
+
+                    form.reset();
+
+
+                    const preview =
+                        document.getElementById(
+                            "imagePreview"
+                        );
+
+
+                    if (preview) {
+
+                        preview.innerHTML = `
+                            <span>
+                                Product image preview
+                            </span>
+                        `;
+
+                    }
+
+
+                    const locationButton =
+                        document.getElementById(
+                            "getLocation"
+                        );
+
+
+                    if (locationButton) {
+
+                        locationButton.textContent =
+                            "📍 Use My Location";
+
+                        locationButton.disabled =
+                            false;
+
+                    }
+
+
+                    /* =================================================
+                       OPTIONAL CONSOLE
+                       ================================================= */
+
+                    console.log(
+                        "ShopNova Vendor Product:",
+                        product
+                    );
+
+
+                    /* =================================================
+                       REFRESH PRODUCT DISPLAY
+                       ================================================= */
+
+                    displayVendorProducts();
+
+                };
+
+
+            reader.onerror =
+                function () {
+
+                    showMessage(
+                        "Unable to read product image."
+                    );
+
+                };
+
+
+            reader.readAsDataURL(
+                imageFile
+            );
+
+        }
+    );
+}
+
+
+/* =========================================================
+   DISPLAY SAVED VENDOR PRODUCTS
+   ================================================= */
+
+function displayVendorProducts() {
+
+    const container =
+        document.getElementById(
+            "vendorProducts"
+        );
+
+
+    if (!container) {
+        return;
+    }
+
+
+    const products =
+        getVendorProducts();
+
+
+    /* =================================================
+       EMPTY
+       ================================================= */
+
+    if (products.length === 0) {
+
+        container.innerHTML = `
+            <div class="vendor-empty">
+                <h3>No products added yet</h3>
+                <p>
+                    Add your first product using
+                    the vendor panel.
+                </p>
+            </div>
+        `;
+
+        return;
+    }
+
+
+    container.innerHTML = "";
+
+
+    /* =================================================
+       PRODUCTS
+       ================================================= */
+
+    products.forEach(
+        product => {
+
+
+            const data =
+                product.product;
+
+
+            const card =
+                document.createElement(
+                    "article"
+                );
+
+
+            card.className =
+                "vendor-product-card";
+
+
+            /* Discount */
+
+            let discount = 0;
+
+
+            if (
+                data.mrp &&
+                data.mrp > data.price
+            ) {
+
+                discount =
+                    Math.round(
+                        (
+                            (
+                                data.mrp -
+                                data.price
+                            )
+                            /
+                            data.mrp
+                        ) * 100
+                    );
+
+            }
+
+
+            card.innerHTML = `
+
+                <div class="vendor-product-image">
+
+                    <img
+                        src="${data.image}"
+                        alt="${data.name}">
+
+                </div>
+
+
+                <div class="vendor-product-info">
+
+                    <span class="vendor-product-category">
+                        ${data.category}
+                    </span>
+
+
+                    <h3>
+                        ${data.name}
+                    </h3>
+
+
+                    ${
+                        data.brand
+                        ?
+                        `
+                        <p>
+                            <strong>Brand:</strong>
+                            ${data.brand}
+                        </p>
+                        `
+                        :
+                        ""
+                    }
+
+
+                    <div class="vendor-product-price">
+
+                        <strong>
+                            ₹${Number(
+                                data.price
+                            ).toLocaleString("en-IN")}
+                        </strong>
+
+
+                        ${
+                            data.mrp
+                            ?
+                            `
+                            <del>
+                                ₹${Number(
+                                    data.mrp
+                                ).toLocaleString("en-IN")}
+                            </del>
+                            `
+                            :
+                            ""
+                        }
+
+
+                        ${
+                            discount > 0
+                            ?
+                            `
+                            <span>
+                                ${discount}% OFF
+                            </span>
+                            `
+                            :
+                            ""
+                        }
+
+                    </div>
+
+
+                    <p>
+                        ${data.description}
+                    </p>
+
+
+                    <p>
+                        <strong>
+                            Stock:
+                        </strong>
+
+                        ${data.stock}
+                    </p>
+
+
+                    ${
+                        product.location &&
+                        product.location.address
+                        ?
+                        `
+                        <p>
+                            📍
+                            ${product.location.address}
+                        </p>
+                        `
+                        :
+                        ""
+                    }
+
+
+                    <button
+                        type="button"
+                        class="delete-vendor-product"
+                        data-id="${product.id}">
+
+                        Delete Product
+
+                    </button>
+
+                </div>
+
+            `;
+
+
+            container.appendChild(
+                card
+            );
+
+        }
+    );
+
+
+    /* =================================================
+       DELETE PRODUCT
+       ================================================= */
+
+    container
+        .querySelectorAll(
+            ".delete-vendor-product"
+        )
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+
+                        const id =
+                            Number(
+                                this.dataset.id
+                            );
+
+
+                        const confirmed =
+                            confirm(
+                                "Delete this product?"
+                            );
+
+
+                        if (!confirmed) {
+                            return;
+                        }
+
+
+                        let products =
+                            getVendorProducts();
+
+
+                        products =
+                            products.filter(
+                                product =>
+                                    product.id !== id
+                            );
+
+
+                        saveVendorProducts(
+                            products
+                        );
+
+
+                        showMessage(
+                            "Product deleted."
+                        );
+
+
+                        displayVendorProducts();
+
+                    }
+                );
+
+            }
+        );
+}
+
+
+/* =========================================================
+   VENDOR PANEL READY
+   ========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        setupVendorImagePreview();
+
+        setupVendorGPS();
+
+        setupVendorForm();
+
+        displayVendorProducts();
+
+    }
+);

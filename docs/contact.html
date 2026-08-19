@@ -1,396 +1,701 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <title>Contact ShopNova</title>
 
-    <title>ShopNova | Contact</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
+        html {
+            scroll-behavior: smooth;
+        }
 
-    <link rel="stylesheet"
-          href="css/style.css">
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background:
+                linear-gradient(
+                    135deg,
+                    #eef6ff,
+                    #dcecff,
+                    #f8fbff
+                );
+            color: #102a43;
+            min-height: 100vh;
+        }
 
+        /* =====================================
+           HEADER
+        ===================================== */
+
+        .contact-header {
+            background:
+                linear-gradient(
+                    135deg,
+                    #071a3d,
+                    #123b70,
+                    #1769aa
+                );
+
+            padding: 12px 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            box-shadow:
+                0 4px 18px rgba(7,26,61,.20);
+        }
+
+        .contact-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: white;
+            text-decoration: none;
+
+            font-size: 22px;
+            font-weight: 900;
+        }
+
+        .contact-logo img {
+            width: 52px;
+            height: 52px;
+
+            object-fit: contain;
+
+            background: white;
+
+            padding: 3px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 4px 15px
+                rgba(0,0,0,.20);
+        }
+
+        .back-home {
+            color: white;
+            text-decoration: none;
+
+            background: rgba(255,255,255,.12);
+
+            padding: 9px 15px;
+
+            border-radius: 8px;
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .back-home:hover {
+            background: rgba(255,255,255,.22);
+        }
+
+
+        /* =====================================
+           MAIN
+        ===================================== */
+
+        .contact-wrapper {
+            width: 100%;
+            max-width: 1050px;
+
+            margin: 35px auto;
+
+            padding: 0 18px;
+        }
+
+
+        .contact-hero {
+            text-align: center;
+
+            margin-bottom: 28px;
+        }
+
+        .contact-badge {
+            display: inline-block;
+
+            background: white;
+
+            color: #1769aa;
+
+            padding: 7px 15px;
+
+            border-radius: 20px;
+
+            font-size: 11px;
+
+            font-weight: 900;
+
+            box-shadow:
+                0 5px 15px
+                rgba(23,105,170,.12);
+        }
+
+        .contact-hero h1 {
+            margin-top: 12px;
+
+            font-size: clamp(30px,5vw,46px);
+
+            color: #071a3d;
+
+            font-weight: 900;
+        }
+
+        .contact-hero h1 span {
+            color: #1769aa;
+        }
+
+        .contact-hero p {
+            margin-top: 8px;
+
+            color: #64748b;
+
+            font-size: 14px;
+        }
+
+
+        /* =====================================
+           CONTACT CARD
+        ===================================== */
+
+        .contact-card {
+            background: rgba(255,255,255,.96);
+
+            border-radius: 18px;
+
+            padding: 28px;
+
+            border: 1px solid #d8e7f7;
+
+            box-shadow:
+                0 12px 35px
+                rgba(7,26,61,.10);
+        }
+
+        .contact-card h2 {
+            color: #071a3d;
+
+            font-size: 24px;
+
+            margin-bottom: 7px;
+        }
+
+        .contact-card > p {
+            color: #697386;
+
+            font-size: 13px;
+
+            margin-bottom: 22px;
+        }
+
+
+        /* =====================================
+           SOCIAL GRID
+        ===================================== */
+
+        .social-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+        }
+
+        .social-item {
+            text-decoration: none;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 15px;
+
+            border-radius: 12px;
+
+            background: #f5f9ff;
+
+            border: 1px solid #dce9f7;
+
+            color: #102a43;
+
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease,
+                background .2s ease;
+        }
+
+        .social-item:hover {
+            transform: translateY(-3px);
+
+            background: white;
+
+            box-shadow:
+                0 8px 20px
+                rgba(23,105,170,.12);
+        }
+
+        .social-icon {
+            width: 42px;
+            height: 42px;
+
+            min-width: 42px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 11px;
+
+            color: white;
+
+            font-size: 20px;
+
+            font-weight: 900;
+        }
+
+        .social-info strong {
+            display: block;
+
+            font-size: 14px;
+
+            color: #071a3d;
+        }
+
+        .social-info small {
+            display: block;
+
+            margin-top: 3px;
+
+            font-size: 11px;
+
+            color: #718096;
+        }
+
+
+        /* COLORS */
+
+        .email-icon {
+            background: #2563eb;
+        }
+
+        .phone-icon {
+            background: #16a34a;
+        }
+
+        .whatsapp-icon {
+            background: #22c55e;
+        }
+
+        .instagram-icon {
+            background:
+                linear-gradient(
+                    135deg,
+                    #833ab4,
+                    #e1306c,
+                    #f77737
+                );
+        }
+
+        .youtube-icon {
+            background: #ff0000;
+        }
+
+        .facebook-icon {
+            background: #1877f2;
+        }
+
+
+        /* =====================================
+           SIMPLE MESSAGE
+        ===================================== */
+
+        .contact-note {
+            margin-top: 22px;
+
+            padding: 14px 16px;
+
+            border-radius: 10px;
+
+            background: #eef6ff;
+
+            border: 1px solid #cfe3f8;
+
+            color: #31516f;
+
+            font-size: 12px;
+
+            text-align: center;
+        }
+
+
+        /* =====================================
+           FOOTER
+        ===================================== */
+
+        .contact-footer {
+            text-align: center;
+
+            padding: 25px 15px;
+
+            color: #718096;
+
+            font-size: 11px;
+        }
+
+
+        /* =====================================
+           MOBILE
+        ===================================== */
+
+        @media (max-width: 750px) {
+
+            .contact-header {
+                padding: 10px 14px;
+            }
+
+            .contact-logo {
+                font-size: 18px;
+            }
+
+            .contact-logo img {
+                width: 45px;
+                height: 45px;
+            }
+
+            .back-home {
+                font-size: 11px;
+                padding: 8px 10px;
+            }
+
+            .contact-wrapper {
+                margin: 25px auto;
+            }
+
+            .contact-card {
+                padding: 20px 15px;
+            }
+
+            .social-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .social-item {
+                padding: 12px 9px;
+            }
+
+            .social-icon {
+                width: 37px;
+                height: 37px;
+                min-width: 37px;
+                font-size: 17px;
+            }
+
+            .social-info strong {
+                font-size: 12px;
+            }
+
+            .social-info small {
+                font-size: 9px;
+            }
+        }
+
+
+        @media (max-width: 430px) {
+
+            .social-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
 </head>
 
 <body>
 
 
-<div class="independence-strip">
+    <!-- =========================================
+         HEADER
+    ========================================== -->
 
-    <div class="scroll-track">
+    <header class="contact-header">
 
-        <span>
-            🇮🇳 80th Indian Independence Celebration
-        </span>
+        <a href="index.html" class="contact-logo">
 
-        <span>
-            🕊️ Happy Independence Day
-        </span>
+            <img
+                src="images/shopnova-logo.png"
+                alt="ShopNova Logo"
+            >
 
-        <span>
-            🇮🇳 80th Indian Independence Celebration
-        </span>
-
-    </div>
-
-</div>
-
-
-
-<header class="site-header">
-
-    <div class="container header-inner">
-
-        <a href="index.html"
-           class="logo">
-
-            <div class="logo-mark">
-                🕊️
-            </div>
-
-            <span>
-                Shop<span>Nova</span>
-            </span>
+            <span>ShopNova</span>
 
         </a>
 
 
-        <form class="search-box"
-              id="searchForm">
+        <a
+            href="index.html"
+            class="back-home"
+        >
+            ← Back to Home
+        </a>
 
-            <input
-                id="searchInput"
-                type="search"
-                placeholder="Search products...">
-
-            <button type="submit">
-                🔍
-            </button>
-
-        </form>
-
-
-        <button
-            class="mobile-menu"
-            id="mobileMenu">
-            ☰
-        </button>
-
-
-        <nav
-            class="main-navigation"
-            id="mainNavigation">
-
-            <a href="index.html">
-                Home
-            </a>
-
-            <a href="products.html">
-                Products
-            </a>
-
-            <a href="vendor.html">
-                Vendor Panel
-            </a>
-
-            <a href="cart.html"
-               class="cart-nav">
-
-                🛒 Cart
-
-                <span id="cartCount">
-                    0
-                </span>
-
-            </a>
-
-            <a class="active contact-link"
-               href="contact.html">
-
-                Contact
-
-            </a>
-
-        </nav>
-
-    </div>
-
-</header>
+    </header>
 
 
 
-<main>
+    <!-- =========================================
+         CONTACT CONTENT
+    ========================================== -->
+
+    <main class="contact-wrapper">
 
 
-<section class="page-banner">
+        <section class="contact-hero">
 
-    <div class="container">
-
-        <div class="page-banner-content">
-
-            <span>
-                🇮🇳 80th Indian Independence Celebration
+            <span class="contact-badge">
+                💙 GET IN TOUCH
             </span>
 
             <h1>
-                Contact ShopNova
+                Contact <span>ShopNova</span>
             </h1>
 
             <p>
-                Happy Independence Day — we are here
-                to help you.
+                We're here to help with orders, products and questions.
             </p>
 
-        </div>
+        </section>
 
-        <div class="page-banner-dove">
-            🕊️
-        </div>
 
-    </div>
 
-</section>
-
-
-
-<section class="section">
-
-    <div class="container">
-
-        <div class="contact-layout">
-
-
-            <div class="contact-information">
-
-                <span class="small-title">
-                    GET IN TOUCH
-                </span>
-
-                <h2>
-                    We'd love to hear from you.
-                </h2>
-
-                <p>
-                    Have a question about an order,
-                    product or vendor account?
-                    Send us a message.
-                </p>
-
-
-                <div class="contact-item">
-
-                    <div>
-                        📧
-                    </div>
-
-                    <div>
-
-                        <strong>
-                            Email
-                        </strong>
-
-                        <p>
-                            support@shopnova.example
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="contact-item">
-
-                    <div>
-                        📞
-                    </div>
-
-                    <div>
-
-                        <strong>
-                            Phone
-                        </strong>
-
-                        <p>
-                            +91 98765 43210
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="contact-item">
-
-                    <div>
-                        📍
-                    </div>
-
-                    <div>
-
-                        <strong>
-                            Location
-                        </strong>
-
-                        <p>
-                            India
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="contact-dove">
-
-                    🕊️
-
-                    <strong>
-                        Happy Independence Day 🇮🇳
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="contact-form-card">
-
-                <h2>
-                    Send us a message
-                </h2>
-
-
-                <form id="contactForm">
-
-
-                    <label>
-
-                        Name
-
-                        <input
-                            type="text"
-                            placeholder="Your name"
-                            required>
-
-                    </label>
-
-
-                    <label>
-
-                        Email
-
-                        <input
-                            type="email"
-                            placeholder="you@example.com"
-                            required>
-
-                    </label>
-
-
-                    <label>
-
-                        Subject
-
-                        <input
-                            type="text"
-                            placeholder="How can we help?"
-                            required>
-
-                    </label>
-
-
-                    <label>
-
-                        Message
-
-                        <textarea
-                            rows="6"
-                            placeholder="Write your message..."
-                            required></textarea>
-
-                    </label>
-
-
-                    <button
-                        type="submit"
-                        class="primary-btn full-button">
-
-                        Send Message
-
-                    </button>
-
-                </form>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<section class="final-independence">
-
-    <div class="container">
-
-        <div class="final-card">
-
-            <div class="dove-large">
-                🕊️
-            </div>
+        <section class="contact-card">
 
             <h2>
-                Happy Independence Day 🇮🇳
+                We'd love to hear from you.
             </h2>
 
             <p>
-                Proudly serving customers across India.
+                Choose any option below to contact ShopNova.
             </p>
 
-            <div class="flag-bars">
-                <span></span>
-                <span></span>
-                <span></span>
+
+            <!-- =====================================
+                 ALL CONTACT / SOCIAL OPTIONS
+            ====================================== -->
+
+            <div class="social-grid">
+
+
+                <!-- EMAIL -->
+
+                <a
+                    href="mailto:support@shopnova.example"
+                    class="social-item"
+                >
+
+                    <div class="social-icon email-icon">
+                        ✉
+                    </div>
+
+                    <div class="social-info">
+
+                        <strong>Email</strong>
+
+                        <small>
+                            support@shopnova.example
+                        </small>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- PHONE -->
+
+                <a
+                    href="tel:+919876543210"
+                    class="social-item"
+                >
+
+                    <div class="social-icon phone-icon">
+                        ☎
+                    </div>
+
+                    <div class="social-info">
+
+                        <strong>Phone</strong>
+
+                        <small>
+                            +91 98765 43210
+                        </small>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- WHATSAPP -->
+
+                <a
+                    href="https://wa.me/919876543210"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="social-item"
+                >
+
+                    <div class="social-icon whatsapp-icon">
+                        W
+                    </div>
+
+                    <div class="social-info">
+
+                        <strong>WhatsApp</strong>
+
+                        <small>
+                            Chat with us
+                        </small>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- INSTAGRAM -->
+
+                <a
+                    href="#"
+                    class="social-item"
+                    onclick="showComingSoon(event, 'Instagram')"
+                >
+
+                    <div class="social-icon instagram-icon">
+                        ◎
+                    </div>
+
+                    <div class="social-info">
+
+                        <strong>Instagram</strong>
+
+                        <small>
+                            Follow ShopNova
+                        </small>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- YOUTUBE -->
+
+                <a
+                    href="#"
+                    class="social-item"
+                    onclick="showComingSoon(event, 'YouTube')"
+                >
+
+                    <div class="social-icon youtube-icon">
+                        ▶
+                    </div>
+
+                    <div class="social-info">
+
+                        <strong>YouTube</strong>
+
+                        <small>
+                            ShopNova videos
+                        </small>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- FACEBOOK -->
+
+                <a
+                    href="#"
+                    class="social-item"
+                    onclick="showComingSoon(event, 'Facebook')"
+                >
+
+                    <div class="social-icon facebook-icon">
+                        f
+                    </div>
+
+                    <div class="social-info">
+
+                        <strong>Facebook</strong>
+
+                        <small>
+                            Follow ShopNova
+                        </small>
+
+                    </div>
+
+                </a>
+
             </div>
 
-        </div>
 
-    </div>
+            <div class="contact-note">
 
-</section>
+                💙 ShopNova customer support is available for
+                product, order and delivery questions.
 
-</main>
+            </div>
 
+        </section>
 
-
-<footer class="site-footer">
-
-    <div class="footer-bottom">
-
-        © 2026 ShopNova •
-        80th Indian Independence Celebration 🇮🇳
-
-    </div>
-
-</footer>
+    </main>
 
 
-<div id="toast"
-     class="toast">
-</div>
+
+    <footer class="contact-footer">
+
+        © 2026 ShopNova | Shop Smart. Live Better.
+
+    </footer>
 
 
-<script src="js/script.js"></script>
+
+    <!-- =========================================
+         SIMPLE SOCIAL MESSAGE
+    ========================================== -->
+
+    <script>
+
+        function showComingSoon(event, platform) {
+
+            event.preventDefault();
+
+            alert(
+                platform +
+                " link will be connected to your official ShopNova account."
+            );
+
+        }
+
+    </script>
 
 </body>
 </html>
