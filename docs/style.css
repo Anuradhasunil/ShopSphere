@@ -2061,3 +2061,127 @@ body {
             );
     }
 }
+/* =========================================================
+   SHOPNOVA HOMEPAGE - SOFT EYE-FRIENDLY BLUE
+   ONLY COLOR ADJUSTMENT
+   ========================================================= */
+
+/* Main homepage background */
+body {
+    background: #f4f8ff;
+    color: #172033;
+}
+
+/* Header */
+.main-navbar {
+    background: #123b70;
+    box-shadow: 0 4px 18px rgba(18, 59, 112, 0.18);
+}
+
+/* Search button */
+.search-btn {
+    background: #2f6fb3;
+}
+
+.search-btn:hover {
+    background: #24598f;
+}
+
+/* Navigation hover */
+.nav-links a:hover,
+.nav-links a.active {
+    color: #8fc5ff;
+}
+
+/* Hero background */
+.hero-section {
+    background:
+        linear-gradient(
+            135deg,
+            #edf5ff 0%,
+            #dcecff 48%,
+            #c9e1fa 100%
+        );
+}
+
+/* Welcome badge */
+.welcome-badge {
+    background: #ffffff;
+    color: #24598f;
+    border: 1px solid #c8ddf5;
+}
+
+/* Main heading */
+.hero-main-heading {
+    color: #123b70;
+}
+
+/* Blue text */
+.blue-text {
+    color: #3679bd;
+}
+
+/* Hero paragraph */
+.hero-subtext {
+    color: #50627a;
+}
+
+/* Primary button */
+.btn-primary {
+    background: #245f9e;
+    color: #ffffff;
+    box-shadow: 0 6px 18px rgba(36, 95, 158, 0.20);
+}
+
+.btn-primary:hover {
+    background: #194c82;
+}
+
+/* Secondary button */
+.btn-secondary {
+    background: #ffffff;
+    color: #245f9e;
+    border: 1px solid #b9d2ed;
+}
+
+.btn-secondary:hover {
+    background: #eaf3ff;
+}
+
+/* Hero logo surrounding area */
+.graphic-card-frame {
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #eef6ff
+        );
+
+    box-shadow:
+        0 12px 35px rgba(36, 95, 158, 0.12),
+        0 0 25px rgba(96, 165, 250, 0.12);
+}
+
+/* Soft blue sections/cards if present */
+.card,
+.feature-card,
+.home-card {
+    border-color: #d8e7f7;
+    box-shadow: 0 6px 22px rgba(36, 95, 158, 0.08);
+}
+
+/* Cart count */
+.cart-count {
+    background: #ffffff;
+    color: #245f9e;
+}
+
+/* Contact button */
+.btn-contact {
+    background: #3679bd;
+    color: #ffffff !important;
+}
+
+.btn-contact:hover {
+    background: #24598f;
+}
