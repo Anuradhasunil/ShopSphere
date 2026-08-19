@@ -1,6 +1,30 @@
 /* =====================================================
-   SHOPNOVA HOME JAVASCRIPT
+   SHOPNOVA - COMPLETE SCRIPT
+   Search + Cart Count + Add To Cart + Mobile Menu
    ===================================================== */
+
+
+/* =====================================================
+   CART
+   ===================================================== */
+
+function getCart() {
+    try {
+        return JSON.parse(
+            localStorage.getItem("shopnova_cart")
+        ) || [];
+    } catch (error) {
+        return [];
+    }
+}
+
+
+function saveCart(cart) {
+    localStorage.setItem(
+        "shopnova_cart",
+        JSON.stringify(cart)
+    );
+}
 
 
 /* =====================================================
@@ -9,89 +33,277 @@
 
 function updateCartCount() {
 
-    let cart = [];
-
-    try {
-
-        cart =
-            JSON.parse(
-                localStorage.getItem("shopnova_cart")
-            ) || [];
-
-    } catch (error) {
-
-        cart = [];
-
-    }
-
+    const cart = getCart();
 
     let count = 0;
 
+    cart.forEach(function (item) {
 
-    if (Array.isArray(cart)) {
+        count += Number(item.quantity) || 1;
 
-        cart.forEach(function (item) {
-
-            count +=
-                Number(item.quantity) || 1;
-
-        });
-
-    }
+    });
 
 
     const cartCount =
+        document.getElementById("cartCount");
+
+    const homeCartCount =
         document.getElementById("cart-count");
 
     const mobileCartCount =
-        document.getElementById(
-            "mobile-cart-count"
-        );
+        document.getElementById("mobile-cart-count");
 
 
     if (cartCount) {
         cartCount.textContent = count;
     }
 
+    if (homeCartCount) {
+        homeCartCount.textContent = count;
+    }
 
     if (mobileCartCount) {
         mobileCartCount.textContent = count;
+    }
+}
+
+
+/* =====================================================
+   ADD TO CART
+   ===================================================== */
+
+function addToCart(
+    name,
+    price,
+    image,
+    button
+) {
+
+    let cart = getCart();
+
+
+    const existingProduct =
+        cart.find(function (item) {
+
+            return item.name === name;
+
+        });
+
+
+    if (existingProduct) {
+
+        existingProduct.quantity =
+            (Number(existingProduct.quantity) || 1) + 1;
+
+    } else {
+
+        cart.push({
+
+            name: name,
+
+            price: Number(price),
+
+            image: image,
+
+            quantity: 1
+
+        });
+
+    }
+
+
+    saveCart(cart);
+
+    updateCartCount();
+
+
+    if (button) {
+
+        const originalText =
+            button.innerHTML;
+
+        button.innerHTML =
+            "✓ Added to Cart";
+
+        button.classList.add("added");
+
+
+        setTimeout(function () {
+
+            button.innerHTML =
+                originalText;
+
+            button.classList.remove("added");
+
+        }, 1400);
+
     }
 
 }
 
 
 /* =====================================================
-   SEARCH
+   SEARCH FUNCTION
    ===================================================== */
 
-function performSearch() {
+function searchProducts() {
 
     const input =
         document.getElementById("searchInput");
 
-    if (!input) {
+    const productsGrid =
+        document.getElementById("productsGrid");
+
+
+    if (!input || !productsGrid) {
         return;
     }
 
 
-    const searchTerm =
-        input.value.trim();
+    const searchText =
+        input.value
+            .trim()
+            .toLowerCase();
 
 
-    if (searchTerm === "") {
+    const products =
+        productsGrid.querySelectorAll(
+            ".product-card"
+        );
 
-        window.location.href =
-            "products.html";
+    const noResults =
+        document.getElementById("noResults");
 
-        return;
+    const searchResult =
+        document.getElementById("searchResult");
+
+
+    let visibleProducts = 0;
+
+
+    products.forEach(function (product) {
+
+        const name =
+            (
+                product.dataset.name ||
+                ""
+            ).toLowerCase();
+
+
+        const category =
+            (
+                product.dataset.category ||
+                ""
+            ).toLowerCase();
+
+
+        const productNameElement =
+            product.querySelector(
+                ".product-name"
+            );
+
+
+        const descriptionElement =
+            product.querySelector(
+                ".product-description"
+            );
+
+
+        const productName =
+            productNameElement
+                ? productNameElement.textContent.toLowerCase()
+                : "";
+
+
+        const description =
+            descriptionElement
+                ? descriptionElement.textContent.toLowerCase()
+                : "";
+
+
+        const searchableText =
+            name +
+            " " +
+            category +
+            " " +
+            productName +
+            " " +
+            description;
+
+
+        if (
+            searchText === "" ||
+            searchableText.includes(searchText)
+        ) {
+
+            product.style.display = "";
+
+            visibleProducts++;
+
+        } else {
+
+            product.style.display = "none";
+
+        }
+
+    });
+
+
+    /* =========================
+       SEARCH MESSAGE
+    ========================= */
+
+    if (searchText !== "") {
+
+        if (searchResult) {
+
+            searchResult.style.display =
+                "block";
+
+            searchResult.textContent =
+                visibleProducts +
+                " product" +
+                (visibleProducts === 1 ? "" : "s") +
+                " found for \"" +
+                input.value.trim() +
+                "\"";
+
+        }
+
+    } else {
+
+        if (searchResult) {
+
+            searchResult.style.display =
+                "none";
+
+        }
 
     }
 
 
-    window.location.href =
-        "products.html?search=" +
-        encodeURIComponent(searchTerm);
+    /* =========================
+       NO RESULTS
+    ========================= */
+
+    if (noResults) {
+
+        if (
+            searchText !== "" &&
+            visibleProducts === 0
+        ) {
+
+            noResults.style.display =
+                "block";
+
+        } else {
+
+            noResults.style.display =
+                "none";
+
+        }
+
+    }
 
 }
 
@@ -102,7 +314,7 @@ function performSearch() {
 
 const searchButton =
     document.getElementById(
-        "searchButton"
+        "searchBtn"
     );
 
 
@@ -110,7 +322,11 @@ if (searchButton) {
 
     searchButton.addEventListener(
         "click",
-        performSearch
+        function () {
+
+            searchProducts();
+
+        }
     );
 
 }
@@ -136,12 +352,148 @@ if (searchInput) {
 
                 event.preventDefault();
 
-                performSearch();
+                searchProducts();
 
             }
 
         }
     );
+
+
+    /*
+       Live search while typing
+    */
+
+    searchInput.addEventListener(
+        "input",
+        function () {
+
+            searchProducts();
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   HOME PAGE SEARCH
+   ===================================================== */
+
+function setupHomeSearch() {
+
+    const input =
+        document.getElementById(
+            "searchInput"
+        );
+
+    const button =
+        document.getElementById(
+            "searchButton"
+        );
+
+
+    if (!input) {
+        return;
+    }
+
+
+    function goToProducts() {
+
+        const text =
+            input.value.trim();
+
+
+        if (text === "") {
+
+            window.location.href =
+                "products.html";
+
+            return;
+
+        }
+
+
+        window.location.href =
+            "products.html?search=" +
+            encodeURIComponent(text);
+
+    }
+
+
+    if (button) {
+
+        button.addEventListener(
+            "click",
+            goToProducts
+        );
+
+    }
+
+
+    input.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Enter") {
+
+                event.preventDefault();
+
+                goToProducts();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   READ SEARCH FROM URL
+   ===================================================== */
+
+function loadSearchFromURL() {
+
+    const input =
+        document.getElementById(
+            "searchInput"
+        );
+
+
+    const productsGrid =
+        document.getElementById(
+            "productsGrid"
+        );
+
+
+    /*
+       Only run this part on Products page.
+    */
+
+    if (!input || !productsGrid) {
+        return;
+    }
+
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const search =
+        params.get("search");
+
+
+    if (search) {
+
+        input.value =
+            search;
+
+        searchProducts();
+
+    }
 
 }
 
@@ -154,6 +506,7 @@ const menuButton =
     document.getElementById(
         "menuButton"
     );
+
 
 const mobileNavigation =
     document.getElementById(
@@ -181,47 +534,25 @@ if (
 
 
 /* =====================================================
-   CLOSE MOBILE MENU AFTER CLICK
-   ===================================================== */
-
-if (mobileNavigation) {
-
-    const mobileLinks =
-        mobileNavigation.querySelectorAll("a");
-
-
-    mobileLinks.forEach(
-        function (link) {
-
-            link.addEventListener(
-                "click",
-                function () {
-
-                    mobileNavigation.classList.remove(
-                        "show"
-                    );
-
-                }
-            );
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   UPDATE CART
-   ===================================================== */
-
-updateCartCount();
-
-
-/* =====================================================
-   UPDATE WHEN STORAGE CHANGES
+   STORAGE UPDATE
    ===================================================== */
 
 window.addEventListener(
     "storage",
-    updateCartCount
+    function () {
+
+        updateCartCount();
+
+    }
 );
+
+
+/* =====================================================
+   INITIALIZE
+   ===================================================== */
+
+updateCartCount();
+
+setupHomeSearch();
+
+loadSearchFromURL();
