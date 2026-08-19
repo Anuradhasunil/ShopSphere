@@ -2,12 +2,12 @@
    SHOPNOVA
    COMPLETE STYLE.CSS
    Fresh Professional Purple Theme
-   ========================================================= */
+========================================================= */
 
 
 /* =========================================================
    1. RESET
-   ========================================================= */
+========================================================= */
 
 * {
     margin: 0;
@@ -49,7 +49,7 @@ a {
 
 /* =========================================================
    2. GLOBAL
-   ========================================================= */
+========================================================= */
 
 .container {
     width: min(1180px, calc(100% - 40px));
@@ -58,6 +58,31 @@ a {
 
 .section {
     padding: 80px 0;
+}
+
+.section-heading {
+    margin-bottom: 35px;
+}
+
+.section-heading h2 {
+    color: #28133f;
+    font-size: clamp(28px, 4vw, 38px);
+    line-height: 1.2;
+    margin-bottom: 8px;
+}
+
+.section-heading p {
+    color: #756a80;
+}
+
+.small-title {
+    display: inline-block;
+    margin-bottom: 12px;
+    color: #7c3aed;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
 }
 
 .primary-btn {
@@ -101,14 +126,46 @@ a {
     transform: translateY(0);
 }
 
+.secondary-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 12px 20px;
+
+    border: 1px solid #d9c8eb;
+    border-radius: 12px;
+
+    background: #ffffff;
+    color: #6d28d9;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition: 0.2s ease;
+}
+
+.secondary-btn:hover {
+    background: #f8f2ff;
+    border-color: #bda0dd;
+    transform: translateY(-2px);
+}
+
 .full-button {
     width: 100%;
+}
+
+.hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 25px;
 }
 
 
 /* =========================================================
    3. HEADER
-   ========================================================= */
+========================================================= */
 
 .site-header {
     position: sticky;
@@ -288,13 +345,13 @@ a {
 
 
 /* =========================================================
-   4. PAGE BANNER
-   ========================================================= */
+   4. HERO / PAGE BANNER
+========================================================= */
 
 .page-banner {
     position: relative;
 
-    padding: 65px 0;
+    padding: 90px 0;
 
     background:
         radial-gradient(
@@ -335,16 +392,20 @@ a {
 }
 
 .page-banner h1 {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 
     color: #28133f;
 
-    font-size: clamp(32px, 5vw, 50px);
-    line-height: 1.1;
+    font-size: clamp(42px, 7vw, 72px);
+    line-height: 1.05;
 }
 
 .page-banner p {
+    max-width: 650px;
+
     color: #6e617a;
+
+    font-size: 16px;
 }
 
 .page-banner-dove {
@@ -353,15 +414,15 @@ a {
     right: 7%;
     bottom: 10px;
 
-    font-size: 100px;
+    font-size: 150px;
 
     opacity: 0.12;
 }
 
 
 /* =========================================================
-   5. GENERAL PRODUCT GRID
-   ========================================================= */
+   5. PRODUCT GRID
+========================================================= */
 
 .product-grid,
 .products-grid {
@@ -430,10 +491,15 @@ a {
     font-weight: 800;
 }
 
+.product-card .add-cart-btn {
+    width: 100%;
+    margin-top: 15px;
+}
+
 
 /* =========================================================
-   6. HOMEPAGE SEARCH RESULTS
-   ========================================================= */
+   6. SEARCH RESULTS / FLIP CARDS
+========================================================= */
 
 .home-search-results {
     display: none;
@@ -615,8 +681,8 @@ a {
 
 
 /* =========================================================
-   7. VENDOR PANEL
-   ========================================================= */
+   7. VENDOR
+========================================================= */
 
 .vendor-layout {
     display: grid;
@@ -629,9 +695,6 @@ a {
 
     align-items: start;
 }
-
-
-/* Vendor Introduction */
 
 .vendor-intro {
     background:
@@ -651,19 +714,6 @@ a {
         0 15px 40px rgba(91, 33, 182, 0.07);
 }
 
-.small-title {
-    display: inline-block;
-
-    margin-bottom: 12px;
-
-    color: #7c3aed;
-
-    font-size: 12px;
-    font-weight: 800;
-
-    letter-spacing: 1.5px;
-}
-
 .vendor-intro h2 {
     margin-bottom: 15px;
 
@@ -678,9 +728,6 @@ a {
 
     margin-bottom: 25px;
 }
-
-
-/* Vendor Benefits */
 
 .vendor-benefits {
     display: grid;
@@ -719,9 +766,6 @@ a {
     font-weight: 800;
 }
 
-
-/* Vendor Dove */
-
 .vendor-dove {
     display: flex;
     align-items: center;
@@ -739,12 +783,14 @@ a {
     color: #6d28d9;
 }
 
-.vendor-dove:first-letter {
-    font-size: 25px;
+.vendor-dove > span {
+    font-size: 28px;
 }
 
 
-/* Vendor Form */
+/* =========================================================
+   8. VENDOR FORM
+========================================================= */
 
 .vendor-form-card {
     background: #ffffff;
@@ -770,9 +816,6 @@ a {
 
     margin-bottom: 25px;
 }
-
-
-/* Form */
 
 #vendorForm {
     display: grid;
@@ -836,8 +879,8 @@ a {
 
 
 /* =========================================================
-   8. PRODUCT IMAGE
-   ========================================================= */
+   9. IMAGE
+========================================================= */
 
 #productImage {
     padding: 10px;
@@ -851,6 +894,7 @@ a {
 
 #productImage:hover {
     border-color: #7c3aed !important;
+
     background: #f8f2ff;
 }
 
@@ -886,8 +930,8 @@ a {
 
 
 /* =========================================================
-   9. GPS LOCATION
-   ========================================================= */
+   10. LOCATION
+========================================================= */
 
 .location-input {
     display: flex;
@@ -949,38 +993,8 @@ a {
 
 
 /* =========================================================
-   10. VENDOR SUBMIT BUTTON
-   ========================================================= */
-
-.vendor-form-card .primary-btn {
-    min-height: 48px;
-
-    margin-top: 5px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #7c3aed,
-            #9333ea
-        );
-
-    box-shadow:
-        0 10px 25px rgba(124, 58, 237, 0.18);
-}
-
-.vendor-form-card .primary-btn:hover {
-    background:
-        linear-gradient(
-            135deg,
-            #6d28d9,
-            #7e22ce
-        );
-}
-
-
-/* =========================================================
    11. VENDOR PRODUCTS
-   ========================================================= */
+========================================================= */
 
 #vendorProducts {
     margin-top: 35px;
@@ -1017,9 +1031,6 @@ a {
         0 18px 38px rgba(91, 33, 182, 0.11);
 }
 
-
-/* Product Image */
-
 .vendor-product-image {
     width: 100%;
     height: 230px;
@@ -1039,9 +1050,6 @@ a {
 
     object-fit: contain;
 }
-
-
-/* Product Info */
 
 .vendor-product-info {
     padding: 20px;
@@ -1077,9 +1085,6 @@ a {
     font-weight: 700;
 }
 
-
-/* Product Price */
-
 .vendor-product-price {
     display: flex;
     align-items: center;
@@ -1114,9 +1119,6 @@ a {
     font-weight: 700;
 }
 
-
-/* Delete */
-
 .delete-vendor-product {
     width: 100%;
 
@@ -1146,9 +1148,6 @@ a {
     color: #581c87;
 }
 
-
-/* Empty */
-
 .vendor-empty {
     grid-column: 1 / -1;
 
@@ -1175,8 +1174,237 @@ a {
 
 
 /* =========================================================
-   12. FINAL SECTION
-   ========================================================= */
+   12. CART
+========================================================= */
+
+.cart-container {
+    padding: 80px 0;
+    background: #fcfaff;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    padding: 18px;
+
+    margin-bottom: 15px;
+
+    background: #ffffff;
+
+    border: 1px solid #e7dff0;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 8px 25px rgba(39, 20, 60, 0.05);
+}
+
+.cart-item img {
+    width: 90px;
+    height: 90px;
+
+    object-fit: cover;
+
+    border-radius: 12px;
+
+    background: #faf7ff;
+}
+
+.cart-item h3 {
+    color: #2b173e;
+}
+
+.cart-item p {
+    color: #7a6e84;
+}
+
+.cart-item-price {
+    color: #7c3aed;
+
+    font-weight: 800;
+}
+
+.cart-item-info {
+    flex: 1;
+}
+
+.cart-remove {
+    border: none;
+
+    background: #f3e8ff;
+
+    color: #6d28d9;
+
+    padding: 9px 12px;
+
+    border-radius: 9px;
+
+    font-weight: 700;
+}
+
+.cart-remove:hover {
+    background: #ede9fe;
+}
+
+.cart-summary {
+    margin-top: 25px;
+
+    padding: 25px;
+
+    background: #faf7ff;
+
+    border: 1px solid #e5d8ef;
+
+    border-radius: 18px;
+}
+
+.cart-summary h2 {
+    color: #2b173e;
+
+    margin-bottom: 15px;
+}
+
+.summary-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 10px 0;
+
+    border-bottom: 1px solid #e8deef;
+
+    color: #756a80;
+}
+
+.summary-row strong {
+    color: #7c3aed;
+}
+
+.cart-summary .primary-btn {
+    margin-top: 20px;
+}
+
+.cart-empty {
+    padding: 50px 20px;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border: 1px dashed #d4c1e4;
+
+    border-radius: 18px;
+}
+
+.cart-empty > div {
+    font-size: 45px;
+
+    margin-bottom: 10px;
+}
+
+.cart-empty h3 {
+    color: #35194d;
+
+    margin-bottom: 5px;
+}
+
+.cart-empty p {
+    color: #81748d;
+}
+
+
+/* =========================================================
+   13. CONTACT
+========================================================= */
+
+.contact-section {
+    padding: 80px 0;
+}
+
+.contact-card {
+    max-width: 700px;
+
+    margin: 0 auto;
+
+    padding: 35px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5dcef;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 15px 40px rgba(39, 20, 60, 0.07);
+}
+
+.contact-card h2 {
+    color: #28153c;
+
+    margin-bottom: 10px;
+}
+
+.contact-card > p {
+    color: #74677f;
+
+    margin-bottom: 25px;
+}
+
+.contact-card form {
+    display: grid;
+
+    gap: 17px;
+}
+
+.contact-card label {
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+
+    color: #3b2c48;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.contact-card input,
+.contact-card textarea {
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border: 1px solid #ded2e8;
+
+    border-radius: 11px;
+
+    outline: none;
+
+    color: #28153c;
+
+    font-size: 14px;
+}
+
+.contact-card textarea {
+    min-height: 130px;
+
+    resize: vertical;
+}
+
+.contact-card input:focus,
+.contact-card textarea:focus {
+    border-color: #7c3aed;
+
+    box-shadow:
+        0 0 0 4px rgba(124, 58, 237, 0.08);
+}
+
+
+/* =========================================================
+   14. FINAL SECTION
+========================================================= */
 
 .final-independence {
     padding: 60px 0;
@@ -1251,8 +1479,8 @@ a {
 
 
 /* =========================================================
-   13. FOOTER
-   ========================================================= */
+   15. FOOTER
+========================================================= */
 
 .site-footer {
     margin-top: 50px;
@@ -1274,140 +1502,8 @@ a {
 
 
 /* =========================================================
-   14. CART
-   ========================================================= */
-
-.cart-container {
-    padding: 60px 0;
-}
-
-.cart-item {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-
-    padding: 18px;
-
-    margin-bottom: 15px;
-
-    background: #ffffff;
-
-    border: 1px solid #e7dff0;
-
-    border-radius: 16px;
-
-    box-shadow:
-        0 8px 25px rgba(39, 20, 60, 0.05);
-}
-
-.cart-item img {
-    width: 90px;
-    height: 90px;
-
-    object-fit: cover;
-
-    border-radius: 12px;
-
-    background: #faf7ff;
-}
-
-.cart-item h3 {
-    color: #2b173e;
-}
-
-.cart-item p {
-    color: #7a6e84;
-}
-
-.cart-item-price {
-    color: #7c3aed;
-
-    font-weight: 800;
-}
-
-.cart-summary {
-    padding: 25px;
-
-    background: #faf7ff;
-
-    border: 1px solid #e5d8ef;
-
-    border-radius: 18px;
-}
-
-.cart-summary h2 {
-    color: #2b173e;
-}
-
-.cart-summary strong {
-    color: #7c3aed;
-}
-
-
-/* =========================================================
-   15. CONTACT
-   ========================================================= */
-
-.contact-section {
-    padding: 70px 0;
-}
-
-.contact-card {
-    max-width: 700px;
-
-    margin: 0 auto;
-
-    padding: 35px;
-
-    background: #ffffff;
-
-    border: 1px solid #e5dcef;
-
-    border-radius: 20px;
-
-    box-shadow:
-        0 15px 40px rgba(39, 20, 60, 0.07);
-}
-
-.contact-card h2 {
-    color: #28153c;
-
-    margin-bottom: 10px;
-}
-
-.contact-card p {
-    color: #74677f;
-}
-
-.contact-card input,
-.contact-card textarea {
-    width: 100%;
-
-    padding: 12px 14px;
-
-    margin-top: 7px;
-
-    border: 1px solid #ded2e8;
-
-    border-radius: 11px;
-
-    outline: none;
-
-    color: #28153c;
-}
-
-.contact-card input:focus,
-.contact-card textarea:focus {
-    border-color: #7c3aed;
-
-    box-shadow:
-        0 0 0 4px rgba(124, 58, 237, 0.08);
-}
-
-
-/* =========================================================
-   16. TOAST / MESSAGE
-   ========================================================= */
+   16. TOAST
+========================================================= */
 
 #shopnovaMessage,
 #toast {
@@ -1443,7 +1539,7 @@ a {
 
 /* =========================================================
    17. NO RESULTS
-   ========================================================= */
+========================================================= */
 
 #homeNoResults {
     display: none;
@@ -1461,10 +1557,16 @@ a {
     border-radius: 16px;
 }
 
+#homeNoResults h3 {
+    color: #4c1d95;
+
+    margin-bottom: 5px;
+}
+
 
 /* =========================================================
-   18. RESPONSIVE - TABLET
-   ========================================================= */
+   18. RESPONSIVE TABLET
+========================================================= */
 
 @media (max-width: 1000px) {
 
@@ -1493,13 +1595,12 @@ a {
     .vendor-layout {
         grid-template-columns: 1fr;
     }
-
 }
 
 
 /* =========================================================
-   19. RESPONSIVE - MOBILE
-   ========================================================= */
+   19. MOBILE
+========================================================= */
 
 @media (max-width: 760px) {
 
@@ -1565,15 +1666,29 @@ a {
     }
 
 
-    /* Banner */
+    /* Hero */
 
     .page-banner {
-        padding: 50px 0;
+        padding: 60px 0;
+    }
+
+    .page-banner h1 {
+        font-size: 45px;
     }
 
     .page-banner-dove {
-        font-size: 70px;
+        font-size: 80px;
         right: 3%;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .hero-actions a {
+        width: 100%;
     }
 
 
@@ -1629,8 +1744,8 @@ a {
 
 
 /* =========================================================
-   20. RESPONSIVE - SMALL MOBILE
-   ========================================================= */
+   20. SMALL MOBILE
+========================================================= */
 
 @media (max-width: 480px) {
 
@@ -1666,7 +1781,7 @@ a {
     }
 
     .page-banner h1 {
-        font-size: 34px;
+        font-size: 36px;
     }
 
     .footer-bottom {
@@ -1687,7 +1802,7 @@ a {
 
 /* =========================================================
    21. ACCESSIBILITY
-   ========================================================= */
+========================================================= */
 
 button:focus-visible,
 a:focus-visible,
@@ -1701,37 +1816,21 @@ textarea:focus-visible {
 
 
 /* =========================================================
-   22. VENDOR PURPLE DETAILS
-   ========================================================= */
+   22. NUMBER INPUT
+========================================================= */
 
 .vendor-form-card input[type="number"] {
     appearance: textfield;
 }
 
-.vendor-form-card input[type="number"]::-webkit-inner-spin-button,
-.vendor-form-card input[type="number"]::-webkit-outer-spin-button {
+.vendor-form-card
+input[type="number"]::-webkit-inner-spin-button,
+.vendor-form-card
+input[type="number"]::-webkit-outer-spin-button {
     opacity: 1;
-}
-
-.vendor-form-card input[type="file"]::file-selector-button {
-    border: none;
-
-    padding: 8px 12px;
-
-    margin-right: 10px;
-
-    border-radius: 8px;
-
-    background: #ede9fe;
-
-    color: #6d28d9;
-
-    font-weight: 700;
-
-    cursor: pointer;
 }
 
 
 /* =========================================================
-   END OF SHOPNOVA STYLE.CSS
-   ========================================================= */
+   END SHOPNOVA STYLE.CSS
+========================================================= */

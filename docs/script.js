@@ -1,1387 +1,850 @@
-"use strict";
+/* =========================================================
+   SHOPNOVA SCRIPT.JS
+========================================================= */
 
 
-/* =====================================================
-   SHOPNOVA CART
-===================================================== */
+/* =========================================================
+   DEFAULT PRODUCTS
+========================================================= */
 
-const CART_KEY = "shopnova_cart";
-
-
-/* =====================================================
-   GET CART
-===================================================== */
-
-function getCart() {
-
-    try {
-
-        const saved =
-            localStorage.getItem(CART_KEY);
-
-        if (!saved) {
-            return [];
-        }
-
-        const cart =
-            JSON.parse(saved);
-
-        return Array.isArray(cart)
-            ? cart
-            : [];
-
-    } catch (error) {
-
-        console.error(
-            "Cart loading error:",
-            error
-        );
-
-        return [];
-    }
-}
-
-
-/* =====================================================
-   SAVE CART
-===================================================== */
-
-function saveCart(cart) {
-
-    try {
-
-        localStorage.setItem(
-            CART_KEY,
-            JSON.stringify(cart)
-        );
-
-    } catch (error) {
-
-        console.error(
-            "Cart saving error:",
-            error
-        );
-    }
-}
-
-
-/* =====================================================
-   CART COUNT
-===================================================== */
-
-function updateCartCount() {
-
-    const cart =
-        getCart();
-
-    const total =
-        cart.reduce(
-            (sum, item) => {
-
-                return sum +
-                    (Number(item.quantity) || 0);
-
-            },
-            0
-        );
-
-
-    document
-        .querySelectorAll(
-            ".cart-count, #cartCount, .cart-badge"
-        )
-        .forEach(
-            counter => {
-
-                counter.textContent =
-                    total;
-
-            }
-        );
-}
-
-
-/* =====================================================
-   ADD TO CART
-===================================================== */
-
-function addToCart(
-    productName,
-    price,
-    image,
-    button = null
-) {
-
-    const cart =
-        getCart();
-
-
-    const existing =
-        cart.find(
-            item =>
-                item.name === productName
-        );
-
-
-    if (existing) {
-
-        existing.quantity =
-            (Number(existing.quantity) || 0) + 1;
-
-    } else {
-
-        cart.push({
-
-            name:
-                productName,
-
-            price:
-                Number(price) || 0,
-
-            image:
-                image || "",
-
-            quantity:
-                1
-
-        });
-    }
-
-
-    saveCart(cart);
-
-    updateCartCount();
-
-
-    if (button) {
-
-        const oldText =
-            button.textContent;
-
-        button.textContent =
-            "✓ Added to Cart";
-
-
-        button.style.opacity =
-            "0.85";
-
-
-        setTimeout(
-            () => {
-
-                button.textContent =
-                    oldText;
-
-                button.style.opacity =
-                    "";
-
-            },
-            1200
-        );
-    }
-
-
-    showMessage(
-        productName +
-        " added to cart!"
-    );
-}
-
-
-/* =====================================================
-   COMPATIBILITY
-===================================================== */
-
-function add(
-    productName,
-    price,
-    image
-) {
-
-    addToCart(
-        productName,
-        price,
-        image
-    );
-}
-
-
-/* =====================================================
-   MESSAGE
-===================================================== */
-
-function showMessage(message) {
-
-    let box =
-        document.getElementById(
-            "shopnovaMessage"
-        );
-
-
-    if (!box) {
-
-        box =
-            document.createElement(
-                "div"
-            );
-
-        box.id =
-            "shopnovaMessage";
-
-
-        box.style.position =
-            "fixed";
-
-        box.style.right =
-            "20px";
-
-        box.style.bottom =
-            "20px";
-
-        box.style.zIndex =
-            "999999";
-
-
-        box.style.background =
-            "linear-gradient(135deg,#0a397b,#315bd8)";
-
-
-        box.style.color =
-            "#ffffff";
-
-
-        box.style.padding =
-            "13px 18px";
-
-
-        box.style.borderRadius =
-            "11px";
-
-
-        box.style.fontSize =
-            "13px";
-
-
-        box.style.fontWeight =
-            "700";
-
-
-        box.style.boxShadow =
-            "0 10px 30px rgba(0,0,0,.25)";
-
-
-        box.style.transition =
-            "opacity .3s ease";
-
-
-        document.body.appendChild(
-            box
-        );
-    }
-
-
-    box.textContent =
-        "✓ " + message;
-
-
-    box.style.opacity =
-        "1";
-
-
-    clearTimeout(
-        window.shopnovaMessageTimer
-    );
-
-
-    window.shopnovaMessageTimer =
-        setTimeout(
-            () => {
-
-                box.style.opacity =
-                    "0";
-
-            },
-            1800
-        );
-}
-
-
-/* =====================================================
-   HOMEPAGE PRODUCTS
-===================================================== */
-
-/*
-    IMPORTANT:
-
-    These image names match your existing
-    docs/images folder.
-
-    Do not change your logo image.
-*/
-
-const SHOPNOVA_PRODUCTS = [
+const defaultProducts = [
 
     {
-        name: "Bible Wonders",
-        price: 999,
-        image: "images/bible-wonders.jpg",
-        category: "Books"
-    },
-
-    {
-        name: "Women's Shoes",
-        price: 1499,
-        image: "images/womens-shoes.jpg",
-        category: "Women's Fashion"
-    },
-
-    {
-        name: "Men's Suit Tuxedo",
-        price: 3999,
-        image: "images/tuxedo.jpg",
-        category: "Men's Fashion"
-    },
-
-    {
-        name: "Luxury Perfume",
-        price: 1999,
-        image: "images/perfume.jpg",
-        category: "Beauty"
-    },
-
-    {
-        name: "Men's Shoes",
-        price: 1799,
-        image: "images/mens-shoes.jpg",
-        category: "Men's Fashion"
-    },
-
-    {
-        name: "Premium Sunglasses",
-        price: 1299,
-        image: "images/sunglasses.jpg",
-        category: "Accessories"
-    },
-
-    {
-        name: "Luxury Handbag",
+        id: 1,
+        name: "Premium Headphones",
+        category: "Electronics",
         price: 2499,
-        image: "images/bag.jpg",
-        category: "Women's Fashion"
+        description: "Comfortable wireless headphones with premium sound.",
+        image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=80"
     },
 
     {
-        name: "Premium Makeup",
-        price: 1599,
-        image: "images/makeup.jpg",
-        category: "Beauty"
+        id: 2,
+        name: "Classic Sneakers",
+        category: "Fashion",
+        price: 1999,
+        description: "Modern everyday sneakers designed for comfort.",
+        image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80"
     },
 
     {
-        name: "Comfort Loungewear",
+        id: 3,
+        name: "Smart Watch",
+        category: "Electronics",
+        price: 3299,
+        description: "Smart everyday watch with a clean modern design.",
+        image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+    },
+
+    {
+        id: 4,
+        name: "Minimal Backpack",
+        category: "Accessories",
+        price: 1499,
+        description: "Stylish and practical backpack for everyday use.",
+        image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=80"
+    },
+
+    {
+        id: 5,
+        name: "Modern Sunglasses",
+        category: "Accessories",
+        price: 899,
+        description: "Minimal sunglasses with a premium appearance.",
+        image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=900&q=80"
+    },
+
+    {
+        id: 6,
+        name: "Desk Lamp",
+        category: "Home",
         price: 1199,
-        image: "images/loungewear.jpg",
-        category: "Fashion"
+        description: "Elegant lamp for your desk or bedside table.",
+        image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=900&q=80"
     },
 
     {
-        name: "Premium Earbuds",
-        price: 2199,
-        image: "images/earbuds.jpg",
-        category: "Electronics"
-    },
-
-    {
-        name: "Supercar Key",
+        id: 7,
+        name: "Luxury Watch",
+        category: "Fashion",
         price: 4999,
-        image: "images/supercar-key.jpg",
-        category: "Luxury"
+        description: "Classic watch design for a sophisticated look.",
+        image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=900&q=80"
+    },
+
+    {
+        id: 8,
+        name: "Skincare Set",
+        category: "Beauty",
+        price: 1599,
+        description: "Simple skincare essentials for your daily routine.",
+        image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=900&q=80"
     }
 
 ];
 
 
-/* =====================================================
-   HOMEPAGE SEARCH
-===================================================== */
+/* =========================================================
+   LOCAL STORAGE
+========================================================= */
 
-function setupHomeSearch() {
+let vendorProducts =
+    JSON.parse(
+        localStorage.getItem("shopnovaVendorProducts")
+    ) || [];
 
-    const input =
-        document.getElementById(
-            "homeSearchInput"
-        );
+let cart =
+    JSON.parse(
+        localStorage.getItem("shopnovaCart")
+    ) || [];
 
 
-    const button =
-        document.getElementById(
-            "homeSearchBtn"
-        );
+/* =========================================================
+   ELEMENTS
+========================================================= */
 
+const productGrid =
+    document.getElementById("productGrid");
 
-    const results =
-        document.getElementById(
-            "homeSearchResults"
-        );
+const vendorProductsContainer =
+    document.getElementById("vendorProducts");
 
+const cartItemsContainer =
+    document.getElementById("cartItems");
 
-    const grid =
-        document.getElementById(
-            "homeProductGrid"
-        );
+const cartCount =
+    document.getElementById("cartCount");
 
+const cartTotal =
+    document.getElementById("cartTotal");
 
-    const noResults =
-        document.getElementById(
-            "homeNoResults"
-        );
+const summaryItems =
+    document.getElementById("summaryItems");
 
+const searchForm =
+    document.getElementById("searchForm");
 
-    const clear =
-        document.getElementById(
-            "clearHomeSearch"
-        );
+const searchInput =
+    document.getElementById("searchInput");
 
+const homeSearchResults =
+    document.getElementById("homeSearchResults");
 
-    if (
-        !input ||
-        !results ||
-        !grid
-    ) {
+const homeProductGrid =
+    document.getElementById("homeProductGrid");
 
-        return;
-    }
+const homeNoResults =
+    document.getElementById("homeNoResults");
 
+const searchResultText =
+    document.getElementById("searchResultText");
 
-    /* =================================================
-       PERFORM SEARCH
-    ================================================= */
+const vendorForm =
+    document.getElementById("vendorForm");
 
-    function performSearch(
-        shouldScroll = true
-    ) {
+const productImage =
+    document.getElementById("productImage");
 
-        const query =
-            input.value
-                .trim()
-                .toLowerCase();
+const imagePreview =
+    document.getElementById("imagePreview");
 
+const locationBtn =
+    document.getElementById("locationBtn");
 
-        /* EMPTY SEARCH */
+const mobileMenu =
+    document.getElementById("mobileMenu");
 
-        if (!query) {
+const mainNavigation =
+    document.getElementById("mainNavigation");
 
-            results.style.display =
-                "none";
+const contactForm =
+    document.getElementById("contactForm");
 
-            grid.innerHTML =
-                "";
+const checkoutBtn =
+    document.getElementById("checkoutBtn");
 
-            if (noResults) {
 
-                noResults.style.display =
-                    "none";
-            }
+/* =========================================================
+   FORMAT PRICE
+========================================================= */
 
-            return;
-        }
+function formatPrice(price) {
 
+    return "₹" + Number(price).toLocaleString("en-IN");
 
-        /* FIND PRODUCTS */
-
-        const matches =
-            SHOPNOVA_PRODUCTS.filter(
-                product => {
-
-                    return (
-
-                        product.name
-                            .toLowerCase()
-                            .includes(query)
-
-                        ||
-
-                        product.category
-                            .toLowerCase()
-                            .includes(query)
-
-                    );
-                }
-            );
-
-
-        results.style.display =
-            "block";
-
-
-        grid.innerHTML =
-            "";
-
-
-        /* NO MATCH */
-
-        if (
-            matches.length === 0
-        ) {
-
-            if (noResults) {
-
-                noResults.style.display =
-                    "block";
-            }
-
-            return;
-        }
-
-
-        if (noResults) {
-
-            noResults.style.display =
-                "none";
-        }
-
-
-        /* =================================================
-           CREATE PRODUCTS
-        ================================================= */
-
-        matches.forEach(
-            product => {
-
-
-                /* CARD */
-
-                const card =
-                    document.createElement(
-                        "article"
-                    );
-
-                card.className =
-                    "home-product-card";
-
-
-                /* INNER */
-
-                const inner =
-                    document.createElement(
-                        "div"
-                    );
-
-                inner.className =
-                    "home-product-card-inner";
-
-
-                /* =================================================
-                   FRONT
-                ================================================= */
-
-                const front =
-                    document.createElement(
-                        "div"
-                    );
-
-                front.className =
-                    "home-product-front";
-
-
-                /* IMAGE */
-
-                const image =
-                    document.createElement(
-                        "img"
-                    );
-
-                image.className =
-                    "home-product-image";
-
-                image.src =
-                    product.image;
-
-                image.alt =
-                    product.name;
-
-                image.loading =
-                    "lazy";
-
-
-                /* INFO */
-
-                const info =
-                    document.createElement(
-                        "div"
-                    );
-
-                info.className =
-                    "home-product-info";
-
-
-                /* CATEGORY */
-
-                const category =
-                    document.createElement(
-                        "div"
-                    );
-
-                category.className =
-                    "home-product-category";
-
-                category.textContent =
-                    product.category;
-
-
-                /* NAME */
-
-                const title =
-                    document.createElement(
-                        "h3"
-                    );
-
-                title.textContent =
-                    product.name;
-
-
-                /* PRICE */
-
-                const price =
-                    document.createElement(
-                        "div"
-                    );
-
-                price.className =
-                    "home-product-price";
-
-                price.textContent =
-                    "₹" +
-                    Number(
-                        product.price
-                    ).toLocaleString(
-                        "en-IN"
-                    );
-
-
-                /* HINT */
-
-                const hint =
-                    document.createElement(
-                        "div"
-                    );
-
-                hint.className =
-                    "home-product-hint";
-
-                hint.textContent =
-                    "↻ Click to inspect product";
-
-
-                info.appendChild(
-                    category
-                );
-
-                info.appendChild(
-                    title
-                );
-
-                info.appendChild(
-                    price
-                );
-
-                info.appendChild(
-                    hint
-                );
-
-
-                front.appendChild(
-                    image
-                );
-
-                front.appendChild(
-                    info
-                );
-
-
-                /* =================================================
-                   BACK
-                ================================================= */
-
-                const back =
-                    document.createElement(
-                        "div"
-                    );
-
-                back.className =
-                    "home-product-back";
-
-
-                /* ICON */
-
-                const backIcon =
-                    document.createElement(
-                        "div"
-                    );
-
-                backIcon.className =
-                    "back-icon";
-
-                backIcon.textContent =
-                    "✦";
-
-
-                /* TITLE */
-
-                const backTitle =
-                    document.createElement(
-                        "h3"
-                    );
-
-                backTitle.textContent =
-                    product.name;
-
-
-                /* CATEGORY */
-
-                const backCategory =
-                    document.createElement(
-                        "div"
-                    );
-
-                backCategory.className =
-                    "back-category";
-
-                backCategory.textContent =
-                    product.category;
-
-
-                /* PRICE */
-
-                const backPrice =
-                    document.createElement(
-                        "div"
-                    );
-
-                backPrice.className =
-                    "back-price";
-
-                backPrice.textContent =
-                    "₹" +
-                    Number(
-                        product.price
-                    ).toLocaleString(
-                        "en-IN"
-                    );
-
-
-                /* DESCRIPTION */
-
-                const backDescription =
-                    document.createElement(
-                        "p"
-                    );
-
-                backDescription.textContent =
-                    "Premium ShopNova selection. Check this product and add it to your shopping cart.";
-
-
-                /* ADD BUTTON */
-
-                const backAction =
-                    document.createElement(
-                        "div"
-                    );
-
-                backAction.className =
-                    "back-action";
-
-                backAction.textContent =
-                    "🛒 Add to Cart";
-
-
-                back.appendChild(
-                    backIcon
-                );
-
-                back.appendChild(
-                    backTitle
-                );
-
-                back.appendChild(
-                    backCategory
-                );
-
-                back.appendChild(
-                    backPrice
-                );
-
-                back.appendChild(
-                    backDescription
-                );
-
-                back.appendChild(
-                    backAction
-                );
-
-
-                /* =================================================
-                   BUILD CARD
-                ================================================= */
-
-                inner.appendChild(
-                    front
-                );
-
-                inner.appendChild(
-                    back
-                );
-
-                card.appendChild(
-                    inner
-                );
-
-                grid.appendChild(
-                    card
-                );
-
-
-                /* =================================================
-                   CLICK CARD = ROTATE
-                ================================================= */
-
-                card.addEventListener(
-                    "click",
-                    event => {
-
-                        /*
-                            If Add to Cart was clicked,
-                            do not rotate again.
-                        */
-
-                        if (
-                            event.target.closest(
-                                ".back-action"
-                            )
-                        ) {
-
-                            return;
-                        }
-
-
-                        card.classList.toggle(
-                            "flipped"
-                        );
-
-                    }
-                );
-
-
-                /* =================================================
-                   ADD TO CART
-                ================================================= */
-
-                backAction.addEventListener(
-                    "click",
-                    event => {
-
-                        event.stopPropagation();
-
-
-                        addToCart(
-
-                            product.name,
-
-                            product.price,
-
-                            product.image,
-
-                            backAction
-
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-
-        /* SCROLL */
-
-        if (shouldScroll) {
-
-            setTimeout(
-                () => {
-
-                    results.scrollIntoView({
-
-                        behavior:
-                            "smooth",
-
-                        block:
-                            "start"
-
-                    });
-
-                },
-                50
-            );
-        }
-    }
-
-
-    /* =================================================
-       SEARCH BUTTON
-    ================================================= */
-
-    if (button) {
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                performSearch(
-                    true
-                );
-
-            }
-        );
-    }
-
-
-    /* =================================================
-       ENTER
-    ================================================= */
-
-    input.addEventListener(
-        "keydown",
-        event => {
-
-            if (
-                event.key === "Enter"
-            ) {
-
-                event.preventDefault();
-
-                performSearch(
-                    true
-                );
-            }
-
-        }
-    );
-
-
-    /* =================================================
-       LIVE SEARCH
-    ================================================= */
-
-    input.addEventListener(
-        "input",
-        () => {
-
-            if (
-                input.value.trim() === ""
-            ) {
-
-                results.style.display =
-                    "none";
-
-                grid.innerHTML =
-                    "";
-
-                if (noResults) {
-
-                    noResults.style.display =
-                        "none";
-                }
-
-            } else {
-
-                performSearch(
-                    false
-                );
-            }
-
-        }
-    );
-
-
-    /* =================================================
-       CLEAR
-    ================================================= */
-
-    if (clear) {
-
-        clear.addEventListener(
-            "click",
-            () => {
-
-                input.value =
-                    "";
-
-                results.style.display =
-                    "none";
-
-                grid.innerHTML =
-                    "";
-
-                if (noResults) {
-
-                    noResults.style.display =
-                        "none";
-                }
-
-                input.focus();
-
-            }
-        );
-    }
 }
 
 
-/* =====================================================
-   CONTACT POPUP
-===================================================== */
+/* =========================================================
+   MESSAGE
+========================================================= */
 
-function setupContactPopup() {
+function showMessage(message) {
 
-    const button =
-        document.getElementById(
-            "contactBtn"
-        );
+    const box =
+        document.getElementById("shopnovaMessage");
 
-
-    const overlay =
-        document.getElementById(
-            "contactOverlay"
-        );
-
-
-    const close =
-        document.getElementById(
-            "contactClose"
-        );
-
-
-    if (
-        !button ||
-        !overlay
-    ) {
-
+    if (!box) {
         return;
     }
 
+    box.textContent = message;
 
-    /* OPEN */
+    box.style.display = "block";
 
-    function openContact() {
+    clearTimeout(window.shopnovaMessageTimer);
 
-        overlay.classList.add(
-            "show"
-        );
+    window.shopnovaMessageTimer =
+        setTimeout(() => {
 
-        document.body.style.overflow =
-            "hidden";
-    }
+            box.style.display = "none";
 
+        }, 2500);
 
-    /* CLOSE */
-
-    function closeContact() {
-
-        overlay.classList.remove(
-            "show"
-        );
-
-        document.body.style.overflow =
-            "";
-    }
-
-
-    button.addEventListener(
-        "click",
-        openContact
-    );
-
-
-    if (close) {
-
-        close.addEventListener(
-            "click",
-            closeContact
-        );
-    }
-
-
-    /* CLICK OUTSIDE */
-
-    overlay.addEventListener(
-        "click",
-        event => {
-
-            if (
-                event.target === overlay
-            ) {
-
-                closeContact();
-            }
-
-        }
-    );
-
-
-    /* ESCAPE */
-
-    document.addEventListener(
-        "keydown",
-        event => {
-
-            if (
-                event.key === "Escape"
-            ) {
-
-                closeContact();
-            }
-
-        }
-    );
 }
 
 
-/* =====================================================
-   CART STORAGE SYNC
-===================================================== */
+/* =========================================================
+   GET ALL PRODUCTS
+========================================================= */
 
-window.addEventListener(
-    "storage",
-    event => {
+function getAllProducts() {
 
-        if (
-            event.key === CART_KEY
-        ) {
+    return [
+        ...defaultProducts,
+        ...vendorProducts
+    ];
 
-            updateCartCount();
-        }
+}
 
+
+/* =========================================================
+   DISPLAY PRODUCTS
+========================================================= */
+
+function renderProducts() {
+
+    if (!productGrid) {
+        return;
     }
-);
+
+    const products =
+        getAllProducts();
+
+    productGrid.innerHTML = "";
+
+    products.forEach(product => {
+
+        const card =
+            document.createElement("article");
+
+        card.className =
+            "product-card";
+
+        card.innerHTML = `
+
+            <img
+                src="${product.image}"
+                alt="${escapeHTML(product.name)}"
+                loading="lazy"
+                onerror="this.src='https://via.placeholder.com/800x600?text=ShopNova'"
+            >
+
+            <div class="product-card-content">
+
+                <span class="home-product-category">
+                    ${escapeHTML(product.category)}
+                </span>
+
+                <h3>
+                    ${escapeHTML(product.name)}
+                </h3>
+
+                <p>
+                    ${escapeHTML(product.description)}
+                </p>
+
+                <div class="product-price">
+                    ${formatPrice(product.price)}
+                </div>
+
+                <button
+                    class="primary-btn add-cart-btn"
+                    type="button"
+                    data-id="${product.id}"
+                >
+                    Add to Cart
+                </button>
+
+            </div>
+        `;
+
+        productGrid.appendChild(card);
+
+    });
+
+}
 
 
-/* =====================================================
-   PAGE READY
-===================================================== */
+/* =========================================================
+   ADD PRODUCT TO CART
+========================================================= */
 
 document.addEventListener(
-    "DOMContentLoaded",
-    () => {
+    "click",
+    function(event) {
 
-        updateCartCount();
+        const button =
+            event.target.closest(".add-cart-btn");
 
-        setupHomeSearch();
+        if (!button) {
+            return;
+        }
 
-        setupContactPopup();
+        const id =
+            Number(button.dataset.id);
+
+        addToCart(id);
 
     }
 );
-/* =========================
-   CONTACT BUTTON
-   Handles WhatsApp, Instagram & YouTube
-   ========================= */
-
-document.addEventListener("DOMContentLoaded", function () {
-    const contactBtn = document.getElementById("contactBtn");
-
-    if (!contactBtn) return;
-
-    contactBtn.addEventListener("click", function (event) {
-        event.preventDefault();
-
-        const contactMenu = document.getElementById("contactMenu");
-
-        if (contactMenu) {
-            contactMenu.classList.toggle("show");
-        }
-    });
-
-    // Close contact menu when clicking outside
-    document.addEventListener("click", function (event) {
-        const contactMenu = document.getElementById("contactMenu");
-
-        if (!contactMenu) return;
-
-        if (
-            !contactMenu.contains(event.target) &&
-            event.target !== contactBtn
-        ) {
-            contactMenu.classList.remove("show");
-        }
-    });
-});
-/* =========================================================
-   SHOPNOVA VENDOR PANEL
-   ADD THIS SECTION AT THE END OF script.js
-   ========================================================= */
 
 
 /* =========================================================
-   VENDOR PRODUCT STORAGE
-   ========================================================= */
+   ADD TO CART
+========================================================= */
 
-const VENDOR_PRODUCTS_KEY =
-    "shopnova_vendor_products";
+function addToCart(id) {
 
-
-function getVendorProducts() {
-
-    try {
-
-        const saved =
-            localStorage.getItem(
-                VENDOR_PRODUCTS_KEY
-            );
-
-        if (!saved) {
-            return [];
-        }
-
-        const products =
-            JSON.parse(saved);
-
-        return Array.isArray(products)
-            ? products
-            : [];
-
-    } catch (error) {
-
-        console.error(
-            "Vendor product loading error:",
-            error
+    const product =
+        getAllProducts().find(
+            item => Number(item.id) === id
         );
 
-        return [];
-    }
-}
-
-
-function saveVendorProducts(products) {
-
-    try {
-
-        localStorage.setItem(
-            VENDOR_PRODUCTS_KEY,
-            JSON.stringify(products)
-        );
-
-    } catch (error) {
-
-        console.error(
-            "Vendor product saving error:",
-            error
-        );
-
-        showMessage(
-            "Unable to save product."
-        );
-    }
-}
-
-
-/* =========================================================
-   PRODUCT IMAGE PREVIEW
-   ========================================================= */
-
-function setupVendorImagePreview() {
-
-    const imageInput =
-        document.getElementById(
-            "productImage"
-        );
-
-    const preview =
-        document.getElementById(
-            "imagePreview"
-        );
-
-    if (!imageInput || !preview) {
+    if (!product) {
         return;
     }
 
+    const existing =
+        cart.find(
+            item => Number(item.id) === id
+        );
 
-    imageInput.addEventListener(
+    if (existing) {
+
+        existing.quantity += 1;
+
+    } else {
+
+        cart.push({
+
+            ...product,
+
+            quantity: 1
+
+        });
+
+    }
+
+    saveCart();
+
+    renderCart();
+
+    showMessage(
+        `${product.name} added to cart`
+    );
+
+}
+
+
+/* =========================================================
+   SAVE CART
+========================================================= */
+
+function saveCart() {
+
+    localStorage.setItem(
+        "shopnovaCart",
+        JSON.stringify(cart)
+    );
+
+}
+
+
+/* =========================================================
+   RENDER CART
+========================================================= */
+
+function renderCart() {
+
+    if (!cartItemsContainer) {
+        return;
+    }
+
+    cartItemsContainer.innerHTML = "";
+
+    if (cart.length === 0) {
+
+        cartItemsContainer.innerHTML = `
+
+            <div class="cart-empty">
+
+                <div>
+                    🛒
+                </div>
+
+                <h3>
+                    Your cart is empty
+                </h3>
+
+                <p>
+                    Add products to your cart to see them here.
+                </p>
+
+            </div>
+
+        `;
+
+        updateCartTotals();
+
+        return;
+
+    }
+
+
+    cart.forEach(item => {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "cart-item";
+
+        const subtotal =
+            Number(item.price) *
+            Number(item.quantity);
+
+        card.innerHTML = `
+
+            <img
+                src="${item.image}"
+                alt="${escapeHTML(item.name)}"
+                onerror="this.src='https://via.placeholder.com/200x200?text=ShopNova'"
+            >
+
+            <div class="cart-item-info">
+
+                <h3>
+                    ${escapeHTML(item.name)}
+                </h3>
+
+                <p>
+                    ${escapeHTML(item.category)}
+                </p>
+
+                <p>
+                    Quantity:
+                    ${item.quantity}
+                </p>
+
+                <div class="cart-item-price">
+                    ${formatPrice(subtotal)}
+                </div>
+
+            </div>
+
+            <button
+                class="cart-remove"
+                type="button"
+                data-cart-id="${item.id}"
+            >
+                Remove
+            </button>
+
+        `;
+
+        cartItemsContainer.appendChild(card);
+
+    });
+
+    updateCartTotals();
+
+}
+
+
+/* =========================================================
+   REMOVE CART ITEM
+========================================================= */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const button =
+            event.target.closest(".cart-remove");
+
+        if (!button) {
+            return;
+        }
+
+        const id =
+            Number(button.dataset.cartId);
+
+        cart =
+            cart.filter(
+                item => Number(item.id) !== id
+            );
+
+        saveCart();
+
+        renderCart();
+
+        showMessage("Product removed from cart");
+
+    }
+);
+
+
+/* =========================================================
+   CART TOTALS
+========================================================= */
+
+function updateCartTotals() {
+
+    const itemCount =
+        cart.reduce(
+            (total, item) =>
+                total + Number(item.quantity),
+            0
+        );
+
+    const total =
+        cart.reduce(
+            (sum, item) =>
+                sum +
+                Number(item.price) *
+                Number(item.quantity),
+            0
+        );
+
+
+    if (cartCount) {
+
+        cartCount.textContent =
+            itemCount;
+
+    }
+
+    if (summaryItems) {
+
+        summaryItems.textContent =
+            itemCount;
+
+    }
+
+    if (cartTotal) {
+
+        cartTotal.textContent =
+            formatPrice(total);
+
+    }
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+if (searchForm) {
+
+    searchForm.addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+            performSearch(
+                searchInput.value.trim()
+            );
+
+        }
+    );
+
+}
+
+
+if (searchInput) {
+
+    searchInput.addEventListener(
+        "input",
+        function() {
+
+            const value =
+                searchInput.value.trim();
+
+            if (value.length >= 2) {
+
+                performSearch(value);
+
+            }
+
+            if (value.length === 0) {
+
+                hideSearchResults();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   SEARCH FUNCTION
+========================================================= */
+
+function performSearch(query) {
+
+    if (!homeSearchResults) {
+        return;
+    }
+
+    const products =
+        getAllProducts();
+
+    const search =
+        query.toLowerCase();
+
+    const results =
+        products.filter(product => {
+
+            return (
+
+                product.name
+                    .toLowerCase()
+                    .includes(search)
+
+                ||
+
+                product.category
+                    .toLowerCase()
+                    .includes(search)
+
+                ||
+
+                product.description
+                    .toLowerCase()
+                    .includes(search)
+
+            );
+
+        });
+
+
+    homeSearchResults.style.display =
+        "block";
+
+
+    if (searchResultText) {
+
+        searchResultText.textContent =
+            `${results.length} product(s) found for "${query}"`;
+
+    }
+
+
+    homeProductGrid.innerHTML = "";
+
+
+    if (results.length === 0) {
+
+        homeNoResults.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    homeNoResults.style.display =
+        "none";
+
+
+    results.forEach(product => {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "home-product-card";
+
+        card.innerHTML = `
+
+            <div class="home-product-card-inner">
+
+
+                <div class="home-product-front">
+
+                    <img
+                        class="home-product-image"
+                        src="${product.image}"
+                        alt="${escapeHTML(product.name)}"
+                        onerror="this.src='https://via.placeholder.com/800x600?text=ShopNova'"
+                    >
+
+                    <div class="home-product-info">
+
+                        <span class="home-product-category">
+                            ${escapeHTML(product.category)}
+                        </span>
+
+                        <h3>
+                            ${escapeHTML(product.name)}
+                        </h3>
+
+                        <div class="home-product-price">
+                            ${formatPrice(product.price)}
+                        </div>
+
+                        <div class="home-product-hint">
+                            Click card to view details →
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="home-product-back">
+
+                    <div class="back-icon">
+                        🛍️
+                    </div>
+
+                    <h3>
+                        ${escapeHTML(product.name)}
+                    </h3>
+
+                    <div class="back-category">
+                        ${escapeHTML(product.category)}
+                    </div>
+
+                    <div class="back-price">
+                        ${formatPrice(product.price)}
+                    </div>
+
+                    <p>
+                        ${escapeHTML(product.description)}
+                    </p>
+
+                    <button
+                        class="back-action add-cart-btn"
+                        type="button"
+                        data-id="${product.id}"
+                    >
+                        Add to Cart
+                    </button>
+
+                </div>
+
+
+            </div>
+
+        `;
+
+
+        card.addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    event.target.closest(
+                        ".add-cart-btn"
+                    )
+                ) {
+                    return;
+                }
+
+                card.classList.toggle("flipped");
+
+            }
+        );
+
+
+        homeProductGrid.appendChild(card);
+
+    });
+
+}
+
+
+/* =========================================================
+   HIDE SEARCH
+========================================================= */
+
+function hideSearchResults() {
+
+    if (!homeSearchResults) {
+        return;
+    }
+
+    homeSearchResults.style.display =
+        "none";
+
+}
+
+
+/* =========================================================
+   VENDOR IMAGE PREVIEW
+========================================================= */
+
+if (productImage) {
+
+    productImage.addEventListener(
         "change",
-        function () {
+        function() {
 
             const file =
-                this.files[0];
-
+                productImage.files[0];
 
             if (!file) {
 
-                preview.innerHTML = `
-                    <span>
-                        Product image preview
-                    </span>
-                `;
+                imagePreview.innerHTML =
+                    "<span>Product image preview</span>";
 
                 return;
+
             }
 
-
-            /* Check image */
 
             if (!file.type.startsWith("image/")) {
 
                 showMessage(
-                    "Please select a valid image."
+                    "Please select an image file"
                 );
 
-                this.value = "";
-
-                preview.innerHTML = `
-                    <span>
-                        Product image preview
-                    </span>
-                `;
+                productImage.value = "";
 
                 return;
+
             }
 
-
-            /* Maximum 5 MB */
-
-            const maxSize =
-                5 * 1024 * 1024;
-
-
-            if (file.size > maxSize) {
-
-                showMessage(
-                    "Image must be smaller than 5 MB."
-                );
-
-                this.value = "";
-
-                preview.innerHTML = `
-                    <span>
-                        Product image preview
-                    </span>
-                `;
-
-                return;
-            }
-
-
-            /* Preview */
 
             const reader =
                 new FileReader();
 
 
             reader.onload =
-                function (event) {
+                function(event) {
 
-                    preview.innerHTML = `
+                    imagePreview.innerHTML = `
 
                         <img
                             src="${event.target.result}"
-                            alt="Product Preview">
+                            alt="Product Preview"
+                        >
 
                     `;
 
@@ -1392,165 +855,462 @@ function setupVendorImagePreview() {
 
         }
     );
+
 }
 
 
 /* =========================================================
-   GPS LOCATION
-   ========================================================= */
+   VENDOR FORM
+========================================================= */
 
-function setupVendorGPS() {
+if (vendorForm) {
 
-    const button =
-        document.getElementById(
-            "getLocation"
-        );
+    vendorForm.addEventListener(
+        "submit",
+        function(event) {
 
-    const locationInput =
-        document.getElementById(
-            "location"
-        );
-
-    const latitudeInput =
-        document.getElementById(
-            "latitude"
-        );
-
-    const longitudeInput =
-        document.getElementById(
-            "longitude"
-        );
+            event.preventDefault();
 
 
-    if (!button) {
+            const name =
+                document
+                    .getElementById("productName")
+                    .value
+                    .trim();
+
+
+            const category =
+                document
+                    .getElementById("productCategory")
+                    .value;
+
+
+            const price =
+                Number(
+                    document
+                        .getElementById("productPrice")
+                        .value
+                );
+
+
+            const originalPrice =
+                Number(
+                    document
+                        .getElementById(
+                            "productOriginalPrice"
+                        )
+                        .value
+                ) || 0;
+
+
+            const description =
+                document
+                    .getElementById(
+                        "productDescription"
+                    )
+                    .value
+                    .trim();
+
+
+            const location =
+                document
+                    .getElementById(
+                        "vendorLocation"
+                    )
+                    .value
+                    .trim();
+
+
+            if (!name || !category || !price) {
+
+                showMessage(
+                    "Please complete the required fields"
+                );
+
+                return;
+
+            }
+
+
+            const file =
+                productImage &&
+                productImage.files[0];
+
+
+            const saveProduct =
+                function(image) {
+
+                    const product = {
+
+                        id:
+                            Date.now(),
+
+                        name,
+
+                        category,
+
+                        price,
+
+                        originalPrice,
+
+                        description:
+                            description ||
+                            "Quality product from ShopNova vendor.",
+
+                        location,
+
+                        image:
+                            image ||
+                            "https://via.placeholder.com/800x600?text=ShopNova"
+
+                    };
+
+
+                    vendorProducts.push(product);
+
+
+                    localStorage.setItem(
+                        "shopnovaVendorProducts",
+                        JSON.stringify(
+                            vendorProducts
+                        )
+                    );
+
+
+                    renderProducts();
+
+                    renderVendorProducts();
+
+
+                    vendorForm.reset();
+
+
+                    if (imagePreview) {
+
+                        imagePreview.innerHTML =
+                            "<span>Product image preview</span>";
+
+                    }
+
+
+                    showMessage(
+                        "Product added successfully!"
+                    );
+
+                };
+
+
+            if (file) {
+
+                const reader =
+                    new FileReader();
+
+
+                reader.onload =
+                    function(event) {
+
+                        saveProduct(
+                            event.target.result
+                        );
+
+                    };
+
+
+                reader.readAsDataURL(file);
+
+            } else {
+
+                saveProduct();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   RENDER VENDOR PRODUCTS
+========================================================= */
+
+function renderVendorProducts() {
+
+    if (!vendorProductsContainer) {
         return;
     }
 
+    vendorProductsContainer.innerHTML = "";
 
-    button.addEventListener(
+
+    if (vendorProducts.length === 0) {
+
+        vendorProductsContainer.innerHTML = `
+
+            <div class="vendor-empty">
+
+                <h3>
+                    No vendor products yet
+                </h3>
+
+                <p>
+                    Add your first product using the form above.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    vendorProducts.forEach(product => {
+
+        const card =
+            document.createElement("article");
+
+        card.className =
+            "vendor-product-card";
+
+
+        let discount = "";
+
+
+        if (
+            product.originalPrice &&
+            product.originalPrice > product.price
+        ) {
+
+            discount =
+                Math.round(
+                    (
+                        (
+                            product.originalPrice -
+                            product.price
+                        )
+                        /
+                        product.originalPrice
+                    ) * 100
+                );
+
+        }
+
+
+        card.innerHTML = `
+
+            <div class="vendor-product-image">
+
+                <img
+                    src="${product.image}"
+                    alt="${escapeHTML(product.name)}"
+                    onerror="this.src='https://via.placeholder.com/800x600?text=ShopNova'"
+                >
+
+            </div>
+
+
+            <div class="vendor-product-info">
+
+                <span class="vendor-product-category">
+                    ${escapeHTML(product.category)}
+                </span>
+
+                <h3>
+                    ${escapeHTML(product.name)}
+                </h3>
+
+                <p>
+                    ${escapeHTML(product.description)}
+                </p>
+
+                ${
+                    product.location
+                    ?
+                    `<p>📍 ${escapeHTML(product.location)}</p>`
+                    :
+                    ""
+                }
+
+
+                <div class="vendor-product-price">
+
+                    <strong>
+                        ${formatPrice(product.price)}
+                    </strong>
+
+                    ${
+                        product.originalPrice
+                        ?
+                        `<del>${formatPrice(product.originalPrice)}</del>`
+                        :
+                        ""
+                    }
+
+                    ${
+                        discount
+                        ?
+                        `<span>${discount}% OFF</span>`
+                        :
+                        ""
+                    }
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="delete-vendor-product"
+                    data-vendor-id="${product.id}"
+                >
+                    Delete Product
+                </button>
+
+            </div>
+
+        `;
+
+
+        vendorProductsContainer.appendChild(card);
+
+    });
+
+}
+
+
+/* =========================================================
+   DELETE VENDOR PRODUCT
+========================================================= */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const button =
+            event.target.closest(
+                ".delete-vendor-product"
+            );
+
+        if (!button) {
+            return;
+        }
+
+
+        const id =
+            Number(
+                button.dataset.vendorId
+            );
+
+
+        vendorProducts =
+            vendorProducts.filter(
+                product =>
+                    Number(product.id) !== id
+            );
+
+
+        localStorage.setItem(
+            "shopnovaVendorProducts",
+            JSON.stringify(
+                vendorProducts
+            )
+        );
+
+
+        renderVendorProducts();
+
+        renderProducts();
+
+        showMessage(
+            "Vendor product deleted"
+        );
+
+    }
+);
+
+
+/* =========================================================
+   GPS LOCATION
+========================================================= */
+
+if (locationBtn) {
+
+    locationBtn.addEventListener(
         "click",
-        function () {
-
-
-            /* Browser support */
+        function() {
 
             if (!navigator.geolocation) {
 
                 showMessage(
-                    "GPS is not supported by your browser."
+                    "Geolocation is not supported by this browser."
                 );
 
                 return;
+
             }
 
 
-            button.disabled = true;
+            locationBtn.disabled =
+                true;
 
-            button.textContent =
-                "📍 Getting Location...";
+            locationBtn.textContent =
+                "Getting location...";
 
 
             navigator.geolocation.getCurrentPosition(
 
-                function (position) {
-
+                function(position) {
 
                     const latitude =
                         position.coords.latitude;
-
 
                     const longitude =
                         position.coords.longitude;
 
 
-                    /* Save coordinates */
+                    const locationInput =
+                        document.getElementById(
+                            "vendorLocation"
+                        );
 
-                    if (latitudeInput) {
-
-                        latitudeInput.value =
-                            latitude.toFixed(6);
-
-                    }
-
-
-                    if (longitudeInput) {
-
-                        longitudeInput.value =
-                            longitude.toFixed(6);
-
-                    }
-
-
-                    /* Show location */
 
                     if (locationInput) {
 
                         locationInput.value =
-                            "GPS: " +
-                            latitude.toFixed(6) +
-                            ", " +
-                            longitude.toFixed(6);
+                            `${latitude.toFixed(6)}, ${longitude.toFixed(6)}`;
 
                     }
 
 
-                    button.disabled = false;
+                    locationBtn.disabled =
+                        false;
 
-                    button.textContent =
-                        "✓ Location Added";
+                    locationBtn.textContent =
+                        "📍 Get Location";
 
 
                     showMessage(
-                        "Location added successfully."
+                        "Location detected"
                     );
 
                 },
 
 
-                function (error) {
+                function() {
+
+                    locationBtn.disabled =
+                        false;
+
+                    locationBtn.textContent =
+                        "📍 Get Location";
 
 
-                    button.disabled = false;
-
-                    button.textContent =
-                        "📍 Use My Location";
-
-
-                    let message =
-                        "Unable to get your location.";
-
-
-                    if (
-                        error.code ===
-                        error.PERMISSION_DENIED
-                    ) {
-
-                        message =
-                            "Location permission was denied.";
-
-                    } else if (
-                        error.code ===
-                        error.POSITION_UNAVAILABLE
-                    ) {
-
-                        message =
-                            "Location information is unavailable.";
-
-                    } else if (
-                        error.code ===
-                        error.TIMEOUT
-                    ) {
-
-                        message =
-                            "Location request timed out.";
-
-                    }
-
-
-                    showMessage(message);
+                    showMessage(
+                        "Unable to get your location."
+                    );
 
                 },
-
 
                 {
                     enableHighAccuracy: true,
@@ -1562,727 +1322,160 @@ function setupVendorGPS() {
 
         }
     );
+
 }
 
 
 /* =========================================================
-   VENDOR FORM
-   ========================================================= */
+   MOBILE MENU
+========================================================= */
 
-function setupVendorForm() {
+if (mobileMenu) {
 
-    const form =
-        document.getElementById(
-            "vendorForm"
-        );
+    mobileMenu.addEventListener(
+        "click",
+        function() {
+
+            mainNavigation.classList.toggle(
+                "active"
+            );
+
+        }
+    );
+
+}
 
 
-    if (!form) {
-        return;
-    }
+/* =========================================================
+   CLOSE MOBILE MENU WHEN CLICKING LINK
+========================================================= */
+
+if (mainNavigation) {
+
+    mainNavigation
+        .querySelectorAll("a")
+        .forEach(link => {
+
+            link.addEventListener(
+                "click",
+                function() {
+
+                    mainNavigation.classList.remove(
+                        "active"
+                    );
+
+                }
+            );
+
+        });
+
+}
 
 
-    form.addEventListener(
+/* =========================================================
+   CONTACT FORM
+========================================================= */
+
+if (contactForm) {
+
+    contactForm.addEventListener(
         "submit",
-        function (event) {
+        function(event) {
 
             event.preventDefault();
 
-
-            const formData =
-                new FormData(form);
-
-
-            /* =================================================
-               VENDOR INFORMATION
-               ================================================= */
-
-            const business =
-                formData.get("business");
-
-
-            const owner =
-                formData.get("owner");
-
-
-            const email =
-                formData.get("email");
-
-
-            const phone =
-                formData.get("phone");
-
-
-            /* =================================================
-               PRODUCT INFORMATION
-               ================================================= */
-
-            const productName =
-                formData.get("productName");
-
-
-            const price =
-                formData.get("price");
-
-
-            const mrp =
-                formData.get("mrp");
-
-
-            const category =
-                formData.get("category");
-
-
-            const brand =
-                formData.get("brand");
-
-
-            const stock =
-                formData.get("stock");
-
-
-            const description =
-                formData.get("description");
-
-
-            /* =================================================
-               LOCATION
-               ================================================= */
-
-            const location =
-                formData.get("location");
-
-
-            const latitude =
-                formData.get("latitude");
-
-
-            const longitude =
-                formData.get("longitude");
-
-
-            /* =================================================
-               IMAGE
-               ================================================= */
-
-            const imageFile =
-                formData.get(
-                    "productImage"
-                );
-
-
-            /* =================================================
-               REQUIRED VALIDATION
-               ================================================= */
-
-            if (
-                !business ||
-                !owner ||
-                !email ||
-                !phone ||
-                !productName ||
-                !price ||
-                !category ||
-                !stock ||
-                !description ||
-                !location
-            ) {
-
-                showMessage(
-                    "Please fill in all required fields."
-                );
-
-                return;
-            }
-
-
-            /* =================================================
-               PRICE VALIDATION
-               ================================================= */
-
-            const sellingPrice =
-                Number(price);
-
-
-            const originalPrice =
-                Number(mrp);
-
-
-            if (
-                isNaN(sellingPrice) ||
-                sellingPrice <= 0
-            ) {
-
-                showMessage(
-                    "Please enter a valid product price."
-                );
-
-                return;
-            }
-
-
-            if (
-                mrp &&
-                (
-                    isNaN(originalPrice) ||
-                    originalPrice < sellingPrice
-                )
-            ) {
-
-                showMessage(
-                    "MRP cannot be lower than selling price."
-                );
-
-                return;
-            }
-
-
-            /* =================================================
-               STOCK VALIDATION
-               ================================================= */
-
-            if (
-                isNaN(Number(stock)) ||
-                Number(stock) < 0
-            ) {
-
-                showMessage(
-                    "Please enter a valid stock quantity."
-                );
-
-                return;
-            }
-
-
-            /* =================================================
-               IMAGE VALIDATION
-               ================================================= */
-
-            if (
-                !imageFile ||
-                !imageFile.name
-            ) {
-
-                showMessage(
-                    "Please select a product image."
-                );
-
-                return;
-            }
-
-
-            if (
-                !imageFile.type.startsWith(
-                    "image/"
-                )
-            ) {
-
-                showMessage(
-                    "Please select a valid product image."
-                );
-
-                return;
-            }
-
-
-            /* =================================================
-               READ IMAGE
-               ================================================= */
-
-            const reader =
-                new FileReader();
-
-
-            reader.onload =
-                function () {
-
-
-                    /* =================================================
-                       CREATE PRODUCT OBJECT
-                       ================================================= */
-
-                    const product = {
-
-                        id:
-                            Date.now(),
-
-                        vendor: {
-
-                            business:
-                                business,
-
-                            owner:
-                                owner,
-
-                            email:
-                                email,
-
-                            phone:
-                                phone
-
-                        },
-
-
-                        product: {
-
-                            name:
-                                productName,
-
-                            image:
-                                reader.result,
-
-                            price:
-                                sellingPrice,
-
-                            mrp:
-                                mrp
-                                    ? originalPrice
-                                    : null,
-
-                            category:
-                                category,
-
-                            brand:
-                                brand || "",
-
-                            stock:
-                                Number(stock),
-
-                            description:
-                                description
-
-                        },
-
-
-                        location: {
-
-                            address:
-                                location,
-
-                            latitude:
-                                latitude || "",
-
-                            longitude:
-                                longitude || ""
-
-                        },
-
-
-                        createdAt:
-                            new Date().toISOString()
-
-                    };
-
-
-                    /* =================================================
-                       GET EXISTING PRODUCTS
-                       ================================================= */
-
-                    const products =
-                        getVendorProducts();
-
-
-                    /* =================================================
-                       ADD NEW PRODUCT
-                       ================================================= */
-
-                    products.push(product);
-
-
-                    /* =================================================
-                       SAVE
-                       ================================================= */
-
-                    saveVendorProducts(
-                        products
-                    );
-
-
-                    /* =================================================
-                       SUCCESS
-                       ================================================= */
-
-                    showMessage(
-                        "Product added successfully!"
-                    );
-
-
-                    /* =================================================
-                       RESET FORM
-                       ================================================= */
-
-                    form.reset();
-
-
-                    const preview =
-                        document.getElementById(
-                            "imagePreview"
-                        );
-
-
-                    if (preview) {
-
-                        preview.innerHTML = `
-                            <span>
-                                Product image preview
-                            </span>
-                        `;
-
-                    }
-
-
-                    const locationButton =
-                        document.getElementById(
-                            "getLocation"
-                        );
-
-
-                    if (locationButton) {
-
-                        locationButton.textContent =
-                            "📍 Use My Location";
-
-                        locationButton.disabled =
-                            false;
-
-                    }
-
-
-                    /* =================================================
-                       OPTIONAL CONSOLE
-                       ================================================= */
-
-                    console.log(
-                        "ShopNova Vendor Product:",
-                        product
-                    );
-
-
-                    /* =================================================
-                       REFRESH PRODUCT DISPLAY
-                       ================================================= */
-
-                    displayVendorProducts();
-
-                };
-
-
-            reader.onerror =
-                function () {
-
-                    showMessage(
-                        "Unable to read product image."
-                    );
-
-                };
-
-
-            reader.readAsDataURL(
-                imageFile
+            const name =
+                document
+                    .getElementById(
+                        "contactName"
+                    )
+                    .value
+                    .trim();
+
+
+            showMessage(
+                `Thanks ${name || "there"}! Your message has been received.`
             );
+
+
+            contactForm.reset();
 
         }
     );
+
 }
 
 
 /* =========================================================
-   DISPLAY SAVED VENDOR PRODUCTS
-   ================================================= */
+   CHECKOUT
+========================================================= */
 
-function displayVendorProducts() {
+if (checkoutBtn) {
 
-    const container =
-        document.getElementById(
-            "vendorProducts"
-        );
+    checkoutBtn.addEventListener(
+        "click",
+        function() {
 
+            if (cart.length === 0) {
 
-    if (!container) {
-        return;
-    }
-
-
-    const products =
-        getVendorProducts();
-
-
-    /* =================================================
-       EMPTY
-       ================================================= */
-
-    if (products.length === 0) {
-
-        container.innerHTML = `
-            <div class="vendor-empty">
-                <h3>No products added yet</h3>
-                <p>
-                    Add your first product using
-                    the vendor panel.
-                </p>
-            </div>
-        `;
-
-        return;
-    }
-
-
-    container.innerHTML = "";
-
-
-    /* =================================================
-       PRODUCTS
-       ================================================= */
-
-    products.forEach(
-        product => {
-
-
-            const data =
-                product.product;
-
-
-            const card =
-                document.createElement(
-                    "article"
+                showMessage(
+                    "Your cart is empty."
                 );
 
-
-            card.className =
-                "vendor-product-card";
-
-
-            /* Discount */
-
-            let discount = 0;
-
-
-            if (
-                data.mrp &&
-                data.mrp > data.price
-            ) {
-
-                discount =
-                    Math.round(
-                        (
-                            (
-                                data.mrp -
-                                data.price
-                            )
-                            /
-                            data.mrp
-                        ) * 100
-                    );
+                return;
 
             }
 
 
-            card.innerHTML = `
-
-                <div class="vendor-product-image">
-
-                    <img
-                        src="${data.image}"
-                        alt="${data.name}">
-
-                </div>
-
-
-                <div class="vendor-product-info">
-
-                    <span class="vendor-product-category">
-                        ${data.category}
-                    </span>
-
-
-                    <h3>
-                        ${data.name}
-                    </h3>
-
-
-                    ${
-                        data.brand
-                        ?
-                        `
-                        <p>
-                            <strong>Brand:</strong>
-                            ${data.brand}
-                        </p>
-                        `
-                        :
-                        ""
-                    }
-
-
-                    <div class="vendor-product-price">
-
-                        <strong>
-                            ₹${Number(
-                                data.price
-                            ).toLocaleString("en-IN")}
-                        </strong>
-
-
-                        ${
-                            data.mrp
-                            ?
-                            `
-                            <del>
-                                ₹${Number(
-                                    data.mrp
-                                ).toLocaleString("en-IN")}
-                            </del>
-                            `
-                            :
-                            ""
-                        }
-
-
-                        ${
-                            discount > 0
-                            ?
-                            `
-                            <span>
-                                ${discount}% OFF
-                            </span>
-                            `
-                            :
-                            ""
-                        }
-
-                    </div>
-
-
-                    <p>
-                        ${data.description}
-                    </p>
-
-
-                    <p>
-                        <strong>
-                            Stock:
-                        </strong>
-
-                        ${data.stock}
-                    </p>
-
-
-                    ${
-                        product.location &&
-                        product.location.address
-                        ?
-                        `
-                        <p>
-                            📍
-                            ${product.location.address}
-                        </p>
-                        `
-                        :
-                        ""
-                    }
-
-
-                    <button
-                        type="button"
-                        class="delete-vendor-product"
-                        data-id="${product.id}">
-
-                        Delete Product
-
-                    </button>
-
-                </div>
-
-            `;
-
-
-            container.appendChild(
-                card
+            showMessage(
+                "Checkout page coming soon."
             );
 
         }
     );
 
+}
 
-    /* =================================================
-       DELETE PRODUCT
-       ================================================= */
 
-    container
-        .querySelectorAll(
-            ".delete-vendor-product"
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(value) {
+
+    return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
         )
-        .forEach(
-            button => {
-
-                button.addEventListener(
-                    "click",
-                    function () {
-
-
-                        const id =
-                            Number(
-                                this.dataset.id
-                            );
-
-
-                        const confirmed =
-                            confirm(
-                                "Delete this product?"
-                            );
-
-
-                        if (!confirmed) {
-                            return;
-                        }
-
-
-                        let products =
-                            getVendorProducts();
-
-
-                        products =
-                            products.filter(
-                                product =>
-                                    product.id !== id
-                            );
-
-
-                        saveVendorProducts(
-                            products
-                        );
-
-
-                        showMessage(
-                            "Product deleted."
-                        );
-
-
-                        displayVendorProducts();
-
-                    }
-                );
-
-            }
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
         );
+
 }
 
 
 /* =========================================================
-   VENDOR PANEL READY
-   ========================================================= */
+   INITIALIZE
+========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+renderProducts();
 
-        setupVendorImagePreview();
+renderVendorProducts();
 
-        setupVendorGPS();
+renderCart();
 
-        setupVendorForm();
-
-        displayVendorProducts();
-
-    }
-);
+updateCartTotals();

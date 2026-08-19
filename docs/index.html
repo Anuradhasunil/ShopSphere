@@ -1,226 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>ShopNova - Shop Smart. Live Better.</title>
 
-    <link rel="stylesheet" href="style.css">
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <style>
-        /* =====================================================
-           CONTACT BUTTON ONLY
-           Everything else remains unchanged
-        ===================================================== */
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
 
-        .main-navbar .nav-links .btn-contact {
-            background: linear-gradient(
-                135deg,
-                #ec4899,
-                #db2777
-            ) !important;
-
-            color: #ffffff !important;
-
-            border: 1px solid rgba(255,255,255,0.35);
-
-            box-shadow:
-                0 5px 15px rgba(219,39,119,0.28);
-
-            transition:
-                transform 0.25s ease,
-                box-shadow 0.25s ease,
-                background 0.25s ease;
-
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .main-navbar .nav-links .btn-contact:hover {
-            background: linear-gradient(
-                135deg,
-                #f472b6,
-                #be185d
-            ) !important;
-
-            color: #ffffff !important;
-
-            transform: translateY(-2px);
-
-            box-shadow:
-                0 8px 22px rgba(219,39,119,0.40);
-        }
-
-        /* Mobile */
-        @media (max-width: 700px) {
-
-            .main-navbar .nav-links .btn-contact {
-                background: linear-gradient(
-                    135deg,
-                    #ec4899,
-                    #db2777
-                ) !important;
-
-                color: #ffffff !important;
-
-                text-decoration: none;
-            }
-
-        }
-    </style>
-
+    <!-- IMPORTANT: CSS -->
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
 
-
     <!-- =====================================================
-         SHOPNOVA HEADER
-    ===================================================== -->
+         HEADER
+    ====================================================== -->
 
-    <header class="main-navbar">
+    <header class="site-header">
 
-        <!-- EXISTING SHOPNOVA LOGO - UNCHANGED -->
+        <div class="container header-inner">
 
-        <div class="nav-logo">
+            <!-- LOGO -->
 
-            <a href="index.html">
+            <a href="index.html" class="logo">
 
-                <img
-                    src="images/shopnova-logo.png"
-                    alt="ShopNova Logo"
-                    class="mini-logo"
+                <div class="logo-mark">
+                    🕊️
+                </div>
+
+                <span>
+                    Shop<span>Nova</span>
+                </span>
+
+            </a>
+
+
+            <!-- SEARCH -->
+
+            <form class="search-box" id="searchForm">
+
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Search products..."
+                    autocomplete="off"
                 >
 
-            </a>
+                <button type="submit" aria-label="Search">
+                    🔍
+                </button>
 
-        </div>
+            </form>
 
 
-        <!-- EXISTING SEARCH - UNCHANGED -->
-
-        <div class="search-bar-container">
-
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Search products..."
-                class="search-input"
-                autocomplete="off"
-            >
+            <!-- MOBILE MENU BUTTON -->
 
             <button
+                class="mobile-menu"
+                id="mobileMenu"
                 type="button"
-                id="searchBtn"
-                class="search-btn"
-                aria-label="Search products"
+                aria-label="Open menu"
             >
-                🔍
+                ☰
             </button>
 
+
+            <!-- NAVIGATION -->
+
+            <nav class="main-navigation" id="mainNavigation">
+
+                <a href="index.html" class="active">
+                    Home
+                </a>
+
+                <a href="#products">
+                    Products
+                </a>
+
+                <a href="#vendor">
+                    Vendor
+                </a>
+
+                <a href="#contact">
+                    Contact
+                </a>
+
+                <a href="#cart" class="cart-nav">
+                    🛒 Cart
+                    <span id="cartCount">0</span>
+                </a>
+
+            </nav>
+
         </div>
-
-
-        <!-- =================================================
-             NAVIGATION
-        ================================================== -->
-
-        <nav class="nav-links">
-
-            <a
-                href="index.html"
-                class="active"
-            >
-                Home
-            </a>
-
-            <a href="products.html">
-                Products
-            </a>
-
-            <a
-                href="cart.html"
-                class="cart-link"
-            >
-                Cart
-                <span class="cart-count">0</span>
-            </a>
-
-            <a href="checkout.html">
-                Checkout
-            </a>
-
-
-            <!-- =================================================
-                 SINGLE CONTACT BUTTON
-                 Opens existing contact.html
-            ================================================== -->
-
-            <a
-                href="contact.html"
-                class="btn-contact"
-                aria-label="Open Contact page"
-            >
-                Contact
-            </a>
-
-        </nav>
 
     </header>
 
 
-
     <!-- =====================================================
-         HOMEPAGE HERO
-         UNCHANGED
-    ===================================================== -->
+         HERO
+    ====================================================== -->
 
-    <main class="hero-section">
+    <section class="page-banner">
 
+        <div class="container page-banner-content">
 
-        <!-- LEFT CONTENT -->
-
-        <div class="hero-left-content">
-
-            <span class="welcome-badge animated-welcome">
+            <span>
                 ✨ Welcome to ShopNova
             </span>
 
-
-            <h1 class="hero-main-heading animated-heading">
-
+            <h1>
                 Shop Smart.<br>
-
-                <span class="blue-text">
-                    Live Better.
-                </span>
-
+                Live Better.
             </h1>
 
-
-            <p class="hero-subtext">
-
-                Discover premium products, modern style and
-                everyday essentials all in one beautiful
-                shopping experience.
-
+            <p>
+                Discover premium products, modern style and everyday
+                essentials all in one beautiful shopping experience.
             </p>
 
+            <div class="hero-actions">
 
-            <div class="hero-cta-buttons">
-
-                <a
-                    href="products.html"
-                    class="btn-primary"
-                >
+                <a href="#products" class="primary-btn">
                     Start Shopping →
                 </a>
 
-                <a
-                    href="cart.html"
-                    class="btn-secondary"
-                >
+                <a href="#cart" class="secondary-btn">
                     View Cart 🛒
                 </a>
 
@@ -228,37 +143,608 @@
 
         </div>
 
+        <div class="page-banner-dove">
+            🕊️
+        </div>
+
+    </section>
 
 
-        <!-- =================================================
-             CENTER DOVE LOGO
-             COMPLETELY UNCHANGED
-        ================================================== -->
+    <!-- =====================================================
+         SEARCH RESULTS
+    ====================================================== -->
 
-        <div class="hero-right-graphic">
+    <section
+        class="section home-search-results"
+        id="homeSearchResults"
+    >
 
-            <div class="graphic-card-frame">
+        <div class="container">
 
-                <img
-                    src="images/shopnova-logo.png"
-                    alt="ShopNova Logo"
-                    class="hero-logo-img animated-dove"
-                >
+            <div class="section-heading">
+
+                <span class="small-title">
+                    SEARCH
+                </span>
+
+                <h2>
+                    Search Results
+                </h2>
+
+                <p id="searchResultText">
+                    Products matching your search
+                </p>
+
+            </div>
+
+
+            <div
+                class="home-product-grid"
+                id="homeProductGrid"
+            ></div>
+
+
+            <div id="homeNoResults">
+
+                <h3>
+                    No products found
+                </h3>
+
+                <p>
+                    Try searching for another product.
+                </p>
 
             </div>
 
         </div>
 
-    </main>
-
+    </section>
 
 
     <!-- =====================================================
-         EXISTING JAVASCRIPT
-         UNCHANGED
-    ===================================================== -->
+         PRODUCTS
+    ====================================================== -->
 
-    <script src="script.js"></script>
+    <section class="section" id="products">
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <span class="small-title">
+                    SHOP COLLECTION
+                </span>
+
+                <h2>
+                    Popular Products
+                </h2>
+
+                <p>
+                    Discover some of our most popular products.
+                </p>
+
+            </div>
+
+
+            <div
+                class="product-grid"
+                id="productGrid"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         VENDOR
+    ====================================================== -->
+
+    <section class="section" id="vendor">
+
+        <div class="container">
+
+            <div class="vendor-layout">
+
+
+                <!-- INTRO -->
+
+                <div class="vendor-intro">
+
+                    <span class="small-title">
+                        SELL WITH US
+                    </span>
+
+                    <h2>
+                        Become a ShopNova Vendor
+                    </h2>
+
+                    <p>
+                        Turn your products into opportunities.
+                        List your products on ShopNova and reach
+                        customers looking for quality products.
+                    </p>
+
+
+                    <div class="vendor-benefits">
+
+                        <div>
+                            <span>✓</span>
+                            Easy product listing
+                        </div>
+
+                        <div>
+                            <span>✓</span>
+                            Beautiful storefront
+                        </div>
+
+                        <div>
+                            <span>✓</span>
+                            Reach more customers
+                        </div>
+
+                        <div>
+                            <span>✓</span>
+                            Simple vendor management
+                        </div>
+
+                    </div>
+
+
+                    <div class="vendor-dove">
+
+                        <span>🕊️</span>
+
+                        <div>
+                            <strong>
+                                ShopNova
+                            </strong>
+
+                            <br>
+
+                            <small>
+                                Shop Smart • Live Better
+                            </small>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FORM -->
+
+                <div class="vendor-form-card">
+
+                    <h2>
+                        Add Your Product
+                    </h2>
+
+                    <p>
+                        Fill in the details below to add a product.
+                    </p>
+
+
+                    <form id="vendorForm">
+
+
+                        <label>
+
+                            Product Name
+
+                            <input
+                                type="text"
+                                id="productName"
+                                placeholder="Enter product name"
+                                required
+                            >
+
+                        </label>
+
+
+                        <label>
+
+                            Category
+
+                            <select id="productCategory" required>
+
+                                <option value="">
+                                    Select category
+                                </option>
+
+                                <option value="Fashion">
+                                    Fashion
+                                </option>
+
+                                <option value="Electronics">
+                                    Electronics
+                                </option>
+
+                                <option value="Home">
+                                    Home
+                                </option>
+
+                                <option value="Beauty">
+                                    Beauty
+                                </option>
+
+                                <option value="Accessories">
+                                    Accessories
+                                </option>
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </label>
+
+
+                        <label>
+
+                            Price
+
+                            <input
+                                type="number"
+                                id="productPrice"
+                                placeholder="Enter price"
+                                min="0"
+                                step="0.01"
+                                required
+                            >
+
+                        </label>
+
+
+                        <label>
+
+                            Original Price
+
+                            <input
+                                type="number"
+                                id="productOriginalPrice"
+                                placeholder="Optional original price"
+                                min="0"
+                                step="0.01"
+                            >
+
+                        </label>
+
+
+                        <label>
+
+                            Product Description
+
+                            <textarea
+                                id="productDescription"
+                                placeholder="Describe your product..."
+                            ></textarea>
+
+                        </label>
+
+
+                        <label>
+
+                            Product Image
+
+                            <input
+                                type="file"
+                                id="productImage"
+                                accept="image/*"
+                            >
+
+                        </label>
+
+
+                        <div
+                            class="image-preview"
+                            id="imagePreview"
+                        >
+                            <span>
+                                Product image preview
+                            </span>
+                        </div>
+
+
+                        <label>
+
+                            Vendor Location
+
+                            <div class="location-input">
+
+                                <input
+                                    type="text"
+                                    id="vendorLocation"
+                                    placeholder="Enter your location"
+                                >
+
+                                <button
+                                    type="button"
+                                    class="location-btn"
+                                    id="locationBtn"
+                                >
+                                    📍 Get Location
+                                </button>
+
+                            </div>
+
+                        </label>
+
+
+                        <button
+                            type="submit"
+                            class="primary-btn full-button"
+                        >
+                            Add Product
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+
+            <!-- VENDOR PRODUCTS -->
+
+            <div
+                id="vendorProducts"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FINAL BRAND SECTION
+    ====================================================== -->
+
+    <section class="final-independence">
+
+        <div class="container">
+
+            <div class="final-card">
+
+                <div class="dove-large">
+                    🕊️
+                </div>
+
+                <h2>
+                    Shop Smart. Live Better.
+                </h2>
+
+                <p>
+                    Welcome to the ShopNova shopping experience.
+                </p>
+
+                <div class="flag-bars">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CART
+    ====================================================== -->
+
+    <section class="cart-container" id="cart">
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <span class="small-title">
+                    YOUR SHOPPING BAG
+                </span>
+
+                <h2>
+                    Shopping Cart
+                </h2>
+
+            </div>
+
+
+            <div id="cartItems">
+
+                <div class="cart-empty">
+
+                    <div>
+                        🛒
+                    </div>
+
+                    <h3>
+                        Your cart is empty
+                    </h3>
+
+                    <p>
+                        Add products to your cart to see them here.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="cart-summary">
+
+                <h2>
+                    Cart Summary
+                </h2>
+
+                <div class="summary-row">
+
+                    <span>
+                        Items
+                    </span>
+
+                    <strong id="summaryItems">
+                        0
+                    </strong>
+
+                </div>
+
+                <div class="summary-row">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong id="cartTotal">
+                        ₹0
+                    </strong>
+
+                </div>
+
+                <button
+                    class="primary-btn full-button"
+                    id="checkoutBtn"
+                    type="button"
+                >
+                    Proceed to Checkout →
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CONTACT
+    ====================================================== -->
+
+    <section
+        class="contact-section"
+        id="contact"
+    >
+
+        <div class="container">
+
+            <div class="contact-card">
+
+                <span class="small-title">
+                    GET IN TOUCH
+                </span>
+
+                <h2>
+                    Contact ShopNova
+                </h2>
+
+                <p>
+                    Have a question? Send us a message.
+                </p>
+
+
+                <form id="contactForm">
+
+                    <label>
+
+                        Name
+
+                        <input
+                            type="text"
+                            id="contactName"
+                            placeholder="Your name"
+                            required
+                        >
+
+                    </label>
+
+
+                    <label>
+
+                        Email
+
+                        <input
+                            type="email"
+                            id="contactEmail"
+                            placeholder="you@example.com"
+                            required
+                        >
+
+                    </label>
+
+
+                    <label>
+
+                        Message
+
+                        <textarea
+                            id="contactMessage"
+                            placeholder="Write your message..."
+                            required
+                        ></textarea>
+
+                    </label>
+
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                    >
+                        Send Message
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="footer-bottom">
+
+            🕊️
+            <strong>ShopNova</strong>
+
+            —
+            Shop Smart • Live Better
+
+            <br>
+
+            © 2026 ShopNova. All rights reserved.
+
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         TOAST
+    ====================================================== -->
+
+    <div
+        id="shopnovaMessage"
+        style="display:none;"
+    ></div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="./script.js"></script>
 
 </body>
+
 </html>
