@@ -32,6 +32,9 @@
                 transform 0.25s ease,
                 box-shadow 0.25s ease,
                 background 0.25s ease;
+
+            text-decoration: none;
+            cursor: pointer;
         }
 
         .main-navbar .nav-links .btn-contact:hover {
@@ -60,6 +63,8 @@
                 ) !important;
 
                 color: #ffffff !important;
+
+                text-decoration: none;
             }
 
         }
@@ -147,17 +152,15 @@
             </a>
 
 
-            <!--
-                SINGLE CONTACT BUTTON
-
-                This still opens your contact.html.
-                Your existing contact page can contain
-                WhatsApp, Instagram, YouTube, Facebook, etc.
-            -->
+            <!-- =================================================
+                 SINGLE CONTACT BUTTON
+                 Opens existing contact.html
+            ================================================== -->
 
             <a
                 href="contact.html"
                 class="btn-contact"
+                aria-label="Open Contact page"
             >
                 Contact
             </a>
