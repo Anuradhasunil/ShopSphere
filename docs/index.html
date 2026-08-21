@@ -11,26 +11,24 @@
 
 <body>
 
-<!-- =========================
+<!-- =====================================================
      HEADER
-========================= -->
+===================================================== -->
 
 <header class="main-header">
 
     <div class="header-inner">
 
-        <!-- FULL SHOPNOVA LOGO -->
-        <!-- THIS IS THE LOGO THAT MUST STAY ON TOP -->
+        <!-- SHOPNOVA LOGO -->
         <a href="index.html" class="brand-logo">
             <img
-                src="images/ShopNova Dove Shopping Logo.png"
+                src="images/shopnova-logo.png"
                 alt="ShopNova"
             >
         </a>
 
 
         <!-- SEARCH -->
-
         <div class="search-box">
 
             <input
@@ -38,11 +36,12 @@
                 id="searchInput"
                 placeholder="Search products..."
                 autocomplete="off"
+                aria-label="Search products"
             >
 
             <button
                 type="button"
-                onclick="searchProducts()"
+                id="searchButton"
                 aria-label="Search"
             >
                 🔍
@@ -52,7 +51,6 @@
 
 
         <!-- NAVIGATION -->
-
         <nav class="nav-links">
 
             <a
@@ -90,9 +88,9 @@
 </header>
 
 
-<!-- =========================
-     HOME
-========================= -->
+<!-- =====================================================
+     HOME HERO
+===================================================== -->
 
 <main>
 
@@ -100,8 +98,7 @@
 
     <div class="hero-inner">
 
-
-        <!-- LEFT -->
+        <!-- LEFT CONTENT -->
 
         <div class="hero-content">
 
@@ -109,11 +106,13 @@
                 ✨ Welcome to ShopNova
             </div>
 
+
             <h1>
                 Shop Smart.
                 <br>
                 <span>Live Better.</span>
             </h1>
+
 
             <p>
                 Discover premium products, modern style and
@@ -131,6 +130,7 @@
                     Start Shopping →
                 </a>
 
+
                 <a
                     href="cart.html"
                     class="secondary-btn"
@@ -143,20 +143,19 @@
         </div>
 
 
-        <!-- =========================
-             CENTER DOVE ONLY
-
-             SAVE YOUR SECOND IMAGE AS:
-             docs/images/center-dove.png
-        ========================= -->
+        <!-- CENTER / DOVE LOGO -->
 
         <div class="center-dove-area">
 
-            <img
-                src="images/center-dove.png"
-                alt="ShopNova Dove"
-                class="center-dove-image"
-            >
+            <div class="logo-glow">
+
+                <img
+                    src="images/shopnova-logo.png"
+                    alt="ShopNova Dove"
+                    class="center-dove-image"
+                >
+
+            </div>
 
         </div>
 
@@ -165,9 +164,9 @@
 </section>
 
 
-<!-- =========================
-     SERVICES
-========================= -->
+<!-- =====================================================
+     SIMPLE PROFESSIONAL FEATURES
+===================================================== -->
 
 <section class="service-strip">
 
@@ -228,137 +227,12 @@
 
 </section>
 
-
-<!-- =========================
-     COLLECTIONS
-========================= -->
-
-<section class="collections">
-
-    <div class="section-heading">
-
-        <span>
-            SHOPNOVA COLLECTIONS
-        </span>
-
-        <h2>
-            Explore Our Collections
-        </h2>
-
-        <p>
-            Quality products selected for modern living.
-        </p>
-
-    </div>
-
-
-    <div class="collection-grid">
-
-        <a
-            href="products.html"
-            class="collection-card"
-        >
-            <div class="collection-icon">
-                👕
-            </div>
-
-            <h3>Fashion</h3>
-
-            <p>
-                Modern styles
-            </p>
-        </a>
-
-
-        <a
-            href="products.html"
-            class="collection-card"
-        >
-            <div class="collection-icon">
-                💻
-            </div>
-
-            <h3>Technology</h3>
-
-            <p>
-                Smart essentials
-            </p>
-        </a>
-
-
-        <a
-            href="products.html"
-            class="collection-card"
-        >
-            <div class="collection-icon">
-                ✨
-            </div>
-
-            <h3>Beauty</h3>
-
-            <p>
-                Premium collection
-            </p>
-        </a>
-
-
-        <a
-            href="products.html"
-            class="collection-card"
-        >
-            <div class="collection-icon">
-                ⌚
-            </div>
-
-            <h3>Lifestyle</h3>
-
-            <p>
-                Everyday essentials
-            </p>
-        </a>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     FINAL BANNER
-========================= -->
-
-<section class="final-banner">
-
-    <div>
-
-        <span>SHOPNOVA</span>
-
-        <h2>
-            Find something you love today.
-        </h2>
-
-        <p>
-            Browse our collection and discover
-            something made for you.
-        </p>
-
-    </div>
-
-
-    <a
-        href="products.html"
-        class="final-button"
-    >
-        Browse Products →
-    </a>
-
-</section>
-
 </main>
 
 
-<!-- =========================
+<!-- =====================================================
      CONTACT POPUP
-========================= -->
+===================================================== -->
 
 <div
     id="contactPopup"
@@ -374,6 +248,7 @@
         >
             ×
         </button>
+
 
         <h2>
             Contact ShopNova
@@ -394,6 +269,7 @@
                 💬 WhatsApp
             </a>
 
+
             <a
                 href="https://instagram.com/"
                 target="_blank"
@@ -402,6 +278,7 @@
                 📸 Instagram
             </a>
 
+
             <a
                 href="https://youtube.com/"
                 target="_blank"
@@ -409,6 +286,7 @@
             >
                 ▶ YouTube
             </a>
+
 
             <a href="mailto:support@shopnova.com">
                 ✉ Email
@@ -421,14 +299,14 @@
 </div>
 
 
-<!-- =========================
+<!-- =====================================================
      FOOTER
-========================= -->
+===================================================== -->
 
 <footer class="footer">
 
     <img
-        src="images/ShopNova Dove Shopping Logo.png"
+        src="images/shopnova-logo.png"
         alt="ShopNova"
     >
 
@@ -443,136 +321,11 @@
 </footer>
 
 
-<script>
+<!-- =====================================================
+     SCRIPT
+===================================================== -->
 
-/* =========================
-   CART COUNT
-========================= */
-
-function updateCartCount() {
-
-    let cart = [];
-
-    try {
-
-        cart = JSON.parse(
-            localStorage.getItem("shopnova_cart") || "[]"
-        );
-
-    } catch (error) {
-
-        cart = [];
-
-    }
-
-    let total = 0;
-
-    cart.forEach(function(item) {
-
-        total += Number(
-            item.quantity || 1
-        );
-
-    });
-
-    const count =
-        document.getElementById("cartCount");
-
-    if (count) {
-        count.textContent = total;
-    }
-}
-
-
-/* =========================
-   SEARCH
-========================= */
-
-function searchProducts() {
-
-    const input =
-        document
-        .getElementById("searchInput")
-        .value
-        .trim();
-
-    if (!input) {
-
-        window.location.href =
-            "products.html";
-
-        return;
-    }
-
-    window.location.href =
-        "products.html?search=" +
-        encodeURIComponent(input);
-}
-
-
-document
-    .getElementById("searchInput")
-    .addEventListener(
-        "keydown",
-        function(event) {
-
-            if (event.key === "Enter") {
-                searchProducts();
-            }
-
-        }
-    );
-
-
-/* =========================
-   CONTACT
-========================= */
-
-function openContact() {
-
-    document
-        .getElementById("contactPopup")
-        .classList.add("show");
-}
-
-
-function closeContact() {
-
-    document
-        .getElementById("contactPopup")
-        .classList.remove("show");
-}
-
-
-/* =========================
-   OUTSIDE CLICK
-========================= */
-
-document
-    .getElementById("contactPopup")
-    .addEventListener(
-        "click",
-        function(event) {
-
-            if (
-                event.target === this
-            ) {
-
-                closeContact();
-
-            }
-
-        }
-    );
-
-
-/* =========================
-   START
-========================= */
-
-updateCartCount();
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
