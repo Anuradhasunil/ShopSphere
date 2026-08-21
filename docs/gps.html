@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ShopNova GPS</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gps-box {
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .gps-icon {
+            font-size: 60px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            margin: 10px 0;
+            color: #1557c0;
+        }
+
+        p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        select {
+            width: 100%;
+            padding: 13px;
+            margin: 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: #1557c0;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0d3f91;
+        }
+
+        #status {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 10px;
+            background: #f1f5f9;
+            color: #333;
+            min-height: 45px;
+        }
+
+        .coordinates {
+            margin-top: 15px;
+            text-align: left;
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="gps-box">
+
+        <div class="gps-icon">📍</div>
+
+        <h1>ShopNova GPS</h1>
+
+        <p>
+            Allow ShopNova to access your location
+            for delivery and order tracking.
+        </p>
+
+        <select id="userType">
+
+            <option value="buyer">
+                Buyer
+            </option>
+
+            <option value="seller">
+                Seller
+            </option>
+
+            <option value="delivery">
+                Delivery Boy
+            </option>
+
+        </select>
+
+        <button onclick="startGPS()">
+            📍 Allow & Start GPS
+        </button>
+
+        <div id="status">
+            GPS is waiting...
+        </div>
+
+        <div class="coordinates" id="coordinates">
+
+            <strong>Latitude:</strong>
+            <span id="latitude"></span>
+
+            <br><br>
+
+            <strong>Longitude:</strong>
+            <span id="longitude"></span>
+
+            <br><br>
+
+            <strong>Updated:</strong>
+            <span id="updated"></span>
+
+        </div>
+
+    </div>
+
+
+<script>
+
+function startGPS() {
+
+    const userType =
+        document.getElementById("userType").value;
+
+    const status =
+        document.getElementById("status");
+
+    const coordinates =
+        document.getElementById("coordinates");
+
+
+    /* Browser GPS support check */
+
+    if (!navigator.geolocation) {
+
+        status.innerHTML =
+            "❌ GPS is not supported by this browser.";
+
+        return;
+    }
+
+
+    status.innerHTML =
+        "📍 Requesting your location...";
+
+
+    navigator.geolocation.getCurrentPosition(
+
+        async function(position) {
+
+            const latitude =
+                position.coords.latitude;
+
+            const longitude =
+                position.coords.longitude;
+
+
+            document.getElementById("latitude")
+                .textContent =
+                latitude.toFixed(6);
+
+            document.getElementById("longitude")
+                .textContent =
+                longitude.toFixed(6);
+
+            document.getElementById("updated")
+                .textContent =
+                new Date().toLocaleString();
+
+
+            coordinates.style.display =
+                "block";
+
+
+            status.innerHTML =
+                "✅ Location detected. Saving GPS location...";
+
+
+            try {
+
+                const response =
+                    await fetch("/api/location", {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+
+                            userType: userType,
+
+                            latitude: latitude,
+
+                            longitude: longitude
+
+                        })
+
+                    });
+
+
+                const data =
+                    await response.json();
+
+
+                if (data.success) {
+
+                    status.innerHTML =
+                        "✅ GPS location saved successfully!";
+
+                } else {
+
+                    status.innerHTML =
+                        "❌ Unable to save GPS location.";
+
+                }
+
+            } catch (error) {
+
+                console.error(error);
+
+                status.innerHTML =
+                    "❌ Server connection failed.";
+
+            }
+
+        },
+
+
+        function(error) {
+
+            if (error.code === 1) {
+
+                status.innerHTML =
+                    "❌ Location permission denied.";
+
+            } else if (error.code === 2) {
+
+                status.innerHTML =
+                    "❌ Location unavailable.";
+
+            } else if (error.code === 3) {
+
+                status.innerHTML =
+                    "❌ GPS request timed out.";
+
+            } else {
+
+                status.innerHTML =
+                    "❌ Unable to get your location.";
+
+            }
+
+        },
+
+
+        {
+            enableHighAccuracy: true,
+            timeout: 15000,
+            maximumAge: 0
+        }
+
+    );
+
+}
+
+</script>
+
+</body>
+</html>

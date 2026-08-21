@@ -11,7 +11,6 @@
 
     <title>ShopNova | Checkout</title>
 
-
     <style>
 
         * {
@@ -19,7 +18,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-
 
         body {
             font-family:
@@ -39,7 +37,6 @@
 
             min-height: 100vh;
         }
-
 
         /* =========================
            HEADER
@@ -67,7 +64,6 @@
                 rgba(17,24,74,.18);
         }
 
-
         .header-main {
             width: 100%;
 
@@ -83,7 +79,6 @@
 
             gap: 16px;
         }
-
 
         /* =========================
            LOGO
@@ -102,7 +97,6 @@
 
             color: white;
         }
-
 
         .logo-art {
             width: 52px;
@@ -123,7 +117,6 @@
             overflow: hidden;
         }
 
-
         .logo-art img {
             width: 100%;
             height: 100%;
@@ -133,7 +126,6 @@
             display: block;
         }
 
-
         .logo-content {
             display: flex;
 
@@ -142,23 +134,19 @@
             line-height: 1;
         }
 
-
         .logo-name {
             font-size: 24px;
 
             font-weight: 900;
         }
 
-
         .logo-name .shop {
             color: white;
         }
 
-
         .logo-name .nova {
             color: #8fb9ff;
         }
-
 
         .logo-tagline {
             margin-top: 4px;
@@ -171,7 +159,6 @@
 
             font-weight: 700;
         }
-
 
         /* =========================
            HEADER LINKS
@@ -187,7 +174,6 @@
             gap: 5px;
         }
 
-
         .header-actions a {
             color: white;
 
@@ -202,12 +188,10 @@
             border-radius: 8px;
         }
 
-
         .header-actions a:hover {
             background:
                 rgba(255,255,255,.1);
         }
-
 
         .checkout-link {
             background:
@@ -217,7 +201,6 @@
                     #a855f7
                 );
         }
-
 
         /* =========================
            CHECKOUT HERO
@@ -238,7 +221,6 @@
 
             padding: 32px 15px;
         }
-
 
         .checkout-badge {
             display: inline-block;
@@ -261,7 +243,6 @@
             margin-bottom: 8px;
         }
 
-
         .checkout-hero h1 {
             font-size:
                 clamp(30px,5vw,44px);
@@ -271,13 +252,11 @@
             margin-bottom: 6px;
         }
 
-
         .checkout-hero p {
             color: #e0e7ff;
 
             font-size: 13px;
         }
-
 
         /* =========================
            CHECKOUT WRAPPER
@@ -293,7 +272,6 @@
             padding: 28px 18px 45px;
         }
 
-
         .checkout-layout {
             display: grid;
 
@@ -305,7 +283,6 @@
 
             align-items: start;
         }
-
 
         /* =========================
            FORM CARD
@@ -326,7 +303,6 @@
             padding: 23px;
         }
 
-
         .checkout-card h2 {
             color: #101b45;
 
@@ -337,7 +313,6 @@
             margin-bottom: 5px;
         }
 
-
         .checkout-card-subtitle {
             color: #7a8295;
 
@@ -345,7 +320,6 @@
 
             margin-bottom: 20px;
         }
-
 
         /* =========================
            FORM
@@ -360,16 +334,13 @@
             gap: 15px;
         }
 
-
         .form-group {
             margin-bottom: 15px;
         }
 
-
         .form-group.full {
             grid-column: 1 / -1;
         }
-
 
         .form-group label {
             display: block;
@@ -382,7 +353,6 @@
 
             margin-bottom: 6px;
         }
-
 
         .form-group input,
         .form-group select,
@@ -409,13 +379,11 @@
             transition: .2s;
         }
 
-
         .form-group textarea {
             min-height: 90px;
 
             resize: vertical;
         }
-
 
         .form-group input:focus,
         .form-group select:focus,
@@ -429,6 +397,136 @@
                 rgba(99,102,241,.1);
         }
 
+        /* =========================
+           GPS LOCATION
+        ========================= */
+
+        .location-box {
+            grid-column: 1 / -1;
+
+            margin-top: -3px;
+
+            margin-bottom: 7px;
+
+            padding: 15px;
+
+            border-radius: 12px;
+
+            border: 1px solid #dfe3ef;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f8faff,
+                    #f7f4ff
+                );
+        }
+
+        .location-title {
+            color: #101b45;
+
+            font-size: 13px;
+
+            font-weight: 900;
+
+            margin-bottom: 4px;
+        }
+
+        .location-description {
+            color: #7a8295;
+
+            font-size: 10px;
+
+            margin-bottom: 10px;
+
+            line-height: 1.5;
+        }
+
+        .gps-btn {
+            border: none;
+
+            border-radius: 9px;
+
+            padding: 10px 15px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #4f46e5
+                );
+
+            color: white;
+
+            font-size: 12px;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+            transition: .2s;
+
+            box-shadow:
+                0 5px 15px
+                rgba(37,99,235,.18);
+        }
+
+        .gps-btn:hover {
+            transform:
+                translateY(-1px);
+
+            box-shadow:
+                0 8px 18px
+                rgba(37,99,235,.25);
+        }
+
+        .gps-btn:disabled {
+            opacity: .65;
+
+            cursor: wait;
+
+            transform: none;
+        }
+
+        .location-status {
+            margin-top: 9px;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            color: #64748b;
+
+            line-height: 1.5;
+        }
+
+        .location-status.success {
+            color: #15803d;
+        }
+
+        .location-status.error {
+            color: #dc2626;
+        }
+
+        .gps-coordinates {
+            display: none;
+
+            margin-top: 8px;
+
+            padding: 8px 10px;
+
+            border-radius: 8px;
+
+            background: #eef6ff;
+
+            color: #1e40af;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            word-break: break-word;
+        }
 
         /* =========================
            PAYMENT METHOD
@@ -445,13 +543,11 @@
                 7px 0 10px;
         }
 
-
         .payment-options {
             display: grid;
 
             gap: 9px;
         }
-
 
         .payment-option {
             border:
@@ -474,18 +570,15 @@
             background: #fbfcff;
         }
 
-
         .payment-option:hover {
             border-color: #a78bfa;
 
             background: #faf8ff;
         }
 
-
         .payment-option input {
             accent-color: #6366f1;
         }
-
 
         .payment-option strong {
             display: block;
@@ -494,7 +587,6 @@
 
             font-size: 12px;
         }
-
 
         .payment-option span {
             display: block;
@@ -505,7 +597,6 @@
 
             margin-top: 2px;
         }
-
 
         /* =========================
            ORDER SUMMARY
@@ -530,7 +621,6 @@
             top: 100px;
         }
 
-
         .order-card h2 {
             color: #101b45;
 
@@ -541,7 +631,6 @@
             margin-bottom: 16px;
         }
 
-
         .checkout-products {
             max-height: 330px;
 
@@ -549,7 +638,6 @@
 
             padding-right: 3px;
         }
-
 
         .checkout-product {
             display: grid;
@@ -567,11 +655,9 @@
                 1px solid #edf0f7;
         }
 
-
         .checkout-product:last-child {
             border-bottom: none;
         }
-
 
         .checkout-product-image {
             width: 60px;
@@ -584,14 +670,12 @@
             background: #f2f4fa;
         }
 
-
         .checkout-product-image img {
             width: 100%;
             height: 100%;
 
             object-fit: cover;
         }
-
 
         .checkout-product-info strong {
             display: block;
@@ -603,7 +687,6 @@
             font-weight: 850;
         }
 
-
         .checkout-product-info span {
             display: block;
 
@@ -613,7 +696,6 @@
 
             margin-top: 3px;
         }
-
 
         .checkout-product-total {
             color: #4c3a92;
@@ -625,7 +707,6 @@
             white-space: nowrap;
         }
 
-
         .order-divider {
             height: 1px;
 
@@ -633,7 +714,6 @@
 
             margin: 15px 0;
         }
-
 
         .order-row {
             display: flex;
@@ -645,11 +725,9 @@
             font-size: 12px;
         }
 
-
         .order-row span:first-child {
             color: #697386;
         }
-
 
         .order-row span:last-child {
             color: #172554;
@@ -657,11 +735,9 @@
             font-weight: 850;
         }
 
-
         .free {
             color: #16a34a !important;
         }
-
 
         .grand-total {
             display: flex;
@@ -674,7 +750,6 @@
                 16px 0 18px;
         }
 
-
         .grand-total span:first-child {
             color: #101b45;
 
@@ -683,7 +758,6 @@
             font-weight: 900;
         }
 
-
         .grand-total span:last-child {
             color: #6d28d9;
 
@@ -691,7 +765,6 @@
 
             font-weight: 950;
         }
-
 
         /* =========================
            PAYMENT BUTTON
@@ -729,7 +802,6 @@
             transition: .25s;
         }
 
-
         .payment-btn:hover {
             transform:
                 translateY(-2px);
@@ -738,7 +810,6 @@
                 0 12px 25px
                 rgba(79,70,229,.3);
         }
-
 
         .secure-text {
             text-align: center;
@@ -751,7 +822,6 @@
 
             margin-top: 12px;
         }
-
 
         /* =========================
            EMPTY CHECKOUT
@@ -773,13 +843,11 @@
                 rgba(34,42,88,.08);
         }
 
-
         .empty-message h2 {
             color: #101b45;
 
             margin-bottom: 7px;
         }
-
 
         .empty-message p {
             color: #7a8295;
@@ -788,7 +856,6 @@
 
             margin-bottom: 18px;
         }
-
 
         .back-btn {
             display: inline-flex;
@@ -813,7 +880,6 @@
             font-weight: 900;
         }
 
-
         /* =========================
            FOOTER
         ========================= */
@@ -828,13 +894,11 @@
             padding: 22px 15px;
         }
 
-
         footer h3 {
             font-size: 20px;
 
             font-weight: 900;
         }
-
 
         footer p {
             color: #cbd5e1;
@@ -843,7 +907,6 @@
 
             margin-top: 6px;
         }
-
 
         /* =========================
            MOBILE
@@ -859,7 +922,6 @@
                 position: static;
             }
         }
-
 
         @media(max-width:700px) {
 
@@ -904,15 +966,17 @@
             .form-group.full {
                 grid-column: auto;
             }
+
+            .location-box {
+                grid-column: auto;
+            }
         }
 
     </style>
 
 </head>
 
-
 <body>
-
 
 <header>
 
@@ -954,7 +1018,6 @@
 
         </a>
 
-
         <div class="header-actions">
 
             <a href="index.html">
@@ -982,7 +1045,6 @@
 
 </header>
 
-
 <section class="checkout-hero">
 
     <div class="checkout-badge">
@@ -999,19 +1061,14 @@
 
 </section>
 
-
 <main class="checkout-wrapper">
-
 
     <div
         id="checkoutLayout"
         class="checkout-layout"
     >
 
-
-        <!-- =========================
-             CUSTOMER DETAILS
-        ========================= -->
+        <!-- CUSTOMER DETAILS -->
 
         <section class="checkout-card">
 
@@ -1023,12 +1080,9 @@
                 Please provide your details for delivery.
             </p>
 
-
             <form id="checkoutForm">
 
-
                 <div class="form-grid">
-
 
                     <div class="form-group">
 
@@ -1046,7 +1100,6 @@
 
                     </div>
 
-
                     <div class="form-group">
 
                         <label for="lastName">
@@ -1062,7 +1115,6 @@
                         >
 
                     </div>
-
 
                     <div class="form-group">
 
@@ -1080,7 +1132,6 @@
 
                     </div>
 
-
                     <div class="form-group">
 
                         <label for="phone">
@@ -1097,7 +1148,6 @@
 
                     </div>
 
-
                     <div class="form-group full">
 
                         <label for="address">
@@ -1113,6 +1163,56 @@
 
                     </div>
 
+                    <!-- =========================
+                         GPS LOCATION
+                    ========================= -->
+
+                    <div class="location-box">
+
+                        <div class="location-title">
+                            📍 Delivery Location
+                        </div>
+
+                        <div class="location-description">
+                            Use your current GPS location to help ShopNova
+                            deliver your order to the correct location.
+                        </div>
+
+                        <button
+                            type="button"
+                            id="gpsButton"
+                            class="gps-btn"
+                        >
+                            📍 Use My Current Location
+                        </button>
+
+                        <div
+                            id="locationStatus"
+                            class="location-status"
+                        >
+                            Location not selected yet.
+                        </div>
+
+                        <div
+                            id="gpsCoordinates"
+                            class="gps-coordinates"
+                        ></div>
+
+                    </div>
+
+                    <!-- Hidden GPS fields -->
+
+                    <input
+                        type="hidden"
+                        id="latitude"
+                        name="latitude"
+                    >
+
+                    <input
+                        type="hidden"
+                        id="longitude"
+                        name="longitude"
+                    >
 
                     <div class="form-group">
 
@@ -1130,7 +1230,6 @@
 
                     </div>
 
-
                     <div class="form-group">
 
                         <label for="state">
@@ -1146,7 +1245,6 @@
                         >
 
                     </div>
-
 
                     <div class="form-group">
 
@@ -1164,7 +1262,6 @@
                         >
 
                     </div>
-
 
                     <div class="form-group">
 
@@ -1187,14 +1284,11 @@
 
                 </div>
 
-
                 <h3 class="payment-title">
                     Payment Method
                 </h3>
 
-
                 <div class="payment-options">
-
 
                     <label class="payment-option">
 
@@ -1219,7 +1313,6 @@
 
                     </label>
 
-
                     <label class="payment-option">
 
                         <input
@@ -1241,7 +1334,6 @@
                         </div>
 
                     </label>
-
 
                     <label class="payment-option">
 
@@ -1265,9 +1357,7 @@
 
                     </label>
 
-
                 </div>
-
 
                 <button
                     type="submit"
@@ -1277,15 +1367,11 @@
                     🔒 Proceed to Payment
                 </button>
 
-
             </form>
 
         </section>
 
-
-        <!-- =========================
-             ORDER SUMMARY
-        ========================= -->
+        <!-- ORDER SUMMARY -->
 
         <aside class="order-card">
 
@@ -1293,15 +1379,12 @@
                 Your Order
             </h2>
 
-
             <div
                 id="checkoutProducts"
                 class="checkout-products"
             ></div>
 
-
             <div class="order-divider"></div>
-
 
             <div class="order-row">
 
@@ -1315,7 +1398,6 @@
 
             </div>
 
-
             <div class="order-row">
 
                 <span>
@@ -1327,7 +1409,6 @@
                 </span>
 
             </div>
-
 
             <div class="order-row">
 
@@ -1341,7 +1422,6 @@
 
             </div>
 
-
             <div class="order-row">
 
                 <span>
@@ -1354,9 +1434,7 @@
 
             </div>
 
-
             <div class="order-divider"></div>
-
 
             <div class="grand-total">
 
@@ -1370,7 +1448,6 @@
 
             </div>
 
-
             <div class="secure-text">
                 🔐 Your checkout information is handled securely.<br>
                 🛡️ ShopNova Safe Shopping
@@ -1378,9 +1455,7 @@
 
         </aside>
 
-
     </div>
-
 
     <section
         id="emptyMessage"
@@ -1404,9 +1479,7 @@
 
     </section>
 
-
 </main>
-
 
 <footer>
 
@@ -1424,15 +1497,16 @@
 
 </footer>
 
-
 <script>
 
 "use strict";
 
-
 const CART_KEY =
     "shopnova_cart";
 
+/* =========================
+   CART
+========================= */
 
 function getCart() {
 
@@ -1453,7 +1527,6 @@ function getCart() {
     }
 }
 
-
 /* =========================
    MONEY
 ========================= */
@@ -1464,7 +1537,6 @@ function money(value) {
         Number(value || 0)
             .toLocaleString("en-IN");
 }
-
 
 /* =========================
    ESCAPE TEXT
@@ -1480,6 +1552,165 @@ function escapeHTML(text) {
         .replace(/'/g, "&#039;");
 }
 
+/* =========================
+   GPS LOCATION
+========================= */
+
+const gpsButton =
+    document.getElementById("gpsButton");
+
+const locationStatus =
+    document.getElementById("locationStatus");
+
+const gpsCoordinates =
+    document.getElementById("gpsCoordinates");
+
+const latitudeInput =
+    document.getElementById("latitude");
+
+const longitudeInput =
+    document.getElementById("longitude");
+
+
+if (gpsButton) {
+
+    gpsButton.addEventListener(
+        "click",
+        function () {
+
+            if (!navigator.geolocation) {
+
+                locationStatus.textContent =
+                    "❌ GPS is not supported by this browser.";
+
+                locationStatus.className =
+                    "location-status error";
+
+                return;
+            }
+
+            gpsButton.disabled = true;
+
+            gpsButton.textContent =
+                "📍 Getting your location...";
+
+            locationStatus.textContent =
+                "Please allow location access in your browser.";
+
+            locationStatus.className =
+                "location-status";
+
+            navigator.geolocation.getCurrentPosition(
+
+                function (position) {
+
+                    const latitude =
+                        position.coords.latitude;
+
+                    const longitude =
+                        position.coords.longitude;
+
+                    const accuracy =
+                        Math.round(
+                            position.coords.accuracy
+                        );
+
+                    latitudeInput.value =
+                        latitude;
+
+                    longitudeInput.value =
+                        longitude;
+
+                    locationStatus.textContent =
+                        "✅ Your current location has been captured successfully.";
+
+                    locationStatus.className =
+                        "location-status success";
+
+                    gpsCoordinates.style.display =
+                        "block";
+
+                    gpsCoordinates.textContent =
+                        "📍 Latitude: " +
+                        latitude.toFixed(6) +
+                        " | Longitude: " +
+                        longitude.toFixed(6) +
+                        " | Accuracy: approximately " +
+                        accuracy +
+                        " meters";
+
+                    gpsButton.disabled =
+                        false;
+
+                    gpsButton.textContent =
+                        "📍 Location Captured — Use Again";
+
+                    /*
+                       Save temporarily in browser.
+                       Later the server will save this
+                       with the actual order.
+                    */
+
+                    localStorage.setItem(
+                        "shopnova_buyer_location",
+                        JSON.stringify({
+                            latitude: latitude,
+                            longitude: longitude,
+                            accuracy: accuracy,
+                            capturedAt:
+                                new Date().toISOString()
+                        })
+                    );
+
+                },
+
+                function (error) {
+
+                    let message =
+                        "❌ Unable to get your location.";
+
+                    if (error.code === 1) {
+
+                        message =
+                            "❌ Location permission was denied. Please allow location access and try again.";
+
+                    } else if (error.code === 2) {
+
+                        message =
+                            "❌ Your location could not be determined. Please try again.";
+
+                    } else if (error.code === 3) {
+
+                        message =
+                            "❌ Location request timed out. Please try again.";
+
+                    }
+
+                    locationStatus.textContent =
+                        message;
+
+                    locationStatus.className =
+                        "location-status error";
+
+                    gpsButton.disabled =
+                        false;
+
+                    gpsButton.textContent =
+                        "📍 Try Location Again";
+                },
+
+                {
+                    enableHighAccuracy: true,
+
+                    timeout: 15000,
+
+                    maximumAge: 0
+                }
+            );
+        }
+    );
+}
+
 
 /* =========================
    RENDER CHECKOUT
@@ -1490,18 +1721,15 @@ function renderCheckout() {
     const cart =
         getCart();
 
-
     const layout =
         document.getElementById(
             "checkoutLayout"
         );
 
-
     const empty =
         document.getElementById(
             "emptyMessage"
         );
-
 
     if (!cart.length) {
 
@@ -1514,28 +1742,23 @@ function renderCheckout() {
         return;
     }
 
-
     layout.style.display =
         "grid";
 
     empty.style.display =
         "none";
 
-
     const container =
         document.getElementById(
             "checkoutProducts"
         );
 
-
     container.innerHTML =
         "";
-
 
     let subtotal = 0;
 
     let quantityTotal = 0;
-
 
     cart.forEach(
         item => {
@@ -1549,18 +1772,15 @@ function renderCheckout() {
             const total =
                 price * quantity;
 
-
             subtotal += total;
 
             quantityTotal += quantity;
-
 
             const product =
                 document.createElement("div");
 
             product.className =
                 "checkout-product";
-
 
             product.innerHTML = `
 
@@ -1574,7 +1794,6 @@ function renderCheckout() {
 
                 </div>
 
-
                 <div class="checkout-product-info">
 
                     <strong>
@@ -1587,19 +1806,16 @@ function renderCheckout() {
 
                 </div>
 
-
                 <div class="checkout-product-total">
                     ${money(total)}
                 </div>
 
             `;
 
-
             container.appendChild(product);
 
         }
     );
-
 
     const discount =
         subtotal >= 5000
@@ -1608,31 +1824,26 @@ function renderCheckout() {
                 ? 250
                 : 0;
 
-
     const grandTotal =
         Math.max(
             0,
             subtotal - discount
         );
 
-
     document.getElementById(
         "orderItems"
     ).textContent =
         quantityTotal;
-
 
     document.getElementById(
         "orderSubtotal"
     ).textContent =
         money(subtotal);
 
-
     document.getElementById(
         "orderDiscount"
     ).textContent =
         "-" + money(discount);
-
 
     document.getElementById(
         "orderTotal"
@@ -1653,10 +1864,8 @@ document
 
             event.preventDefault();
 
-
             const cart =
                 getCart();
-
 
             if (!cart.length) {
 
@@ -1666,22 +1875,108 @@ document
                 return;
             }
 
-
             const payment =
                 document.querySelector(
                     'input[name="payment"]:checked'
                 );
-
 
             const paymentName =
                 payment
                     ? payment.value
                     : "upi";
 
+            const latitude =
+                latitudeInput.value;
+
+            const longitude =
+                longitudeInput.value;
+
 
             /*
-              This is a front-end checkout.
-              It does not charge a real payment method.
+              Collect buyer delivery information.
+            */
+
+            const customerData = {
+
+                firstName:
+                    document.getElementById(
+                        "firstName"
+                    ).value.trim(),
+
+                lastName:
+                    document.getElementById(
+                        "lastName"
+                    ).value.trim(),
+
+                email:
+                    document.getElementById(
+                        "email"
+                    ).value.trim(),
+
+                phone:
+                    document.getElementById(
+                        "phone"
+                    ).value.trim(),
+
+                address:
+                    document.getElementById(
+                        "address"
+                    ).value.trim(),
+
+                city:
+                    document.getElementById(
+                        "city"
+                    ).value.trim(),
+
+                state:
+                    document.getElementById(
+                        "state"
+                    ).value.trim(),
+
+                pincode:
+                    document.getElementById(
+                        "pincode"
+                    ).value.trim(),
+
+                country:
+                    document.getElementById(
+                        "country"
+                    ).value,
+
+                latitude:
+                    latitude || null,
+
+                longitude:
+                    longitude || null,
+
+                payment:
+                    paymentName,
+
+                cart:
+                    cart,
+
+                createdAt:
+                    new Date().toISOString()
+            };
+
+
+            /*
+              Save the order temporarily in browser.
+              Next step: send this data to server.js
+              and seller panel.
+            */
+
+            localStorage.setItem(
+                "shopnova_pending_order",
+                JSON.stringify(
+                    customerData
+                )
+            );
+
+
+            /*
+              This is still a front-end checkout.
+              It does NOT charge real money.
             */
 
             if (
@@ -1691,6 +1986,12 @@ document
                 alert(
                     "Order details accepted!\n\n" +
                     "Cash on Delivery selected.\n\n" +
+                    (
+                        latitude &&
+                        longitude
+                            ? "📍 Delivery GPS location captured successfully.\n\n"
+                            : "📍 GPS location was not selected.\n\n"
+                    ) +
                     "Thank you for shopping with ShopNova."
                 );
 
@@ -1701,6 +2002,12 @@ document
                     "Payment method: " +
                     paymentName.toUpperCase() +
                     "\n\n" +
+                    (
+                        latitude &&
+                        longitude
+                            ? "📍 Delivery GPS location captured successfully.\n\n"
+                            : "📍 GPS location was not selected.\n\n"
+                    ) +
                     "Connect your real payment gateway here."
                 );
             }
@@ -1737,7 +2044,6 @@ window.addEventListener(
 );
 
 </script>
-
 
 </body>
 </html>

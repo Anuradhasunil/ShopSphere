@@ -73,6 +73,15 @@
                 Checkout
             </a>
 
+            <!-- SELLER -->
+            <a
+                href="seller.html"
+                class="seller-link"
+            >
+                🏪 Seller
+            </a>
+
+            <!-- CONTACT -->
             <button
                 class="contact-btn"
                 type="button"
@@ -108,13 +117,9 @@
 
 
             <h1>
-                <span class="shop-smart">
-                    Shop Smart.
-                </span>
+                Shop Smart.
                 <br>
-                <span class="live-better">
-                    Live Better.
-                </span>
+                <span>Live Better.</span>
             </h1>
 
 
@@ -169,7 +174,7 @@
 
 
 <!-- =====================================================
-     SIMPLE PROFESSIONAL FEATURES
+     SERVICES
 ===================================================== -->
 
 <section class="service-strip">
@@ -330,6 +335,223 @@
 ===================================================== -->
 
 <script src="script.js"></script>
+
+
+<script>
+/* =====================================================
+   HOME SEARCH
+===================================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const input =
+        document.getElementById("searchInput");
+
+    const button =
+        document.getElementById("searchButton");
+
+
+    function searchProducts() {
+
+        if (!input) {
+            return;
+        }
+
+        const text =
+            input.value.trim();
+
+
+        if (text === "") {
+
+            window.location.href =
+                "products.html";
+
+            return;
+        }
+
+
+        window.location.href =
+            "products.html?search=" +
+            encodeURIComponent(text);
+    }
+
+
+    if (button) {
+
+        button.addEventListener(
+            "click",
+            searchProducts
+        );
+
+    }
+
+
+    if (input) {
+
+        input.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (event.key === "Enter") {
+
+                    event.preventDefault();
+
+                    searchProducts();
+
+                }
+
+            }
+        );
+
+    }
+
+
+    updateHomeCartCount();
+
+});
+
+
+/* =====================================================
+   CART COUNT
+===================================================== */
+
+function updateHomeCartCount() {
+
+    const countElement =
+        document.getElementById("cartCount");
+
+
+    if (!countElement) {
+        return;
+    }
+
+
+    try {
+
+        const cart =
+            JSON.parse(
+                localStorage.getItem("shopnova_cart") || "[]"
+            );
+
+
+        if (!Array.isArray(cart)) {
+
+            countElement.textContent = "0";
+
+            return;
+        }
+
+
+        const total =
+            cart.reduce(
+                function (sum, item) {
+
+                    return sum +
+                        Math.max(
+                            0,
+                            Number(item.quantity) || 0
+                        );
+
+                },
+                0
+            );
+
+
+        countElement.textContent =
+            total;
+
+    } catch (error) {
+
+        console.error(
+            "Cart count error:",
+            error
+        );
+
+        countElement.textContent =
+            "0";
+    }
+
+}
+
+
+/* =====================================================
+   CONTACT
+===================================================== */
+
+function openContact() {
+
+    const popup =
+        document.getElementById(
+            "contactPopup"
+        );
+
+
+    if (popup) {
+
+        popup.classList.add("show");
+
+    }
+
+}
+
+
+function closeContact() {
+
+    const popup =
+        document.getElementById(
+            "contactPopup"
+        );
+
+
+    if (popup) {
+
+        popup.classList.remove("show");
+
+    }
+
+}
+
+
+/* Close popup by clicking outside */
+
+document.addEventListener(
+    "click",
+    function (event) {
+
+        const popup =
+            document.getElementById(
+                "contactPopup"
+            );
+
+
+        if (
+            popup &&
+            event.target === popup
+        ) {
+
+            closeContact();
+
+        }
+
+    }
+);
+
+
+/* Escape key closes popup */
+
+document.addEventListener(
+    "keydown",
+    function (event) {
+
+        if (event.key === "Escape") {
+
+            closeContact();
+
+        }
+
+    }
+);
+</script>
 
 </body>
 </html>

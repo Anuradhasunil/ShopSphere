@@ -33,7 +33,6 @@ body {
 ===================================================== */
 
 .main-header {
-
     position: sticky;
     top: 0;
 
@@ -55,9 +54,7 @@ body {
 
 
 .header-inner {
-
     width: 97%;
-
     max-width: 1450px;
 
     height: 76px;
@@ -77,7 +74,6 @@ body {
 ===================================================== */
 
 .brand-logo {
-
     width: 70px;
     height: 60px;
 
@@ -106,7 +102,6 @@ body {
 
 
 .brand-logo:hover {
-
     transform:
         translateY(-2px)
         scale(1.03);
@@ -117,7 +112,6 @@ body {
 
 
 .brand-logo img {
-
     width: 100%;
     height: 100%;
 
@@ -132,7 +126,6 @@ body {
 ===================================================== */
 
 .search-box {
-
     height: 46px;
 
     flex: 1;
@@ -156,7 +149,6 @@ body {
 
 
 .search-box input {
-
     flex: 1;
 
     min-width: 0;
@@ -180,7 +172,6 @@ body {
 
 
 .search-box button {
-
     width: 58px;
 
     border: none;
@@ -201,15 +192,14 @@ body {
 
 
 .search-box button:hover {
-
     background:
         #124dbd;
 }
 
 
 .search-box button:active {
-
-    transform: scale(.94);
+    transform:
+        scale(.94);
 }
 
 
@@ -218,7 +208,6 @@ body {
 ===================================================== */
 
 .nav-links {
-
     margin-left: auto;
 
     display: flex;
@@ -232,7 +221,6 @@ body {
 
 
 .nav-links a {
-
     color: white;
 
     text-decoration: none;
@@ -253,7 +241,6 @@ body {
 
 
 .nav-links a:hover {
-
     background:
         rgba(255,255,255,.13);
 
@@ -263,7 +250,6 @@ body {
 
 
 .nav-links a.active {
-
     background:
         rgba(255,255,255,.15);
 
@@ -272,11 +258,36 @@ body {
 
 
 /* =====================================================
+   SELLER BUTTON
+===================================================== */
+
+.nav-links .seller-link {
+    background:
+        rgba(255,255,255,.10);
+
+    color: white;
+
+    border:
+        1px solid rgba(255,255,255,.12);
+}
+
+
+.nav-links .seller-link:hover {
+    background:
+        rgba(255,255,255,.20);
+
+    color: white;
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =====================================================
    CART COUNT
 ===================================================== */
 
 #cartCount {
-
     display: inline-flex;
 
     align-items: center;
@@ -307,7 +318,6 @@ body {
 ===================================================== */
 
 .contact-btn {
-
     border: none;
 
     border-radius: 9px;
@@ -336,7 +346,6 @@ body {
 
 
 .contact-btn:hover {
-
     background:
         #d92770;
 
@@ -353,13 +362,11 @@ body {
 ===================================================== */
 
 .hero {
-
     width: 100%;
 }
 
 
 .hero-inner {
-
     position: relative;
 
     width: 100%;
@@ -381,7 +388,6 @@ body {
     overflow: hidden;
 
     background:
-
         linear-gradient(
             135deg,
             #dcecff 0%,
@@ -392,11 +398,10 @@ body {
 
 
 /* =====================================================
-   HERO DECORATIVE CIRCLES
+   HERO CIRCLES
 ===================================================== */
 
 .hero-inner::before {
-
     content: "";
 
     position: absolute;
@@ -417,7 +422,6 @@ body {
 
 
 .hero-inner::after {
-
     content: "";
 
     position: absolute;
@@ -442,7 +446,6 @@ body {
 ===================================================== */
 
 .hero-content {
-
     position: relative;
 
     z-index: 5;
@@ -452,7 +455,6 @@ body {
 
 
 .welcome-badge {
-
     display: inline-block;
 
     padding:
@@ -494,11 +496,10 @@ body {
 
 
 /* =====================================================
-   MAIN TITLE - CLEAN 3D EFFECT
+   MAIN TITLE
 ===================================================== */
 
 .hero-content h1 {
-
     color:
         #0a2856;
 
@@ -517,65 +518,16 @@ body {
     margin-bottom:
         25px;
 
+    text-shadow:
+        0 4px 0 rgba(255,255,255,.65),
+        0 8px 18px rgba(12,48,95,.15);
+
     animation:
         titleEnter .9s ease both;
 }
 
 
-/* =====================================================
-   SHOP SMART 3D
-===================================================== */
-
-.hero-content h1 .shop-smart {
-
-    display: inline-block;
-
-    color:
-        #0a2856;
-
-    text-shadow:
-        1px 1px 0 #d7e8fb,
-        2px 2px 0 #c3dbf3,
-        3px 3px 0 #aecfeb,
-        4px 4px 0 #98c2e3,
-        5px 5px 0 rgba(11,55,105,.35),
-        0 10px 18px rgba(12,48,95,.20);
-
-    transform:
-        perspective(500px)
-        translateZ(0);
-
-    transition:
-        transform .3s ease,
-        text-shadow .3s ease;
-}
-
-
-.hero-content h1 .shop-smart:hover {
-
-    transform:
-        perspective(500px)
-        translateY(-3px)
-        translateZ(8px);
-
-    text-shadow:
-        1px 1px 0 #d7e8fb,
-        2px 2px 0 #c3dbf3,
-        3px 3px 0 #aecfeb,
-        4px 4px 0 #98c2e3,
-        6px 6px 0 rgba(11,55,105,.40),
-        0 15px 25px rgba(12,48,95,.25);
-}
-
-
-/* =====================================================
-   LIVE BETTER 3D
-===================================================== */
-
-.hero-content h1 .live-better {
-
-    display: inline-block;
-
+.hero-content h1 span {
     background:
         linear-gradient(
             90deg,
@@ -593,40 +545,12 @@ body {
     color:
         transparent;
 
-    text-shadow:
-        none;
+    text-shadow: none;
 
-    filter:
-        drop-shadow(1px 1px 0 rgba(255,255,255,.65))
-        drop-shadow(2px 2px 0 rgba(20,91,166,.30))
-        drop-shadow(4px 4px 0 rgba(7,84,108,.25))
-        drop-shadow(0 10px 16px rgba(20,100,150,.18));
-
-    transform:
-        perspective(500px)
-        translateZ(0);
-
-    transition:
-        transform .3s ease,
-        filter .3s ease;
+    display: inline-block;
 
     animation:
         liveBetterGlow 3s ease-in-out infinite;
-}
-
-
-.hero-content h1 .live-better:hover {
-
-    transform:
-        perspective(500px)
-        translateY(-3px)
-        translateZ(8px);
-
-    filter:
-        drop-shadow(1px 1px 0 rgba(255,255,255,.75))
-        drop-shadow(2px 2px 0 rgba(20,91,166,.38))
-        drop-shadow(5px 5px 0 rgba(7,84,108,.30))
-        drop-shadow(0 15px 24px rgba(20,100,150,.25));
 }
 
 
@@ -634,12 +558,14 @@ body {
 
     from {
         opacity: 0;
+
         transform:
             translateY(20px);
     }
 
     to {
         opacity: 1;
+
         transform:
             translateY(0);
     }
@@ -651,18 +577,16 @@ body {
     0%,
     100% {
         filter:
-            drop-shadow(1px 1px 0 rgba(255,255,255,.65))
-            drop-shadow(2px 2px 0 rgba(20,91,166,.30))
-            drop-shadow(4px 4px 0 rgba(7,84,108,.25))
-            drop-shadow(0 10px 16px rgba(20,100,150,.18));
+            drop-shadow(
+                0 0 0 rgba(20,100,220,0)
+            );
     }
 
     50% {
         filter:
-            drop-shadow(1px 1px 0 rgba(255,255,255,.75))
-            drop-shadow(3px 3px 0 rgba(20,91,166,.34))
-            drop-shadow(5px 5px 0 rgba(7,84,108,.28))
-            drop-shadow(0 12px 20px rgba(20,100,150,.25));
+            drop-shadow(
+                0 7px 15px rgba(20,100,220,.22)
+            );
     }
 }
 
@@ -672,7 +596,6 @@ body {
 ===================================================== */
 
 .hero-content p {
-
     max-width: 610px;
 
     color:
@@ -691,7 +614,6 @@ body {
 ===================================================== */
 
 .hero-buttons {
-
     display: flex;
 
     gap: 13px;
@@ -703,7 +625,6 @@ body {
 
 
 .primary-btn {
-
     display: inline-flex;
 
     align-items: center;
@@ -740,7 +661,6 @@ body {
 
 
 .primary-btn:hover {
-
     transform:
         translateY(-3px);
 
@@ -750,7 +670,6 @@ body {
 
 
 .secondary-btn {
-
     display: inline-flex;
 
     align-items: center;
@@ -784,7 +703,6 @@ body {
 
 
 .secondary-btn:hover {
-
     transform:
         translateY(-3px);
 
@@ -794,11 +712,10 @@ body {
 
 
 /* =====================================================
-   DOVE / SHOPNOVA CENTER LOGO
+   CENTER DOVE
 ===================================================== */
 
 .center-dove-area {
-
     position: relative;
 
     z-index: 5;
@@ -814,7 +731,6 @@ body {
 
 
 .logo-glow {
-
     width: 500px;
 
     max-width: 100%;
@@ -845,7 +761,6 @@ body {
 
 
 .center-dove-image {
-
     width: 100%;
 
     max-width: 460px;
@@ -903,7 +818,6 @@ body {
 ===================================================== */
 
 .service-strip {
-
     width: calc(100% - 8%);
 
     max-width: 1250px;
@@ -932,7 +846,6 @@ body {
 
 
 .service-item {
-
     min-height: 78px;
 
     padding:
@@ -955,7 +868,6 @@ body {
 
 
 .service-icon {
-
     width: 40px;
     height: 40px;
 
@@ -976,7 +888,6 @@ body {
 
 
 .service-item h3 {
-
     color:
         #17456d;
 
@@ -987,7 +898,6 @@ body {
 
 
 .service-item p {
-
     color:
         #678198;
 
@@ -1000,7 +910,6 @@ body {
 ===================================================== */
 
 .contact-popup {
-
     position: fixed;
 
     inset: 0;
@@ -1025,7 +934,6 @@ body {
 
 
 .contact-box {
-
     position: relative;
 
     width: 100%;
@@ -1047,7 +955,6 @@ body {
 
 
 .close-contact {
-
     position: absolute;
 
     top: 10px;
@@ -1073,7 +980,6 @@ body {
 
 
 .contact-box h2 {
-
     color:
         #173d68;
 
@@ -1082,7 +988,6 @@ body {
 
 
 .contact-box > p {
-
     color:
         #6a8097;
 
@@ -1091,7 +996,6 @@ body {
 
 
 .contact-links {
-
     display: grid;
 
     gap: 10px;
@@ -1099,7 +1003,6 @@ body {
 
 
 .contact-links a {
-
     display: block;
 
     padding: 12px;
@@ -1119,7 +1022,6 @@ body {
 
 
 .contact-links a:hover {
-
     background:
         #dcecff;
 }
@@ -1130,7 +1032,6 @@ body {
 ===================================================== */
 
 .footer {
-
     padding:
         25px 15px;
 
@@ -1144,7 +1045,6 @@ body {
 
 
 .footer img {
-
     width: 150px;
 
     max-height: 65px;
@@ -1162,7 +1062,6 @@ body {
 
 
 .footer p {
-
     color:
         #d7e7fa;
 
@@ -1173,7 +1072,6 @@ body {
 
 
 .footer small {
-
     color:
         #9fb8d2;
 
@@ -1192,12 +1090,15 @@ body {
     }
 
     .nav-links a {
-        padding: 9px 7px;
+        padding:
+            9px 7px;
+
         font-size: 13px;
     }
 
     .contact-btn {
-        padding: 9px 12px;
+        padding:
+            9px 12px;
     }
 
     .hero-inner {
@@ -1208,7 +1109,6 @@ body {
     .logo-glow {
         width: 430px;
     }
-
 }
 
 
@@ -1219,7 +1119,6 @@ body {
 @media (max-width: 800px) {
 
     .header-inner {
-
         height: auto;
 
         min-height: 78px;
@@ -1234,14 +1133,12 @@ body {
 
 
     .brand-logo {
-
         width: 62px;
         height: 54px;
     }
 
 
     .search-box {
-
         order: 3;
 
         width: 100%;
@@ -1251,13 +1148,15 @@ body {
 
 
     .nav-links {
-
         margin-left: 0;
+
+        flex-wrap: wrap;
+
+        justify-content: center;
     }
 
 
     .nav-links a {
-
         font-size: 12px;
 
         padding:
@@ -1266,7 +1165,6 @@ body {
 
 
     .contact-btn {
-
         font-size: 12px;
 
         padding:
@@ -1275,7 +1173,6 @@ body {
 
 
     .hero-inner {
-
         min-height: auto;
 
         padding:
@@ -1289,13 +1186,11 @@ body {
 
 
     .hero-content {
-
         max-width: none;
     }
 
 
     .hero-content h1 {
-
         font-size:
             clamp(45px, 13vw, 65px);
 
@@ -1305,7 +1200,6 @@ body {
 
 
     .hero-content p {
-
         margin-left: auto;
         margin-right: auto;
 
@@ -1314,19 +1208,16 @@ body {
 
 
     .hero-buttons {
-
         justify-content: center;
     }
 
 
     .center-dove-area {
-
         min-height: 260px;
     }
 
 
     .logo-glow {
-
         width: 100%;
 
         max-width: 470px;
@@ -1336,7 +1227,6 @@ body {
 
 
     .service-strip {
-
         width:
             calc(100% - 24px);
 
@@ -1346,35 +1236,30 @@ body {
 
 
     .service-item {
-
         border-bottom:
             1px solid #e0e9f2;
     }
 
 
     .service-item:nth-child(2) {
-
         border-right:
             none;
     }
 
 
     .service-item:nth-child(3) {
-
         border-bottom:
             none;
     }
 
 
     .service-item:nth-child(4) {
-
         border-right:
             none;
 
         border-bottom:
             none;
     }
-
 }
 
 
@@ -1385,44 +1270,40 @@ body {
 @media (max-width: 500px) {
 
     .nav-links {
-
         width: 100%;
 
         justify-content:
             center;
 
         overflow-x: auto;
+
+        flex-wrap: nowrap;
     }
 
 
     .nav-links a {
-
         white-space: nowrap;
     }
 
 
     .hero-inner {
-
         padding:
             38px 15px;
     }
 
 
     .hero-content h1 {
-
         font-size:
             45px;
     }
 
 
     .welcome-badge {
-
         font-size: 11px;
     }
 
 
     .hero-buttons {
-
         flex-direction:
             column;
 
@@ -1432,7 +1313,6 @@ body {
 
     .primary-btn,
     .secondary-btn {
-
         width: 100%;
 
         max-width: 280px;
@@ -1440,7 +1320,6 @@ body {
 
 
     .service-strip {
-
         grid-template-columns:
             1fr;
     }
@@ -1459,8 +1338,6 @@ body {
 
 
     .service-item:last-child {
-
         border-bottom: none;
     }
-
 }
