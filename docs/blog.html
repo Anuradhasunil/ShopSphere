@@ -1,0 +1,856 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ShopNova | Blog</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7ff, #f8f5ff, #fff7fb);
+            color: #172033;
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: linear-gradient(135deg, #061738, #172c69, #542b82);
+            color: white;
+            box-shadow: 0 5px 22px rgba(17, 24, 74, .18);
+        }
+
+        .header-main {
+            width: 100%;
+            max-width: 1450px;
+            margin: auto;
+            padding: 8px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo {
+            min-width: 230px;
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo-art {
+            width: 52px;
+            height: 52px;
+            min-width: 52px;
+            border-radius: 12px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .logo-art img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .logo-content {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .logo-name {
+            font-size: 24px;
+            font-weight: 900;
+        }
+
+        .shop {
+            color: white;
+        }
+
+        .nova {
+            color: #8fb9ff;
+        }
+
+        .logo-tagline {
+            margin-top: 4px;
+            font-size: 8px;
+            color: #d7ddf0;
+            letter-spacing: .8px;
+            font-weight: 700;
+        }
+
+        .header-actions {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .header-actions a {
+            color: white;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 8px 11px;
+            border-radius: 8px;
+        }
+
+        .header-actions a:hover {
+            background: rgba(255, 255, 255, .1);
+        }
+
+        .blog-link {
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+        }
+
+        /* HERO */
+        .blog-hero {
+            background: linear-gradient(135deg, #071a3d, #263d8a, #7137a6);
+            color: white;
+            text-align: center;
+            padding: 55px 20px;
+        }
+
+        .blog-badge {
+            display: inline-block;
+            padding: 7px 16px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, .13);
+            border: 1px solid rgba(255, 255, 255, .2);
+            font-size: 11px;
+            font-weight: 900;
+            margin-bottom: 12px;
+        }
+
+        .blog-hero h1 {
+            font-size: clamp(34px, 6vw, 58px);
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .blog-hero h1 span {
+            color: #9dbdff;
+        }
+
+        .blog-hero p {
+            max-width: 700px;
+            margin: auto;
+            color: #e0e7ff;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* SEARCH */
+        .blog-wrapper {
+            width: 100%;
+            max-width: 1250px;
+            margin: auto;
+            padding: 35px 18px 55px;
+        }
+
+        .search-box {
+            max-width: 650px;
+            margin: 0 auto 35px;
+            display: flex;
+            background: white;
+            border: 1px solid #e0e4f0;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(34, 42, 88, .08);
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 15px 17px;
+            font-size: 14px;
+            color: #172033;
+        }
+
+        .search-box button {
+            border: none;
+            padding: 0 22px;
+            color: white;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        /* BLOG GRID */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 23px;
+        }
+
+        .blog-card {
+            background: white;
+            border: 1px solid #e4e7f2;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(34, 42, 88, .08);
+            transition: .25s;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(34, 42, 88, .14);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 205px;
+            overflow: hidden;
+            background: #eef1f8;
+        }
+
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: .3s;
+        }
+
+        .blog-card:hover .blog-image img {
+            transform: scale(1.05);
+        }
+
+        .blog-content {
+            padding: 20px;
+        }
+
+        .blog-category {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            background: #eef2ff;
+            color: #4f46e5;
+            font-size: 9px;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .blog-content h2 {
+            color: #101b45;
+            font-size: 19px;
+            line-height: 1.35;
+            margin-bottom: 9px;
+        }
+
+        .blog-content p {
+            color: #687188;
+            font-size: 12px;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .read-more {
+            display: inline-block;
+            text-decoration: none;
+            color: #4f46e5;
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .read-more:hover {
+            color: #7c3aed;
+        }
+
+        .no-results {
+            display: none;
+            text-align: center;
+            background: white;
+            border-radius: 16px;
+            padding: 35px;
+            color: #737b90;
+            margin-top: 20px;
+        }
+
+        /* FEATURE */
+        .blog-info {
+            margin-top: 35px;
+            padding: 30px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #071a3d, #263d8a, #7137a6);
+            color: white;
+            text-align: center;
+        }
+
+        .blog-info h2 {
+            font-size: 25px;
+            margin-bottom: 8px;
+        }
+
+        .blog-info p {
+            color: #dbe4ff;
+            font-size: 13px;
+            line-height: 1.7;
+            max-width: 750px;
+            margin: auto;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #071a3d;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+        }
+
+        footer h3 {
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        footer p {
+            color: #cbd5e1;
+            font-size: 11px;
+            margin-top: 6px;
+        }
+
+        /* MOBILE */
+        @media (max-width: 950px) {
+            .blog-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+            .header-main {
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 8px 12px;
+            }
+
+            .logo {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .header-actions {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .header-actions a {
+                font-size: 11px;
+                padding: 7px;
+            }
+
+            .blog-hero {
+                padding: 40px 15px;
+            }
+
+            .blog-wrapper {
+                padding: 25px 12px 40px;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .blog-image {
+                height: 220px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-main">
+
+        <a href="index.html" class="logo">
+
+            <div class="logo-art">
+                <img
+                    src="images/shopnova-logo.png"
+                    alt="ShopNova Logo"
+                    onerror="this.style.display='none';"
+                >
+            </div>
+
+            <div class="logo-content">
+                <div class="logo-name">
+                    <span class="shop">Shop</span><span class="nova">Nova</span>
+                </div>
+
+                <div class="logo-tagline">
+                    PREMIUM SHOPPING • BEAUTIFUL CHOICES
+                </div>
+            </div>
+
+        </a>
+
+        <div class="header-actions">
+
+            <a href="index.html">
+                🏠 Home
+            </a>
+
+            <a href="products.html">
+                🛍️ Products
+            </a>
+
+            <a href="cart.html">
+                🛒 Cart
+            </a>
+
+            <a href="checkout.html">
+                💳 Checkout
+            </a>
+
+            <a href="blog.html" class="blog-link">
+                📝 Blog
+            </a>
+
+        </div>
+
+    </div>
+</header>
+
+<section class="blog-hero">
+
+    <div class="blog-badge">
+        SHOPNOVA KNOWLEDGE CENTER
+    </div>
+
+    <h1>
+        ShopNova <span>Blog</span>
+    </h1>
+
+    <p>
+        Discover useful shopping guides, technology tips,
+        fashion ideas, delivery information and helpful
+        advice for a better online shopping experience.
+    </p>
+
+</section>
+
+<main class="blog-wrapper">
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="blogSearch"
+            placeholder="Search articles..."
+            autocomplete="off"
+        >
+
+        <button type="button" onclick="searchBlogs()">
+            🔍 Search
+        </button>
+
+    </div>
+
+    <div class="blog-grid" id="blogGrid">
+
+        <!-- ARTICLE 1 -->
+
+        <article
+            class="blog-card"
+            data-search="online shopping smart shopping tips shopnova shopping guide"
+        >
+
+            <div class="blog-image">
+                <img
+                    src="images/luxury-banner.jpg"
+                    alt="Smart Online Shopping"
+                    onerror="this.src='images/luxury-banner.jpg';"
+                >
+            </div>
+
+            <div class="blog-content">
+
+                <span class="blog-category">
+                    Shopping Tips
+                </span>
+
+                <h2>
+                    How to Shop Smart Online
+                </h2>
+
+                <p>
+                    Learn simple ways to compare products,
+                    check important details and make better
+                    online shopping decisions.
+                </p>
+
+                <a href="#" class="read-more" onclick="showArticle(event, 'smart')">
+                    Read Article →
+                </a>
+
+            </div>
+
+        </article>
+
+
+        <!-- ARTICLE 2 -->
+
+        <article
+            class="blog-card"
+            data-search="technology gadgets electronics smartphone laptop smart watch"
+        >
+
+            <div class="blog-image">
+                <img
+                    src="images/earbuds.jpg"
+                    alt="Technology and Gadgets"
+                    onerror="this.src='images/luxury-banner.jpg';"
+                >
+            </div>
+
+            <div class="blog-content">
+
+                <span class="blog-category">
+                    Technology
+                </span>
+
+                <h2>
+                    Choosing the Right Tech Product
+                </h2>
+
+                <p>
+                    What should you check before buying
+                    laptops, earbuds, smart watches and
+                    other technology products?
+                </p>
+
+                <a href="#" class="read-more" onclick="showArticle(event, 'tech')">
+                    Read Article →
+                </a>
+
+            </div>
+
+        </article>
+
+
+        <!-- ARTICLE 3 -->
+
+        <article
+            class="blog-card"
+            data-search="fashion clothing style mens womens shoes suit fashion guide"
+        >
+
+            <div class="blog-image">
+                <img
+                    src="images/suit.jpg"
+                    alt="Fashion Guide"
+                    onerror="this.src='images/luxury-banner.jpg';"
+                >
+            </div>
+
+            <div class="blog-content">
+
+                <span class="blog-category">
+                    Fashion
+                </span>
+
+                <h2>
+                    Simple Fashion Choices That Work
+                </h2>
+
+                <p>
+                    Explore practical ideas for choosing
+                    clothing, footwear and accessories for
+                    different occasions.
+                </p>
+
+                <a href="#" class="read-more" onclick="showArticle(event, 'fashion')">
+                    Read Article →
+                </a>
+
+            </div>
+
+        </article>
+
+
+        <!-- ARTICLE 4 -->
+
+        <article
+            class="blog-card"
+            data-search="delivery order tracking gps location delivery address"
+        >
+
+            <div class="blog-image">
+                <img
+                    src="images/bag.jpg"
+                    alt="Order Delivery"
+                    onerror="this.src='images/luxury-banner.jpg';"
+                >
+            </div>
+
+            <div class="blog-content">
+
+                <span class="blog-category">
+                    Delivery
+                </span>
+
+                <h2>
+                    Understanding Your Product Delivery
+                </h2>
+
+                <p>
+                    Learn why accurate delivery information
+                    and location details help make order
+                    delivery smoother.
+                </p>
+
+                <a href="#" class="read-more" onclick="showArticle(event, 'delivery')">
+                    Read Article →
+                </a>
+
+            </div>
+
+        </article>
+
+
+        <!-- ARTICLE 5 -->
+
+        <article
+            class="blog-card"
+            data-search="online safety secure shopping payment privacy ecommerce"
+        >
+
+            <div class="blog-image">
+                <img
+                    src="images/sunglasses.jpg"
+                    alt="Safe Shopping"
+                    onerror="this.src='images/luxury-banner.jpg';"
+                >
+            </div>
+
+            <div class="blog-content">
+
+                <span class="blog-category">
+                    Safety
+                </span>
+
+                <h2>
+                    Tips for a Safer Online Shopping Experience
+                </h2>
+
+                <p>
+                    Understand some basic practices that
+                    can help you protect your account and
+                    shopping information.
+                </p>
+
+                <a href="#" class="read-more" onclick="showArticle(event, 'safety')">
+                    Read Article →
+                </a>
+
+            </div>
+
+        </article>
+
+
+        <!-- ARTICLE 6 -->
+
+        <article
+            class="blog-card"
+            data-search="shopnova products offers deals savings shopping budget"
+        >
+
+            <div class="blog-image">
+                <img
+                    src="images/perfume.jpg"
+                    alt="Shopping Deals"
+                    onerror="this.src='images/luxury-banner.jpg';"
+                >
+            </div>
+
+            <div class="blog-content">
+
+                <span class="blog-category">
+                    Deals
+                </span>
+
+                <h2>
+                    How to Get More Value From Your Shopping
+                </h2>
+
+                <p>
+                    A few simple habits can help you compare
+                    options, avoid unnecessary purchases and
+                    get better value from your budget.
+                </p>
+
+                <a href="#" class="read-more" onclick="showArticle(event, 'value')">
+                    Read Article →
+                </a>
+
+            </div>
+
+        </article>
+
+    </div>
+
+    <div class="no-results" id="noResults">
+        <h2>No articles found</h2>
+        <p>Try another search word.</p>
+    </div>
+
+
+    <section class="blog-info">
+
+        <h2>
+            Shop Smart. Live Better.
+        </h2>
+
+        <p>
+            ShopNova Blog is designed to provide useful,
+            simple and practical information to help you
+            make confident shopping decisions.
+        </p>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <h3>
+        ShopNova
+    </h3>
+
+    <p>
+        Premium shopping • Beautiful choices
+    </p>
+
+    <p>
+        © 2026 ShopNova | CEO & Founder: Anuradha
+    </p>
+
+</footer>
+
+
+<script>
+
+"use strict";
+
+
+/* =========================
+   BLOG SEARCH
+========================= */
+
+function searchBlogs() {
+
+    const input =
+        document.getElementById("blogSearch");
+
+    const search =
+        input.value
+            .trim()
+            .toLowerCase();
+
+    const cards =
+        document.querySelectorAll(".blog-card");
+
+    let found = 0;
+
+    cards.forEach(card => {
+
+        const text =
+            (
+                card.innerText +
+                " " +
+                card.dataset.search
+            ).toLowerCase();
+
+        if (
+            search === "" ||
+            text.includes(search)
+        ) {
+
+            card.style.display = "";
+
+            found++;
+
+        } else {
+
+            card.style.display = "none";
+        }
+
+    });
+
+    document.getElementById("noResults").style.display =
+        found === 0
+            ? "block"
+            : "none";
+}
+
+
+document
+    .getElementById("blogSearch")
+    .addEventListener(
+        "input",
+        searchBlogs
+    );
+
+
+/* =========================
+   ARTICLE PREVIEW
+========================= */
+
+function showArticle(event, type) {
+
+    event.preventDefault();
+
+    const articles = {
+
+        smart:
+            "Smart Shopping: Compare products, check important specifications, understand the price and choose a product that genuinely matches your needs.",
+
+        tech:
+            "Technology Guide: Before buying a gadget, consider its specifications, compatibility, warranty, battery life and how you plan to use it.",
+
+        fashion:
+            "Fashion Guide: Choose clothing and accessories based on comfort, occasion, fit and your personal style rather than following every trend.",
+
+        delivery:
+            "Delivery Guide: Providing a complete and accurate address helps the delivery process. ShopNova can also use location features to make delivery information more useful.",
+
+        safety:
+            "Safe Shopping: Use strong passwords, protect your personal information and always check that you are using the correct shopping website before entering sensitive information.",
+
+        value:
+            "Shopping Value: Compare products, consider quality and usefulness, and avoid purchasing items simply because they are discounted."
+    };
+
+    alert(
+        "ShopNova Blog\n\n" +
+        articles[type]
+    );
+}
+
+</script>
+
+</body>
+</html>
+
