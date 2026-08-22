@@ -1497,3 +1497,116 @@ body {
         cursor: pointer !important;
     }
 }
+/* =====================================================
+   SHOPNOVA MOBILE NAVIGATION FIX
+   Home + Products + Cart + Checkout + Blog + Seller + Contact
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .header-inner {
+        width: 100% !important;
+        max-width: none !important;
+
+        display: flex !important;
+        flex-wrap: wrap !important;
+
+        padding: 8px 10px !important;
+        gap: 8px !important;
+    }
+
+    /* Keep logo visible */
+    .brand-logo {
+        flex: 0 0 auto !important;
+    }
+
+    /* Keep search on its own row */
+    .search-box {
+        order: 2 !important;
+        flex: 1 1 100% !important;
+        width: 100% !important;
+        max-width: none !important;
+    }
+
+    /* MOBILE NAVIGATION */
+    .nav-links {
+        order: 3 !important;
+
+        width: 100% !important;
+        max-width: 100% !important;
+
+        display: flex !important;
+        flex-wrap: nowrap !important;
+
+        align-items: center !important;
+        justify-content: flex-start !important;
+
+        gap: 5px !important;
+
+        margin-left: 0 !important;
+        padding: 8px 4px !important;
+
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+
+        white-space: nowrap !important;
+
+        scrollbar-width: none !important;
+
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .nav-links::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    /* ALL NAVIGATION LINKS */
+    .nav-links a {
+        flex: 0 0 auto !important;
+
+        display: inline-flex !important;
+
+        align-items: center !important;
+        justify-content: center !important;
+
+        white-space: nowrap !important;
+
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    /* CONTACT BUTTON */
+    .nav-links .contact-btn {
+        flex: 0 0 auto !important;
+
+        display: inline-flex !important;
+
+        align-items: center !important;
+        justify-content: center !important;
+
+        width: auto !important;
+        min-width: 75px !important;
+
+        padding: 10px 14px !important;
+        margin: 0 !important;
+
+        border: none !important;
+        border-radius: 9px !important;
+
+        background: #ec4899 !important;
+        color: white !important;
+
+        font-size: 13px !important;
+        font-weight: 800 !important;
+
+        white-space: nowrap !important;
+
+        visibility: visible !important;
+        opacity: 1 !important;
+
+        position: relative !important;
+        z-index: 999999 !important;
+
+        cursor: pointer !important;
+    }
+}
