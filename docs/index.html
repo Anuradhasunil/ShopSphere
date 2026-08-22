@@ -73,6 +73,11 @@
                 Checkout
             </a>
 
+            <!-- BLOG -->
+            <a href="blog.html">
+                Blog
+            </a>
+
             <!-- SELLER -->
             <a
                 href="seller.html"
@@ -166,45 +171,6 @@
 
             </div>
 
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     VISITOR / MEMBER COUNTER
-===================================================== -->
-
-<section
-    class="visitor-counter-section"
-    aria-label="ShopNova visitors"
->
-
-    <div class="visitor-counter">
-
-        <div class="visitor-icon">
-            👥
-        </div>
-
-        <div class="visitor-text">
-
-            <h3>
-                ShopNova Visitors
-            </h3>
-
-            <p>
-                Thank you for visiting our store
-            </p>
-
-        </div>
-
-        <div
-            id="visitorCount"
-            class="visitor-number"
-        >
-            0
         </div>
 
     </div>
@@ -447,8 +413,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     updateHomeCartCount();
 
-    updateVisitorCount();
-
 });
 
 
@@ -510,57 +474,6 @@ function updateHomeCartCount() {
 
         countElement.textContent =
             "0";
-    }
-
-}
-
-
-/* =====================================================
-   VISITOR / MEMBER COUNTER
-===================================================== */
-
-function updateVisitorCount() {
-
-    const visitorElement =
-        document.getElementById("visitorCount");
-
-
-    if (!visitorElement) {
-        return;
-    }
-
-
-    try {
-
-        let visitors =
-            Number(
-                localStorage.getItem(
-                    "shopnova_visitors"
-                )
-            ) || 0;
-
-
-        visitors = visitors + 1;
-
-
-        localStorage.setItem(
-            "shopnova_visitors",
-            visitors
-        );
-
-
-        visitorElement.textContent =
-            visitors.toLocaleString();
-
-    } catch (error) {
-
-        console.error(
-            "Visitor counter error:",
-            error
-        );
-
-        visitorElement.textContent =
-            "1";
     }
 
 }
