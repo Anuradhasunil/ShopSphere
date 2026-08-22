@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>ShopNova | Products</title>
 
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -19,28 +26,56 @@
             color: #183b68;
         }
 
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
         header {
+
             position: sticky;
             top: 0;
             z-index: 9999;
-            background: linear-gradient(90deg,#082b5f,#0d4f91,#155da8);
-            box-shadow: 0 5px 20px rgba(0,35,90,.22);
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #082b5f,
+                    #0d4f91,
+                    #155da8
+                );
+
+            box-shadow:
+                0 5px 20px
+                rgba(0,35,90,.22);
         }
 
+
         .header-inner {
+
             width: 97%;
             max-width: 1450px;
+
             min-height: 76px;
+
             margin: auto;
 
             display: flex;
             align-items: center;
+
             gap: 18px;
         }
 
+
+        /* =====================================================
+           LOGO
+        ===================================================== */
+
         .brand-logo {
+
             width: 70px;
             height: 60px;
+
             flex-shrink: 0;
 
             display: flex;
@@ -48,95 +83,209 @@
             justify-content: center;
 
             background: white;
+
             border-radius: 13px;
+
             overflow: hidden;
 
-            box-shadow: 0 5px 15px rgba(0,0,0,.18);
+            box-shadow:
+                0 5px 15px
+                rgba(0,0,0,.18);
         }
 
+
         .brand-logo img {
+
             width: 100%;
             height: 100%;
+
             object-fit: contain;
         }
 
+
+        /* =====================================================
+           SEARCH
+        ===================================================== */
+
         .search-box {
+
             height: 46px;
+
             flex: 1;
+
             max-width: 650px;
 
             display: flex;
+
             overflow: hidden;
 
             background: white;
-            border: 2px solid #b9d5ff;
+
+            border:
+                2px solid #b9d5ff;
+
             border-radius: 13px;
         }
 
+
         .search-box input {
+
             flex: 1;
+
             min-width: 0;
+
             border: none;
+
             outline: none;
-            padding: 0 17px;
+
+            padding:
+                0 17px;
+
             font-size: 14px;
         }
 
+
         .search-box button {
+
             width: 58px;
+
             border: none;
+
             background: #2464e8;
+
             color: white;
+
             font-size: 20px;
+
             cursor: pointer;
         }
 
+
+        /* =====================================================
+           NAVIGATION
+        ===================================================== */
+
         .nav-links {
+
             margin-left: auto;
 
             display: flex;
+
             align-items: center;
+
             gap: 3px;
 
             white-space: nowrap;
         }
 
+
         .nav-links a {
+
             color: white;
+
             text-decoration: none;
+
             font-size: 14px;
+
             font-weight: 750;
-            padding: 10px 12px;
+
+            padding:
+                10px 12px;
+
             border-radius: 9px;
         }
 
+
         .nav-links a:hover,
         .nav-links a.active {
-            background: rgba(255,255,255,.15);
+
+            background:
+                rgba(255,255,255,.15);
         }
 
+
+        /* =====================================================
+           CONTACT BUTTON
+        ===================================================== */
+
+        .contact-btn {
+
+            border: none;
+
+            color: white;
+
+            background:
+                #e83e8c;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            padding:
+                10px 13px;
+
+            border-radius: 9px;
+
+            cursor: pointer;
+
+            white-space: nowrap;
+        }
+
+
+        .contact-btn:hover {
+
+            background:
+                #d72f7c;
+
+            transform:
+                translateY(-1px);
+        }
+
+
+        /* =====================================================
+           CART COUNT
+        ===================================================== */
+
         #cartCount {
+
             display: inline-flex;
+
             align-items: center;
+
             justify-content: center;
 
             min-width: 20px;
+
             height: 20px;
 
-            padding: 0 5px;
+            padding:
+                0 5px;
+
             margin-left: 3px;
 
             border-radius: 50%;
 
             background: #ef4444;
+
             color: white;
 
             font-size: 10px;
+
             font-weight: 900;
         }
 
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
         .hero {
-            padding: 50px 20px;
+
+            padding:
+                50px 20px;
+
             text-align: center;
 
             background:
@@ -148,112 +297,185 @@
                 );
         }
 
+
         .hero h1 {
+
             color: #0a2856;
-            font-size: clamp(38px,6vw,65px);
+
+            font-size:
+                clamp(38px,6vw,65px);
+
             font-weight: 950;
+
             margin-bottom: 12px;
         }
 
+
         .hero p {
+
             color: #28577e;
+
             font-size: 15px;
         }
 
+
+        /* =====================================================
+           PRODUCTS
+        ===================================================== */
+
         .products-container {
+
             width: 94%;
+
             max-width: 1300px;
-            margin: 35px auto 50px;
+
+            margin:
+                35px auto 50px;
         }
 
+
         .products-title {
+
             text-align: center;
+
             margin-bottom: 25px;
         }
 
+
         .products-title h2 {
+
             color: #123e70;
+
             font-size: 30px;
+
             font-weight: 900;
         }
 
+
         .products-title p {
+
             color: #70859c;
+
             margin-top: 5px;
         }
 
+
         .product-grid {
+
             display: grid;
+
             grid-template-columns:
-                repeat(4, minmax(0,1fr));
+                repeat(4,minmax(0,1fr));
 
             gap: 22px;
         }
 
+
         .product-card {
+
             background: white;
+
             border-radius: 17px;
+
             overflow: hidden;
 
-            border: 1px solid #dce7f4;
+            border:
+                1px solid #dce7f4;
 
             box-shadow:
-                0 8px 25px rgba(25,70,115,.10);
+                0 8px 25px
+                rgba(25,70,115,.10);
 
             transition:
                 transform .25s ease,
                 box-shadow .25s ease;
         }
 
+
         .product-card:hover {
-            transform: translateY(-6px);
+
+            transform:
+                translateY(-6px);
 
             box-shadow:
-                0 15px 35px rgba(25,70,115,.18);
+                0 15px 35px
+                rgba(25,70,115,.18);
         }
 
+
         .product-image {
+
             width: 100%;
+
             height: 230px;
+
             background: #f3f7fc;
+
             overflow: hidden;
         }
 
+
         .product-image img {
+
             width: 100%;
+
             height: 100%;
+
             object-fit: cover;
+
             display: block;
         }
 
+
         .product-info {
+
             padding: 17px;
         }
 
+
         .product-info h3 {
+
             color: #123c68;
+
             font-size: 17px;
+
             font-weight: 900;
+
             margin-bottom: 7px;
         }
 
+
         .product-info p {
+
             color: #72849a;
+
             font-size: 12px;
+
             line-height: 1.5;
+
             min-height: 36px;
         }
 
+
         .price {
+
             color: #155dcc;
+
             font-size: 21px;
+
             font-weight: 950;
-            margin: 12px 0;
+
+            margin:
+                12px 0;
         }
 
+
         .add-cart-btn {
+
             width: 100%;
+
             border: none;
+
             border-radius: 10px;
 
             padding: 12px;
@@ -268,98 +490,395 @@
             color: white;
 
             font-size: 13px;
+
             font-weight: 900;
 
             cursor: pointer;
-
-            transition:
-                transform .2s ease,
-                box-shadow .2s ease;
         }
+
 
         .add-cart-btn:hover {
-            transform: translateY(-2px);
+
+            transform:
+                translateY(-2px);
 
             box-shadow:
-                0 8px 18px rgba(23,103,216,.25);
+                0 8px 18px
+                rgba(23,103,216,.25);
         }
 
+
+        /* =====================================================
+           CONTACT POPUP
+        ===================================================== */
+
+        .contact-popup {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 999999;
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(0,25,60,.65);
+        }
+
+
+        .contact-popup.show {
+
+            display: flex;
+        }
+
+
+        .contact-box {
+
+            position: relative;
+
+            width: 100%;
+
+            max-width: 400px;
+
+            padding: 30px;
+
+            border-radius: 20px;
+
+            background: white;
+
+            text-align: center;
+
+            box-shadow:
+                0 20px 60px
+                rgba(0,0,0,.25);
+        }
+
+
+        .contact-box h2 {
+
+            color: #082b5f;
+
+            margin-bottom: 8px;
+        }
+
+
+        .contact-box p {
+
+            color: #70859c;
+
+            font-size: 14px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .close-contact {
+
+            position: absolute;
+
+            top: 10px;
+
+            right: 14px;
+
+            border: none;
+
+            background: transparent;
+
+            color: #56708e;
+
+            font-size: 28px;
+
+            cursor: pointer;
+        }
+
+
+        .contact-links {
+
+            display: grid;
+
+            gap: 10px;
+        }
+
+
+        .contact-links a {
+
+            display: block;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            background: #eef5ff;
+
+            color: #1455a0;
+
+            text-decoration: none;
+
+            font-weight: 800;
+
+            font-size: 14px;
+        }
+
+
+        .contact-links a:hover {
+
+            background: #dcecff;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
         footer {
+
             padding: 25px;
+
             text-align: center;
 
             background: #092c5d;
+
             color: white;
         }
 
+
         footer p {
+
             color: #d7e7fa;
+
             margin-top: 5px;
+
             font-size: 13px;
         }
+
+
+        /* =====================================================
+           TABLET
+        ===================================================== */
 
         @media(max-width:1050px) {
 
             .product-grid {
+
                 grid-template-columns:
                     repeat(3,1fr);
             }
 
+
             .header-inner {
+
                 flex-wrap: wrap;
             }
 
+
             .search-box {
+
                 order: 3;
+
                 width: 100%;
+
                 max-width: none;
             }
         }
 
-        @media(max-width:750px) {
+
+        /* =====================================================
+           MOBILE NAVIGATION
+        ===================================================== */
+
+        @media(max-width:768px) {
+
+            .header-inner {
+
+                width: 100%;
+
+                padding:
+                    8px 10px;
+
+                flex-wrap: wrap;
+
+                gap: 8px;
+            }
+
+
+            .brand-logo {
+
+                width: 58px;
+
+                height: 50px;
+            }
+
+
+            .search-box {
+
+                order: 3;
+
+                width: 100%;
+            }
+
+
+            .nav-links {
+
+                order: 4;
+
+                width: 100%;
+
+                margin-left: 0;
+
+                display: flex;
+
+                flex-wrap: nowrap;
+
+                overflow-x: auto;
+
+                overflow-y: hidden;
+
+                justify-content:
+                    flex-start;
+
+                align-items: center;
+
+                gap: 5px;
+
+                padding:
+                    7px 3px;
+
+                white-space: nowrap;
+
+                -webkit-overflow-scrolling:
+                    touch;
+
+                scrollbar-width: none;
+            }
+
+
+            .nav-links::-webkit-scrollbar {
+
+                display: none;
+            }
+
+
+            .nav-links a {
+
+                flex:
+                    0 0 auto;
+
+                display:
+                    inline-flex;
+
+                align-items:
+                    center;
+
+                justify-content:
+                    center;
+
+                white-space:
+                    nowrap;
+
+                padding:
+                    9px 10px;
+
+                font-size: 13px;
+            }
+
+
+            .nav-links .contact-btn {
+
+                flex:
+                    0 0 auto;
+
+                display:
+                    inline-flex;
+
+                align-items:
+                    center;
+
+                justify-content:
+                    center;
+
+                white-space:
+                    nowrap;
+
+                padding:
+                    9px 11px;
+
+                margin: 0;
+            }
+
 
             .product-grid {
+
                 grid-template-columns:
                     repeat(2,1fr);
             }
-
-            .nav-links a {
-                font-size: 12px;
-                padding: 8px 6px;
-            }
-
-            .brand-logo {
-                width: 60px;
-                height: 52px;
-            }
         }
+
+
+        /* =====================================================
+           SMALL MOBILE
+        ===================================================== */
 
         @media(max-width:500px) {
 
             .product-grid {
+
                 grid-template-columns: 1fr;
             }
 
-            .nav-links {
-                width: 100%;
-                justify-content: center;
-                overflow-x: auto;
-            }
 
             .hero {
-                padding: 35px 15px;
+
+                padding:
+                    35px 15px;
+            }
+
+
+            .hero h1 {
+
+                font-size: 38px;
+            }
+
+
+            .products-container {
+
+                width: 92%;
+            }
+
+
+            .contact-box {
+
+                padding: 25px 18px;
             }
         }
+
     </style>
+
 </head>
 
+
 <body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
 <header>
 
     <div class="header-inner">
 
-        <a href="index.html" class="brand-logo">
+
+        <a
+            href="index.html"
+            class="brand-logo"
+        >
 
             <img
                 src="images/shopnova-logo.png"
@@ -393,6 +912,7 @@
                 Home
             </a>
 
+
             <a
                 href="products.html"
                 class="active"
@@ -400,14 +920,32 @@
                 Products
             </a>
 
+
             <a href="cart.html">
+
                 Cart
-                <span id="cartCount">0</span>
+
+                <span id="cartCount">
+                    0
+                </span>
+
             </a>
+
 
             <a href="checkout.html">
                 Checkout
             </a>
+
+
+            <!-- CONTACT -->
+
+            <button
+                type="button"
+                class="contact-btn"
+                onclick="openContact()"
+            >
+                Contact
+            </button>
 
         </nav>
 
@@ -415,6 +953,10 @@
 
 </header>
 
+
+<!-- =====================================================
+     HERO
+===================================================== -->
 
 <section class="hero">
 
@@ -428,6 +970,10 @@
 
 </section>
 
+
+<!-- =====================================================
+     PRODUCTS
+===================================================== -->
 
 <main class="products-container">
 
@@ -451,6 +997,82 @@
 
 </main>
 
+
+<!-- =====================================================
+     CONTACT POPUP
+===================================================== -->
+
+<div
+    id="contactPopup"
+    class="contact-popup"
+>
+
+    <div class="contact-box">
+
+        <button
+            type="button"
+            class="close-contact"
+            onclick="closeContact()"
+        >
+            ×
+        </button>
+
+
+        <h2>
+            Contact ShopNova
+        </h2>
+
+
+        <p>
+            We're happy to help you.
+        </p>
+
+
+        <div class="contact-links">
+
+            <a
+                href="https://wa.me/"
+                target="_blank"
+                rel="noopener"
+            >
+                💬 WhatsApp
+            </a>
+
+
+            <a
+                href="https://instagram.com/"
+                target="_blank"
+                rel="noopener"
+            >
+                📸 Instagram
+            </a>
+
+
+            <a
+                href="https://youtube.com/"
+                target="_blank"
+                rel="noopener"
+            >
+                ▶ YouTube
+            </a>
+
+
+            <a
+                href="mailto:support@shopnova.com"
+            >
+                ✉ Email
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
 <footer>
 
@@ -621,7 +1243,7 @@ function saveCart(cart) {
 
 
 /* =====================================================
-   ADD PRODUCT TO CART
+   ADD TO CART
 ===================================================== */
 
 function addProductToCart(
@@ -631,7 +1253,8 @@ function addProductToCart(
     image
 ) {
 
-    const cart = getCart();
+    const cart =
+        getCart();
 
 
     const existing =
@@ -648,16 +1271,14 @@ function addProductToCart(
         existing.quantity =
             (Number(existing.quantity) || 1) + 1;
 
-        /*
-         * IMPORTANT:
-         * Always update the image.
-         * This prevents an old watch image
-         * from remaining attached to another product.
-         */
+        existing.name =
+            name;
 
-        existing.name = name;
-        existing.price = Number(price);
-        existing.image = image;
+        existing.price =
+            Number(price);
+
+        existing.image =
+            image;
 
     } else {
 
@@ -698,12 +1319,14 @@ function displayProducts(list) {
             "productGrid"
         );
 
+
     grid.innerHTML = "";
 
 
     if (!list.length) {
 
         grid.innerHTML = `
+
             <div style="
                 grid-column:1/-1;
                 text-align:center;
@@ -711,8 +1334,11 @@ function displayProducts(list) {
                 color:#70859c;
                 font-weight:700;
             ">
+
                 No products found.
+
             </div>
+
         `;
 
         return;
@@ -723,6 +1349,7 @@ function displayProducts(list) {
 
         const card =
             document.createElement("article");
+
 
         card.className =
             "product-card";
@@ -743,25 +1370,30 @@ function displayProducts(list) {
 
             </div>
 
+
             <div class="product-info">
 
                 <h3>
                     ${product.name}
                 </h3>
 
+
                 <p>
                     Premium ShopNova collection.
                 </p>
 
+
                 <div class="price">
+
                     ₹${Number(product.price)
                         .toLocaleString("en-IN")}
+
                 </div>
+
 
                 <button
                     type="button"
                     class="add-cart-btn"
-                    data-id="${product.id}"
                 >
                     🛒 Add to Cart
                 </button>
@@ -815,7 +1447,7 @@ function updateCartCount() {
 
     const count =
         cart.reduce(
-            function(total, item) {
+            function(total,item) {
 
                 return total +
                     (Number(item.quantity) || 1);
@@ -849,6 +1481,7 @@ function setupSearch() {
         document.getElementById(
             "searchInput"
         );
+
 
     const button =
         document.getElementById(
@@ -892,6 +1525,7 @@ function setupSearch() {
                 event.preventDefault();
 
                 search();
+
             }
 
         }
@@ -915,6 +1549,7 @@ function showMessage(message) {
 
         box =
             document.createElement("div");
+
 
         box.id =
             "shopnovaMessage";
@@ -953,6 +1588,7 @@ function showMessage(message) {
         box.style.boxShadow =
             "0 10px 30px rgba(0,0,0,.25)";
 
+
         document.body.appendChild(box);
     }
 
@@ -984,6 +1620,79 @@ function showMessage(message) {
 
 
 /* =====================================================
+   CONTACT
+===================================================== */
+
+function openContact() {
+
+    const popup =
+        document.getElementById(
+            "contactPopup"
+        );
+
+
+    if (popup) {
+
+        popup.classList.add("show");
+    }
+}
+
+
+function closeContact() {
+
+    const popup =
+        document.getElementById(
+            "contactPopup"
+        );
+
+
+    if (popup) {
+
+        popup.classList.remove("show");
+    }
+}
+
+
+/* Close popup by clicking outside */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const popup =
+            document.getElementById(
+                "contactPopup"
+            );
+
+
+        if (
+            popup &&
+            event.target === popup
+        ) {
+
+            closeContact();
+        }
+    }
+);
+
+
+/* Escape key */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closeContact();
+        }
+    }
+);
+
+
+/* =====================================================
    START
 ===================================================== */
 
@@ -1012,16 +1721,19 @@ document.addEventListener(
                             .includes(
                                 search.toLowerCase()
                             );
-
                     }
                 );
 
-            displayProducts(filtered);
+
+            displayProducts(
+                filtered
+            );
 
         } else {
 
-            displayProducts(products);
-
+            displayProducts(
+                products
+            );
         }
 
 
@@ -1033,6 +1745,7 @@ document.addEventListener(
 );
 
 </script>
+
 
 </body>
 </html>
