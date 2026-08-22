@@ -1435,3 +1435,65 @@ body {
     }
 
 }
+/* =====================================================
+   SHOPNOVA MOBILE CONTACT BUTTON FIX
+   ===================================================== */
+
+@media (max-width: 768px) {
+
+    .nav-links {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+
+        width: 100% !important;
+        margin-left: 0 !important;
+
+        justify-content: flex-start !important;
+        align-items: center !important;
+
+        gap: 6px !important;
+        padding: 8px 5px !important;
+
+        white-space: nowrap !important;
+
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .nav-links::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Home, Products, Cart, Checkout, Seller */
+    .nav-links a {
+        flex: 0 0 auto !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        white-space: nowrap !important;
+    }
+
+    /* CONTACT BUTTON */
+    .nav-links .contact-btn {
+        flex: 0 0 auto !important;
+
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+
+        width: auto !important;
+        min-width: 72px !important;
+
+        padding: 10px 14px !important;
+        margin: 0 !important;
+
+        white-space: nowrap !important;
+
+        visibility: visible !important;
+        opacity: 1 !important;
+
+        cursor: pointer !important;
+    }
+}
