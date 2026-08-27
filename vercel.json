@@ -1,13 +1,9 @@
 {
-  "version": 2,
-  "rewrites": [
+  "redirects": [
     {
-      "source": "/",
-      "destination": "/docs/index.html"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/docs/$1"
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
     }
   ]
 }

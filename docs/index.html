@@ -23,8 +23,6 @@
            DESKTOP + MOBILE
         ===================================================== */
 
-        /* DESKTOP CONTACT BUTTON */
-
         .contact-btn {
 
             border: none;
@@ -99,22 +97,11 @@
 
         @media (max-width: 768px) {
 
-
-            /*
-             * Hide Contact from the normal
-             * top navigation on mobile.
-             */
-
             .nav-links .contact-btn {
 
                 display: none !important;
             }
 
-
-            /*
-             * Separate Contact button
-             * below mobile navigation.
-             */
 
             .mobile-contact-area {
 
@@ -138,10 +125,6 @@
                     );
             }
 
-
-            /*
-             * Mobile Contact button
-             */
 
             .mobile-contact-btn {
 
@@ -191,11 +174,6 @@
             }
 
 
-            /*
-             * When clicked,
-             * animation stops.
-             */
-
             .mobile-contact-btn.clicked {
 
                 animation: none !important;
@@ -204,6 +182,107 @@
                     scale(.96);
             }
 
+        }
+
+
+        /* =====================================================
+           NEW SHOPNOVA LOGO ANIMATION
+           NO DOVE
+        ===================================================== */
+
+        .brand-logo img,
+        .center-dove-image,
+        .footer img {
+
+            animation:
+                shopNovaLogoFloat
+                3.5s
+                ease-in-out
+                infinite;
+
+            transition:
+                transform .35s ease,
+                filter .35s ease;
+        }
+
+
+        /* FLOATING LOGO */
+
+        @keyframes shopNovaLogoFloat {
+
+            0% {
+
+                transform:
+                    translateY(0)
+                    scale(1);
+
+                filter:
+                    drop-shadow(
+                        0 4px 8px
+                        rgba(80,40,180,.15)
+                    );
+            }
+
+
+            50% {
+
+                transform:
+                    translateY(-7px)
+                    scale(1.025);
+
+                filter:
+                    drop-shadow(
+                        0 12px 18px
+                        rgba(120,40,220,.30)
+                    );
+            }
+
+
+            100% {
+
+                transform:
+                    translateY(0)
+                    scale(1);
+
+                filter:
+                    drop-shadow(
+                        0 4px 8px
+                        rgba(80,40,180,.15)
+                    );
+            }
+
+        }
+
+
+        /* LOGO HOVER */
+
+        .brand-logo img:hover,
+        .footer img:hover {
+
+            transform:
+                scale(1.08);
+
+            filter:
+                drop-shadow(
+                    0 10px 20px
+                    rgba(140,40,230,.35)
+                );
+        }
+
+
+        /* CENTER LOGO HOVER */
+
+        .center-dove-image:hover {
+
+            transform:
+                scale(1.06)
+                rotate(1deg);
+
+            filter:
+                drop-shadow(
+                    0 12px 24px
+                    rgba(140,40,230,.40)
+                );
         }
 
     </style>
@@ -224,7 +303,7 @@
     <div class="header-inner">
 
 
-        <!-- SHOPNOVA LOGO -->
+        <!-- SHOPNOVA NEW LOGO -->
 
         <a
             href="index.html"
@@ -232,7 +311,7 @@
         >
 
             <img
-                src="images/shopnova-logo.png"
+                src="images/shopnova-header-logo.png"
                 alt="ShopNova"
             >
 
@@ -424,7 +503,7 @@
         </div>
 
 
-        <!-- CENTER / DOVE LOGO -->
+        <!-- CENTER SHOPNOVA LOGO -->
 
         <div class="center-dove-area">
 
@@ -433,8 +512,8 @@
 
 
                 <img
-                    src="images/shopnova-logo.png"
-                    alt="ShopNova Dove"
+                    src="images/shopnova-header-logo.png"
+                    alt="ShopNova"
                     class="center-dove-image"
                 >
 
@@ -654,7 +733,7 @@
 
 
     <img
-        src="images/shopnova-logo.png"
+        src="images/shopnova-header-logo.png"
         alt="ShopNova"
     >
 
@@ -761,7 +840,6 @@ document.addEventListener(
 
                         searchProducts();
 
-
                     }
 
                 }
@@ -865,12 +943,8 @@ function updateHomeCartCount() {
 function openContact(button) {
 
 
-    /*
-     * Stop the flying animation
-     * when Contact is clicked.
-     */
-
     if (button) {
+
 
         button.classList.add(
             "clicked"
@@ -886,6 +960,7 @@ function openContact(button) {
 
 
     if (popup) {
+
 
         popup.classList.add(
             "show"
@@ -911,17 +986,13 @@ function closeContact() {
 
     if (popup) {
 
+
         popup.classList.remove(
             "show"
         );
 
     }
 
-
-    /*
-     * Allow the Contact button
-     * to fly again after closing.
-     */
 
     const buttons =
         document.querySelectorAll(
@@ -931,6 +1002,7 @@ function closeContact() {
 
     buttons.forEach(
         function(button) {
+
 
             button.classList.remove(
                 "clicked"
@@ -962,6 +1034,7 @@ document.addEventListener(
             event.target === popup
         ) {
 
+
             closeContact();
 
         }
@@ -982,6 +1055,7 @@ document.addEventListener(
         if (
             event.key === "Escape"
         ) {
+
 
             closeContact();
 

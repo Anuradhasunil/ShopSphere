@@ -1610,3 +1610,129 @@ body {
         cursor: pointer !important;
     }
 }
+/* =====================================================
+   SHOPNOVA CONTACT BUTTON
+   DESKTOP + MOBILE
+===================================================== */
+
+/* DESKTOP CONTACT */
+.contact-btn {
+    border: none;
+    cursor: pointer;
+
+    padding: 10px 14px;
+
+    border-radius: 9px;
+
+    background: #ec4899;
+    color: white;
+
+    font-size: 14px;
+    font-weight: 800;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+/* Desktop flying animation */
+@keyframes contactFly {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px) rotate(-2deg);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.contact-btn {
+    animation: contactFly 2s ease-in-out infinite;
+}
+
+.contact-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(236,72,153,.35);
+}
+
+/* =====================================================
+   MOBILE CONTACT
+===================================================== */
+
+.mobile-contact-area {
+    display: none;
+}
+
+
+@media (max-width: 768px) {
+
+    /* Remove Contact from top navigation on mobile */
+    .nav-links .contact-btn {
+        display: none !important;
+    }
+
+    /* Mobile contact area */
+    .mobile-contact-area {
+        display: flex !important;
+
+        width: 100%;
+
+        justify-content: center;
+        align-items: center;
+
+        padding: 8px 0 12px;
+    }
+
+    /* Mobile Contact button */
+    .mobile-contact-btn {
+
+        border: none;
+
+        min-width: 130px;
+
+        padding: 12px 22px;
+
+        border-radius: 30px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #ec4899,
+                #db2777
+            );
+
+        color: white;
+
+        font-size: 14px;
+
+        font-weight: 900;
+
+        cursor: pointer;
+
+        box-shadow:
+            0 8px 20px
+            rgba(236,72,153,.25);
+
+        animation:
+            contactFly 2s ease-in-out infinite;
+
+        transition:
+            transform .25s ease,
+            box-shadow .25s ease;
+    }
+
+    .mobile-contact-btn:hover {
+        transform: scale(1.05);
+    }
+
+    .mobile-contact-btn:active {
+        animation: none;
+        transform: scale(.96);
+    }
+
+}
