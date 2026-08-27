@@ -34,13 +34,13 @@
             width: 100%;
             max-width: 1450px;
             margin: auto;
-            padding: 8px 20px;
+            padding: 10px 20px;
             display: flex;
             align-items: center;
             gap: 16px;
         }
 
-        /* Updated for the new logo layout */
+        /* Fixed Brand Layout for Your Image Banner */
         .logo-link {
             display: flex;
             align-items: center;
@@ -48,7 +48,7 @@
         }
 
         .logo-image {
-            height: 52px; /* Keeps header dimensions perfectly aligned */
+            height: 48px; /* Clean proportional size inside the navigation bar */
             width: auto;
             display: block;
             object-fit: contain;
@@ -68,6 +68,7 @@
             font-weight: 700;
             padding: 8px 11px;
             border-radius: 8px;
+            transition: background 0.2s ease;
         }
 
         .header-actions a:hover {
@@ -95,16 +96,14 @@
             font-size: 11px;
             font-weight: 900;
             margin-bottom: 12px;
+            letter-spacing: 0.5px;
         }
 
         .blog-hero h1 {
-            font-size: clamp(34px, 6vw, 58px);
+            font-size: clamp(34px, 6vw, 54px);
             font-weight: 900;
-            margin-bottom: 10px;
-        }
-
-        .blog-hero h1 span {
-            color: #9dbdff;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
         }
 
         .blog-hero p {
@@ -145,12 +144,17 @@
 
         .search-box button {
             border: none;
-            padding: 0 22px;
+            padding: 0 24px;
             color: white;
             background: linear-gradient(135deg, #2563eb, #7c3aed);
             font-size: 14px;
             font-weight: 800;
             cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .search-box button:hover {
+            opacity: 0.9;
         }
 
         /* BLOG GRID */
@@ -235,39 +239,6 @@
             color: #7c3aed;
         }
 
-        .no-results {
-            display: none;
-            text-align: center;
-            background: white;
-            border-radius: 16px;
-            padding: 35px;
-            color: #737b90;
-            margin-top: 20px;
-        }
-
-        /* FEATURE */
-        .blog-info {
-            margin-top: 35px;
-            padding: 30px;
-            border-radius: 20px;
-            background: linear-gradient(135deg, #071a3d, #263d8a, #7137a6);
-            color: white;
-            text-align: center;
-        }
-
-        .blog-info h2 {
-            font-size: 25px;
-            margin-bottom: 8px;
-        }
-
-        .blog-info p {
-            color: #dbe4ff;
-            font-size: 13px;
-            line-height: 1.7;
-            max-width: 750px;
-            margin: auto;
-        }
-
         /* FOOTER */
         footer {
             background: #071a3d;
@@ -287,7 +258,7 @@
             margin-top: 6px;
         }
 
-        /* MOBILE RESPONSIVENESS (Fixed missing braces) */
+        /* MOBILE RESPONSIVENESS */
         @media (max-width: 950px) {
             .blog-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -296,14 +267,21 @@
 
         @media (max-width: 700px) {
             .header-main {
-                flex-wrap: wrap;
-                justify-content: center;
-                padding: 8px 12px;
+                flex-direction: column;
+                gap: 12px;
+                padding: 12px;
             }
 
             .logo-link {
                 width: 100%;
                 justify-content: center;
+            }
+
+            .header-actions {
+                margin-left: 0;
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
             }
             
             .blog-grid {
@@ -316,30 +294,31 @@
 
     <header>
         <div class="header-main">
-            <!-- New updated Image Logo replaces old text tags -->
-            <a href="#" class="logo-link">
-                <img src="shopnova-logo.png" alt="ShopNova Logo" class="logo-image">
+            <!-- Correct image structural path mapped straight inside your folder -->
+            <a href="index.html" class="logo-link">
+                <img src="images/shopnova-header-logo.png" alt="ShopNova Logo" class="logo-image">
             </a>
             
             <div class="header-actions">
-                <a href="#">Home</a>
-                <a href="#">Shop</a>
-                <a href="#" class="blog-link">Blog</a>
-                <a href="#">Contact</a>
+                <a href="index.html">Home</a>
+                <a href="products.html">Products</a>
+                <a href="cart.html">Cart</a>
+                <a href="checkout.html">Checkout</a>
+                <a href="blog.html" class="blog-link">Blog</a>
             </div>
         </div>
     </header>
 
     <section class="blog-hero">
-        <div class="blog-badge">OUR JOURNAL</div>
-        <h1>Insights & <span>Stories</span></h1>
-        <p>Explore articles on smart shopping, lifestyle tips, and trends curated by the ShopNova team.</p>
+        <div class="blog-badge">SHOPNOVA KNOWLEDGE CENTER</div>
+        <h1>ShopNova Blog</h1>
+        <p>Discover useful shopping guides, technology tips, fashion ideas, delivery information and helpful advice for a better online shopping experience.</p>
     </section>
 
     <div class="blog-wrapper">
         <div class="search-box">
-            <input type="text" placeholder="Search blog posts...">
-            <button>Search</button>
+            <input type="text" placeholder="Search articles...">
+            <button>🔍 Search</button>
         </div>
 
         <div class="blog-grid">
@@ -369,3 +348,7 @@
 
             <article class="blog-card">
                 <div class="blog-image">
+                    <img src="https://unsplash.com" alt="Behind the Scenes">
+                </div>
+                <div class="blog-content">
+                    <span class="blog-category">Inside Nova</span>
