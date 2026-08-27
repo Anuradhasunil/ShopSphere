@@ -336,6 +336,7 @@
         }
 
         @media (max-width: 700px) {
+
             .header-main {
                 flex-wrap: wrap;
                 justify-content: center;
@@ -384,15 +385,12 @@
 
         <a href="index.html" class="logo">
 
+            <!-- SHOPNOVA LOGO -->
             <div class="logo-art">
-
-                <!-- ONLY LOGO UPDATED -->
                 <img
-                    src="images/shopnova_blog_logo.png"
+                    src="images/shopnova-app-icon.png"
                     alt="ShopNova Logo"
-                    onerror="this.style.display='none';"
                 >
-
             </div>
 
             <div class="logo-content">
@@ -436,6 +434,7 @@
     </div>
 </header>
 
+
 <section class="blog-hero">
 
     <div class="blog-badge">
@@ -454,6 +453,7 @@
 
 </section>
 
+
 <main class="blog-wrapper">
 
     <div class="search-box">
@@ -470,6 +470,7 @@
         </button>
 
     </div>
+
 
     <div class="blog-grid" id="blogGrid">
 
@@ -750,6 +751,7 @@
 
     </div>
 
+
     <div class="no-results" id="noResults">
 
         <h2>
@@ -801,6 +803,7 @@
 
 "use strict";
 
+
 /* =========================
    BLOG SEARCH
 ========================= */
@@ -820,6 +823,7 @@ function searchBlogs() {
 
     let found = 0;
 
+
     cards.forEach(card => {
 
         const text =
@@ -828,6 +832,7 @@ function searchBlogs() {
                 " " +
                 card.dataset.search
             ).toLowerCase();
+
 
         if (
             search === "" ||
@@ -846,6 +851,7 @@ function searchBlogs() {
 
     });
 
+
     document.getElementById("noResults").style.display =
         found === 0
             ? "block"
@@ -853,6 +859,10 @@ function searchBlogs() {
 
 }
 
+
+/* =========================
+   LIVE SEARCH
+========================= */
 
 document
     .getElementById("blogSearch")
@@ -869,6 +879,7 @@ document
 function showArticle(event, type) {
 
     event.preventDefault();
+
 
     const articles = {
 
@@ -891,6 +902,7 @@ function showArticle(event, type) {
             "Shopping Value: Compare products, consider quality and usefulness, and avoid purchasing items simply because they are discounted."
 
     };
+
 
     alert(
         "ShopNova Blog\n\n" +
