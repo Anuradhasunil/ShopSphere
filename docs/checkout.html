@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <meta charset="UTF-8">
@@ -186,6 +187,8 @@
             padding: 8px 11px;
 
             border-radius: 8px;
+
+            transition: .2s;
         }
 
         .header-actions a:hover {
@@ -412,7 +415,8 @@
 
             border-radius: 12px;
 
-            border: 1px solid #dfe3ef;
+            border:
+                1px solid #dfe3ef;
 
             background:
                 linear-gradient(
@@ -675,6 +679,8 @@
             height: 100%;
 
             object-fit: cover;
+
+            display: block;
         }
 
         .checkout-product-info strong {
@@ -943,6 +949,8 @@
                 width: 100%;
 
                 justify-content: center;
+
+                flex-wrap: wrap;
             }
 
             .header-actions a {
@@ -992,6 +1000,7 @@
                 <img
                     src="images/shopnova-logo.png"
                     alt="ShopNova Logo"
+                    onerror="this.onerror=null; this.src='images/shopnova-header-logo.png';"
                 >
 
             </div>
@@ -1045,6 +1054,7 @@
 
 </header>
 
+
 <section class="checkout-hero">
 
     <div class="checkout-badge">
@@ -1061,6 +1071,7 @@
 
 </section>
 
+
 <main class="checkout-wrapper">
 
     <div
@@ -1068,7 +1079,9 @@
         class="checkout-layout"
     >
 
-        <!-- CUSTOMER DETAILS -->
+        <!-- =========================
+             CUSTOMER DETAILS
+        ========================= -->
 
         <section class="checkout-card">
 
@@ -1079,6 +1092,7 @@
             <p class="checkout-card-subtitle">
                 Please provide your details for delivery.
             </p>
+
 
             <form id="checkoutForm">
 
@@ -1100,6 +1114,7 @@
 
                     </div>
 
+
                     <div class="form-group">
 
                         <label for="lastName">
@@ -1115,6 +1130,7 @@
                         >
 
                     </div>
+
 
                     <div class="form-group">
 
@@ -1132,6 +1148,7 @@
 
                     </div>
 
+
                     <div class="form-group">
 
                         <label for="phone">
@@ -1148,6 +1165,7 @@
 
                     </div>
 
+
                     <div class="form-group full">
 
                         <label for="address">
@@ -1162,6 +1180,7 @@
                         ></textarea>
 
                     </div>
+
 
                     <!-- =========================
                          GPS LOCATION
@@ -1200,7 +1219,8 @@
 
                     </div>
 
-                    <!-- Hidden GPS fields -->
+
+                    <!-- HIDDEN GPS FIELDS -->
 
                     <input
                         type="hidden"
@@ -1213,6 +1233,7 @@
                         id="longitude"
                         name="longitude"
                     >
+
 
                     <div class="form-group">
 
@@ -1230,6 +1251,7 @@
 
                     </div>
 
+
                     <div class="form-group">
 
                         <label for="state">
@@ -1245,6 +1267,7 @@
                         >
 
                     </div>
+
 
                     <div class="form-group">
 
@@ -1262,6 +1285,7 @@
                         >
 
                     </div>
+
 
                     <div class="form-group">
 
@@ -1284,9 +1308,15 @@
 
                 </div>
 
+
+                <!-- =========================
+                     PAYMENT METHOD
+                ========================= -->
+
                 <h3 class="payment-title">
                     Payment Method
                 </h3>
+
 
                 <div class="payment-options">
 
@@ -1313,6 +1343,7 @@
 
                     </label>
 
+
                     <label class="payment-option">
 
                         <input
@@ -1334,6 +1365,7 @@
                         </div>
 
                     </label>
+
 
                     <label class="payment-option">
 
@@ -1359,6 +1391,7 @@
 
                 </div>
 
+
                 <button
                     type="submit"
                     class="payment-btn"
@@ -1371,7 +1404,10 @@
 
         </section>
 
-        <!-- ORDER SUMMARY -->
+
+        <!-- =========================
+             ORDER SUMMARY
+        ========================= -->
 
         <aside class="order-card">
 
@@ -1379,12 +1415,15 @@
                 Your Order
             </h2>
 
+
             <div
                 id="checkoutProducts"
                 class="checkout-products"
             ></div>
 
+
             <div class="order-divider"></div>
+
 
             <div class="order-row">
 
@@ -1398,6 +1437,7 @@
 
             </div>
 
+
             <div class="order-row">
 
                 <span>
@@ -1409,6 +1449,7 @@
                 </span>
 
             </div>
+
 
             <div class="order-row">
 
@@ -1422,6 +1463,7 @@
 
             </div>
 
+
             <div class="order-row">
 
                 <span>
@@ -1434,7 +1476,9 @@
 
             </div>
 
+
             <div class="order-divider"></div>
+
 
             <div class="grand-total">
 
@@ -1448,14 +1492,23 @@
 
             </div>
 
+
             <div class="secure-text">
-                🔐 Your checkout information is handled securely.<br>
+
+                🔐 Your checkout information is handled securely.
+                <br>
                 🛡️ ShopNova Safe Shopping
+
             </div>
 
         </aside>
 
     </div>
+
+
+    <!-- =========================
+         EMPTY CART
+    ========================= -->
 
     <section
         id="emptyMessage"
@@ -1481,6 +1534,11 @@
 
 </main>
 
+
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
 
     <h3>
@@ -1497,12 +1555,17 @@
 
 </footer>
 
+
+<!-- =========================
+     CHECKOUT JAVASCRIPT
+========================= -->
+
 <script>
 
 "use strict";
 
-const CART_KEY =
-    "shopnova_cart";
+const CART_KEY = "shopnova_cart";
+
 
 /* =========================
    CART
@@ -1523,9 +1586,15 @@ function getCart() {
 
     } catch (error) {
 
+        console.error(
+            "ShopNova cart error:",
+            error
+        );
+
         return [];
     }
 }
+
 
 /* =========================
    MONEY
@@ -1537,6 +1606,7 @@ function money(value) {
         Number(value || 0)
             .toLocaleString("en-IN");
 }
+
 
 /* =========================
    ESCAPE TEXT
@@ -1552,25 +1622,40 @@ function escapeHTML(text) {
         .replace(/'/g, "&#039;");
 }
 
+
 /* =========================
-   GPS LOCATION
+   GPS ELEMENTS
 ========================= */
 
 const gpsButton =
-    document.getElementById("gpsButton");
+    document.getElementById(
+        "gpsButton"
+    );
 
 const locationStatus =
-    document.getElementById("locationStatus");
+    document.getElementById(
+        "locationStatus"
+    );
 
 const gpsCoordinates =
-    document.getElementById("gpsCoordinates");
+    document.getElementById(
+        "gpsCoordinates"
+    );
 
 const latitudeInput =
-    document.getElementById("latitude");
+    document.getElementById(
+        "latitude"
+    );
 
 const longitudeInput =
-    document.getElementById("longitude");
+    document.getElementById(
+        "longitude"
+    );
 
+
+/* =========================
+   GPS LOCATION
+========================= */
 
 if (gpsButton) {
 
@@ -1589,16 +1674,19 @@ if (gpsButton) {
                 return;
             }
 
+
             gpsButton.disabled = true;
 
             gpsButton.textContent =
                 "📍 Getting your location...";
+
 
             locationStatus.textContent =
                 "Please allow location access in your browser.";
 
             locationStatus.className =
                 "location-status";
+
 
             navigator.geolocation.getCurrentPosition(
 
@@ -1615,11 +1703,13 @@ if (gpsButton) {
                             position.coords.accuracy
                         );
 
+
                     latitudeInput.value =
                         latitude;
 
                     longitudeInput.value =
                         longitude;
+
 
                     locationStatus.textContent =
                         "✅ Your current location has been captured successfully.";
@@ -1627,8 +1717,10 @@ if (gpsButton) {
                     locationStatus.className =
                         "location-status success";
 
+
                     gpsCoordinates.style.display =
                         "block";
+
 
                     gpsCoordinates.textContent =
                         "📍 Latitude: " +
@@ -1639,52 +1731,71 @@ if (gpsButton) {
                         accuracy +
                         " meters";
 
+
                     gpsButton.disabled =
                         false;
+
 
                     gpsButton.textContent =
                         "📍 Location Captured — Use Again";
 
-                    /*
-                       Save temporarily in browser.
-                       Later the server will save this
-                       with the actual order.
-                    */
+
+                    /* Save location temporarily */
 
                     localStorage.setItem(
+
                         "shopnova_buyer_location",
+
                         JSON.stringify({
-                            latitude: latitude,
-                            longitude: longitude,
-                            accuracy: accuracy,
+
+                            latitude:
+                                latitude,
+
+                            longitude:
+                                longitude,
+
+                            accuracy:
+                                accuracy,
+
                             capturedAt:
                                 new Date().toISOString()
+
                         })
+
                     );
 
                 },
+
 
                 function (error) {
 
                     let message =
                         "❌ Unable to get your location.";
 
+
                     if (error.code === 1) {
 
                         message =
                             "❌ Location permission was denied. Please allow location access and try again.";
 
-                    } else if (error.code === 2) {
+                    }
+
+
+                    else if (error.code === 2) {
 
                         message =
                             "❌ Your location could not be determined. Please try again.";
 
-                    } else if (error.code === 3) {
+                    }
+
+
+                    else if (error.code === 3) {
 
                         message =
                             "❌ Location request timed out. Please try again.";
 
                     }
+
 
                     locationStatus.textContent =
                         message;
@@ -1692,23 +1803,36 @@ if (gpsButton) {
                     locationStatus.className =
                         "location-status error";
 
+
                     gpsButton.disabled =
                         false;
 
+
                     gpsButton.textContent =
                         "📍 Try Location Again";
+
                 },
 
+
                 {
-                    enableHighAccuracy: true,
 
-                    timeout: 15000,
+                    enableHighAccuracy:
+                        true,
 
-                    maximumAge: 0
+                    timeout:
+                        15000,
+
+                    maximumAge:
+                        0
+
                 }
+
             );
+
         }
+
     );
+
 }
 
 
@@ -1721,15 +1845,18 @@ function renderCheckout() {
     const cart =
         getCart();
 
+
     const layout =
         document.getElementById(
             "checkoutLayout"
         );
 
+
     const empty =
         document.getElementById(
             "emptyMessage"
         );
+
 
     if (!cart.length) {
 
@@ -1742,23 +1869,28 @@ function renderCheckout() {
         return;
     }
 
+
     layout.style.display =
         "grid";
 
     empty.style.display =
         "none";
 
+
     const container =
         document.getElementById(
             "checkoutProducts"
         );
 
+
     container.innerHTML =
         "";
+
 
     let subtotal = 0;
 
     let quantityTotal = 0;
+
 
     cart.forEach(
         item => {
@@ -1766,33 +1898,47 @@ function renderCheckout() {
             const quantity =
                 Number(item.quantity) || 1;
 
+
             const price =
                 Number(item.price) || 0;
 
+
             const total =
                 price * quantity;
+
 
             subtotal += total;
 
             quantityTotal += quantity;
 
+
             const product =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
+
 
             product.className =
                 "checkout-product";
+
+
+            const image =
+                item.image ||
+                "images/luxury-banner.jpg";
+
 
             product.innerHTML = `
 
                 <div class="checkout-product-image">
 
                     <img
-                        src="${item.image || "images/luxury-banner.jpg"}"
+                        src="${escapeHTML(image)}"
                         alt="${escapeHTML(item.name)}"
                         onerror="this.onerror=null;this.src='images/luxury-banner.jpg';"
                     >
 
                 </div>
+
 
                 <div class="checkout-product-info">
 
@@ -1806,16 +1952,25 @@ function renderCheckout() {
 
                 </div>
 
+
                 <div class="checkout-product-total">
                     ${money(total)}
                 </div>
 
             `;
 
-            container.appendChild(product);
+
+            container.appendChild(
+                product
+            );
 
         }
     );
+
+
+    /* =========================
+       DISCOUNT
+    ========================= */
 
     const discount =
         subtotal >= 5000
@@ -1824,48 +1979,63 @@ function renderCheckout() {
                 ? 250
                 : 0;
 
+
     const grandTotal =
         Math.max(
             0,
             subtotal - discount
         );
 
+
     document.getElementById(
         "orderItems"
     ).textContent =
         quantityTotal;
+
 
     document.getElementById(
         "orderSubtotal"
     ).textContent =
         money(subtotal);
 
+
     document.getElementById(
         "orderDiscount"
     ).textContent =
-        "-" + money(discount);
+        "-" +
+        money(discount);
+
 
     document.getElementById(
         "orderTotal"
     ).textContent =
         money(grandTotal);
+
 }
 
 
 /* =========================
-   FORM SUBMIT
+   CHECKOUT FORM
 ========================= */
 
-document
-    .getElementById("checkoutForm")
-    .addEventListener(
+const checkoutForm =
+    document.getElementById(
+        "checkoutForm"
+    );
+
+
+if (checkoutForm) {
+
+    checkoutForm.addEventListener(
         "submit",
         function(event) {
 
             event.preventDefault();
 
+
             const cart =
                 getCart();
+
 
             if (!cart.length) {
 
@@ -1875,26 +2045,34 @@ document
                 return;
             }
 
+
             const payment =
                 document.querySelector(
                     'input[name="payment"]:checked'
                 );
+
 
             const paymentName =
                 payment
                     ? payment.value
                     : "upi";
 
+
             const latitude =
-                latitudeInput.value;
+                latitudeInput
+                    ? latitudeInput.value
+                    : "";
+
 
             const longitude =
-                longitudeInput.value;
+                longitudeInput
+                    ? longitudeInput.value
+                    : "";
 
 
-            /*
-              Collect buyer delivery information.
-            */
+            /* =========================
+               CUSTOMER DATA
+            ========================= */
 
             const customerData = {
 
@@ -1957,100 +2135,141 @@ document
 
                 createdAt:
                     new Date().toISOString()
+
             };
 
 
-            /*
-              Save the order temporarily in browser.
-              Next step: send this data to server.js
-              and seller panel.
-            */
+            /* =========================
+               SAVE PENDING ORDER
+            ========================= */
 
             localStorage.setItem(
+
                 "shopnova_pending_order",
+
                 JSON.stringify(
                     customerData
                 )
+
             );
 
 
-            /*
-              This is still a front-end checkout.
-              It does NOT charge real money.
-            */
+            /* =========================
+               FRONT-END PAYMENT NOTICE
+            ========================= */
 
             if (
                 paymentName === "cod"
             ) {
 
                 alert(
+
                     "Order details accepted!\n\n" +
+
                     "Cash on Delivery selected.\n\n" +
+
                     (
                         latitude &&
                         longitude
+
                             ? "📍 Delivery GPS location captured successfully.\n\n"
+
                             : "📍 GPS location was not selected.\n\n"
                     ) +
+
                     "Thank you for shopping with ShopNova."
+
                 );
 
-            } else {
+            }
+
+            else {
 
                 alert(
+
                     "Checkout ready!\n\n" +
+
                     "Payment method: " +
+
                     paymentName.toUpperCase() +
+
                     "\n\n" +
+
                     (
                         latitude &&
                         longitude
+
                             ? "📍 Delivery GPS location captured successfully.\n\n"
+
                             : "📍 GPS location was not selected.\n\n"
                     ) +
+
                     "Connect your real payment gateway here."
+
                 );
+
             }
 
         }
+
     );
+
+}
 
 
 /* =========================
-   READY
+   PAGE READY
 ========================= */
 
 document.addEventListener(
     "DOMContentLoaded",
-    renderCheckout
+    function() {
+
+        renderCheckout();
+
+    }
 );
 
 
 /* =========================
-   STORAGE UPDATE
+   CART STORAGE UPDATE
 ========================= */
 
 window.addEventListener(
     "storage",
-    event => {
+    function(event) {
 
         if (
             event.key === CART_KEY
         ) {
 
             renderCheckout();
+
         }
+
     }
 );
 
 </script>
 
+
+<!-- =========================
+     SHOPNOVA GLOBAL SCRIPT
+========================= -->
+
+<script src="script.js"></script>
+
+
+<!-- =========================
+     VERCEL ANALYTICS
+========================= -->
+
+<script
+    defer
+    src="/_vercel/insights/script.js"
+></script>
+
+
 </body>
-</html>
-    <!-- Other content above -->
-    <script src="script.js"></script> 
-    
-    <!-- Paste the Vercel script right here -->
-    <script defer src="/_vercel/insights/script.js"></script>
-</body>
+
 </html>
