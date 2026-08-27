@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>ShopNova | Blog</title>
 
     <style>
@@ -20,7 +20,9 @@
             min-height: 100vh;
         }
 
-        /* HEADER */
+        /* =========================================================
+           HEADER
+        ========================================================= */
         header {
             position: sticky;
             top: 0;
@@ -40,7 +42,7 @@
             gap: 16px;
         }
 
-        /* Fixed Brand Layout for Your Image Banner */
+        /* SHOPNOVA HEADER LOGO */
         .logo-link {
             display: flex;
             align-items: center;
@@ -48,12 +50,13 @@
         }
 
         .logo-image {
-            height: 48px; /* Clean proportional size inside the navigation bar */
+            height: 48px;
             width: auto;
             display: block;
             object-fit: contain;
         }
 
+        /* HEADER NAVIGATION */
         .header-actions {
             margin-left: auto;
             display: flex;
@@ -79,7 +82,9 @@
             background: linear-gradient(135deg, #6366f1, #a855f7);
         }
 
-        /* HERO */
+        /* =========================================================
+           BLOG HERO
+        ========================================================= */
         .blog-hero {
             background: linear-gradient(135deg, #071a3d, #263d8a, #7137a6);
             color: white;
@@ -114,7 +119,9 @@
             line-height: 1.7;
         }
 
-        /* SEARCH */
+        /* =========================================================
+           BLOG WRAPPER
+        ========================================================= */
         .blog-wrapper {
             width: 100%;
             max-width: 1250px;
@@ -122,6 +129,9 @@
             padding: 35px 18px 55px;
         }
 
+        /* =========================================================
+           SEARCH
+        ========================================================= */
         .search-box {
             max-width: 650px;
             margin: 0 auto 35px;
@@ -157,13 +167,18 @@
             opacity: 0.9;
         }
 
-        /* BLOG GRID */
+        /* =========================================================
+           BLOG GRID
+        ========================================================= */
         .blog-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 23px;
         }
 
+        /* =========================================================
+           BLOG CARD
+        ========================================================= */
         .blog-card {
             background: white;
             border: 1px solid #e4e7f2;
@@ -178,6 +193,9 @@
             box-shadow: 0 15px 35px rgba(34, 42, 88, .14);
         }
 
+        /* =========================================================
+           BLOG IMAGE
+        ========================================================= */
         .blog-image {
             width: 100%;
             height: 205px;
@@ -197,6 +215,9 @@
             transform: scale(1.05);
         }
 
+        /* =========================================================
+           BLOG CONTENT
+        ========================================================= */
         .blog-content {
             padding: 20px;
         }
@@ -239,12 +260,58 @@
             color: #7c3aed;
         }
 
-        /* FOOTER */
+        /* =========================================================
+           NO RESULTS
+        ========================================================= */
+        .no-results {
+            display: none;
+            text-align: center;
+            background: white;
+            border-radius: 16px;
+            padding: 35px;
+            color: #737b90;
+            margin-top: 20px;
+        }
+
+        .no-results h2 {
+            color: #101b45;
+            margin-bottom: 8px;
+        }
+
+        /* =========================================================
+           BLOG INFO
+        ========================================================= */
+        .blog-info {
+            margin-top: 35px;
+            padding: 30px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #071a3d, #263d8a, #7137a6);
+            color: white;
+            text-align: center;
+        }
+
+        .blog-info h2 {
+            font-size: 25px;
+            margin-bottom: 8px;
+        }
+
+        .blog-info p {
+            color: #dbe4ff;
+            font-size: 13px;
+            line-height: 1.7;
+            max-width: 750px;
+            margin: auto;
+        }
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
         footer {
             background: #071a3d;
             color: white;
             text-align: center;
             padding: 25px 15px;
+            margin-top: 40px;
         }
 
         footer h3 {
@@ -258,7 +325,9 @@
             margin-top: 6px;
         }
 
-        /* MOBILE RESPONSIVENESS */
+        /* =========================================================
+           RESPONSIVE MEDIA QUERIES
+        ========================================================= */
         @media (max-width: 950px) {
             .blog-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -290,64 +359,10 @@
         }
     </style>
 </head>
+
 <body>
 
+    <!-- HEADER NAVIGATION -->
     <header>
         <div class="header-main">
-            <!-- Added version parameter ?v=2 to bypass old cached images globally -->
-            <a href="index.html" class="logo-link">
-                <img src="images/shopnova-header-logo.png?v=2" alt="ShopNova Logo" class="logo-image">
-            </a>
-            
-            <div class="header-actions">
-                <a href="index.html">Home</a>
-                <a href="products.html">Products</a>
-                <a href="cart.html">Cart</a>
-                <a href="checkout.html">Checkout</a>
-                <a href="blog.html" class="blog-link">Blog</a>
-            </div>
-        </div>
-    </header>
-
-    <section class="blog-hero">
-        <div class="blog-badge">SHOPNOVA KNOWLEDGE CENTER</div>
-        <h1>ShopNova Blog</h1>
-        <p>Discover useful shopping guides, technology tips, fashion ideas, delivery information and helpful advice for a better online shopping experience.</p>
-    </section>
-
-    <div class="blog-wrapper">
-        <div class="search-box">
-            <input type="text" placeholder="Search articles...">
-            <button>🔍 Search</button>
-        </div>
-
-        <div class="blog-grid">
-            <article class="blog-card">
-                <div class="blog-image">
-                    <img src="https://unsplash.com" alt="Smart Shopping">
-                </div>
-                <div class="blog-content">
-                    <span class="blog-category">Guides</span>
-                    <h2>10 Tips for Smarter Shopping Decisions</h2>
-                    <p>Discover how to optimize your budget and pick items that add real longevity to your lifestyle.</p>
-                    <a href="#" class="read-more">Read Article →</a>
-                </div>
-            </article>
-
-            <article class="blog-card">
-                <div class="blog-image">
-                    <img src="https://unsplash.com" alt="Trends">
-                </div>
-                <div class="blog-content">
-                    <span class="blog-category">Trends</span>
-                    <h2>Upcoming Lifestyle Shifts This Year</h2>
-                    <p>A closer look at consumer trends focusing heavily on sustainability and minimalist modern living spaces.</p>
-                    <a href="#" class="read-more">Read Article →</a>
-                </div>
-            </article>
-
-            <article class="blog-card">
-                <div class="blog-image">
-                    <img src="https://unsplash.com" alt="Behind the Scenes">
-                </div>
-                <div class="blog-content">
+            <!-- Universal absolute cloud link ensures logo loads 100% of the time -->
