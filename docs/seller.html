@@ -1,9 +1,9 @@
+
 <!DOCTYPE html>
 
 <html lang="en">
 
 <head>
-
 
 <meta charset="UTF-8">
 
@@ -395,12 +395,12 @@
 
 
     /* ==============================
-       IMAGE
+       MULTIPLE PRODUCT IMAGES
     ============================== */
 
     .image-box {
 
-        padding: 15px;
+        padding: 18px;
 
         border:
             2px dashed #b9d5ef;
@@ -411,19 +411,43 @@
     }
 
 
-    .image-preview {
+    .image-help {
 
-        width: 180px;
+        margin-top: 8px;
 
-        height: 150px;
+        color: #698198;
 
-        margin-top: 15px;
+        font-size: 12px;
 
-        display: none;
+        line-height: 1.5;
+    }
 
-        align-items: center;
 
-        justify-content: center;
+    .image-help strong {
+
+        color: #1767d8;
+    }
+
+
+    .image-preview-grid {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(
+                auto-fill,
+                minmax(150px, 1fr)
+            );
+
+        gap: 15px;
+
+        margin-top: 18px;
+    }
+
+
+    .image-preview-card {
+
+        position: relative;
 
         overflow: hidden;
 
@@ -432,17 +456,137 @@
         border:
             1px solid #d9e6f3;
 
+        background: white;
+
+        box-shadow:
+            0 5px 15px
+            rgba(20,65,110,.08);
+    }
+
+
+    .image-preview-card img {
+
+        display: block;
+
+        width: 100%;
+
+        height: 150px;
+
+        object-fit: contain;
+
         background: #eef5fc;
     }
 
 
-    .image-preview img {
+    .image-preview-info {
 
-        width: 100%;
+        padding: 9px;
 
-        height: 100%;
+        text-align: center;
+    }
 
-        object-fit: contain;
+
+    .image-number {
+
+        display: inline-block;
+
+        margin-bottom: 4px;
+
+        padding:
+            4px 8px;
+
+        border-radius: 20px;
+
+        background: #e8f2ff;
+
+        color: #1767d8;
+
+        font-size: 10px;
+
+        font-weight: 900;
+    }
+
+
+    .image-name {
+
+        overflow: hidden;
+
+        color: #56708e;
+
+        font-size: 10px;
+
+        white-space: nowrap;
+
+        text-overflow: ellipsis;
+    }
+
+
+    .remove-image {
+
+        position: absolute;
+
+        top: 7px;
+
+        right: 7px;
+
+        width: 28px;
+
+        height: 28px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        border: none;
+
+        border-radius: 50%;
+
+        background: #b42318;
+
+        color: white;
+
+        font-size: 14px;
+
+        font-weight: 900;
+
+        cursor: pointer;
+
+        box-shadow:
+            0 3px 8px
+            rgba(0,0,0,.18);
+    }
+
+
+    .remove-image:hover {
+
+        background: #8f1b12;
+
+        transform: scale(1.05);
+    }
+
+
+    .main-image-badge {
+
+        position: absolute;
+
+        left: 8px;
+
+        top: 8px;
+
+        padding:
+            5px 8px;
+
+        border-radius: 20px;
+
+        background: #1767d8;
+
+        color: white;
+
+        font-size: 9px;
+
+        font-weight: 900;
     }
 
 
@@ -703,6 +847,30 @@
             font-size: 20px;
         }
 
+
+        .image-preview-grid {
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    1fr
+                );
+
+            gap: 10px;
+        }
+
+
+        .image-preview-card img {
+
+            height: 125px;
+        }
+
+
+        .image-box {
+
+            padding: 14px;
+        }
+
     }
 
 </style>
@@ -710,7 +878,9 @@
 
 </head>
 
+
 <body>
+
 
 <!-- ==============================
      HEADER
@@ -752,6 +922,7 @@
 
 </header>
 
+
 <!-- ==============================
      MAIN
 ============================== -->
@@ -770,7 +941,7 @@
     </h1>
 
     <p>
-        Add product details, price, image and your pickup location.
+        Add product details, price, multiple images and your pickup location.
     </p>
 
 </div>
@@ -895,12 +1066,12 @@
             </div>
 
 
-            <!-- IMAGE -->
+            <!-- MULTIPLE PRODUCT IMAGES -->
 
             <div class="form-group full">
 
                 <label>
-                    Product Image *
+                    Product Images *
                 </label>
 
                 <div class="image-box">
@@ -909,21 +1080,30 @@
                         type="file"
                         id="productImage"
                         accept="image/*"
+                        multiple
                         required
                     >
 
-                    <div
-                        id="imagePreview"
-                        class="image-preview"
-                    >
+                    <div class="image-help">
 
-                        <img
-                            id="previewImage"
-                            src=""
-                            alt="Product Preview"
-                        >
+                        📷 You can select
+                        <strong>multiple images at once</strong>.
+
+                        Add front, back, side, close-up and other
+                        product views.
+
+                        <br>
+
+                        ⭐ The first image will be used as the
+                        main product image.
 
                     </div>
+
+
+                    <div
+                        id="imagePreviewGrid"
+                        class="image-preview-grid"
+                    ></div>
 
                 </div>
 
@@ -1033,10 +1213,12 @@
 
     </form>
 
+
 </section>
 
 
 </main>
+
 
 <script>
 
@@ -1052,14 +1234,9 @@ const imageInput =
         "productImage"
     );
 
-const imagePreview =
+const imagePreviewGrid =
     document.getElementById(
-        "imagePreview"
-    );
-
-const previewImage =
-    document.getElementById(
-        "previewImage"
+        "imagePreviewGrid"
     );
 
 const sellerForm =
@@ -1084,6 +1261,13 @@ const errorMessage =
 
 
 /* =========================================
+   MULTIPLE IMAGE STORAGE
+========================================= */
+
+let selectedImageFiles = [];
+
+
+/* =========================================
    IMAGE PREVIEW
 ========================================= */
 
@@ -1091,50 +1275,231 @@ imageInput.addEventListener(
     "change",
     function() {
 
-        const file =
-            this.files[0];
-
-        if (!file) {
-
-            imagePreview.style.display =
-                "none";
-
-            return;
-        }
-
-
-        if (!file.type.startsWith("image/")) {
-
-            showError(
-                "❌ Please select a valid image file."
+        const newFiles =
+            Array.from(
+                this.files
             );
 
-            this.value = "";
+
+        if (!newFiles.length) {
 
             return;
         }
 
 
-        const reader =
-            new FileReader();
+        for (
+            const file of newFiles
+        ) {
+
+            if (
+                !file.type.startsWith(
+                    "image/"
+                )
+            ) {
+
+                showError(
+                    "❌ One or more selected files are not images."
+                );
+
+                continue;
+            }
 
 
-        reader.onload =
-            function(event) {
+            selectedImageFiles.push(
+                file
+            );
 
-                previewImage.src =
-                    event.target.result;
-
-                imagePreview.style.display =
-                    "flex";
-
-            };
+        }
 
 
-        reader.readAsDataURL(file);
+        renderImagePreviews();
+
+
+        /*
+         * Reset the input so the seller
+         * can select more images later
+         * if required.
+         */
+
+        this.value = "";
 
     }
 );
+
+
+/* =========================================
+   RENDER IMAGE PREVIEWS
+========================================= */
+
+function renderImagePreviews() {
+
+    imagePreviewGrid.innerHTML = "";
+
+
+    selectedImageFiles.forEach(
+        function(file, index) {
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+            card.className =
+                "image-preview-card";
+
+
+            const img =
+                document.createElement(
+                    "img"
+                );
+
+
+            const objectURL =
+                URL.createObjectURL(
+                    file
+                );
+
+
+            img.src =
+                objectURL;
+
+            img.alt =
+                "Product image " +
+                (index + 1);
+
+
+            img.onload =
+                function() {
+
+                    URL.revokeObjectURL(
+                        objectURL
+                    );
+
+                };
+
+
+            const info =
+                document.createElement(
+                    "div"
+                );
+
+            info.className =
+                "image-preview-info";
+
+
+            const number =
+                document.createElement(
+                    "div"
+                );
+
+            number.className =
+                "image-number";
+
+
+            number.textContent =
+                index === 0
+                    ? "MAIN IMAGE"
+                    : "IMAGE " + (index + 1);
+
+
+            const name =
+                document.createElement(
+                    "div"
+                );
+
+            name.className =
+                "image-name";
+
+
+            name.textContent =
+                file.name;
+
+
+            info.appendChild(
+                number
+            );
+
+            info.appendChild(
+                name
+            );
+
+
+            const removeButton =
+                document.createElement(
+                    "button"
+                );
+
+
+            removeButton.type =
+                "button";
+
+            removeButton.className =
+                "remove-image";
+
+            removeButton.textContent =
+                "×";
+
+            removeButton.title =
+                "Remove this image";
+
+
+            removeButton.addEventListener(
+                "click",
+                function() {
+
+                    selectedImageFiles.splice(
+                        index,
+                        1
+                    );
+
+                    renderImagePreviews();
+
+                }
+            );
+
+
+            card.appendChild(
+                img
+            );
+
+
+            if (index === 0) {
+
+                const badge =
+                    document.createElement(
+                        "div"
+                    );
+
+                badge.className =
+                    "main-image-badge";
+
+                badge.textContent =
+                    "MAIN";
+
+                card.appendChild(
+                    badge
+                );
+
+            }
+
+
+            card.appendChild(
+                removeButton
+            );
+
+            card.appendChild(
+                info
+            );
+
+
+            imagePreviewGrid.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
 
 
 /* =========================================
@@ -1305,7 +1670,9 @@ function readImageAsDataURL(file) {
                 };
 
 
-            reader.readAsDataURL(file);
+            reader.readAsDataURL(
+                file
+            );
 
         }
     );
@@ -1331,27 +1698,39 @@ sellerForm.addEventListener(
             "none";
 
 
-        const file =
-            imageInput.files[0];
+        /* =====================================
+           CHECK MULTIPLE IMAGES
+        ===================================== */
 
-
-        if (!file) {
+        if (
+            selectedImageFiles.length === 0
+        ) {
 
             showError(
-                "❌ Please select a product image."
+                "❌ Please select at least one product image."
             );
 
             return;
         }
 
 
-        if (!file.type.startsWith("image/")) {
+        for (
+            const file of selectedImageFiles
+        ) {
 
-            showError(
-                "❌ Only image files are allowed."
-            );
+            if (
+                !file.type.startsWith(
+                    "image/"
+                )
+            ) {
 
-            return;
+                showError(
+                    "❌ Only image files are allowed."
+                );
+
+                return;
+            }
+
         }
 
 
@@ -1408,11 +1787,53 @@ sellerForm.addEventListener(
 
         try {
 
-            const imageData =
-                await readImageAsDataURL(
-                    file
+
+            /* =====================================
+               CONVERT ALL IMAGES
+            ===================================== */
+
+            const imageDataList =
+                await Promise.all(
+                    selectedImageFiles.map(
+                        function(file) {
+
+                            return readImageAsDataURL(
+                                file
+                            );
+
+                        }
+                    )
                 );
 
+
+            /* =====================================
+               CREATE IMAGE DETAILS
+            ===================================== */
+
+            const imageObjects =
+                selectedImageFiles.map(
+                    function(file, index) {
+
+                        return {
+
+                            data:
+                                imageDataList[index],
+
+                            name:
+                                file.name,
+
+                            type:
+                                file.type
+
+                        };
+
+                    }
+                );
+
+
+            /* =====================================
+               PRODUCT OBJECT
+            ===================================== */
 
             const product = {
 
@@ -1420,29 +1841,52 @@ sellerForm.addEventListener(
                     "seller-" +
                     Date.now(),
 
+
                 name:
                     productName,
+
 
                 price:
                     productPrice,
 
+
                 stock:
                     productStock,
+
 
                 category:
                     productCategory,
 
+
                 description:
                     productDescription,
 
+
+                /*
+                 * Compatibility:
+                 * The first image remains
+                 * available as "image".
+                 */
+
                 image:
-                    imageData,
+                    imageDataList[0],
+
 
                 imageName:
-                    file.name,
+                    selectedImageFiles[0].name,
+
 
                 imageType:
-                    file.type,
+                    selectedImageFiles[0].type,
+
+
+                /*
+                 * New multiple-image system.
+                 */
+
+                images:
+                    imageObjects,
+
 
                 sellerLocation: {
 
@@ -1453,6 +1897,7 @@ sellerForm.addEventListener(
                         longitude.value
 
                 },
+
 
                 createdAt:
                     new Date().toISOString()
@@ -1473,12 +1918,16 @@ sellerForm.addEventListener(
                         method: "POST",
 
                         headers: {
+
                             "Content-Type":
                                 "application/json"
+
                         },
 
                         body:
-                            JSON.stringify(product)
+                            JSON.stringify(
+                                product
+                            )
 
                     }
                 );
@@ -1488,7 +1937,10 @@ sellerForm.addEventListener(
                 await response.json();
 
 
-            if (!response.ok || !result.success) {
+            if (
+                !response.ok ||
+                !result.success
+            ) {
 
                 showError(
                     "❌ " +
@@ -1524,7 +1976,9 @@ sellerForm.addEventListener(
 
             localStorage.setItem(
                 "shopnova_seller_products",
-                JSON.stringify(existing)
+                JSON.stringify(
+                    existing
+                )
             );
 
 
@@ -1536,17 +1990,20 @@ sellerForm.addEventListener(
             sellerForm.reset();
 
 
-            imagePreview.style.display =
-                "none";
+            selectedImageFiles =
+                [];
 
-            previewImage.src =
+
+            imagePreviewGrid.innerHTML =
                 "";
+
 
             latitude.value =
                 "";
 
             longitude.value =
                 "";
+
 
             gpsStatus.textContent =
                 "Location not detected yet.";
@@ -1579,12 +2036,17 @@ sellerForm.addEventListener(
 
 </script>
 
+
 <script src="script.js"></script>
+
 
 <script
     defer
     src="/_vercel/insights/script.js"
 ></script>
 
+
 </body>
+
 </html>
+
