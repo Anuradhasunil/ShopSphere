@@ -1,3 +1,4 @@
+
 "use strict";
 
 const express = require("express");
@@ -11,8 +12,6 @@ const PORT = process.env.PORT || 5000;
 
 /* =====================================================
    BODY PARSERS
-   Larger limit because seller products contain
-   multiple image Data URLs.
 ===================================================== */
 
 app.use(
@@ -45,7 +44,10 @@ app.use(
 app.get("/", (req, res) => {
 
     res.sendFile(
-        path.join(__dirname, "index.html")
+        path.join(
+            __dirname,
+            "index.html"
+        )
     );
 
 });
@@ -55,41 +57,62 @@ app.get("/", (req, res) => {
    PRODUCTS API
 ===================================================== */
 
-app.get("/api/products", (req, res) => {
+app.get(
+    "/api/products",
+    (req, res) => {
 
-    const productsFile =
-        path.join(__dirname, "products.json");
-
-    if (!fs.existsSync(productsFile)) {
-
-        return res.json([]);
-
-    }
-
-    try {
-
-        const products =
-            JSON.parse(
-                fs.readFileSync(
-                    productsFile,
-                    "utf8"
-                )
+        const productsFile =
+            path.join(
+                __dirname,
+                "products.json"
             );
 
-        res.json(products);
 
-    } catch (error) {
+        if (
+            !fs.existsSync(
+                productsFile
+            )
+        ) {
 
-        console.error(
-            "PRODUCTS JSON ERROR:",
-            error
-        );
+            return res.json([]);
 
-        res.status(500).json([]);
+        }
+
+
+        try {
+
+            const products =
+                JSON.parse(
+                    fs.readFileSync(
+                        productsFile,
+                        "utf8"
+                    )
+                );
+
+
+            return res.json(
+                Array.isArray(products)
+                    ? products
+                    : []
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "PRODUCTS JSON ERROR:",
+                error
+            );
+
+
+            return res.status(500).json(
+                []
+            );
+
+        }
 
     }
-
-});
+);
 
 
 /* =====================================================
@@ -160,7 +183,7 @@ app.post(
 
 
             /* -----------------------------------------
-               IMAGE VALIDATION
+               MULTIPLE IMAGE VALIDATION
             ----------------------------------------- */
 
             if (
@@ -180,8 +203,36 @@ app.post(
             }
 
 
+            for (
+                const image of product.images
+            ) {
+
+                if (
+                    !image ||
+                    !image.data ||
+                    !String(
+                        image.data
+                    ).startsWith(
+                        "data:image/"
+                    )
+                ) {
+
+                    return res.status(400).json({
+
+                        success: false,
+
+                        message:
+                            "One or more product images are invalid."
+
+                    });
+
+                }
+
+            }
+
+
             /* -----------------------------------------
-               CREATE PRODUCTS FILE IF NEEDED
+               PRODUCTS FILE
             ----------------------------------------- */
 
             const productsFile =
@@ -208,13 +259,17 @@ app.post(
                             "utf8"
                         );
 
+
                     products =
                         existing.trim()
                             ? JSON.parse(existing)
                             : [];
 
+
                     if (
-                        !Array.isArray(products)
+                        !Array.isArray(
+                            products
+                        )
                     ) {
 
                         products = [];
@@ -228,6 +283,7 @@ app.post(
                         error
                     );
 
+
                     products = [];
 
                 }
@@ -236,7 +292,7 @@ app.post(
 
 
             /* -----------------------------------------
-               CREATE PRODUCT ID
+               CREATE PRODUCT
             ----------------------------------------- */
 
             const newProduct = {
@@ -255,10 +311,36 @@ app.post(
                     ),
 
                 name:
-                    String(product.name).trim(),
+                    String(
+                        product.name
+                    ).trim(),
 
                 price:
-                    Number(product.price),
+                    Number(
+                        product.price
+                    ),
+
+                stock:
+                    Number(
+                        product.stock || 0
+                    ),
+
+                images:
+                    product.images,
+
+                /*
+                 * Keep first image available
+                 * for older Products page code.
+                 */
+
+                image:
+                    product.images[0].data,
+
+                imageName:
+                    product.images[0].name,
+
+                imageType:
+                    product.images[0].type,
 
                 createdAt:
                     product.createdAt ||
@@ -292,7 +374,7 @@ app.post(
 
 
             /* -----------------------------------------
-               SUCCESS RESPONSE
+               SUCCESS
             ----------------------------------------- */
 
             return res.status(200).json({
@@ -366,3 +448,4 @@ app.listen(
 
     }
 );
+

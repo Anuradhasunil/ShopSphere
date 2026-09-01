@@ -552,10 +552,6 @@
         font-weight: 900;
 
         cursor: pointer;
-
-        box-shadow:
-            0 3px 8px
-            rgba(0,0,0,.18);
     }
 
 
@@ -659,10 +655,6 @@
         font-weight: 900;
 
         cursor: pointer;
-
-        box-shadow:
-            0 7px 18px
-            rgba(23,103,216,.2);
     }
 
 
@@ -733,10 +725,6 @@
         box-shadow:
             0 10px 25px
             rgba(23,103,216,.22);
-
-        transition:
-            transform .2s,
-            box-shadow .2s;
     }
 
 
@@ -744,10 +732,6 @@
 
         transform:
             translateY(-2px);
-
-        box-shadow:
-            0 14px 30px
-            rgba(23,103,216,.3);
     }
 
 
@@ -865,16 +849,9 @@
             height: 125px;
         }
 
-
-        .image-box {
-
-            padding: 14px;
-        }
-
     }
 
 </style>
-
 
 </head>
 
@@ -882,12 +859,7 @@
 <body>
 
 
-<!-- ==============================
-     HEADER
-============================== -->
-
 <header class="seller-header">
-
 
 <div class="header-inner">
 
@@ -895,8 +867,6 @@
         href="index.html"
         class="brand"
     >
-
-        <!-- SHOPNOVA BLOG LOGO -->
 
         <img
             src="images/shopnova-blog-logo.jpg"
@@ -919,13 +889,8 @@
 
 </div>
 
-
 </header>
 
-
-<!-- ==============================
-     MAIN
-============================== -->
 
 <main class="page">
 
@@ -947,8 +912,6 @@
 </div>
 
 
-<!-- FAMILY FRIENDLY POLICY -->
-
 <div class="safety-notice">
 
     <strong>
@@ -966,255 +929,235 @@
 <section class="seller-card">
 
 
-    <h2 class="section-title">
-        Product Details
-    </h2>
+<h2 class="section-title">
+    Product Details
+</h2>
 
 
-    <form id="sellerProductForm">
+<form id="sellerProductForm">
 
 
-        <div class="form-grid">
+<div class="form-grid">
 
 
-            <!-- PRODUCT NAME -->
+<div class="form-group">
 
-            <div class="form-group">
+    <label for="productName">
+        Product Name *
+    </label>
 
-                <label for="productName">
-                    Product Name *
-                </label>
+    <input
+        type="text"
+        id="productName"
+        placeholder="Example: Women's Shoes"
+        required
+    >
 
-                <input
-                    type="text"
-                    id="productName"
-                    placeholder="Example: Women's Shoes"
-                    required
-                >
+</div>
 
-            </div>
 
+<div class="form-group">
 
-            <!-- PRICE -->
+    <label for="productPrice">
+        Price (₹) *
+    </label>
 
-            <div class="form-group">
+    <input
+        type="number"
+        id="productPrice"
+        placeholder="Example: 1499"
+        min="0"
+        required
+    >
 
-                <label for="productPrice">
-                    Price (₹) *
-                </label>
+</div>
 
-                <input
-                    type="number"
-                    id="productPrice"
-                    placeholder="Example: 1499"
-                    min="0"
-                    required
-                >
 
-            </div>
+<div class="form-group">
 
+    <label for="productStock">
+        Stock *
+    </label>
 
-            <!-- STOCK -->
+    <input
+        type="number"
+        id="productStock"
+        placeholder="Example: 5"
+        min="0"
+        required
+    >
 
-            <div class="form-group">
+</div>
 
-                <label for="productStock">
-                    Stock *
-                </label>
 
-                <input
-                    type="number"
-                    id="productStock"
-                    placeholder="Example: 25"
-                    min="0"
-                    required
-                >
+<div class="form-group">
 
-            </div>
+    <label for="productCategory">
+        Category
+    </label>
 
+    <input
+        type="text"
+        id="productCategory"
+        placeholder="Example: Fashion"
+    >
 
-            <!-- CATEGORY -->
+</div>
 
-            <div class="form-group">
 
-                <label for="productCategory">
-                    Category
-                </label>
+<div class="form-group full">
 
-                <input
-                    type="text"
-                    id="productCategory"
-                    placeholder="Example: Fashion"
-                >
+    <label for="productDescription">
+        Product Description
+    </label>
 
-            </div>
+    <textarea
+        id="productDescription"
+        placeholder="Describe your product..."
+    ></textarea>
 
+</div>
 
-            <!-- DESCRIPTION -->
 
-            <div class="form-group full">
+<div class="form-group full">
 
-                <label for="productDescription">
-                    Product Description
-                </label>
+    <label>
+        Product Images *
+    </label>
 
-                <textarea
-                    id="productDescription"
-                    placeholder="Describe your product..."
-                ></textarea>
+    <div class="image-box">
 
-            </div>
-
-
-            <!-- MULTIPLE PRODUCT IMAGES -->
-
-            <div class="form-group full">
-
-                <label>
-                    Product Images *
-                </label>
-
-                <div class="image-box">
-
-                    <input
-                        type="file"
-                        id="productImage"
-                        accept="image/*"
-                        multiple
-                    >
-
-                    <div class="image-help">
-
-                        📷 You can select
-                        <strong>multiple images at once</strong>.
-
-                        Add front, back, side, close-up and other
-                        product views.
-
-                        <br>
-
-                        ⭐ The first image will be used as the
-                        main product image.
-
-                    </div>
-
-
-                    <div
-                        id="imagePreviewGrid"
-                        class="image-preview-grid"
-                    ></div>
-
-                </div>
-
-            </div>
-
-
-        </div>
-
-
-        <!-- ==========================
-             GPS
-        =========================== -->
-
-        <div class="gps-card">
-
-            <div class="gps-title">
-                📍 Seller Pickup Location
-            </div>
-
-            <div class="gps-description">
-                Your GPS location will be used later for delivery tracking.
-            </div>
-
-
-            <button
-                type="button"
-                class="gps-button"
-                id="getLocationBtn"
-            >
-                📍 Get My Current Location
-            </button>
-
-
-            <div
-                id="gpsStatus"
-                class="gps-status"
-            >
-                Location not detected yet.
-            </div>
-
-
-            <div class="location-grid">
-
-
-                <div class="form-group">
-
-                    <label for="latitude">
-                        Latitude
-                    </label>
-
-                    <input
-                        type="text"
-                        id="latitude"
-                        readonly
-                        placeholder="Waiting for GPS..."
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="longitude">
-                        Longitude
-                    </label>
-
-                    <input
-                        type="text"
-                        id="longitude"
-                        readonly
-                        placeholder="Waiting for GPS..."
-                    >
-
-                </div>
-
-
-            </div>
-
-        </div>
-
-
-        <!-- SUBMIT -->
-
-        <button
-            type="submit"
-            class="submit-button"
-            id="submitButton"
+        <input
+            type="file"
+            id="productImage"
+            accept="image/*"
+            multiple
+            required
         >
-            ➕ Add Product to ShopNova
-        </button>
 
+        <div class="image-help">
 
-        <div
-            id="successMessage"
-            class="message success"
-        >
-            ✓ Product submitted successfully.
+            📷 Select
+            <strong>multiple product images</strong>
+            at once.
+
+            <br>
+
+            Add front, back, side, close-up and other views.
+
+            <br>
+
+            ⭐ The first image will be the main product image.
+
         </div>
 
 
         <div
-            id="errorMessage"
-            class="message error"
-        >
+            id="imagePreviewGrid"
+            class="image-preview-grid"
+        ></div>
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+<div class="gps-card">
+
+    <div class="gps-title">
+        📍 Seller Pickup Location
+    </div>
+
+    <div class="gps-description">
+        Your GPS location will be used later for delivery tracking.
+    </div>
+
+
+    <button
+        type="button"
+        class="gps-button"
+        id="getLocationBtn"
+    >
+        📍 Get My Current Location
+    </button>
+
+
+    <div
+        id="gpsStatus"
+        class="gps-status"
+    >
+        Location not detected yet.
+    </div>
+
+
+    <div class="location-grid">
+
+        <div class="form-group">
+
+            <label for="latitude">
+                Latitude
+            </label>
+
+            <input
+                type="text"
+                id="latitude"
+                readonly
+                placeholder="Waiting for GPS..."
+            >
+
         </div>
 
 
-    </form>
+        <div class="form-group">
 
+            <label for="longitude">
+                Longitude
+            </label>
+
+            <input
+                type="text"
+                id="longitude"
+                readonly
+                placeholder="Waiting for GPS..."
+            >
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<button
+    type="submit"
+    class="submit-button"
+    id="submitButton"
+>
+    ➕ Add Product to ShopNova
+</button>
+
+
+<div
+    id="successMessage"
+    class="message success"
+>
+    ✓ Product submitted successfully.
+</div>
+
+
+<div
+    id="errorMessage"
+    class="message error"
+>
+</div>
+
+
+</form>
 
 </section>
-
 
 </main>
 
@@ -1260,64 +1203,56 @@ const errorMessage =
 
 
 /* =========================================
-   MULTIPLE IMAGE STORAGE
+   MULTIPLE IMAGE FILES
 ========================================= */
 
 let selectedImageFiles = [];
 
 
 /* =========================================
-   IMAGE PREVIEW
+   IMAGE SELECTION
 ========================================= */
 
 imageInput.addEventListener(
     "change",
     function() {
 
-        const newFiles =
+        const files =
             Array.from(
                 this.files
             );
 
 
-        if (!newFiles.length) {
-
+        if (!files.length) {
             return;
         }
 
 
-        for (
-            const file of newFiles
-        ) {
+        files.forEach(
+            function(file) {
 
-            if (
-                !file.type.startsWith(
-                    "image/"
-                )
-            ) {
+                if (
+                    file.type.startsWith(
+                        "image/"
+                    )
+                ) {
 
-                showError(
-                    "❌ One or more selected files are not images."
-                );
+                    selectedImageFiles.push(
+                        file
+                    );
 
-                continue;
+                }
+
             }
-
-
-            selectedImageFiles.push(
-                file
-            );
-
-        }
+        );
 
 
         renderImagePreviews();
 
 
         /*
-         * Reset the input so the seller
-         * can select more images later
-         * if required.
+         * Clear input so the seller
+         * can add more images later.
          */
 
         this.value = "";
@@ -1327,7 +1262,7 @@ imageInput.addEventListener(
 
 
 /* =========================================
-   RENDER IMAGE PREVIEWS
+   IMAGE PREVIEW
 ========================================= */
 
 function renderImagePreviews() {
@@ -1377,50 +1312,24 @@ function renderImagePreviews() {
                 };
 
 
-            const info =
-                document.createElement(
-                    "div"
+            if (index === 0) {
+
+                const badge =
+                    document.createElement(
+                        "div"
+                    );
+
+                badge.className =
+                    "main-image-badge";
+
+                badge.textContent =
+                    "MAIN";
+
+                card.appendChild(
+                    badge
                 );
 
-            info.className =
-                "image-preview-info";
-
-
-            const number =
-                document.createElement(
-                    "div"
-                );
-
-            number.className =
-                "image-number";
-
-
-            number.textContent =
-                index === 0
-                    ? "MAIN IMAGE"
-                    : "IMAGE " + (index + 1);
-
-
-            const name =
-                document.createElement(
-                    "div"
-                );
-
-            name.className =
-                "image-name";
-
-
-            name.textContent =
-                file.name;
-
-
-            info.appendChild(
-                number
-            );
-
-            info.appendChild(
-                name
-            );
+            }
 
 
             const removeButton =
@@ -1457,30 +1366,53 @@ function renderImagePreviews() {
             );
 
 
-            card.appendChild(
-                img
+            const info =
+                document.createElement(
+                    "div"
+                );
+
+            info.className =
+                "image-preview-info";
+
+
+            const number =
+                document.createElement(
+                    "div"
+                );
+
+            number.className =
+                "image-number";
+
+            number.textContent =
+                index === 0
+                    ? "MAIN IMAGE"
+                    : "IMAGE " + (index + 1);
+
+
+            const name =
+                document.createElement(
+                    "div"
+                );
+
+            name.className =
+                "image-name";
+
+            name.textContent =
+                file.name;
+
+
+            info.appendChild(
+                number
+            );
+
+            info.appendChild(
+                name
             );
 
 
-            if (index === 0) {
-
-                const badge =
-                    document.createElement(
-                        "div"
-                    );
-
-                badge.className =
-                    "main-image-badge";
-
-                badge.textContent =
-                    "MAIN";
-
-                card.appendChild(
-                    badge
-                );
-
-            }
-
+            card.appendChild(
+                img
+            );
 
             card.appendChild(
                 removeButton
@@ -1547,18 +1479,13 @@ getLocationBtn.addEventListener(
 
             function(position) {
 
-                const lat =
-                    position.coords.latitude;
-
-                const lon =
-                    position.coords.longitude;
-
-
                 latitude.value =
-                    lat.toFixed(6);
+                    position.coords.latitude
+                        .toFixed(6);
 
                 longitude.value =
-                    lon.toFixed(6);
+                    position.coords.longitude
+                        .toFixed(6);
 
 
                 gpsStatus.textContent =
@@ -1635,7 +1562,7 @@ function showSuccess(message) {
 
 
 /* =========================================
-   CONVERT IMAGE TO BASE64
+   READ IMAGE
 ========================================= */
 
 function readImageAsDataURL(file) {
@@ -1680,7 +1607,7 @@ function readImageAsDataURL(file) {
 
 
 /* =========================================
-   SAVE SELLER PRODUCT
+   SUBMIT PRODUCT
 ========================================= */
 
 sellerForm.addEventListener(
@@ -1697,10 +1624,6 @@ sellerForm.addEventListener(
             "none";
 
 
-        /* =====================================
-           CHECK MULTIPLE IMAGES
-        ===================================== */
-
         if (
             selectedImageFiles.length === 0
         ) {
@@ -1710,26 +1633,6 @@ sellerForm.addEventListener(
             );
 
             return;
-        }
-
-
-        for (
-            const file of selectedImageFiles
-        ) {
-
-            if (
-                !file.type.startsWith(
-                    "image/"
-                )
-            ) {
-
-                showError(
-                    "❌ Only image files are allowed."
-                );
-
-                return;
-            }
-
         }
 
 
@@ -1788,7 +1691,7 @@ sellerForm.addEventListener(
 
 
             /* =====================================
-               CONVERT ALL IMAGES
+               READ ALL IMAGES
             ===================================== */
 
             const imageDataList =
@@ -1806,7 +1709,7 @@ sellerForm.addEventListener(
 
 
             /* =====================================
-               CREATE IMAGE DETAILS
+               IMAGE OBJECTS
             ===================================== */
 
             const imageObjects =
@@ -1831,7 +1734,7 @@ sellerForm.addEventListener(
 
 
             /* =====================================
-               PRODUCT OBJECT
+               PRODUCT
             ===================================== */
 
             const product = {
@@ -1840,52 +1743,40 @@ sellerForm.addEventListener(
                     "seller-" +
                     Date.now(),
 
-
                 name:
                     productName,
-
 
                 price:
                     productPrice,
 
-
                 stock:
                     productStock,
-
 
                 category:
                     productCategory,
 
-
                 description:
                     productDescription,
 
-
                 /*
-                 * Compatibility:
-                 * The first image remains
-                 * available as "image".
+                 * Existing compatibility.
                  */
 
                 image:
                     imageDataList[0],
 
-
                 imageName:
                     selectedImageFiles[0].name,
-
 
                 imageType:
                     selectedImageFiles[0].type,
 
-
                 /*
-                 * New multiple-image system.
+                 * Multiple product images.
                  */
 
                 images:
                     imageObjects,
-
 
                 sellerLocation: {
 
@@ -1897,17 +1788,15 @@ sellerForm.addEventListener(
 
                 },
 
-
                 createdAt:
                     new Date().toISOString()
 
             };
 
 
-            /*
-             * Send product to server.
-             * The server performs the safety check.
-             */
+            /* =====================================
+               SEND TO SERVER
+            ===================================== */
 
             const response =
                 await fetch(
@@ -1950,14 +1839,12 @@ sellerForm.addEventListener(
                 );
 
                 return;
-
             }
 
 
-            /*
-             * Only save locally after
-             * the server approves it.
-             */
+            /* =====================================
+               LOCAL STORAGE
+            ===================================== */
 
             const existing =
                 JSON.parse(
@@ -2038,12 +1925,10 @@ sellerForm.addEventListener(
 
 <script src="script.js"></script>
 
-
 <script
     defer
     src="/_vercel/insights/script.js"
 ></script>
-
 
 </body>
 
