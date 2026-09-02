@@ -129,6 +129,7 @@
         align-items: center;
         gap: 12px;
         flex-wrap: wrap;
+        position: relative;
     }
     .select-image-button {
         display: inline-flex;
@@ -283,7 +284,8 @@
             <div class="image-box">
                 <div class="image-select-row">
                     <label for="productImage" class="select-image-button">Choose Files</label>
-                    <input type="file" id="productImage" accept="image/*" multiple style="display: none;">
+                    <!-- Style parameter tracking adjusted to ensure interaction channels remain fully open across mobile and desktop browsers -->
+                    <input type="file" id="productImage" accept="image/*" multiple style="position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none;">
                     <span class="image-count" id="fileCounter">0 files staged</span>
                 </div>
                 <div class="image-help">Select multiple images at once. Maximum 10 images.</div>
@@ -293,7 +295,6 @@
             <div class="section-title">3. Seller Pickup Location</div>
             <p style="font-size: 13px; color: #56708e; margin-bottom: 12px;">Your GPS location can be used later for delivery tracking.</p>
             
-            <!-- EVERYTHING BELOW This WAS CORRUPTED OR CUT OFF IN YOUR FILE -->
             <button type="button" class="location-btn" id="geoBtn">📍 Get My Current Location</button>
             <div id="locationStatus" class="status-msg"></div>
 
@@ -317,5 +318,3 @@
 <script>
     let uploadedFilesArray = [];
 
-    const fileInput = document.getElementById('productImage');
-    const previewGrid = document.getElementById('previewGrid');
