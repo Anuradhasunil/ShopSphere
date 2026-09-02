@@ -10,24 +10,19 @@
         padding: 0;
         box-sizing: border-box;
     }
-
     body {
         font-family: "Segoe UI", Arial, sans-serif;
         min-height: 100vh;
         background: linear-gradient(135deg, #eaf4ff, #d8ebff, #f5f9ff);
         color: #183b68;
+        padding-bottom: 60px;
     }
-
-    /* ==============================
-       HEADER
-    ============================== */
     .seller-header {
         width: 100%;
         background: linear-gradient(90deg, #082b5f, #0d4f91, #155da8);
         color: white;
         box-shadow: 0 5px 20px rgba(0,35,90,.22);
     }
-
     .header-inner {
         width: 95%;
         max-width: 1200px;
@@ -36,22 +31,11 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 20px;
     }
-
-    .brand {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        color: white;
-        text-decoration: none;
-    }
-
     .brand-text {
         font-size: 22px;
         font-weight: 900;
     }
-
     .back-home {
         padding: 10px 17px;
         border-radius: 9px;
@@ -61,35 +45,20 @@
         font-size: 13px;
         font-weight: 800;
     }
-
-    .back-home:hover {
-        background: rgba(255,255,255,.25);
-    }
-
-    /* ==============================
-       MAIN LAYOUT
-    ============================== */
     .page {
         width: 95%;
         max-width: 1100px;
         margin: 35px auto 50px;
     }
-
     .page-title {
         text-align: center;
         margin-bottom: 28px;
     }
-
     .page-title h1 {
-        margin-top: 12px;
         color: #082b5f;
         font-size: clamp(30px,5vw,48px);
         font-weight: 950;
     }
-
-    /* ==============================
-       FORM CARD & GROUPS
-    ============================== */
     .seller-card {
         background: white;
         border-radius: 20px;
@@ -97,7 +66,6 @@
         box-shadow: 0 12px 40px rgba(20,65,110,.12);
         border: 1px solid #dce9f7;
     }
-
     .section-title {
         color: #0b3d78;
         font-size: 20px;
@@ -107,34 +75,28 @@
         padding-bottom: 12px;
         border-bottom: 1px solid #e4edf7;
     }
-
     .section-title:first-of-type {
         margin-top: 0;
     }
-
     .form-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 20px;
     }
-
     .form-group {
         display: flex;
         flex-direction: column;
         margin-bottom: 15px;
     }
-
     .form-group.full {
         grid-column: 1 / -1;
     }
-
     label {
         margin-bottom: 7px;
         color: #244b73;
         font-size: 13px;
         font-weight: 800;
     }
-
     input, textarea, select {
         width: 100%;
         border: 1px solid #cbdced;
@@ -146,21 +108,15 @@
         font-size: 14px;
         font-family: inherit;
     }
-
     input:focus, textarea:focus, select:focus {
         border-color: #3280e8;
         box-shadow: 0 0 0 3px rgba(50,128,232,.12);
         background: white;
     }
-
     textarea {
         min-height: 120px;
         resize: vertical;
     }
-
-    /* ==============================
-       IMAGE MANAGEMENT BLOCK
-    ============================== */
     .image-box {
         padding: 18px;
         border: 2px dashed #b9d5ef;
@@ -168,14 +124,12 @@
         background: #f8fbff;
         margin-bottom: 20px;
     }
-
     .image-select-row {
         display: flex;
         align-items: center;
         gap: 12px;
         flex-wrap: wrap;
     }
-
     .select-image-button {
         display: inline-flex;
         align-items: center;
@@ -188,28 +142,23 @@
         font-weight: 900;
         cursor: pointer;
         border: none;
-        margin-bottom: 0;
     }
-
     .image-count {
         color: #1767d8;
         font-size: 13px;
         font-weight: 900;
     }
-
     .image-help {
         margin-top: 8px;
         color: #698198;
         font-size: 12px;
     }
-
     .image-preview-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
         gap: 15px;
         margin-top: 18px;
     }
-
     .image-preview-card {
         position: relative;
         overflow: hidden;
@@ -217,7 +166,6 @@
         border: 1px solid #d9e6f3;
         background: white;
     }
-
     .image-preview-card img {
         display: block;
         width: 100%;
@@ -225,23 +173,15 @@
         object-fit: contain;
         background: #eef5fc;
     }
-
-    .image-preview-info {
+    .image-name {
         padding: 9px;
         text-align: center;
-    }
-
-    .image-name {
         overflow: hidden;
         color: #56708e;
         font-size: 10px;
         white-space: nowrap;
         text-overflow: ellipsis;
     }
-
-    /* ==============================
-       LOCATION & NOTIFICATION STATES
-    ============================== */
     .location-btn {
         background-color: #0076df;
         color: white;
@@ -250,20 +190,17 @@
         font-weight: bold;
         border-radius: 8px;
         cursor: pointer;
-        margin-bottom: 12px;
-        align-self: flex-start;
+        margin-bottom: 15px;
+        display: inline-block;
     }
-
     .status-msg {
         font-size: 13px;
         font-weight: 600;
         margin-bottom: 15px;
         display: none;
     }
-
     .status-msg.success { color: #2e7d32; display: block; }
     .status-msg.error { color: #c62828; display: block; }
-
     .submit-btn {
         width: 100%;
         padding: 16px;
@@ -274,15 +211,8 @@
         border: none;
         border-radius: 10px;
         cursor: pointer;
-        margin-top: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
+        margin-top: 25px;
     }
-
-    .submit-btn:hover { opacity: 0.95; }
-
     .feedback-banner {
         width: 100%;
         padding: 12px;
@@ -301,9 +231,7 @@
 
 <header class="seller-header">
     <div class="header-inner">
-        <a href="#" class="brand">
-            <div class="brand-text">ShopNova</div>
-        </a>
+        <div class="brand-text">ShopNova</div>
         <a href="#" class="back-home">Back to Dashboard</a>
     </div>
 </header>
@@ -314,28 +242,28 @@
     </div>
 
     <div class="seller-card">
-        <form id="productForm" enctype="multipart/form-data">
+        <form id="productForm">
             
             <div class="section-title">1. Product Information</div>
             <div class="form-grid">
                 <div class="form-group">
                     <label for="productTitle">Product Name *</label>
-                    <input type="text" id="productTitle" name="title" placeholder="Example: One Step Closer T-Shirt" required>
+                    <input type="text" id="productTitle" placeholder="Example: One Step Closer T-Shirt" required>
                 </div>
                 
                 <div class="form-group">
                     <label for="productPrice">Price *</label>
-                    <input type="number" id="productPrice" name="price" step="0.01" placeholder="Example: 799" required>
+                    <input type="number" id="productPrice" step="0.01" placeholder="Example: 799" required>
                 </div>
 
                 <div class="form-group">
                     <label for="productStock">Stock *</label>
-                    <input type="number" id="productStock" name="stock" placeholder="Example: 25" required>
+                    <input type="number" id="productStock" placeholder="Example: 25" required>
                 </div>
 
                 <div class="form-group">
                     <label for="productCategory">Category *</label>
-                    <select id="productCategory" name="category" required>
+                    <select id="productCategory" required>
                         <option value="" disabled selected>Select a Category...</option>
                         <option value="fashion">Fashion & Apparel</option>
                         <option value="electronics">Electronics & Gadgets</option>
@@ -347,7 +275,7 @@
 
                 <div class="form-group full">
                     <label for="productDescription">Product Description *</label>
-                    <textarea id="productDescription" name="description" placeholder="Describe your product..." required></textarea>
+                    <textarea id="productDescription" placeholder="Describe your product..." required></textarea>
                 </div>
             </div>
 
@@ -364,3 +292,30 @@
 
             <div class="section-title">3. Seller Pickup Location</div>
             <p style="font-size: 13px; color: #56708e; margin-bottom: 12px;">Your GPS location can be used later for delivery tracking.</p>
+            
+            <!-- EVERYTHING BELOW This WAS CORRUPTED OR CUT OFF IN YOUR FILE -->
+            <button type="button" class="location-btn" id="geoBtn">📍 Get My Current Location</button>
+            <div id="locationStatus" class="status-msg"></div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="latitude">Latitude</label>
+                    <input type="text" id="latitude" placeholder="Awaiting GPS detection..." readonly required>
+                </div>
+                <div class="form-group">
+                    <label for="longitude">Longitude</label>
+                    <input type="text" id="longitude" placeholder="Awaiting GPS detection..." readonly required>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">🚀 Submit Product</button>
+            <div id="formFeedback" class="feedback-banner"></div>
+        </form>
+    </div>
+</main>
+
+<script>
+    let uploadedFilesArray = [];
+
+    const fileInput = document.getElementById('productImage');
+    const previewGrid = document.getElementById('previewGrid');
