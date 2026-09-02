@@ -1,13 +1,14 @@
 {
-  "name": "shopnova-ecommerce-pro",
+  "name": "shop-sphere",
   "version": "1.0.0",
-  "description": "ShopNova E-Commerce Website",
+  "description": "Modern responsive e-commerce website built with HTML, CSS & JavaScript",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^5.2.1",
-    "multer": "^2.0.2"
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1"
   }
 }
