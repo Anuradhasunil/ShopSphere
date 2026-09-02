@@ -1,16 +1,23 @@
 {
   "version": 2,
-  "redirects": [
+  "builds": [
     {
-      "source": "/index.html",
-      "destination": "/",
-      "permanent": true
+      "src": "server.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "docs/**",
+      "use": "@vercel/static"
     }
   ],
-  "rewrites": [
+  "routes": [
     {
-      "source": "/add-product",
-      "destination": "/api/add-product"
+      "src": "/add-product",
+      "dest": "server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "docs/$1"
     }
   ]
 }
