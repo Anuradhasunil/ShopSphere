@@ -1,9 +1,16 @@
 {
+  "version": 2,
   "redirects": [
     {
       "source": "/index.html",
       "destination": "/",
       "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/add-product",
+      "destination": "/api/add-product"
     }
   ]
 }
