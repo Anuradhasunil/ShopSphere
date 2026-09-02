@@ -1,22 +1,63 @@
 "use strict";
 
+
+/* =====================================================
+   SHOPNOVA SERVER
+===================================================== */
+
 const express = require("express");
+
 const path = require("path");
+
+const fs = require("fs");
+
+const multer = require("multer");
+
 
 const app = express();
 
-const PORT = process.env.PORT || 5000;
+const PORT =
+    process.env.PORT || 5000;
 
 
-/* =========================================
-   SHOPNOVA SERVER SETUP
-========================================= */
+/* =====================================================
+   DIRECTORIES
+===================================================== */
+
+const ROOT_DIR =
+    __dirname;
+
+
+const UPLOAD_DIR =
+    path.join(
+        ROOT_DIR,
+        "uploads",
+        "products"
+    );
+
+
+/*
+ * Make sure upload directory exists.
+ */
+
+fs.mkdirSync(
+    UPLOAD_DIR,
+    {
+        recursive: true
+    }
+);
+
+
+/* =====================================================
+   EXPRESS SETUP
+===================================================== */
 
 app.use(
     express.json({
         limit: "15mb"
     })
 );
+
 
 app.use(
     express.urlencoded({
@@ -26,119 +67,432 @@ app.use(
 );
 
 
-/* Serve all ShopNova files */
+/*
+ * Serve complete project.
+ */
 
 app.use(
-    express.static(__dirname)
+    express.static(
+        ROOT_DIR
+    )
 );
 
 
-/* =========================================
-   TEMPORARY GPS / LOCATION STORAGE
-========================================= */
+/*
+ * Serve uploaded product images.
+ */
+
+app.use(
+    "/uploads",
+    express.static(
+        path.join(
+            ROOT_DIR,
+            "uploads"
+        )
+    )
+);
+
+
+/* =====================================================
+   MULTER STORAGE
+===================================================== */
+
+const storage =
+    multer.diskStorage({
+
+        destination:
+            function(
+                req,
+                file,
+                callback
+            ) {
+
+                callback(
+                    null,
+                    UPLOAD_DIR
+                );
+
+            },
+
+
+        filename:
+            function(
+                req,
+                file,
+                callback
+            ) {
+
+
+                /*
+                 * Create safe unique filename.
+                 */
+
+                const extension =
+                    path.extname(
+                        file.originalname
+                    ).toLowerCase();
+
+
+                const baseName =
+                    path.basename(
+                        file.originalname,
+                        extension
+                    )
+                    .replace(
+                        /[^a-zA-Z0-9_-]/g,
+                        "-"
+                    )
+                    .replace(
+                        /-+/g,
+                        "-"
+                    )
+                    .slice(
+                        0,
+                        60
+                    );
+
+
+                const timestamp =
+                    Date.now();
+
+
+                const random =
+                    Math.round(
+                        Math.random() *
+                        1000000
+                    );
+
+
+                const finalName =
+                    baseName +
+                    "-" +
+                    timestamp +
+                    "-" +
+                    random +
+                    extension;
+
+
+                callback(
+                    null,
+                    finalName
+                );
+
+            }
+
+    });
+
+
+/* =====================================================
+   IMAGE FILTER
+===================================================== */
+
+function imageFileFilter(
+    req,
+    file,
+    callback
+) {
+
+
+    if (
+        file.mimetype &&
+        file.mimetype.startsWith(
+            "image/"
+        )
+    ) {
+
+        callback(
+            null,
+            true
+        );
+
+    }
+
+    else {
+
+        callback(
+            new Error(
+                "Only image files are allowed."
+            )
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   MULTER
+===================================================== */
+
+const upload =
+    multer({
+
+        storage:
+            storage,
+
+        fileFilter:
+            imageFileFilter,
+
+        limits: {
+
+            files: 10,
+
+            fileSize:
+                10 * 1024 * 1024
+
+        }
+
+    });
+
+
+/* =====================================================
+   TEMPORARY GPS STORAGE
+===================================================== */
 
 const locations = {};
 
 
-/* =========================================
-   SHOPNOVA PRODUCT SAFETY POLICY
-=========================================
+/* =====================================================
+   PRODUCT STORAGE
+===================================================== */
 
-   Products containing prohibited categories
-   are rejected before server approval.
+const PRODUCTS_FILE =
+    path.join(
+        ROOT_DIR,
+        "products.json"
+    );
 
-   This is a basic text/file-name filter.
-   It does NOT replace professional image
-   moderation.
-========================================= */
+
+/*
+ * Read existing products.
+ */
+
+function readProducts() {
+
+    try {
+
+        if (
+            !fs.existsSync(
+                PRODUCTS_FILE
+            )
+        ) {
+
+            return [];
+
+        }
+
+
+        const text =
+            fs.readFileSync(
+                PRODUCTS_FILE,
+                "utf8"
+            );
+
+
+        if (!text.trim()) {
+
+            return [];
+
+        }
+
+
+        const products =
+            JSON.parse(text);
+
+
+        return Array.isArray(products)
+            ? products
+            : [];
+
+    }
+
+    catch(error) {
+
+        console.error(
+            "PRODUCT FILE READ ERROR:",
+            error
+        );
+
+        return [];
+
+    }
+
+}
+
+
+/*
+ * Save products.
+ */
+
+function saveProducts(
+    products
+) {
+
+    fs.writeFileSync(
+
+        PRODUCTS_FILE,
+
+        JSON.stringify(
+            products,
+            null,
+            4
+        ),
+
+        "utf8"
+
+    );
+
+}
+
+
+/* =====================================================
+   SAFETY POLICY
+===================================================== */
 
 const prohibitedPatterns = [
+
 
     /* Adult / sexual content */
 
     /\bsex\s*toy(s)?\b/i,
+
     /\badult\s*toy(s)?\b/i,
+
     /\bsex\s*product(s)?\b/i,
+
     /\bvibrator(s)?\b/i,
+
     /\bdildo(s)?\b/i,
+
     /\blingerie\b/i,
+
     /\bcondom(s)?\b/i,
+
     /\berotic\b/i,
+
     /\bporn\b/i,
+
     /\bpornography\b/i,
+
     /\bxxx\b/i,
+
     /\bnsfw\b/i,
+
     /\bexplicit\s*content\b/i,
 
 
     /* Alcohol */
 
     /\balcohol\b/i,
+
     /\bliquor\b/i,
+
     /\bwhiskey\b/i,
+
     /\bwhisky\b/i,
+
     /\bvodka\b/i,
+
     /\brum\b/i,
+
     /\bbrandy\b/i,
+
     /\bgin\b/i,
+
     /\btequila\b/i,
+
     /\bbeer\b/i,
+
     /\bwine\b/i,
+
     /\bchampagne\b/i,
+
     /\bcocktail\b/i,
+
     /\bspirits\b/i,
 
 
     /* Tobacco / nicotine */
 
     /\bcigarette(s)?\b/i,
+
     /\bcigar(s)?\b/i,
+
     /\btobacco\b/i,
+
     /\bvape(s)?\b/i,
+
     /\bvaping\b/i,
+
     /\be-?cigarette(s)?\b/i,
+
     /\be-?liquid\b/i,
+
     /\bnicotine\b/i,
+
     /\bhookah\b/i,
+
     /\bshisha\b/i,
 
 
     /* Recreational drugs */
 
     /\bcocaine\b/i,
+
     /\bheroin\b/i,
+
     /\bmethamphetamine\b/i,
+
     /\bmeth\b/i,
+
     /\bcrack cocaine\b/i,
+
     /\bketamine\b/i,
+
     /\blsd\b/i,
+
     /\bmdma\b/i,
+
     /\becstasy\b/i,
+
     /\bmushroom(s)?\b/i,
+
     /\bmagic mushrooms\b/i,
+
     /\bmarijuana\b/i,
+
     /\bcannabis\b/i,
+
     /\bweed\b/i,
+
     /\bhashish\b/i,
+
     /\bhash\b/i,
+
     /\bthc\b/i,
 
 
     /* Drug paraphernalia */
 
     /\bdrug\s*pipe\b/i,
+
     /\bbong(s)?\b/i,
+
     /\bdrug\s*kit\b/i,
+
     /\bdrug\s*paraphernalia\b/i
 
 ];
 
 
-/* =========================================
+/* =====================================================
    SAFETY CHECK
-========================================= */
+===================================================== */
 
-function checkProductSafety(product) {
+function checkProductSafety(
+    product
+) {
+
 
     const searchableText = [
 
@@ -148,7 +502,9 @@ function checkProductSafety(product) {
 
         product.description || "",
 
-        product.imageName || ""
+        product.imageName || "",
+
+        ...(product.imageNames || [])
 
     ].join(" ");
 
@@ -158,6 +514,7 @@ function checkProductSafety(product) {
         of prohibitedPatterns
     ) {
 
+
         if (
             pattern.test(
                 searchableText
@@ -166,7 +523,8 @@ function checkProductSafety(product) {
 
             return {
 
-                safe: false,
+                safe:
+                    false,
 
                 reason:
                     "This product appears to contain prohibited adult, alcohol, tobacco/nicotine, drug-related, or otherwise restricted content."
@@ -180,106 +538,312 @@ function checkProductSafety(product) {
 
     return {
 
-        safe: true,
+        safe:
+            true,
 
-        reason: ""
+        reason:
+            ""
 
     };
 
 }
 
 
-/* =========================================
+/* =====================================================
    SELLER PRODUCT SUBMISSION
-========================================= */
+===================================================== */
 
 app.post(
+
     "/api/seller-products",
-    (req, res) => {
+
+    upload.array(
+        "gallery",
+        10
+    ),
+
+    function(
+        req,
+        res
+    ) {
+
 
         try {
 
-            const product =
-                req.body;
+
+            const body =
+                req.body || {};
 
 
-            if (!product) {
-
-                return res.status(400).json({
-
-                    success: false,
-
-                    message:
-                        "No product data received."
-
-                });
-
-            }
+            const files =
+                req.files || [];
 
 
-            /* Basic required fields */
+            /* -----------------------------------------
+               REQUIRED IMAGE
+            ----------------------------------------- */
 
             if (
-                !product.name ||
-                !product.image
+                files.length === 0
             ) {
 
                 return res.status(400).json({
 
-                    success: false,
+                    success:
+                        false,
 
                     message:
-                        "Product name and image are required."
+                        "Please select at least one product image."
 
                 });
 
             }
 
 
-            /* Check image format */
+            /* -----------------------------------------
+               REQUIRED FIELDS
+            ----------------------------------------- */
 
             if (
-                product.imageType &&
-                !product.imageType.startsWith(
-                    "image/"
+                !body.name ||
+                !body.name.trim()
+            ) {
+
+                return res.status(400).json({
+
+                    success:
+                        false,
+
+                    message:
+                        "Product name is required."
+
+                });
+
+            }
+
+
+            if (
+                body.price === undefined ||
+                body.price === ""
+            ) {
+
+                return res.status(400).json({
+
+                    success:
+                        false,
+
+                    message:
+                        "Product price is required."
+
+                });
+
+            }
+
+
+            const price =
+                Number(
+                    body.price
+                );
+
+
+            if (
+                !Number.isFinite(price) ||
+                price < 0
+            ) {
+
+                return res.status(400).json({
+
+                    success:
+                        false,
+
+                    message:
+                        "Invalid product price."
+
+                });
+
+            }
+
+
+            if (
+                !body.category
+            ) {
+
+                return res.status(400).json({
+
+                    success:
+                        false,
+
+                    message:
+                        "Product category is required."
+
+                });
+
+            }
+
+
+            if (
+                !body.description ||
+                !body.description.trim()
+            ) {
+
+                return res.status(400).json({
+
+                    success:
+                        false,
+
+                    message:
+                        "Product description is required."
+
+                });
+
+            }
+
+
+            /* -----------------------------------------
+               GPS
+            ----------------------------------------- */
+
+            const latitude =
+                Number(
+                    body.latitude
+                );
+
+
+            const longitude =
+                Number(
+                    body.longitude
+                );
+
+
+            if (
+                !Number.isFinite(
+                    latitude
+                ) ||
+                !Number.isFinite(
+                    longitude
                 )
             ) {
 
                 return res.status(400).json({
 
-                    success: false,
+                    success:
+                        false,
 
                     message:
-                        "Only image files are allowed."
+                        "Valid seller GPS coordinates are required."
 
                 });
 
             }
 
 
-            /* =================================
-               SAFETY CHECK
-            ================================= */
+            /* -----------------------------------------
+               BUILD IMAGE DATA
+            ----------------------------------------- */
 
-            const safety =
-                checkProductSafety(
-                    product
+            const imagePaths =
+                files.map(
+                    function(file) {
+
+                        return (
+                            "/uploads/products/" +
+                            file.filename
+                        );
+
+                    }
                 );
 
 
-            if (!safety.safe) {
+            const imageNames =
+                files.map(
+                    function(file) {
+
+                        return file.originalname;
+
+                    }
+                );
+
+
+            /* -----------------------------------------
+               PRODUCT OBJECT FOR SAFETY
+            ----------------------------------------- */
+
+            const productForSafety = {
+
+                name:
+                    body.name.trim(),
+
+                category:
+                    body.category,
+
+                description:
+                    body.description.trim(),
+
+                imageName:
+                    imageNames.join(" "),
+
+                imageNames:
+                    imageNames
+
+            };
+
+
+            /* -----------------------------------------
+               SAFETY CHECK
+            ----------------------------------------- */
+
+            const safety =
+                checkProductSafety(
+                    productForSafety
+                );
+
+
+            if (
+                !safety.safe
+            ) {
+
+
+                /*
+                 * Delete uploaded files when rejected.
+                 */
+
+                files.forEach(
+                    function(file) {
+
+                        try {
+
+                            fs.unlinkSync(
+                                file.path
+                            );
+
+                        }
+
+                        catch(deleteError) {
+
+                            console.error(
+                                "FILE DELETE ERROR:",
+                                deleteError
+                            );
+
+                        }
+
+                    }
+                );
+
 
                 console.log(
                     "🚫 PRODUCT REJECTED:",
-                    product.name
+                    body.name
                 );
 
 
                 return res.status(400).json({
 
-                    success: false,
+                    success:
+                        false,
 
-                    approved: false,
+                    approved:
+                        false,
 
                     message:
                         "This product cannot be published on ShopNova because it violates our family-friendly marketplace policy."
@@ -289,159 +853,71 @@ app.post(
             }
 
 
-            /*
-             * Product passed the basic safety
-             * filter.
-             *
-             * For now we return it to the
-             * seller page, which stores it
-             * locally.
-             */
+            /* -----------------------------------------
+               CREATE PRODUCT
+            ----------------------------------------- */
 
-            console.log(
-                "✅ PRODUCT APPROVED:",
-                product.name
+            const products =
+                readProducts();
+
+
+            const product = {
+
+                id:
+                    "product-" +
+                    Date.now(),
+
+                name:
+                    body.name.trim(),
+
+                price:
+                    price,
+
+                category:
+                    body.category,
+
+                description:
+                    body.description.trim(),
+
+                image:
+                    imagePaths[0],
+
+                images:
+                    imagePaths,
+
+                imageNames:
+                    imageNames,
+
+                latitude:
+                    latitude,
+
+                longitude:
+                    longitude,
+
+                sellerType:
+                    "seller",
+
+                createdAt:
+                    new Date().toISOString()
+
+            };
+
+
+            products.push(
+                product
             );
 
 
-            return res.json({
-
-                success: true,
-
-                approved: true,
-
-                message:
-                    "Product passed ShopNova's basic safety check.",
-
-                product: product
-
-            });
-
-
-        } catch (error) {
-
-            console.error(
-                "PRODUCT SAFETY ERROR:",
-                error
+            saveProducts(
+                products
             );
 
 
-            return res.status(500).json({
+            /* -----------------------------------------
+               SAVE GPS
+            ----------------------------------------- */
 
-                success: false,
-
-                message:
-                    "Unable to check the product. Please try again."
-
-            });
-
-        }
-
-    }
-);
-
-
-/* =========================================
-   HOME PAGE
-========================================= */
-
-app.get(
-    "/",
-    (req, res) => {
-
-        res.sendFile(
-            path.join(
-                __dirname,
-                "index.html"
-            )
-        );
-
-    }
-);
-
-
-/* =========================================
-   PRODUCTS JSON
-========================================= */
-
-app.get(
-    "/api/products",
-    (req, res) => {
-
-        res.sendFile(
-            path.join(
-                __dirname,
-                "products.json"
-            )
-        );
-
-    }
-);
-
-
-/* =========================================
-   GPS - SAVE LOCATION
-========================================= */
-
-app.post(
-    "/api/location",
-    (req, res) => {
-
-        try {
-
-            const {
-                userType,
-                latitude,
-                longitude
-            } = req.body;
-
-
-            const allowedTypes = [
-                "buyer",
-                "seller",
-                "delivery"
-            ];
-
-
-            if (
-                !allowedTypes.includes(
-                    userType
-                )
-            ) {
-
-                return res.status(400).json({
-
-                    success: false,
-
-                    message:
-                        "Invalid user type"
-
-                });
-
-            }
-
-
-            if (
-                typeof latitude !==
-                    "number" ||
-
-                typeof longitude !==
-                    "number"
-            ) {
-
-                return res.status(400).json({
-
-                    success: false,
-
-                    message:
-                        "Invalid GPS coordinates"
-
-                });
-
-            }
-
-
-            locations[userType] = {
+            locations.seller = {
 
                 latitude:
                     latitude,
@@ -455,16 +931,494 @@ app.post(
             };
 
 
+            /* -----------------------------------------
+               SERVER LOG
+            ----------------------------------------- */
+
             console.log(
-                `📍 ${userType.toUpperCase()} LOCATION UPDATED:`,
+                "===================================="
+            );
+
+
+            console.log(
+                "✅ PRODUCT APPROVED:"
+            );
+
+
+            console.log(
+                "Name:",
+                product.name
+            );
+
+
+            console.log(
+                "Price:",
+                product.price
+            );
+
+
+            console.log(
+                "Category:",
+                product.category
+            );
+
+
+            console.log(
+                "Images:",
+                product.images.length
+            );
+
+
+            console.log(
+                "GPS:",
                 latitude,
                 longitude
             );
 
 
+            console.log(
+                "===================================="
+            );
+
+
+            /* -----------------------------------------
+               RESPONSE
+            ----------------------------------------- */
+
+            return res.json({
+
+                success:
+                    true,
+
+                approved:
+                    true,
+
+                message:
+                    "Product passed ShopNova's basic safety check and was saved successfully.",
+
+                product:
+                    product
+
+            });
+
+        }
+
+
+        catch(error) {
+
+
+            console.error(
+                "PRODUCT SUBMISSION ERROR:",
+                error
+            );
+
+
+            /*
+             * Clean up uploaded files if something
+             * failed after upload.
+             */
+
+            if (
+                req.files &&
+                req.files.length
+            ) {
+
+                req.files.forEach(
+                    function(file) {
+
+                        try {
+
+                            if (
+                                fs.existsSync(
+                                    file.path
+                                )
+                            ) {
+
+                                fs.unlinkSync(
+                                    file.path
+                                );
+
+                            }
+
+                        }
+
+                        catch(deleteError) {
+
+                            console.error(
+                                "CLEANUP ERROR:",
+                                deleteError
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+
+
+            return res.status(500).json({
+
+                success:
+                    false,
+
+                message:
+                    "Unable to submit the product. Please try again."
+
+            });
+
+        }
+
+    }
+
+);
+
+
+/* =====================================================
+   MULTER / UPLOAD ERROR HANDLER
+===================================================== */
+
+app.use(
+    function(
+        error,
+        req,
+        res,
+        next
+    ) {
+
+
+        if (
+            error instanceof
+            multer.MulterError
+        ) {
+
+
+            if (
+                error.code ===
+                "LIMIT_FILE_SIZE"
+            ) {
+
+                return res.status(400).json({
+
+                    success:
+                        false,
+
+                    message:
+                        "Each image must be 10 MB or smaller."
+
+                });
+
+            }
+
+
+            if (
+                error.code ===
+                "LIMIT_FILE_COUNT"
+            ) {
+
+                return res.status(400).json({
+
+                    success:
+                        false,
+
+                    message:
+                        "You can upload a maximum of 10 images."
+
+                });
+
+            }
+
+
+            return res.status(400).json({
+
+                success:
+                    false,
+
+                message:
+                    error.message
+
+            });
+
+        }
+
+
+        if (
+            error
+        ) {
+
+            return res.status(400).json({
+
+                success:
+                    false,
+
+                message:
+                    error.message ||
+                    "File upload error."
+
+            });
+
+        }
+
+
+        next();
+
+    }
+);
+
+
+/* =====================================================
+   HOME PAGE
+===================================================== */
+
+app.get(
+    "/",
+    function(
+        req,
+        res
+    ) {
+
+
+        const possibleFiles = [
+
+            path.join(
+                ROOT_DIR,
+                "index.html"
+            ),
+
+            path.join(
+                ROOT_DIR,
+                "docs",
+                "index.html"
+            )
+
+        ];
+
+
+        const found =
+            possibleFiles.find(
+                function(file) {
+
+                    return fs.existsSync(
+                        file
+                    );
+
+                }
+            );
+
+
+        if (!found) {
+
+            return res.status(404).send(
+                "ShopNova index.html not found."
+            );
+
+        }
+
+
+        res.sendFile(
+            found
+        );
+
+    }
+);
+
+
+/* =====================================================
+   PRODUCTS JSON API
+===================================================== */
+
+app.get(
+    "/api/products",
+    function(
+        req,
+        res
+    ) {
+
+
+        const products =
+            readProducts();
+
+
+        res.json(
+            products
+        );
+
+    }
+);
+
+
+/* =====================================================
+   GET SINGLE PRODUCT
+===================================================== */
+
+app.get(
+    "/api/products/:id",
+    function(
+        req,
+        res
+    ) {
+
+
+        const products =
+            readProducts();
+
+
+        const product =
+            products.find(
+                function(item) {
+
+                    return String(
+                        item.id
+                    ) ===
+                    String(
+                        req.params.id
+                    );
+
+                }
+            );
+
+
+        if (!product) {
+
+            return res.status(404).json({
+
+                success:
+                    false,
+
+                message:
+                    "Product not found."
+
+            });
+
+        }
+
+
+        res.json({
+
+            success:
+                true,
+
+            product:
+                product
+
+        });
+
+    }
+);
+
+
+/* =====================================================
+   GPS SAVE
+===================================================== */
+
+app.post(
+    "/api/location",
+    function(
+        req,
+        res
+    ) {
+
+
+        try {
+
+
+            const {
+                userType,
+                latitude,
+                longitude
+            } =
+                req.body;
+
+
+            const allowedTypes = [
+
+                "buyer",
+
+                "seller",
+
+                "delivery"
+
+            ];
+
+
+            if (
+                !allowedTypes.includes(
+                    userType
+                )
+            ) {
+
+                return res.status(400).json({
+
+                    success:
+                        false,
+
+                    message:
+                        "Invalid user type"
+
+                });
+
+            }
+
+
+            const lat =
+                Number(
+                    latitude
+                );
+
+
+            const lng =
+                Number(
+                    longitude
+                );
+
+
+            if (
+                !Number.isFinite(
+                    lat
+                ) ||
+                !Number.isFinite(
+                    lng
+                )
+            ) {
+
+                return res.status(400).json({
+
+                    success:
+                        false,
+
+                    message:
+                        "Invalid GPS coordinates"
+
+                });
+
+            }
+
+
+            locations[userType] = {
+
+                latitude:
+                    lat,
+
+                longitude:
+                    lng,
+
+                updatedAt:
+                    new Date().toISOString()
+
+            };
+
+
+            console.log(
+                `📍 ${userType.toUpperCase()} LOCATION UPDATED:`,
+                lat,
+                lng
+            );
+
+
             res.json({
 
-                success: true,
+                success:
+                    true,
 
                 message:
                     `${userType} location saved successfully`,
@@ -474,8 +1428,11 @@ app.post(
 
             });
 
+        }
 
-        } catch (error) {
+
+        catch(error) {
+
 
             console.error(
                 "GPS SAVE ERROR:",
@@ -485,7 +1442,8 @@ app.post(
 
             res.status(500).json({
 
-                success: false,
+                success:
+                    false,
 
                 message:
                     "Unable to save location"
@@ -498,22 +1456,30 @@ app.post(
 );
 
 
-/* =========================================
-   GPS - GET ONE USER LOCATION
-========================================= */
+/* =====================================================
+   GET ONE LOCATION
+===================================================== */
 
 app.get(
     "/api/location/:userType",
-    (req, res) => {
+    function(
+        req,
+        res
+    ) {
+
 
         const userType =
             req.params.userType;
 
 
         const allowedTypes = [
+
             "buyer",
+
             "seller",
+
             "delivery"
+
         ];
 
 
@@ -525,7 +1491,8 @@ app.get(
 
             return res.status(400).json({
 
-                success: false,
+                success:
+                    false,
 
                 message:
                     "Invalid user type"
@@ -543,9 +1510,11 @@ app.get(
 
             return res.json({
 
-                success: true,
+                success:
+                    true,
 
-                available: false,
+                available:
+                    false,
 
                 message:
                     `No location available for ${userType}`
@@ -557,9 +1526,11 @@ app.get(
 
         res.json({
 
-            success: true,
+            success:
+                true,
 
-            available: true,
+            available:
+                true,
 
             userType:
                 userType,
@@ -573,17 +1544,22 @@ app.get(
 );
 
 
-/* =========================================
-   GPS - GET ALL LOCATIONS
-========================================= */
+/* =====================================================
+   GET ALL LOCATIONS
+===================================================== */
 
 app.get(
     "/api/locations",
-    (req, res) => {
+    function(
+        req,
+        res
+    ) {
+
 
         res.json({
 
-            success: true,
+            success:
+                true,
 
             locations:
                 locations
@@ -594,17 +1570,22 @@ app.get(
 );
 
 
-/* =========================================
-   GPS HEALTH CHECK
-========================================= */
+/* =====================================================
+   GPS HEALTH
+===================================================== */
 
 app.get(
     "/api/gps-status",
-    (req, res) => {
+    function(
+        req,
+        res
+    ) {
+
 
         res.json({
 
-            success: true,
+            success:
+                true,
 
             gpsSystem:
                 "ShopNova GPS System",
@@ -628,13 +1609,40 @@ app.get(
 );
 
 
-/* =========================================
+/* =====================================================
+   404
+===================================================== */
+
+app.use(
+    function(
+        req,
+        res
+    ) {
+
+        res.status(404).json({
+
+            success:
+                false,
+
+            message:
+                "ShopNova route not found."
+
+        });
+
+    }
+);
+
+
+/* =====================================================
    START SERVER
-========================================= */
+===================================================== */
 
 app.listen(
+
     PORT,
-    () => {
+
+    function() {
+
 
         console.log("");
 
@@ -656,6 +1664,10 @@ app.listen(
 
         console.log(
             "------------------------------------"
+        );
+
+        console.log(
+            "PRODUCT UPLOAD: READY"
         );
 
         console.log(
@@ -683,10 +1695,23 @@ app.listen(
         );
 
         console.log(
+            "Maximum images: 10"
+        );
+
+        console.log(
+            "Maximum image size: 10 MB"
+        );
+
+        console.log(
+            "------------------------------------"
+        );
+
+        console.log(
             "===================================="
         );
 
         console.log("");
 
     }
+
 );
