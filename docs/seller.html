@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -408,6 +407,85 @@
         border-radius: 12px;
 
         background: #f8fbff;
+    }
+
+
+    .image-select-row {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 12px;
+
+        flex-wrap: wrap;
+    }
+
+
+    .select-image-button {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        padding:
+            12px 18px;
+
+        border-radius: 10px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #1767d8,
+                #0875b9
+            );
+
+        color: white;
+
+        font-size: 13px;
+
+        font-weight: 900;
+
+        cursor: pointer;
+
+        border: none;
+    }
+
+
+    .select-image-button:hover {
+
+        transform:
+            translateY(-1px);
+
+        box-shadow:
+            0 7px 18px
+            rgba(23,103,216,.20);
+    }
+
+
+    #productImage {
+
+        position: absolute;
+
+        width: 1px;
+
+        height: 1px;
+
+        opacity: 0;
+
+        pointer-events: none;
+    }
+
+
+    .image-count {
+
+        color: #1767d8;
+
+        font-size: 12px;
+
+        font-weight: 900;
     }
 
 
@@ -1027,19 +1105,41 @@
 
     <div class="image-box">
 
+        <div class="image-select-row">
+
+            <label
+                for="productImage"
+                class="select-image-button"
+            >
+                📷 Select Product Images
+            </label>
+
+            <span
+                id="imageCount"
+                class="image-count"
+            >
+                0 images selected
+            </span>
+
+        </div>
+
+
         <input
             type="file"
             id="productImage"
-            accept="image/*"
+            accept="image/jpeg,image/png,image/webp,image/jpg"
             multiple
-            required
         >
+
 
         <div class="image-help">
 
             📷 Select
-            <strong>multiple product images</strong>
-            at once.
+            <strong>as many product images as you need</strong>.
+
+            <br>
+
+            You can select images again to add more.
 
             <br>
 
@@ -1181,6 +1281,11 @@ const imagePreviewGrid =
         "imagePreviewGrid"
     );
 
+const imageCount =
+    document.getElementById(
+        "imageCount"
+    );
+
 const sellerForm =
     document.getElementById(
         "sellerProductForm"
@@ -1215,11 +1320,11 @@ let selectedImageFiles = [];
 
 imageInput.addEventListener(
     "change",
-    function() {
+    function () {
 
         const files =
             Array.from(
-                this.files
+                this.files || []
             );
 
 
@@ -1228,18 +1333,49 @@ imageInput.addEventListener(
         }
 
 
+        let addedCount = 0;
+
+
         files.forEach(
             function(file) {
 
+                /* Only real image files */
+
                 if (
-                    file.type.startsWith(
-                        "image/"
-                    )
+                    !file ||
+                    !file.type ||
+                    !file.type.startsWith("image/")
                 ) {
+                    return;
+                }
+
+
+                /*
+                 * Prevent accidental duplicate
+                 * selection of exactly the same file.
+                 */
+
+                const duplicate =
+                    selectedImageFiles.some(
+                        function(existingFile) {
+
+                            return (
+                                existingFile.name === file.name &&
+                                existingFile.size === file.size &&
+                                existingFile.lastModified === file.lastModified
+                            );
+
+                        }
+                    );
+
+
+                if (!duplicate) {
 
                     selectedImageFiles.push(
                         file
                     );
+
+                    addedCount++;
 
                 }
 
@@ -1251,14 +1387,52 @@ imageInput.addEventListener(
 
 
         /*
-         * Clear input so the seller
-         * can add more images later.
+         * Clear the native file input.
+         * The selected files remain safely
+         * inside selectedImageFiles.
          */
 
         this.value = "";
 
+
+        if (addedCount > 0) {
+
+            hideMessages();
+
+        }
+
     }
 );
+
+
+/* =========================================
+   UPDATE IMAGE COUNT
+========================================= */
+
+function updateImageCount() {
+
+    const count =
+        selectedImageFiles.length;
+
+
+    if (count === 0) {
+
+        imageCount.textContent =
+            "0 images selected";
+
+    } else if (count === 1) {
+
+        imageCount.textContent =
+            "1 image selected";
+
+    } else {
+
+        imageCount.textContent =
+            count + " images selected";
+
+    }
+
+}
 
 
 /* =========================================
@@ -1268,6 +1442,9 @@ imageInput.addEventListener(
 function renderImagePreviews() {
 
     imagePreviewGrid.innerHTML = "";
+
+
+    updateImageCount();
 
 
     selectedImageFiles.forEach(
@@ -1383,10 +1560,12 @@ function renderImagePreviews() {
             number.className =
                 "image-number";
 
+
             number.textContent =
                 index === 0
                     ? "MAIN IMAGE"
-                    : "IMAGE " + (index + 1);
+                    : "IMAGE " +
+                      (index + 1);
 
 
             const name =
@@ -1533,6 +1712,17 @@ getLocationBtn.addEventListener(
    MESSAGES
 ========================================= */
 
+function hideMessages() {
+
+    successMessage.style.display =
+        "none";
+
+    errorMessage.style.display =
+        "none";
+
+}
+
+
 function showError(message) {
 
     successMessage.style.display =
@@ -1562,10 +1752,16 @@ function showSuccess(message) {
 
 
 /* =========================================
-   READ IMAGE
+   COMPRESS IMAGE
 ========================================= */
 
-function readImageAsDataURL(file) {
+/*
+ * Large camera/phone images can be several MB.
+ * Compressing them before sending prevents
+ * unnecessarily huge JSON requests.
+ */
+
+function compressImage(file) {
 
     return new Promise(
         function(resolve, reject) {
@@ -1575,11 +1771,114 @@ function readImageAsDataURL(file) {
 
 
             reader.onload =
-                function() {
+                function(event) {
 
-                    resolve(
-                        reader.result
-                    );
+                    const img =
+                        new Image();
+
+
+                    img.onload =
+                        function() {
+
+                            const MAX_WIDTH =
+                                1600;
+
+                            const MAX_HEIGHT =
+                                1600;
+
+
+                            let width =
+                                img.width;
+
+                            let height =
+                                img.height;
+
+
+                            if (
+                                width >
+                                MAX_WIDTH ||
+                                height >
+                                MAX_HEIGHT
+                            ) {
+
+                                const ratio =
+                                    Math.min(
+                                        MAX_WIDTH / width,
+                                        MAX_HEIGHT / height
+                                    );
+
+
+                                width =
+                                    Math.round(
+                                        width * ratio
+                                    );
+
+
+                                height =
+                                    Math.round(
+                                        height * ratio
+                                    );
+
+                            }
+
+
+                            const canvas =
+                                document.createElement(
+                                    "canvas"
+                                );
+
+
+                            canvas.width =
+                                width;
+
+                            canvas.height =
+                                height;
+
+
+                            const context =
+                                canvas.getContext(
+                                    "2d"
+                                );
+
+
+                            context.drawImage(
+                                img,
+                                0,
+                                0,
+                                width,
+                                height
+                            );
+
+
+                            const dataURL =
+                                canvas.toDataURL(
+                                    "image/jpeg",
+                                    0.82
+                                );
+
+
+                            resolve(
+                                dataURL
+                            );
+
+                        };
+
+
+                    img.onerror =
+                        function() {
+
+                            reject(
+                                new Error(
+                                    "Unable to process image: " +
+                                    file.name
+                                )
+                            );
+
+                        };
+
+
+                    img.src =
+                        event.target.result;
 
                 };
 
@@ -1589,7 +1888,8 @@ function readImageAsDataURL(file) {
 
                     reject(
                         new Error(
-                            "Unable to read image."
+                            "Unable to read image: " +
+                            file.name
                         )
                     );
 
@@ -1607,6 +1907,49 @@ function readImageAsDataURL(file) {
 
 
 /* =========================================
+   READ ALL IMAGES
+========================================= */
+
+async function prepareImages() {
+
+    const result = [];
+
+
+    for (
+        let i = 0;
+        i < selectedImageFiles.length;
+        i++
+    ) {
+
+        const file =
+            selectedImageFiles[i];
+
+
+        const data =
+            await compressImage(
+                file
+            );
+
+
+        result.push({
+
+            data: data,
+
+            name: file.name,
+
+            type: "image/jpeg"
+
+        });
+
+    }
+
+
+    return result;
+
+}
+
+
+/* =========================================
    SUBMIT PRODUCT
 ========================================= */
 
@@ -1617,24 +1960,32 @@ sellerForm.addEventListener(
         event.preventDefault();
 
 
-        successMessage.style.display =
-            "none";
+        hideMessages();
 
-        errorMessage.style.display =
-            "none";
 
+        /* =====================================
+           IMAGE CHECK
+        ===================================== */
 
         if (
+            !Array.isArray(
+                selectedImageFiles
+            ) ||
             selectedImageFiles.length === 0
         ) {
 
             showError(
-                "❌ Please select at least one product image."
+                "❌ Please select at least one product image before adding the product."
             );
 
             return;
+
         }
 
+
+        /* =====================================
+           PRODUCT INFORMATION
+        ===================================== */
 
         const productName =
             document.getElementById(
@@ -1677,71 +2028,87 @@ sellerForm.addEventListener(
             );
 
             return;
+
         }
 
+
+        if (
+            !Number.isFinite(
+                productPrice
+            ) ||
+            productPrice <= 0
+        ) {
+
+            showError(
+                "❌ Please enter a valid product price."
+            );
+
+            return;
+
+        }
+
+
+        if (
+            !Number.isFinite(
+                productStock
+            ) ||
+            productStock < 0
+        ) {
+
+            showError(
+                "❌ Please enter a valid stock quantity."
+            );
+
+            return;
+
+        }
+
+
+        /* =====================================
+           DISABLE SUBMIT
+        ===================================== */
 
         submitButton.disabled =
             true;
 
         submitButton.textContent =
-            "🔍 Checking product safety...";
+            "📷 Preparing product images...";
 
 
         try {
 
-
-            /* =====================================
-               READ ALL IMAGES
-            ===================================== */
-
-            const imageDataList =
-                await Promise.all(
-                    selectedImageFiles.map(
-                        function(file) {
-
-                            return readImageAsDataURL(
-                                file
-                            );
-
-                        }
-                    )
-                );
-
-
-            /* =====================================
-               IMAGE OBJECTS
-            ===================================== */
+            /* =================================
+               PREPARE ALL IMAGES
+            ================================= */
 
             const imageObjects =
-                selectedImageFiles.map(
-                    function(file, index) {
+                await prepareImages();
 
-                        return {
 
-                            data:
-                                imageDataList[index],
+            if (
+                !imageObjects.length
+            ) {
 
-                            name:
-                                file.name,
-
-                            type:
-                                file.type
-
-                        };
-
-                    }
+                throw new Error(
+                    "No product images could be processed."
                 );
 
+            }
 
-            /* =====================================
-               PRODUCT
-            ===================================== */
+
+            /* =================================
+               PRODUCT OBJECT
+            ================================= */
 
             const product = {
 
                 id:
                     "seller-" +
-                    Date.now(),
+                    Date.now() +
+                    "-" +
+                    Math.random()
+                        .toString(36)
+                        .substring(2, 8),
 
                 name:
                     productName,
@@ -1759,20 +2126,21 @@ sellerForm.addEventListener(
                     productDescription,
 
                 /*
-                 * Existing compatibility.
+                 * First image remains available
+                 * to older product-page code.
                  */
 
                 image:
-                    imageDataList[0],
+                    imageObjects[0].data,
 
                 imageName:
-                    selectedImageFiles[0].name,
+                    imageObjects[0].name,
 
                 imageType:
-                    selectedImageFiles[0].type,
+                    imageObjects[0].type,
 
                 /*
-                 * Multiple product images.
+                 * All selected images.
                  */
 
                 images:
@@ -1794,9 +2162,13 @@ sellerForm.addEventListener(
             };
 
 
-            /* =====================================
+            /* =================================
                SEND TO SERVER
-            ===================================== */
+            ================================= */
+
+            submitButton.textContent =
+                "⬆ Uploading product...";
+
 
             const response =
                 await fetch(
@@ -1821,9 +2193,26 @@ sellerForm.addEventListener(
                 );
 
 
-            const result =
-                await response.json();
+            let result;
 
+
+            try {
+
+                result =
+                    await response.json();
+
+            } catch (jsonError) {
+
+                throw new Error(
+                    "The server returned an invalid response."
+                );
+
+            }
+
+
+            /* =================================
+               SERVER ERROR
+            ================================= */
 
             if (
                 !response.ok ||
@@ -1834,44 +2223,70 @@ sellerForm.addEventListener(
                     "❌ " +
                     (
                         result.message ||
-                        "This product cannot be published on ShopNova."
+                        "This product could not be added."
                     )
                 );
 
                 return;
+
             }
 
 
-            /* =====================================
+            /* =================================
                LOCAL STORAGE
-            ===================================== */
+            ================================= */
 
-            const existing =
-                JSON.parse(
-                    localStorage.getItem(
-                        "shopnova_seller_products"
-                    ) || "[]"
+            try {
+
+                const existing =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "shopnova_seller_products"
+                        ) || "[]"
+                    );
+
+
+                if (
+                    Array.isArray(
+                        existing
+                    )
+                ) {
+
+                    existing.push(
+                        result.product ||
+                        product
+                    );
+
+
+                    localStorage.setItem(
+                        "shopnova_seller_products",
+                        JSON.stringify(
+                            existing
+                        )
+                    );
+
+                }
+
+            } catch (storageError) {
+
+                console.warn(
+                    "Local storage could not be updated:",
+                    storageError
                 );
 
-
-            existing.push(
-                result.product ||
-                product
-            );
+            }
 
 
-            localStorage.setItem(
-                "shopnova_seller_products",
-                JSON.stringify(
-                    existing
-                )
-            );
-
+            /* =================================
+               SUCCESS
+            ================================= */
 
             showSuccess(
                 "✓ Product approved and added successfully!"
             );
 
+
+            /* Clear form */
 
             sellerForm.reset();
 
@@ -1882,6 +2297,9 @@ sellerForm.addEventListener(
 
             imagePreviewGrid.innerHTML =
                 "";
+
+
+            updateImageCount();
 
 
             latitude.value =
@@ -1904,7 +2322,11 @@ sellerForm.addEventListener(
 
 
             showError(
-                "❌ Unable to contact ShopNova server. Please try again."
+                "❌ " +
+                (
+                    error.message ||
+                    "Unable to upload the product. Please try again."
+                )
             );
 
         } finally {
@@ -1920,6 +2342,13 @@ sellerForm.addEventListener(
     }
 );
 
+
+/* =========================================
+   INITIAL STATE
+========================================= */
+
+updateImageCount();
+
 </script>
 
 
@@ -1933,4 +2362,3 @@ sellerForm.addEventListener(
 </body>
 
 </html>
-
