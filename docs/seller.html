@@ -1,1977 +1,366 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ShopNova | Seller Panel</title>
-
-
 <style>
-
-/* =====================================================
-   RESET
-===================================================== */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-
-/* =====================================================
-   BODY
-===================================================== */
-
-body {
-
-    font-family:
-        "Segoe UI",
-        Arial,
-        sans-serif;
-
-    min-height: 100vh;
-
-    background:
-        linear-gradient(
-            135deg,
-            #eaf4ff,
-            #d8ebff,
-            #f5f9ff
-        );
-
-    color: #183b68;
-}
-
-
-/* =====================================================
-   HEADER
-===================================================== */
-
-.seller-header {
-
-    width: 100%;
-
-    background:
-        linear-gradient(
-            90deg,
-            #082b5f,
-            #0d4f91,
-            #155da8
-        );
-
-    color: white;
-
-    box-shadow:
-        0 5px 20px
-        rgba(0,35,90,.22);
-}
-
-
-.header-inner {
-
-    width: 95%;
-
-    max-width: 1200px;
-
-    min-height: 75px;
-
-    margin: auto;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 20px;
-}
-
-
-.brand {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    color: white;
-
-    text-decoration: none;
-}
-
-
-.brand-text {
-
-    font-size: 22px;
-
-    font-weight: 900;
-}
-
-
-.back-home {
-
-    padding:
-        10px 17px;
-
-    border-radius: 9px;
-
-    background:
-        rgba(255,255,255,.14);
-
-    color: white;
-
-    text-decoration: none;
-
-    font-size: 13px;
-
-    font-weight: 800;
-}
-
-
-.back-home:hover {
-
-    background:
-        rgba(255,255,255,.25);
-}
-
-
-/* =====================================================
-   MAIN
-===================================================== */
-
-.page {
-
-    width: 95%;
-
-    max-width: 1100px;
-
-    margin:
-        35px auto 50px;
-}
-
-
-.page-title {
-
-    text-align: center;
-
-    margin-bottom: 28px;
-}
-
-
-.page-title h1 {
-
-    margin-top: 12px;
-
-    color: #082b5f;
-
-    font-size:
-        clamp(30px,5vw,48px);
-
-    font-weight: 950;
-}
-
-
-/* =====================================================
-   CARD
-===================================================== */
-
-.seller-card {
-
-    background: white;
-
-    border-radius: 20px;
-
-    padding: 30px;
-
-    box-shadow:
-        0 12px 40px
-        rgba(20,65,110,.12);
-
-    border:
-        1px solid #dce9f7;
-}
-
-
-/* =====================================================
-   SECTION TITLE
-===================================================== */
-
-.section-title {
-
-    color: #0b3d78;
-
-    font-size: 20px;
-
-    font-weight: 900;
-
-    margin-top: 25px;
-
-    margin-bottom: 20px;
-
-    padding-bottom: 12px;
-
-    border-bottom:
-        1px solid #e4edf7;
-}
-
-
-.section-title:first-of-type {
-
-    margin-top: 0;
-}
-
-
-/* =====================================================
-   FORM GRID
-===================================================== */
-
-.form-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap: 20px;
-}
-
-
-.form-group {
-
-    display: flex;
-
-    flex-direction: column;
-
-    margin-bottom: 15px;
-}
-
-
-.form-group.full {
-
-    grid-column:
-        1 / -1;
-}
-
-
-label {
-
-    margin-bottom: 7px;
-
-    color: #244b73;
-
-    font-size: 13px;
-
-    font-weight: 800;
-}
-
-
-input,
-textarea,
-select {
-
-    width: 100%;
-
-    border:
-        1px solid #cbdced;
-
-    border-radius: 10px;
-
-    padding:
-        12px 14px;
-
-    outline: none;
-
-    background: #fbfdff;
-
-    color: #183b68;
-
-    font-size: 14px;
-
-    font-family: inherit;
-}
-
-
-input:focus,
-textarea:focus,
-select:focus {
-
-    border-color:
-        #3280e8;
-
-    box-shadow:
-        0 0 0 3px
-        rgba(50,128,232,.12);
-
-    background: white;
-}
-
-
-textarea {
-
-    min-height: 120px;
-
-    resize: vertical;
-}
-
-
-/* =====================================================
-   IMAGE MANAGEMENT
-===================================================== */
-
-.image-box {
-
-    padding: 18px;
-
-    border:
-        2px dashed #b9d5ef;
-
-    border-radius: 12px;
-
-    background: #f8fbff;
-
-    margin-bottom: 20px;
-}
-
-
-.image-select-row {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    flex-wrap: wrap;
-}
-
-
-/* Hide actual file input */
-
-#productImage {
-
-    display: none;
-}
-
-
-/* Choose button */
-
-.select-image-button {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding:
-        12px 18px;
-
-    border-radius: 10px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #1767d8,
-            #0875b9
-        );
-
-    color: white;
-
-    font-size: 13px;
-
-    font-weight: 900;
-
-    cursor: pointer;
-
-    border: none;
-
-    margin-bottom: 0;
-}
-
-
-.select-image-button:hover {
-
-    transform:
-        translateY(-1px);
-
-    box-shadow:
-        0 6px 15px
-        rgba(23,103,216,.25);
-}
-
-
-/* File counter */
-
-.image-count {
-
-    color: #1767d8;
-
-    font-size: 13px;
-
-    font-weight: 900;
-}
-
-
-/* =====================================================
-   IMAGE PREVIEW
-===================================================== */
-
-.image-preview-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fill,
-            minmax(150px,1fr)
-        );
-
-    gap: 15px;
-
-    margin-top: 18px;
-}
-
-
-.image-preview-card {
-
-    position: relative;
-
-    overflow: hidden;
-
-    border-radius: 12px;
-
-    border:
-        1px solid #d9e6f3;
-
-    background: white;
-
-    box-shadow:
-        0 5px 15px
-        rgba(20,65,110,.08);
-}
-
-
-.image-preview-card img {
-
-    display: block;
-
-    width: 100%;
-
-    height: 150px;
-
-    object-fit: contain;
-
-    background: #eef5fc;
-}
-
-
-.image-preview-info {
-
-    padding: 9px;
-
-    text-align: center;
-}
-
-
-.image-name {
-
-    overflow: hidden;
-
-    color: #56708e;
-
-    font-size: 10px;
-
-    white-space: nowrap;
-
-    text-overflow: ellipsis;
-}
-
-
-/* Remove image button */
-
-.remove-image {
-
-    position: absolute;
-
-    top: 7px;
-
-    right: 7px;
-
-    width: 28px;
-
-    height: 28px;
-
-    border: none;
-
-    border-radius: 50%;
-
-    background:
-        rgba(220,38,38,.92);
-
-    color: white;
-
-    font-size: 18px;
-
-    font-weight: 900;
-
-    cursor: pointer;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    z-index: 5;
-}
-
-
-.remove-image:hover {
-
-    background:
-        #b91c1c;
-
-    transform:
-        scale(1.05);
-}
-
-
-/* =====================================================
-   LOCATION
-===================================================== */
-
-.location-btn {
-
-    background-color:
-        #0076df;
-
-    color: white;
-
-    border: none;
-
-    padding:
-        12px 20px;
-
-    font-weight: bold;
-
-    border-radius: 8px;
-
-    cursor: pointer;
-
-    margin-bottom: 12px;
-
-    align-self: flex-start;
-}
-
-
-.location-btn:hover {
-
-    background-color:
-        #0065bf;
-}
-
-
-.status-msg {
-
-    font-size: 13px;
-
-    font-weight: 600;
-
-    margin-bottom: 15px;
-
-    display: none;
-}
-
-
-.status-msg.success {
-
-    color: #2e7d32;
-
-    display: block;
-}
-
-
-.status-msg.error {
-
-    color: #c62828;
-
-    display: block;
-}
-
-
-/* =====================================================
-   SUBMIT
-===================================================== */
-
-.submit-btn {
-
-    width: 100%;
-
-    padding: 16px;
-
-    background:
-        linear-gradient(
-            180deg,
-            #00798c,
-            #005c6a
-        );
-
-    color: white;
-
-    font-size: 16px;
-
-    font-weight: bold;
-
-    border: none;
-
-    border-radius: 10px;
-
-    cursor: pointer;
-
-    margin-top: 20px;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    gap: 8px;
-}
-
-
-.submit-btn:hover {
-
-    opacity: .95;
-}
-
-
-.submit-btn:disabled {
-
-    opacity: .65;
-
-    cursor: not-allowed;
-}
-
-
-/* =====================================================
-   FEEDBACK
-===================================================== */
-
-.feedback-banner {
-
-    width: 100%;
-
-    padding: 12px;
-
-    border-radius: 8px;
-
-    text-align: center;
-
-    font-weight: bold;
-
-    font-size: 14px;
-
-    margin-top: 15px;
-
-    display: none;
-}
-
-
-.feedback-banner.error {
-
-    background-color:
-        #ffebee;
-
-    color:
-        #c62828;
-
-    border:
-        1px solid #ffcdd2;
-
-    display: block;
-}
-
-
-.feedback-banner.success {
-
-    background-color:
-        #e8f5e9;
-
-    color:
-        #2e7d32;
-
-    border:
-        1px solid #c8e6c9;
-
-    display: block;
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media(max-width:768px) {
-
-    .seller-card {
-
-        padding: 20px;
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
     }
 
-
-    .form-grid {
-
-        grid-template-columns: 1fr;
+    body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #eaf4ff, #d8ebff, #f5f9ff);
+        color: #183b68;
     }
 
-
-    .form-group.full {
-
-        grid-column: auto;
+    /* ==============================
+       HEADER
+    ============================== */
+    .seller-header {
+        width: 100%;
+        background: linear-gradient(90deg, #082b5f, #0d4f91, #155da8);
+        color: white;
+        box-shadow: 0 5px 20px rgba(0,35,90,.22);
     }
-
 
     .header-inner {
-
-        width: 92%;
-
-        min-height: 65px;
+        width: 95%;
+        max-width: 1200px;
+        min-height: 75px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
     }
 
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: white;
+        text-decoration: none;
+    }
 
     .brand-text {
-
-        font-size: 19px;
+        font-size: 22px;
+        font-weight: 900;
     }
 
+    .back-home {
+        padding: 10px 17px;
+        border-radius: 9px;
+        background: rgba(255,255,255,.14);
+        color: white;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 800;
+    }
 
+    .back-home:hover {
+        background: rgba(255,255,255,.25);
+    }
+
+    /* ==============================
+       MAIN LAYOUT
+    ============================== */
     .page {
-
-        width: 94%;
+        width: 95%;
+        max-width: 1100px;
+        margin: 35px auto 50px;
     }
 
-}
+    .page-title {
+        text-align: center;
+        margin-bottom: 28px;
+    }
 
+    .page-title h1 {
+        margin-top: 12px;
+        color: #082b5f;
+        font-size: clamp(30px,5vw,48px);
+        font-weight: 950;
+    }
 
-@media(max-width:500px) {
-
+    /* ==============================
+       FORM CARD & GROUPS
+    ============================== */
     .seller-card {
-
-        padding: 16px;
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 12px 40px rgba(20,65,110,.12);
+        border: 1px solid #dce9f7;
     }
 
+    .section-title {
+        color: #0b3d78;
+        font-size: 20px;
+        font-weight: 900;
+        margin-top: 25px;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #e4edf7;
+    }
+
+    .section-title:first-of-type {
+        margin-top: 0;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+    }
+
+    .form-group.full {
+        grid-column: 1 / -1;
+    }
+
+    label {
+        margin-bottom: 7px;
+        color: #244b73;
+        font-size: 13px;
+        font-weight: 800;
+    }
+
+    input, textarea, select {
+        width: 100%;
+        border: 1px solid #cbdced;
+        border-radius: 10px;
+        padding: 12px 14px;
+        outline: none;
+        background: #fbfdff;
+        color: #183b68;
+        font-size: 14px;
+        font-family: inherit;
+    }
+
+    input:focus, textarea:focus, select:focus {
+        border-color: #3280e8;
+        box-shadow: 0 0 0 3px rgba(50,128,232,.12);
+        background: white;
+    }
+
+    textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    /* ==============================
+       IMAGE MANAGEMENT BLOCK
+    ============================== */
+    .image-box {
+        padding: 18px;
+        border: 2px dashed #b9d5ef;
+        border-radius: 12px;
+        background: #f8fbff;
+        margin-bottom: 20px;
+    }
+
+    .image-select-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .select-image-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 18px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #1767d8, #0875b9);
+        color: white;
+        font-size: 13px;
+        font-weight: 900;
+        cursor: pointer;
+        border: none;
+        margin-bottom: 0;
+    }
+
+    .image-count {
+        color: #1767d8;
+        font-size: 13px;
+        font-weight: 900;
+    }
+
+    .image-help {
+        margin-top: 8px;
+        color: #698198;
+        font-size: 12px;
+    }
 
     .image-preview-grid {
-
-        grid-template-columns:
-            repeat(2,1fr);
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 15px;
+        margin-top: 18px;
     }
 
+    .image-preview-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 12px;
+        border: 1px solid #d9e6f3;
+        background: white;
+    }
 
     .image-preview-card img {
-
-        height: 130px;
+        display: block;
+        width: 100%;
+        height: 150px;
+        object-fit: contain;
+        background: #eef5fc;
     }
 
-}
+    .image-preview-info {
+        padding: 9px;
+        text-align: center;
+    }
 
+    .image-name {
+        overflow: hidden;
+        color: #56708e;
+        font-size: 10px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    /* ==============================
+       LOCATION & NOTIFICATION STATES
+    ============================== */
+    .location-btn {
+        background-color: #0076df;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        font-weight: bold;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-bottom: 12px;
+        align-self: flex-start;
+    }
+
+    .status-msg {
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        display: none;
+    }
+
+    .status-msg.success { color: #2e7d32; display: block; }
+    .status-msg.error { color: #c62828; display: block; }
+
+    .submit-btn {
+        width: 100%;
+        padding: 16px;
+        background: linear-gradient(180deg, #00798c, #005c6a);
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .submit-btn:hover { opacity: 0.95; }
+
+    .feedback-banner {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 14px;
+        margin-top: 15px;
+        display: none;
+    }
+    .feedback-banner.error { background-color: #ffebee; color: #c62828; border: 1px solid #ffcdd2; display: block; }
+    .feedback-banner.success { background-color: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; display: block; }
 </style>
-
 </head>
-
-
 <body>
 
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
 <header class="seller-header">
-
     <div class="header-inner">
-
-        <a
-            href="index.html"
-            class="brand"
-        >
-
-            <div class="brand-text">
-                ShopNova
-            </div>
-
+        <a href="#" class="brand">
+            <div class="brand-text">ShopNova</div>
         </a>
-
-
-        <a
-            href="index.html"
-            class="back-home"
-        >
-            Back to Dashboard
-        </a>
-
+        <a href="#" class="back-home">Back to Dashboard</a>
     </div>
-
 </header>
 
-
-<!-- =====================================================
-     MAIN
-===================================================== -->
-
 <main class="page">
-
-
     <div class="page-title">
-
-        <h1>
-            Seller Catalog Portal
-        </h1>
-
+        <h1>Seller Catalog Portal</h1>
     </div>
-
 
     <div class="seller-card">
-
-
-        <form
-            id="productForm"
-            enctype="multipart/form-data"
-        >
-
-
-            <!-- =================================================
-                 1. MEDIA
-            ================================================== -->
-
-            <div class="section-title">
-
-                1. Media Assets
-
-            </div>
-
-
-            <div class="image-box">
-
-
-                <div class="image-select-row">
-
-
-                    <label
-                        for="productImage"
-                        class="select-image-button"
-                    >
-
-                        Choose Gallery Files
-
-                    </label>
-
-
-                    <input
-                        type="file"
-                        id="productImage"
-                        name="gallery"
-                        accept="image/*"
-                        multiple
-                    >
-
-
-                    <span
-                        class="image-count"
-                        id="fileCounter"
-                    >
-
-                        0 files staged
-
-                    </span>
-
-
-                </div>
-
-
-                <div
-                    class="image-preview-grid"
-                    id="previewGrid"
-                ></div>
-
-
-            </div>
-
-
-            <!-- =================================================
-                 2. PRODUCT DETAILS
-            ================================================== -->
-
-            <div class="section-title">
-
-                2. Product Details
-
-            </div>
-
-
+        <form id="productForm" enctype="multipart/form-data">
+            
+            <div class="section-title">1. Product Information</div>
             <div class="form-grid">
-
-
-                <div class="form-group full">
-
-                    <label
-                        for="productTitle"
-                    >
-                        Product Title / Name
-                    </label>
-
-
-                    <input
-                        type="text"
-                        id="productTitle"
-                        name="name"
-                        placeholder="e.g., Men's Slim Fit Navy Blue T-Shirt"
-                        required
-                    >
-
+                <div class="form-group">
+                    <label for="productTitle">Product Name *</label>
+                    <input type="text" id="productTitle" name="title" placeholder="Example: One Step Closer T-Shirt" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="productPrice">Price *</label>
+                    <input type="number" id="productPrice" name="price" step="0.01" placeholder="Example: 799" required>
                 </div>
 
-
                 <div class="form-group">
-
-                    <label
-                        for="productPrice"
-                    >
-                        Price (₹)
-                    </label>
-
-
-                    <input
-                        type="number"
-                        id="productPrice"
-                        name="price"
-                        step="0.01"
-                        min="0"
-                        placeholder="0.00"
-                        required
-                    >
-
+                    <label for="productStock">Stock *</label>
+                    <input type="number" id="productStock" name="stock" placeholder="Example: 25" required>
                 </div>
 
-
                 <div class="form-group">
-
-                    <label
-                        for="productCategory"
-                    >
-                        Category
-                    </label>
-
-
-                    <select
-                        id="productCategory"
-                        name="category"
-                        required
-                    >
-
-                        <option
-                            value=""
-                            disabled
-                            selected
-                        >
-                            Select a category
-                        </option>
-
-                        <option value="fashion">
-                            Fashion & Apparel
-                        </option>
-
-                        <option value="electronics">
-                            Electronics & Gadgets
-                        </option>
-
-                        <option value="home">
-                            Home & Kitchen
-                        </option>
-
-                        <option value="beauty">
-                            Beauty & Personal Care
-                        </option>
-
-                        <option value="other">
-                            Other / Miscellaneous
-                        </option>
-
+                    <label for="productCategory">Category *</label>
+                    <select id="productCategory" name="category" required>
+                        <option value="" disabled selected>Select a Category...</option>
+                        <option value="fashion">Fashion & Apparel</option>
+                        <option value="electronics">Electronics & Gadgets</option>
+                        <option value="home">Home & Kitchen</option>
+                        <option value="beauty">Beauty & Personal Care</option>
+                        <option value="other">Other</option>
                     </select>
-
                 </div>
-
 
                 <div class="form-group full">
-
-                    <label
-                        for="productDescription"
-                    >
-                        Product Description
-                    </label>
-
-
-                    <textarea
-                        id="productDescription"
-                        name="description"
-                        placeholder="Write a clear description of your item features, materials, and sizes..."
-                        required
-                    ></textarea>
-
+                    <label for="productDescription">Product Description *</label>
+                    <textarea id="productDescription" name="description" placeholder="Describe your product..." required></textarea>
                 </div>
-
-
             </div>
 
-
-            <!-- =================================================
-                 3. GPS
-            ================================================== -->
-
-            <div class="section-title">
-
-                3. Fulfillment Coordinates
-
+            <div class="section-title">2. Product Images *</div>
+            <div class="image-box">
+                <div class="image-select-row">
+                    <label for="productImage" class="select-image-button">Choose Files</label>
+                    <input type="file" id="productImage" accept="image/*" multiple style="display: none;">
+                    <span class="image-count" id="fileCounter">0 files staged</span>
+                </div>
+                <div class="image-help">Select multiple images at once: front, back, side, close-up, size/details, etc. Maximum 10 images.</div>
+                <div class="image-preview-grid" id="previewGrid"></div>
             </div>
 
-
-            <button
-                type="button"
-                class="location-btn"
-                id="geoBtn"
-            >
-
-                📍 Get My Current Location
-
-            </button>
-
-
-            <div
-                id="locationStatus"
-                class="status-msg"
-            ></div>
-
-
-            <div class="form-grid">
-
-
-                <div class="form-group">
-
-                    <label for="latitude">
-                        Latitude
-                    </label>
-
-
-                    <input
-                        type="text"
-                        id="latitude"
-                        name="latitude"
-                        placeholder="Awaiting GPS detection..."
-                        readonly
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="longitude">
-                        Longitude
-                    </label>
-
-
-                    <input
-                        type="text"
-                        id="longitude"
-                        name="longitude"
-                        placeholder="Awaiting GPS detection..."
-                        readonly
-                        required
-                    >
-
-                </div>
-
-
-            </div>
-
-
-            <!-- =================================================
-                 SUBMIT
-            ================================================== -->
-
-            <button
-                type="submit"
-                class="submit-btn"
-                id="submitBtn"
-            >
-
-                🚀 Submit Product
-
-            </button>
-
-
-            <div
-                id="feedbackBanner"
-                class="feedback-banner"
-            ></div>
-
-
-        </form>
-
-
-    </div>
-
-</main>
-
-
-<script>
-
-"use strict";
-
-
-/* =====================================================
-   ELEMENTS
-===================================================== */
-
-const galleryInput =
-    document.getElementById(
-        "productImage"
-    );
-
-
-const fileCounter =
-    document.getElementById(
-        "fileCounter"
-    );
-
-
-const previewGrid =
-    document.getElementById(
-        "previewGrid"
-    );
-
-
-const productForm =
-    document.getElementById(
-        "productForm"
-    );
-
-
-const submitBtn =
-    document.getElementById(
-        "submitBtn"
-    );
-
-
-const feedbackBanner =
-    document.getElementById(
-        "feedbackBanner"
-    );
-
-
-const geoBtn =
-    document.getElementById(
-        "geoBtn"
-    );
-
-
-const locationStatus =
-    document.getElementById(
-        "locationStatus"
-    );
-
-
-const latitudeInput =
-    document.getElementById(
-        "latitude"
-    );
-
-
-const longitudeInput =
-    document.getElementById(
-        "longitude"
-    );
-
-
-/* =====================================================
-   SELECTED FILES
-===================================================== */
-
-let selectedGalleryFiles = [];
-
-
-/* =====================================================
-   FILE KEY
-===================================================== */
-
-function getFileKey(file) {
-
-    return [
-        file.name,
-        file.size,
-        file.lastModified
-    ].join("_");
-
-}
-
-
-/* =====================================================
-   FILE SELECTION
-===================================================== */
-
-galleryInput.addEventListener(
-    "change",
-    function() {
-
-        const files =
-            Array.from(
-                this.files || []
-            );
-
-
-        if (!files.length) {
-
-            return;
-
-        }
-
-
-        files.forEach(
-            function(file) {
-
-
-                /* Only images */
-
-                if (
-                    !file.type.startsWith(
-                        "image/"
-                    )
-                ) {
-
-                    return;
-
-                }
-
-
-                /* Maximum 10 images */
-
-                if (
-                    selectedGalleryFiles.length >= 10
-                ) {
-
-                    return;
-
-                }
-
-
-                const duplicate =
-                    selectedGalleryFiles.some(
-                        function(existing) {
-
-                            return (
-                                getFileKey(existing) ===
-                                getFileKey(file)
-                            );
-
-                        }
-                    );
-
-
-                if (!duplicate) {
-
-                    selectedGalleryFiles.push(
-                        file
-                    );
-
-                }
-
-            }
-        );
-
-
-        updateImageUI();
-
-
-        /*
-         * Clear input.
-         *
-         * This is important because it allows
-         * the seller to select the same file
-         * again later.
-         */
-
-        this.value = "";
-
-    }
-);
-
-
-/* =====================================================
-   UPDATE IMAGE UI
-===================================================== */
-
-function updateImageUI() {
-
-
-    const count =
-        selectedGalleryFiles.length;
-
-
-    if (count === 0) {
-
-        fileCounter.textContent =
-            "0 files staged";
-
-    }
-
-    else if (count === 1) {
-
-        fileCounter.textContent =
-            "1 file staged";
-
-    }
-
-    else {
-
-        fileCounter.textContent =
-            count +
-            " files staged";
-
-    }
-
-
-    renderPreviews();
-
-}
-
-
-/* =====================================================
-   RENDER PREVIEWS
-===================================================== */
-
-function renderPreviews() {
-
-
-    previewGrid.innerHTML = "";
-
-
-    selectedGalleryFiles.forEach(
-        function(file, index) {
-
-
-            const card =
-                document.createElement(
-                    "div"
-                );
-
-
-            card.className =
-                "image-preview-card";
-
-
-            const image =
-                document.createElement(
-                    "img"
-                );
-
-
-            image.alt =
-                file.name;
-
-
-            const previewUrl =
-                URL.createObjectURL(
-                    file
-                );
-
-
-            image.src =
-                previewUrl;
-
-
-            image.onload =
-                function() {
-
-                    URL.revokeObjectURL(
-                        previewUrl
-                    );
-
-                };
-
-
-            const removeButton =
-                document.createElement(
-                    "button"
-                );
-
-
-            removeButton.type =
-                "button";
-
-
-            removeButton.className =
-                "remove-image";
-
-
-            removeButton.textContent =
-                "×";
-
-
-            removeButton.title =
-                "Remove image";
-
-
-            removeButton.addEventListener(
-                "click",
-                function() {
-
-                    selectedGalleryFiles.splice(
-                        index,
-                        1
-                    );
-
-
-                    updateImageUI();
-
-                }
-            );
-
-
-            const info =
-                document.createElement(
-                    "div"
-                );
-
-
-            info.className =
-                "image-preview-info";
-
-
-            const name =
-                document.createElement(
-                    "div"
-                );
-
-
-            name.className =
-                "image-name";
-
-
-            name.textContent =
-                file.name;
-
-
-            info.appendChild(
-                name
-            );
-
-
-            card.appendChild(
-                image
-            );
-
-
-            card.appendChild(
-                removeButton
-            );
-
-
-            card.appendChild(
-                info
-            );
-
-
-            previewGrid.appendChild(
-                card
-            );
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   LOCATION
-===================================================== */
-
-geoBtn.addEventListener(
-    "click",
-    function() {
-
-
-        if (
-            !navigator.geolocation
-        ) {
-
-            showLocationStatus(
-                "Geolocation is not supported by this browser.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        geoBtn.disabled =
-            true;
-
-
-        geoBtn.textContent =
-            "📍 Detecting Location...";
-
-
-        showLocationStatus(
-            "Requesting your current location...",
-            "success"
-        );
-
-
-        navigator.geolocation.getCurrentPosition(
-
-            function(position) {
-
-
-                const latitude =
-                    position.coords.latitude;
-
-
-                const longitude =
-                    position.coords.longitude;
-
-
-                latitudeInput.value =
-                    latitude;
-
-
-                longitudeInput.value =
-                    longitude;
-
-
-                showLocationStatus(
-                    "✓ Location detected successfully.",
-                    "success"
-                );
-
-
-                geoBtn.disabled =
-                    false;
-
-
-                geoBtn.textContent =
-                    "📍 Location Detected";
-
-            },
-
-
-            function(error) {
-
-
-                console.error(
-                    "GPS ERROR:",
-                    error
-                );
-
-
-                let message =
-                    "Unable to detect your location.";
-
-
-                if (
-                    error.code ===
-                    error.PERMISSION_DENIED
-                ) {
-
-                    message =
-                        "Location permission was denied. Please allow location access.";
-
-                }
-
-                else if (
-                    error.code ===
-                    error.POSITION_UNAVAILABLE
-                ) {
-
-                    message =
-                        "Your location is currently unavailable.";
-
-                }
-
-                else if (
-                    error.code ===
-                    error.TIMEOUT
-                ) {
-
-                    message =
-                        "Location request timed out. Please try again.";
-
-                }
-
-
-                showLocationStatus(
-                    message,
-                    "error"
-                );
-
-
-                geoBtn.disabled =
-                    false;
-
-
-                geoBtn.textContent =
-                    "📍 Get My Current Location";
-
-            },
-
-            {
-
-                enableHighAccuracy:
-                    true,
-
-                timeout:
-                    15000,
-
-                maximumAge:
-                    0
-
-            }
-
-        );
-
-    }
-);
-
-
-/* =====================================================
-   LOCATION STATUS
-===================================================== */
-
-function showLocationStatus(
-    message,
-    type
-) {
-
-    locationStatus.textContent =
-        message;
-
-
-    locationStatus.className =
-        "status-msg " +
-        type;
-
-}
-
-
-/* =====================================================
-   FEEDBACK
-===================================================== */
-
-function showFeedback(
-    message,
-    type
-) {
-
-    feedbackBanner.textContent =
-        message;
-
-
-    feedbackBanner.className =
-        "feedback-banner " +
-        type;
-
-}
-
-
-/* =====================================================
-   FORM SUBMISSION
-===================================================== */
-
-productForm.addEventListener(
-    "submit",
-    async function(event) {
-
-        event.preventDefault();
-
-
-        /* ---------------------------------------------
-           CHECK IMAGES
-        --------------------------------------------- */
-
-        if (
-            selectedGalleryFiles.length === 0
-        ) {
-
-            showFeedback(
-                "Please choose at least one product image.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        /* ---------------------------------------------
-           CHECK GPS
-        --------------------------------------------- */
-
-        if (
-            !latitudeInput.value ||
-            !longitudeInput.value
-        ) {
-
-            showFeedback(
-                "Please get your current location before submitting the product.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        /* ---------------------------------------------
-           DISABLE SUBMIT
-        --------------------------------------------- */
-
-        submitBtn.disabled =
-            true;
-
-
-        submitBtn.textContent =
-            "⏳ Uploading Product...";
-
-
-        feedbackBanner.className =
-            "feedback-banner";
-
-
-        try {
-
-
-            /* -----------------------------------------
-               FORM DATA
-            ----------------------------------------- */
-
-            const formData =
-                new FormData();
-
-
-            formData.append(
-                "name",
-                document.getElementById(
-                    "productTitle"
-                ).value.trim()
-            );
-
-
-            formData.append(
-                "price",
-                document.getElementById(
-                    "productPrice"
-                ).value
-            );
-
-
-            formData.append(
-                "category",
-                document.getElementById(
-                    "productCategory"
-                ).value
-            );
-
-
-            formData.append(
-                "description",
-                document.getElementById(
-                    "productDescription"
-                ).value.trim()
-            );
-
-
-            formData.append(
-                "latitude",
-                latitudeInput.value
-            );
-
-
-            formData.append(
-                "longitude",
-                longitudeInput.value
-            );
-
-
-            formData.append(
-                "userType",
-                "seller"
-            );
-
-
-            /* -----------------------------------------
-               ADD IMAGES
-            ----------------------------------------- */
-
-            selectedGalleryFiles.forEach(
-                function(file) {
-
-                    formData.append(
-                        "gallery",
-                        file
-                    );
-
-                }
-            );
-
-
-            /* -----------------------------------------
-               SEND PRODUCT
-            ----------------------------------------- */
-
-            const response =
-                await fetch(
-                    "/api/seller-products",
-                    {
-
-                        method:
-                            "POST",
-
-                        body:
-                            formData
-
-                    }
-                );
-
-
-            const result =
-                await response.json();
-
-
-            if (
-                !response.ok ||
-                !result.success
-            ) {
-
-                throw new Error(
-                    result.message ||
-                    "Product submission failed."
-                );
-
-            }
-
-
-            /* -----------------------------------------
-               SUCCESS
-            ----------------------------------------- */
-
-            showFeedback(
-                "✓ Product submitted successfully and passed ShopNova's safety check.",
-                "success"
-            );
-
-
-            /*
-             * Clear selected files
-             */
-
-            selectedGalleryFiles =
-                [];
-
-
-            updateImageUI();
-
-
-            /*
-             * Reset product fields
-             */
-
-            document.getElementById(
-                "productTitle"
-            ).value = "";
-
-
-            document.getElementById(
-                "productPrice"
-            ).value = "";
-
-
-            document.getElementById(
-                "productCategory"
-            ).value = "";
-
-
-            document.getElementById(
-                "productDescription"
-            ).value = "";
-
-
-            /*
-             * Keep GPS visible because seller
-             * can use the same location again.
-             */
-
-            submitBtn.textContent =
-                "✓ Product Submitted";
-
-
-            setTimeout(
-                function() {
-
-                    submitBtn.disabled =
-                        false;
-
-                    submitBtn.textContent =
-                        "🚀 Submit Product";
-
-                },
-                1500
-            );
-
-
-        }
-
-        catch(error) {
-
-
-            console.error(
-                "SUBMIT ERROR:",
-                error
-            );
-
-
-            showFeedback(
-                error.message ||
-                "Unable to submit product. Please try again.",
-                "error"
-            );
-
-
-            submitBtn.disabled =
-                false;
-
-
-            submitBtn.textContent =
-                "🚀 Submit Product";
-
-        }
-
-    }
-);
-
-</script>
-
-
-</body>
-
-</html>
+            <div class="section-title">3. Seller Pickup Location</div>
+            <p style="font-size: 13px; color: #56708e; margin-bottom: 12px;">Your GPS location can be used later for delivery tracking.</p>
