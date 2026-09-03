@@ -3,13 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>ShopNova | Seller Panel</title>
+
 <style>
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
     }
+
     body {
         font-family: "Segoe UI", Arial, sans-serif;
         min-height: 100vh;
@@ -17,12 +20,14 @@
         color: #183b68;
         padding-bottom: 60px;
     }
+
     .seller-header {
         width: 100%;
         background: linear-gradient(90deg, #082b5f, #0d4f91, #155da8);
         color: white;
         box-shadow: 0 5px 20px rgba(0,35,90,.22);
     }
+
     .header-inner {
         width: 95%;
         max-width: 1200px;
@@ -32,10 +37,12 @@
         align-items: center;
         justify-content: space-between;
     }
+
     .brand-text {
         font-size: 22px;
         font-weight: 900;
     }
+
     .back-home {
         padding: 10px 17px;
         border-radius: 9px;
@@ -44,21 +51,31 @@
         text-decoration: none;
         font-size: 13px;
         font-weight: 800;
+        transition: .2s ease;
     }
+
+    .back-home:hover {
+        background: rgba(255,255,255,.25);
+        transform: translateY(-1px);
+    }
+
     .page {
         width: 95%;
         max-width: 1100px;
         margin: 35px auto 50px;
     }
+
     .page-title {
         text-align: center;
         margin-bottom: 28px;
     }
+
     .page-title h1 {
         color: #082b5f;
         font-size: clamp(30px,5vw,48px);
         font-weight: 950;
     }
+
     .seller-card {
         background: white;
         border-radius: 20px;
@@ -66,6 +83,7 @@
         box-shadow: 0 12px 40px rgba(20,65,110,.12);
         border: 1px solid #dce9f7;
     }
+
     .section-title {
         color: #0b3d78;
         font-size: 20px;
@@ -75,29 +93,37 @@
         padding-bottom: 12px;
         border-bottom: 1px solid #e4edf7;
     }
+
     .section-title:first-of-type {
         margin-top: 0;
     }
+
     .form-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 20px;
     }
+
     .form-group {
         display: flex;
         flex-direction: column;
         margin-bottom: 15px;
     }
+
     .form-group.full {
         grid-column: 1 / -1;
     }
+
     label {
         margin-bottom: 7px;
         color: #244b73;
         font-size: 13px;
         font-weight: 800;
     }
-    input, textarea, select {
+
+    input,
+    textarea,
+    select {
         width: 100%;
         border: 1px solid #cbdced;
         border-radius: 10px;
@@ -108,15 +134,21 @@
         font-size: 14px;
         font-family: inherit;
     }
-    input:focus, textarea:focus, select:focus {
+
+    input:focus,
+    textarea:focus,
+    select:focus {
         border-color: #3280e8;
         box-shadow: 0 0 0 3px rgba(50,128,232,.12);
         background: white;
     }
+
     textarea {
         min-height: 120px;
         resize: vertical;
     }
+
+    /* IMAGE AREA */
     .image-box {
         padding: 18px;
         border: 2px dashed #b9d5ef;
@@ -124,13 +156,14 @@
         background: #f8fbff;
         margin-bottom: 20px;
     }
+
     .image-select-row {
         display: flex;
         align-items: center;
         gap: 12px;
         flex-wrap: wrap;
-        position: relative;
     }
+
     .select-image-button {
         display: inline-flex;
         align-items: center;
@@ -143,30 +176,46 @@
         font-weight: 900;
         cursor: pointer;
         border: none;
+        transition: .2s ease;
     }
+
+    .select-image-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 7px 18px rgba(23,103,216,.25);
+    }
+
+    #productImage {
+        display: none;
+    }
+
     .image-count {
         color: #1767d8;
         font-size: 13px;
         font-weight: 900;
     }
+
     .image-help {
         margin-top: 8px;
         color: #698198;
         font-size: 12px;
     }
+
     .image-preview-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
         gap: 15px;
         margin-top: 18px;
     }
+
     .image-preview-card {
         position: relative;
         overflow: hidden;
         border-radius: 12px;
         border: 1px solid #d9e6f3;
         background: white;
+        box-shadow: 0 4px 12px rgba(20,65,110,.08);
     }
+
     .image-preview-card img {
         display: block;
         width: 100%;
@@ -174,8 +223,10 @@
         object-fit: contain;
         background: #eef5fc;
     }
+
     .image-name {
         padding: 9px;
+        padding-right: 30px;
         text-align: center;
         overflow: hidden;
         color: #56708e;
@@ -183,6 +234,28 @@
         white-space: nowrap;
         text-overflow: ellipsis;
     }
+
+    .remove-image {
+        position: absolute;
+        top: 7px;
+        right: 7px;
+        width: 25px;
+        height: 25px;
+        border: none;
+        border-radius: 50%;
+        background: #c62828;
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 2;
+    }
+
+    .remove-image:hover {
+        background: #a51d1d;
+    }
+
+    /* LOCATION */
     .location-btn {
         background-color: #0076df;
         color: white;
@@ -193,15 +266,38 @@
         cursor: pointer;
         margin-bottom: 15px;
         display: inline-block;
+        transition: .2s ease;
     }
+
+    .location-btn:hover {
+        background-color: #005fb8;
+        transform: translateY(-1px);
+    }
+
+    .location-btn:disabled {
+        opacity: .65;
+        cursor: wait;
+        transform: none;
+    }
+
     .status-msg {
         font-size: 13px;
         font-weight: 600;
         margin-bottom: 15px;
         display: none;
     }
-    .status-msg.success { color: #2e7d32; display: block; }
-    .status-msg.error { color: #c62828; display: block; }
+
+    .status-msg.success {
+        color: #2e7d32;
+        display: block;
+    }
+
+    .status-msg.error {
+        color: #c62828;
+        display: block;
+    }
+
+    /* SUBMIT */
     .submit-btn {
         width: 100%;
         padding: 16px;
@@ -213,7 +309,21 @@
         border-radius: 10px;
         cursor: pointer;
         margin-top: 25px;
+        transition: .2s ease;
     }
+
+    .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0,92,106,.22);
+    }
+
+    .submit-btn:disabled {
+        opacity: .65;
+        cursor: wait;
+        transform: none;
+    }
+
+    /* FEEDBACK */
     .feedback-banner {
         width: 100%;
         padding: 12px;
@@ -224,97 +334,79 @@
         margin-top: 15px;
         display: none;
     }
-    .feedback-banner.error { background-color: #ffebee; color: #c62828; border: 1px solid #ffcdd2; display: block; }
-    .feedback-banner.success { background-color: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; display: block; }
+
+    .feedback-banner.error {
+        background-color: #ffebee;
+        color: #c62828;
+        border: 1px solid #ffcdd2;
+        display: block;
+    }
+
+    .feedback-banner.success {
+        background-color: #e8f5e9;
+        color: #2e7d32;
+        border: 1px solid #c8e6c9;
+        display: block;
+    }
+
+    @media (max-width: 700px) {
+        .header-inner { min-height: 65px; }
+        .brand-text { font-size: 19px; }
+        .back-home { padding: 9px 12px; font-size: 12px; }
+        .page { width: 94%; margin-top: 25px; }
+        .seller-card { padding: 20px; border-radius: 16px; }
+        .form-grid { grid-template-columns: 1fr; gap: 5px; }
+        .form-group.full { grid-column: auto; }
+        .page-title h1 { font-size: 32px; }
+        .section-title { font-size: 18px; }
+        .image-preview-grid { grid-template-columns: repeat(2, 1fr); }
+    }
 </style>
 </head>
 <body>
 
-<header class="seller-header">
-    <div class="header-inner">
-        <div class="brand-text">ShopNova</div>
-        <a href="#" class="back-home">Back to Dashboard</a>
-    </div>
-</header>
+    <header class="seller-header">
+        <div class="header-inner">
+            <div class="brand-text">ShopNova</div>
+            <a href="/" class="back-home">Back to Store</a>
+        </div>
+    </header>
 
-<main class="page">
-    <div class="page-title">
-        <h1>Seller Catalog Portal</h1>
-    </div>
+    <main class="page">
+        <div class="page-title">
+            <h1>Seller Panel</h1>
+        </div>
 
-    <div class="seller-card">
-        <form id="productForm">
-            
-            <div class="section-title">1. Product Information</div>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label for="productTitle">Product Name *</label>
-                    <input type="text" id="productTitle" placeholder="Example: One Step Closer T-Shirt" required>
-                </div>
+        <div class="seller-card">
+            <form id="productForm">
                 
-                <div class="form-group">
-                    <label for="productPrice">Price *</label>
-                    <input type="number" id="productPrice" step="0.01" placeholder="Example: 799" required>
-                </div>
+                <div class="section-title">Product Information</div>
+                <div class="form-grid">
+                    <div class="form-group full">
+                        <label for="title">Product Title *</label>
+                        <input type="text" id="title" required placeholder="e.g. Wireless Noise Cancelling Headphones">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="price">Price ($) *</label>
+                        <input type="number" id="price" min="0" step="0.01" required placeholder="0.00">
+                    </div>
 
-                <div class="form-group">
-                    <label for="productStock">Stock *</label>
-                    <input type="number" id="productStock" placeholder="Example: 25" required>
-                </div>
+                    <div class="form-group">
+                        <label for="stock">Stock Quantity *</label>
+                        <input type="number" id="stock" min="0" required placeholder="0">
+                    </div>
 
-                <div class="form-group">
-                    <label for="productCategory">Category *</label>
-                    <select id="productCategory" required>
-                        <option value="" disabled selected>Select a Category...</option>
-                        <option value="fashion">Fashion & Apparel</option>
-                        <option value="electronics">Electronics & Gadgets</option>
-                        <option value="home">Home & Kitchen</option>
-                        <option value="beauty">Beauty & Personal Care</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
+                    <div class="form-group full">
+                        <label for="category">Category *</label>
+                        <select id="category" required>
+                            <option value="" disabled selected>Select Category</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Clothing">Clothing</option>
+                            <option value="Home & Kitchen">Home & Kitchen</option>
+                            <option value="Books">Books</option>
+                        </select>
+                    </div>
 
-                <div class="form-group full">
-                    <label for="productDescription">Product Description *</label>
-                    <textarea id="productDescription" placeholder="Describe your product..." required></textarea>
-                </div>
-            </div>
-
-            <div class="section-title">2. Product Images *</div>
-            <div class="image-box">
-                <div class="image-select-row">
-                    <label for="productImage" class="select-image-button">Choose Files</label>
-                    <!-- Style parameter tracking adjusted to ensure interaction channels remain fully open across mobile and desktop browsers -->
-                    <input type="file" id="productImage" accept="image/*" multiple style="position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none;">
-                    <span class="image-count" id="fileCounter">0 files staged</span>
-                </div>
-                <div class="image-help">Select multiple images at once. Maximum 10 images.</div>
-                <div class="image-preview-grid" id="previewGrid"></div>
-            </div>
-
-            <div class="section-title">3. Seller Pickup Location</div>
-            <p style="font-size: 13px; color: #56708e; margin-bottom: 12px;">Your GPS location can be used later for delivery tracking.</p>
-            
-            <button type="button" class="location-btn" id="geoBtn">📍 Get My Current Location</button>
-            <div id="locationStatus" class="status-msg"></div>
-
-            <div class="form-grid">
-                <div class="form-group">
-                    <label for="latitude">Latitude</label>
-                    <input type="text" id="latitude" placeholder="Awaiting GPS detection..." readonly required>
-                </div>
-                <div class="form-group">
-                    <label for="longitude">Longitude</label>
-                    <input type="text" id="longitude" placeholder="Awaiting GPS detection..." readonly required>
-                </div>
-            </div>
-
-            <button type="submit" class="submit-btn" id="submitBtn">🚀 Submit Product</button>
-            <div id="formFeedback" class="feedback-banner"></div>
-        </form>
-    </div>
-</main>
-
-<script>
-    let uploadedFilesArray = [];
-
+                    <div class="form-group full">
+                        <label for="description">Product Description</label>
