@@ -1,386 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ShopNova | Seller Panel</title>
-
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    body {
-        font-family: "Segoe UI", Arial, sans-serif;
-        min-height: 100vh;
-        background: linear-gradient(135deg, #eaf4ff, #d8ebff, #f5f9ff);
-        color: #183b68;
-        padding-bottom: 60px;
-    }
-
-    .seller-header {
-        width: 100%;
-        background: linear-gradient(90deg, #082b5f, #0d4f91, #155da8);
-        color: white;
-        box-shadow: 0 5px 20px rgba(0,35,90,.22);
-    }
-
-    .header-inner {
-        width: 95%;
-        max-width: 1200px;
-        min-height: 75px;
-        margin: auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .brand-text {
-        font-size: 22px;
-        font-weight: 900;
-    }
-
-    .back-home {
-        padding: 10px 17px;
-        border-radius: 9px;
-        background: rgba(255,255,255,.14);
-        color: white;
-        text-decoration: none;
-        font-size: 13px;
-        font-weight: 800;
-        transition: .2s ease;
-    }
-
-    .back-home:hover {
-        background: rgba(255,255,255,.25);
-        transform: translateY(-1px);
-    }
-
-    .page {
-        width: 95%;
-        max-width: 1100px;
-        margin: 35px auto 50px;
-    }
-
-    .page-title {
-        text-align: center;
-        margin-bottom: 28px;
-    }
-
-    .page-title h1 {
-        color: #082b5f;
-        font-size: clamp(30px,5vw,48px);
-        font-weight: 950;
-    }
-
-    .seller-card {
-        background: white;
-        border-radius: 20px;
-        padding: 30px;
-        box-shadow: 0 12px 40px rgba(20,65,110,.12);
-        border: 1px solid #dce9f7;
-    }
-
-    .section-title {
-        color: #0b3d78;
-        font-size: 20px;
-        font-weight: 900;
-        margin-top: 25px;
-        margin-bottom: 20px;
-        padding-bottom: 12px;
-        border-bottom: 1px solid #e4edf7;
-    }
-
-    .section-title:first-of-type {
-        margin-top: 0;
-    }
-
-    .form-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-    }
-
-    .form-group {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 15px;
-    }
-
-    .form-group.full {
-        grid-column: 1 / -1;
-    }
-
-    label {
-        margin-bottom: 7px;
-        color: #244b73;
-        font-size: 13px;
-        font-weight: 800;
-    }
-
-    input, textarea, select {
-        width: 100%;
-        border: 1px solid #cbdced;
-        border-radius: 10px;
-        padding: 12px 14px;
-        outline: none;
-        background: #fbfdff;
-        color: #183b68;
-        font-size: 14px;
-        font-family: inherit;
-    }
-
-    input:focus, textarea:focus, select:focus {
-        border-color: #3280e8;
-        box-shadow: 0 0 0 3px rgba(50,128,232,.12);
-        background: white;
-    }
-
-    textarea {
-        min-height: 120px;
-        resize: vertical;
-    }
-
-    /* IMAGE UPLOADER STYLES */
-    .image-box {
-        padding: 18px;
-        border: 2px dashed #b9d5ef;
-        border-radius: 12px;
-        background: #f8fbff;
-        margin-bottom: 20px;
-    }
-
-    .image-select-row {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        flex-wrap: wrap;
-    }
-
-    .select-image-button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 12px 18px;
-        border-radius: 10px;
-        background: linear-gradient(135deg, #1767d8, #0875b9);
-        color: white;
-        font-size: 13px;
-        font-weight: 900;
-        cursor: pointer;
-        border: none;
-        transition: .2s ease;
-    }
-
-    .select-image-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 7px 18px rgba(23,103,216,.25);
-    }
-
-    #productImage {
-        display: none;
-    }
-
-    .image-count {
-        color: #1767d8;
-        font-size: 13px;
-        font-weight: 900;
-    }
-
-    .image-help {
-        margin-top: 8px;
-        color: #698198;
-        font-size: 12px;
-    }
-
-    .image-preview-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 15px;
-        margin-top: 18px;
-    }
-
-    .image-preview-card {
-        position: relative;
-        overflow: hidden;
-        border-radius: 12px;
-        border: 1px solid #d9e6f3;
-        background: white;
-        box-shadow: 0 4px 12px rgba(20,65,110,.08);
-    }
-
-    .image-preview-card img {
-        display: block;
-        width: 100%;
-        height: 150px;
-        object-fit: contain;
-        background: #eef5fc;
-    }
-
-    .image-name {
-        padding: 9px;
-        padding-right: 30px;
-        text-align: center;
-        overflow: hidden;
-        color: #56708e;
-        font-size: 10px;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
-
-    .remove-image {
-        position: absolute;
-        top: 7px;
-        right: 7px;
-        width: 25px;
-        height: 25px;
-        border: none;
-        border-radius: 50%;
-        background: #c62828;
-        color: white;
-        font-size: 14px;
-        font-weight: bold;
-        cursor: pointer;
-        z-index: 2;
-    }
-
-    .remove-image:hover {
-        background: #a51d1d;
-    }
-
-    /* GEOLOCATION STYLES */
-    .location-btn {
-        background-color: #0076df;
-        color: white;
-        border: none;
-        padding: 12px 20px;
-        font-weight: bold;
-        border-radius: 8px;
-        cursor: pointer;
-        margin-bottom: 15px;
-        display: inline-block;
-        transition: .2s ease;
-    }
-
-    .location-btn:hover {
-        background-color: #005fb8;
-        transform: translateY(-1px);
-    }
-
-    .status-msg {
-        font-size: 13px;
-        font-weight: 600;
-        margin-bottom: 15px;
-        display: none;
-    }
-
-    .status-msg.success { color: #2e7d32; display: block; }
-    .status-msg.error { color: #c62828; display: block; }
-
-    /* SUBMIT LAYOUT BUTTON */
-    .submit-btn {
-        width: 100%;
-        padding: 16px;
-        background: linear-gradient(180deg, #00798c, #005c6a);
-        color: white;
-        font-size: 16px;
-        font-weight: bold;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        margin-top: 25px;
-        transition: .2s ease;
-    }
-
-    .submit-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(0,92,106,.22);
-    }
-
-    .submit-btn:disabled {
-        opacity: .65;
-        cursor: wait;
-        transform: none;
-    }
-
-    .feedback-banner {
-        width: 100%;
-        padding: 12px;
-        border-radius: 8px;
-        text-align: center;
-        font-weight: bold;
-        font-size: 14px;
-        margin-top: 15px;
-        display: none;
-    }
-
-    .feedback-banner.error { background-color: #ffebee; color: #c62828; border: 1px solid #ffcdd2; display: block; }
-    .feedback-banner.success { background-color: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; display: block; }
-
-    @media (max-width: 700px) {
-        .form-grid { grid-template-columns: 1fr; }
-        .form-group.full { grid-column: auto; }
-        .image-preview-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopNova | Seller Panel</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Segoe UI", Arial, sans-serif; background: #eaf4ff; color: #183b68; padding: 20px; }
+        .seller-card { background: white; border-radius: 20px; padding: 30px; max-width: 800px; margin: auto; box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
+        .section-title { font-size: 20px; font-weight: 900; margin: 20px 0 10px; border-bottom: 2px solid #e4edf7; padding-bottom: 5px; }
+        .form-group { display: flex; flex-direction: column; margin-bottom: 15px; }
+        label { font-size: 13px; font-weight: 800; margin-bottom: 5px; }
+        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #cbdced; border-radius: 10px; }
+        .image-box { padding: 20px; border: 2px dashed #b9d5ef; background: #f8fbff; border-radius: 12px; text-align: center; }
+        .select-image-button { display: inline-block; padding: 12px 20px; background: #1767d8; color: white; font-weight: bold; border-radius: 10px; cursor: pointer; }
+        #productImage { display: none; }
+        .image-preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; margin-top: 15px; }
+        .preview-card { position: relative; border: 1px solid #d9e6f3; border-radius: 8px; overflow: hidden; background: #eef5fc; }
+        .preview-card img { width: 100%; height: 100px; object-fit: cover; }
+        .remove-btn { position: absolute; top: 5px; right: 5px; background: red; color: white; border: none; border-radius: 50%; width: 20px; height: 20px; cursor: pointer; font-weight: bold; }
+        .submit-btn { width: 100%; padding: 16px; background: #00798c; color: white; font-size: 16px; font-weight: bold; border: none; border-radius: 10px; cursor: pointer; margin-top: 20px; }
+    </style>
 </head>
 <body>
+    <div class="seller-card">
+        <h1>Seller Panel</h1>
+        <form id="productForm">
+            <div class="section-title">Product Information</div>
+            <div class="form-group">
+                <label>Product Title *</label>
+                <input type="text" id="title" required>
+            </div>
+            <div class="form-group">
+                <label>Price ($) *</label>
+                <input type="number" id="price" required>
+            </div>
+            <div class="form-group">
+                <label>Stock Quantity *</label>
+                <input type="number" id="stock" required>
+            </div>
+            <div class="form-group">
+                <label>Category *</label>
+                <select id="category" required>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Clothing">Clothing</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea id="description"></textarea>
+            </div>
 
-    <header class="seller-header">
-        <div class="header-inner">
-            <div class="brand-text">ShopNova</div>
-            <a href="/" class="back-home">Back to Store</a>
-        </div>
-    </header>
+            <div class="section-title">Product Media</div>
+            <div class="image-box">
+                <label for="productImage" class="select-image-button">Select Images</label>
+                <input type="file" id="productImage" accept="image/*" multiple>
+                <div id="imageCountDisplay" style="margin-top: 10px; font-weight: bold;">0 images selected</div>
+                <div class="image-preview-grid" id="previewGrid"></div>
+            </div>
 
-    <main class="page">
-        <div class="page-title">
-            <h1>Seller Panel</h1>
-        </div>
+            <button type="submit" class="submit-btn">Publish Product Catalog</button>
+        </form>
+    </div>
 
-        <div class="seller-card">
-            <form id="productForm">
+    <script>
+        let filesArray = [];
+        const fileInput = document.getElementById('productImage');
+        const previewGrid = document.getElementById('previewGrid');
+        const countDisplay = document.getElementById('imageCountDisplay');
+
+        fileInput.addEventListener('change', (e) => {
+            const files = Array.from(e.target.files);
+            files.forEach(file => {
+                if (filesArray.length < 10) filesArray.push(file);
+            });
+            renderPreviews();
+            fileInput.value = '';
+        });
+
+        function renderPreviews() {
+            previewGrid.innerHTML = '';
+            countDisplay.textContent = `${filesArray.length} image(s) selected`;
+            filesArray.forEach((file, index) => {
+                const reader = new FileReader();
+                const card = document.createElement('div');
+                card.className = 'preview-card';
                 
-                <!-- SECTION 1: METADATA -->
-                <div class="section-title">Product Information</div>
-                <div class="form-grid">
-                    <div class="form-group full">
-                        <label for="title">Product Title *</label>
-                        <input type="text" id="title" required placeholder="e.g. Wireless Noise Cancelling Headphones">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="price">Price ($) *</label>
-                        <input type="number" id="price" min="0" step="0.01" required placeholder="0.00">
-                    </div>
+                const img = document.createElement('img');
+                const btn = document.createElement('button');
+                btn.className = 'remove-btn';
+                btn.innerHTML = '&times;';
+                btn.onclick = () => { filesArray.splice(index, 1); renderPreviews(); };
 
-                    <div class="form-group">
-                        <label for="stock">Stock Quantity *</label>
-                        <input type="number" id="stock" min="0" required placeholder="0">
-                    </div>
+                reader.onload = (e) => { img.src = e.target.result; };
+                reader.readAsDataURL(file);
 
-                    <div class="form-group full">
-                        <label for="category">Category *</label>
-                        <select id="category" required>
-                            <option value="" disabled selected>Select Category</option>
-                            <option value="Electronics">Electronics</option>
-                            <option value="Clothing">Clothing</option>
-                            <option value="Home & Kitchen">Home & Kitchen</option>
-                            <option value="Books">Books</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group full">
-                        <label for="description">Product Description</label>
-                        <textarea id="description" placeholder="Describe your item..."></textarea>
-                    </div>
-                </div>
-
-                <!-- SECTION 2: THE IMAGE UPLOADER -->
-                <div class="section-title">Product Media</div>
-                <div class="image-box">
-                    <div class="image-select-row">
-                        <label for="productImage" class="select-image-button">Select Images</label>
-                        <input type="file" id="productImage" accept="image/*" multiple>
+                card.appendChild(img);
+                card.appendChild(btn);
+                previewGrid.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>
