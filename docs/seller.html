@@ -95,7 +95,6 @@
             formData.append('category', document.getElementById('category').value);
             formData.append('description', document.getElementById('description')?.value.trim() || "");
             
-            // Appending temporary coordinate fallbacks for server structure schemas 
             formData.append('latitude', '16.306');
             formData.append('longitude', '80.436');
 
@@ -104,8 +103,8 @@
             });
 
             try {
-                // FIXED: Changed route path endpoint directly to match your /add-product listener
-                const response = await fetch('http://localhost:5000/add-product', {
+                // FIXED: Changed from hardcoded localhost to relative web endpoint route
+                const response = await fetch('/add-product', {
                     method: 'POST',
                     body: formData 
                 });
@@ -120,7 +119,7 @@
                 }
             } catch (error) {
                 console.error('Critical Network Failure:', error);
-                alert('🚫 Transmission Failed: Verify your Node background process terminal window is actively running.');
+                alert('🚫 Transmission Failed: Verify your cloud environment pipeline server route is responsive.');
             }
         });
 
