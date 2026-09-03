@@ -212,7 +212,7 @@
         }
 
         /* =====================================================
-           AMAZON SLIDING TRACK MECHANICS
+           AMAZON / FLIPKART STYLE HORIZONTAL SCROLL IMAGE BOX
         ===================================================== */
         .product-image {
             display: flex !important;
@@ -225,6 +225,7 @@
             position: relative;
         }
 
+        /* Hide default scrollbar tracks for clean interface appearance */
         .product-image::-webkit-scrollbar {
             display: none;
         }
@@ -239,6 +240,7 @@
             padding: 10px;
         }
 
+        /* Horizontal scrolling micro-hint badge layout */
         .scroll-hint-badge {
             position: absolute;
             bottom: 12px;
@@ -324,9 +326,9 @@
 
     <header>
         <div class="header-inner">
-            <!-- DYNAMIC IMAGE LOADER POINTING TO YOUR INTERNAL VS CODE FILES -->
+            <!-- UPDATED REAL PATH LOGO CONTAINER MATCHING YOUR SIDEBAR -->
             <div class="brand-logo-container">
-                <img src="logo.png" alt="ShopNova Logo" onerror="this.src='docs/logo.png'; this.onerror=function(){this.src='https://placeholder.com'}">
+                <img src="images/shopnova-header-logo.png" alt="ShopNova Logo" onerror="this.src='../docs/images/shopnova-header-logo.png'; this.onerror=function(){this.src='https://placeholder.com'}">
             </div>
             
             <div class="search-box">
@@ -355,11 +357,3 @@
         </div>
 
         <div class="product-grid" id="mainCatalogGrid"></div>
-    </main>
-
-    <script>
-        async function fetchAndRenderProducts() {
-            try {
-                const res = await fetch('http://localhost:5000/api/products');
-                const products = await res.json();
-                
