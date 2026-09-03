@@ -1,90 +1,162 @@
-<script>
-    // Global array tracking selected files (matches your preview grid system logic)
-    let filesArray = [];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopNova | Seller Panel</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Segoe UI", Arial, sans-serif; background: #eaf4ff; color: #183b68; padding: 20px; }
+        .seller-card { background: white; border-radius: 20px; padding: 30px; max-width: 800px; margin: auto; box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
+        .section-title { font-size: 20px; font-weight: 900; margin: 20px 0 10px; border-bottom: 2px solid #e4edf7; padding-bottom: 5px; }
+        .form-group { display: flex; flex-direction: column; margin-bottom: 15px; }
+        label { font-size: 13px; font-weight: 800; margin-bottom: 5px; }
+        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #cbdced; border-radius: 10px; outline: none; }
+        input:focus, select:focus, textarea:focus { border-color: #3280e8; }
+        .image-box { padding: 20px; border: 2px dashed #b9d5ef; background: #f8fbff; border-radius: 12px; text-align: center; }
+        .select-image-button { display: inline-block; padding: 12px 20px; background: #1767d8; color: white; font-weight: bold; border-radius: 10px; cursor: pointer; }
+        #productImage { display: none; }
+        .image-preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; margin-top: 15px; }
+        .preview-card { position: relative; border: 1px solid #d9e6f3; border-radius: 8px; overflow: hidden; background: #eef5fc; }
+        .preview-card img { width: 100%; height: 100px; object-fit: cover; }
+        .remove-btn { position: absolute; top: 5px; right: 5px; background: red; color: white; border: none; border-radius: 50%; width: 20px; height: 20px; cursor: pointer; font-weight: bold; }
+        .submit-btn { width: 100%; padding: 16px; background: #00798c; color: white; font-size: 16px; font-weight: bold; border: none; border-radius: 10px; cursor: pointer; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="seller-card">
+        <h1>Seller Panel</h1>
+        <form id="productForm">
+            <div class="section-title">Product Information</div>
+            <div class="form-group">
+                <label>Product Title *</label>
+                <input type="text" id="title" required>
+            </div>
+            <div class="form-group">
+                <label>Price ($) *</label>
+                <input type="number" id="price" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label>Stock Quantity *</label>
+                <input type="number" id="stock" required>
+            </div>
+            <div class="form-group">
+                <label>Category *</label>
+                <select id="category" required>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Clothing">Clothing</option>
+                    <option value="Home & Kitchen">Home & Kitchen</option>
+                    <option value="Books">Books</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea id="description"></textarea>
+            </div>
 
-    // Listen for image selection inputs to feed file states
-    document.getElementById('productImage').addEventListener('change', function(e) {
-        const selectedFiles = Array.from(e.target.files);
-        filesArray = [...filesArray, ...selectedFiles];
-        renderPreviews(); // Fires your visual grid card thumbnail builder
-    });
+            <div class="section-title">Product Media</div>
+            <div class="image-box">
+                <label for="productImage" class="select-image-button">Select Images</label>
+                <input type="file" id="productImage" accept="image/*" multiple>
+                <div id="imageCountDisplay" style="margin-top: 10px; font-weight: bold;">0 images selected</div>
+                <div class="image-preview-grid" id="previewGrid"></div>
+            </div>
 
-    // 🚀 FORM SUBMISSION LOGIC
-    document.getElementById('productForm').addEventListener('submit', async function(e) {
-        e.preventDefault(); // Intercepts native page reloads
+            <button type="submit" class="submit-btn">Publish Product Catalog</button>
+        </form>
+    </div>
 
-        // 1. Instantiating a multi-part boundary wrapper
-        const formData = new FormData();
-        
-        // 2. Fetch and append standard string value fields
-        formData.append('title', document.getElementById('title').value.trim());
-        formData.append('price', document.getElementById('price').value);
-        formData.append('stock', document.getElementById('stock').value);
-        formData.append('category', document.getElementById('category').value);
-        formData.append('description', document.getElementById('description')?.value.trim() || "");
+    <script>
+        let filesArray = [];
 
-        // 3. Append multiple raw image files into the binary array payload
-        if (filesArray.length > 0) {
-            filesArray.forEach((file) => {
-                formData.append('images', file); // Field name must match backend upload.array('images')
+        document.getElementById('productImage').addEventListener('change', function(e) {
+            const selectedFiles = Array.from(e.target.files);
+            selectedFiles.forEach(file => {
+                if (filesArray.length < 10 && file.type.startsWith('image/')) {
+                    filesArray.push(file);
+                }
             });
-        }
-
-        try {
-            // 4. Fire the async fetch mutation out to the port gateway
-            const response = await fetch('http://localhost:5000/upload', {
-                method: 'POST',
-                body: formData 
-                // NOTE: Do NOT declare an explicit 'Content-Type' header here. 
-                // Leaving it out allows the browser to auto-assign the correct multipart/form-data boundary token string.
-            });
-
-            const result = await response.json();
-
-            if (response.ok && result.success !== false) {
-                alert('🎉 Catalog updated successfully! Product received.');
-                window.location.href = 'products.html'; // Dynamic redirect to gallery layout
-            } else {
-                alert('⚠️ Publish execution failure: ' + (result.message || 'Unknown Server Error'));
-            }
-        } catch (error) {
-            console.error('Critical Network Connection Failure:', error);
-            alert('🚫 Transmission Failed: Unable to link up with the Node environment portal. Ensure "node server.js" is actively spinning up on Port 5000!');
-        }
-    });
-
-    // Keeping your custom rendering architecture bound natively to the script scope
-    function renderPreviews() {
-        const previewGrid = document.getElementById('previewGrid');
-        const countDisplay = document.getElementById('imageCountDisplay');
-        
-        if (countDisplay) countDisplay.textContent = `${filesArray.length} images selected`;
-        if (!previewGrid) return;
-        
-        previewGrid.innerHTML = ''; // Fresh DOM sweep
-
-        filesArray.forEach((file, index) => {
-            const card = document.createElement('div');
-            card.className = 'preview-card';
-
-            const img = document.createElement('img');
-            const reader = new FileReader(); // Fixed: declared locally inside scope iteration loop
-
-            reader.onload = (e) => { img.src = e.target.result; };
-            reader.readAsDataURL(file);
-
-            const btn = document.createElement('button');
-            btn.className = 'remove-btn';
-            btn.innerHTML = '&times;';
-            btn.type = 'button'; // Stops button clicks from submitting early
-            btn.onclick = () => {
-                filesArray.splice(index, 1);
-                renderPreviews();
-            };
-
-            card.appendChild(img);
-            card.appendChild(btn);
-            previewGrid.appendChild(card);
+            renderPreviews();
+            this.value = '';
         });
-    }
-</script>
+
+        document.getElementById('productForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            if (filesArray.length === 0) {
+                alert('Please upload at least one image file.');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('title', document.getElementById('title').value.trim());
+            formData.append('price', document.getElementById('price').value);
+            formData.append('stock', document.getElementById('stock').value);
+            formData.append('category', document.getElementById('category').value);
+            formData.append('description', document.getElementById('description')?.value.trim() || "");
+            
+            // Appending temporary coordinate fallbacks for server structure schemas 
+            formData.append('latitude', '16.306');
+            formData.append('longitude', '80.436');
+
+            filesArray.forEach((file) => {
+                formData.append('images', file);
+            });
+
+            try {
+                // FIXED: Changed route path endpoint directly to match your /add-product listener
+                const response = await fetch('http://localhost:5000/add-product', {
+                    method: 'POST',
+                    body: formData 
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success !== false) {
+                    alert('🎉 Catalog updated successfully! Product received.');
+                    window.location.href = 'products.html';
+                } else {
+                    alert('⚠️ Publish failure: ' + (result.message || 'Unknown Server Rejection'));
+                }
+            } catch (error) {
+                console.error('Critical Network Failure:', error);
+                alert('🚫 Transmission Failed: Verify your Node background process terminal window is actively running.');
+            }
+        });
+
+        function renderPreviews() {
+            const previewGrid = document.getElementById('previewGrid');
+            const countDisplay = document.getElementById('imageCountDisplay');
+            
+            if (countDisplay) countDisplay.textContent = `${filesArray.length} image(s) selected`;
+            if (!previewGrid) return;
+            
+            previewGrid.innerHTML = '';
+
+            filesArray.forEach((file, index) => {
+                const card = document.createElement('div');
+                card.className = 'preview-card';
+
+                const img = document.createElement('img');
+                const reader = new FileReader();
+
+                reader.onload = (e) => { img.src = e.target.result; };
+                reader.readAsDataURL(file);
+
+                const btn = document.createElement('button');
+                btn.className = 'remove-btn';
+                btn.innerHTML = '&times;';
+                btn.type = 'button';
+                btn.onclick = () => {
+                    filesArray.splice(index, 1);
+                    renderPreviews();
+                };
+
+                card.appendChild(img);
+                card.appendChild(btn);
+                previewGrid.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>
