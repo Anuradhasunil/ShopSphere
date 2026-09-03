@@ -20,7 +20,7 @@
         }
 
         /* =====================================================
-           HEADER
+           HEADER DESIGN LAYER
         ===================================================== */
         header {
             position: sticky;
@@ -40,7 +40,7 @@
             gap: 18px;
         }
 
-        /* LOGO FRAME GRAPHICS CONTAINER */
+        /* LOGO GRAPHICS ROUNDED BOX */
         .brand-logo-container {
             width: 70px;
             height: 60px;
@@ -60,6 +60,7 @@
             object-fit: contain;
         }
 
+        /* SEARCH TRACKS */
         .search-box {
             height: 46px;
             flex: 1;
@@ -89,6 +90,7 @@
             cursor: pointer;
         }
 
+        /* NAVIGATION INTERFACE LINKS */
         .nav-links {
             margin-left: auto;
             display: flex;
@@ -144,7 +146,7 @@
         }
 
         /* =====================================================
-           HERO
+           HERO BANNER LAYOUT
         ===================================================== */
         .hero {
             padding: 50px 20px;
@@ -165,7 +167,7 @@
         }
 
         /* =====================================================
-           PRODUCTS GRID
+           CATALOG ITEMS DISPLAY GRID CONTAINER
         ===================================================== */
         .products-container {
             width: 94%;
@@ -212,7 +214,7 @@
         }
 
         /* =====================================================
-           AMAZON / FLIPKART STYLE HORIZONTAL SCROLL IMAGE BOX
+           AMAZON / FLIPKART STYLE SWIPEABLE SCROLLING MECHANICS
         ===================================================== */
         .product-image {
             display: flex !important;
@@ -225,7 +227,7 @@
             position: relative;
         }
 
-        /* Hide default scrollbar tracks for clean interface appearance */
+        /* Hide the horizontal scrollbar tracks for clear user interfaces */
         .product-image::-webkit-scrollbar {
             display: none;
         }
@@ -240,7 +242,7 @@
             padding: 10px;
         }
 
-        /* Horizontal scrolling micro-hint badge layout */
+        /* Swipe label hint bubble overlay layout */
         .scroll-hint-badge {
             position: absolute;
             bottom: 12px;
@@ -326,7 +328,7 @@
 
     <header>
         <div class="header-inner">
-            <!-- UPDATED REAL PATH LOGO CONTAINER MATCHING YOUR SIDEBAR -->
+            <!-- LOGO INTEGRATION POINTING TO YOUR INTERNAL VS CODE FILE SIDEBAR -->
             <div class="brand-logo-container">
                 <img src="images/shopnova-header-logo.png" alt="ShopNova Logo" onerror="this.src='../docs/images/shopnova-header-logo.png'; this.onerror=function(){this.src='https://placeholder.com'}">
             </div>
@@ -353,7 +355,3 @@
     <main class="products-container">
         <div class="products-title">
             <h2>Live Catalog</h2>
-            <p>Swipe left or right on item cards to view alternative product media images</p>
-        </div>
-
-        <div class="product-grid" id="mainCatalogGrid"></div>
