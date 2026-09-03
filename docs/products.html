@@ -2,18 +2,11 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShopNova | Products</title>
 
     <style>
-
         * {
             margin: 0;
             padding: 0;
@@ -26,2282 +19,347 @@
             color: #183b68;
         }
 
-
         /* =====================================================
            HEADER
         ===================================================== */
-
         header {
-
             position: sticky;
             top: 0;
             z-index: 9999;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #082b5f,
-                    #0d4f91,
-                    #155da8
-                );
-
-            box-shadow:
-                0 5px 20px
-                rgba(0,35,90,.22);
+            background: linear-gradient(90deg, #082b5f, #0d4f91, #155da8);
+            box-shadow: 0 5px 20px rgba(0,35,90,.22);
         }
 
-
         .header-inner {
-
             width: 97%;
             max-width: 1450px;
-
             min-height: 76px;
-
             margin: auto;
-
             display: flex;
             align-items: center;
-
             gap: 18px;
         }
 
-
-        /* =====================================================
-           LOGO
-        ===================================================== */
-
-        .brand-logo {
-
+        /* LOGO FRAME GRAPHICS CONTAINER */
+        .brand-logo-container {
             width: 70px;
             height: 60px;
-
             flex-shrink: 0;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             background: white;
-
             border-radius: 13px;
-
             overflow: hidden;
-
-            box-shadow:
-                0 5px 15px
-                rgba(0,0,0,.18);
+            box-shadow: 0 5px 15px rgba(0,0,0,.18);
         }
 
-
-        .brand-logo img {
-
+        .brand-logo-container img {
             width: 100%;
             height: 100%;
-
             object-fit: contain;
         }
 
-
-        /* =====================================================
-           SEARCH
-        ===================================================== */
-
         .search-box {
-
             height: 46px;
-
             flex: 1;
-
             max-width: 650px;
-
             display: flex;
-
             overflow: hidden;
-
             background: white;
-
-            border:
-                2px solid #b9d5ff;
-
+            border: 2px solid #b9d5ff;
             border-radius: 13px;
         }
 
-
         .search-box input {
-
             flex: 1;
-
             min-width: 0;
-
             border: none;
-
             outline: none;
-
-            padding:
-                0 17px;
-
+            padding: 0 17px;
             font-size: 14px;
         }
-
 
         .search-box button {
-
             width: 58px;
-
             border: none;
-
             background: #2464e8;
-
             color: white;
-
             font-size: 20px;
-
             cursor: pointer;
         }
-
-
-        /* =====================================================
-           NAVIGATION
-        ===================================================== */
 
         .nav-links {
-
             margin-left: auto;
-
             display: flex;
-
             align-items: center;
-
             gap: 3px;
-
             white-space: nowrap;
         }
-
 
         .nav-links a {
-
             color: white;
-
             text-decoration: none;
-
             font-size: 14px;
-
             font-weight: 750;
-
-            padding:
-                10px 12px;
-
+            padding: 10px 12px;
             border-radius: 9px;
         }
 
-
-        .nav-links a:hover,
-        .nav-links a.active {
-
-            background:
-                rgba(255,255,255,.15);
+        .nav-links a:hover, .nav-links a.active {
+            background: rgba(255,255,255,.15);
         }
-
-
-        /* =====================================================
-           CONTACT BUTTON
-        ===================================================== */
 
         .contact-btn {
-
             border: none;
-
             color: white;
-
-            background:
-                #e83e8c;
-
+            background: #e83e8c;
             text-decoration: none;
-
             font-size: 14px;
-
             font-weight: 800;
-
-            padding:
-                10px 13px;
-
+            padding: 10px 13px;
             border-radius: 9px;
-
             cursor: pointer;
-
             white-space: nowrap;
         }
 
-
         .contact-btn:hover {
-
-            background:
-                #d72f7c;
-
-            transform:
-                translateY(-1px);
+            background: #d72f7c;
+            transform: translateY(-1px);
         }
-
-
-        /* =====================================================
-           CART COUNT
-        ===================================================== */
 
         #cartCount {
-
             display: inline-flex;
-
             align-items: center;
-
             justify-content: center;
-
             min-width: 20px;
-
             height: 20px;
-
-            padding:
-                0 5px;
-
+            padding: 0 5px;
             margin-left: 3px;
-
             border-radius: 50%;
-
             background: #ef4444;
-
             color: white;
-
             font-size: 10px;
-
             font-weight: 900;
         }
-
 
         /* =====================================================
            HERO
         ===================================================== */
-
         .hero {
-
-            padding:
-                50px 20px;
-
+            padding: 50px 20px;
             text-align: center;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #dcecff,
-                    #acd3f7,
-                    #7db7e7
-                );
+            background: linear-gradient(135deg, #dcecff, #acd3f7, #7db7e7);
         }
 
-
         .hero h1 {
-
             color: #0a2856;
-
-            font-size:
-                clamp(38px,6vw,65px);
-
+            font-size: clamp(38px,6vw,65px);
             font-weight: 950;
-
             margin-bottom: 12px;
         }
 
-
         .hero p {
-
             color: #28577e;
-
             font-size: 15px;
         }
 
-
         /* =====================================================
-           PRODUCTS
+           PRODUCTS GRID
         ===================================================== */
-
         .products-container {
-
             width: 94%;
-
             max-width: 1300px;
-
-            margin:
-                35px auto 50px;
+            margin: 35px auto 50px;
         }
 
-
         .products-title {
-
             text-align: center;
-
             margin-bottom: 25px;
         }
 
-
         .products-title h2 {
-
             color: #123e70;
-
             font-size: 30px;
-
             font-weight: 900;
         }
 
-
         .products-title p {
-
             color: #70859c;
-
             margin-top: 5px;
         }
 
-
         .product-grid {
-
             display: grid;
-
-            grid-template-columns:
-                repeat(4,minmax(0,1fr));
-
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 22px;
         }
 
-
         .product-card {
-
             background: white;
-
             border-radius: 17px;
-
             overflow: hidden;
-
-            border:
-                1px solid #dce7f4;
-
-            box-shadow:
-                0 8px 25px
-                rgba(25,70,115,.10);
-
-            transition:
-                transform .25s ease,
-                box-shadow .25s ease;
+            border: 1px solid #dce7f4;
+            box-shadow: 0 8px 25px rgba(25, 70, 115, .10);
+            transition: transform .25s ease, box-shadow .25s ease;
+            display: flex;
+            flex-direction: column;
         }
-
 
         .product-card:hover {
-
-            transform:
-                translateY(-6px);
-
-            box-shadow:
-                0 15px 35px
-                rgba(25,70,115,.18);
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(25, 70, 115, .18);
         }
-
 
         /* =====================================================
-           PRODUCT IMAGE GALLERY
+           AMAZON SLIDING TRACK MECHANICS
         ===================================================== */
-
         .product-image {
-
-            position: relative;
-
+            display: flex !important;
+            overflow-x: auto !important;
+            scroll-snap-type: x mandatory !important;
+            scroll-behavior: smooth;
             width: 100%;
-
-            height: 300px;
-
+            height: 320px;
             background: #f3f7fc;
-
-            overflow: hidden;
-
-            touch-action: pan-y;
+            position: relative;
         }
 
+        .product-image::-webkit-scrollbar {
+            display: none;
+        }
 
         .product-image img {
-
-            width: 100%;
-
-            height: 100%;
-
+            width: 100% !important;
+            height: 100% !important;
+            flex-shrink: 0 !important;
+            scroll-snap-align: start !important;
             object-fit: contain;
-
-            display: block;
-
-            user-select: none;
-
-            -webkit-user-drag: none;
-
-            transition:
-                opacity .18s ease;
+            background: #f3f7fc;
+            padding: 10px;
         }
 
-
-        .gallery-arrow {
-
+        .scroll-hint-badge {
             position: absolute;
-
-            top: 50%;
-
-            transform:
-                translateY(-50%);
-
-            width: 38px;
-
-            height: 38px;
-
-            border: none;
-
-            border-radius: 50%;
-
-            background:
-                rgba(255,255,255,.92);
-
-            color: #123e70;
-
-            font-size: 24px;
-
-            font-weight: 900;
-
-            cursor: pointer;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            box-shadow:
-                0 4px 15px
-                rgba(0,0,0,.18);
-
-            z-index: 5;
-        }
-
-
-        .gallery-arrow:hover {
-
-            background: white;
-
-            transform:
-                translateY(-50%)
-                scale(1.05);
-        }
-
-
-        .gallery-prev {
-
-            left: 10px;
-        }
-
-
-        .gallery-next {
-
-            right: 10px;
-        }
-
-
-        .gallery-counter {
-
-            position: absolute;
-
-            right: 10px;
-
-            top: 10px;
-
-            padding:
-                5px 9px;
-
-            border-radius: 20px;
-
-            background:
-                rgba(0,0,0,.58);
-
+            bottom: 12px;
+            right: 12px;
+            background: rgba(8, 43, 95, 0.75);
             color: white;
-
-            font-size: 11px;
-
-            font-weight: 800;
-
-            z-index: 5;
-        }
-
-
-        /* =====================================================
-           THUMBNAILS
-        ===================================================== */
-
-        .product-thumbnails {
-
-            display: flex;
-
-            gap: 7px;
-
-            padding:
-                9px 10px;
-
-            overflow-x: auto;
-
-            background: white;
-
-            scrollbar-width: thin;
-        }
-
-
-        .product-thumbnail {
-
-            width: 52px;
-
-            height: 52px;
-
-            flex:
-                0 0 52px;
-
-            border:
-                2px solid #dce7f4;
-
-            border-radius: 8px;
-
-            overflow: hidden;
-
-            background: #f5f9ff;
-
-            padding: 0;
-
-            cursor: pointer;
-        }
-
-
-        .product-thumbnail.active {
-
-            border:
-                2px solid #2464e8;
-        }
-
-
-        .product-thumbnail img {
-
-            width: 100%;
-
-            height: 100%;
-
-            object-fit: cover;
-
-            display: block;
-        }
-
-
-        .product-info {
-
-            padding: 17px;
-        }
-
-
-        .product-info h3 {
-
-            color: #123c68;
-
-            font-size: 17px;
-
-            font-weight: 900;
-
-            margin-bottom: 7px;
-        }
-
-
-        .product-info p {
-
-            color: #72849a;
-
-            font-size: 12px;
-
-            line-height: 1.6;
-
-            min-height: 75px;
-        }
-
-
-        .product-details {
-
-            display: flex;
-
-            flex-wrap: wrap;
-
-            gap: 6px;
-
-            margin-top: 10px;
-        }
-
-
-        .product-tag {
-
-            display: inline-flex;
-
-            align-items: center;
-
-            padding:
-                5px 8px;
-
-            border-radius: 7px;
-
-            background: #eef5ff;
-
-            color: #1455a0;
-
+            padding: 4px 8px;
+            border-radius: 20px;
             font-size: 10px;
+            font-weight: bold;
+            pointer-events: none;
+            z-index: 10;
+            letter-spacing: 0.5px;
+        }
 
+        .product-info-wrap {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            background: white;
+            border-top: 1px solid #edf4fc;
+        }
+
+        .product-info-wrap h3 {
+            color: #0a2856;
+            font-size: 18px;
             font-weight: 800;
+            margin-bottom: 6px;
         }
 
-
-        .price {
-
-            color: #155dcc;
-
-            font-size: 21px;
-
-            font-weight: 950;
-
-            margin:
-                14px 0;
+        .product-info-wrap .category-label {
+            color: #70859c;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
         }
 
+        .product-info-wrap .description-text {
+            color: #56708e;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            word-wrap: break-word;
+        }
+
+        .product-meta-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px dashed #e4edf7;
+        }
+
+        .price-tag {
+            font-size: 22px;
+            font-weight: 800;
+            color: #155da8;
+        }
 
         .add-cart-btn {
-
-            width: 100%;
-
-            border: none;
-
-            border-radius: 10px;
-
-            padding: 12px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #1767d8,
-                    #0875b9
-                );
-
+            background: #2464e8;
             color: white;
-
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: 700;
             font-size: 13px;
-
-            font-weight: 900;
-
             cursor: pointer;
+            transition: background 0.2s;
         }
-
 
         .add-cart-btn:hover {
-
-            transform:
-                translateY(-2px);
-
-            box-shadow:
-                0 8px 18px
-                rgba(23,103,216,.25);
+            background: #0d4f91;
         }
-
-
-        /* =====================================================
-           CONTACT POPUP
-        ===================================================== */
-
-        .contact-popup {
-
-            position: fixed;
-
-            inset: 0;
-
-            z-index: 999999;
-
-            display: none;
-
-            align-items: center;
-
-            justify-content: center;
-
-            padding: 20px;
-
-            background:
-                rgba(0,25,60,.65);
-        }
-
-
-        .contact-popup.show {
-
-            display: flex;
-        }
-
-
-        .contact-box {
-
-            position: relative;
-
-            width: 100%;
-
-            max-width: 400px;
-
-            padding: 30px;
-
-            border-radius: 20px;
-
-            background: white;
-
-            text-align: center;
-
-            box-shadow:
-                0 20px 60px
-                rgba(0,0,0,.25);
-        }
-
-
-        .contact-box h2 {
-
-            color: #082b5f;
-
-            margin-bottom: 8px;
-        }
-
-
-        .contact-box p {
-
-            color: #70859c;
-
-            font-size: 14px;
-
-            margin-bottom: 20px;
-        }
-
-
-        .close-contact {
-
-            position: absolute;
-
-            top: 10px;
-
-            right: 14px;
-
-            border: none;
-
-            background: transparent;
-
-            color: #56708e;
-
-            font-size: 28px;
-
-            cursor: pointer;
-        }
-
-
-        .contact-links {
-
-            display: grid;
-
-            gap: 10px;
-        }
-
-
-        .contact-links a {
-
-            display: block;
-
-            padding: 12px;
-
-            border-radius: 10px;
-
-            background: #eef5ff;
-
-            color: #1455a0;
-
-            text-decoration: none;
-
-            font-weight: 800;
-
-            font-size: 14px;
-        }
-
-
-        .contact-links a:hover {
-
-            background: #dcecff;
-        }
-
-
-        /* =====================================================
-           FOOTER
-        ===================================================== */
-
-        footer {
-
-            padding: 25px;
-
-            text-align: center;
-
-            background: #092c5d;
-
-            color: white;
-        }
-
-
-        footer p {
-
-            color: #d7e7fa;
-
-            margin-top: 5px;
-
-            font-size: 13px;
-        }
-
-
-        /* =====================================================
-           TABLET
-        ===================================================== */
-
-        @media(max-width:1050px) {
-
-            .product-grid {
-
-                grid-template-columns:
-                    repeat(3,1fr);
-            }
-
-
-            .header-inner {
-
-                flex-wrap: wrap;
-            }
-
-
-            .search-box {
-
-                order: 3;
-
-                width: 100%;
-
-                max-width: none;
-            }
-        }
-
-
-        /* =====================================================
-           MOBILE NAVIGATION
-        ===================================================== */
-
-        @media(max-width:768px) {
-
-            .header-inner {
-
-                width: 100%;
-
-                padding:
-                    8px 10px;
-
-                flex-wrap: wrap;
-
-                gap: 8px;
-            }
-
-
-            .brand-logo {
-
-                width: 58px;
-
-                height: 50px;
-            }
-
-
-            .search-box {
-
-                order: 3;
-
-                width: 100%;
-            }
-
-
-            .nav-links {
-
-                order: 4;
-
-                width: 100%;
-
-                margin-left: 0;
-
-                display: flex;
-
-                flex-wrap: nowrap;
-
-                overflow-x: auto;
-
-                overflow-y: hidden;
-
-                justify-content:
-                    flex-start;
-
-                align-items: center;
-
-                gap: 5px;
-
-                padding:
-                    7px 3px;
-
-                white-space: nowrap;
-
-                -webkit-overflow-scrolling:
-                    touch;
-
-                scrollbar-width: none;
-            }
-
-
-            .nav-links::-webkit-scrollbar {
-
-                display: none;
-            }
-
-
-            .nav-links a {
-
-                flex:
-                    0 0 auto;
-
-                display:
-                    inline-flex;
-
-                align-items:
-                    center;
-
-                justify-content:
-                    center;
-
-                white-space:
-                    nowrap;
-
-                padding:
-                    9px 10px;
-
-                font-size: 13px;
-            }
-
-
-            .nav-links .contact-btn {
-
-                flex:
-                    0 0 auto;
-
-                display:
-                    inline-flex;
-
-                align-items:
-                    center;
-
-                justify-content:
-                    center;
-
-                white-space:
-                    nowrap;
-
-                padding:
-                    9px 11px;
-
-                margin: 0;
-            }
-
-
-            .product-grid {
-
-                grid-template-columns:
-                    repeat(2,1fr);
-            }
-
-
-            .product-image {
-
-                height: 260px;
-            }
-
-        }
-
-
-        /* =====================================================
-           SMALL MOBILE
-        ===================================================== */
-
-        @media(max-width:500px) {
-
-            .product-grid {
-
-                grid-template-columns: 1fr;
-            }
-
-
-            .hero {
-
-                padding:
-                    35px 15px;
-            }
-
-
-            .hero h1 {
-
-                font-size: 38px;
-            }
-
-
-            .products-container {
-
-                width: 92%;
-            }
-
-
-            .contact-box {
-
-                padding: 25px 18px;
-            }
-
-
-            .product-image {
-
-                height: 300px;
-            }
-
-        }
-
     </style>
-
 </head>
-
 
 <body>
 
+    <header>
+        <div class="header-inner">
+            <!-- DYNAMIC IMAGE LOADER POINTING TO YOUR INTERNAL VS CODE FILES -->
+            <div class="brand-logo-container">
+                <img src="logo.png" alt="ShopNova Logo" onerror="this.src='docs/logo.png'; this.onerror=function(){this.src='https://placeholder.com'}">
+            </div>
+            
+            <div class="search-box">
+                <input type="text" placeholder="Search product catalogs...">
+                <button>🔍</button>
+            </div>
+            
+            <nav class="nav-links">
+                <a href="/products.html" class="active">Products</a>
+                <a href="/seller.html">Seller Panel</a>
+                <a href="#">Cart <span id="cartCount">0</span></a>
+            </nav>
+            <button class="contact-btn">Contact Support</button>
+        </div>
+    </header>
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
+    <section class="hero">
+        <h1>Our Products</h1>
+        <p>Explore high quality items verified and deployed securely with Vercel cloud architecture layers.</p>
+    </section>
 
-<header>
-
-    <div class="header-inner">
-
-
-        <a
-            href="index.html"
-            class="brand-logo"
-        >
-
-            <!-- SHOPNOVA HEADER LOGO -->
-            <img
-                src="images/shopnova-header-logo.png"
-                alt="ShopNova"
-            >
-
-        </a>
-
-
-        <div class="search-box">
-
-            <input
-                type="search"
-                id="searchInput"
-                placeholder="Search products..."
-            >
-
-            <button
-                type="button"
-                id="searchButton"
-            >
-                🔍
-            </button>
-
+    <main class="products-container">
+        <div class="products-title">
+            <h2>Live Catalog</h2>
+            <p>Swipe left or right on item cards to view alternative product media images</p>
         </div>
 
-
-        <nav class="nav-links">
-
-            <a href="index.html">
-                Home
-            </a>
-
-
-            <a
-                href="products.html"
-                class="active"
-            >
-                Products
-            </a>
-
-
-            <a href="cart.html">
-
-                Cart
-
-                <span id="cartCount">
-                    0
-                </span>
-
-            </a>
-
-
-            <a href="checkout.html">
-                Checkout
-            </a>
-
-
-            <button
-                type="button"
-                class="contact-btn"
-                onclick="openContact()"
-            >
-                Contact
-            </button>
-
-        </nav>
-
-    </div>
-
-</header>
-
-
-<!-- =====================================================
-     HERO
-===================================================== -->
-
-<section class="hero">
-
-    <h1>
-        Shop Our Products
-    </h1>
-
-    <p>
-        Discover premium products and beautiful choices.
-    </p>
-
-</section>
-
-
-<!-- =====================================================
-     PRODUCTS
-===================================================== -->
-
-<main class="products-container">
-
-    <div class="products-title">
-
-        <h2>
-            Featured Products
-        </h2>
-
-        <p>
-            Shop your favourite products from ShopNova.
-        </p>
-
-    </div>
-
-
-    <div
-        id="productGrid"
-        class="product-grid"
-    ></div>
-
-</main>
-
-
-<!-- =====================================================
-     CONTACT POPUP
-===================================================== -->
-
-<div
-    id="contactPopup"
-    class="contact-popup"
->
-
-    <div class="contact-box">
-
-        <button
-            type="button"
-            class="close-contact"
-            onclick="closeContact()"
-        >
-            ×
-        </button>
-
-
-        <h2>
-            Contact ShopNova
-        </h2>
-
-
-        <p>
-            We're happy to help you.
-        </p>
-
-
-        <div class="contact-links">
-
-            <a
-                href="https://wa.me/"
-                target="_blank"
-                rel="noopener"
-            >
-                💬 WhatsApp
-            </a>
-
-
-            <a
-                href="https://instagram.com/"
-                target="_blank"
-                rel="noopener"
-            >
-                📸 Instagram
-            </a>
-
-
-            <a
-                href="https://youtube.com/"
-                target="_blank"
-                rel="noopener"
-            >
-                ▶ YouTube
-            </a>
-
-
-            <a
-                href="mailto:support@shopnova.com"
-            >
-                ✉ Email
-            </a>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer>
-
-    <h3>
-        ShopNova
-    </h3>
-
-    <p>
-        Shop Smart • Live Better
-    </p>
-
-    <p>
-        © 2026 ShopNova | CEO & Founder: Anuradha
-    </p>
-
-</footer>
-
-
-<script>
-
-"use strict";
-
-
-/* =====================================================
-   CART KEY
-===================================================== */
-
-const CART_KEY = "shopnova_cart";
-
-
-/* =====================================================
-   PRODUCT DATA
-===================================================== */
-
-const products = [
-
-    {
-        id: "walk-by-faith-tshirt",
-
-        name: "Walk by Faith T-Shirt",
-
-        price: 1999,
-
-        image:
-            "images/walk-by-faith-front.jpg",
-
-        description:
-            "Premium-quality unisex lifestyle T-shirt featuring a clean Walk by Faith design and a mountain-inspired back graphic. Designed for comfortable everyday wear.",
-
-        brand:
-            "Gildan 64000",
-
-        fit:
-            "Unisex",
-
-        category:
-            "Lifestyle",
-
-        images: [
-
-            "images/walk-by-faith-front.jpg",
-
-            "images/walk-by-faith-full.jpg",
-
-            "images/walk-by-faith-back.jpg",
-
-            "images/walk-by-faith-front-closeup.jpg",
-
-            "images/walk-by-faith-back-closeup.jpg",
-
-            "images/walk-by-faith-side.jpg",
-
-            "images/walk-by-faith-folded.jpg"
-
-        ]
-
-    }
-
-];
-
-
-/* =====================================================
-   GET CART
-===================================================== */
-
-function getCart() {
-
-    try {
-
-        const saved =
-            localStorage.getItem(CART_KEY);
-
-        if (!saved) {
-            return [];
-        }
-
-        const cart =
-            JSON.parse(saved);
-
-        return Array.isArray(cart)
-            ? cart
-            : [];
-
-    } catch (error) {
-
-        console.error(error);
-
-        return [];
-    }
-}
-
-
-/* =====================================================
-   SAVE CART
-===================================================== */
-
-function saveCart(cart) {
-
-    localStorage.setItem(
-        CART_KEY,
-        JSON.stringify(cart)
-    );
-
-    updateCartCount();
-}
-
-
-/* =====================================================
-   ADD TO CART
-===================================================== */
-
-function addProductToCart(
-    id,
-    name,
-    price,
-    image
-) {
-
-    const cart =
-        getCart();
-
-
-    const existing =
-        cart.find(function(item) {
-
-            return String(item.id) ===
-                String(id);
-
-        });
-
-
-    if (existing) {
-
-        existing.quantity =
-            (Number(existing.quantity) || 1) + 1;
-
-        existing.name =
-            name;
-
-        existing.price =
-            Number(price);
-
-        existing.image =
-            image;
-
-    } else {
-
-        cart.push({
-
-            id:
-                String(id),
-
-            name:
-                String(name),
-
-            price:
-                Number(price),
-
-            image:
-                String(image),
-
-            quantity:
-                1
-
-        });
-
-    }
-
-
-    saveCart(cart);
-
-
-    showMessage(
-        name + " added to cart!"
-    );
-}
-
-
-/* =====================================================
-   DISPLAY PRODUCTS
-===================================================== */
-
-function displayProducts(list) {
-
-    const grid =
-        document.getElementById(
-            "productGrid"
-        );
-
-
-    grid.innerHTML = "";
-
-
-    if (!list.length) {
-
-        grid.innerHTML = `
-
-            <div style="
-                grid-column:1/-1;
-                text-align:center;
-                padding:50px;
-                color:#70859c;
-                font-weight:700;
-            ">
-
-                No products found.
-
-            </div>
-
-        `;
-
-        return;
-    }
-
-
-    list.forEach(function(product) {
-
-        const card =
-            document.createElement(
-                "article"
-            );
-
-
-        card.className =
-            "product-card";
-
-
-        const images =
-            Array.isArray(product.images) &&
-            product.images.length
-                ? product.images
-                : [product.image];
-
-
-        card.innerHTML = `
-
-            <div
-                class="product-image"
-                data-gallery-index="0"
-            >
-
-                <img
-                    class="main-product-image"
-                    src="${images[0]}"
-                    alt="${product.name}"
-                    draggable="false"
-                    onerror="
-                        this.onerror=null;
-                        this.src='images/luxury-banner.jpg';
-                    "
-                >
-
-
-                <button
-                    type="button"
-                    class="gallery-arrow gallery-prev"
-                    aria-label="Previous image"
-                >
-                    ‹
-                </button>
-
-
-                <button
-                    type="button"
-                    class="gallery-arrow gallery-next"
-                    aria-label="Next image"
-                >
-                    ›
-                </button>
-
-
-                <div class="gallery-counter">
-                    1 / ${images.length}
-                </div>
-
-            </div>
-
-
-            <div class="product-thumbnails"></div>
-
-
-            <div class="product-info">
-
-                <h3>
-                    ${product.name}
-                </h3>
-
-
-                <p>
-                    ${product.description}
-                </p>
-
-
-                <div class="product-details">
-
-                    <span class="product-tag">
-                        ${product.brand}
-                    </span>
-
-                    <span class="product-tag">
-                        ${product.fit}
-                    </span>
-
-                    <span class="product-tag">
-                        ${product.category}
-                    </span>
-
-                </div>
-
-
-                <div class="price">
-
-                    ₹${Number(product.price)
-                        .toLocaleString("en-IN")}
-
-                </div>
-
-
-                <button
-                    type="button"
-                    class="add-cart-btn"
-                >
-                    🛒 Add to Cart
-                </button>
-
-            </div>
-
-        `;
-
-
-        /* =================================================
-           GALLERY
-        ================================================= */
-
-        const imageBox =
-            card.querySelector(
-                ".product-image"
-            );
-
-
-        const mainImage =
-            card.querySelector(
-                ".main-product-image"
-            );
-
-
-        const previousButton =
-            card.querySelector(
-                ".gallery-prev"
-            );
-
-
-        const nextButton =
-            card.querySelector(
-                ".gallery-next"
-            );
-
-
-        const counter =
-            card.querySelector(
-                ".gallery-counter"
-            );
-
-
-        const thumbnails =
-            card.querySelector(
-                ".product-thumbnails"
-            );
-
-
-        let currentIndex = 0;
-
-
-        /* =================================================
-           THUMBNAILS
-        ================================================= */
-
-        images.forEach(
-            function(image, index) {
-
-                const thumbnail =
-                    document.createElement(
-                        "button"
-                    );
-
-
-                thumbnail.type =
-                    "button";
-
-
-                thumbnail.className =
-                    "product-thumbnail";
-
-
-                if (index === 0) {
-
-                    thumbnail.classList.add(
-                        "active"
-                    );
-
-                }
-
-
-                thumbnail.innerHTML = `
-
-                    <img
-                        src="${image}"
-                        alt="${product.name} image ${index + 1}"
-                        draggable="false"
-                        onerror="
-                            this.onerror=null;
-                            this.src='images/luxury-banner.jpg';
-                        "
-                    >
-
-                `;
-
-
-                thumbnail.addEventListener(
-                    "click",
-                    function() {
-
-                        showGalleryImage(
-                            index
-                        );
-
-                    }
-                );
-
-
-                thumbnails.appendChild(
-                    thumbnail
-                );
-
-            }
-        );
-
-
-        function showGalleryImage(index) {
-
-            if (!images.length) {
-                return;
-            }
-
-
-            currentIndex =
-                (index + images.length) %
-                images.length;
-
-
-            mainImage.style.opacity =
-                "0.35";
-
-
-            setTimeout(
-                function() {
-
-                    mainImage.src =
-                        images[currentIndex];
-
-                    mainImage.style.opacity =
-                        "1";
-
-                },
-                80
-            );
-
-
-            counter.textContent =
-                (currentIndex + 1) +
-                " / " +
-                images.length;
-
-
-            imageBox.dataset.galleryIndex =
-                currentIndex;
-
-
-            const allThumbnails =
-                thumbnails.querySelectorAll(
-                    ".product-thumbnail"
-                );
-
-
-            allThumbnails.forEach(
-                function(
-                    thumbnail,
-                    thumbnailIndex
-                ) {
-
-                    thumbnail.classList.toggle(
-                        "active",
-                        thumbnailIndex ===
-                            currentIndex
-                    );
-
-                }
-            );
-
-        }
-
-
-        previousButton.addEventListener(
-            "click",
-            function(event) {
-
-                event.stopPropagation();
-
-                showGalleryImage(
-                    currentIndex - 1
-                );
-
-            }
-        );
-
-
-        nextButton.addEventListener(
-            "click",
-            function(event) {
-
-                event.stopPropagation();
-
-                showGalleryImage(
-                    currentIndex + 1
-                );
-
-            }
-        );
-
-
-        /* =================================================
-           MOBILE SWIPE
-        ================================================= */
-
-        let touchStartX = 0;
-
-        let touchEndX = 0;
-
-
-        imageBox.addEventListener(
-            "touchstart",
-            function(event) {
-
-                if (
-                    event.touches &&
-                    event.touches.length
-                ) {
-
-                    touchStartX =
-                        event.touches[0].clientX;
-
-                }
-
-            },
-            {
-                passive: true
-            }
-        );
-
-
-        imageBox.addEventListener(
-            "touchend",
-            function(event) {
-
-                if (
-                    event.changedTouches &&
-                    event.changedTouches.length
-                ) {
-
-                    touchEndX =
-                        event.changedTouches[0].clientX;
-
-                    handleSwipe();
-
-                }
-
-            },
-            {
-                passive: true
-            }
-        );
-
-
-        function handleSwipe() {
-
-            const distance =
-                touchEndX -
-                touchStartX;
-
-
-            if (Math.abs(distance) < 45) {
-                return;
-            }
-
-
-            if (distance < 0) {
-
-                showGalleryImage(
-                    currentIndex + 1
-                );
-
-            } else {
-
-                showGalleryImage(
-                    currentIndex - 1
-                );
-
-            }
-
-        }
-
-
-        /* =================================================
-           ADD TO CART
-        ================================================= */
-
-        const button =
-            card.querySelector(
-                ".add-cart-btn"
-            );
-
-
-        button.addEventListener(
-            "click",
-            function() {
-
-                addProductToCart(
-
-                    product.id,
-
-                    product.name,
-
-                    product.price,
-
-                    images[0]
-
-                );
-
-            }
-        );
-
-
-        grid.appendChild(card);
-
-    });
-}
-
-
-/* =====================================================
-   CART COUNT
-===================================================== */
-
-function updateCartCount() {
-
-    const cart =
-        getCart();
-
-
-    const count =
-        cart.reduce(
-            function(total, item) {
-
-                return total +
-                    (Number(item.quantity) || 1);
-
-            },
-            0
-        );
-
-
-    const element =
-        document.getElementById(
-            "cartCount"
-        );
-
-
-    if (element) {
-
-        element.textContent =
-            count;
-    }
-}
-
-
-/* =====================================================
-   SEARCH
-===================================================== */
-
-function setupSearch() {
-
-    const input =
-        document.getElementById(
-            "searchInput"
-        );
-
-
-    const button =
-        document.getElementById(
-            "searchButton"
-        );
-
-
-    function search() {
-
-        const text =
-            input.value.trim();
-
-
-        if (!text) {
-
-            window.location.href =
-                "products.html";
-
-            return;
-        }
-
-
-        window.location.href =
-            "products.html?search=" +
-            encodeURIComponent(text);
-    }
-
-
-    button.addEventListener(
-        "click",
-        search
-    );
-
-
-    input.addEventListener(
-        "keydown",
-        function(event) {
-
-            if (event.key === "Enter") {
-
-                event.preventDefault();
-
-                search();
-
-            }
-
-        }
-    );
-}
-
-
-/* =====================================================
-   MESSAGE
-===================================================== */
-
-function showMessage(message) {
-
-    let box =
-        document.getElementById(
-            "shopnovaMessage"
-        );
-
-
-    if (!box) {
-
-        box =
-            document.createElement("div");
-
-
-        box.id =
-            "shopnovaMessage";
-
-
-        box.style.position =
-            "fixed";
-
-
-        box.style.right =
-            "20px";
-
-
-        box.style.bottom =
-            "20px";
-
-
-        box.style.zIndex =
-            "999999";
-
-
-        box.style.background =
-            "linear-gradient(135deg,#1767d8,#0875b9)";
-
-
-        box.style.color =
-            "white";
-
-
-        box.style.padding =
-            "14px 20px";
-
-
-        box.style.borderRadius =
-            "12px";
-
-
-        box.style.fontWeight =
-            "800";
-
-
-        box.style.fontSize =
-            "13px";
-
-
-        box.style.boxShadow =
-            "0 10px 30px rgba(0,0,0,.25)";
-
-
-        document.body.appendChild(box);
-    }
-
-
-    box.textContent =
-        "✓ " + message;
-
-
-    box.style.opacity =
-        "1";
-
-
-    clearTimeout(
-        window.shopnovaMessageTimer
-    );
-
-
-    window.shopnovaMessageTimer =
-        setTimeout(
-            function() {
-
-                box.style.opacity =
-                    "0";
-
-            },
-            1800
-        );
-}
-
-
-/* =====================================================
-   CONTACT
-===================================================== */
-
-function openContact() {
-
-    const popup =
-        document.getElementById(
-            "contactPopup"
-        );
-
-
-    if (popup) {
-
-        popup.classList.add("show");
-    }
-}
-
-
-function closeContact() {
-
-    const popup =
-        document.getElementById(
-            "contactPopup"
-        );
-
-
-    if (popup) {
-
-        popup.classList.remove("show");
-    }
-}
-
-
-/* =====================================================
-   CLOSE POPUP OUTSIDE
-===================================================== */
-
-document.addEventListener(
-    "click",
-    function(event) {
-
-        const popup =
-            document.getElementById(
-                "contactPopup"
-            );
-
-
-        if (
-            popup &&
-            event.target === popup
-        ) {
-
-            closeContact();
-        }
-    }
-);
-
-
-/* =====================================================
-   ESCAPE KEY
-===================================================== */
-
-document.addEventListener(
-    "keydown",
-    function(event) {
-
-        if (
-            event.key === "Escape"
-        ) {
-
-            closeContact();
-        }
-    }
-);
-
-
-/* =====================================================
-   START
-===================================================== */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function() {
-
-        const params =
-            new URLSearchParams(
-                window.location.search
-            );
-
-
-        const search =
-            params.get("search");
-
-
-        if (search) {
-
-            const filtered =
-                products.filter(
-                    function(product) {
-
-                        return (
-
-                            product.name
-                                .toLowerCase()
-                                .includes(
-                                    search.toLowerCase()
-                                )
-
-                            ||
-
-                            product.brand
-                                .toLowerCase()
-                                .includes(
-                                    search.toLowerCase()
-                                )
-
-                            ||
-
-                            product.category
-                                .toLowerCase()
-                                .includes(
-                                    search.toLowerCase()
-                                )
-
-                        );
-
-                    }
-                );
-
-
-            displayProducts(
-                filtered
-            );
-
-        } else {
-
-            displayProducts(
-                products
-            );
-        }
-
-
-        updateCartCount();
-
-        setupSearch();
-
-    }
-);
-
-</script>
-
-
-</body>
-</html>
+        <div class="product-grid" id="mainCatalogGrid"></div>
+    </main>
+
+    <script>
+        async function fetchAndRenderProducts() {
+            try {
+                const res = await fetch('http://localhost:5000/api/products');
+                const products = await res.json();
+                
