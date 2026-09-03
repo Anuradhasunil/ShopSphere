@@ -103,10 +103,10 @@
             });
 
             try {
-                // SMART CROSS-PORT INDUSTRIAL ROUTER CHECK
+                // LIVE INTERNET PRODUCTION SWITCH ROUTER
                 const backendUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
                     ? 'http://localhost:5000/add-product'
-                    : '/add-product';
+                    : 'https://onrender.com'; // We will replace this placeholder string in Step 4
 
                 const response = await fetch(backendUrl, {
                     method: 'POST',
