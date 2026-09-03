@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>ShopNova | Seller Panel</title>
 
 <style>
@@ -121,9 +120,7 @@
         font-weight: 800;
     }
 
-    input,
-    textarea,
-    select {
+    input, textarea, select {
         width: 100%;
         border: 1px solid #cbdced;
         border-radius: 10px;
@@ -135,9 +132,7 @@
         font-family: inherit;
     }
 
-    input:focus,
-    textarea:focus,
-    select:focus {
+    input:focus, textarea:focus, select:focus {
         border-color: #3280e8;
         box-shadow: 0 0 0 3px rgba(50,128,232,.12);
         background: white;
@@ -148,7 +143,7 @@
         resize: vertical;
     }
 
-    /* IMAGE AREA */
+    /* IMAGE UPLOADER STYLES */
     .image-box {
         padding: 18px;
         border: 2px dashed #b9d5ef;
@@ -255,7 +250,7 @@
         background: #a51d1d;
     }
 
-    /* LOCATION */
+    /* GEOLOCATION STYLES */
     .location-btn {
         background-color: #0076df;
         color: white;
@@ -274,12 +269,6 @@
         transform: translateY(-1px);
     }
 
-    .location-btn:disabled {
-        opacity: .65;
-        cursor: wait;
-        transform: none;
-    }
-
     .status-msg {
         font-size: 13px;
         font-weight: 600;
@@ -287,17 +276,10 @@
         display: none;
     }
 
-    .status-msg.success {
-        color: #2e7d32;
-        display: block;
-    }
+    .status-msg.success { color: #2e7d32; display: block; }
+    .status-msg.error { color: #c62828; display: block; }
 
-    .status-msg.error {
-        color: #c62828;
-        display: block;
-    }
-
-    /* SUBMIT */
+    /* SUBMIT LAYOUT BUTTON */
     .submit-btn {
         width: 100%;
         padding: 16px;
@@ -323,7 +305,6 @@
         transform: none;
     }
 
-    /* FEEDBACK */
     .feedback-banner {
         width: 100%;
         padding: 12px;
@@ -335,30 +316,12 @@
         display: none;
     }
 
-    .feedback-banner.error {
-        background-color: #ffebee;
-        color: #c62828;
-        border: 1px solid #ffcdd2;
-        display: block;
-    }
-
-    .feedback-banner.success {
-        background-color: #e8f5e9;
-        color: #2e7d32;
-        border: 1px solid #c8e6c9;
-        display: block;
-    }
+    .feedback-banner.error { background-color: #ffebee; color: #c62828; border: 1px solid #ffcdd2; display: block; }
+    .feedback-banner.success { background-color: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; display: block; }
 
     @media (max-width: 700px) {
-        .header-inner { min-height: 65px; }
-        .brand-text { font-size: 19px; }
-        .back-home { padding: 9px 12px; font-size: 12px; }
-        .page { width: 94%; margin-top: 25px; }
-        .seller-card { padding: 20px; border-radius: 16px; }
-        .form-grid { grid-template-columns: 1fr; gap: 5px; }
+        .form-grid { grid-template-columns: 1fr; }
         .form-group.full { grid-column: auto; }
-        .page-title h1 { font-size: 32px; }
-        .section-title { font-size: 18px; }
         .image-preview-grid { grid-template-columns: repeat(2, 1fr); }
     }
 </style>
@@ -380,6 +343,7 @@
         <div class="seller-card">
             <form id="productForm">
                 
+                <!-- SECTION 1: METADATA -->
                 <div class="section-title">Product Information</div>
                 <div class="form-grid">
                     <div class="form-group full">
@@ -410,3 +374,13 @@
 
                     <div class="form-group full">
                         <label for="description">Product Description</label>
+                        <textarea id="description" placeholder="Describe your item..."></textarea>
+                    </div>
+                </div>
+
+                <!-- SECTION 2: THE IMAGE UPLOADER -->
+                <div class="section-title">Product Media</div>
+                <div class="image-box">
+                    <div class="image-select-row">
+                        <label for="productImage" class="select-image-button">Select Images</label>
+                        <input type="file" id="productImage" accept="image/*" multiple>
