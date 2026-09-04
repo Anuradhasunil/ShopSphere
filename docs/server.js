@@ -96,11 +96,6 @@ app.get('/api/products', async (req, res) => {
     }
 });
 
-// Fallback rule routing index requests back home seamlessly if needed (Express v5 Compliant Splat)
-app.get('/:splat*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
-
 // Establishing port tracking configurations for continuous request ingestion channels
 app.listen(PORT, () => {
     console.log(`Server execution sequence operational. Monitoring connections over port: ${PORT}`);
