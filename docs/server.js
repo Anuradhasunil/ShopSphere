@@ -96,8 +96,8 @@ app.get('/api/products', async (req, res) => {
     }
 });
 
-// Fallback rule routing index requests back home seamlessly if needed (Express v5 Compliant)
-app.get('/*', (req, res) => {
+// Fallback rule routing index requests back home seamlessly if needed (Express v5 Compliant Splat)
+app.get('/:splat*', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
