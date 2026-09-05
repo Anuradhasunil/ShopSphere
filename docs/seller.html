@@ -1,165 +1,460 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopNova | Seller Panel</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: "Segoe UI", Arial, sans-serif; background: #eaf4ff; color: #183b68; padding: 20px; }
-        .seller-card { background: white; border-radius: 20px; padding: 30px; max-width: 800px; margin: auto; box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
-        .section-title { font-size: 20px; font-weight: 900; margin: 20px 0 10px; border-bottom: 2px solid #e4edf7; padding-bottom: 5px; }
-        .form-group { display: flex; flex-direction: column; margin-bottom: 15px; }
-        label { font-size: 13px; font-weight: 800; margin-bottom: 5px; }
-        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #cbdced; border-radius: 10px; outline: none; }
-        input:focus, select:focus, textarea:focus { border-color: #3280e8; }
-        .image-box { padding: 20px; border: 2px dashed #b9d5ef; background: #f8fbff; border-radius: 12px; text-align: center; }
-        .select-image-button { display: inline-block; padding: 12px 20px; background: #1767d8; color: white; font-weight: bold; border-radius: 10px; cursor: pointer; }
-        #productImage { display: none; }
-        .image-preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; margin-top: 15px; }
-        .preview-card { position: relative; border: 1px solid #d9e6f3; border-radius: 8px; overflow: hidden; background: #eef5fc; }
-        .preview-card img { width: 100%; height: 100px; object-fit: cover; }
-        .remove-btn { position: absolute; top: 5px; right: 5px; background: red; color: white; border: none; border-radius: 50%; width: 20px; height: 20px; cursor: pointer; font-weight: bold; }
-        .submit-btn { width: 100%; padding: 16px; background: #00798c; color: white; font-size: 16px; font-weight: bold; border: none; border-radius: 10px; cursor: pointer; margin-top: 20px; }
-    </style>
-</head>
-<body>
-    <div class="seller-card">
-        <h1>Seller Panel</h1>
-        <form id="productForm">
-            <div class="section-title">Product Information</div>
-            <div class="form-group">
-                <label>Product Title *</label>
-                <input type="text" id="title" required>
-            </div>
-            <div class="form-group">
-                <label>Price ($) *</label>
-                <input type="number" id="price" step="0.01" required>
-            </div>
-            <div class="form-group">
-                <label>Stock Quantity *</label>
-                <input type="number" id="stock" required>
-            </div>
-            <div class="form-group">
-                <label>Category *</label>
-                <select id="category" required>
-                    <option value="Electronics">Electronics</option>
-                    <option value="Clothing">Clothing</option>
-                    <option value="Home & Kitchen">Home & Kitchen</option>
-                    <option value="Books">Books</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Description</label>
-                <textarea id="description"></textarea>
-            </div>
+<script>
+    let filesArray = [];
 
-            <div class="section-title">Product Media</div>
-            <div class="image-box">
-                <label for="productImage" class="select-image-button">Select Images</label>
-                <input type="file" id="productImage" accept="image/*" multiple>
-                <div id="imageCountDisplay" style="margin-top: 10px; font-weight: bold;">0 images selected</div>
-                <div class="image-preview-grid" id="previewGrid"></div>
-            </div>
+    /*
+     * =====================================================
+     * SHOPNOVA BACKEND
+     * =====================================================
+     *
+     * LOCAL:
+     * http://localhost:5000
+     *
+     * AFTER RENDER DEPLOYMENT:
+     * Replace the RENDER URL below with YOUR actual
+     * Render Web Service URL.
+     */
 
-            <button type="submit" class="submit-btn">Publish Product Catalog</button>
-        </form>
-    </div>
+    const LOCAL_BACKEND =
+        "http://localhost:5000";
 
-    <script>
-        let filesArray = [];
+    const RENDER_BACKEND =
+        "YOUR_RENDER_SERVICE_URL";
 
-        document.getElementById('productImage').addEventListener('change', function(e) {
-            const selectedFiles = Array.from(e.target.files);
-            selectedFiles.forEach(file => {
-                if (filesArray.length < 10 && file.type.startsWith('image/')) {
-                    filesArray.push(file);
-                }
-            });
-            renderPreviews();
-            this.value = '';
-        });
 
-        document.getElementById('productForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
+    /*
+     * Automatically select local or live backend
+     */
 
-            if (filesArray.length === 0) {
-                alert('Please upload at least one image file.');
-                return;
+    const backendBase =
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+            ? LOCAL_BACKEND
+            : RENDER_BACKEND;
+
+
+    /*
+     * =====================================================
+     * IMAGE SELECTION
+     * =====================================================
+     */
+
+    document
+        .getElementById("productImage")
+        .addEventListener(
+            "change",
+            function(e) {
+
+                const selectedFiles =
+                    Array.from(e.target.files);
+
+                selectedFiles.forEach(
+                    function(file) {
+
+                        if (
+                            filesArray.length < 10 &&
+                            file.type.startsWith("image/")
+                        ) {
+
+                            filesArray.push(file);
+                        }
+
+                    }
+                );
+
+                renderPreviews();
+
+                /*
+                 * Allow selecting the same file again
+                 */
+                this.value = "";
             }
+        );
 
-            const formData = new FormData();
-            formData.append('title', document.getElementById('title').value.trim());
-            formData.append('price', document.getElementById('price').value);
-            formData.append('stock', document.getElementById('stock').value);
-            formData.append('category', document.getElementById('category').value);
-            formData.append('description', document.getElementById('description')?.value.trim() || "");
-            
-            formData.append('latitude', '16.306');
-            formData.append('longitude', '80.436');
 
-            filesArray.forEach((file) => {
-                formData.append('images', file);
-            });
+    /*
+     * =====================================================
+     * SUBMIT PRODUCT
+     * =====================================================
+     */
 
-            try {
-                // LIVE INTERNET PRODUCTION SWITCH ROUTER
-                const backendUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-                    ? 'http://localhost:5000/add-product'
-                    : 'https://onrender.com'; // We will replace this placeholder string in Step 4
+    document
+        .getElementById("productForm")
+        .addEventListener(
+            "submit",
+            async function(e) {
 
-                const response = await fetch(backendUrl, {
-                    method: 'POST',
-                    body: formData 
-                });
+                e.preventDefault();
 
-                const result = await response.json();
 
-                if (response.ok && result.success !== false) {
-                    alert('🎉 Catalog updated successfully! Product received.');
-                    window.location.href = 'products.html';
-                } else {
-                    alert('⚠️ Publish failure: ' + (result.message || 'Unknown Server Rejection'));
+                /*
+                 * Check images
+                 */
+
+                if (
+                    filesArray.length === 0
+                ) {
+
+                    alert(
+                        "Please upload at least one image file."
+                    );
+
+                    return;
                 }
-            } catch (error) {
-                console.error('Critical Network Failure:', error);
-                alert('🚫 Transmission Failed: Verify your cloud environment pipeline server route is responsive.');
+
+
+                /*
+                 * Check live backend URL
+                 */
+
+                if (
+                    backendBase ===
+                    "YOUR_RENDER_SERVICE_URL"
+                ) {
+
+                    alert(
+                        "⚠️ ShopNova cloud server is not connected yet.\n\n" +
+                        "Please enter your actual Render Web Service URL."
+                    );
+
+                    return;
+                }
+
+
+                /*
+                 * Create FormData
+                 */
+
+                const formData =
+                    new FormData();
+
+
+                formData.append(
+                    "title",
+                    document
+                        .getElementById("title")
+                        .value
+                        .trim()
+                );
+
+
+                formData.append(
+                    "price",
+                    document
+                        .getElementById("price")
+                        .value
+                );
+
+
+                formData.append(
+                    "stock",
+                    document
+                        .getElementById("stock")
+                        .value
+                );
+
+
+                formData.append(
+                    "category",
+                    document
+                        .getElementById("category")
+                        .value
+                );
+
+
+                formData.append(
+                    "description",
+                    document
+                        .getElementById("description")
+                        .value
+                        .trim()
+                );
+
+
+                /*
+                 * GPS
+                 *
+                 * These are your current values.
+                 * We can connect real browser GPS later.
+                 */
+
+                formData.append(
+                    "latitude",
+                    "16.306"
+                );
+
+
+                formData.append(
+                    "longitude",
+                    "80.436"
+                );
+
+
+                /*
+                 * Add all images
+                 */
+
+                filesArray.forEach(
+                    function(file) {
+
+                        formData.append(
+                            "images",
+                            file
+                        );
+
+                    }
+                );
+
+
+                /*
+                 * Full backend endpoint
+                 */
+
+                const endpoint =
+                    backendBase +
+                    "/add-product";
+
+
+                try {
+
+                    console.log(
+                        "ShopNova backend:",
+                        endpoint
+                    );
+
+
+                    /*
+                     * Send product
+                     */
+
+                    const response =
+                        await fetch(
+                            endpoint,
+                            {
+                                method: "POST",
+                                body: formData
+                            }
+                        );
+
+
+                    /*
+                     * Read response safely
+                     */
+
+                    const text =
+                        await response.text();
+
+
+                    let result;
+
+                    try {
+
+                        result =
+                            JSON.parse(text);
+
+                    } catch {
+
+                        result = {
+                            success: false,
+                            message:
+                                text ||
+                                "Server returned an invalid response."
+                        };
+
+                    }
+
+
+                    /*
+                     * Check response
+                     */
+
+                    if (
+                        response.ok &&
+                        result.success !== false
+                    ) {
+
+                        alert(
+                            "🎉 Catalog updated successfully!\n\n" +
+                            "Product received by ShopNova server."
+                        );
+
+
+                        /*
+                         * Clear form
+                         */
+
+                        document
+                            .getElementById("productForm")
+                            .reset();
+
+
+                        filesArray = [];
+
+                        renderPreviews();
+
+
+                        /*
+                         * Go to products page
+                         */
+
+                        window.location.href =
+                            "products.html";
+
+                    } else {
+
+                        alert(
+                            "⚠️ Publish failure:\n\n" +
+                            (
+                                result.message ||
+                                "Unknown server rejection."
+                            )
+                        );
+
+                    }
+
+                } catch (error) {
+
+                    console.error(
+                        "SHOPNOVA NETWORK ERROR:",
+                        error
+                    );
+
+
+                    alert(
+                        "🚫 Transmission Failed.\n\n" +
+                        "ShopNova could not connect to the cloud server.\n\n" +
+                        "Backend:\n" +
+                        endpoint
+                    );
+
+                }
+
             }
-        });
+        );
 
-        function renderPreviews() {
-            const previewGrid = document.getElementById('previewGrid');
-            const countDisplay = document.getElementById('imageCountDisplay');
-            
-            if (countDisplay) countDisplay.textContent = `${filesArray.length} image(s) selected`;
-            if (!previewGrid) return;
-            
-            previewGrid.innerHTML = '';
 
-            filesArray.forEach((file, index) => {
-                const card = document.createElement('div');
-                card.className = 'preview-card';
+    /*
+     * =====================================================
+     * IMAGE PREVIEWS
+     * =====================================================
+     */
 
-                const img = document.createElement('img');
-                const reader = new FileReader();
+    function renderPreviews() {
 
-                reader.onload = (e) => { img.src = e.target.result; };
-                reader.readAsDataURL(file);
+        const previewGrid =
+            document.getElementById(
+                "previewGrid"
+            );
 
-                const btn = document.createElement('button');
-                btn.className = 'remove-btn';
-                btn.innerHTML = '&times;';
-                btn.type = 'button';
-                btn.onclick = () => {
-                    filesArray.splice(index, 1);
-                    renderPreviews();
-                };
 
-                card.appendChild(img);
-                card.appendChild(btn);
-                previewGrid.appendChild(card);
-            });
+        const countDisplay =
+            document.getElementById(
+                "imageCountDisplay"
+            );
+
+
+        if (countDisplay) {
+
+            countDisplay.textContent =
+                `${filesArray.length} image(s) selected`;
+
         }
-    </script>
-</body>
-</html>
+
+
+        if (!previewGrid) {
+            return;
+        }
+
+
+        previewGrid.innerHTML = "";
+
+
+        filesArray.forEach(
+            function(file, index) {
+
+                const card =
+                    document.createElement(
+                        "div"
+                    );
+
+                card.className =
+                    "preview-card";
+
+
+                const img =
+                    document.createElement(
+                        "img"
+                    );
+
+
+                const reader =
+                    new FileReader();
+
+
+                reader.onload =
+                    function(e) {
+
+                        img.src =
+                            e.target.result;
+
+                    };
+
+
+                reader.readAsDataURL(
+                    file
+                );
+
+
+                /*
+                 * Remove button
+                 */
+
+                const btn =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                btn.className =
+                    "remove-btn";
+
+
+                btn.innerHTML =
+                    "&times;";
+
+
+                btn.type =
+                    "button";
+
+
+                btn.onclick =
+                    function() {
+
+                        filesArray.splice(
+                            index,
+                            1
+                        );
+
+                        renderPreviews();
+
+                    };
+
+
+                card.appendChild(
+                    img
+                );
+
+
+                card.appendChild(
+                    btn
+                );
+
+
+                previewGrid.appendChild(
+                    card
+                );
+
+            }
+        );
+
+    }
+</script>
