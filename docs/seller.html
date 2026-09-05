@@ -1,460 +1,1891 @@
-<script>
-    let filesArray = [];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
 
-    /*
-     * =====================================================
-     * SHOPNOVA BACKEND
-     * =====================================================
-     *
-     * LOCAL:
-     * http://localhost:5000
-     *
-     * AFTER RENDER DEPLOYMENT:
-     * Replace the RENDER URL below with YOUR actual
-     * Render Web Service URL.
-     */
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    const LOCAL_BACKEND =
-        "http://localhost:5000";
+    <title>ShopNova | Seller Panel</title>
 
-    const RENDER_BACKEND =
-        "YOUR_RENDER_SERVICE_URL";
+    <style>
+
+        /* =====================================================
+           SHOPNOVA SELLER PANEL
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f7f2ff,
+                    #ffffff
+                );
+
+            color: #222;
+            min-height: 100vh;
+        }
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .seller-header {
+            width: 100%;
+            background:
+                linear-gradient(
+                    135deg,
+                    #6a1b9a,
+                    #8e24aa,
+                    #ab47bc
+                );
+
+            color: white;
+            padding: 18px 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+
+            box-shadow:
+                0 4px 18px rgba(90, 30, 120, 0.25);
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .seller-brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .seller-brand img {
+            width: 145px;
+            max-width: 45vw;
+            height: auto;
+            display: block;
+            object-fit: contain;
+            background: white;
+            border-radius: 8px;
+            padding: 5px;
+        }
+
+        .seller-title {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .seller-title h1 {
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .seller-title p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .home-btn {
+            text-decoration: none;
+            color: #6a1b9a;
+            background: white;
+            padding: 11px 18px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 6px 15px rgba(0, 0, 0, 0.18);
+        }
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .seller-container {
+            width: min(1200px, 92%);
+            margin: 35px auto 60px;
+        }
+
+        .welcome-card {
+            background: white;
+            border-radius: 18px;
+            padding: 28px;
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 8px 30px rgba(70, 30, 100, 0.08);
+
+            border: 1px solid #eee;
+        }
+
+        .welcome-card h2 {
+            color: #6a1b9a;
+            margin-bottom: 8px;
+            font-size: 27px;
+        }
+
+        .welcome-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* =====================================================
+           GRID
+        ===================================================== */
+
+        .seller-grid {
+            display: grid;
+            grid-template-columns:
+                minmax(300px, 0.9fr)
+                minmax(400px, 1.1fr);
+
+            gap: 25px;
+            align-items: start;
+        }
+
+        /* =====================================================
+           CARD
+        ===================================================== */
+
+        .seller-card {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+
+            border: 1px solid #eee;
+
+            box-shadow:
+                0 8px 30px rgba(70, 30, 100, 0.08);
+        }
+
+        .seller-card h3 {
+            color: #6a1b9a;
+            font-size: 21px;
+            margin-bottom: 20px;
+
+            padding-bottom: 12px;
+            border-bottom: 2px solid #f0e5f7;
+        }
+
+        /* =====================================================
+           FORM
+        ===================================================== */
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 7px;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border: 1px solid #d8d8d8;
+            border-radius: 9px;
+
+            font-size: 15px;
+            font-family: inherit;
+
+            outline: none;
+
+            background: #fff;
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #8e24aa;
+
+            box-shadow:
+                0 0 0 3px rgba(142, 36, 170, 0.10);
+        }
+
+        .form-group textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        .form-group input[type="file"] {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        /* =====================================================
+           LOCATION
+        ===================================================== */
+
+        .location-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .location-row input {
+            flex: 1;
+        }
+
+        .location-btn {
+            border: none;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6a1b9a,
+                    #8e24aa
+                );
+
+            color: white;
+
+            padding: 0 16px;
+
+            border-radius: 9px;
+
+            font-weight: 700;
+            cursor: pointer;
+
+            white-space: nowrap;
+
+            transition:
+                transform 0.2s ease,
+                opacity 0.2s ease;
+        }
+
+        .location-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .location-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .coordinates {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .coordinates input {
+            background: #f7f7f7;
+            color: #555;
+        }
+
+        /* =====================================================
+           IMAGE PREVIEW
+        ===================================================== */
+
+        .image-preview {
+            width: 100%;
+            min-height: 180px;
+
+            border:
+                2px dashed #d5c0df;
+
+            border-radius: 12px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+
+            background: #faf7fc;
+
+            margin-top: 10px;
+
+            color: #888;
+            font-size: 14px;
+        }
+
+        .image-preview img {
+            width: 100%;
+            max-height: 280px;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* =====================================================
+           ADD PRODUCT BUTTON
+        ===================================================== */
+
+        .add-product-btn {
+            width: 100%;
+
+            border: none;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6a1b9a,
+                    #8e24aa,
+                    #ab47bc
+                );
+
+            color: white;
+
+            padding: 15px;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+            font-weight: 800;
+
+            cursor: pointer;
+
+            margin-top: 5px;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                opacity 0.2s ease;
+        }
+
+        .add-product-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px rgba(106, 27, 154, 0.25);
+        }
+
+        .add-product-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* =====================================================
+           MESSAGE
+        ===================================================== */
+
+        .message {
+            display: none;
+
+            margin-top: 15px;
+
+            padding: 13px 15px;
+
+            border-radius: 9px;
+
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .message.success {
+            display: block;
+
+            background: #e9f8ee;
+            color: #176b35;
+
+            border: 1px solid #b9e8c8;
+        }
+
+        .message.error {
+            display: block;
+
+            background: #fff0f0;
+            color: #a21d1d;
+
+            border: 1px solid #f2baba;
+        }
+
+        .message.info {
+            display: block;
+
+            background: #f1edff;
+            color: #5c2a91;
+
+            border: 1px solid #d8c8f3;
+        }
+
+        /* =====================================================
+           PRODUCTS
+        ===================================================== */
+
+        .products-area {
+            margin-top: 25px;
+        }
+
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .products-header h3 {
+            margin: 0;
+            border: none;
+            padding: 0;
+        }
+
+        .refresh-btn {
+            border: 1px solid #8e24aa;
+            background: white;
+            color: #6a1b9a;
+
+            padding: 9px 15px;
+
+            border-radius: 8px;
+
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .refresh-btn:hover {
+            background: #f7effa;
+        }
+
+        .product-list {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fill, minmax(210px, 1fr));
+
+            gap: 17px;
+        }
+
+        .product-item {
+            border: 1px solid #e7e0ea;
+            border-radius: 13px;
+            overflow: hidden;
+            background: white;
+
+            box-shadow:
+                0 5px 18px rgba(0, 0, 0, 0.05);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 175px;
+
+            background: #f7f7f7;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .no-image {
+            color: #999;
+            font-size: 13px;
+        }
+
+        .product-info {
+            padding: 14px;
+        }
+
+        .product-info h4 {
+            color: #333;
+            margin-bottom: 7px;
+            font-size: 16px;
+        }
+
+        .product-category {
+            display: inline-block;
+
+            background: #f2e7f7;
+            color: #6a1b9a;
+
+            padding: 4px 8px;
+
+            border-radius: 20px;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            font-size: 17px;
+            font-weight: 800;
+            color: #6a1b9a;
+
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            font-size: 12px;
+            color: #777;
+            line-height: 1.5;
+
+            margin-bottom: 12px;
+
+            min-height: 35px;
+        }
+
+        .delete-btn {
+            width: 100%;
+
+            border: none;
+
+            background: #fff0f0;
+            color: #b42323;
+
+            padding: 9px;
+
+            border-radius: 7px;
+
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background: #ffe1e1;
+        }
+
+        .empty-products {
+            text-align: center;
+
+            padding: 45px 20px;
+
+            color: #888;
+
+            border:
+                2px dashed #ddd;
+
+            border-radius: 12px;
+        }
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .seller-footer {
+            text-align: center;
+            padding: 25px 15px;
+
+            color: #777;
+            font-size: 13px;
+        }
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 850px) {
+
+            .seller-header {
+                padding: 15px 4%;
+            }
+
+            .seller-title {
+                display: none;
+            }
+
+            .seller-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .seller-container {
+                width: 94%;
+                margin-top: 22px;
+            }
+        }
+
+        @media (max-width: 550px) {
+
+            .seller-brand img {
+                width: 120px;
+            }
+
+            .home-btn {
+                padding: 9px 12px;
+                font-size: 12px;
+            }
+
+            .seller-card,
+            .welcome-card {
+                padding: 18px;
+            }
+
+            .location-row {
+                flex-direction: column;
+            }
+
+            .location-btn {
+                min-height: 44px;
+            }
+
+            .coordinates {
+                grid-template-columns: 1fr;
+            }
+
+            .products-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="seller-header">
+
+        <div class="seller-brand">
+
+            <img
+                src="images/shopnova_seller_logo.png"
+                alt="ShopNova Seller"
+                onerror="
+                    this.onerror=null;
+                    this.src='images/shopnova-header-logo.png';
+                "
+            >
+
+            <div class="seller-title">
+
+                <h1>Seller Panel</h1>
+
+                <p>
+                    Manage your ShopNova products
+                </p>
+
+            </div>
+
+        </div>
+
+        <a
+            href="index.html"
+            class="home-btn"
+        >
+            ← Back to ShopNova
+        </a>
+
+    </header>
 
 
-    /*
-     * Automatically select local or live backend
-     */
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
 
-    const backendBase =
-        window.location.hostname === "localhost" ||
-        window.location.hostname === "127.0.0.1"
-            ? LOCAL_BACKEND
-            : RENDER_BACKEND;
+    <main class="seller-container">
+
+        <section class="welcome-card">
+
+            <h2>
+                Welcome, Seller 👋
+            </h2>
+
+            <p>
+                Add and manage your products on ShopNova.
+                Upload product images, enter your business
+                location, and publish your products.
+            </p>
+
+        </section>
 
 
-    /*
-     * =====================================================
-     * IMAGE SELECTION
-     * =====================================================
-     */
+        <div class="seller-grid">
 
-    document
-        .getElementById("productImage")
-        .addEventListener(
-            "change",
-            function(e) {
+            <!-- =================================================
+                 ADD PRODUCT
+            ================================================== -->
 
-                const selectedFiles =
-                    Array.from(e.target.files);
+            <section class="seller-card">
 
-                selectedFiles.forEach(
-                    function(file) {
+                <h3>
+                    Add New Product
+                </h3>
 
-                        if (
-                            filesArray.length < 10 &&
-                            file.type.startsWith("image/")
-                        ) {
+                <form
+                    id="productForm"
+                    enctype="multipart/form-data"
+                >
 
-                            filesArray.push(file);
+                    <div class="form-group">
+
+                        <label for="productName">
+                            Product Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="productName"
+                            name="name"
+                            placeholder="Enter product name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="productPrice">
+                            Price (₹)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="productPrice"
+                            name="price"
+                            placeholder="Enter price"
+                            min="0"
+                            step="0.01"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="productCategory">
+                            Category
+                        </label>
+
+                        <select
+                            id="productCategory"
+                            name="category"
+                            required
+                        >
+
+                            <option value="">
+                                Select category
+                            </option>
+
+                            <option value="Men's Fashion">
+                                Men's Fashion
+                            </option>
+
+                            <option value="Women's Fashion">
+                                Women's Fashion
+                            </option>
+
+                            <option value="Beauty">
+                                Beauty
+                            </option>
+
+                            <option value="Electronics">
+                                Electronics
+                            </option>
+
+                            <option value="Accessories">
+                                Accessories
+                            </option>
+
+                            <option value="Books">
+                                Books
+                            </option>
+
+                            <option value="Luxury">
+                                Luxury
+                            </option>
+
+                            <option value="Fashion">
+                                Fashion
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="productDescription">
+                            Description
+                        </label>
+
+                        <textarea
+                            id="productDescription"
+                            name="description"
+                            placeholder="Enter product description"
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="productImage">
+                            Product Image
+                        </label>
+
+                        <input
+                            type="file"
+                            id="productImage"
+                            name="image"
+                            accept="image/*"
+                        >
+
+                        <div
+                            class="image-preview"
+                            id="imagePreview"
+                        >
+                            Image preview will appear here
+                        </div>
+
+                    </div>
+
+
+                    <!-- =========================================
+                         LOCATION
+                    ========================================== -->
+
+                    <div class="form-group">
+
+                        <label for="location">
+                            Business Location
+                        </label>
+
+                        <div class="location-row">
+
+                            <input
+                                type="text"
+                                id="location"
+                                name="location"
+                                placeholder="Enter business location"
+                            >
+
+                            <button
+                                type="button"
+                                id="getLocation"
+                                class="location-btn"
+                            >
+                                📍 Get My Location
+                            </button>
+
+                        </div>
+
+
+                        <div class="coordinates">
+
+                            <input
+                                type="text"
+                                id="latitude"
+                                name="latitude"
+                                placeholder="Latitude"
+                                readonly
+                            >
+
+                            <input
+                                type="text"
+                                id="longitude"
+                                name="longitude"
+                                placeholder="Longitude"
+                                readonly
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        id="addProductBtn"
+                        class="add-product-btn"
+                    >
+                        ➕ Add Product
+                    </button>
+
+                    <div
+                        id="formMessage"
+                        class="message"
+                    ></div>
+
+                </form>
+
+            </section>
+
+
+            <!-- =================================================
+                 PRODUCT LIST
+            ================================================== -->
+
+            <section class="seller-card products-area">
+
+                <div class="products-header">
+
+                    <h3>
+                        Your Products
+                    </h3>
+
+                    <button
+                        type="button"
+                        id="refreshProducts"
+                        class="refresh-btn"
+                    >
+                        ↻ Refresh
+                    </button>
+
+                </div>
+
+                <div
+                    id="productList"
+                    class="product-list"
+                >
+
+                    <div class="empty-products">
+                        Loading products...
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="seller-footer">
+
+        © 2026 ShopNova | Seller Panel
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        /* =====================================================
+           SHOPNOVA BACKEND
+        ===================================================== */
+
+        const BACKEND_URL = "http://localhost:5000";
+
+
+        /* =====================================================
+           SAFE ELEMENT HELPER
+        ===================================================== */
+
+        function getElement(id) {
+
+            return document.getElementById(id);
+
+        }
+
+
+        /* =====================================================
+           ELEMENTS
+        ===================================================== */
+
+        const productForm =
+            getElement("productForm");
+
+        const productImage =
+            getElement("productImage");
+
+        const imagePreview =
+            getElement("imagePreview");
+
+        const getLocationBtn =
+            getElement("getLocation");
+
+        const productList =
+            getElement("productList");
+
+        const refreshProductsBtn =
+            getElement("refreshProducts");
+
+        const formMessage =
+            getElement("formMessage");
+
+        const addProductBtn =
+            getElement("addProductBtn");
+
+
+        /* =====================================================
+           MESSAGE
+        ===================================================== */
+
+        function showMessage(
+            message,
+            type = "info"
+        ) {
+
+            if (!formMessage) {
+                return;
+            }
+
+            formMessage.textContent = message;
+
+            formMessage.className =
+                "message " + type;
+
+        }
+
+
+        /* =====================================================
+           IMAGE PREVIEW
+        ===================================================== */
+
+        if (productImage && imagePreview) {
+
+            productImage.addEventListener(
+                "change",
+                function () {
+
+                    const file =
+                        this.files &&
+                        this.files[0];
+
+                    if (!file) {
+
+                        imagePreview.innerHTML =
+                            "Image preview will appear here";
+
+                        return;
+                    }
+
+                    if (!file.type.startsWith("image/")) {
+
+                        imagePreview.innerHTML =
+                            "Please select an image file.";
+
+                        return;
+                    }
+
+                    const reader =
+                        new FileReader();
+
+                    reader.onload =
+                        function (event) {
+
+                            imagePreview.innerHTML =
+                                `
+                                <img
+                                    src="${event.target.result}"
+                                    alt="Product preview"
+                                >
+                                `;
+
+                        };
+
+                    reader.readAsDataURL(file);
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           GPS LOCATION
+        ===================================================== */
+
+        if (getLocationBtn) {
+
+            getLocationBtn.addEventListener(
+                "click",
+                function () {
+
+                    if (!navigator.geolocation) {
+
+                        showMessage(
+                            "Geolocation is not supported by this browser.",
+                            "error"
+                        );
+
+                        return;
+                    }
+
+                    getLocationBtn.disabled = true;
+
+                    getLocationBtn.textContent =
+                        "📍 Getting Location...";
+
+
+                    navigator.geolocation.getCurrentPosition(
+
+                        function (position) {
+
+                            const latitude =
+                                position.coords.latitude;
+
+                            const longitude =
+                                position.coords.longitude;
+
+
+                            const latitudeInput =
+                                getElement("latitude");
+
+                            const longitudeInput =
+                                getElement("longitude");
+
+                            const locationInput =
+                                getElement("location");
+
+
+                            if (latitudeInput) {
+
+                                latitudeInput.value =
+                                    latitude.toFixed(6);
+
+                            }
+
+                            if (longitudeInput) {
+
+                                longitudeInput.value =
+                                    longitude.toFixed(6);
+
+                            }
+
+
+                            if (locationInput) {
+
+                                locationInput.value =
+                                    `GPS: ${latitude.toFixed(6)}, ${longitude.toFixed(6)}`;
+
+                            }
+
+
+                            showMessage(
+                                "Business location detected successfully.",
+                                "success"
+                            );
+
+
+                            getLocationBtn.disabled =
+                                false;
+
+                            getLocationBtn.textContent =
+                                "📍 Get My Location";
+
+                        },
+
+                        function (error) {
+
+                            let message =
+                                "Unable to get your location.";
+
+                            if (error.code === 1) {
+
+                                message =
+                                    "Location permission was denied. Please allow location access.";
+
+                            } else if (error.code === 2) {
+
+                                message =
+                                    "Your location could not be determined.";
+
+                            } else if (error.code === 3) {
+
+                                message =
+                                    "Location request timed out.";
+
+                            }
+
+
+                            showMessage(
+                                message,
+                                "error"
+                            );
+
+
+                            getLocationBtn.disabled =
+                                false;
+
+                            getLocationBtn.textContent =
+                                "📍 Get My Location";
+
+                        },
+
+                        {
+                            enableHighAccuracy: true,
+                            timeout: 15000,
+                            maximumAge: 0
                         }
 
-                    }
-                );
+                    );
 
-                renderPreviews();
+                }
+            );
 
-                /*
-                 * Allow selecting the same file again
-                 */
-                this.value = "";
+        }
+
+
+        /* =====================================================
+           LOAD PRODUCTS
+        ===================================================== */
+
+        async function loadProducts() {
+
+            if (!productList) {
+                return;
             }
-        );
+
+            productList.innerHTML =
+                `
+                <div class="empty-products">
+                    Loading products...
+                </div>
+                `;
 
 
-    /*
-     * =====================================================
-     * SUBMIT PRODUCT
-     * =====================================================
-     */
+            try {
 
-    document
-        .getElementById("productForm")
-        .addEventListener(
-            "submit",
-            async function(e) {
-
-                e.preventDefault();
-
-
-                /*
-                 * Check images
-                 */
-
-                if (
-                    filesArray.length === 0
-                ) {
-
-                    alert(
-                        "Please upload at least one image file."
+                const response =
+                    await fetch(
+                        `${BACKEND_URL}/api/products`
                     );
 
-                    return;
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        `Server returned ${response.status}`
+                    );
+
                 }
 
 
+                const data =
+                    await response.json();
+
+
+                let products = data;
+
+
                 /*
-                 * Check live backend URL
+                 * Support APIs that return:
+                 * { products: [...] }
                  */
 
                 if (
-                    backendBase ===
-                    "YOUR_RENDER_SERVICE_URL"
+                    data &&
+                    Array.isArray(data.products)
                 ) {
 
-                    alert(
-                        "⚠️ ShopNova cloud server is not connected yet.\n\n" +
-                        "Please enter your actual Render Web Service URL."
-                    );
+                    products =
+                        data.products;
 
-                    return;
                 }
 
 
-                /*
-                 * Create FormData
-                 */
+                if (!Array.isArray(products)) {
 
-                const formData =
-                    new FormData();
+                    products = [];
+
+                }
 
 
-                formData.append(
-                    "title",
-                    document
-                        .getElementById("title")
-                        .value
-                        .trim()
+                displayProducts(products);
+
+            } catch (error) {
+
+                console.error(
+                    "LOAD PRODUCTS ERROR:",
+                    error
                 );
 
 
-                formData.append(
-                    "price",
-                    document
-                        .getElementById("price")
-                        .value
+                productList.innerHTML =
+                    `
+                    <div class="empty-products">
+
+                        <strong>
+                            Could not load products.
+                        </strong>
+
+                        <br><br>
+
+                        Make sure your ShopNova
+                        server is running on:
+
+                        <br>
+
+                        http://localhost:5000
+
+                    </div>
+                    `;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           DISPLAY PRODUCTS
+        ===================================================== */
+
+        function displayProducts(products) {
+
+            if (!productList) {
+                return;
+            }
+
+
+            if (!products.length) {
+
+                productList.innerHTML =
+                    `
+                    <div class="empty-products">
+
+                        No products added yet.
+
+                        <br><br>
+
+                        Add your first product
+                        using the form.
+
+                    </div>
+                    `;
+
+                return;
+
+            }
+
+
+            productList.innerHTML =
+                products
+                    .map(
+                        function (product) {
+
+                            return createProductCard(
+                                product
+                            );
+
+                        }
+                    )
+                    .join("");
+
+
+            /*
+             * Attach delete listeners after
+             * cards have been created.
+             */
+
+            const deleteButtons =
+                productList.querySelectorAll(
+                    ".delete-btn"
                 );
 
 
-                formData.append(
-                    "stock",
-                    document
-                        .getElementById("stock")
-                        .value
+            deleteButtons.forEach(
+                function (button) {
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+                            const id =
+                                this.dataset.id;
+
+                            deleteProduct(id);
+
+                        }
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           CREATE PRODUCT CARD
+        ===================================================== */
+
+        function createProductCard(product) {
+
+            const id =
+                product._id ||
+                product.id ||
+                "";
+
+
+            const name =
+                product.name ||
+                product.productName ||
+                "Unnamed Product";
+
+
+            const price =
+                Number(
+                    product.price || 0
                 );
 
 
-                formData.append(
-                    "category",
-                    document
-                        .getElementById("category")
-                        .value
+            const category =
+                product.category ||
+                "Other";
+
+
+            const description =
+                product.description ||
+                "No description available.";
+
+
+            let image =
+                product.image ||
+                product.imageUrl ||
+                product.imagePath ||
+                "";
+
+
+            /*
+             * Convert relative backend image
+             * paths into full URLs.
+             */
+
+            if (
+                image &&
+                !image.startsWith("http") &&
+                !image.startsWith("data:")
+            ) {
+
+                if (image.startsWith("/")) {
+
+                    image =
+                        BACKEND_URL + image;
+
+                } else {
+
+                    image =
+                        BACKEND_URL + "/" + image;
+
+                }
+
+            }
+
+
+            const imageHTML =
+                image
+                    ?
+                    `
+                    <img
+                        src="${escapeHTML(image)}"
+                        alt="${escapeHTML(name)}"
+                        onerror="this.style.display='none';"
+                    >
+                    `
+                    :
+                    `
+                    <span class="no-image">
+                        No image
+                    </span>
+                    `;
+
+
+            return `
+                <article class="product-item">
+
+                    <div class="product-image">
+
+                        ${imageHTML}
+
+                    </div>
+
+
+                    <div class="product-info">
+
+                        <span class="product-category">
+
+                            ${escapeHTML(category)}
+
+                        </span>
+
+
+                        <h4>
+
+                            ${escapeHTML(name)}
+
+                        </h4>
+
+
+                        <div class="product-price">
+
+                            ₹${price.toLocaleString("en-IN")}
+
+                        </div>
+
+
+                        <div class="product-description">
+
+                            ${escapeHTML(description)}
+
+                        </div>
+
+
+                        ${
+                            id
+                                ?
+                                `
+                                <button
+                                    type="button"
+                                    class="delete-btn"
+                                    data-id="${escapeHTML(String(id))}"
+                                >
+                                    🗑 Delete Product
+                                </button>
+                                `
+                                :
+                                ""
+                        }
+
+                    </div>
+
+                </article>
+            `;
+
+        }
+
+
+        /* =====================================================
+           DELETE PRODUCT
+        ===================================================== */
+
+        async function deleteProduct(id) {
+
+            if (!id) {
+
+                showMessage(
+                    "Product ID is missing.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            const confirmed =
+                window.confirm(
+                    "Are you sure you want to delete this product?"
                 );
 
 
-                formData.append(
-                    "description",
-                    document
-                        .getElementById("description")
-                        .value
-                        .trim()
+            if (!confirmed) {
+                return;
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${BACKEND_URL}/api/products/${encodeURIComponent(id)}`,
+                        {
+                            method: "DELETE"
+                        }
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        `Delete failed: ${response.status}`
+                    );
+
+                }
+
+
+                showMessage(
+                    "Product deleted successfully.",
+                    "success"
                 );
 
 
-                /*
-                 * GPS
-                 *
-                 * These are your current values.
-                 * We can connect real browser GPS later.
-                 */
+                loadProducts();
 
-                formData.append(
-                    "latitude",
-                    "16.306"
+            } catch (error) {
+
+                console.error(
+                    "DELETE PRODUCT ERROR:",
+                    error
                 );
 
 
-                formData.append(
-                    "longitude",
-                    "80.436"
+                showMessage(
+                    "Could not delete the product. Check your server.",
+                    "error"
                 );
 
+            }
 
-                /*
-                 * Add all images
-                 */
+        }
 
-                filesArray.forEach(
-                    function(file) {
 
-                        formData.append(
-                            "images",
-                            file
-                        );
+        /* =====================================================
+           ADD PRODUCT
+        ===================================================== */
+
+        if (productForm) {
+
+            productForm.addEventListener(
+                "submit",
+                async function (event) {
+
+                    event.preventDefault();
+
+
+                    if (addProductBtn) {
+
+                        addProductBtn.disabled =
+                            true;
+
+                        addProductBtn.textContent =
+                            "⏳ Adding Product...";
 
                     }
-                );
 
 
-                /*
-                 * Full backend endpoint
-                 */
-
-                const endpoint =
-                    backendBase +
-                    "/add-product";
-
-
-                try {
-
-                    console.log(
-                        "ShopNova backend:",
-                        endpoint
+                    showMessage(
+                        "Uploading product...",
+                        "info"
                     );
 
-
-                    /*
-                     * Send product
-                     */
-
-                    const response =
-                        await fetch(
-                            endpoint,
-                            {
-                                method: "POST",
-                                body: formData
-                            }
-                        );
-
-
-                    /*
-                     * Read response safely
-                     */
-
-                    const text =
-                        await response.text();
-
-
-                    let result;
 
                     try {
 
-                        result =
-                            JSON.parse(text);
-
-                    } catch {
-
-                        result = {
-                            success: false,
-                            message:
-                                text ||
-                                "Server returned an invalid response."
-                        };
-
-                    }
-
-
-                    /*
-                     * Check response
-                     */
-
-                    if (
-                        response.ok &&
-                        result.success !== false
-                    ) {
-
-                        alert(
-                            "🎉 Catalog updated successfully!\n\n" +
-                            "Product received by ShopNova server."
-                        );
+                        const formData =
+                            new FormData(
+                                productForm
+                            );
 
 
                         /*
-                         * Clear form
+                         * Send product to backend.
                          */
 
-                        document
-                            .getElementById("productForm")
-                            .reset();
+                        const response =
+                            await fetch(
+                                `${BACKEND_URL}/api/products`,
+                                {
+                                    method: "POST",
+                                    body: formData
+                                }
+                            );
 
 
-                        filesArray = [];
-
-                        renderPreviews();
+                        let result = null;
 
 
-                        /*
-                         * Go to products page
-                         */
+                        try {
 
-                        window.location.href =
-                            "products.html";
+                            result =
+                                await response.json();
 
-                    } else {
+                        } catch (jsonError) {
 
-                        alert(
-                            "⚠️ Publish failure:\n\n" +
-                            (
-                                result.message ||
-                                "Unknown server rejection."
-                            )
+                            result = null;
+
+                        }
+
+
+                        if (!response.ok) {
+
+                            const serverMessage =
+                                result &&
+                                (
+                                    result.message ||
+                                    result.error
+                                );
+
+                            throw new Error(
+                                serverMessage ||
+                                `Server returned ${response.status}`
+                            );
+
+                        }
+
+
+                        showMessage(
+                            "Product added successfully! 🎉",
+                            "success"
                         );
 
+
+                        productForm.reset();
+
+
+                        if (imagePreview) {
+
+                            imagePreview.innerHTML =
+                                "Image preview will appear here";
+
+                        }
+
+
+                        const latitudeInput =
+                            getElement("latitude");
+
+                        const longitudeInput =
+                            getElement("longitude");
+
+
+                        if (latitudeInput) {
+
+                            latitudeInput.value =
+                                "";
+
+                        }
+
+                        if (longitudeInput) {
+
+                            longitudeInput.value =
+                                "";
+
+                        }
+
+
+                        loadProducts();
+
+                    } catch (error) {
+
+                        console.error(
+                            "ADD PRODUCT ERROR:",
+                            error
+                        );
+
+
+                        showMessage(
+                            "Could not add product: " +
+                            error.message,
+                            "error"
+                        );
+
+                    } finally {
+
+                        if (addProductBtn) {
+
+                            addProductBtn.disabled =
+                                false;
+
+                            addProductBtn.textContent =
+                                "➕ Add Product";
+
+                        }
+
                     }
-
-                } catch (error) {
-
-                    console.error(
-                        "SHOPNOVA NETWORK ERROR:",
-                        error
-                    );
-
-
-                    alert(
-                        "🚫 Transmission Failed.\n\n" +
-                        "ShopNova could not connect to the cloud server.\n\n" +
-                        "Backend:\n" +
-                        endpoint
-                    );
 
                 }
-
-            }
-        );
-
-
-    /*
-     * =====================================================
-     * IMAGE PREVIEWS
-     * =====================================================
-     */
-
-    function renderPreviews() {
-
-        const previewGrid =
-            document.getElementById(
-                "previewGrid"
             );
-
-
-        const countDisplay =
-            document.getElementById(
-                "imageCountDisplay"
-            );
-
-
-        if (countDisplay) {
-
-            countDisplay.textContent =
-                `${filesArray.length} image(s) selected`;
 
         }
 
 
-        if (!previewGrid) {
-            return;
+        /* =====================================================
+           REFRESH
+        ===================================================== */
+
+        if (refreshProductsBtn) {
+
+            refreshProductsBtn.addEventListener(
+                "click",
+                loadProducts
+            );
+
         }
 
 
-        previewGrid.innerHTML = "";
+        /* =====================================================
+           ESCAPE HTML
+        ===================================================== */
 
+        function escapeHTML(value) {
 
-        filesArray.forEach(
-            function(file, index) {
-
-                const card =
-                    document.createElement(
-                        "div"
-                    );
-
-                card.className =
-                    "preview-card";
-
-
-                const img =
-                    document.createElement(
-                        "img"
-                    );
-
-
-                const reader =
-                    new FileReader();
-
-
-                reader.onload =
-                    function(e) {
-
-                        img.src =
-                            e.target.result;
-
-                    };
-
-
-                reader.readAsDataURL(
-                    file
+            return String(value)
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+                .replace(
+                    /'/g,
+                    "&#039;"
                 );
 
-
-                /*
-                 * Remove button
-                 */
-
-                const btn =
-                    document.createElement(
-                        "button"
-                    );
+        }
 
 
-                btn.className =
-                    "remove-btn";
+        /* =====================================================
+           PAGE START
+        ===================================================== */
 
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
 
-                btn.innerHTML =
-                    "&times;";
-
-
-                btn.type =
-                    "button";
-
-
-                btn.onclick =
-                    function() {
-
-                        filesArray.splice(
-                            index,
-                            1
-                        );
-
-                        renderPreviews();
-
-                    };
-
-
-                card.appendChild(
-                    img
-                );
-
-
-                card.appendChild(
-                    btn
-                );
-
-
-                previewGrid.appendChild(
-                    card
-                );
+                loadProducts();
 
             }
         );
 
-    }
-</script>
+    </script>
+
+</body>
+</html>
