@@ -1,364 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopNova | Products</title>
-
+    <title>ShopNova | Seller Panel</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: "Segoe UI", Arial, sans-serif;
-            background: #f5f9ff;
-            color: #183b68;
-        }
-
-        /* =====================================================
-           HEADER DESIGN LAYER
-        ===================================================== */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 9999;
-            background: linear-gradient(90deg, #082b5f, #0d4f91, #155da8);
-            box-shadow: 0 5px 20px rgba(0,35,90,.22);
-        }
-
-        .header-inner {
-            width: 97%;
-            max-width: 1450px;
-            min-height: 76px;
-            margin: auto;
-            display: flex;
-            align-items: center;
-            gap: 18px;
-        }
-
-        /* LOGO GRAPHICS ROUNDED BOX */
-        .brand-logo-container {
-            width: 70px;
-            height: 60px;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: white;
-            border-radius: 13px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,.18);
-        }
-
-        .brand-logo-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        /* SEARCH TRACKS */
-        .search-box {
-            height: 46px;
-            flex: 1;
-            max-width: 650px;
-            display: flex;
-            overflow: hidden;
-            background: white;
-            border: 2px solid #b9d5ff;
-            border-radius: 13px;
-        }
-
-        .search-box input {
-            flex: 1;
-            min-width: 0;
-            border: none;
-            outline: none;
-            padding: 0 17px;
-            font-size: 14px;
-        }
-
-        .search-box button {
-            width: 58px;
-            border: none;
-            background: #2464e8;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        /* NAVIGATION INTERFACE LINKS */
-        .nav-links {
-            margin-left: auto;
-            display: flex;
-            align-items: center;
-            gap: 3px;
-            white-space: nowrap;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 750;
-            padding: 10px 12px;
-            border-radius: 9px;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            background: rgba(255,255,255,.15);
-        }
-
-        .contact-btn {
-            border: none;
-            color: white;
-            background: #e83e8c;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 800;
-            padding: 10px 13px;
-            border-radius: 9px;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-
-        .contact-btn:hover {
-            background: #d72f7c;
-            transform: translateY(-1px);
-        }
-
-        #cartCount {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 20px;
-            height: 20px;
-            padding: 0 5px;
-            margin-left: 3px;
-            border-radius: 50%;
-            background: #ef4444;
-            color: white;
-            font-size: 10px;
-            font-weight: 900;
-        }
-
-        /* =====================================================
-           HERO BANNER LAYOUT
-        ===================================================== */
-        .hero {
-            padding: 50px 20px;
-            text-align: center;
-            background: linear-gradient(135deg, #dcecff, #acd3f7, #7db7e7);
-        }
-
-        .hero h1 {
-            color: #0a2856;
-            font-size: clamp(38px,6vw,65px);
-            font-weight: 950;
-            margin-bottom: 12px;
-        }
-
-        .hero p {
-            color: #28577e;
-            font-size: 15px;
-        }
-
-        /* =====================================================
-           CATALOG ITEMS DISPLAY GRID CONTAINER
-        ===================================================== */
-        .products-container {
-            width: 94%;
-            max-width: 1300px;
-            margin: 35px auto 50px;
-        }
-
-        .products-title {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .products-title h2 {
-            color: #123e70;
-            font-size: 30px;
-            font-weight: 900;
-        }
-
-        .products-title p {
-            color: #70859c;
-            margin-top: 5px;
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 22px;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 17px;
-            overflow: hidden;
-            border: 1px solid #dce7f4;
-            box-shadow: 0 8px 25px rgba(25, 70, 115, .10);
-            transition: transform .25s ease, box-shadow .25s ease;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-
-        .product-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 15px 35px rgba(25, 70, 115, .18);
-        }
-
-        /* =====================================================
-           AMAZON / FLIPKART STYLE SWIPEABLE SCROLLING MECHANICS
-        ===================================================== */
-        .product-image {
-            display: flex !important;
-            overflow-x: auto !important;
-            scroll-snap-type: x mandatory !important;
-            scroll-behavior: smooth;
-            width: 100%;
-            height: 320px;
-            background: #f3f7fc;
-            position: relative;
-        }
-
-        /* Hide the horizontal scrollbar tracks for clear user interfaces */
-        .product-image::-webkit-scrollbar {
-            display: none;
-        }
-
-        .product-image img {
-            width: 100% !important;
-            height: 100% !important;
-            flex-shrink: 0 !important;
-            scroll-snap-align: start !important;
-            object-fit: contain;
-            background: #f3f7fc;
-            padding: 10px;
-        }
-
-        /* Swipe label hint bubble overlay layout */
-        .scroll-hint-badge {
-            position: absolute;
-            bottom: 12px;
-            right: 12px;
-            background: rgba(8, 43, 95, 0.75);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 20px;
-            font-size: 10px;
-            font-weight: bold;
-            pointer-events: none;
-            z-index: 10;
-            letter-spacing: 0.5px;
-        }
-
-        .product-info-wrap {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-            background: white;
-            border-top: 1px solid #edf4fc;
-        }
-
-        .product-info-wrap h3 {
-            color: #0a2856;
-            font-size: 18px;
-            font-weight: 800;
-            margin-bottom: 6px;
-        }
-
-        .product-info-wrap .category-label {
-            color: #70859c;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 10px;
-        }
-
-        .product-info-wrap .description-text {
-            color: #56708e;
-            font-size: 14px;
-            line-height: 1.5;
-            margin-bottom: 15px;
-            word-wrap: break-word;
-        }
-
-        .product-meta-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: auto;
-            padding-top: 15px;
-            border-top: 1px dashed #e4edf7;
-        }
-
-        .price-tag {
-            font-size: 22px;
-            font-weight: 800;
-            color: #00798c;
-        }
-
-        .add-cart-btn {
-            padding: 10px 18px;
-            background: #2464e8;
-            color: white;
-            border: none;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 13px;
-        }
-
-        .add-cart-btn:hover {
-            background: #124ec4;
-        }
-
-        .no-products {
-            text-align: center;
-            font-size: 18px;
-            color: #70859c;
-            grid-column: 1 / -1;
-            padding: 50px 0;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Segoe UI", Arial, sans-serif; background: #eaf4ff; color: #183b68; padding: 20px; }
+        .seller-card { background: white; border-radius: 20px; padding: 30px; max-width: 800px; margin: auto; box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
+        .section-title { font-size: 20px; font-weight: 900; margin: 20px 0 10px; border-bottom: 2px solid #e4edf7; padding-bottom: 5px; }
+        .form-group { display: flex; flex-direction: column; margin-bottom: 15px; }
+        label { font-size: 13px; font-weight: 800; margin-bottom: 5px; }
+        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #cbdced; border-radius: 10px; outline: none; }
+        input:focus, select:focus, textarea:focus { border-color: #3280e8; }
+        .image-box { padding: 20px; border: 2px dashed #b9d5ef; background: #f8fbff; border-radius: 12px; text-align: center; }
+        .select-image-button { display: inline-block; padding: 12px 20px; background: #1767d8; color: white; font-weight: bold; border-radius: 10px; cursor: pointer; }
+        #productImage { display: none; }
+        .image-preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; margin-top: 15px; }
+        .preview-card { position: relative; border: 1px solid #d9e6f3; border-radius: 8px; overflow: hidden; background: #eef5fc; }
+        .preview-card img { width: 100%; height: 100px; object-fit: cover; }
+        .remove-btn { position: absolute; top: 5px; right: 5px; background: red; color: white; border: none; border-radius: 50%; width: 20px; height: 20px; cursor: pointer; font-weight: bold; }
+        .submit-btn { width: 100%; padding: 16px; background: #00798c; color: white; font-size: 16px; font-weight: bold; border: none; border-radius: 10px; cursor: pointer; margin-top: 20px; }
     </style>
 </head>
-
 <body>
-
-    <header>
-        <div class="header-inner">
-            <div class="brand-logo-container">
-                <img src="https://ibb.co" alt="ShopNova Logo" onerror="this.src='https://placeholder.com'">
+    <div class="seller-card">
+        <h1>Seller Panel</h1>
+        <form id="productForm">
+            <div class="section-title">Product Information</div>
+            <div class="form-group">
+                <label>Product Title *</label>
+                <input type="text" id="title" required>
+            </div>
+            <div class="form-group">
+                <label>Price ($) *</label>
+                <input type="number" id="price" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label>Stock Quantity *</label>
+                <input type="number" id="stock" required>
+            </div>
+            <div class="form-group">
+                <label>Category *</label>
+                <select id="category" required>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Clothing">Clothing</option>
+                    <option value="Home & Kitchen">Home & Kitchen</option>
+                    <option value="Books">Books</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea id="description"></textarea>
             </div>
 
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Search premium items custom catalogs...">
-                <button onclick="triggerSearch()">🔍</button>
+            <div class="section-title">Product Media</div>
+            <div class="image-box">
+                <label for="productImage" class="select-image-button">Select Images</label>
+                <input type="file" id="productImage" accept="image/*" multiple>
+                <div id="imageCountDisplay" style="margin-top: 10px; font-weight: bold;">0 images selected</div>
+                <div class="image-preview-grid" id="previewGrid"></div>
             </div>
 
-            <nav class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="products.html" class="active">Products</a>
-                <a href="#">Cart <span id="cartCount">0</span></a>
-                <a href="seller.html">Seller</a>
-            </nav>
+            <button type="submit" class="submit-btn">Publish Product Catalog</button>
+        </form>
+    </div>
 
-            <button class="contact-btn">Contact</button>
-        </div>
-    </header>
+    <script>
+        let filesArray = [];
 
-    <section class="hero">
-        <h1>Discover ShopNova</h1>
-        <p>Explore your premium product catalogs engineered live from the cloud marketplace ecosystem</p>
-    </section>
+        document.getElementById('productImage').addEventListener('change', function(e) {
+            const selectedFiles = Array.from(e.target.files);
+            selectedFiles.forEach(file => {
+                // Matches our backend layout limit of 6 total images cleanly
+                if (filesArray.length < 6 && file.type.startsWith('image/')) {
+                    filesArray.push(file);
+                }
+            });
+            renderPreviews();
+            this.value = '';
+        });
 
-    <main class="products-container">
+        document.getElementById('productForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            if (filesArray.length === 0) {
+                alert('Please upload at least one image file.');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('title', document.getElementById('title').value.trim());
+            formData.append('price', document.getElementById('price').value);
+            formData.append('stock', document.getElementById('stock').value);
+            formData.append('category', document.getElementById('category').value);
+            formData.append('description', document.getElementById('description')?.value.trim() || "");
+
+            // Appends file chunks directly to our secure array key structure 'images'
+            filesArray.forEach((file) => {
+                formData.append('images', file);
+            });
+
+            try {
+                // FIXED: Hardcoded live internet production router target address connection path
+                const backendUrl = 'https://onrender.com';
+
+                const response = await fetch(backendUrl, {
+                    method: 'POST',
+                    body: formData 
+                });
+
+                const result = await response.json();
+
+                // FIXED: Evaluates HTTP status validation maps natively without property dependency bugs
+                if (response.ok || response.status === 201) {
+                    alert('🎉 Catalog updated successfully! Product received.');
+                    window.location.href = 'products.html'; 
+                } else {
+                    alert('⚠️ Publish failure: ' + (result.error || result.message || 'Unknown Server Rejection'));
+                }
+            } catch (error) {
+                console.error('Critical Network Failure Error Trace Logs:', error);
+                alert('🚫 Transmission Failed: Verify your cloud environment pipeline server route is responsive.');
+            }
+        });
+
+        function renderPreviews() {
+            const previewGrid = document.getElementById('previewGrid');
+            const countDisplay = document.getElementById('imageCountDisplay');
+            
+            if (countDisplay) countDisplay.textContent = `${filesArray.length} image(s) selected`;
+            if (!previewGrid) return;
+            
+            previewGrid.innerHTML = '';
+
+            filesArray.forEach((file, index) => {
+                const card = document.createElement('div');
+                card.className = 'preview-card';
+
+                const img = document.createElement('img');
+                const reader = new FileReader();
+
+                reader.onload = (e) => { img.src = e.target.result; };
+                reader.readAsDataURL(file);
+
+                const btn = document.createElement('button');
+                btn.className = 'remove-btn';
+                btn.innerHTML = '&times;';
+                btn.type = 'button';
+                btn.onclick = () => {
+                    filesArray.splice(index, 1);
+                    renderPreviews();
+                };
+
+                card.appendChild(img);
+                card.appendChild(btn);
+                previewGrid.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>
