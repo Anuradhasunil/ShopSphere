@@ -105,7 +105,7 @@ body {
 }
 
 /* ==============================
-   GRID
+   GRID LAYOUT
 ============================== */
 .seller-grid {
     display: grid;
@@ -113,14 +113,14 @@ body {
     gap: 25px;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 900px) {
     .seller-grid {
         grid-template-columns: 1fr;
     }
 }
 
 /* ==============================
-   CARD
+   CARD PANELS
 ============================== */
 .seller-card {
     background: white;
@@ -139,7 +139,7 @@ body {
 }
 
 /* ==============================
-   FORM
+   FORM LOGIC FIELDS
 ============================== */
 .form-group {
     margin-bottom: 17px;
@@ -180,7 +180,7 @@ body {
 }
 
 /* ==============================
-   MULTIPLE IMAGE UPLOAD
+   IMAGE THUMBNAILS GRID
 ============================== */
 .image-help {
     margin-top: 7px;
@@ -224,7 +224,7 @@ body {
 }
 
 /* ==============================
-   LOCATION
+   GEOLOCATION
 ============================== */
 .location-row {
     display: flex;
@@ -264,7 +264,7 @@ body {
 }
 
 /* ==============================
-   ADD BUTTON
+   SUBMIT BUTTON & RESPONSE BANNERS
 ============================== */
 .add-product-btn {
     width: 100%;
@@ -277,6 +277,7 @@ body {
     font-weight: 800;
     cursor: pointer;
     transition: 0.2s;
+    margin-top: 10px;
 }
 
 .add-product-btn:hover {
@@ -284,9 +285,6 @@ body {
     box-shadow: 0 8px 20px rgba(8,43,99,0.25);
 }
 
-/* ==============================
-   MESSAGE BANNER
-============================== */
 .message {
     display: none;
     margin-top: 15px;
@@ -301,19 +299,13 @@ body {
 .message.info { display: block; background: #eef6ff; color: #145a96; border: 1px solid #c8e1fa; }
 
 /* ==============================
-   PRODUCTS CATALOG MANAGEMENT
+   INVENTORY GRID
 ============================== */
 .products-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 18px;
-}
-
-.products-header h3 {
-    margin: 0;
-    border: none;
-    padding: 0;
 }
 
 .refresh-btn {
@@ -324,10 +316,6 @@ body {
     border-radius: 8px;
     font-weight: bold;
     cursor: pointer;
-}
-
-.refresh-btn:hover {
-    background: #edf7ff;
 }
 
 .product-list {
@@ -348,10 +336,8 @@ body {
 
 .product-image {
     width: 100%;
-    height: 175px;
+    height: 160px;
     background: #f3f8fd;
-    overflow: hidden;
-    position: relative;
 }
 
 .product-image img {
@@ -362,70 +348,34 @@ body {
 
 .product-info {
     padding: 14px;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
 }
 
-.product-info h4 {
-    color: #1d2b3f;
-    margin-bottom: 7px;
-    font-size: 16px;
-}
-
-.product-category {
-    display: inline-block;
-    background: #e8f3ff;
-    color: #07599c;
-    padding: 4px 8px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: bold;
-    margin-bottom: 8px;
-    align-self: flex-start;
-}
-
-.product-price {
-    font-size: 17px;
-    font-weight: 800;
-    color: #0b4d8b;
-    margin-bottom: 10px;
-}
-
-.product-description {
-    font-size: 12px;
-    color: #718096;
-    line-height: 1.5;
-    margin-bottom: 12px;
-    flex-grow: 1;
-}
+.product-info h4 { color: #1d2b3f; margin-bottom: 4px; font-size: 15px; }
+.product-category { display: inline-block; background: #e8f3ff; color: #07599c; padding: 3px 8px; border-radius: 20px; font-size: 10px; font-weight: bold; margin-bottom: 8px; align-self: flex-start; }
+.product-price { font-size: 16px; font-weight: 800; color: #0b4d8b; margin-bottom: 6px; }
+.product-description { font-size: 12px; color: #718096; line-height: 1.4; margin-bottom: 12px; flex-grow: 1; }
 
 .delete-btn {
     width: 100%;
+    padding: 8px;
     background: #fff1f1;
-    color: #b91c1c;
-    border: 1px solid #fca5a5;
-    padding: 8px 12px;
+    color: #c53030;
+    border: 1px solid #fed7d7;
     border-radius: 6px;
-    font-weight: 600;
-    font-size: 13px;
+    font-weight: bold;
+    font-size: 12px;
     cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
+    transition: 0.2s;
+    margin-top: auto;
 }
-
-.delete-btn:hover {
-    background: #fee2e2;
-    color: #991b1b;
-}
+.delete-btn:hover { background: #fee2e2; color: #991b1b; }
 </style>
 </head>
 <body>
 
-    <!-- Header Block -->
     <header class="seller-header">
         <div class="seller-brand">
             <img src="images/shopnova-blog-logo.jpg" alt="ShopNova Logo" onerror="this.src='images/shopnova-blog-logo-jpg'">
@@ -438,14 +388,13 @@ body {
     </header>
 
     <div class="seller-container">
-        <!-- Dashboard Card -->
         <div class="welcome-card">
             <h2>Welcome, Seller 👋</h2>
             <p>Add your products to ShopNova with clear images, accurate information, and your business location. ShopNova is committed to a safe, friendly and environmentally responsible shopping experience.</p>
         </div>
 
         <div class="seller-grid">
-            <!-- Upload Management Panel -->
+            <!-- Add New Product Form Section -->
             <div class="seller-card">
                 <h3>Add New Product</h3>
                 <form id="productForm" enctype="multipart/form-data">
@@ -464,3 +413,11 @@ body {
                         <select id="pCategory" name="category" required>
                             <option value="" disabled selected>Select category</option>
                             <option value="Electronics">Electronics</option>
+                            <option value="Fashion">Fashion</option>
+                            <option value="Wearables">Wearables</option>
+                            <option value="Home Essentials">Home Essentials</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pDesc">Description *</label>
