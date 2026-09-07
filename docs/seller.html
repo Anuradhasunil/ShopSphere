@@ -78,7 +78,7 @@ body {
 }
 
 /* ==============================
-   CONTAINER
+   CONTAINER & GRID LAYOUT
 ============================== */
 .seller-container {
     width: min(1200px, 92%);
@@ -104,12 +104,9 @@ body {
     line-height: 1.6;
 }
 
-/* ==============================
-   GRID LAYOUT
-============================== */
 .seller-grid {
     display: grid;
-    grid-template-columns: minmax(300px, 0.9fr) minmax(400px, 1.1fr);
+    grid-template-columns: minmax(320px, 1fr) minmax(400px, 1.2fr);
     gap: 25px;
 }
 
@@ -128,6 +125,7 @@ body {
     padding: 25px;
     border: 1px solid #dcecff;
     box-shadow: 0 8px 30px rgba(20, 70, 120, 0.08);
+    height: fit-content;
 }
 
 .seller-card h3 {
@@ -180,7 +178,7 @@ body {
 }
 
 /* ==============================
-   IMAGE THUMBNAILS GRID
+   IMAGE PREVIEWS
 ============================== */
 .image-help {
     margin-top: 7px;
@@ -224,7 +222,7 @@ body {
 }
 
 /* ==============================
-   GEOLOCATION
+   LOCATION HANDLERS
 ============================== */
 .location-row {
     display: flex;
@@ -264,7 +262,7 @@ body {
 }
 
 /* ==============================
-   SUBMIT BUTTON & RESPONSE BANNERS
+   BUTTON & INVENTORY ITEMS STYLE
 ============================== */
 .add-product-btn {
     width: 100%;
@@ -298,9 +296,6 @@ body {
 .message.error { display: block; background: #fff1f1; color: #a32121; border: 1px solid #efc0c0; }
 .message.info { display: block; background: #eef6ff; color: #145a96; border: 1px solid #c8e1fa; }
 
-/* ==============================
-   INVENTORY GRID
-============================== */
 .products-header {
     display: flex;
     justify-content: space-between;
@@ -394,7 +389,7 @@ body {
         </div>
 
         <div class="seller-grid">
-            <!-- Add New Product Form Section -->
+            <!-- Add New Product Input Block -->
             <div class="seller-card">
                 <h3>Add New Product</h3>
                 <form id="productForm" enctype="multipart/form-data">
@@ -421,3 +416,7 @@ body {
 
                     <div class="form-group">
                         <label for="pDesc">Description *</label>
+                        <textarea id="pDesc" name="description" placeholder="Enter product description" required></textarea>
+                    </div>
+
+                    <div class="form-group">
