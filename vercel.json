@@ -12,8 +12,12 @@
   ],
   "routes": [
     {
-      "src": "/add-product",
+      "src": "/api/(.*)",
       "dest": "server.js"
+    },
+    {
+      "src": "/(css|js|images|uploads)/(.*)",
+      "dest": "docs/$1/$2"
     },
     {
       "src": "/(.*)",
