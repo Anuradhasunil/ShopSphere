@@ -3,8 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>ShopNova | Seller Panel</title>
+
 <style>
+
 * {
     margin: 0;
     padding: 0;
@@ -18,18 +21,17 @@ body {
     min-height: 100vh;
 }
 
-/* ==============================
-   HEADER
-============================== */
+/* ================= HEADER ================= */
+
 .seller-header {
     background: linear-gradient(135deg, #071a3d, #0b2d63, #164b8f);
     color: white;
-    padding: 17px 5%;
+    padding: 16px 5%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    box-shadow: 0 5px 20px rgba(7, 26, 61, 0.25);
+    box-shadow: 0 5px 20px rgba(7,26,61,.25);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -44,7 +46,7 @@ body {
 .seller-brand img {
     width: 145px;
     max-width: 42vw;
-    height: auto;
+    height: 55px;
     background: white;
     padding: 5px;
     border-radius: 8px;
@@ -58,7 +60,7 @@ body {
 
 .seller-title p {
     font-size: 13px;
-    opacity: 0.9;
+    opacity: .9;
 }
 
 .home-btn {
@@ -69,17 +71,16 @@ body {
     border-radius: 8px;
     font-weight: bold;
     font-size: 14px;
-    transition: 0.2s;
+    transition: .2s;
 }
 
 .home-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 15px rgba(0,0,0,.2);
 }
 
-/* ==============================
-   CONTAINER & GRID LAYOUT
-============================== */
+/* ================= CONTAINER ================= */
+
 .seller-container {
     width: min(1200px, 92%);
     margin: 35px auto 60px;
@@ -91,7 +92,7 @@ body {
     padding: 28px;
     margin-bottom: 25px;
     border: 1px solid #dcecff;
-    box-shadow: 0 8px 30px rgba(20, 70, 120, 0.08);
+    box-shadow: 0 8px 30px rgba(20,70,120,.08);
 }
 
 .welcome-card h2 {
@@ -106,26 +107,34 @@ body {
 
 .seller-grid {
     display: grid;
-    grid-template-columns: minmax(320px, 1fr) minmax(400px, 1.2fr);
+    grid-template-columns: 1fr 1fr;
     gap: 25px;
 }
 
-@media (max-width: 900px) {
+@media(max-width:900px) {
+
     .seller-grid {
         grid-template-columns: 1fr;
     }
+
+    .seller-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .home-btn {
+        align-self: flex-start;
+    }
 }
 
-/* ==============================
-   CARD PANELS
-============================== */
+/* ================= CARD ================= */
+
 .seller-card {
     background: white;
     border-radius: 18px;
     padding: 25px;
     border: 1px solid #dcecff;
-    box-shadow: 0 8px 30px rgba(20, 70, 120, 0.08);
-    height: fit-content;
+    box-shadow: 0 8px 30px rgba(20,70,120,.08);
 }
 
 .seller-card h3 {
@@ -136,9 +145,8 @@ body {
     border-bottom: 2px solid #e4f0ff;
 }
 
-/* ==============================
-   FORM LOGIC FIELDS
-============================== */
+/* ================= FORM ================= */
+
 .form-group {
     margin-bottom: 17px;
 }
@@ -162,14 +170,13 @@ body {
     outline: none;
     font-family: inherit;
     background: white;
-    transition: 0.2s;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
     border-color: #2878c8;
-    box-shadow: 0 0 0 3px rgba(40,120,200,0.10);
+    box-shadow: 0 0 0 3px rgba(40,120,200,.10);
 }
 
 .form-group textarea {
@@ -177,134 +184,209 @@ body {
     resize: vertical;
 }
 
-/* ==============================
-   AMAZON / FLIPKART STYLE SLIDER PREVIEW
-============================== */
-.slider-container {
-    position: relative;
-    width: 100%;
-    height: 220px;
-    background: #f8fafc;
+/* ================= PRICE STOCK ================= */
+
+.two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+@media(max-width:500px) {
+    .two-column {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ================= IMAGE UPLOAD ================= */
+
+.upload-box {
+    border: 2px dashed #2878c8;
+    background: #f5faff;
     border-radius: 12px;
-    border: 1px dashed #cbd5e1;
-    margin-top: 10px;
-    display: none;
-    overflow: hidden;
-}
-
-.slider-track {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.3s ease-in-out;
-}
-
-.slider-slide {
-    min-width: 100%;
-    height: 100%;
-    position: relative;
-}
-
-.slider-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    background: #f1f5f9;
-}
-
-.slider-tag {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background: rgba(15, 23, 42, 0.75);
-    color: white;
-    font-size: 11px;
-    font-weight: bold;
-    padding: 4px 10px;
-    border-radius: 20px;
-}
-
-.slider-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid #cbd5e1;
-    color: #0f172a;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
+    padding: 25px;
+    text-align: center;
     cursor: pointer;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    z-index: 10;
+    transition: .2s;
 }
-.slider-btn:hover { background: white; }
-.slider-btn.prev { left: 10px; }
-.slider-btn.next { right: 10px; }
 
-/* ==============================
-   LOCATION HANDLERS
-============================== */
-.location-row {
-    display: flex;
+.upload-box:hover {
+    background: #eaf5ff;
+    border-color: #07599c;
+}
+
+.upload-icon {
+    font-size: 38px;
+    margin-bottom: 8px;
+}
+
+.upload-title {
+    color: #0b4d8b;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.upload-subtitle {
+    color: #718096;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+#productImage {
+    display: none;
+}
+
+/* IMAGE COUNTER */
+
+.image-count {
+    margin-top: 10px;
+    background: #eef6ff;
+    color: #145a96;
+    border: 1px solid #c8e1fa;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 13px;
+    text-align: center;
+}
+
+/* ================= IMAGE PREVIEW ================= */
+
+.preview-area {
+    display: none;
+    margin-top: 15px;
+}
+
+.preview-area.active {
+    display: block;
+}
+
+.preview-title {
+    font-weight: bold;
+    color: #24324a;
+    margin-bottom: 10px;
+}
+
+.preview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
 }
 
-.location-row input {
-    flex: 1;
+.preview-item {
+    position: relative;
+    height: 110px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #f1f5f9;
+    border: 1px solid #dce6f0;
 }
 
-.location-btn {
+.preview-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.remove-image {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 25px;
+    height: 25px;
     border: none;
-    background: linear-gradient(135deg, #082b63, #1764aa);
+    border-radius: 50%;
+    background: #dc2626;
     color: white;
-    padding: 0 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.image-number {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    background: rgba(0,0,0,.7);
+    color: white;
+    padding: 3px 7px;
+    border-radius: 5px;
+    font-size: 10px;
+}
+
+/* ================= GPS ================= */
+
+.gps-box {
+    background: #f5faff;
+    border: 1px solid #d7e9fb;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.gps-button {
+    width: 100%;
+    border: none;
+    background: linear-gradient(135deg,#082b63,#1764aa);
+    color: white;
+    padding: 13px;
     border-radius: 9px;
     font-weight: bold;
     cursor: pointer;
-    white-space: nowrap;
-    transition: 0.2s;
+    font-size: 14px;
+    transition: .2s;
 }
 
-.location-btn:hover { transform: translateY(-1px); }
+.gps-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(8,43,99,.2);
+}
+
+.gps-status {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #64748b;
+    text-align: center;
+}
 
 .coordinates {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
-    margin-top: 10px;
+    margin-top: 12px;
 }
 
 .coordinates input {
-    background: #f5f9fd;
+    background: #f1f5f9;
     color: #64748b;
 }
 
-/* ==============================
-   BUTTON & INVENTORY ITEMS STYLE
-============================== */
+/* ================= ADD BUTTON ================= */
+
 .add-product-btn {
     width: 100%;
     border: none;
-    background: linear-gradient(135deg, #082b63, #1764aa, #2388d4);
+    background: linear-gradient(135deg,#082b63,#1764aa,#2388d4);
     color: white;
-    padding: 15px;
+    padding: 16px;
     border-radius: 10px;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 800;
     cursor: pointer;
-    transition: 0.2s;
-    margin-top: 20px;
+    transition: .2s;
+    margin-top: 10px;
 }
 
 .add-product-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(8,43,99,0.25);
+    box-shadow: 0 8px 20px rgba(8,43,99,.25);
 }
+
+.add-product-btn:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ================= MESSAGE ================= */
 
 .message {
     display: none;
@@ -315,14 +397,30 @@ body {
     font-weight: bold;
 }
 
-.message.success { display: block; background: #eaf8f0; color: #176b3a; border: 1px solid #bce7ca; }
-.message.error { display: block; background: #fff1f1; color: #a32121; border: 1px solid #efc0c0; }
-.message.info { display: block; background: #eef6ff; color: #145a96; border: 1px solid #c8e1fa; }
+.message.success {
+    display: block;
+    background: #eaf8f0;
+    color: #176b3a;
+    border: 1px solid #bce7ca;
+}
 
-/* ==============================
-   INVENTORY CATALOG SLIDER PANELS
-============================== */
-.products-header {
+.message.error {
+    display: block;
+    background: #fff1f1;
+    color: #a32121;
+    border: 1px solid #efc0c0;
+}
+
+.message.info {
+    display: block;
+    background: #eef6ff;
+    color: #145a96;
+    border: 1px solid #c8e1fa;
+}
+
+/* ================= INVENTORY ================= */
+
+.inventory-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -339,9 +437,20 @@ body {
     cursor: pointer;
 }
 
+.empty-products {
+    text-align: center;
+    padding: 40px 20px;
+    color: #64748b;
+}
+
+.empty-products div {
+    font-size: 45px;
+    margin-bottom: 10px;
+}
+
 .product-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    grid-template-columns: repeat(auto-fill,minmax(210px,1fr));
     gap: 17px;
 }
 
@@ -350,103 +459,1135 @@ body {
     border-radius: 13px;
     overflow: hidden;
     background: white;
-    box-shadow: 0 5px 18px rgba(0,0,0,0.05);
-    display: flex;
-    flex-direction: column;
+    box-shadow: 0 5px 18px rgba(0,0,0,.05);
 }
 
-.product-image-container {
-    position: relative;
+.product-image {
     width: 100%;
     height: 160px;
-    background: #f1f5f9;
-    overflow: hidden;
-}
-
-.product-image-track {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.2s ease;
-}
-
-.product-image-track img {
-    min-width: 100%;
-    height: 100%;
     object-fit: cover;
+    background: #f1f5f9;
 }
-
-.mini-nav-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255,255,255,0.85);
-    border: none;
-    color: #334155;
-    width: 22px;
-    height: 22px;
-    font-size: 10px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 5;
-}
-.mini-nav-btn.left { left: 5px; }
-.mini-nav-btn.right { right: 5px; }
 
 .product-info {
     padding: 14px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
 }
 
-.product-info h4 { color: #1d2b3f; margin-bottom: 4px; font-size: 15px; }
-.product-category { display: inline-block; background: #e8f3ff; color: #07599c; padding: 3px 8px; border-radius: 20px; font-size: 10px; font-weight: bold; margin-bottom: 8px; align-self: flex-start; }
-.product-price { font-size: 16px; font-weight: 800; color: #0b4d8b; margin-bottom: 6px; }
-.product-description { font-size: 12px; color: #718096; line-height: 1.4; margin-bottom: 12px; flex-grow: 1; }
+.product-info h4 {
+    color: #1d2b3f;
+    margin-bottom: 5px;
+}
+
+.product-price {
+    font-size: 16px;
+    font-weight: 800;
+    color: #0b4d8b;
+    margin: 7px 0;
+}
+
+.product-stock {
+    font-size: 12px;
+    color: #64748b;
+}
 
 .delete-btn {
     width: 100%;
-    padding: 8px;
+    padding: 9px;
+    margin-top: 12px;
     background: #fff1f1;
     color: #c53030;
     border: 1px solid #fed7d7;
     border-radius: 6px;
     font-weight: bold;
-    font-size: 12px;
     cursor: pointer;
-    transition: 0.2s;
-    margin-top: auto;
 }
-.delete-btn:hover { background: #fee2e2; color: #991b1b; }
+
+.delete-btn:hover {
+    background: #fee2e2;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:600px) {
+
+    .seller-container {
+        width: 94%;
+        margin-top: 20px;
+    }
+
+    .seller-card {
+        padding: 18px;
+    }
+
+    .seller-brand img {
+        width: 110px;
+    }
+
+    .seller-title h1 {
+        font-size: 18px;
+    }
+
+    .preview-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .coordinates {
+        grid-template-columns: 1fr;
+    }
+}
+
 </style>
 </head>
+
 <body>
 
-    <header class="seller-header">
-        <div class="seller-brand">
-            <img src="images/shopnova-blog-logo.jpg" alt="ShopNova Logo" onerror="this.src='images/shopnova-blog-logo-jpg'">
-            <div class="seller-title">
-                <h1>Seller Panel</h1>
-                <p>Manage your ShopNova products</p>
-            </div>
-        </div>
-        <a href="products.html" class="home-btn">← Back to ShopNova</a>
-    </header>
+<!-- ================= HEADER ================= -->
 
-    <div class="seller-container">
-        <div class="welcome-card">
-            <h2>Welcome, Seller 👋</h2>
-            <p>Add your products to ShopNova with clear images, accurate information, and your business location. ShopNova is committed to a safe, friendly and environmentally responsible shopping experience.</p>
+<header class="seller-header">
+
+    <div class="seller-brand">
+
+        <img
+            src="images/shopnova-blog-logo.jpg"
+            alt="ShopNova Logo"
+            onerror="this.style.display='none'"
+        >
+
+        <div class="seller-title">
+            <h1>Seller Panel</h1>
+            <p>Manage your ShopNova products</p>
         </div>
 
-        <div class="seller-grid">
-            <!-- Add New Product Form Section (100% Repaired Tags Layout) -->
-            <div class="seller-card">
-                <h3>Add New Product</h3>
-                <form id="productForm" enctype="multipart/form-data">
+    </div>
+
+    <a href="products.html" class="home-btn">
+        ← Back to ShopNova
+    </a>
+
+</header>
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="seller-container">
+
+    <div class="welcome-card">
+
+        <h2>Welcome, Seller 👋</h2>
+
+        <p>
+            Add your products to ShopNova with multiple product images,
+            accurate information and your business location.
+        </p>
+
+    </div>
+
+
+    <div class="seller-grid">
+
+
+        <!-- ================= ADD PRODUCT ================= -->
+
+        <div class="seller-card">
+
+            <h3>➕ Add New Product</h3>
+
+            <form id="productForm" enctype="multipart/form-data">
+
+
+                <!-- PRODUCT NAME -->
+
+                <div class="form-group">
+
+                    <label for="pName">
+                        Product Name *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="pName"
+                        name="title"
+                        placeholder="Enter product name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PRICE + STOCK -->
+
+                <div class="two-column">
+
                     <div class="form-group">
-                        <label for="pName">Product Name *</label>
+
+                        <label for="pPrice">
+                            Price (₹) *
+                        </label>
+
+                        <input
+                            type="number"
+                            id="pPrice"
+                            name="price"
+                            min="0"
+                            step="0.01"
+                            placeholder="799"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="pStock">
+                            Stock *
+                        </label>
+
+                        <input
+                            type="number"
+                            id="pStock"
+                            name="stock"
+                            min="0"
+                            placeholder="50"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- CATEGORY -->
+
+                <div class="form-group">
+
+                    <label for="pCategory">
+                        Category *
+                    </label>
+
+                    <select
+                        id="pCategory"
+                        name="category"
+                        required
+                    >
+
+                        <option value="">
+                            Select Category
+                        </option>
+
+                        <option value="Fashion">
+                            Fashion
+                        </option>
+
+                        <option value="Men's Clothing">
+                            Men's Clothing
+                        </option>
+
+                        <option value="Women's Clothing">
+                            Women's Clothing
+                        </option>
+
+                        <option value="Shoes">
+                            Shoes
+                        </option>
+
+                        <option value="Beauty">
+                            Beauty
+                        </option>
+
+                        <option value="Electronics">
+                            Electronics
+                        </option>
+
+                        <option value="Watches">
+                            Watches
+                        </option>
+
+                        <option value="Accessories">
+                            Accessories
+                        </option>
+
+                        <option value="Home">
+                            Home
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-group">
+
+                    <label for="pDescription">
+                        Product Description *
+                    </label>
+
+                    <textarea
+                        id="pDescription"
+                        name="description"
+                        placeholder="Describe your product..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- ================= MULTIPLE IMAGE UPLOAD ================= -->
+
+                <div class="form-group">
+
+                    <label>
+                        Product Images *
+                    </label>
+
+                    <label
+                        for="productImage"
+                        class="upload-box"
+                    >
+
+                        <div class="upload-icon">
+                            📸
+                        </div>
+
+                        <div class="upload-title">
+                            Click Here to Select Images
+                        </div>
+
+                        <div class="upload-subtitle">
+                            You can select multiple images • Maximum 10
+                        </div>
+
+                    </label>
+
+
+                    <input
+                        type="file"
+                        id="productImage"
+                        name="images"
+                        accept="image/*"
+                        multiple
+                    >
+
+
+                    <div
+                        id="imageCount"
+                        class="image-count"
+                    >
+                        0 files selected
+                    </div>
+
+
+                    <div
+                        id="previewArea"
+                        class="preview-area"
+                    >
+
+                        <div class="preview-title">
+                            Selected Images
+                        </div>
+
+                        <div
+                            id="previewGrid"
+                            class="preview-grid"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= GPS ================= -->
+
+                <div class="form-group">
+
+                    <label>
+                        📍 Seller Location *
+                    </label>
+
+                    <div class="gps-box">
+
+                        <button
+                            type="button"
+                            id="gpsButton"
+                            class="gps-button"
+                        >
+                            📍 Get My Current Location
+                        </button>
+
+
+                        <div
+                            id="gpsStatus"
+                            class="gps-status"
+                        >
+                            Location not detected
+                        </div>
+
+
+                        <div class="coordinates">
+
+                            <input
+                                type="text"
+                                id="latitude"
+                                name="latitude"
+                                placeholder="Latitude"
+                                readonly
+                                required
+                            >
+
+                            <input
+                                type="text"
+                                id="longitude"
+                                name="longitude"
+                                placeholder="Longitude"
+                                readonly
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= SUBMIT ================= -->
+
+                <button
+                    type="submit"
+                    id="addProductButton"
+                    class="add-product-btn"
+                >
+                    🚀 Add Product to ShopNova
+                </button>
+
+
+                <!-- MESSAGE -->
+
+                <div
+                    id="message"
+                    class="message"
+                ></div>
+
+            </form>
+
+        </div>
+
+
+        <!-- ================= INVENTORY ================= -->
+
+        <div class="seller-card">
+
+            <div class="inventory-header">
+
+                <h3>
+                    📦 My Products
+                </h3>
+
+                <button
+                    type="button"
+                    id="refreshButton"
+                    class="refresh-btn"
+                >
+                    🔄 Refresh
+                </button>
+
+            </div>
+
+
+            <div
+                id="productList"
+                class="product-list"
+            ></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   SHOPNOVA SELLER PANEL
+========================================================= */
+
+
+/* ================= IMAGE VARIABLES ================= */
+
+let selectedFiles = [];
+
+
+/* ================= IMAGE INPUT ================= */
+
+const imageInput =
+    document.getElementById("productImage");
+
+const imageCount =
+    document.getElementById("imageCount");
+
+const previewArea =
+    document.getElementById("previewArea");
+
+const previewGrid =
+    document.getElementById("previewGrid");
+
+
+/* ================= IMAGE SELECTION ================= */
+
+imageInput.addEventListener("change", function(event) {
+
+    const newFiles = Array.from(event.target.files);
+
+    if (!newFiles.length) {
+        return;
+    }
+
+
+    /* Maximum 10 images */
+
+    if (selectedFiles.length + newFiles.length > 10) {
+
+        alert("You can select a maximum of 10 images.");
+
+        return;
+    }
+
+
+    /* Only images */
+
+    const validFiles = newFiles.filter(file =>
+        file.type.startsWith("image/")
+    );
+
+
+    selectedFiles.push(...validFiles);
+
+    updateImagePreview();
+
+    /* Allow selecting again */
+
+    imageInput.value = "";
+
+});
+
+
+/* ================= IMAGE PREVIEW ================= */
+
+function updateImagePreview() {
+
+    previewGrid.innerHTML = "";
+
+
+    imageCount.textContent =
+        `${selectedFiles.length} file${selectedFiles.length === 1 ? "" : "s"} selected`;
+
+
+    if (selectedFiles.length === 0) {
+
+        previewArea.classList.remove("active");
+
+        return;
+    }
+
+
+    previewArea.classList.add("active");
+
+
+    selectedFiles.forEach((file, index) => {
+
+        const item =
+            document.createElement("div");
+
+        item.className = "preview-item";
+
+
+        const img =
+            document.createElement("img");
+
+        img.src =
+            URL.createObjectURL(file);
+
+
+        const number =
+            document.createElement("span");
+
+        number.className = "image-number";
+
+        number.textContent =
+            `Image ${index + 1}`;
+
+
+        const removeButton =
+            document.createElement("button");
+
+        removeButton.type = "button";
+
+        removeButton.className = "remove-image";
+
+        removeButton.textContent = "×";
+
+
+        removeButton.onclick = function() {
+
+            selectedFiles.splice(index, 1);
+
+            updateImagePreview();
+
+        };
+
+
+        item.appendChild(img);
+
+        item.appendChild(number);
+
+        item.appendChild(removeButton);
+
+        previewGrid.appendChild(item);
+
+    });
+
+}
+
+
+/* ================= GPS ================= */
+
+const gpsButton =
+    document.getElementById("gpsButton");
+
+const gpsStatus =
+    document.getElementById("gpsStatus");
+
+const latitudeInput =
+    document.getElementById("latitude");
+
+const longitudeInput =
+    document.getElementById("longitude");
+
+
+gpsButton.addEventListener("click", function() {
+
+
+    if (!navigator.geolocation) {
+
+        gpsStatus.textContent =
+            "❌ GPS is not supported by this browser.";
+
+        return;
+    }
+
+
+    gpsStatus.textContent =
+        "📡 Detecting your location...";
+
+
+    gpsButton.disabled = true;
+
+    gpsButton.textContent =
+        "📡 Detecting Location...";
+
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position) {
+
+            const latitude =
+                position.coords.latitude;
+
+            const longitude =
+                position.coords.longitude;
+
+
+            latitudeInput.value =
+                latitude.toFixed(6);
+
+            longitudeInput.value =
+                longitude.toFixed(6);
+
+
+            gpsStatus.textContent =
+                "✅ Location detected successfully!";
+
+
+            gpsButton.disabled = false;
+
+            gpsButton.textContent =
+                "📍 Location Detected";
+
+        },
+
+
+        function(error) {
+
+            console.error(error);
+
+
+            gpsStatus.textContent =
+                "❌ Unable to detect location. Please allow location access.";
+
+            gpsButton.disabled = false;
+
+            gpsButton.textContent =
+                "📍 Try Again";
+
+        },
+
+        {
+            enableHighAccuracy: true,
+            timeout: 15000,
+            maximumAge: 0
+        }
+
+    );
+
+});
+
+
+/* ================= MESSAGE ================= */
+
+const message =
+    document.getElementById("message");
+
+
+function showMessage(text, type) {
+
+    message.textContent = text;
+
+    message.className =
+        "message " + type;
+
+}
+
+
+/* ================= FORM ================= */
+
+const productForm =
+    document.getElementById("productForm");
+
+const addProductButton =
+    document.getElementById("addProductButton");
+
+
+productForm.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+
+    /* Validate images */
+
+    if (selectedFiles.length === 0) {
+
+        showMessage(
+            "❌ Please select at least one product image.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    /* Validate GPS */
+
+    if (
+        !latitudeInput.value ||
+        !longitudeInput.value
+    ) {
+
+        showMessage(
+            "❌ Please get your GPS location before adding the product.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    addProductButton.disabled = true;
+
+    addProductButton.textContent =
+        "⏳ Uploading Product...";
+
+
+    showMessage(
+        "Uploading your product and images...",
+        "info"
+    );
+
+
+    try {
+
+        const formData =
+            new FormData();
+
+
+        /* Product information */
+
+        formData.append(
+            "title",
+            document.getElementById("pName").value.trim()
+        );
+
+
+        formData.append(
+            "price",
+            document.getElementById("pPrice").value
+        );
+
+
+        formData.append(
+            "stock",
+            document.getElementById("pStock").value
+        );
+
+
+        formData.append(
+            "category",
+            document.getElementById("pCategory").value
+        );
+
+
+        formData.append(
+            "description",
+            document.getElementById("pDescription").value.trim()
+        );
+
+
+        /* GPS */
+
+        formData.append(
+            "latitude",
+            latitudeInput.value
+        );
+
+
+        formData.append(
+            "longitude",
+            longitudeInput.value
+        );
+
+
+        /* Multiple images */
+
+        selectedFiles.forEach(file => {
+
+            formData.append(
+                "images",
+                file
+            );
+
+        });
+
+
+        /* Send to Express server */
+
+        const response =
+            await fetch(
+                "/add-product",
+                {
+                    method: "POST",
+                    body: formData
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                result.message ||
+                "Product upload failed."
+            );
+
+        }
+
+
+        /* Save locally for seller inventory */
+
+        saveProductLocally(result.product);
+
+
+        showMessage(
+            "✅ Product added successfully to ShopNova!",
+            "success"
+        );
+
+
+        /* Reset */
+
+        productForm.reset();
+
+        selectedFiles = [];
+
+        updateImagePreview();
+
+        latitudeInput.value = "";
+
+        longitudeInput.value = "";
+
+        gpsStatus.textContent =
+            "Location not detected";
+
+
+        addProductButton.disabled = false;
+
+        addProductButton.textContent =
+            "🚀 Add Product to ShopNova";
+
+
+        loadLocalProducts();
+
+
+    } catch(error) {
+
+        console.error(
+            "UPLOAD ERROR:",
+            error
+        );
+
+
+        showMessage(
+            "❌ " + error.message,
+            "error"
+        );
+
+
+        addProductButton.disabled = false;
+
+        addProductButton.textContent =
+            "🚀 Add Product to ShopNova";
+
+    }
+
+});
+
+
+/* ================= LOCAL STORAGE ================= */
+
+const SELLER_PRODUCTS_KEY =
+    "shopnova_seller_products";
+
+
+function getLocalProducts() {
+
+    try {
+
+        return JSON.parse(
+            localStorage.getItem(
+                SELLER_PRODUCTS_KEY
+            )
+        ) || [];
+
+    } catch {
+
+        return [];
+
+    }
+
+}
+
+
+function saveProductLocally(product) {
+
+    const products =
+        getLocalProducts();
+
+    products.unshift(product);
+
+    localStorage.setItem(
+        SELLER_PRODUCTS_KEY,
+        JSON.stringify(products)
+    );
+
+}
+
+
+/* ================= LOAD PRODUCTS ================= */
+
+const productList =
+    document.getElementById("productList");
+
+
+function loadLocalProducts() {
+
+    const products =
+        getLocalProducts();
+
+
+    productList.innerHTML = "";
+
+
+    if (products.length === 0) {
+
+        productList.innerHTML = `
+
+            <div class="empty-products">
+
+                <div>📦</div>
+
+                <strong>
+                    No products yet
+                </strong>
+
+                <p>
+                    Add your first product using the form.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    products.forEach((product, index) => {
+
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "product-item";
+
+
+        let imageSrc = "";
+
+        if (
+            product.images &&
+            product.images.length
+        ) {
+
+            imageSrc =
+                product.images[0];
+
+        }
+
+
+        item.innerHTML = `
+
+            ${
+                imageSrc
+                ?
+                `<img
+                    class="product-image"
+                    src="${imageSrc}"
+                    alt="${escapeHtml(product.title || "Product")}"
+                >`
+                :
+                `<div
+                    class="product-image"
+                    style="
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        font-size:40px;
+                    "
+                >
+                    📦
+                </div>`
+            }
+
+            <div class="product-info">
+
+                <h4>
+                    ${escapeHtml(product.title || "Product")}
+                </h4>
+
+                <div class="product-price">
+                    ₹${Number(product.price || 0).toLocaleString("en-IN")}
+                </div>
+
+                <div class="product-stock">
+                    Stock: ${product.stock ?? 0}
+                </div>
+
+                <button
+                    class="delete-btn"
+                    onclick="deleteProduct(${index})"
+                >
+                    🗑 Delete
+                </button>
+
+            </div>
+
+        `;
+
+
+        productList.appendChild(item);
+
+    });
+
+}
+
+
+/* ================= DELETE PRODUCT ================= */
+
+function deleteProduct(index) {
+
+    if (
+        !confirm(
+            "Are you sure you want to delete this product?"
+        )
+    ) {
+        return;
+    }
+
+
+    const products =
+        getLocalProducts();
+
+
+    products.splice(index, 1);
+
+
+    localStorage.setItem(
+        SELLER_PRODUCTS_KEY,
+        JSON.stringify(products)
+    );
+
+
+    loadLocalProducts();
+
+}
+
+
+/* ================= ESCAPE HTML ================= */
+
+function escapeHtml(value) {
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* ================= REFRESH ================= */
+
+document
+    .getElementById("refreshButton")
+    .addEventListener(
+        "click",
+        loadLocalProducts
+    );
+
+
+/* ================= INITIAL LOAD ================= */
+
+loadLocalProducts();
+
+</script>
+
+</body>
+</html>
