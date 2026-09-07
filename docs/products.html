@@ -3,79 +3,307 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopNova - Product Showcase</title>
+    <title>ShopNova - Discover Premium Collections</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f7f6; margin: 0; padding: 20px; }
-        .container { max-width: 1200px; margin: 0 auto; }
-        h1 { color: #1e3a8a; text-align: center; margin-bottom: 30px; }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
-        .product-card { background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding: 15px; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s; }
-        .product-card:hover { transform: translateY(-5px); }
-        .product-img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; background: #e5e7eb; }
-        .product-title { font-size: 1.2rem; font-weight: bold; margin: 0 0 10px 0; color: #111827; }
-        .product-desc { font-size: 0.9rem; color: #6b7280; line-height: 1.4; margin-bottom: 15px; flex-grow: 1; }
-        .product-meta { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f3f4f6; padding-top: 10px; }
-        .product-price { font-size: 1.3rem; font-weight: 700; color: #10b981; }
-        .product-stock { font-size: 0.85rem; background: #d1fae5; color: #065f46; padding: 4px 8px; border-radius: 20px; }
-        .product-category { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: #3b82f6; font-weight: 600; margin-bottom: 5px; display: block; }
-        #no-products { grid-column: 1 / -1; text-align: center; color: #9ca3af; padding: 5px; font-size: 1.2rem; }
+        :root {
+            --primary-navy: #004B87;      /* Matches the clean dark blue in your header */
+            --sky-blue-start: #BFD7ED;    /* The soft light blue from your backdrop */
+            --sky-blue-end: #E6F2F7;      /* Subtle lighter fade */
+            --brand-purple: #7c3aed;
+            --brand-magenta: #db2777;
+            --text-dark: #0f172a;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, var(--sky-blue-start) 0%, var(--sky-blue-end) 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+        }
+
+        /* Top Header Component - Matched to your reference screenshot */
+        .navbar {
+            background-color: var(--primary-navy);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 40px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-frame {
+            height: 48px;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Animated Welcome Hero Box - Styled with clean matching sky-blue tone */
+        .hero-banner {
+            text-align: center;
+            padding: 50px 20px 30px 20px;
+            color: var(--primary-navy);
+        }
+
+        .welcome-animation {
+            font-size: 3rem;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            color: var(--primary-navy);
+            animation: fadeInUp 0.8s ease-out;
+            letter-spacing: -0.02em;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
+        }
+
+        .sub-heading {
+            font-size: 1.15rem;
+            color: #475569;
+            margin: 0;
+            font-weight: 500;
+            animation: fadeInUp 1.1s ease-out;
+        }
+
+        /* Products Display Grid with Clean Floating Cards */
+        .marketplace-wrapper {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 25px 60px 25px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 75, 135, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0, 75, 135, 0.12);
+        }
+
+        .card-image-box {
+            position: relative;
+            width: 100%;
+            height: 240px;
+            background: #f8fafc;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .category-pill {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--primary-navy);
+            color: #ffffff;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 5px 12px;
+            border-radius: 30px;
+            letter-spacing: 0.05em;
+        }
+
+        .card-body {
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0 0 10px 0;
+            color: var(--primary-navy);
+            line-height: 1.3;
+        }
+
+        .product-desc {
+            font-size: 0.92rem;
+            color: #475569;
+            line-height: 1.5;
+            margin: 0 0 20px 0;
+            flex-grow: 1;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 15px;
+        }
+
+        .product-price {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary-navy);
+        }
+
+        .stock-badge {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #047857;
+            background-color: #ecfdf5;
+            padding: 5px 12px;
+            border-radius: 12px;
+        }
+
+        .stock-out {
+            color: #b91c1c;
+            background-color: #fef2f2;
+        }
+
+        /* Context Loader Spinners */
+        .status-container {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .loader-spinner {
+            border: 4px solid rgba(0, 75, 135, 0.1);
+            border-top: 4px solid var(--primary-navy);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px auto;
+        }
+
+        .status-msg {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--primary-navy);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Our Premium Product Catalog</h1>
-        <div class="product-grid" id="catalog-container">
-            <!-- Products are injected dynamically by JavaScript here -->
-            <p id="no-products">Loading live store inventory content...</p>
+
+    <!-- Matching Navbar Header -->
+    <nav class="navbar">
+        <div class="brand-container">
+            <img src="images/shopnova-blog-logo.jpg" class="logo-frame" alt="ShopNova Logo" onerror="this.src='images/shopnova-blog-logo-jpg'">
         </div>
-    </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="products.html" style="background: rgba(255,255,255,0.2);">Products</a>
+            <a href="seller.html">Seller</a>
+        </div>
+    </nav>
+
+    <!-- Welcome Hero Section -->
+    <header class="hero-banner">
+        <h1 class="welcome-animation">Welcome to ShopNova</h1>
+        <p class="sub-heading">Discover premium products, modern style, and everyday essentials.</p>
+    </header>
+
+    <!-- Marketplace Viewport Container -->
+    <main class="marketplace-wrapper">
+        <div class="product-grid" id="catalog-container">
+            <div class="status-container">
+                <div class="loader-spinner"></div>
+                <p class="status-msg">Synchronizing catalog collection layers...</p>
+            </div>
+        </div>
+    </main>
 
     <script>
-        // Dynamically fetch items from your backend server API route
-        async function loadCatalog() {
+        async function fetchMarketplaceInventory() {
             const container = document.getElementById('catalog-container');
+            
+            // AUTOMATIC BASE URL ROUTER:
+            let backendBaseUrl = '';
+            if (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost') {
+                backendBaseUrl = 'http://localhost:5000';
+            }
+
             try {
-                // Pointing to your serverless backend route relative to root domain
-                const response = await fetch('/api/products');
-                if (!response.ok) throw new Error('Network payload resolution error');
+                const response = await fetch(`${backendBaseUrl}/api/products`);
+                if (!response.ok) throw new Error(`Server connection code: ${response.status}`);
                 
                 const products = await response.json();
                 
-                if(products.length === 0) {
-                    container.innerHTML = '<p id="no-products">No active items in catalog array. Use seller workspace panel to add items.</p>';
+                if (!products || products.length === 0) {
+                    container.innerHTML = `
+                        <div class="status-container">
+                            <p class="status-msg">No active items in catalog array. Use the seller portal to populate items.</p>
+                        </div>`;
                     return;
                 }
-                
-                container.innerHTML = ''; // Clear out initialization status loaders
+
+                container.innerHTML = ''; 
                 
                 products.forEach(item => {
-                    // Fallback to placeholder if imagery array array is missing parameters
-                    const mainImage = (item.images && item.images.length > 0) ? item.images[0] : 'https://placeholder.com';
+                    let productImgUrl = 'https://unsplash.com';
+                    if (item.images && item.images.length > 0) {
+                        productImgUrl = item.images[0]; // Resolves first image asset safely
+                    }
                     
-                    const cardMarkup = `
-                        <div class="product-card">
-                            <div>
-                                <img src="${mainImage}" class="product-img" alt="${item.name}">
-                                <span class="product-category">${item.category || 'General'}</span>
-                                <h3 class="product-title">${item.name}</h3>
-                                <p class="product-desc">${item.description || 'No description text provided.'}</p>
-                            </div>
-                            <div class="product-meta">
-                                <span class="product-price">$${item.price}</span>
-                                <span class="product-stock">Stock: ${item.stock || 0} left</span>
-                            </div>
-                        </div>
-                    `;
-                    container.innerHTML += cardMarkup;
-                });
-            } catch (err) {
-                console.error('Failed to resolve dynamic product synchronization:', err);
-                container.innerHTML = '<p id="no-products" style="color: #ef4444;">Failed to sync live application store contents lists.</p>';
-            }
-        }
+                    const isOutOfStock = Number(item.stock) <= 0;
+                    const stockDisplayMarkup = isOutOfStock 
+                        ? `<span class="stock-badge stock-out">Out of Stock</span>`
+                        : `<span class="stock-badge">Stock: ${item.stock} left</span>`;
 
-        // Initialize script loop context
-        window.addEventListener('DOMContentLoaded', loadCatalog);
-    </script>
-</body>
-</html>
+                    const cardTemplate = `
+                        <article class="product-card">
+                            <div class="card-image-box">
+                                <img src="${productImgUrl}" class="product-img" alt="${item.name}">
+                                <span class="category-pill">${item.category || 'Collection'}</span>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="product-title">${item.name}</h3>
+                                <p class="product-desc">${item.description || 'No description text properties defined.'}</p>
