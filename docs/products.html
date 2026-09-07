@@ -3,161 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopNova | Seller Panel</title>
+    <title>ShopNova - Product Showcase</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: "Segoe UI", Arial, sans-serif; background: #eaf4ff; color: #183b68; padding: 20px; }
-        .seller-card { background: white; border-radius: 20px; padding: 30px; max-width: 800px; margin: auto; box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
-        .section-title { font-size: 20px; font-weight: 900; margin: 20px 0 10px; border-bottom: 2px solid #e4edf7; padding-bottom: 5px; }
-        .form-group { display: flex; flex-direction: column; margin-bottom: 15px; }
-        label { font-size: 13px; font-weight: 800; margin-bottom: 5px; }
-        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #cbdced; border-radius: 10px; outline: none; }
-        input:focus, select:focus, textarea:focus { border-color: #3280e8; }
-        .image-box { padding: 20px; border: 2px dashed #b9d5ef; background: #f8fbff; border-radius: 12px; text-align: center; }
-        .select-image-button { display: inline-block; padding: 12px 20px; background: #1767d8; color: white; font-weight: bold; border-radius: 10px; cursor: pointer; }
-        #productImage { display: none; }
-        .image-preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; margin-top: 15px; }
-        .preview-card { position: relative; border: 1px solid #d9e6f3; border-radius: 8px; overflow: hidden; background: #eef5fc; }
-        .preview-card img { width: 100%; height: 100px; object-fit: cover; }
-        .remove-btn { position: absolute; top: 5px; right: 5px; background: red; color: white; border: none; border-radius: 50%; width: 20px; height: 20px; cursor: pointer; font-weight: bold; }
-        .submit-btn { width: 100%; padding: 16px; background: #00798c; color: white; font-size: 16px; font-weight: bold; border: none; border-radius: 10px; cursor: pointer; margin-top: 20px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f7f6; margin: 0; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 { color: #1e3a8a; text-align: center; margin-bottom: 30px; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        .product-card { background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding: 15px; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s; }
+        .product-card:hover { transform: translateY(-5px); }
+        .product-img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; background: #e5e7eb; }
+        .product-title { font-size: 1.2rem; font-weight: bold; margin: 0 0 10px 0; color: #111827; }
+        .product-desc { font-size: 0.9rem; color: #6b7280; line-height: 1.4; margin-bottom: 15px; flex-grow: 1; }
+        .product-meta { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f3f4f6; padding-top: 10px; }
+        .product-price { font-size: 1.3rem; font-weight: 700; color: #10b981; }
+        .product-stock { font-size: 0.85rem; background: #d1fae5; color: #065f46; padding: 4px 8px; border-radius: 20px; }
+        .product-category { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: #3b82f6; font-weight: 600; margin-bottom: 5px; display: block; }
+        #no-products { grid-column: 1 / -1; text-align: center; color: #9ca3af; padding: 5px; font-size: 1.2rem; }
     </style>
 </head>
 <body>
-    <div class="seller-card">
-        <h1>Seller Panel</h1>
-        <form id="productForm">
-            <div class="section-title">Product Information</div>
-            <div class="form-group">
-                <label>Product Title *</label>
-                <input type="text" id="title" required>
-            </div>
-            <div class="form-group">
-                <label>Price ($) *</label>
-                <input type="number" id="price" step="0.01" required>
-            </div>
-            <div class="form-group">
-                <label>Stock Quantity *</label>
-                <input type="number" id="stock" required>
-            </div>
-            <div class="form-group">
-                <label>Category *</label>
-                <select id="category" required>
-                    <option value="Electronics">Electronics</option>
-                    <option value="Clothing">Clothing</option>
-                    <option value="Home & Kitchen">Home & Kitchen</option>
-                    <option value="Books">Books</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Description</label>
-                <textarea id="description"></textarea>
-            </div>
-
-            <div class="section-title">Product Media</div>
-            <div class="image-box">
-                <label for="productImage" class="select-image-button">Select Images</label>
-                <input type="file" id="productImage" accept="image/*" multiple>
-                <div id="imageCountDisplay" style="margin-top: 10px; font-weight: bold;">0 images selected</div>
-                <div class="image-preview-grid" id="previewGrid"></div>
-            </div>
-
-            <button type="submit" class="submit-btn">Publish Product Catalog</button>
-        </form>
+    <div class="container">
+        <h1>Our Premium Product Catalog</h1>
+        <div class="product-grid" id="catalog-container">
+            <!-- Products are injected dynamically by JavaScript here -->
+            <p id="no-products">Loading live store inventory content...</p>
+        </div>
     </div>
 
     <script>
-        let filesArray = [];
-
-        document.getElementById('productImage').addEventListener('change', function(e) {
-            const selectedFiles = Array.from(e.target.files);
-            selectedFiles.forEach(file => {
-                // Matches our backend layout limit of 6 total images cleanly
-                if (filesArray.length < 6 && file.type.startsWith('image/')) {
-                    filesArray.push(file);
-                }
-            });
-            renderPreviews();
-            this.value = '';
-        });
-
-        document.getElementById('productForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            if (filesArray.length === 0) {
-                alert('Please upload at least one image file.');
-                return;
-            }
-
-            const formData = new FormData();
-            formData.append('title', document.getElementById('title').value.trim());
-            formData.append('price', document.getElementById('price').value);
-            formData.append('stock', document.getElementById('stock').value);
-            formData.append('category', document.getElementById('category').value);
-            formData.append('description', document.getElementById('description')?.value.trim() || "");
-
-            // Appends file chunks directly to our secure array key structure 'images'
-            filesArray.forEach((file) => {
-                formData.append('images', file);
-            });
-
+        // Dynamically fetch items from your backend server API route
+        async function loadCatalog() {
+            const container = document.getElementById('catalog-container');
             try {
-                // FIXED: Hardcoded live internet production router target address connection path
-                const backendUrl = 'https://onrender.com';
-
-                const response = await fetch(backendUrl, {
-                    method: 'POST',
-                    body: formData 
-                });
-
-                const result = await response.json();
-
-                // FIXED: Evaluates HTTP status validation maps natively without property dependency bugs
-                if (response.ok || response.status === 201) {
-                    alert('🎉 Catalog updated successfully! Product received.');
-                    window.location.href = 'products.html'; 
-                } else {
-                    alert('⚠️ Publish failure: ' + (result.error || result.message || 'Unknown Server Rejection'));
+                // Pointing to your serverless backend route relative to root domain
+                const response = await fetch('/api/products');
+                if (!response.ok) throw new Error('Network payload resolution error');
+                
+                const products = await response.json();
+                
+                if(products.length === 0) {
+                    container.innerHTML = '<p id="no-products">No active items in catalog array. Use seller workspace panel to add items.</p>';
+                    return;
                 }
-            } catch (error) {
-                console.error('Critical Network Failure Error Trace Logs:', error);
-                alert('🚫 Transmission Failed: Verify your cloud environment pipeline server route is responsive.');
+                
+                container.innerHTML = ''; // Clear out initialization status loaders
+                
+                products.forEach(item => {
+                    // Fallback to placeholder if imagery array array is missing parameters
+                    const mainImage = (item.images && item.images.length > 0) ? item.images[0] : 'https://placeholder.com';
+                    
+                    const cardMarkup = `
+                        <div class="product-card">
+                            <div>
+                                <img src="${mainImage}" class="product-img" alt="${item.name}">
+                                <span class="product-category">${item.category || 'General'}</span>
+                                <h3 class="product-title">${item.name}</h3>
+                                <p class="product-desc">${item.description || 'No description text provided.'}</p>
+                            </div>
+                            <div class="product-meta">
+                                <span class="product-price">$${item.price}</span>
+                                <span class="product-stock">Stock: ${item.stock || 0} left</span>
+                            </div>
+                        </div>
+                    `;
+                    container.innerHTML += cardMarkup;
+                });
+            } catch (err) {
+                console.error('Failed to resolve dynamic product synchronization:', err);
+                container.innerHTML = '<p id="no-products" style="color: #ef4444;">Failed to sync live application store contents lists.</p>';
             }
-        });
-
-        function renderPreviews() {
-            const previewGrid = document.getElementById('previewGrid');
-            const countDisplay = document.getElementById('imageCountDisplay');
-            
-            if (countDisplay) countDisplay.textContent = `${filesArray.length} image(s) selected`;
-            if (!previewGrid) return;
-            
-            previewGrid.innerHTML = '';
-
-            filesArray.forEach((file, index) => {
-                const card = document.createElement('div');
-                card.className = 'preview-card';
-
-                const img = document.createElement('img');
-                const reader = new FileReader();
-
-                reader.onload = (e) => { img.src = e.target.result; };
-                reader.readAsDataURL(file);
-
-                const btn = document.createElement('button');
-                btn.className = 'remove-btn';
-                btn.innerHTML = '&times;';
-                btn.type = 'button';
-                btn.onclick = () => {
-                    filesArray.splice(index, 1);
-                    renderPreviews();
-                };
-
-                card.appendChild(img);
-                card.appendChild(btn);
-                previewGrid.appendChild(card);
-            });
         }
+
+        // Initialize script loop context
+        window.addEventListener('DOMContentLoaded', loadCatalog);
     </script>
 </body>
 </html>
