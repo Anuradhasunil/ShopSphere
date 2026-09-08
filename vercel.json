@@ -16,8 +16,12 @@
       "dest": "server.js"
     },
     {
-      "src": "/(css|js|images|uploads)/(.*)",
-      "dest": "docs/$1/$2"
+      "src": "/seller.html",
+      "dest": "docs/seller.html"
+    },
+    {
+      "src": "/products.html",
+      "dest": "docs/products.html"
     },
     {
       "src": "/(.*)",
