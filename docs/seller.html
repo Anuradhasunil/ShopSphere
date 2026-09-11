@@ -1,475 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ShopNova | Seller Panel</title>
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(135deg, #eef7ff, #ffffff);
-    color: #172033;
-    min-height: 100vh;
-}
-/* ================= HEADER ================= */
-.seller-header {
-    background: linear-gradient(135deg, #071a3d, #0b2d63, #164b8f);
-    color: white;
-    padding: 16px 5%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    box-shadow: 0 5px 20px rgba(7,26,61,.25);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-.seller-brand {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-.seller-brand img {
-    width: 145px;
-    max-width: 42vw;
-    height: 55px;
-    background: white;
-    padding: 5px;
-    border-radius: 8px;
-    object-fit: contain;
-}
-.seller-title h1 {
-    font-size: 23px;
-    margin-bottom: 4px;
-}
-.seller-title p {
-    font-size: 13px;
-    opacity: .9;
-}
-.home-btn {
-    text-decoration: none;
-    color: #08265a;
-    background: white;
-    padding: 11px 18px;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 14px;
-    transition: .2s;
-}
-.home-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,.2);
-}
-/* ================= CONTAINER ================= */
-.seller-container {
-    width: min(1200px, 92%);
-    margin: 35px auto 60px;
-}
-.welcome-card {
-    background: white;
-    border-radius: 18px;
-    padding: 28px;
-    margin-bottom: 25px;
-    border: 1px solid #dcecff;
-    box-shadow: 0 8px 30px rgba(20,70,120,.08);
-}
-.welcome-card h2 {
-    color: #0b3c82;
-    margin-bottom: 8px;
-}
-.welcome-card p {
-    color: #64748b;
-    line-height: 1.6;
-}
-.seller-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 25px;
-}
-@media(max-width:900px) {
-    .seller-grid {
-        grid-template-columns: 1fr;
-    }
-    .seller-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .home-btn {
-        align-self: flex-start;
-    }
-}
-/* ================= CARD ================= */
-.seller-card {
-    background: white;
-    border-radius: 18px;
-    padding: 25px;
-    border: 1px solid #dcecff;
-    box-shadow: 0 8px 30px rgba(20,70,120,.08);
-}
-.seller-card h3 {
-    color: #0b3c82;
-    font-size: 21px;
-    margin-bottom: 20px;
-    padding-bottom: 12px;
-    border-bottom: 2px solid #e4f0ff;
-}
-/* ================= FORM ================= */
-.form-group {
-    margin-bottom: 17px;
-}
-.form-group label {
-    display: block;
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 7px;
-    color: #24324a;
-}
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 13px 14px;
-    border: 1px solid #cbd9e8;
-    border-radius: 9px;
-    font-size: 15px;
-    outline: none;
-    font-family: inherit;
-    background: white;
-}
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    border-color: #2878c8;
-    box-shadow: 0 0 0 3px rgba(40,120,200,.10);
-}
-.form-group textarea {
-    min-height: 110px;
-    resize: vertical;
-}
-/* ================= PRICE STOCK ================= */
-.two-column {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-}
-@media(max-width:500px) {
-    .two-column {
-        grid-template-columns: 1fr;
-    }
-}
-/* ================= IMAGE UPLOAD ================= */
-.upload-box {
-    border: 2px dashed #2878c8;
-    background: #f5faff;
-    border-radius: 12px;
-    padding: 25px;
-    text-align: center;
-    cursor: pointer;
-    transition: .2s;
-}
-.upload-box:hover {
-    background: #eaf5ff;
-    border-color: #07599c;
-}
-.upload-icon {
-    font-size: 38px;
-    margin-bottom: 8px;
-}
-.upload-title {
-    color: #0b4d8b;
-    font-size: 16px;
-    font-weight: bold;
-}
-.upload-subtitle {
-    color: #718096;
-    font-size: 12px;
-    margin-top: 5px;
-}
-#productImage {
-    display: none !important;
-}
-.image-count {
-    margin-top: 10px;
-    background: #eef6ff;
-    color: #145a96;
-    border: 1px solid #c8e1fa;
-    padding: 10px;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 13px;
-    text-align: center;
-}
-/* ================= IMAGE PREVIEW ================= */
-.preview-area {
-    display: none;
-    margin-top: 15px;
-}
-.preview-area.active {
-    display: block;
-}
-.preview-title {
-    font-weight: bold;
-    color: #24324a;
-    margin-bottom: 10px;
-}
-.preview-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-}
-.preview-item {
-    position: relative;
-    height: 110px;
-    border-radius: 10px;
-    overflow: hidden;
-    background: #f1f5f9;
-    border: 1px solid #dce6f0;
-}
-.preview-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.remove-image {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    width: 25px;
-    height: 25px;
-    border: none;
-    border-radius: 50%;
-    background: #dc2626;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-}
-.image-number {
-    position: absolute;
-    bottom: 5px;
-    left: 5px;
-    background: rgba(0,0,0,.7);
-    color: white;
-    padding: 3px 7px;
-    border-radius: 5px;
-    font-size: 10px;
-}
-/* ================= GPS ================= */
-.gps-box {
-    background: #f5faff;
-    border: 1px solid #d7e9fb;
-    padding: 15px;
-    border-radius: 12px;
-}
-.gps-button {
-    width: 100%;
-    border: none;
-    background: linear-gradient(135deg,#082b63,#1764aa);
-    color: white;
-    padding: 13px;
-    border-radius: 9px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 14px;
-    transition: .2s;
-}
-.gps-button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 5px 15px rgba(8,43,99,.2);
-}
-.gps-status {
-    margin-top: 10px;
-    font-size: 13px;
-    color: #64748b;
-    text-align: center;
-}
-.coordinates {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: 12px;
-}
-.coordinates input {
-    background: #f1f5f9;
-    color: #64748b;
-}
-/* ================= ADD BUTTON ================= */
-.add-product-btn {
-    width: 100%;
-    border: none;
-    background: linear-gradient(135deg,#082b63,#1764aa,#2388d4);
-    color: white;
-    padding: 16px;
-    border-radius: 10px;
-    font-size: 17px;
-    font-weight: 800;
-    cursor: pointer;
-    transition: .2s;
-    margin-top: 10px;
-}
-.add-product-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(8,43,99,.25);
-}
-.add-product-btn:disabled {
-    opacity: .6;
-    cursor: not-allowed;
-    transform: none;
-}
-/* ================= MESSAGE ================= */
-.message {
-    display: none;
-    margin-top: 15px;
-    padding: 13px 15px;
-    border-radius: 9px;
-    font-size: 14px;
-    font-weight: bold;
-}
-.message.success {
-    display: block;
-    background: #eaf8f0;
-    color: #176b3a;
-    border: 1px solid #bce7ca;
-}
-.message.error {
-    display: block;
-    background: #fff1f1;
-    color: #a32121;
-    border: 1px solid #efc0c0;
-}
-.message.info {
-    display: block;
-    background: #eef6ff;
-    color: #145a96;
-    border: 1px solid #c8e1fa;
-}
-/* ================= INVENTORY ================= */
-.inventory-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 18px;
-}
-.refresh-btn {
-    border: 1px solid #1764aa;
-    background: white;
-    color: #0b4d8b;
-    padding: 9px 15px;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-}
-.empty-products {
-    text-align: center;
-    padding: 40px 20px;
-    color: #64748b;
-}
-.empty-products div {
-    font-size: 45px;
-    margin-bottom: 10px;
-}
-.product-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(210px,1fr));
-    gap: 17px;
-}
-.product-item {
-    border: 1px solid #dce6f0;
-    border-radius: 13px;
-    overflow: hidden;
-    background: white;
-    box-shadow: 0 5px 18px rgba(0,0,0,.05);
-    position: relative;
-}
-.product-image {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-    background: #f1f5f9;
-}
-.product-details {
-    padding: 15px;
-}
-.product-name {
-    font-size: 16px;
-    font-weight: bold;
-    color: #172033;
-    margin-bottom: 5px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.product-category-tag {
-    display: inline-block;
-    background: #eef6ff;
-    color: #1764aa;
-    font-size: 11px;
-    font-weight: bold;
-    padding: 3px 8px;
-    border-radius: 4px;
-    margin-bottom: 10px;
-}
-.product-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.product-price {
-    font-size: 17px;
-    font-weight: 800;
-    color: #0b4d8b;
-}
-.product-stock {
-    font-size: 12px;
-    color: #64748b;
-}
-.delete-product-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: rgba(220, 38, 38, 0.9);
-    color: white;
-    border: none;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    transition: 0.2s;
-    z-index: 10;
-}
-.delete-product-btn:hover {
-    background: #b91c1c;
-    transform: scale(1.1);
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopNova - Seller Panel</title>
+    <style>
+        :root { --primary: #2563eb; --primary-hover: #1d4ed8; --bg: #f8fafc; --card: #ffffff; --text: #1e293b; }
+        body { font-family: system-ui, -apple-system, sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .panel { background: var(--card); max-width: 600px; width: 100%; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); padding: 24px; }
+        .header { background: var(--primary); color: white; margin: -24px -24px 24px -24px; padding: 20px; border-radius: 12px 12px 0 0; display: flex; justify-content: space-between; align-items: center; }
+        .form-group { margin-bottom: 16px; }
+        label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 14px; }
+        input, textarea, select { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
+        .geo-btn { background: #e2e8f0; color: #334155; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-weight: 500; font-size: 13px; margin-bottom: 8px; }
+        .geo-fields { display: flex; gap: 12px; }
+        .submit-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 12px; transition: background 0.2s; }
+        .submit-btn:hover { background: var(--primary-hover); }
+        .status-msg { margin-top: 16px; padding: 12px; border-radius: 6px; font-size: 14px; display: none; text-align: center; font-weight: 500; }
+        .status-success { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+        .status-error { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+    </style>
 </head>
 <body>
 
-<header class="seller-header">
-    <div class="seller-brand">
-        <!-- FIXED LOGO HANDLING SYNTAX -->
-        <img src="https://postimg.co" alt="ShopNova Logo">
-        <div class="seller-title">
-            <h1>Seller Panel</h1>
-            <p>Manage your ShopNova products</p>
+<div class="panel">
+    <div class="header">
+        <div>
+            <h2 style="margin:0; font-size: 20px;">Seller Panel</h2>
+            <p style="margin:4px 0 0 0; font-size: 12px; opacity: 0.9;">Manage your ShopNova products</p>
         </div>
+        <a href="/" style="color: white; text-decoration: none; font-size: 14px; border: 1px solid white; padding: 6px 12px; border-radius: 6px;">← Back to ShopNova</a>
     </div>
-    <a href="/" class="home-btn">← Back to ShopNova</a>
-</header>
 
-<main class="seller-container">
-    <div class="welcome-card">
+    <form id="productForm">
+        <div class="form-group">
+            <label for="name">Product Name *</label>
+            <input type="text" id="name" required placeholder="e.g. Classic White T-Shirt">
+        </div>
+
+        <div class="form-group">
+            <label for="price">Price ($) *</label>
+            <input type="number" id="price" step="0.01" required placeholder="0.00">
+        </div>
+
+        <div class="form-group">
+            <label for="stock">Stock Quantity</label>
+            <input type="number" id="stock" value="0" placeholder="0">
+        </div>
+
+        <div class="form-group">
+            <label for="category">Category *</label>
+            <select id="category" required>
+                <option value="">Select a category</option>
+                <option value="Clothing">Clothing</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Accessories">Accessories</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description *</label>
+            <textarea id="description" rows="3" required placeholder="Describe your product specs and features..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="images">Product Images (Select up to 10) *</label>
+            <input type="file" id="images" multiple accept="image/*" required>
+        </div>
+
+        <div class="form-group" style="background: #f1f5f9; padding: 12px; border-radius: 8px;">
+            <label>Seller GPS Location</label>
+            <button type="button" class="geo-btn" id="getLocBtn">📍 Auto-Detect Location</button>
+            <div class="geo-fields">
+                <input type="text" id="lat" placeholder="Latitude" readonly>
+                <input type="text" id="lng" placeholder="Longitude" readonly>
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">🚀 Add Product to ShopNova</button>
+    </form>
+
+    <div id="statusBox" class="status-msg"></div>
+</div>
+
+<script>
+    const API_URL = 'http://localhost:5000/api/products';
+    const form = document.getElementById('productForm');
+    const statusBox = document.getElementById('statusBox');
+    const getLocBtn = document.getElementById('getLocBtn');
+
+    // Handle Geolocation Collection
+    getLocBtn.addEventListener('click', () => {
+        if (!navigator.geolocation) {
+            alert('Geolocation is not supported by your browser');
+            return;
+        }
+        getLocBtn.textContent = '🔄 Detecting Location...';
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                document.getElementById('lat').value = position.coords.latitude.toFixed(6);
+                document.getElementById('lng').value = position.coords.longitude.toFixed(6);
+                getLocBtn.textContent = '✅ Location Detected!';
+                getLocBtn.style.background = '#dcfce7';
+            },
+            () => {
+                alert('Unable to fetch your location coordinates.');
+                getLocBtn.textContent = '❌ Detection Failed';
+            }
+        );
+    });
+
+    // Form submission processing
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Setup visual status tracking rules
+        statusBox.style.display = 'none';
+        statusBox.className = 'status-msg';
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Processing upload package...';
+
+        // Instantiate Multi-part form array mapping
+        const formData = new FormData();
+        formData.append('name', document.getElementById('name').value);
+        formData.append('price', document.getElementById('price').value);
+        formData.append('stock', document.getElementById('stock').value);
+        formData.append('category', document.getElementById('category').value);
+        formData.append('description', document.getElementById('description').value);
+
+        // Bundle input asset stream arrays
+        const fileInput = document.getElementById('images');
+        for (let i = 0; i < fileInput.files.length; i++) {
+            formData.append('images', fileInput.files[i]);
+        }
+
+        try {
+            // CRITICAL FIX: Explicitly hits backend Engine running on Port 5000
+            // Note: DO NOT set Content-Type header manually here. Browser handles boundaries for FormData.
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Server error occurred processing cataloging request.');
+            }
+
+            // Success Execution Response Handler
+            statusBox.style.display = 'block';
+            statusBox.classList.add('status-success');
+            statusBox.innerText = `Success: ${data.message}`;
+            form.reset();
+            getLocBtn.textContent = '📍 Auto-Detect Location';
+            getLocBtn.style.background = '#e2e8f0';
+
+        } catch (error) {
+            // Fallback UI Crash Rendering Catch block
+            statusBox.style.display = 'block';
+            statusBox.classList.add('status-error');
+            statusBox.innerText = `❌ Error: ${error.message}`;
+            console.error('Submission transaction fault logs:', error);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = '🚀 Add Product to ShopNova';
+        }
+    });
+</script>
+</body>
+</html>
