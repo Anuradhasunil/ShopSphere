@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: shopnova
+    runtime: node
+    repo: https://github.com
+    branch: main
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: MONGODB_URI
+        value: mongodb+srv://ganjianuradha152_db_user:ShopnovaSecure2026@cluster0.anfpmps.mongodb.net/shopnova?appName=Cluster0
+      - key: PORT
+        value: 10000
