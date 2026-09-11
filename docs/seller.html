@@ -1,5 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopNova - Seller Panel</title>
+    <style>
+        :root { 
+            --primary-navy: #004B87;      /* Matches the clean dark blue in your header */
+            --sky-blue-start: #BFD7ED;    /* The soft light blue from your backdrop */
+            --sky-blue-end: #E6F2F7;      /* Subtle lighter fade */
+            --card-bg: #ffffff; 
+            --text-dark: #0f172a; 
+            --text-muted: #475569;
+        }
+        
+        body { 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, var(--sky-blue-start) 0%, var(--sky-blue-end) 100%); 
+            color: var(--text-dark); 
+            margin: 0; 
+            padding: 40px 20px; 
+            display: flex; 
+            justify-content: center; 
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* Form Container Box */
+        .panel { 
+            background: var(--card-bg); 
+            max-width: 600px; 
+            width: 100%; 
+            border-radius: 20px; 
+            box-shadow: 0 15px 35px rgba(0, 75, 135, 0.08); 
+            padding: 30px; 
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-sizing: border-box;
+        }
+
+        /* Top Header Component with Brand Logo Image */
+        .header { 
+            background-color: var(--primary-navy); 
+            margin: -30px -30px 30px -30px; 
+            padding: 20px 30px; 
+            border-radius: 20px 20px 0 0; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .logo-frame {
+            height: 44px;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+
+        .view-btn {
+            color: #ffffff; 
+            text-decoration: none; 
+            font-weight: 600;
+            font-size: 0.9rem; 
+            border: 1px solid rgba(255, 255, 255, 0.4); 
+            padding: 8px 16px; 
+            border-radius: 6px;
+            transition: background-color 0.2s ease;
+        }
+
+        .view-btn:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Form Controls */
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 14px; color: var(--primary-navy); }
+        input, textarea, select { 
+            width: 100%; 
+            padding: 12px; 
+            border: 1px solid #cbd5e1; 
+            border-radius: 8px; 
+            box-sizing: border-box; 
+            font-size: 14px; 
+            background-color: #f8fafc;
+            color: var(--text-dark);
+            transition: border-color 0.2s;
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-navy);
+            background-color: #ffffff;
+        }
+        
+        /* Geolocation Interface Elements */
+        .geo-box {
+            background: #f1f5f9; 
+            padding: 16px; 
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .geo-btn { 
+            background: var(--primary-navy); 
+            color: white; 
+            border: none; 
+            padding: 10px 16px; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-weight: 600; 
+            font-size: 13px; 
+            margin-bottom: 12px; 
+            transition: opacity 0.2s;
+        }
+        .geo-btn:hover { opacity: 0.9; }
+        .geo-fields { display: flex; gap: 12px; }
+        .geo-fields input { background-color: #e2e8f0; }
+
+        /* Action Buttons */
+        .submit-btn { 
+            width: 100%; 
+            background: var(--primary-navy); 
+            color: white; 
+            border: none; 
+            padding: 14px; 
+            border-radius: 8px; 
+            font-size: 16px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            margin-top: 10px; 
+            transition: box-shadow 0.2s, opacity 0.2s; 
+        }
+        .submit-btn:hover { 
+            box-shadow: 0 4px 12px rgba(0, 75, 135, 0.2);
+            opacity: 0.95;
+        }
+        .submit-btn:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* Execution Diagnostics Message Banners */
+        .status-msg { margin-top: 20px; padding: 14px; border-radius: 8px; font-size: 14px; display: none; text-align: center; font-weight: 600; }
+        .status-success { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
+        .status-error { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+    </style>
+</head>
+<body>
+
+<div class="panel">
+    <!-- Navbar Header Containing the Image Logo -->
+    <header class="header">
+        <img src="images/shopnova-blog-logo.jpg" class="logo-frame" alt="ShopNova Logo" onerror="this.src='images/shopnova-blog-logo.jpg'">
+        <a href="products.html" class="view-btn">← View Products</a>
+    </header>
+
+    <!-- Interactive Data Collection Form -->
+    <form id="productForm">
+        <div class="form-group">
+            <label for="name">Product Name *</label>
+            <input type="text" id="name" required placeholder="e.g. Premium Cotton T-Shirt">
+        </div>
+
+        <div class="form-group">
+            <label for="price">Price ($) *</label>
+            <input type="number" id="price" step="0.01" required placeholder="0.00">
+        </div>
+
+        <div class="form-group">
+            <label for="stock">Stock Quantity</label>
+            <input type="number" id="stock" value="0" placeholder="0">
+        </div>
+
+        <div class="form-group">
+            <label for="category">Category *</label>
+            <select id="category" required>
+                <option value="">Select a category</option>
+                <option value="Clothing">Clothing</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Accessories">Accessories</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description *</label>
+            <textarea id="description" rows="4" required placeholder="Describe your product specifications, metrics, and parameters..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="images">Product Images (Select up to 10) *</label>
+            <input type="file" id="images" multiple accept="image/*" required style="background: white;">
+        </div>
+
+        <div class="form-group geo-box">
+            <label style="color: var(--text-dark);">Seller GPS Location</label>
+            <button type="button" class="geo-btn" id="getLocBtn">📍 Auto-Detect Location</button>
+            <div class="geo-fields">
+                <input type="text" id="lat" placeholder="Latitude" readonly>
+                <input type="text" id="lng" placeholder="Longitude" readonly>
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">🚀 Add Product to ShopNova</button>
+    </form>
+
+    <!-- Output Processing Feedback Notification -->
+    <div id="statusBox" class="status-msg"></div>
+</div>
+
 <script>
-    // FORCED LOCALBACKEND ROUTER: Hits your local machine server directly from the web
+    // FORCED LOCALBACKEND ROUTER: Forces live Vercel domains to connect to your local Node environment engine
     const backendBaseUrl = 'http://localhost:5000';
     const API_URL = `${backendBaseUrl}/api/products`;
     
@@ -19,11 +227,12 @@
                 document.getElementById('lat').value = position.coords.latitude.toFixed(6);
                 document.getElementById('lng').value = position.coords.longitude.toFixed(6);
                 getLocBtn.textContent = '✅ Location Detected!';
-                getLocBtn.style.background = '#dcfce7';
+                getLocBtn.style.background = '#047857';
             },
             () => {
                 alert('Unable to fetch your location coordinates.');
                 getLocBtn.textContent = '❌ Detection Failed';
+                getLocBtn.style.background = '#b91c1c';
             }
         );
     });
@@ -56,27 +265,3 @@
                 body: formData
             });
 
-            const data = await response.json();
-
-            if (!response.ok) {
-                throw new Error(data.error || 'Server error occurred processing cataloging request.');
-            }
-
-            statusBox.style.display = 'block';
-            statusBox.classList.add('status-success');
-            statusBox.innerText = `Success: ${data.message}`;
-            form.reset();
-            getLocBtn.textContent = '📍 Auto-Detect Location';
-            getLocBtn.style.background = '#e2e8f0';
-
-        } catch (error) {
-            statusBox.style.display = 'block';
-            statusBox.classList.add('status-error');
-            statusBox.innerText = `❌ Error: ${error.message}`;
-            console.error('Submission transaction fault logs:', error);
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.textContent = '🚀 Add Product to ShopNova';
-        }
-    });
-</script>
