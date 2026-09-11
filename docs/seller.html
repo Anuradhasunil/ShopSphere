@@ -1,90 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopNova - Seller Panel</title>
-    <style>
-        :root { --primary: #2563eb; --primary-hover: #1d4ed8; --bg: #f8fafc; --card: #ffffff; --text: #1e293b; }
-        body { font-family: system-ui, -apple-system, sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .panel { background: var(--card); max-width: 600px; width: 100%; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); padding: 24px; }
-        .header { background: var(--primary); color: white; margin: -24px -24px 24px -24px; padding: 20px; border-radius: 12px 12px 0 0; display: flex; justify-content: space-between; align-items: center; }
-        .form-group { margin-bottom: 16px; }
-        label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 14px; }
-        input, textarea, select { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
-        .geo-btn { background: #e2e8f0; color: #334155; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-weight: 500; font-size: 13px; margin-bottom: 8px; }
-        .geo-fields { display: flex; gap: 12px; }
-        .submit-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 12px; transition: background 0.2s; }
-        .submit-btn:hover { background: var(--primary-hover); }
-        .status-msg { margin-top: 16px; padding: 12px; border-radius: 6px; font-size: 14px; display: none; text-align: center; font-weight: 500; }
-        .status-success { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
-        .status-error { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
-    </style>
-</head>
-<body>
-
-<div class="panel">
-    <div class="header">
-        <div>
-            <h2 style="margin:0; font-size: 20px;">Seller Panel</h2>
-            <p style="margin:4px 0 0 0; font-size: 12px; opacity: 0.9;">Manage your ShopNova products</p>
-        </div>
-        <a href="/" style="color: white; text-decoration: none; font-size: 14px; border: 1px solid white; padding: 6px 12px; border-radius: 6px;">← Back to ShopNova</a>
-    </div>
-
-    <form id="productForm">
-        <div class="form-group">
-            <label for="name">Product Name *</label>
-            <input type="text" id="name" required placeholder="e.g. Classic White T-Shirt">
-        </div>
-
-        <div class="form-group">
-            <label for="price">Price ($) *</label>
-            <input type="number" id="price" step="0.01" required placeholder="0.00">
-        </div>
-
-        <div class="form-group">
-            <label for="stock">Stock Quantity</label>
-            <input type="number" id="stock" value="0" placeholder="0">
-        </div>
-
-        <div class="form-group">
-            <label for="category">Category *</label>
-            <select id="category" required>
-                <option value="">Select a category</option>
-                <option value="Clothing">Clothing</option>
-                <option value="Electronics">Electronics</option>
-                <option value="Accessories">Accessories</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="description">Description *</label>
-            <textarea id="description" rows="3" required placeholder="Describe your product specs and features..."></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="images">Product Images (Select up to 10) *</label>
-            <input type="file" id="images" multiple accept="image/*" required>
-        </div>
-
-        <div class="form-group" style="background: #f1f5f9; padding: 12px; border-radius: 8px;">
-            <label>Seller GPS Location</label>
-            <button type="button" class="geo-btn" id="getLocBtn">📍 Auto-Detect Location</button>
-            <div class="geo-fields">
-                <input type="text" id="lat" placeholder="Latitude" readonly>
-                <input type="text" id="lng" placeholder="Longitude" readonly>
-            </div>
-        </div>
-
-        <button type="submit" class="submit-btn" id="submitBtn">🚀 Add Product to ShopNova</button>
-    </form>
-
-    <div id="statusBox" class="status-msg"></div>
-</div>
-
 <script>
-    const API_URL = 'http://localhost:5000/api/products';
+    // FORCED LOCALBACKEND ROUTER: Hits your local machine server directly from the web
+    const backendBaseUrl = 'http://localhost:5000';
+    const API_URL = `${backendBaseUrl}/api/products`;
+    
     const form = document.getElementById('productForm');
     const statusBox = document.getElementById('statusBox');
     const getLocBtn = document.getElementById('getLocBtn');
@@ -114,14 +32,12 @@
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        // Setup visual status tracking rules
         statusBox.style.display = 'none';
         statusBox.className = 'status-msg';
         const submitBtn = document.getElementById('submitBtn');
         submitBtn.disabled = true;
         submitBtn.textContent = 'Processing upload package...';
 
-        // Instantiate Multi-part form array mapping
         const formData = new FormData();
         formData.append('name', document.getElementById('name').value);
         formData.append('price', document.getElementById('price').value);
@@ -129,15 +45,12 @@
         formData.append('category', document.getElementById('category').value);
         formData.append('description', document.getElementById('description').value);
 
-        // Bundle input asset stream arrays
         const fileInput = document.getElementById('images');
         for (let i = 0; i < fileInput.files.length; i++) {
             formData.append('images', fileInput.files[i]);
         }
 
         try {
-            // CRITICAL FIX: Explicitly hits backend Engine running on Port 5000
-            // Note: DO NOT set Content-Type header manually here. Browser handles boundaries for FormData.
             const response = await fetch(API_URL, {
                 method: 'POST',
                 body: formData
@@ -149,7 +62,6 @@
                 throw new Error(data.error || 'Server error occurred processing cataloging request.');
             }
 
-            // Success Execution Response Handler
             statusBox.style.display = 'block';
             statusBox.classList.add('status-success');
             statusBox.innerText = `Success: ${data.message}`;
@@ -158,7 +70,6 @@
             getLocBtn.style.background = '#e2e8f0';
 
         } catch (error) {
-            // Fallback UI Crash Rendering Catch block
             statusBox.style.display = 'block';
             statusBox.classList.add('status-error');
             statusBox.innerText = `❌ Error: ${error.message}`;
@@ -169,5 +80,3 @@
         }
     });
 </script>
-</body>
-</html>
