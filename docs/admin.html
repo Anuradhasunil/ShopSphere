@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopNova - Admin Management Control Panel</title>
+    <style>
+        :root {
+            --primary-navy: #004B87;      /* Matches your clean dark blue branding */
+            --sky-blue-start: #BFD7ED;    /* Soft light blue backdrop fade */
+            --sky-blue-end: #E6F2F7;      
+            --card-bg: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --danger-red: #dc2626;
+            --danger-hover: #b91c1c;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, var(--sky-blue-start) 0%, var(--sky-blue-end) 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+        }
+
+        /* Top Header Navigation Component matching your storefront theme */
+        .navbar {
+            background-color: var(--primary-navy);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 40px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-frame {
+            height: 48px;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Dashboard Heading Panel Layout */
+        .admin-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 25px 60px 25px;
+        }
+
+        .dashboard-header {
+            background: var(--card-bg);
+            padding: 24px 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 75, 135, 0.05);
+            margin-bottom: 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+        }
+
+        .dashboard-header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: var(--primary-navy);
+            font-weight: 800;
+        }
+
+        .stats-text {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 600;
+            background: #f1f5f9;
+            padding: 6px 14px;
+            border-radius: 20px;
+        }
+
+        /* Database Inventory Control Table Framework */
+        .table-responsive {
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 75, 135, 0.06);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 15px;
+        }
+
+        th {
+            background-color: #f8fafc;
+            color: var(--primary-navy);
+            font-weight: 700;
+            padding: 16px 20px;
+            border-bottom: 2px solid #edf2f7;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #f1f5f9;
+            vertical-align: middle;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Product Preview Elements */
+        .product-meta {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .admin-thumb {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 8px;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+        }
+
+        .product-name-text {
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .product-id-text {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin: 2px 0 0 0;
+            font-family: monospace;
+        }
+
+        .badge-category {
+            background: #e2e8f0;
+            color: var(--primary-navy);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        /* Destructive Action Delete Switch Switches */
+        .btn-delete {
+            background-color: var(--danger-red);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-delete:hover {
+            background-color: var(--danger-hover);
+        }
+
+        .btn-delete:disabled {
+            background-color: #cbd5e1;
+            cursor: not-allowed;
+        }
+
+        /* Diagnostic States Layer */
+        .status-box {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--primary-navy);
+        }
+
+        .status-txt {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Navigation Bar Layout Header -->
+    <nav class="navbar">
+        <div class="brand-container">
+            <img src="images/shopnova-blog-logo.jpg" class="logo-frame" alt="ShopNova Logo" onerror="this.src='images/shopnova-blog-logo.jpg'">
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="seller.html">Seller</a>
+            <a href="admin.html" style="background: rgba(255,255,255,0.2);">Admin Panel</a>
+        </div>
+    </nav>
+
+    <main class="admin-container">
+        <!-- Control Header Dashboard Metadata Row -->
+        <div class="dashboard-header">
+            <div>
+                <h1>Catalog Inventory Control Desk</h1>
+                <p style="margin: 4px 0 0 0; color: var(--text-muted); font-size: 14px;">Purge test dataset documents and maintain store arrays live.</p>
+            </div>
+            <div class="stats-text" id="inventoryCount">Tracking: -- items total</div>
+        </div>
+
+        <!-- Master Administration Table Area Viewport -->
+        <div class="table-responsive">
+            <table id="adminTable">
+                <thead>
+                    <tr>
+                        <th>Product Details</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Stock Level</th>
+                        <th style="text-align: right;">Management Pipeline Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-table-body">
+                    <tr>
+                        <td colspan="5" class="status-box">
+                            <p class="status-txt">Synchronizing structural database channels...</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+<script>
+    // SECURE CLOUD ENDPOINT CONFIGURATIONS: Routes requests directly into your active Render server
+    const backendBaseUrl = 'https://onrender.com';
+    const API_ENDPOINT = `${backendBaseUrl}/api/products`;
+
+    // Fetch and catalog all active item arrays
+    async function syncControlPanelRecords() {
+        const tbody = document.getElementById('admin-table-body');
+        const counter = document.getElementById('inventoryCount');
+
+        try {
+            const response = await fetch(API_ENDPOINT);
+            if (!response.ok) throw new Error(`HTTP data bridge synchronization failure status: ${response.status}`);
+            
+            const productsList = await response.json();
+            counter.innerText = `Tracking: ${productsList.length} items total`;
+
+            if (productsList.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="status-box" style="color: var(--text-muted);">
+                            <p class="status-txt">No transactional records found inside MongoDB Atlas collection.</p>
+                            <p style="font-size: 13px; margin: 6px 0 0 0;">Inject data profiles using your Seller Panel terminal setup wrapper.</p>
+                        </td>
+                    </tr>`;
+                return;
+            }
+
+            // Map document instances out into dashboard management tabular framework rows
+            tbody.innerHTML = productsList.map(item => {
+                let thumbPath = 'https://unsplash.com';
+                if (item.images && item.images.length > 0) {
+                    const baseImg = item.images;
+                    thumbPath = baseImg.startsWith('http') ? baseImg : `${backendBaseUrl}${baseImg}`;
+                }
+
+                const displayPrice = typeof item.price === 'number' ? item.price.toFixed(2) : parseFloat(item.price || 0).toFixed(2);
+                const stockValue = item.stock ?? 0;
+
+                return `
+                    <tr id="row-${item._id}">
+                        <td>
