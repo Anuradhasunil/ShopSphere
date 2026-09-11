@@ -1,4 +1,12 @@
-require('dotenv').config(); // MUST BE ON LINE 1
+// Check if running locally before trying to load dotenv package
+if (process.env.NODE_ENV !== 'production') {
+    try {
+        require('dotenv').config();
+    } catch (e) {
+        console.log("⚠️ Dotenv module skipped in non-local cluster execution.");
+    }
+}
+
 const express = require('express');
 const mongoose = require('mongoose');
 const multer = require('multer');
@@ -35,12 +43,15 @@ if (!mongoURI) {
     process.exit(1);
 }
 
-mongoose.connect(mongoURI)
-    .then(() => console.log('Successfully connected to secure MongoDB database layer.'))
-    .catch(err => {
-        console.error('MongoDB database connection error:', err);
-        process.exit(1);
-    });
+// CRITICAL IMPROVEMENT: Strict 5-second failure timeout window prevents server freezes
+mongoose.connect(mongoURI, {
+    serverSelectionTimeoutMS: 5000 
+})
+.then(() => console.log('Successfully connected to secure MongoDB database layer.'))
+.catch(err => {
+    console.error('MongoDB database connection error:', err.message);
+    process.exit(1);
+});
 
 // Schema layout architecture definitions mapping marketplace entities
 const productSchema = new mongoose.Schema({
